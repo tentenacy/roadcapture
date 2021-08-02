@@ -1,4 +1,4 @@
-package com.untilled.roadcapture
+package com.untilled.roadcapture.application
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp
