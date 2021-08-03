@@ -7,11 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentPasswordInputSignupBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PasswordInputSignupFragment : Fragment() {
 
     private var _binding: FragmentPasswordInputSignupBinding? = null
-    private val binding = _binding!!
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

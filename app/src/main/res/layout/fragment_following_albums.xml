@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".features.root.mystudio.MyStudioFragment">
+    tools:context=".features.root.albums.FollowingAlbumsFragment">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="My Studio" />
+        android:text="Following Albums" />
 
 </FrameLayout>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_root_search"
+    app:startDestination="@id/searchRootFragment">
+
+    <fragment
+        android:id="@+id/searchRootFragment"
+        android:name="com.untilled.roadcapture.features.root.search.SearchRootFragment"
+        android:label="fragment_search_root"
+        tools:layout="@layout/fragment_search_root" />
+</navigation>

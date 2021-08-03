@@ -1,7 +1,7 @@
 package com.untilled.roadcapture.application
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import com.untilled.roadcapture.R
 import dagger.hilt.android.AndroidEntryPoint
 

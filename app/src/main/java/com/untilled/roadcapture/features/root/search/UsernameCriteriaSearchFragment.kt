@@ -7,10 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentUsernameCriteriaSearchBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 class UsernameCriteriaSearchFragment : Fragment() {
     private var _binding: FragmentUsernameCriteriaSearchBinding? = null
-    private val binding = _binding!!
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

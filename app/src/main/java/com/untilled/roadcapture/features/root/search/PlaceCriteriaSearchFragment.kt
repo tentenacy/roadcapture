@@ -7,11 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentPlaceCriteriaSearchBinding
+import dagger.hilt.android.AndroidEntryPoint
 
 class PlaceCriteriaSearchFragment : Fragment() {
 
     private var _binding: FragmentPlaceCriteriaSearchBinding? = null
-    private val binding = _binding!!
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
