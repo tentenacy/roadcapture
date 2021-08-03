@@ -21,7 +21,7 @@ class EmailInputSignupFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentEmailInputSignupBinding.inflate(layoutInflater, container, false)
-        return binding. root
+        return binding.root
     }
 
     override fun onDestroyView() {
