@@ -7,10 +7,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.untilled.roadcapture.databinding.FragmentAlbumsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class AlbumsFragment @Inject constructor() : Fragment() {
+class AlbumsFragment: Fragment() {
 
     private var _binding: FragmentAlbumsBinding? = null
     private val binding get() = _binding!!
