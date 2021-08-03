@@ -18,10 +18,10 @@ class RootFragment : Fragment() {
     private var _binding: FragmentRootBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var albumsFragment: StackHostFragment
-    private lateinit var searchRootFragment: StackHostFragment
-    private lateinit var followingAlbumsFragment: StackHostFragment
-    private lateinit var myStudioFragment: StackHostFragment
+    lateinit var albumsFragment: StackHostFragment
+    lateinit var searchRootFragment: StackHostFragment
+    lateinit var followingAlbumsFragment: StackHostFragment
+    lateinit var myStudioFragment: StackHostFragment
 
     private val fragments: Array<Fragment>
         get() = arrayOf(
@@ -47,52 +47,54 @@ class RootFragment : Fragment() {
 
         if (savedInstanceState == null) {
             initChildFragments()
-            addTransactionalFragments().setDefaultFragment().commit()
+            childFragmentManager.beginTransaction().addFragments().setDefaultFragment().commit()
         } else {
             selectedIndex = savedInstanceState.getInt("selectedIndex", 0)
-            initSavedChildFragments()
+            loadChildFragments()
         }
     }
 
-    private fun initSavedChildFragments() {
+    private fun loadChildFragments() {
         albumsFragment =
-            childFragmentManager.findFragmentByTag("albumsFragment") as StackHostFragment
+            childFragmentManager.findFragmentByTag(this@RootFragment::albumsFragment.name) as StackHostFragment
         searchRootFragment =
-            childFragmentManager.findFragmentByTag("searchRootFragment") as StackHostFragment
+            childFragmentManager.findFragmentByTag(this@RootFragment::searchRootFragment.name) as StackHostFragment
         followingAlbumsFragment =
-            childFragmentManager.findFragmentByTag("followingAlbumsFragment") as StackHostFragment
+            childFragmentManager.findFragmentByTag(this@RootFragment::followingAlbumsFragment.name) as StackHostFragment
         myStudioFragment =
-            childFragmentManager.findFragmentByTag("myStudioFragment") as StackHostFragment
+            childFragmentManager.findFragmentByTag(this@RootFragment::myStudioFragment.name) as StackHostFragment
     }
 
     private fun FragmentTransaction.setDefaultFragment() = selectFragment(selectedIndex)
 
-    private fun addTransactionalFragments() = childFragmentManager.beginTransaction()
-        .add(
+    private fun FragmentTransaction.addFragments() = apply {
+        add(
             R.id.frame_layout_root_container_bottom_nav_content,
             albumsFragment,
-            "albumsFragment"
+            this@RootFragment::albumsFragment.name
         )
-        .add(
+        add(
             R.id.frame_layout_root_container_bottom_nav_content,
             searchRootFragment,
-            "searchRootFragment"
+            this@RootFragment::searchRootFragment.name
         )
-        .add(
+        add(
             R.id.frame_layout_root_container_bottom_nav_content,
             followingAlbumsFragment,
-            "followingAlbumsFragment"
+            this@RootFragment::followingAlbumsFragment.name
         )
-        .add(
+        add(
             R.id.frame_layout_root_container_bottom_nav_content,
             myStudioFragment,
-            "myStudioFragment"
+            this@RootFragment::myStudioFragment.name
         )
+    }
 
     private fun initChildFragments() {
         albumsFragment = StackHostFragment.newInstance(R.navigation.navigation_root_albums)
         searchRootFragment = StackHostFragment.newInstance(R.navigation.navigation_root_search)
-        followingAlbumsFragment = StackHostFragment.newInstance(R.navigation.navigation_root_following_albums)
+        followingAlbumsFragment =
+            StackHostFragment.newInstance(R.navigation.navigation_root_following_albums)
         myStudioFragment = StackHostFragment.newInstance(R.navigation.navigation_root_my_studio)
     }
 
