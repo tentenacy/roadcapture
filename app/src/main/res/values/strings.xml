@@ -2,4 +2,7 @@
     <string name="app_name">RoadCapture</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_email_login">이메일로 로그인</string>
+    <string name="login_no_account">아직 계정이 없으신가요?</string>
+    <string name="login_signup">여기에서 계정을 만드세요!</string>
 </resources>
