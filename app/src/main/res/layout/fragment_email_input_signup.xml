@@ -22,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="@string/email_input_signup_title"
-        app:layout_constraintStart_toStartOf="@+id/guideline_email_input_signup_body_start"
-        app:layout_constraintTop_toTopOf="@+id/guideline_email_input_signup_body_top" />
+        app:layout_constraintStart_toStartOf="@+id/guideline_username_input_signup_body_start"
+        app:layout_constraintTop_toTopOf="@+id/guideline_username_input_signup_body_top" />
 
     <TextView
         android:id="@+id/textview_email_input_signup_label"
@@ -32,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
         android:text="@string/email_input_signup_label"
-        app:layout_constraintStart_toStartOf="@+id/guideline_email_input_signup_body_start"
+        app:layout_constraintStart_toStartOf="@+id/guideline_username_input_signup_body_start"
         app:layout_constraintTop_toBottomOf="@+id/textview_email_input_signup_title" />
 
     <com.google.android.material.textfield.TextInputLayout
@@ -55,7 +55,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
-        android:id="@+id/textview_email_input_signup_next"
+        android:id="@+id/textview_username_input_signup_next"
         style="@style/TextAppearance.MdcTypographyStyles.Button"
         android:layout_width="0dp"
         android:layout_height="40dp"
@@ -69,12 +69,12 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline_email_input_signup_body_end"
-        app:layout_constraintStart_toStartOf="@+id/guideline_email_input_signup_body_start"
+        app:layout_constraintStart_toStartOf="@+id/guideline_username_input_signup_body_start"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.6" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_email_input_signup_body_start"
+        android:id="@+id/guideline_username_input_signup_body_start"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -88,7 +88,7 @@
         app:layout_constraintGuide_end="56dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_email_input_signup_body_top"
+        android:id="@+id/guideline_username_input_signup_body_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
