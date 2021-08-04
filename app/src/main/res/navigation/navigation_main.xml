@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_loginFragment_to_emailInputSignupFragment"
             app:destination="@id/emailInputSignupFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_rootFragment"
+            app:destination="@id/rootFragment" />
     </fragment>
     <fragment
         android:id="@+id/emailInputSignupFragment"
@@ -36,13 +39,14 @@
         android:id="@+id/usernameInputSignupFragment"
         android:name="com.untilled.roadcapture.features.signup.UsernameInputSignupFragment"
         android:label="fragment_username_input_signup"
-        tools:layout="@layout/fragment_username_input_signup" />
+        tools:layout="@layout/fragment_username_input_signup" >
+        <action
+            android:id="@+id/action_usernameInputSignupFragment_to_rootFragment"
+            app:destination="@id/rootFragment" />
+    </fragment>
     <fragment
         android:id="@+id/rootFragment"
         android:name="com.untilled.roadcapture.features.root.RootFragment"
         android:label="fragment_root"
         tools:layout="@layout/fragment_root" />
-    <action
-        android:id="@+id/action_global_rootFragment"
-        app:destination="@id/rootFragment" />
 </navigation>
