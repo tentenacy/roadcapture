@@ -1,6 +1,6 @@
-<img src="C:\Users\leewo\Desktop\app_logo.png" alt="app_logo" style="zoom:50%;" />
-
-
+<p align="center">
+	<img src="https://user-images.githubusercontent.com/76826021/128172146-d09b1b6a-3289-4be3-85c3-dedd97e26dd4.png" alt="App Logo" width="25%" height="25%"/>
+</p>
 
 # Road Capture
 
