@@ -11,10 +11,12 @@
 
         <ImageView
             android:id="@+id/imageview_username_input_signup_back"
-            android:layout_width="24dp"
-            android:layout_height="21dp"
-            android:layout_margin="16dp"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:padding="16dp"
             android:src="@drawable/arrow_back"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_username_input_signup_body_top"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_username_input_signup_body_start"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -65,7 +67,7 @@
             android:layout_marginBottom="16dp"
             android:text="@string/username_input_signup_terms"
             android:textColor="@color/secondaryColor"
-            app:layout_constraintBottom_toTopOf="@+id/textview_username_input_signup_next"
+            app:layout_constraintBottom_toTopOf="@+id/textview_username_input_signup_submit"
             app:layout_constraintEnd_toStartOf="@+id/textview_username_input_signup_terms_shell"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="@+id/guideline_username_input_signup_body_start" />
@@ -82,12 +84,12 @@
             app:layout_constraintTop_toTopOf="@+id/textview_username_input_signup_terms" />
 
         <TextView
-            android:id="@+id/textview_username_input_signup_next"
+            android:id="@+id/textview_username_input_signup_submit"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:gravity="center"
             android:paddingVertical="8dp"
-            android:text="@string/username_input_signup_next"
+            android:text="@string/username_input_signup_submit"
             app:clickableTextView="@{null}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline_username_input_signup_body_end"

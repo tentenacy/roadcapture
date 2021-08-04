@@ -1,10 +1,11 @@
 package com.untilled.roadcapture.features.signup
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentPasswordInputSignupBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,5 +29,21 @@ class PasswordInputSignupFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        setOnClickListeners()
+    }
+
+    private fun setOnClickListeners() {
+        binding.imageviewPasswordInputSignupBack.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+        binding.textviewPasswordInputSignupNext.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_passwordInputSignupFragment_to_usernameInputSignupFragment)
+        }
     }
 }

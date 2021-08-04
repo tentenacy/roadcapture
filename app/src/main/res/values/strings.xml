@@ -14,7 +14,7 @@
     <string name="password_input_signup_next">계속</string>
     <string name="username_input_signup_title">이메일로 회원가입</string>
     <string name="username_input_signup_label">닉네임 입력</string>
-    <string name="username_input_signup_next">계속</string>
+    <string name="username_input_signup_submit">완료</string>
     <string name="username_input_signup_terms">이용약관</string>
     <string name="username_input_signup_terms_shell">을 확인했으며 회원가입에 동의합니다.</string>
 </resources>

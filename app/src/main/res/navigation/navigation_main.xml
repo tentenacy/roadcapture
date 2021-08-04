@@ -9,7 +9,7 @@
         android:id="@+id/loginFragment"
         android:name="com.untilled.roadcapture.features.login.LoginFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_emailInputSignupFragment"
             app:destination="@id/emailInputSignupFragment" />
@@ -21,7 +21,7 @@
         android:id="@+id/emailInputSignupFragment"
         android:name="com.untilled.roadcapture.features.signup.EmailInputSignupFragment"
         android:label="fragment_email_input_signup"
-        tools:layout="@layout/fragment_email_input_signup" >
+        tools:layout="@layout/fragment_email_input_signup">
         <action
             android:id="@+id/action_emailInputSignupFragment_to_passwordInputSignupFragment"
             app:destination="@id/passwordInputSignupFragment" />
@@ -30,7 +30,7 @@
         android:id="@+id/passwordInputSignupFragment"
         android:name="com.untilled.roadcapture.features.signup.PasswordInputSignupFragment"
         android:label="fragment_password_input_signup"
-        tools:layout="@layout/fragment_password_input_signup" >
+        tools:layout="@layout/fragment_password_input_signup">
         <action
             android:id="@+id/action_passwordInputSignupFragment_to_usernameInputSignupFragment"
             app:destination="@id/usernameInputSignupFragment" />
@@ -39,10 +39,12 @@
         android:id="@+id/usernameInputSignupFragment"
         android:name="com.untilled.roadcapture.features.signup.UsernameInputSignupFragment"
         android:label="fragment_username_input_signup"
-        tools:layout="@layout/fragment_username_input_signup" >
+        tools:layout="@layout/fragment_username_input_signup">
         <action
             android:id="@+id/action_usernameInputSignupFragment_to_rootFragment"
-            app:destination="@id/rootFragment" />
+            app:destination="@id/rootFragment"
+            app:popUpTo="@id/emailInputSignupFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/rootFragment"
