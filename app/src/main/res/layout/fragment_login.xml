@@ -1,140 +1,145 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/login_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".features.login.LoginFragment">
-
-    <ImageView
-        android:id="@+id/imageview_login_app_logo"
-        android:layout_width="128dp"
-        android:layout_height="192dp"
-        android:scaleType="centerInside"
-        android:src="@drawable/app_logo"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.25" />
-
-    <ImageView
-        android:id="@+id/imageview_login_naver_logo"
-        style="@style/RippleEffect"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="16dp"
-        android:src="@drawable/naver_logo"
-        app:layout_constraintBottom_toTopOf="@+id/constraint_login_container_email"
-        app:layout_constraintEnd_toStartOf="@+id/imageview_login_google_logo"
-        app:layout_constraintHorizontal_chainStyle="spread_inside"
-        app:layout_constraintStart_toStartOf="@+id/constraint_login_container_email"
-        app:layout_constraintTop_toBottomOf="@+id/imageview_login_app_logo"
-        app:layout_constraintVertical_bias="0.75"
-        app:layout_constraintVertical_chainStyle="packed" />
-
-    <ImageView
-        android:id="@+id/imageview_login_google_logo"
-        style="@style/RippleEffect"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/google_logo"
-        app:layout_constraintBottom_toBottomOf="@+id/imageview_login_naver_logo"
-        app:layout_constraintEnd_toStartOf="@+id/imageview_login_kakao_logo"
-        app:layout_constraintStart_toEndOf="@+id/imageview_login_naver_logo"
-        app:layout_constraintTop_toTopOf="@+id/imageview_login_naver_logo" />
-
-    <ImageView
-        android:id="@+id/imageview_login_kakao_logo"
-        style="@style/RippleEffect"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/kakao_logo"
-        app:layout_constraintBottom_toBottomOf="@+id/imageview_login_naver_logo"
-        app:layout_constraintEnd_toStartOf="@+id/imageview_login_facebook_logo"
-        app:layout_constraintStart_toEndOf="@+id/imageview_login_google_logo"
-        app:layout_constraintTop_toTopOf="@+id/imageview_login_naver_logo" />
-
-    <ImageView
-        android:id="@+id/imageview_login_facebook_logo"
-        style="@style/RippleEffect"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:src="@drawable/facebook_logo"
-        app:layout_constraintBottom_toBottomOf="@+id/imageview_login_naver_logo"
-        app:layout_constraintEnd_toEndOf="@+id/constraint_login_container_email"
-        app:layout_constraintStart_toEndOf="@+id/imageview_login_kakao_logo"
-        app:layout_constraintTop_toTopOf="@+id/imageview_login_naver_logo" />
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_login_container_email"
-        style="@style/RippleEffect"
-        android:layout_width="240dp"
-        android:layout_height="40dp"
-        android:layout_marginBottom="32dp"
-        android:background="#3d86c7"
-        android:paddingVertical="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/textview_login_no_account"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageview_login_naver_logo">
+        android:id="@+id/login_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".features.login.LoginFragment">
 
         <ImageView
-            android:id="@+id/imageview_login_email_icon"
-            android:layout_width="24dp"
-            android:layout_height="18dp"
-            android:src="@drawable/email_login"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textview_login_email_login"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/white" />
-
-        <TextView
-            android:id="@+id/textview_login_email_login"
-            style="@style/TextAppearance.MdcTypographyStyles.Button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_email_login"
-            android:textColor="@color/white"
+            android:id="@+id/imageview_login_app_logo"
+            android:layout_width="128dp"
+            android:layout_height="192dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/app_logo"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.25" />
+
+        <ImageView
+            android:id="@+id/imageview_login_naver_logo"
+            style="@style/RippleEffect"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/naver_logo"
+            app:layout_constraintBottom_toTopOf="@+id/constraint_login_container_email"
+            app:layout_constraintEnd_toStartOf="@+id/imageview_login_google_logo"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="@+id/constraint_login_container_email"
+            app:layout_constraintTop_toBottomOf="@+id/imageview_login_app_logo"
+            app:layout_constraintVertical_bias="0.75"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <ImageView
+            android:id="@+id/imageview_login_google_logo"
+            style="@style/RippleEffect"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/google_logo"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_login_naver_logo"
+            app:layout_constraintEnd_toStartOf="@+id/imageview_login_kakao_logo"
+            app:layout_constraintStart_toEndOf="@+id/imageview_login_naver_logo"
+            app:layout_constraintTop_toTopOf="@+id/imageview_login_naver_logo" />
+
+        <ImageView
+            android:id="@+id/imageview_login_kakao_logo"
+            style="@style/RippleEffect"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/kakao_logo"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_login_naver_logo"
+            app:layout_constraintEnd_toStartOf="@+id/imageview_login_facebook_logo"
+            app:layout_constraintStart_toEndOf="@+id/imageview_login_google_logo"
+            app:layout_constraintTop_toTopOf="@+id/imageview_login_naver_logo" />
+
+        <ImageView
+            android:id="@+id/imageview_login_facebook_logo"
+            style="@style/RippleEffect"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/facebook_logo"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_login_naver_logo"
+            app:layout_constraintEnd_toEndOf="@+id/constraint_login_container_email"
+            app:layout_constraintStart_toEndOf="@+id/imageview_login_kakao_logo"
+            app:layout_constraintTop_toTopOf="@+id/imageview_login_naver_logo" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_login_container_email"
+            android:layout_width="240dp"
+            android:layout_height="40dp"
+            android:layout_marginBottom="32dp"
+            android:paddingVertical="8dp"
+            app:clickableLayout="@{null}"
+            app:layout_constraintBottom_toTopOf="@+id/textview_login_no_account"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageview_login_naver_logo"
+            tools:background="@color/secondaryColor"
+            tools:style="@style/RippleEffect">
+
+            <ImageView
+                android:id="@+id/imageview_login_email_icon"
+                android:layout_width="24dp"
+                android:layout_height="18dp"
+                android:src="@drawable/email_login"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textview_login_email_login"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/white" />
+
+            <TextView
+                android:id="@+id/textview_login_email_login"
+                style="@style/TextAppearance.MdcTypographyStyles.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/login_email_login"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/textview_login_no_account"
+            style="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="@string/login_no_account"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_login_body_top"
+            app:layout_constraintEnd_toStartOf="@+id/textview_login_signup"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/textview_login_signup"
+            style="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:text="@string/login_signup"
+            android:textColor="@color/secondaryColor"
+            app:layout_constraintBottom_toBottomOf="@+id/textview_login_no_account"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textview_login_no_account"
+            app:layout_constraintTop_toTopOf="@+id/textview_login_no_account" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_login_body_top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="56dp" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <TextView
-        android:id="@+id/textview_login_no_account"
-        style="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:text="@string/login_no_account"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_login_body_top"
-        app:layout_constraintEnd_toStartOf="@+id/textview_login_signup"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textview_login_signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:text="@string/login_signup"
-        android:textColor="@color/secondaryColor"
-        app:layout_constraintBottom_toBottomOf="@+id/textview_login_no_account"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textview_login_no_account"
-        app:layout_constraintTop_toTopOf="@+id/textview_login_no_account" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_login_body_top"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_end="56dp" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
