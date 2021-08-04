@@ -46,8 +46,9 @@
         app:layout_constraintTop_toBottomOf="@+id/textview_email_input_signup_label">
 
         <EditText
-            style="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
             android:id="@+id/edittext_email_input_signup"
+            style="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
+            android:theme="@style/EditTextTheme"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 

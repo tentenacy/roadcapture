@@ -19,4 +19,8 @@
 
     <color name="tab_unselected">#909090</color>
     <color name="tab_selected">#121212</color>
+
+    <color name="control_normal">#c5c5c5</color>
+    <color name="control_activated">@color/secondaryColor</color>
+    <color name="control_highlight">@android:color/holo_red_light</color>
 </resources>
