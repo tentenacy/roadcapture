@@ -5,4 +5,11 @@
     <string name="login_email_login">이메일로 로그인</string>
     <string name="login_no_account">아직 계정이 없으신가요?</string>
     <string name="login_signup">여기에서 계정을 만드세요!</string>
+    <string name="email_input_signup_title">이메일로 회원가입</string>
+    <string name="email_input_signup_label">이메일 입력</string>
+    <string name="email_input_signup_next">계속</string>
+    <string name="password_input_signup_title">이메일로 회원가입</string>
+    <string name="password_input_signup_label">비밀번호 입력</string>
+    <string name="password_input_signup_label_check">비밀번호 재입력</string>
+    <string name="password_input_signup_next">계속</string>
 </resources>
