@@ -1,14 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".features.signup.EmailInputSignupFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <ImageView
+        android:id="@+id/imageview_email_input_signup_back"
+        android:layout_width="24dp"
+        android:layout_height="21dp"
+        android:layout_margin="16dp"
+        android:src="@drawable/arrow_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</FrameLayout>
+    <TextView
+        android:id="@+id/textview_email_input_signup_title"
+        style="@style/TextAppearance.MaterialComponents.Headline6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="이메일로 회원가입"
+        app:layout_constraintStart_toStartOf="@+id/guideline_email_input_signup_body_start"
+        app:layout_constraintTop_toTopOf="@+id/guideline_email_input_signup_body_top" />
+
+    <TextView
+        android:id="@+id/textview_email_input_signup_label"
+        style="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="이메일 입력"
+        app:layout_constraintStart_toStartOf="@+id/guideline_email_input_signup_body_start"
+        app:layout_constraintTop_toBottomOf="@+id/textview_email_input_signup_title" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/textinputlayout_email_input_signup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_email_input_signup_body_end"
+        app:layout_constraintStart_toStartOf="@+id/textview_email_input_signup_label"
+        app:layout_constraintTop_toBottomOf="@+id/textview_email_input_signup_label">
+
+        <EditText
+            style="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
+            android:id="@+id/edittext_email_input_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/textview_email_input_signup_next"
+        style="@style/RippleEffect"
+        android:layout_width="0dp"
+        android:layout_height="40dp"
+        android:background="#3d86c7"
+        android:fontFamily="@font/nanum_barun_gothic"
+        android:gravity="center"
+        android:paddingVertical="8dp"
+        android:text="계속"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_email_input_signup_body_end"
+        app:layout_constraintStart_toStartOf="@+id/guideline_email_input_signup_body_start"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_email_input_signup_body_start"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="56dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_email_input_signup_body_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="56dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline_email_input_signup_body_top"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="56dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -71,9 +71,9 @@
         android:id="@+id/constraint_login_container_email"
         style="@style/RippleEffect"
         android:layout_width="240dp"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginBottom="32dp"
-        android:background="#0089b5"
+        android:background="#3d86c7"
         android:paddingVertical="8dp"
         app:layout_constraintBottom_toTopOf="@+id/textview_login_no_account"
         app:layout_constraintEnd_toEndOf="parent"
@@ -112,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/login_no_account"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_login_bnv_top"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_login_body_top"
         app:layout_constraintEnd_toStartOf="@+id/textview_login_signup"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
@@ -130,7 +130,7 @@
         app:layout_constraintTop_toTopOf="@+id/textview_login_no_account" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_login_bnv_top"
+        android:id="@+id/guideline_login_body_top"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"

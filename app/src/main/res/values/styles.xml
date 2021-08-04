@@ -78,6 +78,7 @@
     </style>
 
     <style name="SecondSubTitleAnchor" parent="TextAppearance.MdcTypographyStyles.Subtitle2">
-        <item name="android:textColor">#0089b5</item>
+        <item name="android:textColor">@color/secondaryColor</item>
     </style>
+
 </resources>
