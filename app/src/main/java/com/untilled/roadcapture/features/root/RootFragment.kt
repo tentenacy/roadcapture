@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -11,6 +12,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.navigation.StackHostFragment
 import com.untilled.roadcapture.databinding.FragmentRootBinding
+import com.untilled.roadcapture.utils.extension.setTint
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,13 +34,13 @@ class RootFragment : Fragment() {
         )
     private var selectedIndex = 0
 
-    private val tabs: Array<TextView>
+    private val tabs: Array<ImageView>
         get() = binding.run {
             arrayOf(
-                textViewRootAlbumsTab,
-                textViewRootSearchTab,
-                textViewRootFollowingAlbumsTab,
-                textViewRootMyStudioTab
+                imageViewRootAlbumsTab,
+                imageViewRootSearchTab,
+                imageViewRootFollowingAlbumsTab,
+                imageViewRootMyStudioTab
             )
         }
 
@@ -117,8 +119,8 @@ class RootFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tabs.forEachIndexed { index, textView ->
-            textView.setOnClickListener {
+        tabs.forEachIndexed { index, imageView ->
+            imageView.setOnClickListener {
                 selectFragment(index)
             }
         }
@@ -144,14 +146,11 @@ class RootFragment : Fragment() {
     }
 
     private fun setupTabSelectedState(selectedIndex: Int) {
-        tabs.forEachIndexed { index, textView ->
-            textView.setTextColor(
+        tabs.forEachIndexed { index, imageView ->
+            imageView.setTint(
                 when (index) {
-                    selectedIndex -> ContextCompat.getColor(
-                        requireContext(),
-                        R.color.tab_selected
-                    )
-                    else -> ContextCompat.getColor(requireContext(), R.color.tab_unselected)
+                    selectedIndex -> requireContext().getColor(R.color.tab_selected)
+                    else -> requireContext().getColor(R.color.tab_unselected)
                 }
             )
         }

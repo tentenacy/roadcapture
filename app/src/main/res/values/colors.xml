@@ -17,10 +17,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="tab_unselected">#909090</color>
-    <color name="tab_selected">#121212</color>
+    <color name="tab_unselected">@color/black</color>
+    <color name="tab_selected">@color/secondaryColor</color>
 
     <color name="control_normal">#c5c5c5</color>
     <color name="control_activated">@color/secondaryColor</color>
     <color name="control_highlight">@android:color/holo_red_light</color>
+    <color name="divider">#EFEFEF</color>
 </resources>

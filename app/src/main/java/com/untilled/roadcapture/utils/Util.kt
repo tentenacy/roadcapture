@@ -1,10 +1,16 @@
 package com.untilled.roadcapture.utils.extension
 
+import android.R
 import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.view.View
+import android.widget.ImageView
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.DrawableCompat
+
 
 fun View.setRippleEffect() {
     isClickable = true
@@ -29,3 +35,7 @@ fun Context.getDpFromPx(px: Int) = resources.displayMetrics.density.let { densit
 }
 
 fun Context.getColor(colorId: Int): Drawable? = ContextCompat.getDrawable(this, colorId)
+
+fun ImageView.setTint(colorId: Int) {
+    DrawableCompat.setTint(DrawableCompat.wrap(drawable), colorId)
+}

@@ -2,7 +2,6 @@ package com.untilled.roadcapture.features.root.search
 
 import android.text.InputFilter
 import android.widget.EditText
-import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import com.untilled.roadcapture.utils.extension.getPxFromDp
 
@@ -17,7 +16,7 @@ object SearchBindingAdapter {
             view.setPadding(0, getPxFromDp(12.0f), 0, getPxFromDp(12.0f))
             view.maxLines = 1
             view.filters = arrayOf<InputFilter>(InputFilter.LengthFilter(15))
-            view.setBackgroundColor(ContextCompat.getColor(this, android.R.color.transparent))
+            view.setBackgroundColor(context.getColor(android.R.color.transparent))
         }
     }
 }

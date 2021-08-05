@@ -22,10 +22,12 @@
             android:id="@+id/tablayout_search"
             android:layout_width="0dp"
             android:layout_height="?attr/actionBarSize"
-            app:tabIndicatorColor="@color/secondaryColor"
+            android:layout_marginTop="12dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_search" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_search"
+            app:tabIndicatorColor="@color/secondaryColor" />
 
         <LinearLayout
             android:id="@+id/linear_search_input"
