@@ -5,8 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.untilled.roadcapture.R
@@ -20,10 +18,10 @@ class RootFragment : Fragment() {
     private var _binding: FragmentRootBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var albumsFragment: StackHostFragment
-    lateinit var searchRootFragment: StackHostFragment
-    lateinit var followingAlbumsFragment: StackHostFragment
-    lateinit var myStudioFragment: StackHostFragment
+    private lateinit var albumsFragment: StackHostFragment
+    private lateinit var searchRootFragment: StackHostFragment
+    private lateinit var followingAlbumsFragment: StackHostFragment
+    private lateinit var myStudioFragment: StackHostFragment
 
     private val fragments: Array<Fragment>
         get() = arrayOf(
@@ -37,10 +35,10 @@ class RootFragment : Fragment() {
     private val tabs: Array<ImageView>
         get() = binding.run {
             arrayOf(
-                imageViewRootAlbumsTab,
-                imageViewRootSearchTab,
-                imageViewRootFollowingAlbumsTab,
-                imageViewRootMyStudioTab
+                imageviewRootAlbumsTab,
+                imageviewRootSearchTab,
+                imageviewRootFollowingAlbumsTab,
+                imageviewRootMyStudioTab
             )
         }
 
@@ -71,22 +69,22 @@ class RootFragment : Fragment() {
 
     private fun FragmentTransaction.addFragments() = apply {
         add(
-            R.id.frame_layout_root_container_bottom_nav_content,
+            R.id.frame_root_container_contents,
             albumsFragment,
             this@RootFragment::albumsFragment.name
         )
         add(
-            R.id.frame_layout_root_container_bottom_nav_content,
+            R.id.frame_root_container_contents,
             searchRootFragment,
             this@RootFragment::searchRootFragment.name
         )
         add(
-            R.id.frame_layout_root_container_bottom_nav_content,
+            R.id.frame_root_container_contents,
             followingAlbumsFragment,
             this@RootFragment::followingAlbumsFragment.name
         )
         add(
-            R.id.frame_layout_root_container_bottom_nav_content,
+            R.id.frame_root_container_contents,
             myStudioFragment,
             this@RootFragment::myStudioFragment.name
         )
