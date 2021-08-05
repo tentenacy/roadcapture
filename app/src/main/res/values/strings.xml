@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RoadCapture</string>
+    <string name="app_name">로드캡처</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login_email_login">이메일로 로그인</string>

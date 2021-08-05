@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/item_home_album_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageview_item_home_albums_thumbnail"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintDimensionRatio="1"
+        app:layout_constraintEnd_toStartOf="@+id/imageview_item_home_album_profile"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/sample_thumbnail" />
+
+    <ImageView
+        android:id="@+id/imageview_item_home_album_profile"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toTopOf="@+id/imageview_item_home_album_like"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageview_item_home_albums_thumbnail"
+        app:layout_constraintVertical_chainStyle="spread_inside"
+        tools:src="@drawable/sample_profile" />
+
+    <ImageView
+        android:id="@+id/imageview_item_home_album_like"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:src="@drawable/like"
+        app:layout_constraintBottom_toTopOf="@+id/imageview_item_home_album_comment"
+        app:layout_constraintEnd_toEndOf="@+id/imageview_item_home_album_profile"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/imageview_item_home_album_profile"
+        app:layout_constraintTop_toBottomOf="@+id/imageview_item_home_album_profile" />
+
+    <TextView
+        android:id="@+id/textview_item_home_album_like"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
+        app:layout_constraintEnd_toEndOf="@+id/imageview_item_home_album_like"
+        app:layout_constraintStart_toStartOf="@+id/imageview_item_home_album_like"
+        app:layout_constraintTop_toBottomOf="@+id/imageview_item_home_album_like"
+        tools:text="1K" />
+
+    <ImageView
+        android:id="@+id/imageview_item_home_album_comment"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="19dp"
+        android:src="@drawable/comment"
+        app:layout_constraintBottom_toTopOf="@+id/imageview_item_home_album_more"
+        app:layout_constraintEnd_toEndOf="@+id/imageview_item_home_album_like"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/imageview_item_home_album_like"
+        app:layout_constraintTop_toBottomOf="@+id/imageview_item_home_album_like" />
+
+    <TextView
+        android:id="@+id/textview_item_home_album_comment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
+        app:layout_constraintEnd_toEndOf="@+id/imageview_item_home_album_comment"
+        app:layout_constraintStart_toStartOf="@+id/imageview_item_home_album_comment"
+        app:layout_constraintTop_toBottomOf="@+id/imageview_item_home_album_comment"
+        tools:text="39" />
+
+    <ImageView
+        android:id="@+id/imageview_item_home_album_more"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="19dp"
+        android:layout_marginBottom="4dp"
+        android:src="@drawable/more"
+        app:layout_constraintBottom_toBottomOf="@+id/imageview_item_home_albums_thumbnail"
+        app:layout_constraintEnd_toEndOf="@+id/imageview_item_home_album_comment"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/imageview_item_home_album_comment"
+        app:layout_constraintTop_toBottomOf="@+id/imageview_item_home_album_comment"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textview_item_home_album_overlay"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle1"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="tenutz · 3분전" />
+
+    <TextView
+        android:id="@+id/textview_item_home_album_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="16dp"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageview_item_home_albums_thumbnail"
+        tools:text="나의 첫 부산 여행기" />
+
+    <TextView
+        android:id="@+id/textview_item_home_album_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="16dp"
+        android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/textview_item_home_album_title"
+        app:layout_constraintTop_toBottomOf="@+id/textview_item_home_album_title"
+        tools:text="안녕하세요. 저는 이원석입니다. 잘 부탁드립니다!" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
