@@ -140,8 +140,6 @@ class RootFragment : Fragment() {
             }
         }
 
-        setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
-
         return this
     }
 

@@ -18,4 +18,7 @@
     <string name="username_input_signup_terms">이용약관</string>
     <string name="username_input_signup_terms_shell">을 확인했으며 회원가입에 동의합니다.</string>
     <string name="search_input">검색어를 입력하세요</string>
+    <string name="search_title_criteria">제목</string>
+    <string name="search_username_criteria">닉네임</string>
+    <string name="search_place_criteria">장소</string>
 </resources>
