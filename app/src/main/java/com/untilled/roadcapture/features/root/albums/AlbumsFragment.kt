@@ -9,7 +9,7 @@ import com.untilled.roadcapture.databinding.FragmentAlbumsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AlbumsFragment: Fragment() {
+class AlbumsFragment : Fragment() {
 
     private var _binding: FragmentAlbumsBinding? = null
     private val binding get() = _binding!!

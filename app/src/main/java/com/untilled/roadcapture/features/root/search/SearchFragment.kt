@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.untilled.roadcapture.databinding.FragmentSearchRootBinding
+import com.untilled.roadcapture.databinding.FragmentSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SearchRootFragment : Fragment() {
-    private var _binding: FragmentSearchRootBinding? = null
+class SearchFragment : Fragment() {
+    private var _binding: FragmentSearchBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -18,7 +18,8 @@ class SearchRootFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentSearchRootBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
+
         return binding.root
     }
 

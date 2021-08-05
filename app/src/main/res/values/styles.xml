@@ -83,4 +83,6 @@
         <item name="colorControlHighlight">@color/control_highlight</item>
     </style>
 
+    <style name="Theme.RoadCapture.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
+
 </resources>
