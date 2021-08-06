@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -58,7 +59,7 @@
                 android:layout_weight="1"
                 android:hint="@string/search_input"
                 android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle1"
-                app:searchEditText="@{null}"
+                bind:searchEditText="@{null}"
                 tools:background="@android:color/transparent"
                 tools:minHeight="0dp"
                 tools:paddingVertical="12dp" />

@@ -7,7 +7,7 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.utils.extension.setRippleEffect
 
 
-object CommonBindingAdapter {
+object CommonBindingAdapters {
 
     @JvmStatic
     @BindingAdapter("clickableTextView")
@@ -25,5 +25,11 @@ object CommonBindingAdapter {
         val context = view.context
         view.setBackgroundColor(context.getColor(R.color.secondaryColor))
         view.setRippleEffect()
+    }
+
+    @JvmStatic
+    @BindingAdapter("countFormat")
+    fun setCountFormat(view: TextView, count: Int) {
+
     }
 }

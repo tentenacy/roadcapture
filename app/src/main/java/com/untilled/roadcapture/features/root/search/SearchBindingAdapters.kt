@@ -5,7 +5,7 @@ import android.widget.EditText
 import androidx.databinding.BindingAdapter
 import com.untilled.roadcapture.utils.extension.getPxFromDp
 
-object SearchBindingAdapter {
+object SearchBindingAdapters {
 
     @JvmStatic
     @BindingAdapter("searchEditText")

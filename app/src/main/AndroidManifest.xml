@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.untilled.roadcapture">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".application.GlobalApplication"
         android:allowBackup="true"
@@ -11,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RoadCapture">
         <activity android:name=".application.MainActivity"
-            android:theme="@style/TransparentStatusTheme">
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

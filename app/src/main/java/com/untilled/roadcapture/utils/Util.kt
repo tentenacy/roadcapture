@@ -34,7 +34,7 @@ fun Context.getDpFromPx(px: Int) = resources.displayMetrics.density.let { densit
     }
 }
 
-fun Context.getColor(colorId: Int): Drawable? = ContextCompat.getDrawable(this, colorId)
+fun Context.getDrawable(colorId: Int): Drawable? = ContextCompat.getDrawable(this, colorId)
 
 fun ImageView.setTint(colorId: Int) {
     DrawableCompat.setTint(DrawableCompat.wrap(drawable), colorId)
