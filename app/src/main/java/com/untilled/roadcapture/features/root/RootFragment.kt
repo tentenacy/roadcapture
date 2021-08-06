@@ -47,7 +47,7 @@ class RootFragment : Fragment() {
 
         if (savedInstanceState == null) {
             initChildFragments()
-            childFragmentManager.beginTransaction().addFragments().setDefaultFragment().commit()
+            childFragmentManager.beginTransaction().addFragments().showDefaultFragment().commit()
         } else {
             selectedIndex = savedInstanceState.getInt("selectedIndex", 0)
             loadChildFragments()
@@ -65,14 +65,7 @@ class RootFragment : Fragment() {
             childFragmentManager.findFragmentByTag(this@RootFragment::myStudioFragment.name) as StackHostFragment
     }
 
-    private fun FragmentTransaction.setDefaultFragment() = selectFragment(selectedIndex)
-
     private fun FragmentTransaction.addFragments() = apply {
-        add(
-            R.id.frame_root_container_contents,
-            albumsFragment,
-            this@RootFragment::albumsFragment.name
-        )
         add(
             R.id.frame_root_container_contents,
             searchRootFragment,
@@ -87,6 +80,11 @@ class RootFragment : Fragment() {
             R.id.frame_root_container_contents,
             myStudioFragment,
             this@RootFragment::myStudioFragment.name
+        )
+        add(
+            R.id.frame_root_container_contents,
+            albumsFragment,
+            this@RootFragment::albumsFragment.name
         )
     }
 
@@ -131,12 +129,14 @@ class RootFragment : Fragment() {
         outState.putInt("selectedIndex", selectedIndex)
     }
 
+    private fun FragmentTransaction.showDefaultFragment() = selectFragment(selectedIndex)
+
     private fun FragmentTransaction.selectFragment(selectedIndex: Int): FragmentTransaction {
         fragments.forEachIndexed { index, fragment ->
             if (index == selectedIndex) {
-                attach(fragment)
+                show(fragment)
             } else {
-                detach(fragment)
+                hide(fragment)
             }
         }
 

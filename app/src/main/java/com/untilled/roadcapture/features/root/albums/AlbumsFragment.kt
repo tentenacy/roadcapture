@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.entity.Album
 import com.untilled.roadcapture.databinding.FragmentAlbumsBinding
@@ -27,6 +28,7 @@ class AlbumsFragment : Fragment() {
         (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarAlbums)
 
         binding.recyclerviewAlbums.adapter = AlbumsAdapter(DummyDataSet.albums)
+
 
         return binding.root
     }

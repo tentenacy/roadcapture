@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentTitleCriteriaSearchBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,6 +21,9 @@ class TitleCriteriaSearchFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentTitleCriteriaSearchBinding.inflate(layoutInflater, container, false)
+
+        Logger.d("화면 전환 시 호출되나?")
+
         return binding.root
     }
 

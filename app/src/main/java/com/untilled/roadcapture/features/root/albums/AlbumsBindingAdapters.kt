@@ -8,6 +8,7 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
+import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.utils.extension.getPxFromDp
 
@@ -60,7 +61,7 @@ object AlbumsBindingAdapters {
                 ConstraintSet.BOTTOM,
                 view.id,
                 ConstraintSet.BOTTOM,
-                view.context.getPxFromDp(16f)
+                view.context.getPxFromDp(48f)
             )
             constraints.applyTo(view)
         }
