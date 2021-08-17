@@ -37,7 +37,23 @@ class FollowingAlbumsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        
+
+        // 아래로 스크롤 시 플로팅 버튼 hide
+        binding.recyclerviewFollowingAlbums.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                //super.onScrolled(recyclerView, dx, dy)
+                if(dy>0) {  // 아래로 스크롤
+                    binding.fbuttonFollowingAlbumsSort.hide()
+                    binding.fbuttonFollowingAlbumsSortLatest.hide()
+                    binding.fbuttonFollowingAlbumsSortPopularity.hide()
+                } else if(dy < 0) { // 위로 스크롤
+                    binding.fbuttonFollowingAlbumsSort.show()
+                    binding.fbuttonFollowingAlbumsSortLatest.show()
+                    binding.fbuttonFollowingAlbumsSortPopularity.show()
+                }
+            }
+        })
+
         setOnClickListeners()
     }
 
