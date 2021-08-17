@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/following_albums_container"
@@ -65,7 +65,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
                 android:layout_margin="24dp"
-                app:fabSize="mini" />
+                app:fabSize="mini"
+                app:hideOnScroll="true" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fbutton_following_albums_sort"
@@ -84,5 +85,7 @@
                 app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

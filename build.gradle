@@ -23,6 +23,11 @@ allprojects {
         google()
         mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon
+
+        // NaverMap API
+        maven {
+            url 'https://naver.jfrog.io/artifactory/maven/'
+        }
     }
 }
 

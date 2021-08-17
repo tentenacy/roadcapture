@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentFollowingAlbumsBinding
@@ -36,7 +37,7 @@ class FollowingAlbumsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        
         setOnClickListeners()
     }
 

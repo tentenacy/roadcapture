@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.navigation.StackHostFragment
 import com.untilled.roadcapture.databinding.FragmentRootBinding
@@ -28,7 +29,7 @@ class RootFragment : Fragment() {
             albumsFragment,
             searchRootFragment,
             followingAlbumsFragment,
-            myStudioFragment
+            myStudioFragment,
         )
     private var selectedIndex = 0
 
@@ -38,7 +39,7 @@ class RootFragment : Fragment() {
                 imageviewRootAlbumsTab,
                 imageviewRootSearchTab,
                 imageviewRootFollowingAlbumsTab,
-                imageviewRootMyStudioTab
+                imageviewRootMyStudioTab,
             )
         }
 
@@ -91,8 +92,7 @@ class RootFragment : Fragment() {
     private fun initChildFragments() {
         albumsFragment = StackHostFragment.newInstance(R.navigation.navigation_root_albums)
         searchRootFragment = StackHostFragment.newInstance(R.navigation.navigation_root_search)
-        followingAlbumsFragment =
-            StackHostFragment.newInstance(R.navigation.navigation_root_following_albums)
+        followingAlbumsFragment = StackHostFragment.newInstance(R.navigation.navigation_root_following_albums)
         myStudioFragment = StackHostFragment.newInstance(R.navigation.navigation_root_my_studio)
     }
 
@@ -120,7 +120,7 @@ class RootFragment : Fragment() {
                 selectFragment(index)
             }
         }
-
+        onClickedListeners()
         setupTabSelectedState(selectedIndex)
     }
 
@@ -162,5 +162,12 @@ class RootFragment : Fragment() {
         childFragmentManager.beginTransaction()
             .selectFragment(indexToSelect)
             .commit()
+    }
+
+    private fun onClickedListeners() {
+        binding.imageviewRootCaptureTab.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_rootFragment_to_captureFragment)
+        }
     }
 }
