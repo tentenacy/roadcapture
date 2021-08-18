@@ -43,13 +43,13 @@ class FollowingAlbumsFragment : Fragment() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 //super.onScrolled(recyclerView, dx, dy)
                 if(dy>0) {  // 아래로 스크롤
-                    binding.fbuttonFollowingAlbumsSort.hide()
-                    binding.fbuttonFollowingAlbumsSortLatest.hide()
-                    binding.fbuttonFollowingAlbumsSortPopularity.hide()
+                    binding.fabFollowingAlbumsSort.hide()
+                    binding.fabFollowingAlbumsSortLatest.hide()
+                    binding.fabFollowingAlbumsSortPopularity.hide()
                 } else if(dy < 0) { // 위로 스크롤
-                    binding.fbuttonFollowingAlbumsSort.show()
-                    binding.fbuttonFollowingAlbumsSortLatest.show()
-                    binding.fbuttonFollowingAlbumsSortPopularity.show()
+                    binding.fabFollowingAlbumsSort.show()
+                    binding.fabFollowingAlbumsSortLatest.show()
+                    binding.fabFollowingAlbumsSortPopularity.show()
                 }
             }
         })
@@ -58,14 +58,14 @@ class FollowingAlbumsFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.fbuttonFollowingAlbumsSort.setOnClickListener {
+        binding.fabFollowingAlbumsSort.setOnClickListener {
             isClicked = if(isClicked){  // fbutton이 눌렸다면
-                ObjectAnimator.ofFloat(binding.fbuttonFollowingAlbumsSortPopularity,"translationY",0f).apply { start() }
-                ObjectAnimator.ofFloat(binding.fbuttonFollowingAlbumsSortLatest,"translationY",0f).apply { start() }
+                ObjectAnimator.ofFloat(binding.fabFollowingAlbumsSortPopularity,"translationY",0f).apply { start() }
+                ObjectAnimator.ofFloat(binding.fabFollowingAlbumsSortLatest,"translationY",0f).apply { start() }
                 false
             } else {  // fbutton이 눌리지 않았다면
-                ObjectAnimator.ofFloat(binding.fbuttonFollowingAlbumsSortPopularity,"translationY",-450f).apply { start() }
-                ObjectAnimator.ofFloat(binding.fbuttonFollowingAlbumsSortLatest,"translationY",-250f).apply { start() }
+                ObjectAnimator.ofFloat(binding.fabFollowingAlbumsSortPopularity,"translationY",-450f).apply { start() }
+                ObjectAnimator.ofFloat(binding.fabFollowingAlbumsSortLatest,"translationY",-250f).apply { start() }
                 true
             }
         }

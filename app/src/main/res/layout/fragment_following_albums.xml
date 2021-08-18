@@ -52,28 +52,31 @@
             </com.google.android.material.appbar.AppBarLayout>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fbutton_following_albums_sort_popularity"
+                android:id="@+id/fab_following_albums_sort_popularity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
                 android:layout_margin="24dp"
+                android:contentDescription="@string/following_albums_sort_popularity"
                 app:fabSize="mini" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fbutton_following_albums_sort_latest"
+                android:id="@+id/fab_following_albums_sort_latest"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
                 android:layout_margin="24dp"
+                android:contentDescription="@string/following_albums_sort_latest"
                 app:fabSize="mini"
                 app:hideOnScroll="true" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fbutton_following_albums_sort"
+                android:id="@+id/fab_following_albums_sort"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
                 android:layout_margin="16dp"
+                android:contentDescription="@string/following_albums_sort"
                 android:src="@drawable/sort" />
 
             <androidx.recyclerview.widget.RecyclerView

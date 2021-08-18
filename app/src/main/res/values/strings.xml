@@ -21,4 +21,10 @@
     <string name="search_title_criteria">제목</string>
     <string name="search_username_criteria">닉네임</string>
     <string name="search_place_criteria">장소</string>
+    <string name="capture_capture">캡처</string>
+    <string name="capture_record">기록</string>
+    <string name="capture_create_album">앨범 만들기</string>
+    <string name="following_albums_sort">정렬 방식 선택</string>
+    <string name="following_albums_sort_latest">최근 순으로 정렬</string>
+    <string name="following_albums_sort_popularity">인기 순으로 정렬</string>
 </resources>
