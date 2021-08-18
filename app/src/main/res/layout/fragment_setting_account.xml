@@ -2,8 +2,10 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/setting_account_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator_setting_account"
@@ -35,8 +37,8 @@
 
                 <ImageView
                     android:id="@+id/imageview_setting_account_back"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:layout_gravity="start|center"
                     android:layout_marginStart="16dp"
                     android:src="@drawable/back" />
@@ -45,7 +47,7 @@
                     android:id="@+id/textview_setting_account_title"
                     android:layout_width="wrap_content"
                     android:layout_height="?attr/actionBarSize"
-                    android:layout_marginStart="72dp"
+                    android:layout_marginStart="56dp"
                     android:gravity="start|center"
                     android:text="@string/setting_account_title"
                     android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
@@ -64,7 +66,6 @@
                 android:id="@+id/textview_setting_account_connectedAccount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="48dp"
                 android:text="@string/setting_account_connectedAccount"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
