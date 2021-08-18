@@ -27,4 +27,19 @@
     <string name="following_albums_sort">정렬 방식 선택</string>
     <string name="following_albums_sort_latest">최근 순으로 정렬</string>
     <string name="following_albums_sort_popularity">인기 순으로 정렬</string>
+    <string name="setting_title">설정</string>
+    <string name="setting_account">계정 설정</string>
+    <string name="setting_service">서비스 설정</string>
+    <string name="setting_support">고객지원</string>
+    <string name="setting_service_location">위치 서비스</string>
+    <string name="setting_service_notification">알림</string>
+    <string name="setting_support_version">버전</string>
+    <string name="setting_support_opinion">의견 보내기</string>
+    <string name="setting_support_terms">서비스 약관</string>
+    <string name="setting_account_title">프로필 및 계정</string>
+    <string name="setting_account_connectedAccount">연결된 계정</string>
+    <string name="setting_account_username">닉네임 변경</string>
+    <string name="setting_account_password">비밀번호 변경</string>
+    <string name="setting_account_resign">서비스 탈퇴</string>
+    <string name="setting_account_logout">로그아웃</string>
 </resources>
