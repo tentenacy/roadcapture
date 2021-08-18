@@ -52,7 +52,7 @@
                     android:layout_height="32dp"
                     android:layout_gravity="end|center"
                     android:layout_marginEnd="72dp"
-                    android:src="@drawable/notification"/>
+                    android:src="@drawable/ic_notification"/>
 
                 <ImageView
                     android:id="@+id/imageview_albums_setting"
@@ -60,7 +60,7 @@
                     android:layout_height="32dp"
                     android:layout_gravity="end|center"
                     android:layout_marginEnd="16dp"
-                    android:src="@drawable/setting"/>
+                    android:src="@drawable/ic_setting"/>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

@@ -31,7 +31,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="16dp"
-            android:src="@drawable/home" />
+            android:src="@drawable/ic_home" />
 
         <ImageView
             android:id="@+id/imageview_root_search_tab"
@@ -40,7 +40,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="16dp"
-            android:src="@drawable/search" />
+            android:src="@drawable/ic_search" />
 
         <ImageView
             android:id="@+id/imageview_root_capture_tab"
@@ -50,7 +50,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="16dp"
-            android:src="@drawable/plus" />
+            android:src="@drawable/ic_plus" />
 
         <ImageView
             android:id="@+id/imageview_root_following_albums_tab"
@@ -59,7 +59,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="16dp"
-            android:src="@drawable/albums" />
+            android:src="@drawable/ic_album" />
 
         <ImageView
             android:id="@+id/imageview_root_my_studio_tab"
@@ -68,7 +68,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:padding="16dp"
-            android:src="@drawable/person" />
+            android:src="@drawable/ic_user" />
 
     </LinearLayout>
 

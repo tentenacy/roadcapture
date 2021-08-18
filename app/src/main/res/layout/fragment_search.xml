@@ -51,7 +51,7 @@
                 android:layout_gravity="center"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="8dp"
-                android:src="@drawable/search"
+                android:src="@drawable/ic_search"
                 app:tint="#999999" />
 
             <EditText

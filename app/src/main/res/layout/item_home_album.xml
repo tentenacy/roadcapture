@@ -4,7 +4,7 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
+    <data>v
 
         <import type="android.view.View" />
 
@@ -59,7 +59,7 @@
             android:id="@+id/imageview_item_home_album_like"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/like"
+            android:src="@drawable/ic_like"
             app:layout_constraintBottom_toTopOf="@+id/imageview_item_home_album_comment"
             app:layout_constraintEnd_toEndOf="@+id/imageview_item_home_album_profile"
             app:layout_constraintHorizontal_bias="0.5"
@@ -83,7 +83,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginTop="19dp"
-            android:src="@drawable/comment"
+            android:src="@drawable/ic_comment"
             app:layout_constraintBottom_toTopOf="@+id/imageview_item_home_album_more"
             app:layout_constraintEnd_toEndOf="@+id/imageview_item_home_album_like"
             app:layout_constraintHorizontal_bias="0.5"
@@ -108,7 +108,7 @@
             android:layout_height="32dp"
             android:layout_marginTop="19dp"
             android:layout_marginBottom="4dp"
-            android:src="@drawable/more"
+            android:src="@drawable/ic_more_blank"
             app:layout_constraintBottom_toBottomOf="@+id/imageview_item_home_albums_thumbnail"
             app:layout_constraintEnd_toEndOf="@+id/imageview_item_home_album_comment"
             app:layout_constraintHorizontal_bias="0.5"
