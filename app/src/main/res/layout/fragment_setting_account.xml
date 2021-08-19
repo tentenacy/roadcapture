@@ -31,10 +31,10 @@
 
             <ImageView
                 android:id="@+id/imageview_setting_account_back"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
                 android:layout_gravity="start|center"
-                android:layout_marginStart="16dp"
+                android:padding="16dp"
                 android:src="@drawable/ic_back" />
 
             <TextView
@@ -54,60 +54,64 @@
         android:id="@+id/constraint_scrollview_setting"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="56dp">
+        android:layout_marginTop="56dp"
+        android:padding="32dp"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <TextView
-            android:id="@+id/textview_setting_account_connectedAccount"
+            android:id="@+id/textview_setting_account_connected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="24dp"
             android:text="@string/setting_account_connectedAccount"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textview_setting_account_connectedAccount_email"
+            android:id="@+id/textview_setting_account_connected_email"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
+            android:text="kwangddang11@naver.com"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            app:layout_constraintStart_toStartOf="@id/textview_setting_account_connectedAccount"
-            app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connectedAccount"
-            tools:text="kwangddang11@naver.com" />
+            app:layout_constraintStart_toStartOf="@id/textview_setting_account_connected"
+            app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connected" />
 
         <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
             android:src="@drawable/ic_naver"
+            app:layout_constraintBottom_toBottomOf="@id/textview_setting_account_connected_email"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connectedAccount" />
+            app:layout_constraintTop_toTopOf="@id/textview_setting_account_connected_email" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/primaryDarkColor"
+            android:layout_marginTop="24dp"
+            android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/textview_setting_account_connectedAccount_email"
-            app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connectedAccount_email" />
+            app:layout_constraintStart_toStartOf="@id/textview_setting_account_connected_email"
+            app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connected_email" />
 
         <TextView
             android:id="@+id/textview_setting_account_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="48dp"
             android:text="@string/setting_account_username"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-            app:layout_constraintStart_toStartOf="@id/textview_setting_account_connectedAccount_email"
-            app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connectedAccount_email" />
+            app:layout_constraintStart_toStartOf="@id/textview_setting_account_connected_email"
+            app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connected_email" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/primaryDarkColor"
+            android:layout_marginTop="24dp"
+            android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/textview_setting_account_username"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_account_username" />
@@ -116,7 +120,7 @@
             android:id="@+id/textview_setting_account_password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="48dp"
             android:text="@string/setting_account_password"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:layout_constraintStart_toStartOf="@id/textview_setting_account_username"
@@ -125,8 +129,8 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/primaryDarkColor"
+            android:layout_marginTop="24dp"
+            android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/textview_setting_account_password"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_account_password" />
@@ -135,17 +139,18 @@
             android:id="@+id/textview_setting_account_logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
+            android:layout_marginBottom="48dp"
             android:text="@string/setting_account_logout"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textview_setting_account_resign"
             app:layout_constraintStart_toStartOf="@id/textview_setting_account_password" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/primaryDarkColor"
+            android:layout_marginTop="24dp"
+            android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/textview_setting_account_logout"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_account_logout" />
@@ -154,17 +159,18 @@
             android:id="@+id/textview_setting_account_resign"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
+            android:layout_marginBottom="48dp"
             android:text="@string/setting_account_resign"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/textview_setting_account_password" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/primaryDarkColor"
+            android:layout_marginTop="24dp"
+            android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/textview_setting_account_password"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_account_resign" />
