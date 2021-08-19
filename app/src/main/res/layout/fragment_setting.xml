@@ -54,27 +54,30 @@
         android:id="@+id/scrollview_setting_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="32dp"
         android:layout_marginTop="56dp"
-        android:padding="56dp">
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="56dp">
 
         <TextView
-            android:id="@+id/textview_setting_account_connectedAccount"
+            android:id="@+id/textview_setting_account"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/setting_account"
             android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
             android:textStyle="bold"
+            android:layout_marginTop="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="6dp"
-            android:background="@color/primaryDarkColor"
+            android:layout_marginTop="24dp"
+            android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/textview_setting_account_connectedAccount"
-            app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connectedAccount" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_setting_account" />
 
         <TextView
             android:id="@+id/textview_setting_service"
@@ -84,15 +87,15 @@
             android:text="@string/setting_service"
             android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
             android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="@id/textview_setting_account_connectedAccount"
-            app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connectedAccount" />
+            app:layout_constraintStart_toStartOf="@id/textview_setting_account"
+            app:layout_constraintTop_toBottomOf="@id/textview_setting_account" />
 
         <TextView
             android:id="@+id/textview_setting_service_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="24dp"
             android:text="@string/setting_service_location"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service"
@@ -102,18 +105,17 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="6dp"
-            android:background="@color/primaryDarkColor"
+            android:layout_marginTop="24dp"
+            android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/textview_setting_account_connectedAccount"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_service_location" />
 
         <TextView
             android:id="@+id/textview_setting_service_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="48dp"
             android:text="@string/setting_service_notification"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
@@ -122,18 +124,17 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="6dp"
-            android:background="@color/primaryDarkColor"
+            android:layout_marginTop="24dp"
+            android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/textview_setting_account_connectedAccount"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_service_notification" />
 
         <TextView
             android:id="@+id/textview_setting_support"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="96dp"
+            android:layout_marginTop="48dp"
             android:text="@string/setting_support"
             android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
             android:textStyle="bold"
@@ -145,7 +146,7 @@
             android:id="@+id/textview_setting_support_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="24dp"
             android:text="@string/setting_support_version"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
@@ -155,18 +156,17 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="6dp"
-            android:background="@color/primaryDarkColor"
+            android:layout_marginTop="24dp"
+            android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/textview_setting_support_version"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_support_version" />
 
         <TextView
             android:id="@+id/textview_setting_support_opinion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="48dp"
             android:text="@string/setting_support_opinion"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
@@ -176,18 +176,17 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="6dp"
-            android:background="@color/primaryDarkColor"
+            android:layout_marginTop="24dp"
+            android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/textview_setting_support_version"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_support_opinion" />
 
         <TextView
             android:id="@+id/textview_setting_support_terms"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="48dp"
             android:text="@string/setting_support_terms"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
@@ -197,11 +196,10 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="6dp"
-            android:background="@color/primaryDarkColor"
+            android:layout_marginTop="24dp"
+            android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@id/textview_setting_support_version"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_support_terms" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
