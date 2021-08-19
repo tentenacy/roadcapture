@@ -7,177 +7,170 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinator_setting_account"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarlayout_setting_account"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="?attr/actionBarSize"
+        android:fitsSystemWindows="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbarlayout_setting_account"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/ctoolbarlayout_setting_account"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true">
+            app:layout_scrollFlags="scroll|enterAlways">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/ctoolbarlayout_setting_account"
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar_setting_account"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways">
-
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/toolbar_setting_account"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:contentInsetStart="0dp"
-                    app:layout_collapseMode="parallax" />
-
-                <ImageView
-                    android:id="@+id/imageview_setting_account_back"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_gravity="start|center"
-                    android:layout_marginStart="16dp"
-                    android:src="@drawable/ic_back" />
-
-                <TextView
-                    android:id="@+id/textview_setting_account_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="?attr/actionBarSize"
-                    android:layout_marginStart="56dp"
-                    android:gravity="start|center"
-                    android:text="@string/setting_account_title"
-                    android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
-                    android:textStyle="bold" />
-
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-        </com.google.android.material.appbar.AppBarLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_scrollview_setting"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:padding="56dp">
-
-            <TextView
-                android:id="@+id/textview_setting_account_connectedAccount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
-                android:text="@string/setting_account_connectedAccount"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textview_setting_account_connectedAccount_email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                app:layout_constraintStart_toStartOf="@id/textview_setting_account_connectedAccount"
-                app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connectedAccount"
-                tools:text="kwangddang11@naver.com" />
+                android:layout_height="?attr/actionBarSize"
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="parallax" />
 
             <ImageView
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_naver"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connectedAccount" />
-
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/primaryDarkColor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/textview_setting_account_connectedAccount_email"
-                app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connectedAccount_email" />
+                android:id="@+id/imageview_setting_account_back"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_gravity="start|center"
+                android:layout_marginStart="16dp"
+                android:src="@drawable/ic_back" />
 
             <TextView
-                android:id="@+id/textview_setting_account_username"
+                android:id="@+id/textview_setting_account_title"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:text="@string/setting_account_username"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                app:layout_constraintStart_toStartOf="@id/textview_setting_account_connectedAccount_email"
-                app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connectedAccount_email" />
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginStart="56dp"
+                android:gravity="start|center"
+                android:text="@string/setting_account_title"
+                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
+                android:textStyle="bold" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/primaryDarkColor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/textview_setting_account_username"
-                app:layout_constraintTop_toBottomOf="@id/textview_setting_account_username" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
-            <TextView
-                android:id="@+id/textview_setting_account_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:text="@string/setting_account_password"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                app:layout_constraintStart_toStartOf="@id/textview_setting_account_username"
-                app:layout_constraintTop_toBottomOf="@id/textview_setting_account_username" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_scrollview_setting"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="56dp">
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/primaryDarkColor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/textview_setting_account_password"
-                app:layout_constraintTop_toBottomOf="@id/textview_setting_account_password" />
+        <TextView
+            android:id="@+id/textview_setting_account_connectedAccount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="48dp"
+            android:text="@string/setting_account_connectedAccount"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textview_setting_account_logout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="32dp"
-                android:text="@string/setting_account_logout"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                app:layout_constraintBottom_toTopOf="@+id/textview_setting_account_resign"
-                app:layout_constraintStart_toStartOf="@id/textview_setting_account_password" />
+        <TextView
+            android:id="@+id/textview_setting_account_connectedAccount_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            app:layout_constraintStart_toStartOf="@id/textview_setting_account_connectedAccount"
+            app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connectedAccount"
+            tools:text="kwangddang11@naver.com" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/primaryDarkColor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/textview_setting_account_logout"
-                app:layout_constraintTop_toBottomOf="@id/textview_setting_account_logout" />
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_naver"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connectedAccount" />
 
-            <TextView
-                android:id="@+id/textview_setting_account_resign"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="24dp"
-                android:text="@string/setting_account_resign"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/textview_setting_account_password" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/primaryDarkColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textview_setting_account_connectedAccount_email"
+            app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connectedAccount_email" />
 
-            <View
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:background="@color/primaryDarkColor"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/textview_setting_account_password"
-                app:layout_constraintTop_toBottomOf="@id/textview_setting_account_resign" />
+        <TextView
+            android:id="@+id/textview_setting_account_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/setting_account_username"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            app:layout_constraintStart_toStartOf="@id/textview_setting_account_connectedAccount_email"
+            app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connectedAccount_email" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/primaryDarkColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textview_setting_account_username"
+            app:layout_constraintTop_toBottomOf="@id/textview_setting_account_username" />
+
+        <TextView
+            android:id="@+id/textview_setting_account_password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/setting_account_password"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            app:layout_constraintStart_toStartOf="@id/textview_setting_account_username"
+            app:layout_constraintTop_toBottomOf="@id/textview_setting_account_username" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/primaryDarkColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textview_setting_account_password"
+            app:layout_constraintTop_toBottomOf="@id/textview_setting_account_password" />
+
+        <TextView
+            android:id="@+id/textview_setting_account_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:text="@string/setting_account_logout"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            app:layout_constraintBottom_toTopOf="@+id/textview_setting_account_resign"
+            app:layout_constraintStart_toStartOf="@id/textview_setting_account_password" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/primaryDarkColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textview_setting_account_logout"
+            app:layout_constraintTop_toBottomOf="@id/textview_setting_account_logout" />
+
+        <TextView
+            android:id="@+id/textview_setting_account_resign"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:text="@string/setting_account_resign"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textview_setting_account_password" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:background="@color/primaryDarkColor"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textview_setting_account_password"
+            app:layout_constraintTop_toBottomOf="@id/textview_setting_account_resign" />
 
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

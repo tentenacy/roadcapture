@@ -42,4 +42,5 @@
     <string name="setting_account_password">비밀번호 변경</string>
     <string name="setting_account_resign">서비스 탈퇴</string>
     <string name="setting_account_logout">로그아웃</string>
+    <string name="my_studio_follower">팔로워</string>
 </resources>
