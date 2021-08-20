@@ -28,7 +28,6 @@ class CaptureFragment : Fragment() {
 
     }
 
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

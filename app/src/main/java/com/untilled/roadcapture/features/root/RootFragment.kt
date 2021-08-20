@@ -11,6 +11,7 @@ import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.navigation.StackHostFragment
 import com.untilled.roadcapture.databinding.FragmentRootBinding
+import com.untilled.roadcapture.features.root.capture.AskMakeAlbumModalBottomSheet
 import com.untilled.roadcapture.utils.extension.setTint
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -166,8 +167,8 @@ class RootFragment : Fragment() {
 
     private fun onClickedListeners() {
         binding.imageviewRootCaptureTab.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_rootFragment_to_captureFragment)
+            val askMakeAlbumBottomSheetDialog = AskMakeAlbumModalBottomSheet()
+            askMakeAlbumBottomSheetDialog.show(childFragmentManager, "askMakeAlbumBottomSheetDialog")
         }
     }
 }

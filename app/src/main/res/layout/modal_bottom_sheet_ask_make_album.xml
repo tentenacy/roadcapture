@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ask_make_album_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/textview_ask_make_album_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/ask_make_album_title"
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/button_ask_make_album_yes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/secondaryColor"
+            android:text="@string/ask_make_album_yes"
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button"
+            app:layout_constraintEnd_toStartOf="@id/button_ask_make_album_no"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_ask_make_album_title"
+            bind:clickableLayout="@{null}" />
+
+        <Button
+            android:id="@+id/button_ask_make_album_no"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:backgroundTint="@color/secondaryColor"
+            android:text="@string/ask_make_album_no"
+            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/button_ask_make_album_yes"
+            app:layout_constraintTop_toBottomOf="@id/textview_ask_make_album_title"
+            bind:clickableLayout="@{null}" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_ask_make_album_yes" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
