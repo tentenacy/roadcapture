@@ -5,7 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
@@ -54,6 +56,18 @@ class RootFragment : Fragment() {
             selectedIndex = savedInstanceState.getInt("selectedIndex", 0)
             loadChildFragments()
         }
+
+        // FragmentResultListener 호출
+        childFragmentManager.setFragmentResultListener(
+            "requestKey",
+            this,
+            { _, bundle ->
+                var result = bundle.getString("bundleKey")
+                if(result == "yes"){
+                    Navigation.findNavController(binding.root)
+                        .navigate(R.id.action_rootFragment_to_captureFragment)
+                }
+            })
     }
 
     private fun loadChildFragments() {

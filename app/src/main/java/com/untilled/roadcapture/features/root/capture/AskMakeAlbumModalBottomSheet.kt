@@ -31,6 +31,10 @@ class AskMakeAlbumModalBottomSheet : BottomSheetDialogFragment() {
 
     private fun onClickedListeners(){
         binding.buttonAskMakeAlbumYes.setOnClickListener {
+            // RootFragment로 '예' 버튼 클릭 했다는 "yes" 문자열 전송
+            val result = Bundle()
+            result.putString("bundleKey","yes")
+            parentFragmentManager.setFragmentResult("requestKey",result)
             dismiss()
         }
         binding.buttonAskMakeAlbumNo.setOnClickListener {
