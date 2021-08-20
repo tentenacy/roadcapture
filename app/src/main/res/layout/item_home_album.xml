@@ -4,7 +4,7 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>v
+    <data>
 
         <import type="android.view.View" />
 
@@ -36,7 +36,7 @@
             android:id="@+id/view_item_home_album_overlay"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/overlay_gradient"
+            android:background="@drawable/overlay_gradient_thumbnail"
             app:layout_constraintBottom_toBottomOf="@+id/imageview_item_home_albums_thumbnail"
             app:layout_constraintEnd_toEndOf="@+id/imageview_item_home_albums_thumbnail"
             app:layout_constraintStart_toStartOf="@+id/imageview_item_home_albums_thumbnail"

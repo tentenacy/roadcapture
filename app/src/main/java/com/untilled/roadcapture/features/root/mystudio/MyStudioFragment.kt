@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.untilled.roadcapture.databinding.FragmentMyStudioBinding
+import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -20,6 +21,9 @@ class MyStudioFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentMyStudioBinding.inflate(layoutInflater, container, false)
+
+        binding.recyclerviewMyStudioArea.adapter = AreasAdapter(DummyDataSet.areas)
+        binding.recyclerviewMyStudioAlbums.adapter = StudiosAdapter(DummyDataSet.studios)
         return binding.root
     }
 

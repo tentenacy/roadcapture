@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="studio"
+            type="com.untilled.roadcapture.data.entity.Studio" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_studios_album_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="24dp">
+
+        <TextView
+            android:id="@+id/item_studios_album_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{studio.createdDate}"
+            tools:text="2021년 08월 21일 03시 46분" />
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageview_item_studios_album_thumbnail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintDimensionRatio="1"
+            app:layout_constraintEnd_toEndOf="@+id/item_studios_album_date"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_studios_album_date"
+            bind:albumThumbnailImage="@{studio.thumbnailUrl}"
+            tools:src="@drawable/sample_thumbnail" />
+
+        <TextView
+            android:id="@+id/textview_item_studios_album_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="12dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@id/imageview_item_studios_album_thumbnail"
+            app:layout_constraintTop_toTopOf="@id/imageview_item_studios_album_thumbnail"
+            android:text="@{studio.title}"
+            tools:text="로드캡처 스터디" />
+
+        <TextView
+            android:id="@+id/textview_item_studios_album_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@+id/textview_item_studios_album_title"
+            app:layout_constraintTop_toBottomOf="@+id/textview_item_studios_album_title"
+            android:text="@{studio.description}"
+            tools:text="안녕하세요 저는 한상우입니다.\n잘 부탁드립니다." />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
