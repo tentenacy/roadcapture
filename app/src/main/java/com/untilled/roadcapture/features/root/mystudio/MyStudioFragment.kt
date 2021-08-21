@@ -22,7 +22,7 @@ class MyStudioFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentMyStudioBinding.inflate(layoutInflater, container, false)
 
-        binding.recyclerviewMyStudioArea.adapter = AreasAdapter(DummyDataSet.areas)
+        binding.recyclerviewMyStudioPlace.adapter = PlacesAdapter(DummyDataSet.areas)
         binding.recyclerviewMyStudioAlbums.adapter = StudiosAdapter(DummyDataSet.studios)
         return binding.root
     }

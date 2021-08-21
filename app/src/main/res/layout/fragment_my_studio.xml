@@ -38,10 +38,10 @@
 
                 <ImageView
                     android:id="@+id/imageview_my_studio_back"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
                     android:layout_gravity="start|center"
-                    android:layout_marginStart="16dp"
+                    android:padding="8dp"
                     android:src="@drawable/ic_back" />
 
                 <TextView
@@ -189,23 +189,25 @@
                     app:layout_constraintTop_toTopOf="@+id/textview_my_studio_follower" />
 
                 <TextView
-                    android:id="@+id/textview_my_studio_area"
+                    android:id="@+id/textview_my_studio_place"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="관심지역"
+                    android:textStyle="bold"
+                    android:layout_margin="12dp"
                     android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/imageview_my_studio_background" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerview_my_studio_area"
+                    android:id="@+id/recyclerview_my_studio_place"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textview_my_studio_area" />
+                    app:layout_constraintTop_toBottomOf="@+id/textview_my_studio_place" />
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recyclerview_my_studio_albums"
@@ -215,7 +217,7 @@
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/recyclerview_my_studio_area" />
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerview_my_studio_place" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

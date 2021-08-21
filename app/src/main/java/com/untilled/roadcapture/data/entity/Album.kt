@@ -22,5 +22,7 @@ data class Album(
     @SerializedName("modified_date")
     var modifiedDate: String,
     @SerializedName("thumbnail_url")
-    var thumbnailUrl: String
+    var thumbnailUrl: String,
+    @SerializedName("index")
+    var index: String
 )

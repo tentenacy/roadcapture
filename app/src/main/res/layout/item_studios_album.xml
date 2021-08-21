@@ -5,54 +5,74 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
 
         <variable
             name="studio"
-            type="com.untilled.roadcapture.data.entity.Studio" />
+            type="com.untilled.roadcapture.data.entity.Album" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/item_studios_album_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="24dp">
+        android:paddingVertical="12dp"
+        bind:reverseItem = "@{studio.index}">
 
         <TextView
-            android:id="@+id/item_studios_album_date"
+            android:id="@+id/textview_item_studios_album_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:text="@{studio.createdDate}"
-            tools:text="2021년 08월 21일 03시 46분" />
+            tools:text="2021년 08월 21일 03시 46분"
+            tools:ignore="MissingConstraints" />
+
+        <View
+            android:id="@+id/divider_item_studios_album_circle"
+            android:layout_width="6dp"
+            android:layout_height="6dp"
+            android:background="@drawable/circle"
+            android:backgroundTint="@color/secondaryColor"
+            app:layout_constraintTop_toTopOf="@id/textview_item_studios_album_date"
+            app:layout_constraintBottom_toBottomOf="@id/textview_item_studios_album_date"
+            tools:ignore="MissingConstraints" />
+
+        <View
+            android:id="@+id/divider_item_studios_album_line"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/secondaryColor"
+            app:layout_constraintTop_toTopOf="@id/divider_item_studios_album_circle"
+            app:layout_constraintBottom_toBottomOf="@id/divider_item_studios_album_circle"
+            tools:ignore="MissingConstraints" />
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageview_item_studios_album_thumbnail"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintDimensionRatio="1"
-            app:layout_constraintEnd_toEndOf="@+id/item_studios_album_date"
+            app:layout_constraintEnd_toEndOf="@+id/textview_item_studios_album_date"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/item_studios_album_date"
-            bind:albumThumbnailImage="@{studio.thumbnailUrl}"
+            app:layout_constraintStart_toStartOf="@+id/textview_item_studios_album_date"
+            app:layout_constraintTop_toBottomOf="@+id/textview_item_studios_album_date"
+            bind:studioThumbnailImage="@{studio.thumbnailUrl}"
+            bind:studioThumbnailImageIndex="@{studio.index}"
             tools:src="@drawable/sample_thumbnail" />
 
         <TextView
             android:id="@+id/textview_item_studios_album_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
             android:layout_marginTop="12dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@id/imageview_item_studios_album_thumbnail"
             app:layout_constraintTop_toTopOf="@id/imageview_item_studios_album_thumbnail"
             android:text="@{studio.title}"
-            tools:text="로드캡처 스터디" />
+            tools:text="로드캡처 스터디"
+            tools:ignore="MissingConstraints" />
 
         <TextView
             android:id="@+id/textview_item_studios_album_description"

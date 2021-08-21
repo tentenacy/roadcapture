@@ -2,7 +2,7 @@ package com.untilled.roadcapture.data.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class Area(
-    @SerializedName("area")
-    var area: String
+data class Place(
+    @SerializedName("place")
+    var place: String
 )

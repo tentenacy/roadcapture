@@ -9,8 +9,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="area"
-            type="com.untilled.roadcapture.data.entity.Area" />
+            name="place"
+            type="com.untilled.roadcapture.data.entity.Place" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -26,7 +26,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:text="@{area.area}"
+            android:text="@{place.place}"
             tools:text="경기도"
             android:textColor="@color/white"
             android:textSize="16sp"
