@@ -36,22 +36,15 @@
                     app:contentInsetStart="0dp"
                     app:layout_collapseMode="parallax" />
 
-                <ImageView
-                    android:id="@+id/imageview_my_studio_back"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="start|center"
-                    android:padding="8dp"
-                    android:src="@drawable/ic_back" />
 
                 <TextView
                     android:id="@+id/textview_my_studio_title"
+                    style="@style/ActionBarTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="?attr/actionBarSize"
-                    android:layout_marginStart="56dp"
+                    android:layout_marginStart="16dp"
                     android:gravity="start|center"
                     android:text="tenutz의 스튜디오"
-                    android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
                     android:textStyle="bold" />
 
                 <ImageView
@@ -92,8 +85,10 @@
                     android:background="@drawable/overlay_gradient_background"
                     app:layout_constraintBottom_toBottomOf="@+id/imageview_my_studio_background"
                     app:layout_constraintEnd_toEndOf="@+id/imageview_my_studio_background"
+                    app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="@+id/imageview_my_studio_background"
-                    app:layout_constraintTop_toTopOf="@+id/imageview_my_studio_background" />
+                    app:layout_constraintTop_toTopOf="@+id/imageview_my_studio_background"
+                    app:layout_constraintVertical_bias="0.0" />
 
                 <ImageView
                     android:id="@+id/imageview_my_studio_profile"
@@ -108,24 +103,21 @@
 
                 <TextView
                     android:id="@+id/textview_my_studio_profile_name"
+                    style="@style/SubHeadBoldWhite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="12dp"
                     android:text="tenutz"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@id/imageview_my_studio_profile"
                     app:layout_constraintTop_toTopOf="@id/imageview_my_studio_profile" />
 
                 <TextView
                     android:id="@+id/textview_my_studio_profile_description"
+                    style="@style/BodyWhite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:text="안녕하세요. 저는 이원석입니다. 안녕하세요..."
-                    android:textColor="@color/white"
-                    android:textSize="13sp"
                     app:layout_constraintStart_toStartOf="@id/textview_my_studio_profile_name"
                     app:layout_constraintTop_toBottomOf="@id/textview_my_studio_profile_name" />
 
@@ -141,61 +133,54 @@
 
                 <TextView
                     android:id="@+id/textview_my_studio_follower"
+                    style="@style/SubHeadBoldWhite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/my_studio_follower"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="@id/imageview_my_studio_background"
                     app:layout_constraintStart_toStartOf="@+id/imageview_my_studio_profile"
                     app:layout_constraintTop_toBottomOf="@+id/imageview_my_studio_profile" />
 
                 <TextView
                     android:id="@+id/textview_my_studio_follower_num"
+                    style="@style/BodyWhite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:text="81.9만"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/white"
                     app:layout_constraintHorizontal_chainStyle="spread"
                     app:layout_constraintStart_toEndOf="@+id/textview_my_studio_follower"
                     app:layout_constraintTop_toTopOf="@+id/textview_my_studio_follower" />
 
                 <TextView
                     android:id="@+id/textview_my_studio_following"
+                    style="@style/SubHeadBoldWhite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="96dp"
                     android:text="팔로잉"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/white"
-                    android:textStyle="bold"
                     app:layout_constraintStart_toEndOf="@+id/textview_my_studio_follower"
                     app:layout_constraintTop_toTopOf="@+id/textview_my_studio_follower" />
 
 
                 <TextView
                     android:id="@+id/textview_my_studio_following_num"
+                    style="@style/BodyWhite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="24dp"
                     android:text="100"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-                    android:textColor="@color/white"
                     app:layout_constraintStart_toEndOf="@+id/textview_my_studio_following"
                     app:layout_constraintTop_toTopOf="@+id/textview_my_studio_follower" />
 
                 <TextView
                     android:id="@+id/textview_my_studio_place"
+                    style="@style/SubHeadBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="관심지역"
-                    android:textStyle="bold"
                     android:layout_margin="12dp"
-                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
+                    android:text="관심지역"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/imageview_my_studio_background" />
 

@@ -11,32 +11,31 @@
 
         <ImageView
             android:id="@+id/imageview_email_input_signup_back"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_margin="4dp"
             android:padding="16dp"
             android:src="@drawable/ic_back"
-            app:layout_constraintBottom_toTopOf="@+id/guideline_username_input_signup_body_top"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_username_input_signup_body_start"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textview_email_input_signup_title"
+            style="@style/Head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/email_input_signup_title"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintStart_toStartOf="@+id/guideline_username_input_signup_body_start"
             app:layout_constraintTop_toTopOf="@+id/guideline_username_input_signup_body_top" />
 
         <TextView
             android:id="@+id/textview_email_input_signup_label"
+            style="@style/SubHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="@string/email_input_signup_label"
-            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
             app:layout_constraintStart_toStartOf="@+id/guideline_username_input_signup_body_start"
             app:layout_constraintTop_toBottomOf="@+id/textview_email_input_signup_title" />
 
@@ -52,15 +51,16 @@
 
             <EditText
                 android:id="@+id/edittext_email_input_signup"
+                style="body"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
                 android:theme="@style/EditTextTheme" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/textview_email_input_signup_next"
+            style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:gravity="center"
@@ -73,9 +73,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.6"
             bind:clickableTextView="@{null}"
-            tools:background="@color/secondaryColor"
-            tools:style="@style/TextAppearance.MdcTypographyStyles.Button"
-            tools:textColor="@color/white" />
+            tools:background="@color/secondaryColor" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_username_input_signup_body_start"

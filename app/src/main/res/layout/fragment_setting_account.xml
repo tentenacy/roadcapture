@@ -39,13 +39,12 @@
 
             <TextView
                 android:id="@+id/textview_setting_account_title"
+                style="@style/ActionBarTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_marginStart="56dp"
                 android:gravity="start|center"
-                android:text="@string/setting_account_title"
-                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
-                android:textStyle="bold" />
+                android:text="@string/setting_account_title" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -61,22 +60,21 @@
 
         <TextView
             android:id="@+id/textview_setting_account_connected"
+            style="@style/Head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="@string/setting_account_connectedAccount"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textview_setting_account_connected_email"
+            style="@style/SubHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="kwangddang11@naver.com"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:layout_constraintStart_toStartOf="@id/textview_setting_account_connected"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connected" />
 
@@ -99,11 +97,11 @@
 
         <TextView
             android:id="@+id/textview_setting_account_username"
+            style="@style/SubHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
             android:text="@string/setting_account_username"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:layout_constraintStart_toStartOf="@id/textview_setting_account_connected_email"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connected_email" />
 
@@ -118,11 +116,11 @@
 
         <TextView
             android:id="@+id/textview_setting_account_password"
+            style="@style/SubHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
             android:text="@string/setting_account_password"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:layout_constraintStart_toStartOf="@id/textview_setting_account_username"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_account_username" />
 
@@ -137,12 +135,11 @@
 
         <TextView
             android:id="@+id/textview_setting_account_logout"
+            style="@style/Head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="48dp"
             android:text="@string/setting_account_logout"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/textview_setting_account_resign"
             app:layout_constraintStart_toStartOf="@id/textview_setting_account_password" />
 
@@ -157,12 +154,11 @@
 
         <TextView
             android:id="@+id/textview_setting_account_resign"
+            style="@style/Head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="48dp"
             android:text="@string/setting_account_resign"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@id/textview_setting_account_password" />
 

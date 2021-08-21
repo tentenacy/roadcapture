@@ -44,11 +44,11 @@
 
         <ImageView
             android:id="@+id/imageview_root_capture_tab"
-            android:clickable="true"
             style="@style/RippleEffect"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:clickable="true"
             android:padding="16dp"
             android:src="@drawable/ic_plus" />
 

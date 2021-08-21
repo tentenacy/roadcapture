@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/albums_container"
-    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".features.root.albums.AlbumsFragment">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -38,13 +38,12 @@
 
                 <TextView
                     android:id="@+id/textview_albums_title"
+                    style="@style/ActionBarTitle"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:gravity="start|center"
                     android:paddingHorizontal="16dp"
-                    android:text="@string/app_name"
-                    android:textStyle="bold"
-                    android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6" />
+                    android:text="@string/app_name" />
 
                 <ImageView
                     android:id="@+id/imageview_albums_notification"
@@ -52,7 +51,8 @@
                     android:layout_height="32dp"
                     android:layout_gravity="end|center"
                     android:layout_marginEnd="72dp"
-                    android:src="@drawable/ic_notification"/>
+                    android:padding="4dp"
+                    android:src="@drawable/ic_notification" />
 
                 <ImageView
                     android:id="@+id/imageview_albums_setting"
@@ -60,7 +60,8 @@
                     android:layout_height="32dp"
                     android:layout_gravity="end|center"
                     android:layout_marginEnd="16dp"
-                    android:src="@drawable/ic_setting"/>
+                    android:padding="4dp"
+                    android:src="@drawable/ic_setting" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 

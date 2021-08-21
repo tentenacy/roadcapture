@@ -1,70 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="TextAppearance.MdcTypographyStyles.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
-        <item name="fontFamily">@font/font</item>
-        <item name="android:fontFamily">@font/font</item>
-        <item name="android:textSize">96sp</item>
-    </style>
-    <style name="TextAppearance.MdcTypographyStyles.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
-        <item name="fontFamily">@font/font</item>
-        <item name="android:fontFamily">@font/font</item>
-        <item name="android:textSize">60sp</item>
-    </style>
-    <style name="TextAppearance.MdcTypographyStyles.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
-        <item name="fontFamily">@font/font</item>
-        <item name="android:fontFamily">@font/font</item>
-        <item name="android:textSize">48sp</item>
-    </style>
-    <style name="TextAppearance.MdcTypographyStyles.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
-        <item name="fontFamily">@font/font</item>
-        <item name="android:fontFamily">@font/font</item>
-        <item name="android:textSize">34sp</item>
-    </style>
-    <style name="TextAppearance.MdcTypographyStyles.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
-        <item name="fontFamily">@font/font</item>
-        <item name="android:fontFamily">@font/font</item>
-        <item name="android:textSize">24sp</item>
-    </style>
-    <style name="TextAppearance.MdcTypographyStyles.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
-        <item name="fontFamily">@font/font</item>
-        <item name="android:fontFamily">@font/font</item>
+
+    <style name="ActionBarTitle" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/arita_semi_bold</item>
         <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
     </style>
-    <style name="TextAppearance.MdcTypographyStyles.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
-        <item name="fontFamily">@font/font</item>
-        <item name="android:fontFamily">@font/font</item>
+
+    <style name="Button" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/arita</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/primaryColor</item>
+    </style>
+
+    <style name="Head" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/arita_semi_bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+
+    <style name="SubHeadBold" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/arita_semi_bold</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
     </style>
-    <style name="TextAppearance.MdcTypographyStyles.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
-        <item name="fontFamily">@font/font</item>
-        <item name="android:fontFamily">@font/font</item>
-        <item name="android:textSize">14sp</item>
-    </style>
-    <style name="TextAppearance.MdcTypographyStyles.Body1" parent="TextAppearance.MaterialComponents.Body1">
-        <item name="fontFamily">@font/font</item>
-        <item name="android:fontFamily">@font/font</item>
+
+    <style name="SubHead" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/arita</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
     </style>
-    <style name="TextAppearance.MdcTypographyStyles.Body2" parent="TextAppearance.MaterialComponents.Body2">
-        <item name="fontFamily">@font/font</item>
-        <item name="android:fontFamily">@font/font</item>
+
+    <style name="Body" parent ="android:TextAppearance">
+        <item name="android:fontFamily">@font/arita</item>
         <item name="android:textSize">14sp</item>
     </style>
-    <style name="TextAppearance.MdcTypographyStyles.Button" parent="TextAppearance.MaterialComponents.Button">
-        <item name="fontFamily">@font/font</item>
-        <item name="android:fontFamily">@font/font</item>
+
+    <style name="HeadWhite" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/arita_semi_bold</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/primaryColor</item>
+    </style>
+
+    <style name="SubHeadBoldWhite" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/arita_semi_bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primaryColor</item>
+    </style>
+
+    <style name="SubHeadWhite" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/arita</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primaryColor</item>
+    </style>
+
+    <style name="BodyWhite" parent ="android:TextAppearance">
+        <item name="android:fontFamily">@font/arita</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/primaryColor</item>
     </style>
-    <style name="TextAppearance.MdcTypographyStyles.Caption" parent="TextAppearance.MaterialComponents.Caption">
-        <item name="fontFamily">@font/font</item>
-        <item name="android:fontFamily">@font/font</item>
-        <item name="android:textSize">12sp</item>
-    </style>
-    <style name="TextAppearance.MdcTypographyStyles.Overline" parent="TextAppearance.MaterialComponents.Overline">
-        <item name="fontFamily">@font/font</item>
-        <item name="android:fontFamily">@font/font</item>
-        <item name="android:textSize">10sp</item>
-    </style>
+
 
     <style name="RippleEffect">
         <item name="android:clickable">true</item>
@@ -78,6 +73,6 @@
         <item name="colorControlHighlight">@color/control_highlight</item>
     </style>
 
-    <style name="Theme.RoadCapture.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar"/>
+    <style name="Theme.RoadCapture.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
 </resources>

@@ -13,7 +13,7 @@ object CommonBindingAdapters {
     @BindingAdapter("clickableTextView")
     fun setClickableTextView(view: TextView, any: Any?) {
         val context = view.context
-        view.setTextAppearance(R.style.TextAppearance_MdcTypographyStyles_Button)
+        view.setTextAppearance(R.style.Button)
         view.setTextColor(context.getColor(R.color.white))
         view.setBackgroundColor(context.getColor(R.color.secondaryColor))
         view.setRippleEffect()

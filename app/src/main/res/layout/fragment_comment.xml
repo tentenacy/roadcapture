@@ -3,9 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/comment_container"
-    android:fitsSystemWindows="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".features.root.albums.AlbumsFragment">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -46,13 +46,13 @@
 
                 <TextView
                     android:id="@+id/textview_albums_title"
+                    style="@style/ActionBarTitle"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:gravity="start|center"
                     android:layout_marginStart="56dp"
+                    android:gravity="start|center"
                     android:text="댓글 0"
-                    android:textStyle="bold"
-                    android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6" />
+                    android:textStyle="bold" />
 
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -73,22 +73,21 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:background="@drawable/comment_edit_text"
-        app:tint="#999999"
         android:layout_margin="16dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:background="@drawable/comment_edit_text"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:tint="#999999">
 
         <ImageView
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:src="@drawable/ic_send"
             android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_send"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
-
+            app:layout_constraintTop_toTopOf="parent" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

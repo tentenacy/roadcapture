@@ -97,11 +97,10 @@
 
             <TextView
                 android:id="@+id/textview_login_email_login"
+                style="@style/Button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/login_email_login"
-                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Button"
-                android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -111,11 +110,11 @@
 
         <TextView
             android:id="@+id/textview_login_no_account"
+            style="body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:text="@string/login_no_account"
-            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
             app:layout_constraintBottom_toTopOf="@+id/guideline_login_body_top"
             app:layout_constraintEnd_toStartOf="@+id/textview_login_signup"
             app:layout_constraintHorizontal_chainStyle="packed"
@@ -123,11 +122,11 @@
 
         <TextView
             android:id="@+id/textview_login_signup"
+            style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:text="@string/login_signup"
-            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Subtitle2"
             android:textColor="@color/secondaryColor"
             app:layout_constraintBottom_toBottomOf="@+id/textview_login_no_account"
             app:layout_constraintEnd_toEndOf="parent"

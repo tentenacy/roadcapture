@@ -39,13 +39,12 @@
 
             <TextView
                 android:id="@+id/textview_setting_title"
+                style="@style/ActionBarTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="?attr/actionBarSize"
                 android:layout_marginStart="56dp"
                 android:gravity="start|center"
-                android:text="@string/setting_title"
-                android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
-                android:textStyle="bold" />
+                android:text="@string/setting_title" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -54,19 +53,18 @@
         android:id="@+id/scrollview_setting_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="32dp"
         android:layout_marginTop="56dp"
+        android:padding="32dp"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="56dp">
 
         <TextView
             android:id="@+id/textview_setting_account"
+            style="@style/Head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/setting_account"
-            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
-            android:textStyle="bold"
             android:layout_marginTop="24dp"
+            android:text="@string/setting_account"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -81,23 +79,22 @@
 
         <TextView
             android:id="@+id/textview_setting_service"
+            style="@style/Head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
             android:text="@string/setting_service"
-            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/textview_setting_account"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_account" />
 
         <TextView
             android:id="@+id/textview_setting_service_location"
+            style="@style/SubHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="24dp"
             android:text="@string/setting_service_location"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_service" />
 
@@ -113,11 +110,11 @@
 
         <TextView
             android:id="@+id/textview_setting_service_notification"
+            style="@style/SubHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
             android:text="@string/setting_service_notification"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_service_location" />
 
@@ -132,23 +129,22 @@
 
         <TextView
             android:id="@+id/textview_setting_support"
+            style="@style/Head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
             android:text="@string/setting_support"
-            android:textAppearance="@style/TextAppearance.MdcTypographyStyles.Headline6"
-            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_service_notification" />
 
 
         <TextView
             android:id="@+id/textview_setting_support_version"
+            style="@style/SubHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="@string/setting_support_version"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_support" />
 
@@ -164,11 +160,11 @@
 
         <TextView
             android:id="@+id/textview_setting_support_opinion"
+            style="@style/SubHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
             android:text="@string/setting_support_opinion"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_support_version" />
 
@@ -184,11 +180,11 @@
 
         <TextView
             android:id="@+id/textview_setting_support_terms"
+            style="@style/SubHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
             android:text="@string/setting_support_terms"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_support_opinion" />
 

@@ -20,17 +20,16 @@
         android:paddingHorizontal="12dp">
 
         <androidx.appcompat.widget.AppCompatButton
+            style="@style/Button"
             android:layout_width="64dp"
             android:layout_height="32dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@drawable/area_button"
             android:text="@{place.place}"
-            tools:text="경기도"
-            android:textColor="@color/white"
-            android:textSize="16sp"
-            android:background="@drawable/area_button"/>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="경기도" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
