@@ -48,27 +48,17 @@
                         android:paddingHorizontal="16dp"
                         android:text="@string/app_name" />
 
+                    <ImageView
+                        android:id="@+id/imageview_following_albums_notification"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="end|center"
+                        android:layout_marginEnd="16dp"
+                        android:padding="4dp"
+                        android:src="@drawable/ic_notification" />
+
                 </com.google.android.material.appbar.CollapsingToolbarLayout>
             </com.google.android.material.appbar.AppBarLayout>
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_following_albums_sort_popularity"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_margin="24dp"
-                android:contentDescription="@string/following_albums_sort_popularity"
-                app:fabSize="mini" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_following_albums_sort_latest"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_margin="24dp"
-                android:contentDescription="@string/following_albums_sort_latest"
-                app:fabSize="mini"
-                app:hideOnScroll="true" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_following_albums_sort"

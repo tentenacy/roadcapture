@@ -133,7 +133,7 @@ class RootFragment : Fragment() {
                 selectFragment(index)
             }
         }
-        setOnClickListener()
+        setOnClickListeners()
         setupTabSelectedState(selectedIndex)
     }
 
@@ -177,7 +177,7 @@ class RootFragment : Fragment() {
             .commit()
     }
 
-    private fun setOnClickListener() {
+    private fun setOnClickListeners() {
         binding.imageviewRootCaptureTab.setOnClickListener {
             val askMakeAlbumBottomSheetDialog = AlbumCreationAskingBottomSheetDialog()
             askMakeAlbumBottomSheetDialog.show(childFragmentManager, "askMakeAlbumBottomSheetDialog")

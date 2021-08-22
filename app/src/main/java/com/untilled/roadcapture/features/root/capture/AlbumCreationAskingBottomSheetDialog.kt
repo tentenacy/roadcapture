@@ -25,10 +25,10 @@ class AlbumCreationAskingBottomSheetDialog : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setOnClickListener()
+        setOnClickListeners()
     }
 
-    private fun setOnClickListener(){
+    private fun setOnClickListeners(){
         binding.buttonAlbumCreationAskingYes.setOnClickListener {
             // RootFragment로 '예' 버튼 클릭 했다는 "yes" 문자열 전송
             val result = Bundle()
