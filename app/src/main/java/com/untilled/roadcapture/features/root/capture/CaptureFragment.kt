@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentCaptureBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -26,6 +28,14 @@ class CaptureFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setOnClickListeners()
+    }
+
+    private fun setOnClickListeners() {
+        binding.fabCaptureCapture.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_captureFragment_to_cameraFragment)
+        }
     }
 
     override fun onDestroyView() {

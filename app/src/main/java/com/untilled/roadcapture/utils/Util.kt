@@ -39,3 +39,7 @@ fun Context.getDrawable(colorId: Int): Drawable? = ContextCompat.getDrawable(thi
 fun ImageView.setTint(colorId: Int) {
     DrawableCompat.setTint(DrawableCompat.wrap(drawable), colorId)
 }
+
+// Milliseconds used for UI animations in Camera
+const val ANIMATION_FAST_MILLIS = 50L
+const val ANIMATION_SLOW_MILLIS = 100L
