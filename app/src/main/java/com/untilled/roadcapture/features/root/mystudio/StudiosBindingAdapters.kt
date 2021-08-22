@@ -1,7 +1,5 @@
 package com.untilled.roadcapture.features.root.mystudio
 
-import android.util.Log
-import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.databinding.BindingAdapter
@@ -9,7 +7,6 @@ import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.utils.extension.getPxFromDp
 
 object StudiosBindingAdapters {
 
@@ -19,7 +16,7 @@ object StudiosBindingAdapters {
         view.context.apply {
 
             if(index.toInt() % 2 == 0) {
-                val radius = resources.getDimension(R.dimen.album_corner_raduis)
+                val radius = resources.getDimension(R.dimen.album_corner_radius)
                 val shapeAppearanceModel = view.shapeAppearanceModel.toBuilder()
                     .setTopRightCorner(CornerFamily.ROUNDED, radius)
                     .setBottomRightCorner(CornerFamily.ROUNDED, radius)
@@ -28,7 +25,7 @@ object StudiosBindingAdapters {
             }
 
             else {
-                val radius = resources.getDimension(R.dimen.album_corner_raduis)
+                val radius = resources.getDimension(R.dimen.album_corner_radius)
                 val shapeAppearanceModel = view.shapeAppearanceModel.toBuilder()
                     .setTopLeftCorner(CornerFamily.ROUNDED, radius)
                     .setBottomLeftCorner(CornerFamily.ROUNDED, radius)

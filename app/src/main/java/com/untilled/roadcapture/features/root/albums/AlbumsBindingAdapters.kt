@@ -8,7 +8,6 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
-import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.utils.extension.getPxFromDp
 
@@ -18,7 +17,7 @@ object AlbumsBindingAdapters {
     @BindingAdapter("albumThumbnailImage")
     fun setAlbumThumbnailImage(view: ShapeableImageView, url: String) {
         view.context.apply {
-            val radius = resources.getDimension(R.dimen.album_corner_raduis)
+            val radius = resources.getDimension(R.dimen.album_corner_radius)
             val shapeAppearanceModel = view.shapeAppearanceModel.toBuilder()
                 .setTopRightCorner(CornerFamily.ROUNDED, radius)
                 .setBottomRightCorner(CornerFamily.ROUNDED, radius)

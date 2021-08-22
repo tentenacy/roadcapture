@@ -7,6 +7,6 @@
         android:startColor="#99000000" />
 
     <corners
-        android:bottomRightRadius="@dimen/album_corner_raduis"
-        android:topRightRadius="@dimen/album_corner_raduis" />
+        android:bottomRightRadius="@dimen/album_corner_radius"
+        android:topRightRadius="@dimen/album_corner_radius" />
 </shape>
