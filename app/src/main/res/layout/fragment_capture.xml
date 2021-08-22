@@ -20,6 +20,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
 
+            <ImageView
+                android:id="@+id/imageview_capture_back"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_margin="8dp"
+                android:padding="8dp"
+                android:src="@drawable/ic_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_capture_create_album"
                 android:layout_width="wrap_content"

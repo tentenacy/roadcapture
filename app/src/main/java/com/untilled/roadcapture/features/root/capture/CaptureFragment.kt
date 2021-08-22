@@ -35,6 +35,9 @@ class CaptureFragment : Fragment() {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_captureFragment_to_cameraFragment)
         }
+        binding.imageviewCaptureBack.setOnClickListener{
+            requireActivity().onBackPressed()
+        }
     }
 
     override fun onDestroyView() {
