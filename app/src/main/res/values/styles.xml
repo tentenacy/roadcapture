@@ -34,6 +34,9 @@
     <style name="Body" parent ="android:TextAppearance">
         <item name="android:fontFamily">@font/arita</item>
         <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
     </style>
 
     <style name="HeadWhite" parent="android:TextAppearance">
@@ -58,6 +61,9 @@
         <item name="android:fontFamily">@font/arita</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
     </style>
 
 

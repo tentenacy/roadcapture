@@ -153,8 +153,6 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="48dp"
-            android:ellipsize="end"
-            android:maxLines="2"
             android:text="@{album.description}"
             android:visibility='@{album.description.equals("") ? View.GONE : View.VISIBLE}'
             app:layout_constraintBottom_toBottomOf="parent"
