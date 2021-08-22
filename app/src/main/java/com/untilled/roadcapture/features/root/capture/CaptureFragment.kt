@@ -1,9 +1,8 @@
 package com.untilled.roadcapture.features.root.capture
 
+import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R

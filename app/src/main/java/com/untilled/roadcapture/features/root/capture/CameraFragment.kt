@@ -12,10 +12,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.Telephony.Mms.Part.FILENAME
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
 import android.webkit.MimeTypeMap
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
@@ -69,6 +66,7 @@ class CameraFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentCameraBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -83,6 +81,9 @@ class CameraFragment : Fragment() {
     @SuppressLint("MissingPermission")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        // 상태바 없애기기
+        hideStatusBars()
 
         // 백그라운드 executor 초기화
         cameraExecutor = Executors.newSingleThreadExecutor()
@@ -398,6 +399,17 @@ class CameraFragment : Fragment() {
             listeners.forEach { it(luma) }
 
             image.close()
+        }
+    }
+
+    private fun hideStatusBars() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            requireActivity().window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
+            requireActivity().window.setFlags(
+                android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                android.view.WindowManager.LayoutParams.FLAG_FULLSCREEN
+            )
         }
     }
 
