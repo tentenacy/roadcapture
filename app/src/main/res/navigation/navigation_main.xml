@@ -54,10 +54,27 @@
         <action
             android:id="@+id/action_rootFragment_to_captureFragment"
             app:destination="@id/captureFragment" />
+        <action
+            android:id="@+id/action_rootFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/captureFragment"
         android:name="com.untilled.roadcapture.features.root.capture.CaptureFragment"
         tools:layout="@layout/fragment_capture"
         android:label="fragment_capture" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.untilled.roadcapture.features.root.settings.SettingsFragment"
+        tools:layout="@layout/fragment_setting"
+        android:label="SettingsFragment" >
+        <action
+            android:id="@+id/action_settingsFragment_to_accountSettingFragment"
+            app:destination="@id/accountSettingFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/accountSettingFragment"
+        android:name="com.untilled.roadcapture.features.root.settings.AccountSettingFragment"
+        tools:layout="@layout/fragment_setting_account"
+        android:label="AccountSettingFragment" />
 </navigation>

@@ -60,12 +60,12 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
+            android:id="@+id/my_studio_scroll_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraint_my_studio_container_items"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
