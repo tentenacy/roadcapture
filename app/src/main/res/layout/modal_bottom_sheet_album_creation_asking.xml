@@ -5,46 +5,46 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/ask_make_album_container"
+        android:id="@+id/album_creation_asking_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <TextView
-            android:id="@+id/textview_ask_make_album_title"
+            android:id="@+id/textview_album_creation_asking_title"
             style="@style/Head"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:gravity="center"
-            android:text="@string/ask_make_album_title"
+            android:text="@string/album_creation_asking_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button_ask_make_album_yes"
+            android:id="@+id/button_album_creation_asking_yes"
             style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:backgroundTint="@color/secondaryColor"
-            android:text="@string/ask_make_album_yes"
-            app:layout_constraintEnd_toStartOf="@id/button_ask_make_album_no"
+            android:text="@string/album_creation_asking_yes"
+            app:layout_constraintEnd_toStartOf="@id/button_album_creation_asking_no"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_ask_make_album_title"
+            app:layout_constraintTop_toBottomOf="@id/textview_album_creation_asking_title"
             bind:clickableLayout="@{null}" />
 
         <Button
-            android:id="@+id/button_ask_make_album_no"
+            android:id="@+id/button_album_creation_asking_no"
             style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:backgroundTint="@color/secondaryColor"
-            android:text="@string/ask_make_album_no"
+            android:text="@string/album_creation_asking_no"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/button_ask_make_album_yes"
-            app:layout_constraintTop_toBottomOf="@id/textview_ask_make_album_title"
+            app:layout_constraintStart_toEndOf="@id/button_album_creation_asking_yes"
+            app:layout_constraintTop_toBottomOf="@id/textview_album_creation_asking_title"
             bind:clickableLayout="@{null}" />
 
         <View
@@ -52,7 +52,7 @@
             android:layout_height="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_ask_make_album_yes" />
+            app:layout_constraintTop_toBottomOf="@id/button_album_creation_asking_yes" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -5,12 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.untilled.roadcapture.R
-import com.untilled.roadcapture.databinding.ModalBottomSheetAskMakeAlbumBinding
+import com.untilled.roadcapture.databinding.ModalBottomSheetAlbumCreationAskingBinding
 
-class AskMakeAlbumModalBottomSheet : BottomSheetDialogFragment() {
+class AlbumCreationAskingBottomSheetDialog : BottomSheetDialogFragment() {
 
-    private var _binding : ModalBottomSheetAskMakeAlbumBinding? = null
+    private var _binding : ModalBottomSheetAlbumCreationAskingBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -18,7 +17,7 @@ class AskMakeAlbumModalBottomSheet : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = ModalBottomSheetAskMakeAlbumBinding.inflate(inflater, container, false)
+        _binding = ModalBottomSheetAlbumCreationAskingBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -26,18 +25,18 @@ class AskMakeAlbumModalBottomSheet : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        onClickedListeners()
+        setOnClickListener()
     }
 
-    private fun onClickedListeners(){
-        binding.buttonAskMakeAlbumYes.setOnClickListener {
+    private fun setOnClickListener(){
+        binding.buttonAlbumCreationAskingYes.setOnClickListener {
             // RootFragment로 '예' 버튼 클릭 했다는 "yes" 문자열 전송
             val result = Bundle()
             result.putString("bundleKey","yes")
             parentFragmentManager.setFragmentResult("requestKey",result)
             dismiss()
         }
-        binding.buttonAskMakeAlbumNo.setOnClickListener {
+        binding.buttonAlbumCreationAskingNo.setOnClickListener {
             dismiss()
         }
     }

@@ -5,15 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentResultListener
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.navigation.StackHostFragment
 import com.untilled.roadcapture.databinding.FragmentRootBinding
-import com.untilled.roadcapture.features.root.capture.AskMakeAlbumModalBottomSheet
+import com.untilled.roadcapture.features.root.capture.AlbumCreationAskingBottomSheetDialog
 import com.untilled.roadcapture.utils.extension.setTint
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -135,7 +133,7 @@ class RootFragment : Fragment() {
                 selectFragment(index)
             }
         }
-        onClickedListeners()
+        setOnClickListener()
         setupTabSelectedState(selectedIndex)
     }
 
@@ -179,9 +177,9 @@ class RootFragment : Fragment() {
             .commit()
     }
 
-    private fun onClickedListeners() {
+    private fun setOnClickListener() {
         binding.imageviewRootCaptureTab.setOnClickListener {
-            val askMakeAlbumBottomSheetDialog = AskMakeAlbumModalBottomSheet()
+            val askMakeAlbumBottomSheetDialog = AlbumCreationAskingBottomSheetDialog()
             askMakeAlbumBottomSheetDialog.show(childFragmentManager, "askMakeAlbumBottomSheetDialog")
         }
     }

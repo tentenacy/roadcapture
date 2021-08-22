@@ -43,7 +43,7 @@
     <string name="setting_account_resign">서비스 탈퇴</string>
     <string name="setting_account_logout">로그아웃</string>
     <string name="my_studio_follower">팔로워</string>
-    <string name="ask_make_album_title">앨범을 만드시겠습니까?</string>
-    <string name="ask_make_album_yes">예</string>
-    <string name="ask_make_album_no">아니오</string>
+    <string name="album_creation_asking_title">앨범을 만드시겠습니까?</string>
+    <string name="album_creation_asking_yes">예</string>
+    <string name="album_creation_asking_no">아니오</string>
 </resources>
