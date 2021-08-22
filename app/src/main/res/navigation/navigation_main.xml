@@ -12,7 +12,11 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_emailInputSignupFragment"
-            app:destination="@id/emailInputSignupFragment" />
+            app:destination="@id/emailInputSignupFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_loginFragment_to_rootFragment"
             app:destination="@id/rootFragment" />
@@ -24,7 +28,11 @@
         tools:layout="@layout/fragment_email_input_signup">
         <action
             android:id="@+id/action_emailInputSignupFragment_to_passwordInputSignupFragment"
-            app:destination="@id/passwordInputSignupFragment" />
+            app:destination="@id/passwordInputSignupFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/passwordInputSignupFragment"
@@ -33,7 +41,11 @@
         tools:layout="@layout/fragment_password_input_signup">
         <action
             android:id="@+id/action_passwordInputSignupFragment_to_usernameInputSignupFragment"
-            app:destination="@id/usernameInputSignupFragment" />
+            app:destination="@id/usernameInputSignupFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/usernameInputSignupFragment"
@@ -43,6 +55,10 @@
         <action
             android:id="@+id/action_usernameInputSignupFragment_to_rootFragment"
             app:destination="@id/rootFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right"
             app:popUpTo="@id/emailInputSignupFragment"
             app:popUpToInclusive="true" />
     </fragment>

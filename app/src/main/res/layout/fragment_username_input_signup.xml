@@ -12,12 +12,11 @@
 
         <ImageView
             android:id="@+id/imageview_username_input_signup_back"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:padding="16dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="8dp"
+            android:padding="8dp"
             android:src="@drawable/ic_back"
-            app:layout_constraintBottom_toTopOf="@+id/guideline_username_input_signup_body_top"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_username_input_signup_body_start"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

@@ -46,4 +46,5 @@ class EmailInputSignupFragment : Fragment() {
                 .navigate(R.id.action_emailInputSignupFragment_to_passwordInputSignupFragment)
         }
     }
+
 }
