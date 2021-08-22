@@ -2,37 +2,37 @@
 <resources>
 
     <style name="ActionBarTitle" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/arita_semi_bold</item>
+        <item name="android:fontFamily">@font/eland_choice_bold</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 
     <style name="Button" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/arita</item>
+        <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/primaryColor</item>
     </style>
 
     <style name="Head" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/arita_semi_bold</item>
+        <item name="android:fontFamily">@font/eland_choice_bold</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 
     <style name="SubHeadBold" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/arita_semi_bold</item>
+        <item name="android:fontFamily">@font/eland_choice_bold</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 
     <style name="SubHead" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/arita</item>
+        <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 
     <style name="Body" parent ="android:TextAppearance">
-        <item name="android:fontFamily">@font/arita</item>
+        <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">4sp</item>
         <item name="android:ellipsize">end</item>
@@ -40,25 +40,25 @@
     </style>
 
     <style name="HeadWhite" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/arita_semi_bold</item>
+        <item name="android:fontFamily">@font/eland_choice_bold</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/primaryColor</item>
     </style>
 
     <style name="SubHeadBoldWhite" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/arita_semi_bold</item>
+        <item name="android:fontFamily">@font/eland_choice_bold</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/primaryColor</item>
     </style>
 
     <style name="SubHeadWhite" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/arita</item>
+        <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/primaryColor</item>
     </style>
 
     <style name="BodyWhite" parent ="android:TextAppearance">
-        <item name="android:fontFamily">@font/arita</item>
+        <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/primaryColor</item>
         <item name="android:lineSpacingExtra">4sp</item>

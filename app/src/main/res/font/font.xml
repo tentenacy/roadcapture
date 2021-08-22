@@ -3,29 +3,19 @@
 
 
     <font
-        android:font="@font/arita_thin"
+        android:font="@font/eland_choice_light"
         android:fontStyle="normal"
         android:fontWeight="400" />
 
     <font
-        android:font="@font/arita_light"
+        android:font="@font/eland_choice_medium"
         android:fontStyle="normal"
         android:fontWeight="400" />
 
     <font
-        android:font="@font/arita"
+        android:font="@font/eland_choice_bold"
         android:fontStyle="normal"
         android:fontWeight="1000" />
-
-    <font
-        android:font="@font/arita_semi_bold"
-        android:fontStyle="normal"
-        android:fontWeight="400" />
-
-    <font
-        android:font="@font/arita_bold"
-        android:fontStyle="normal"
-        android:fontWeight="400" />
 
 
 </font-family>
