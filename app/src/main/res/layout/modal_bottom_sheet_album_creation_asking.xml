@@ -11,7 +11,7 @@
 
         <TextView
             android:id="@+id/textview_album_creation_asking_title"
-            style="@style/Head"
+            style="@style/SubHeadBold"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"

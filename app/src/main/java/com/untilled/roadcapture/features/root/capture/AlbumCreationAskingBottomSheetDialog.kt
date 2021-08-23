@@ -1,11 +1,15 @@
 package com.untilled.roadcapture.features.root.capture
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.Navigation
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.ModalBottomSheetAlbumCreationAskingBinding
+import com.untilled.roadcapture.features.root.RootFragment
 
 class AlbumCreationAskingBottomSheetDialog : BottomSheetDialogFragment() {
 
@@ -30,10 +34,8 @@ class AlbumCreationAskingBottomSheetDialog : BottomSheetDialogFragment() {
 
     private fun setOnClickListeners(){
         binding.buttonAlbumCreationAskingYes.setOnClickListener {
-            // RootFragment로 '예' 버튼 클릭 했다는 "yes" 문자열 전송
-            val result = Bundle()
-            result.putString("bundleKey","yes")
-            parentFragmentManager.setFragmentResult("requestKey",result)
+            Navigation.findNavController((parentFragment as RootFragment).binding.root)
+                .navigate(R.id.action_rootFragment_to_captureFragment)
             dismiss()
         }
         binding.buttonAlbumCreationAskingNo.setOnClickListener {

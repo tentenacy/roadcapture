@@ -1,13 +1,17 @@
 package com.untilled.roadcapture.features.root
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
+import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.navigation.StackHostFragment
 import com.untilled.roadcapture.databinding.FragmentRootBinding
@@ -18,7 +22,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class RootFragment : Fragment() {
     private var _binding: FragmentRootBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     private lateinit var albumsFragment: StackHostFragment
     private lateinit var searchRootFragment: StackHostFragment
@@ -54,18 +58,6 @@ class RootFragment : Fragment() {
             selectedIndex = savedInstanceState.getInt("selectedIndex", 0)
             loadChildFragments()
         }
-
-        // FragmentResultListener 호출
-        childFragmentManager.setFragmentResultListener(
-            "requestKey",
-            this,
-            { _, bundle ->
-                var result = bundle.getString("bundleKey")
-                if(result == "yes"){
-                    Navigation.findNavController(binding.root)
-                        .navigate(R.id.action_rootFragment_to_captureFragment)
-                }
-            })
     }
 
     private fun loadChildFragments() {
@@ -121,6 +113,8 @@ class RootFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+
+        Logger.d("RootFragment onDestroyView")
 
         _binding = null
     }
