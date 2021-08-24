@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentUsernameInputSignupBinding
@@ -38,12 +39,13 @@ class UsernameInputSignupFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imageviewUsernameInputSignupBack.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
+
         binding.textviewUsernameInputSignupSubmit.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_usernameInputSignupFragment_to_rootFragment)
+            Navigation.findNavController((parentFragment?.parentFragment as SignupFragment).binding.root)
+                .navigate(R.id.action_signupFragment_to_rootFragment)
+        }
+        (parentFragment?.parentFragment as SignupFragment).binding.imageviewSignupBack.setOnClickListener {
+            requireActivity().onBackPressed()
         }
     }
 }

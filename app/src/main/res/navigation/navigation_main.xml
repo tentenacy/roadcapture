@@ -11,56 +11,11 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/action_loginFragment_to_emailInputSignupFragment"
-            app:destination="@id/emailInputSignupFragment"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right" />
-        <action
             android:id="@+id/action_loginFragment_to_rootFragment"
             app:destination="@id/rootFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/emailInputSignupFragment"
-        android:name="com.untilled.roadcapture.features.signup.EmailInputSignupFragment"
-        android:label="fragment_email_input_signup"
-        tools:layout="@layout/fragment_email_input_signup">
         <action
-            android:id="@+id/action_emailInputSignupFragment_to_passwordInputSignupFragment"
-            app:destination="@id/passwordInputSignupFragment"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right" />
-    </fragment>
-    <fragment
-        android:id="@+id/passwordInputSignupFragment"
-        android:name="com.untilled.roadcapture.features.signup.PasswordInputSignupFragment"
-        android:label="fragment_password_input_signup"
-        tools:layout="@layout/fragment_password_input_signup">
-        <action
-            android:id="@+id/action_passwordInputSignupFragment_to_usernameInputSignupFragment"
-            app:destination="@id/usernameInputSignupFragment"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right" />
-    </fragment>
-    <fragment
-        android:id="@+id/usernameInputSignupFragment"
-        android:name="com.untilled.roadcapture.features.signup.UsernameInputSignupFragment"
-        android:label="fragment_username_input_signup"
-        tools:layout="@layout/fragment_username_input_signup">
-        <action
-            android:id="@+id/action_usernameInputSignupFragment_to_rootFragment"
-            app:destination="@id/rootFragment"
-            app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/to_left"
-            app:popEnterAnim="@anim/from_left"
-            app:popExitAnim="@anim/to_right"
-            app:popUpTo="@id/emailInputSignupFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_loginFragment_to_signupFragment"
+            app:destination="@id/signupFragment" />
     </fragment>
     <fragment
         android:id="@+id/rootFragment"
@@ -102,4 +57,13 @@
         android:name="com.untilled.roadcapture.features.root.capture.CameraFragment"
         tools:layout="@layout/fragment_camera"
         android:label="CameraFragment" />
+    <fragment
+        android:id="@+id/signupFragment"
+        android:name="com.untilled.roadcapture.features.signup.SignupFragment"
+        android:label="SignupFragment"
+        tools:layout="@layout/fragment_signup">
+        <action
+            android:id="@+id/action_signupFragment_to_rootFragment"
+            app:destination="@id/rootFragment" />
+    </fragment>
 </navigation>

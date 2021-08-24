@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_signup"
+    app:startDestination="@id/emailInputSignupFragment">
+
+    <fragment
+        android:id="@+id/emailInputSignupFragment"
+        android:name="com.untilled.roadcapture.features.signup.EmailInputSignupFragment"
+        android:label="EmailInputSignupFragment"
+        tools:layout="@layout/fragment_email_input_signup">
+        <action
+            android:id="@+id/action_emailInputSignupFragment_to_passwordInputSignupFragment"
+            app:destination="@id/passwordInputSignupFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/passwordInputSignupFragment"
+        android:name="com.untilled.roadcapture.features.signup.PasswordInputSignupFragment"
+        android:label="PasswordInputSignupFragment"
+        tools:layout="@layout/fragment_password_input_signup">
+        <action
+            android:id="@+id/action_passwordInputSignupFragment_to_usernameInputSignupFragment"
+            app:destination="@id/usernameInputSignupFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/usernameInputSignupFragment"
+        android:name="com.untilled.roadcapture.features.signup.UsernameInputSignupFragment"
+        android:label="UsernameInputSignupFragment"
+        tools:layout="@layout/fragment_username_input_signup"/>
+</navigation>

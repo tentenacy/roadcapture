@@ -44,7 +44,7 @@ class LoginFragment : Fragment() {
         }
         binding.textviewLoginSignup.setOnClickListener {
             Navigation.findNavController(binding.root)
-                .navigate(R.id.action_loginFragment_to_emailInputSignupFragment)
+                .navigate(R.id.action_loginFragment_to_signupFragment)
         }
     }
 }

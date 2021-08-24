@@ -38,12 +38,13 @@ class PasswordInputSignupFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imageviewPasswordInputSignupBack.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
+
         binding.textviewPasswordInputSignupNext.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_passwordInputSignupFragment_to_usernameInputSignupFragment)
+        }
+        (parentFragment?.parentFragment as SignupFragment).binding.imageviewSignupBack.setOnClickListener {
+            requireActivity().onBackPressed()
         }
     }
 }
