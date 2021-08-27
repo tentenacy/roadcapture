@@ -48,4 +48,8 @@
     <string name="sorting_title">정렬기준</string>
     <string name="sorting_latest">업로드 날짜</string>
     <string name="sorting_popularity">좋아요 수</string>
+    <string name="email_input_signup_hint">abcd@gmail.com</string>
+    <string name="password_input_signup_check_hint">비밀번호 확인</string>
+    <string name="password_input_signup_hint">6자리 이상</string>
+    <string name="username_input_signup_hint">두 글자 이상 입력</string>
 </resources>

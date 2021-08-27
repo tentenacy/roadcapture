@@ -64,6 +64,8 @@
         tools:layout="@layout/fragment_signup">
         <action
             android:id="@+id/action_signupFragment_to_rootFragment"
+            app:popUpTo="@id/signupFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/rootFragment" />
     </fragment>
 </navigation>

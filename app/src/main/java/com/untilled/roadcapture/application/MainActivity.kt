@@ -12,6 +12,7 @@ import android.view.WindowManager
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
+import androidx.databinding.DataBindingUtil
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,5 +28,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
     }
 }

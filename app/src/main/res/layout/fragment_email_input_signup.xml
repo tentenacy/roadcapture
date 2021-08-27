@@ -4,7 +4,15 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.untilled.roadcapture.features.signup.SignupViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/email_input_signup_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".features.signup.EmailInputSignupFragment">
@@ -29,38 +37,34 @@
             app:layout_constraintStart_toStartOf="@+id/guideline_username_input_signup_body_start"
             app:layout_constraintTop_toBottomOf="@+id/textview_email_input_signup_title" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textinputlayout_email_input_signup"
+
+        <EditText
+            android:id="@+id/edittext_email_input_signup"
+            style="@style/SubHead"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            app:boxBackgroundColor="@android:color/transparent"
+            android:layout_marginTop="12dp"
+            android:hint="@string/email_input_signup_hint"
+            android:inputType="textEmailAddress"
             app:layout_constraintEnd_toStartOf="@+id/guideline_email_input_signup_body_end"
             app:layout_constraintStart_toStartOf="@+id/textview_email_input_signup_label"
-            app:layout_constraintTop_toBottomOf="@+id/textview_email_input_signup_label">
+            app:layout_constraintTop_toBottomOf="@+id/textview_email_input_signup_label"
+            bind:emailValidation="@={vm.email}" />
 
-            <EditText
-                android:id="@+id/edittext_email_input_signup"
-                style="body"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/EditTextTheme" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <TextView
-            android:id="@+id/textview_email_input_signup_next"
+        <Button
+            android:id="@+id/button_email_input_signup_next"
             style="@style/Button"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
+            android:enabled="false"
             android:gravity="center"
             android:text="@string/email_input_signup_next"
+            android:textColor="@color/black"
+            app:backgroundTint="@color/divider"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline_email_input_signup_body_end"
             app:layout_constraintStart_toStartOf="@+id/guideline_username_input_signup_body_start"
-            app:layout_constraintTop_toTopOf="@+id/textview_email_input_signup_title"
-            bind:clickableTextView="@{null}"
-            tools:background="@color/secondaryColor" />
+            app:layout_constraintTop_toTopOf="@+id/textview_email_input_signup_title" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_username_input_signup_body_start"

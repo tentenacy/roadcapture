@@ -4,6 +4,13 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="vm"
+            type="com.untilled.roadcapture.features.signup.SignupViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/username_input_signup_container"
         android:layout_width="match_parent"
@@ -30,24 +37,19 @@
             app:layout_constraintStart_toStartOf="@+id/guideline_username_input_signup_body_start"
             app:layout_constraintTop_toBottomOf="@+id/textview_username_input_signup_title" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textinputlayout_username_input_signup"
+
+        <EditText
+            android:id="@+id/edittext_username_input_signup"
+            style="@style/SubHead"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            app:boxBackgroundColor="@android:color/transparent"
+            android:layout_marginTop="12dp"
+            android:hint="@string/username_input_signup_hint"
             app:layout_constraintEnd_toStartOf="@+id/guideline_username_input_signup_body_end"
             app:layout_constraintStart_toStartOf="@+id/textview_username_input_signup_label"
-            app:layout_constraintTop_toBottomOf="@+id/textview_username_input_signup_label">
+            app:layout_constraintTop_toBottomOf="@+id/textview_username_input_signup_label"
+            bind:usernameValidation="@={vm.username}" />
 
-            <EditText
-                android:id="@+id/edittext_username_input_signup"
-                style="@style/SubHead"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/EditTextTheme" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/textview_username_input_signup_terms"
@@ -57,7 +59,7 @@
             android:layout_marginBottom="16dp"
             android:text="@string/username_input_signup_terms"
             android:textColor="@color/secondaryColor"
-            app:layout_constraintBottom_toTopOf="@+id/textview_username_input_signup_submit"
+            app:layout_constraintBottom_toTopOf="@+id/button_username_input_signup_submit"
             app:layout_constraintEnd_toStartOf="@+id/textview_username_input_signup_terms_shell"
             app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="@+id/guideline_username_input_signup_body_start" />
@@ -73,20 +75,19 @@
             app:layout_constraintStart_toEndOf="@+id/textview_username_input_signup_terms"
             app:layout_constraintTop_toTopOf="@+id/textview_username_input_signup_terms" />
 
-        <TextView
-            android:id="@+id/textview_username_input_signup_submit"
+        <Button
+            android:id="@+id/button_username_input_signup_submit"
             style="@style/Button"
             android:layout_width="0dp"
-            android:layout_height="40dp"
+            android:layout_height="48dp"
             android:gravity="center"
-            android:paddingVertical="8dp"
             android:text="@string/username_input_signup_submit"
+            android:textColor="@color/black"
+            app:backgroundTint="@color/divider"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline_username_input_signup_body_end"
             app:layout_constraintStart_toStartOf="@+id/guideline_username_input_signup_body_start"
-            app:layout_constraintTop_toTopOf="@+id/textview_username_input_signup_title"
-            bind:clickableTextView="@{null}"
-            tools:background="#3d86c7" />
+            app:layout_constraintTop_toTopOf="@+id/textview_username_input_signup_title" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_username_input_signup_body_start"

@@ -5,10 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
-import com.untilled.roadcapture.R
-import com.untilled.roadcapture.core.navigation.StackHostFragment
+import androidx.fragment.app.viewModels
 import com.untilled.roadcapture.databinding.FragmentSignupBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -17,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class SignupFragment : Fragment() {
 
     private var _binding: FragmentSignupBinding? = null
+
     val binding get() = _binding!!
 
     override fun onCreateView(
@@ -25,6 +23,9 @@ class SignupFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSignupBinding.inflate(layoutInflater, container, false)
+        binding.apply{
+            lifecycleOwner = lifecycleOwner
+        }
 
         return binding.root
     }
@@ -38,5 +39,6 @@ class SignupFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
+
 
 }

@@ -1,11 +1,14 @@
 package com.untilled.roadcapture.features.signup
 
+import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentUsernameInputSignupBinding
@@ -13,6 +16,9 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class UsernameInputSignupFragment : Fragment() {
+
+    private val viewModel: SignupViewModel by viewModels ({requireParentFragment()})
+
     private var _binding: FragmentUsernameInputSignupBinding? = null
     private val binding get() = _binding!!
 
@@ -22,30 +28,48 @@ class UsernameInputSignupFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentUsernameInputSignupBinding.inflate(layoutInflater, container, false)
-
+        binding.apply {
+            lifecycleOwner = lifecycleOwner
+            vm = viewModel
+        }
         return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-
         _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeValidation()
         setOnClickListeners()
     }
 
     private fun setOnClickListeners() {
-
-        binding.textviewUsernameInputSignupSubmit.setOnClickListener {
+        binding.buttonUsernameInputSignupSubmit.setOnClickListener {
             Navigation.findNavController((parentFragment?.parentFragment as SignupFragment).binding.root)
                 .navigate(R.id.action_signupFragment_to_rootFragment)
         }
         (parentFragment?.parentFragment as SignupFragment).binding.imageviewSignupBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
+    }
+
+    private fun observeValidation(){
+        viewModel.username.observe(viewLifecycleOwner, Observer{
+            if(it.length>=2){
+                binding.buttonUsernameInputSignupSubmit.isEnabled = true
+                binding.buttonUsernameInputSignupSubmit.setBackgroundColor(Color.parseColor("#3d86c7"))
+                binding.buttonUsernameInputSignupSubmit.setTextColor(Color.WHITE)
+            }
+            else{
+                binding.buttonUsernameInputSignupSubmit.isEnabled = false
+                binding.buttonUsernameInputSignupSubmit.setBackgroundColor(Color.parseColor("#EFEFEF"))
+                binding.buttonUsernameInputSignupSubmit.setTextColor(Color.BLACK)
+            }
+        })
+
     }
 }
