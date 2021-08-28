@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="comment"
+            type="com.untilled.roadcapture.data.entity.Comment" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_comment_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="16dp"
+        android:layout_marginTop="12dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imageview_item_comment_profile"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/sample_thumbnail"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textview_item_comment_username"
+            bind:commentProfileImage="@{comment.profileUrl}" />
+
+        <TextView
+            android:id="@+id/textview_item_comment_username"
+            style="@style/SubHead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:text="@{comment.username}"
+            app:layout_constraintStart_toEndOf="@id/imageview_item_comment_profile"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="hsw0715" />
+
+        <TextView
+            android:id="@+id/textview_item_comment_time"
+            style="@style/Body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="@{comment.createdDate}"
+            app:layout_constraintBottom_toBottomOf="@id/textview_item_comment_username"
+            app:layout_constraintStart_toEndOf="@id/textview_item_comment_username"
+            tools:text="3분전" />
+
+        <TextView
+            android:id="@+id/textview_item_comment_content"
+            style="@style/Body"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:text="@{comment.content}"
+            app:layout_constraintStart_toStartOf="@id/textview_item_comment_username"
+            app:layout_constraintTop_toBottomOf="@id/textview_item_comment_username"
+            tools:text="개발 진행중" />
+
+        <View
+            android:id="@+id/divider_item_comment"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="12dp"
+            android:background="@color/divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_item_comment_content" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

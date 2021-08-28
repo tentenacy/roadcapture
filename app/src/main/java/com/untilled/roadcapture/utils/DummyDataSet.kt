@@ -1,6 +1,7 @@
 package com.untilled.roadcapture.utils
 
 import com.untilled.roadcapture.data.entity.Album
+import com.untilled.roadcapture.data.entity.Comment
 import com.untilled.roadcapture.data.entity.Place
 
 object DummyDataSet {
@@ -109,7 +110,6 @@ object DummyDataSet {
             index = "2"
         ),
         Album(
-
             id="13",
             username = "tenutz",
             profileUrl = "",
@@ -123,4 +123,110 @@ object DummyDataSet {
             index = "3"
         ),
     )
+
+    val comment = listOf(
+        Comment(
+            username = "hsw0715",
+            createdDate = "3분전",
+            content = "캡쳐 라이브러리 개발 정말 어렵네요..",
+            profileUrl = "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
+        ),
+
+        Comment(
+            username = "kwangddang11",
+            createdDate = "30분전",
+            content = "게시물 정말 잘 봤어요!",
+            profileUrl = "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
+        ),
+
+        Comment(
+            username = "tentancy",
+            createdDate = "3개월전",
+            content = "좋아요 누르고 갑니다~",
+            profileUrl = "https://images.unsplash.com/photo-1552058544-f2b08422138a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=344&q=80"
+        ),
+
+        Comment(
+            username = "fkdjksl132",
+            createdDate = "1년전",
+            content = "맞팔 소통해요 ㅎㅎ",
+            profileUrl = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
+        ),
+
+        Comment(
+            username = "looonnnngg",
+            createdDate = "3년전",
+            content = "내용이 길면 어떻게 될까요? aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            profileUrl = "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80"
+        ),
+        Comment(
+            username = "hsw0715",
+            createdDate = "3분전",
+            content = "캡쳐 라이브러리 개발 정말 어렵네요..",
+            profileUrl = "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
+        ),
+
+        Comment(
+            username = "kwangddang11",
+            createdDate = "30분전",
+            content = "게시물 정말 잘 봤어요!",
+            profileUrl = "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
+        ),
+
+        Comment(
+            username = "tentancy",
+            createdDate = "3개월전",
+            content = "좋아요 누르고 갑니다~",
+            profileUrl = "https://images.unsplash.com/photo-1552058544-f2b08422138a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=344&q=80"
+        ),
+
+        Comment(
+            username = "fkdjksl132",
+            createdDate = "1년전",
+            content = "맞팔 소통해요 ㅎㅎ",
+            profileUrl = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
+        ),
+
+        Comment(
+            username = "looonnnngg",
+            createdDate = "3년전",
+            content = "내용이 길면 어떻게 될까요? aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            profileUrl = "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80"
+        ),
+        Comment(
+            username = "hsw0715",
+            createdDate = "3분전",
+            content = "캡쳐 라이브러리 개발 정말 어렵네요..",
+            profileUrl = "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
+        ),
+
+        Comment(
+            username = "kwangddang11",
+            createdDate = "30분전",
+            content = "게시물 정말 잘 봤어요!",
+            profileUrl = "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80"
+        ),
+
+        Comment(
+            username = "tentancy",
+            createdDate = "3개월전",
+            content = "좋아요 누르고 갑니다~",
+            profileUrl = "https://images.unsplash.com/photo-1552058544-f2b08422138a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=344&q=80"
+        ),
+
+        Comment(
+            username = "fkdjksl132",
+            createdDate = "1년전",
+            content = "맞팔 소통해요 ㅎㅎ",
+            profileUrl = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
+        ),
+
+        Comment(
+            username = "looonnnngg",
+            createdDate = "3년전",
+            content = "내용이 길면 어떻게 될까요? aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            profileUrl = "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80"
+        ),
+
+        )
 }

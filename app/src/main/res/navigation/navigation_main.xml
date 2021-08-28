@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_rootFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_rootFragment_to_commentFragment"
+            app:destination="@id/commentFragment" />
     </fragment>
     <fragment
         android:id="@+id/captureFragment"
@@ -82,4 +85,9 @@
             app:argType="string"
             android:defaultValue='""' />
     </fragment>
+    <fragment
+        android:id="@+id/commentFragment"
+        android:name="com.untilled.roadcapture.features.root.comment.CommentFragment"
+        android:label="CommentFragment"
+        tools:layout="@layout/fragment_comment"/>
 </navigation>

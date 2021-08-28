@@ -51,8 +51,7 @@
                     android:layout_height="?attr/actionBarSize"
                     android:layout_marginStart="56dp"
                     android:gravity="start|center"
-                    android:text="댓글 0"
-                    android:textStyle="bold" />
+                    android:text="댓글 0" />
 
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -67,29 +66,29 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/comment_input_container"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/comment_edit_text"
+            android:layout_gravity="bottom"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+            app:tint="#999999">
+
+            <ImageView
+                android:id="@+id/imageview_comment_input"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center|end"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_send" />
+
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_margin="16dp"
-        android:background="@drawable/comment_edit_text"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:tint="#999999">
-
-        <ImageView
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_send"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
