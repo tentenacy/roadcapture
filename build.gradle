@@ -24,6 +24,9 @@ allprojects {
         mavenCentral()
         jcenter() // Warning: this repository is going to shut down soon
 
+        // uCrop Library
+        maven { url "https://jitpack.io" }
+
         // NaverMap API
         maven {
             url 'https://naver.jfrog.io/artifactory/maven/'

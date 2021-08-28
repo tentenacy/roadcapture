@@ -56,7 +56,11 @@
         android:id="@+id/cameraFragment"
         android:name="com.untilled.roadcapture.features.root.capture.CameraFragment"
         tools:layout="@layout/fragment_camera"
-        android:label="CameraFragment" />
+        android:label="CameraFragment" >
+        <action
+            android:id="@+id/action_cameraFragment_to_cropFragment"
+            app:destination="@id/cropFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.untilled.roadcapture.features.signup.SignupFragment"
@@ -67,5 +71,15 @@
             app:popUpTo="@id/signupFragment"
             app:popUpToInclusive="true"
             app:destination="@id/rootFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cropFragment"
+        tools:layout="@layout/fragment_crop"
+        android:name="com.untilled.roadcapture.features.root.capture.CropFragment"
+        android:label="CropFragment" >
+        <argument
+            android:name="imageUri"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
 </navigation>

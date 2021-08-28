@@ -5,6 +5,6 @@
     <solid
         android:color="@color/white"/>
     <stroke
-        android:width="10dp"
+        android:width="6dp"
         android:color="@color/secondaryColor"/>
 </shape>

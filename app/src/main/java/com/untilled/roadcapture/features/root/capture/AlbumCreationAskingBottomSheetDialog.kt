@@ -10,7 +10,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.ModalBottomSheetAlbumCreationAskingBinding
 import com.untilled.roadcapture.features.root.RootFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class AlbumCreationAskingBottomSheetDialog : BottomSheetDialogFragment() {
 
     private var _binding : ModalBottomSheetAlbumCreationAskingBinding? = null

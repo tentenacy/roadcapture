@@ -14,6 +14,7 @@ import android.provider.Telephony.Mms.Part.FILENAME
 import android.util.Log
 import android.view.*
 import android.webkit.MimeTypeMap
+import androidx.annotation.UiThread
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
@@ -27,6 +28,7 @@ import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentCameraBinding
 import com.untilled.roadcapture.utils.extension.ANIMATION_FAST_MILLIS
 import com.untilled.roadcapture.utils.extension.ANIMATION_SLOW_MILLIS
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
@@ -42,6 +44,7 @@ import kotlin.math.min
 // Helper type alias used for analysis use case callbacks
 typealias LumaListener = (luma: Double) -> Unit
 
+@AndroidEntryPoint
 class CameraFragment : Fragment() {
     private var _binding : FragmentCameraBinding? = null
     private val binding get() = _binding!!
@@ -109,7 +112,7 @@ class CameraFragment : Fragment() {
     private fun updateCameraUi() {
 
         // Listener for button used to capture photo
-       binding.imageviewCameraShutter.setOnClickListener {
+        binding.imageviewCameraShutter.setOnClickListener {
 
             // Get a stable reference of the modifiable image capture use case
             imageCapture?.let { imageCapture ->
@@ -160,9 +163,17 @@ class CameraFragment : Fragment() {
                             ) { _, uri ->
                                 Log.d(TAG, "Image capture scanned into media store: $uri")
                             }
+
+                            // MainThread(UI Thread) 에서 Navigation 이용해서 cropFragment 로 이동
+                            ContextCompat.getMainExecutor(requireContext()).execute {
+                                Navigation.findNavController(binding.root)
+                                    //.navigate(R.id.action_cameraFragment_to_cropFragment)
+                                    .navigate(CameraFragmentDirections.actionCameraFragmentToCropFragment(savedUri.toString()))
+                            }
                         }
                     })
 
+                //화면 찍히는 플래시 애니메이션
                 // We can only change the foreground Drawable using API level 23+ API
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
 
@@ -176,25 +187,16 @@ class CameraFragment : Fragment() {
             }
         }
 
-        /*
         // 카메라 전환(전면, 후면)
-        cameraUiContainerBinding?.cameraSwitchButton?.let {
-
-            // Disable the button until the camera is set up
-            it.isEnabled = false
-
-            // Listener for button used to switch cameras. Only called if the button is enabled
-            it.setOnClickListener {
-                lensFacing = if (CameraSelector.LENS_FACING_FRONT == lensFacing) {
-                    CameraSelector.LENS_FACING_BACK
-                } else {
-                    CameraSelector.LENS_FACING_FRONT
-                }
-                // Re-bind use cases to update selected camera
-                bindCameraUseCases()
+        binding.imageviewCameraFlipCamera.setOnClickListener {
+            lensFacing = if (CameraSelector.LENS_FACING_FRONT == lensFacing) {
+                CameraSelector.LENS_FACING_BACK
+            } else {
+                CameraSelector.LENS_FACING_FRONT
             }
+            // Re-bind use cases to update selected camera
+            bindCameraUseCases()
         }
-         */
     }
 
     // Initialize CameraX, and prepare to bind the camera use cases
@@ -211,9 +213,6 @@ class CameraFragment : Fragment() {
                 else -> throw IllegalStateException("Back and front camera are unavailable")
             }
 
-            // Enable or disable switching between cameras
-            //updateCameraSwitchButton()
-
             // Build and bind the camera use cases
             bindCameraUseCases()
         }, ContextCompat.getMainExecutor(requireContext()))
@@ -226,8 +225,8 @@ class CameraFragment : Fragment() {
         val metrics = windowManager.getCurrentWindowMetrics().bounds
         Log.d(TAG, "Screen metrics: ${metrics.width()} x ${metrics.height()}")
 
-        //val screenAspectRatio = aspectRatio(metrics.width(), metrics.height())
-        val screenAspectRatio = AspectRatio.RATIO_4_3   // 1:1 화면이 없음
+        val screenAspectRatio = aspectRatio(metrics.width(), metrics.height())
+        //val screenAspectRatio = AspectRatio.RATIO_4_3  // 1:1 화면이 없음
         Log.d(TAG, "Preview aspect ratio: $screenAspectRatio")
 
         val rotation = binding.viewFinderCamera.display.rotation
@@ -405,7 +404,6 @@ class CameraFragment : Fragment() {
         private const val PHOTO_EXTENSION = ".jpg"
         private const val RATIO_4_3_VALUE = 4.0 / 3.0
         private const val RATIO_16_9_VALUE = 16.0 / 9.0
-        private const val RATIO_1_1_VALUE = 1.0 / 1.0
 
         /** Helper function used to create a timestamped file */
         private fun createFile(baseFolder: File, format: String, extension: String) =
