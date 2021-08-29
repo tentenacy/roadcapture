@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_rootFragment_to_commentFragment"
             app:destination="@id/commentFragment" />
+        <action
+            android:id="@+id/action_rootFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/captureFragment"
@@ -90,4 +93,9 @@
         android:name="com.untilled.roadcapture.features.root.comment.CommentFragment"
         android:label="CommentFragment"
         tools:layout="@layout/fragment_comment"/>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.untilled.roadcapture.features.root.notification.NotificationFragment"
+        android:label="NotificationFragment"
+        tools:layout="@layout/fragment_notification"/>
 </navigation>

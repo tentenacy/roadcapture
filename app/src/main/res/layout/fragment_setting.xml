@@ -31,10 +31,10 @@
 
             <ImageView
                 android:id="@+id/imageview_setting_back"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="16dp"
                 android:layout_gravity="start|center"
-                android:layout_marginStart="16dp"
                 android:src="@drawable/ic_back" />
 
             <TextView
@@ -42,7 +42,7 @@
                 style="@style/ActionBarTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="?attr/actionBarSize"
-                android:layout_marginStart="56dp"
+                android:layout_marginStart="64dp"
                 android:gravity="start|center"
                 android:text="@string/setting_title" />
 

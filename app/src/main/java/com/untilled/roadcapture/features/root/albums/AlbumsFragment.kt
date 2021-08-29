@@ -56,6 +56,10 @@ class AlbumsFragment : Fragment() {
                 .navigate(R.id.action_rootFragment_to_settingsFragment)
         }
 
+        binding.imageviewAlbumsNotification.setOnClickListener {
+            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                .navigate(R.id.action_rootFragment_to_notificationFragment)
+        }
     }
 
     override fun onDestroyView() {

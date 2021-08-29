@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.root.comment
+package com.untilled.roadcapture.features.root.notification
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -6,26 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.untilled.roadcapture.application.MainActivity
-import com.untilled.roadcapture.databinding.FragmentCommentBinding
+import com.untilled.roadcapture.databinding.FragmentNotificationBinding
 import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class CommentFragment : Fragment() {
+class NotificationFragment : Fragment(){
 
-    private var _binding: FragmentCommentBinding? = null
+    private var _binding: FragmentNotificationBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentCommentBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentNotificationBinding.inflate(layoutInflater,container,false)
 
-        (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarComment)
+        (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarNotification)
 
-        binding.recyclerviewComment.adapter = CommentAdapter(DummyDataSet.comment)
+        binding.recyclerviewNotification.adapter = NotificationAdapter(DummyDataSet.notification)
 
         return binding.root
     }
@@ -37,14 +37,15 @@ class CommentFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imageviewCommentBack.setOnClickListener {
+        binding.imageviewNotificationBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
+    override fun onDestroy() {
+        super.onDestroy()
 
         _binding = null
     }
+
 }

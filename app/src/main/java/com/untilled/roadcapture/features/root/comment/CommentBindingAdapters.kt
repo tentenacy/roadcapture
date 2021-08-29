@@ -7,7 +7,7 @@ import de.hdodenhof.circleimageview.CircleImageView
 object CommentBindingAdapters {
     @JvmStatic
     @BindingAdapter("commentProfileImage")
-    fun setAlbumThumbnailImage(view: CircleImageView, url: String) {
+    fun setCommentProfileImage(view: CircleImageView, url: String) {
         view.context.apply {
             Glide.with(this)
                 .asBitmap()

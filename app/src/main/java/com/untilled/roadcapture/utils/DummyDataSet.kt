@@ -70,7 +70,7 @@ object DummyDataSet {
 
     val studios = listOf(
         Album(
-            id="10",
+            id = "10",
             username = "tenutz",
             profileUrl = "",
             likeCount = "100",
@@ -83,7 +83,7 @@ object DummyDataSet {
             index = "0"
         ),
         Album(
-            id="11",
+            id = "11",
             username = "tenutz",
             profileUrl = "",
             likeCount = "100",
@@ -97,7 +97,7 @@ object DummyDataSet {
         ),
         Album(
 
-            id="12",
+            id = "12",
             username = "tenutz",
             profileUrl = "",
             likeCount = "100",
@@ -110,7 +110,7 @@ object DummyDataSet {
             index = "2"
         ),
         Album(
-            id="13",
+            id = "13",
             username = "tenutz",
             profileUrl = "",
             likeCount = "100",
@@ -226,7 +226,175 @@ object DummyDataSet {
             createdDate = "3년전",
             content = "내용이 길면 어떻게 될까요? aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
             profileUrl = "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80"
+        )
+
+    )
+
+    val notification = listOf(
+        Album(
+            username = "hsw0715",
+            id = "",
+            profileUrl = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+            likeCount = "",
+            commentCount = "",
+            title = "",
+            description = "님이 앨범을 만들었습니다.",
+            createdDate = "3분전",
+            modifiedDate = "",
+            thumbnailUrl = "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/2fG8/image/wgtUIZSe7IVwsEGZFg1MNf9CRZ0.jpg",
+            index = ""
         ),
 
-        )
+        Album(
+            username = "kwangddang11",
+            id = "",
+            profileUrl = "https://images.unsplash.com/photo-1552058544-f2b08422138a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=344&q=80",
+            likeCount = "",
+            commentCount = "",
+            title = "",
+            description = "님이 작가님의 앨범을 좋아합니다.",
+            createdDate = "30분전",
+            modifiedDate = "",
+            thumbnailUrl = "https://cdn.pixabay.com/photo/2017/10/15/13/54/doll-2853763_960_720.jpg",
+            index = ""
+        ),
+
+        Album(
+            username = "tentancy",
+            id = "",
+            profileUrl = "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+            likeCount = "",
+            commentCount = "",
+            title = "",
+            description = "님이 작가님을 팔로우합니다.",
+            createdDate = "1년전",
+            modifiedDate = "",
+            thumbnailUrl = "",
+            index = ""
+        ),
+
+        Album(
+            username = "tentancy",
+            id = "",
+            profileUrl = "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80",
+            likeCount = "",
+            commentCount = "",
+            title = "",
+            description = "님이 작가님의 앨범에 댓글을 남겼습니다",
+            createdDate = "1시간전",
+            modifiedDate = "",
+            thumbnailUrl = "https://cdn.pixabay.com/photo/2018/07/05/12/24/mountain-3518219_960_720.jpg",
+            index = ""
+        ),
+        Album(
+            username = "hsw0715",
+            id = "",
+            profileUrl = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+            likeCount = "",
+            commentCount = "",
+            title = "",
+            description = "님이 앨범을 만들었습니다.",
+            createdDate = "3분전",
+            modifiedDate = "",
+            thumbnailUrl = "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/2fG8/image/wgtUIZSe7IVwsEGZFg1MNf9CRZ0.jpg",
+            index = ""
+        ),
+
+        Album(
+            username = "kwangddang11",
+            id = "",
+            profileUrl = "https://images.unsplash.com/photo-1552058544-f2b08422138a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=344&q=80",
+            likeCount = "",
+            commentCount = "",
+            title = "",
+            description = "님이 작가님의 앨범을 좋아합니다.",
+            createdDate = "30분전",
+            modifiedDate = "",
+            thumbnailUrl = "https://cdn.pixabay.com/photo/2017/10/15/13/54/doll-2853763_960_720.jpg",
+            index = ""
+        ),
+
+        Album(
+            username = "tentancy",
+            id = "",
+            profileUrl = "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+            likeCount = "",
+            commentCount = "",
+            title = "",
+            description = "님이 작가님을 팔로우합니다.",
+            createdDate = "1년전",
+            modifiedDate = "",
+            thumbnailUrl = "",
+            index = ""
+        ),
+
+        Album(
+            username = "tentancy",
+            id = "",
+            profileUrl = "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80",
+            likeCount = "",
+            commentCount = "",
+            title = "",
+            description = "님이 작가님의 앨범에 댓글을 남겼습니다",
+            createdDate = "1시간전",
+            modifiedDate = "",
+            thumbnailUrl = "https://cdn.pixabay.com/photo/2018/07/05/12/24/mountain-3518219_960_720.jpg",
+            index = ""
+        ),
+        Album(
+            username = "hsw0715",
+            id = "",
+            profileUrl = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+            likeCount = "",
+            commentCount = "",
+            title = "",
+            description = "님이 앨범을 만들었습니다.",
+            createdDate = "3분전",
+            modifiedDate = "",
+            thumbnailUrl = "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/2fG8/image/wgtUIZSe7IVwsEGZFg1MNf9CRZ0.jpg",
+            index = ""
+        ),
+
+        Album(
+            username = "kwangddang11",
+            id = "",
+            profileUrl = "https://images.unsplash.com/photo-1552058544-f2b08422138a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=344&q=80",
+            likeCount = "",
+            commentCount = "",
+            title = "",
+            description = "님이 작가님의 앨범을 좋아합니다.",
+            createdDate = "30분전",
+            modifiedDate = "",
+            thumbnailUrl = "https://cdn.pixabay.com/photo/2017/10/15/13/54/doll-2853763_960_720.jpg",
+            index = ""
+        ),
+
+        Album(
+            username = "tentancy",
+            id = "",
+            profileUrl = "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+            likeCount = "",
+            commentCount = "",
+            title = "",
+            description = "님이 작가님을 팔로우합니다.",
+            createdDate = "1년전",
+            modifiedDate = "",
+            thumbnailUrl = "",
+            index = ""
+        ),
+
+        Album(
+            username = "tentancy",
+            id = "",
+            profileUrl = "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80",
+            likeCount = "",
+            commentCount = "",
+            title = "",
+            description = "님이 작가님의 앨범에 댓글을 남겼습니다",
+            createdDate = "1시간전",
+            modifiedDate = "",
+            thumbnailUrl = "https://cdn.pixabay.com/photo/2018/07/05/12/24/mountain-3518219_960_720.jpg",
+            index = ""
+        ),
+    )
 }
