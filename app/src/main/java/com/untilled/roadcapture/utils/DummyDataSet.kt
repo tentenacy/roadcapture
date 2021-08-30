@@ -3,6 +3,7 @@ package com.untilled.roadcapture.utils
 import com.untilled.roadcapture.data.entity.Album
 import com.untilled.roadcapture.data.entity.Comment
 import com.untilled.roadcapture.data.entity.Place
+import com.untilled.roadcapture.data.entity.User
 
 object DummyDataSet {
     val albums = listOf(
@@ -396,5 +397,44 @@ object DummyDataSet {
             thumbnailUrl = "https://cdn.pixabay.com/photo/2018/07/05/12/24/mountain-3518219_960_720.jpg",
             index = ""
         ),
+    )
+
+    val user = listOf(
+        User(
+            username = "hsw0715",
+            profileUrl = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
+        ),
+        User(
+            username = "kwangddang11",
+            profileUrl = "https://images.unsplash.com/photo-1552058544-f2b08422138a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=344&q=80"
+        ),
+        User(
+            username = "tentancy",
+            profileUrl = "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80"
+        ),
+        User(
+            username = "hsw0715",
+            profileUrl = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
+        ),
+        User(
+            username = "kwangddang11",
+            profileUrl = "https://images.unsplash.com/photo-1552058544-f2b08422138a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=344&q=80"
+        ),
+        User(
+            username = "tentancy",
+            profileUrl = "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80"
+        ),
+        User(
+            username = "hsw0715",
+            profileUrl = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
+        ),
+        User(
+            username = "kwangddang11",
+            profileUrl = "https://images.unsplash.com/photo-1552058544-f2b08422138a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=344&q=80"
+        ),
+        User(
+            username = "tentancy",
+            profileUrl = "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80"
+        )
     )
 }

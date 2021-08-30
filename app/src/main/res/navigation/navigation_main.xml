@@ -34,6 +34,12 @@
         <action
             android:id="@+id/action_rootFragment_to_notificationFragment"
             app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_rootFragment_to_followerFragment"
+            app:destination="@id/followerFragment" />
+        <action
+            android:id="@+id/action_rootFragment_to_followingFragment"
+            app:destination="@id/followingFragment" />
     </fragment>
     <fragment
         android:id="@+id/captureFragment"
@@ -98,4 +104,14 @@
         android:name="com.untilled.roadcapture.features.root.notification.NotificationFragment"
         android:label="NotificationFragment"
         tools:layout="@layout/fragment_notification"/>
+    <fragment
+        android:id="@+id/followerFragment"
+        android:name="com.untilled.roadcapture.features.root.mystudio.follow.FollowerFragment"
+        android:label="FollowerFragment"
+        tools:layout="@layout/fragment_follower"/>
+    <fragment
+        android:id="@+id/followingFragment"
+        android:name="com.untilled.roadcapture.features.root.mystudio.follow.FollowingFragment"
+        android:label="FollowingFragment"
+        tools:layout="@layout/fragment_following"/>
 </navigation>
