@@ -1,8 +1,11 @@
 package com.untilled.roadcapture.features
 
 import android.view.View
+import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.bumptech.glide.Glide
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.utils.extension.setRippleEffect
 
@@ -31,5 +34,17 @@ object CommonBindingAdapters {
     @BindingAdapter("countFormat")
     fun setCountFormat(view: TextView, count: Int) {
 
+    }
+
+    @JvmStatic
+    @BindingAdapter("Image")
+    fun setImageView(imageView: ImageView, uri: String) {
+        imageView.context.apply {
+            Glide.with(this)
+                .asBitmap()
+                .load(uri)
+                .centerCrop()
+                .into(imageView)
+        }
     }
 }

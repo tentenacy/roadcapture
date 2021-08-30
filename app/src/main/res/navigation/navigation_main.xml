@@ -93,6 +93,9 @@
             android:name="imageUri"
             app:argType="string"
             android:defaultValue='""' />
+        <action
+            android:id="@+id/action_cropFragment_to_pictureEditorFragment"
+            app:destination="@id/pictureEditorFragment" />
     </fragment>
     <fragment
         android:id="@+id/commentFragment"
@@ -114,4 +117,14 @@
         android:name="com.untilled.roadcapture.features.root.mystudio.follow.FollowingFragment"
         android:label="FollowingFragment"
         tools:layout="@layout/fragment_following"/>
+    <fragment
+        android:id="@+id/pictureEditorFragment"
+        android:name="com.untilled.roadcapture.features.root.capture.PictureEditorFragment"
+        android:label="PictureEditorFragment"
+        tools:layout="@layout/fragment_picture_editor">
+        <argument
+            android:name="imageUrl"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
 </navigation>

@@ -13,6 +13,7 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
@@ -72,10 +73,8 @@ class CropFragment : Fragment() {
     }
 
     private fun startCrop(uri: Uri) {
-        var destinationFileName = "SampleCropImage.jpg" // 임시
-
-        var uCrop: UCrop =
-            UCrop.of(uri, Uri.fromFile(File(requireContext().filesDir, destinationFileName)))
+        // cache 디렉토리에 crop image 저장
+        var uCrop: UCrop = UCrop.of(uri, Uri.fromFile(File.createTempFile("crop_", ".jpg", requireContext().cacheDir)))
 
         uCrop = uCrop.withAspectRatio(1f, 1f)
         uCrop = advancedConfig(uCrop)
@@ -210,8 +209,9 @@ class CropFragment : Fragment() {
     fun handleCropResult(result: Intent) {
         val resultUri = UCrop.getOutput(result)
         if (resultUri != null) {
-            // 성공 하였으므로 다음 화면으로 넘어감
-            Toast.makeText(requireContext(), "성공", Toast.LENGTH_SHORT).show()
+            // crop 성공하였으므로 crop한 이미지 uri 전달
+            Navigation.findNavController(binding.root)
+                .navigate(CropFragmentDirections.actionCropFragmentToPictureEditorFragment(resultUri.toString()))
         } else {
             Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
         }

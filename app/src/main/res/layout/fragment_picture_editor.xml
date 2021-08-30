@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="imageUri"
+            type="String" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/imageview_picture_editor_back"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:padding="20dp"
+                android:src="@drawable/ic_back"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageview_picture_editor_check"
+                android:layout_width="56dp"
+                android:layout_height="56dp"
+                android:padding="16dp"
+                android:src="@drawable/check"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/imageview_picture_editor_image"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintDimensionRatio="H,1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/imageview_picture_editor_back"
+                bind:Image="@{imageUri}" />
+
+            <ImageView
+                android:id="@+id/imageview_picture_editor_remove"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_remove"
+                app:layout_constraintBottom_toBottomOf="@id/imageview_picture_editor_image"
+                app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_body_start"
+                app:layout_constraintTop_toBottomOf="@id/imageview_picture_editor_image" />
+
+            <TextView
+                android:id="@+id/textview_picture_editor_date"
+                style="@style/SubHeadBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:text="@string/picture_editor_date"
+                app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_body_start"
+                app:layout_constraintTop_toBottomOf="@id/imageview_picture_editor_image" />
+
+            <TextView
+                android:id="@+id/textview_picture_editor_date_user_input"
+                style="@style/Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/picture_editor_user_input"
+                app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
+                app:layout_constraintTop_toTopOf="@id/textview_picture_editor_date" />
+
+            <TextView
+                android:id="@+id/textview_picture_editor_place"
+                style="@style/SubHeadBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/picture_editor_place"
+                app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_body_start"
+                app:layout_constraintTop_toBottomOf="@id/textview_picture_editor_date" />
+
+            <TextView
+                android:id="@+id/textview_picture_editor_place_user_input"
+                style="@style/Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/picture_editor_user_input"
+                app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
+                app:layout_constraintTop_toTopOf="@id/textview_picture_editor_place" />
+
+            <TextView
+                android:id="@+id/textview_picture_editor_picture_name"
+                style="@style/SubHeadBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/picture_editor_picture_name"
+                app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_body_start"
+                app:layout_constraintTop_toBottomOf="@id/textview_picture_editor_place" />
+
+            <EditText
+                android:id="@+id/edittext_picture_editor_name_user_input"
+                style="@style/Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="@string/picture_editor_user_input"
+                android:inputType="text|textImeMultiLine"
+                android:maxLines="1"
+                app:layout_constraintBottom_toBottomOf="@id/textview_picture_editor_picture_name"
+                app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
+                app:layout_constraintTop_toTopOf="@id/textview_picture_editor_picture_name" />
+
+            <TextView
+                android:id="@+id/textview_picture_editor_description"
+                style="@style/SubHeadBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/picture_editor_description"
+                app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_body_start"
+                app:layout_constraintTop_toBottomOf="@id/textview_picture_editor_picture_name" />
+
+            <EditText
+                android:id="@+id/edit_picture_editor_description_user_input"
+                style="@style/Body"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@null"
+                android:gravity="top|left"
+                android:hint="@string/picture_editor_user_input"
+                android:maxLines="10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
+                app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_body_start"
+                app:layout_constraintTop_toBottomOf="@id/textview_picture_editor_description" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_picture_editor_body_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_picture_editor_body_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths>
-    <external-media-path name="media" path="@{string/app_name}/" />
-    <files-path name="files" path="."/>
+<!--    <external-media-path name="media" path="@{string/app_name}/" />-->
+<!--    <files-path name="files" path="."/>-->
+    <cache-path
+        name="images"
+        path=".images"/>
 </paths>

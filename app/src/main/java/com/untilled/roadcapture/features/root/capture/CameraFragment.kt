@@ -1,7 +1,6 @@
 package com.untilled.roadcapture.features.root.capture
 
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -10,27 +9,20 @@ import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.Telephony.Mms.Part.FILENAME
 import android.util.Log
 import android.view.*
 import android.webkit.MimeTypeMap
-import androidx.annotation.UiThread
 import androidx.camera.core.*
 import androidx.camera.lifecycle.ProcessCameraProvider
 import androidx.core.content.ContextCompat
 import androidx.core.net.toFile
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.window.WindowManager
-import com.untilled.roadcapture.R
-import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentCameraBinding
 import com.untilled.roadcapture.utils.extension.ANIMATION_FAST_MILLIS
 import com.untilled.roadcapture.utils.extension.ANIMATION_SLOW_MILLIS
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.io.File
 import java.nio.ByteBuffer
 import java.text.SimpleDateFormat
@@ -51,8 +43,6 @@ class CameraFragment : Fragment() {
 
     // Blocking camera operations are performed using this executor
     private lateinit var cameraExecutor: ExecutorService
-
-    private lateinit var outputDirectory: File
 
     private var displayId: Int = -1
     private var preview: Preview? = null
@@ -88,9 +78,6 @@ class CameraFragment : Fragment() {
         // 백그라운드 executor 초기화
         cameraExecutor = Executors.newSingleThreadExecutor()
 
-        // Determine the output directory
-        outputDirectory = getOutputDirectory()
-
         //Initialize WindowManager to retrieve display metrics
         windowManager = WindowManager(view.context)
 
@@ -117,8 +104,8 @@ class CameraFragment : Fragment() {
             // Get a stable reference of the modifiable image capture use case
             imageCapture?.let { imageCapture ->
 
-                // Create output file to hold the image
-                val photoFile = createFile(outputDirectory, FILENAME, PHOTO_EXTENSION)
+                // cache 디렉토리에 사진 저장
+                val photoFile = File.createTempFile("capture_", PHOTO_EXTENSION, requireContext().cacheDir)
 
                 // Setup image capture metadata
                 val metadata = ImageCapture.Metadata().apply {
@@ -297,14 +284,6 @@ class CameraFragment : Fragment() {
             return AspectRatio.RATIO_4_3
         }
         return AspectRatio.RATIO_16_9
-    }
-
-    private fun getOutputDirectory() : File {
-        // 외부 저장소 목록을 가져와 null이 아니면 let 블록 실행
-        val mediaDir = requireActivity().externalMediaDirs.firstOrNull()?.let {
-            File(it, resources.getString(R.string.app_name)).apply{ mkdirs() } }
-
-        return if (mediaDir != null && mediaDir.exists()) mediaDir else requireActivity().filesDir
     }
 
     // Returns true if the device has an available back camera. False otherwise

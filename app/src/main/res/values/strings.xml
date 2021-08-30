@@ -55,4 +55,9 @@
     <string name="notification_title">알림</string>
     <string name="follower_title">팔로워</string>
     <string name="following_title">팔로잉</string>
+    <string name="picture_editor_place">장소</string>
+    <string name="picture_editor_date">날짜</string>
+    <string name="picture_editor_picture_name">사진 이름</string>
+    <string name="picture_editor_user_input">사용자 입력</string>
+    <string name="picture_editor_description">설명</string>
 </resources>
