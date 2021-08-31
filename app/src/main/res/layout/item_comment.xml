@@ -53,7 +53,7 @@
 
         <kr.co.prnd.readmore.ReadMoreTextView
             android:id="@+id/textview_item_comment_content"
-            style="@style/Comment"
+            style="@style/CommentContent"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

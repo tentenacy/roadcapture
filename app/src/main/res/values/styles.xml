@@ -39,14 +39,22 @@
         <item name="android:maxLines">2</item>
     </style>
 
-    <style name="Comment" parent ="android:TextAppearance">
+    <style name="CommentContent" parent ="android:TextAppearance">
         <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">4sp</item>
         <item name="readMoreMaxLine">6</item>
         <item name="readMoreColor">@color/black</item>
         <item name="readMoreText">...</item>
+    </style>
 
+    <style name="AlbumContent" parent ="android:TextAppearance">
+        <item name="android:fontFamily">@font/eland_choice_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="readMoreMaxLine">2</item>
+        <item name="readMoreColor">@color/black</item>
+        <item name="readMoreText">...</item>
     </style>
 
     <style name="HeadWhite" parent="android:TextAppearance">
