@@ -22,30 +22,40 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-            android:id="@+id/button_album_creation_asking_yes"
-            style="@style/Button"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:backgroundTint="@color/secondaryColor"
-            android:text="@string/album_creation_asking_yes"
-            app:layout_constraintEnd_toStartOf="@id/button_album_creation_asking_no"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_album_creation_asking_title"
-            bind:clickableLayout="@{null}" />
-
-        <Button
             android:id="@+id/button_album_creation_asking_no"
             style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:backgroundTint="@color/secondaryColor"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/control_normal"
             android:text="@string/album_creation_asking_no"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toStartOf="@id/view_album_creation_asking_divide"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_album_creation_asking_title" />
+
+        <View
+            android:id="@+id/view_album_creation_asking_divide"
+            android:layout_width="8dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="@id/button_album_creation_asking_no"
+            app:layout_constraintEnd_toStartOf="@id/button_album_creation_asking_yes"
+            app:layout_constraintStart_toEndOf="@id/button_album_creation_asking_no"
+            app:layout_constraintTop_toTopOf="@id/button_album_creation_asking_no" />
+
+        <Button
+            android:id="@+id/button_album_creation_asking_yes"
+            style="@style/Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:backgroundTint="@color/secondaryColor"
+            android:text="@string/album_creation_asking_yes"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/button_album_creation_asking_yes"
-            app:layout_constraintTop_toBottomOf="@id/textview_album_creation_asking_title"
-            bind:clickableLayout="@{null}" />
+            app:layout_constraintStart_toEndOf="@+id/view_album_creation_asking_divide"
+            app:layout_constraintTop_toTopOf="@id/button_album_creation_asking_no" />
 
         <View
             android:layout_width="0dp"

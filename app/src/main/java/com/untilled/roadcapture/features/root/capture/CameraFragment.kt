@@ -154,7 +154,6 @@ class CameraFragment : Fragment() {
                             // MainThread(UI Thread) 에서 Navigation 이용해서 cropFragment 로 이동
                             ContextCompat.getMainExecutor(requireContext()).execute {
                                 Navigation.findNavController(binding.root)
-                                    //.navigate(R.id.action_cameraFragment_to_cropFragment)
                                     .navigate(CameraFragmentDirections.actionCameraFragmentToCropFragment(savedUri.toString()))
                             }
                         }

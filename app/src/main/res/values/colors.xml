@@ -24,5 +24,4 @@
     <color name="control_activated">@color/secondaryColor</color>
     <color name="control_highlight">@android:color/holo_red_light</color>
     <color name="divider">#EFEFEF</color>
-    <color name="gray">#888888</color>
 </resources>

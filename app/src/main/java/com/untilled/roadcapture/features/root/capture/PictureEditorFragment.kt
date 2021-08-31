@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
+import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentPictureEditorBinding
 
 class PictureEditorFragment : Fragment() {
@@ -39,6 +40,11 @@ class PictureEditorFragment : Fragment() {
     private fun setOnClickListeners() {
         binding.imageviewPictureEditorBack.setOnClickListener{
             requireActivity().onBackPressed()
+        }
+
+        binding.imageviewPictureEditorRemove.setOnClickListener {
+            binding.imageviewPictureEditorImage.setImageResource(R.drawable.plus_dotted_square)
+            it.visibility = View.GONE
         }
     }
 }
