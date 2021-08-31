@@ -79,8 +79,8 @@
             app:layout_constraintTop_toBottomOf="@id/textview_setting_account_connected" />
 
         <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             android:src="@drawable/ic_naver"
             app:layout_constraintBottom_toBottomOf="@id/textview_setting_account_connected_email"
             app:layout_constraintEnd_toEndOf="parent"
