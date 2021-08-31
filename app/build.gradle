@@ -49,6 +49,7 @@ def glide_version = '4.12.0'
 def camerax_version = '1.0.1'
 def circle_imageview_version = '3.1.0'
 def recyclerview_helper_version = '3.0.4'
+def read_more_textview_version = '1.0.0'
 
 dependencies {
 
@@ -57,6 +58,9 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.3.1'
     implementation 'com.google.android.material:material:1.4.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+    //ReadMoreTextView
+    implementation "kr.co.prnd:readmore-textview:$read_more_textview_version"
 
     //BaseRecyclerViewAdapterHelper
     implementation "com.github.CymChad:BaseRecyclerViewAdapterHelper:$recyclerview_helper_version"
