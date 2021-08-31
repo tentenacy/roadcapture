@@ -1,5 +1,6 @@
 package com.untilled.roadcapture.features.root.albums
 
+import android.animation.ValueAnimator
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.Album
 import com.untilled.roadcapture.databinding.ItemHomeAlbumBinding
@@ -9,6 +10,8 @@ class AlbumsAdapter(private val albums: List<Album> = listOf()) : BaseRecyclerVi
 
     private lateinit var albumsItemClickListener: AlbumsItemClickListener
 
+    private var flagLike : Boolean = false
+
     override fun getLayoutResId(): Int = R.layout.item_home_album
 
     override fun onBindViewHolder(holder: BaseViewHolder, position: Int) {
@@ -16,6 +19,25 @@ class AlbumsAdapter(private val albums: List<Album> = listOf()) : BaseRecyclerVi
 
         holder.binding!!.imageviewItemHomeAlbumComment.setOnClickListener {
             albumsItemClickListener.setOnClickListeners()
+        }
+
+        holder.binding.imageviewItemHomeAlbumLike.setOnClickListener {
+            if(!flagLike){
+                val animator = ValueAnimator.ofFloat(0f,0.5f).setDuration(800)
+                animator.addUpdateListener {
+                    holder.binding.imageviewItemHomeAlbumLike.progress = it.animatedValue as Float
+                }
+                animator.start()
+                flagLike = true
+            }
+            else{
+                val animator = ValueAnimator.ofFloat(0.5f,1f).setDuration(800)
+                animator.addUpdateListener {
+                    holder.binding.imageviewItemHomeAlbumLike.progress = it.animatedValue as Float
+                }
+                animator.start()
+                flagLike = false
+            }
         }
     }
 
