@@ -58,7 +58,7 @@ class CaptureFragment : Fragment() {
         binding.imageviewCaptureBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        binding.fabCaptureCreateAlbum.setOnClickListener {
+        binding.fabCapturePickFromGallery.setOnClickListener {
             pickFromGallery()
         }
     }
