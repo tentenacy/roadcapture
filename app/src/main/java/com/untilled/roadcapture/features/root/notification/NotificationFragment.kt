@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentNotificationBinding
+import com.untilled.roadcapture.notification
 import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,7 +26,7 @@ class NotificationFragment : Fragment(){
 
         (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarNotification)
 
-        binding.recyclerviewNotification.adapter = NotificationAdapter(DummyDataSet.notification)
+        initAdapter()
 
         return binding.root
     }
@@ -46,6 +47,17 @@ class NotificationFragment : Fragment(){
         super.onDestroy()
 
         _binding = null
+    }
+
+    private fun initAdapter(){
+        binding.recyclerviewNotification.withModels {
+            DummyDataSet.notification.forEachIndexed { index, album ->
+                notification {
+                    id(index)
+                    notification(album)
+                }
+            }
+        }
     }
 
 }

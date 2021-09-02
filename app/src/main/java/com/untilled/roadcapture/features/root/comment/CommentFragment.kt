@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.untilled.roadcapture.application.MainActivity
+import com.untilled.roadcapture.comment
 import com.untilled.roadcapture.databinding.FragmentCommentBinding
 import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,7 +26,7 @@ class CommentFragment : Fragment() {
 
         (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarComment)
 
-        binding.recyclerviewComment.adapter = CommentAdapter(DummyDataSet.comment)
+        initAdapter()
 
         return binding.root
     }
@@ -46,5 +47,16 @@ class CommentFragment : Fragment() {
         super.onDestroyView()
 
         _binding = null
+    }
+
+    private fun initAdapter(){
+        binding.recyclerviewComment.withModels {
+            DummyDataSet.comment.forEachIndexed { index, comment ->
+                comment {
+                    id(index)
+                    comment(comment)
+                }
+            }
+        }
     }
 }

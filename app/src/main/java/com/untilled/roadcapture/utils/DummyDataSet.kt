@@ -48,7 +48,7 @@ object DummyDataSet {
         ),
     )
 
-    val areas = listOf(
+    val places = listOf(
         Place(
             place = "경기도"
         ),

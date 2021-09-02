@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.untilled.roadcapture.databinding.FragmentFollowerBinding
+import com.untilled.roadcapture.follow
 import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,7 +22,8 @@ class FollowerFragment : Fragment(){
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentFollowerBinding.inflate(layoutInflater,container,false)
-        binding.recyclerviewFollower.adapter = FollowAdapter(DummyDataSet.user)
+        initAdapter()
+
         return binding.root
     }
 
@@ -40,6 +42,17 @@ class FollowerFragment : Fragment(){
     private fun setOnClickListeners(){
         binding.imageviewFollowerBack.setOnClickListener {
             requireActivity().onBackPressed()
+        }
+    }
+
+    private fun initAdapter(){
+        binding.recyclerviewFollower.withModels {
+            DummyDataSet.user.forEachIndexed { index, user ->
+                follow {
+                    id(index)
+                    user(user)
+                }
+            }
         }
     }
 

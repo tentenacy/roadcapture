@@ -54,7 +54,7 @@
                     android:layout_gravity="end|center"
                     android:layout_marginEnd="16dp"
                     android:padding="4dp"
-                    android:src="@drawable/ic_setting" />
+                    android:src="@drawable/ic_modification" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
@@ -186,25 +186,25 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/imageview_my_studio_background" />
 
-                <androidx.recyclerview.widget.RecyclerView
+                <com.airbnb.epoxy.EpoxyRecyclerView
                     android:id="@+id/recyclerview_my_studio_place"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_height="80dp"
+                    android:paddingVertical="16dp"
                     android:orientation="horizontal"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textview_my_studio_place" />
 
-                <androidx.recyclerview.widget.RecyclerView
+                <com.airbnb.epoxy.EpoxyRecyclerView
                     android:id="@+id/recyclerview_my_studio_albums"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/recyclerview_my_studio_place" />
+                    app:layout_constraintTop_toBottomOf="@+id/recyclerview_my_studio_place"
+                    tools:listitem="@layout/item_studio_album"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -9,48 +9,48 @@
     tools:context=".features.root.albums.AlbumsFragment">
 
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbarlayout_follower"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarlayout_follower"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/ctoolbarlayout_follower"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_scrollFlags="scroll|enterAlways">
 
-            <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/ctoolbarlayout_follower"
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar_follower"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_scrollFlags="scroll|enterAlways">
+                android:layout_height="?attr/actionBarSize"
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="parallax" />
 
-                <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/toolbar_follower"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:contentInsetStart="0dp"
-                    app:layout_collapseMode="parallax" />
+            <ImageView
+                android:id="@+id/imageview_follower_back"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="start|center"
+                android:padding="16dp"
+                android:src="@drawable/ic_back" />
 
-                <ImageView
-                    android:id="@+id/imageview_follower_back"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:padding="16dp"
-                    android:layout_gravity="start|center"
-                    android:src="@drawable/ic_back" />
+            <TextView
+                android:id="@+id/textview_follower_title"
+                style="@style/ActionBarTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="?attr/actionBarSize"
+                android:layout_marginStart="64dp"
+                android:gravity="start|center"
+                android:text="@string/follower_title" />
 
-                <TextView
-                    android:id="@+id/textview_follower_title"
-                    style="@style/ActionBarTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="?attr/actionBarSize"
-                    android:layout_marginStart="64dp"
-                    android:gravity="start|center"
-                    android:text="@string/follower_title" />
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-            </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-        </com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/follower_scroll_container"
@@ -73,7 +73,7 @@
                 android:layout_margin="16dp"
                 android:background="@drawable/search_edit_text"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/imageview_follower_search"
@@ -81,10 +81,10 @@
                 android:layout_height="16dp"
                 android:layout_marginStart="16dp"
                 android:src="@drawable/ic_search"
-                app:tint="#999999"
+                app:layout_constraintBottom_toBottomOf="@id/follower_search_background"
                 app:layout_constraintStart_toStartOf="@id/follower_search_background"
                 app:layout_constraintTop_toTopOf="@id/follower_search_background"
-                app:layout_constraintBottom_toBottomOf="@id/follower_search_background"/>
+                app:tint="#999999" />
 
             <EditText
                 android:id="@+id/edittext_follower_search_input"
@@ -92,24 +92,25 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:hint="@string/search_input"
                 android:background="@android:color/transparent"
-                tools:minHeight="0dp"
-                tools:paddingVertical="12dp"
+                android:hint="@string/search_input"
+                app:layout_constraintBottom_toBottomOf="@id/follower_search_background"
+                app:layout_constraintEnd_toEndOf="@id/follower_search_background"
                 app:layout_constraintStart_toEndOf="@id/imageview_follower_search"
                 app:layout_constraintTop_toTopOf="@id/follower_search_background"
-                app:layout_constraintBottom_toBottomOf="@id/follower_search_background"
-                app:layout_constraintEnd_toEndOf="@id/follower_search_background"/>
+                tools:minHeight="0dp"
+                tools:paddingVertical="12dp" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.airbnb.epoxy.EpoxyRecyclerView
                 android:id="@+id/recyclerview_follower"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/follower_search_background"
-                android:layout_marginTop="16dp"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+                tools:listitem="@layout/item_follow" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

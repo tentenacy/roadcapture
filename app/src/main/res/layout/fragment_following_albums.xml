@@ -69,13 +69,14 @@
                 android:contentDescription="@string/following_albums_sort"
                 android:src="@drawable/ic_align" />
 
-            <androidx.recyclerview.widget.RecyclerView
+            <com.airbnb.epoxy.EpoxyRecyclerView
                 android:id="@+id/recyclerview_following_albums"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                tools:listitem="@layout/item_home_album"/>
 
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -1,6 +1,7 @@
 package com.untilled.roadcapture.features.root.albums
 
 import android.animation.ObjectAnimator
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,11 +9,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
+import com.airbnb.lottie.LottieAnimationView
 import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentFollowingAlbumsBinding
 import com.untilled.roadcapture.features.root.RootFragment
+import com.untilled.roadcapture.homeAlbum
 import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,8 +24,7 @@ class FollowingAlbumsFragment : Fragment() {
 
     private var _binding: FragmentFollowingAlbumsBinding? = null
     private val binding get() = _binding!!
-
-    private var isClicked = false
+    private var flagLike: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,7 +35,7 @@ class FollowingAlbumsFragment : Fragment() {
 
         (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarFollowingAlbums)
 
-        binding.recyclerviewFollowingAlbums.adapter = AlbumsAdapter(DummyDataSet.albums)
+        initAdapter()
 
         return binding.root
     }
@@ -67,5 +69,42 @@ class FollowingAlbumsFragment : Fragment() {
         super.onDestroyView()
 
         _binding = null
+    }
+
+    private fun initAdapter(){
+        binding.recyclerviewFollowingAlbums.withModels {
+            DummyDataSet.albums.forEachIndexed { index, album ->
+                homeAlbum {
+                    id(index)
+                    album(album)
+
+                    onClickItem { model, parentView, clickedView, position ->
+                        when (clickedView.id) {
+                            R.id.imageview_item_home_album_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                                .navigate(R.id.action_rootFragment_to_commentFragment)
+
+                            R.id.imageview_item_home_album_like -> if (!flagLike) {
+                                val animator = ValueAnimator.ofFloat(0f, 0.5f).setDuration(800)
+                                animator.addUpdateListener {
+                                    (clickedView as LottieAnimationView).progress =
+                                        it.animatedValue as Float
+                                }
+                                animator.start()
+                                flagLike = true
+                            } else {
+                                val animator = ValueAnimator.ofFloat(0.5f, 1f).setDuration(800)
+                                animator.addUpdateListener {
+                                    (clickedView as LottieAnimationView).progress =
+                                        it.animatedValue as Float
+                                }
+                                animator.start()
+                                flagLike = false
+                            }
+
+                        }
+                    }
+                }
+            }
+        }
     }
 }
