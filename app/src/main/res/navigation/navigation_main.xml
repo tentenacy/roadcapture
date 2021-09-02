@@ -129,5 +129,16 @@
             android:name="imageUrl"
             app:argType="string"
             android:defaultValue='""' />
+        <action
+            android:id="@+id/action_pictureEditorFragment_to_searchPlaceFragment"
+            app:destination="@id/searchPlaceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/searchPlaceFragment"
+        android:name="com.untilled.roadcapture.features.root.capture.SearchPlaceFragment"
+        android:label="SearchPlaceFragment" >
+        <action
+            android:id="@+id/action_searchPlaceFragment_to_pictureEditorFragment"
+            app:destination="@id/pictureEditorFragment" />
     </fragment>
 </navigation>

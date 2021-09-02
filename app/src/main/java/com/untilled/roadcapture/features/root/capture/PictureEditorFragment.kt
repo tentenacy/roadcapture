@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentPictureEditorBinding
+import com.untilled.roadcapture.features.root.RootFragment
 
 class PictureEditorFragment : Fragment() {
     private var _binding : FragmentPictureEditorBinding? = null
@@ -45,6 +48,10 @@ class PictureEditorFragment : Fragment() {
         binding.imageviewPictureEditorRemove.setOnClickListener {
             binding.imageviewPictureEditorImage.setImageResource(R.drawable.plus_dotted_square)
             it.visibility = View.GONE
+        }
+
+        binding.textviewPictureEditorPlaceUserInput.setOnClickListener {
+            Navigation.findNavController(binding.root).navigate(R.id.action_pictureEditorFragment_to_searchPlaceFragment)
         }
     }
 }
