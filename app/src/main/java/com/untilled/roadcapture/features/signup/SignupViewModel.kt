@@ -13,7 +13,6 @@ class SignupViewModel() : ViewModel() {
     val username = MutableLiveData<String>()
 
     init{
-        Log.d("Tag", "viewmodel init")
         email.value = ""
         password.value = ""
         passwordVerification.value = ""

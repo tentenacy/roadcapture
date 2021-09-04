@@ -24,6 +24,7 @@
         <activity
             android:name=".application.MainActivity"
             android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
             android:theme="@style/SplashTheme" >
 
             <!-- Main app intent filter -->

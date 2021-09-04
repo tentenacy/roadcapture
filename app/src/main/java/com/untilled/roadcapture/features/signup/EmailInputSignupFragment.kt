@@ -1,6 +1,5 @@
 package com.untilled.roadcapture.features.signup
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -16,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class EmailInputSignupFragment : Fragment() {
 
-    private val viewModel: SignupViewModel by viewModels({requireParentFragment()})
+    private val viewModel: SignupViewModel by viewModels({ requireParentFragment() })
 
     private var _binding: FragmentEmailInputSignupBinding? = null
     private val binding get() = _binding!!
@@ -58,17 +57,12 @@ class EmailInputSignupFragment : Fragment() {
     }
 
 
-    private fun observeValidation(){
-        viewModel.email.observe(viewLifecycleOwner, Observer{
-            if(android.util.Patterns.EMAIL_ADDRESS.matcher(it).matches()) {
-                binding.buttonEmailInputSignupNext.isEnabled = true
-                binding.buttonEmailInputSignupNext.setBackgroundColor(Color.parseColor("#3d86c7"))
-                binding.buttonEmailInputSignupNext.setTextColor(Color.WHITE)
-            }
-            else {
-                binding.buttonEmailInputSignupNext.isEnabled = false
-                binding.buttonEmailInputSignupNext.setBackgroundColor(Color.parseColor("#EFEFEF"))
-                binding.buttonEmailInputSignupNext.setTextColor(Color.BLACK)
+    private fun observeValidation() {
+        viewModel.email.observe(viewLifecycleOwner, Observer {
+            if (android.util.Patterns.EMAIL_ADDRESS.matcher(it).matches()) {
+                binding.emailInputSignupContainer.transitionToEnd()
+            } else {
+                binding.emailInputSignupContainer.transitionToStart()
             }
         })
     }

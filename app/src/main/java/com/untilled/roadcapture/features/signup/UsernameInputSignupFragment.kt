@@ -1,8 +1,6 @@
 package com.untilled.roadcapture.features.signup
 
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class UsernameInputSignupFragment : Fragment() {
 
-    private val viewModel: SignupViewModel by viewModels ({requireParentFragment()})
+    private val viewModel: SignupViewModel by viewModels({ requireParentFragment() })
 
     private var _binding: FragmentUsernameInputSignupBinding? = null
     private val binding get() = _binding!!
@@ -53,22 +51,17 @@ class UsernameInputSignupFragment : Fragment() {
                 .navigate(R.id.action_signupFragment_to_rootFragment)
         }
         (parentFragment?.parentFragment as SignupFragment).binding.imageviewSignupBack.setOnClickListener {
+            viewModel.username.value = ""
             requireActivity().onBackPressed()
         }
     }
 
-    private fun observeValidation(){
-        viewModel.username.observe(viewLifecycleOwner, Observer{
-            if(it.length>=2){
-                binding.buttonUsernameInputSignupSubmit.isEnabled = true
-                binding.buttonUsernameInputSignupSubmit.setBackgroundColor(Color.parseColor("#3d86c7"))
-                binding.buttonUsernameInputSignupSubmit.setTextColor(Color.WHITE)
-            }
-            else{
-                binding.buttonUsernameInputSignupSubmit.isEnabled = false
-                binding.buttonUsernameInputSignupSubmit.setBackgroundColor(Color.parseColor("#EFEFEF"))
-                binding.buttonUsernameInputSignupSubmit.setTextColor(Color.BLACK)
-            }
+    private fun observeValidation() {
+        viewModel.username.observe(viewLifecycleOwner, Observer {
+            if (it.length >= 2)
+                binding.usernameInputSignupContainer.transitionToEnd()
+            else
+                binding.usernameInputSignupContainer.transitionToStart()
         })
 
     }

@@ -1,8 +1,6 @@
 package com.untilled.roadcapture.features.signup
 
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class PasswordInputSignupFragment : Fragment() {
 
-    private val viewModel: SignupViewModel by viewModels ({requireParentFragment()})
+    private val viewModel: SignupViewModel by viewModels({ requireParentFragment() })
 
     private var _binding: FragmentPasswordInputSignupBinding? = null
     private val binding get() = _binding!!
@@ -53,24 +51,27 @@ class PasswordInputSignupFragment : Fragment() {
                 .navigate(R.id.action_passwordInputSignupFragment_to_usernameInputSignupFragment)
         }
         (parentFragment?.parentFragment as SignupFragment).binding.imageviewSignupBack.setOnClickListener {
+            viewModel.password.value = ""
+            viewModel.passwordVerification.value = ""
             requireActivity().onBackPressed()
         }
     }
 
-    private fun observeValidation(){
-        viewModel.password.observe(viewLifecycleOwner, Observer{
-            binding.edittextPasswordInputSignupVerification.isEnabled = it.length >= 6
+    private fun observeValidation() {
+
+        viewModel.password.observe(viewLifecycleOwner, Observer {
+            if (it.length >= 6)
+                binding.passwordInputSignupContainer.transitionToState(R.id.password_input_signup_verification_end)
+            else
+                binding.passwordInputSignupContainer.transitionToState(R.id.password_input_signup_verification_start)
         })
-        viewModel.passwordVerification.observe(viewLifecycleOwner, Observer{
-            if(binding.edittextPasswordInputSignup.text.toString() == it && binding.edittextPasswordInputSignup.text.toString().length >= 6){
-                binding.buttonPasswordInputSignupNext.isEnabled = true
-                binding.buttonPasswordInputSignupNext.setBackgroundColor(Color.parseColor("#3d86c7"))
-                binding.buttonPasswordInputSignupNext.setTextColor(Color.WHITE)
-            }
-            else{
-                binding.buttonPasswordInputSignupNext.isEnabled = false
-                binding.buttonPasswordInputSignupNext.setBackgroundColor(Color.parseColor("#EFEFEF"))
-                binding.buttonPasswordInputSignupNext.setTextColor(Color.BLACK)
+
+        viewModel.passwordVerification.observe(viewLifecycleOwner, Observer {
+            if (viewModel.password.value!!.length >= 6) {
+                if (viewModel.password.value == it)
+                    binding.passwordInputSignupContainer.transitionToState(R.id.password_input_signup_button_end)
+                else
+                    binding.passwordInputSignupContainer.transitionToState(R.id.password_input_signup_button_start)
             }
         })
     }

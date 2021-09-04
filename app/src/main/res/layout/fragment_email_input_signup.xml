@@ -11,10 +11,11 @@
             type="com.untilled.roadcapture.features.signup.SignupViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.constraintlayout.motion.widget.MotionLayout
         android:id="@+id/email_input_signup_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutDescription="@xml/email_input_signup_scene"
         tools:context=".features.signup.EmailInputSignupFragment">
 
         <TextView
@@ -56,15 +57,13 @@
             style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="48dp"
-            android:enabled="false"
-            android:gravity="center"
+            android:layout_marginTop="200dp"
             android:text="@string/email_input_signup_next"
-            android:textColor="@color/black"
-            app:backgroundTint="@color/divider"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/guideline_email_input_signup_body_end"
             app:layout_constraintStart_toStartOf="@+id/guideline_username_input_signup_body_start"
-            app:layout_constraintTop_toTopOf="@+id/textview_email_input_signup_title" />
+            app:layout_constraintTop_toBottomOf="@+id/edittext_email_input_signup"
+            app:layout_constraintVertical_bias="1.0" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_username_input_signup_body_start"
@@ -81,6 +80,6 @@
             app:layout_constraintGuide_end="56dp" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
 </layout>
