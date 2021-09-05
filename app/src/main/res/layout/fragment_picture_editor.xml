@@ -4,6 +4,7 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="vm"
             type="com.untilled.roadcapture.features.root.capture.PictureEditorViewModel" />
@@ -42,12 +43,11 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:src="@drawable/plus_dotted_square"
-                bind:Image = "@{vm.imageUri}"
                 app:layout_constraintDimensionRatio="H,1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageview_picture_editor_back"
-                />
+                bind:Image="@{vm.imageUri}" />
 
             <ImageView
                 android:id="@+id/imageview_picture_editor_remove"
@@ -72,9 +72,11 @@
                 android:id="@+id/textview_picture_editor_date_user_input"
                 style="@style/Body"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@={vm.date}"
+                android:layout_height="40dp"
+                android:gravity="center|right"
                 android:hint="@string/picture_editor_user_input"
+                android:text="@={vm.date}"
+                app:layout_constraintBottom_toBottomOf="@id/textview_picture_editor_date"
                 app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
                 app:layout_constraintTop_toTopOf="@id/textview_picture_editor_date" />
 
@@ -92,10 +94,11 @@
                 android:id="@+id/textview_picture_editor_place_user_input"
                 style="@style/Body"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@={vm.searchResult.name}"
+                android:layout_height="40dp"
+                android:gravity="center|right"
                 android:hint="@string/picture_editor_user_input"
-                android:gravity="right"
+                android:text="@={vm.searchResult.name}"
+                app:layout_constraintBottom_toBottomOf="@id/textview_picture_editor_place"
                 app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
                 app:layout_constraintTop_toTopOf="@id/textview_picture_editor_place" />
 
@@ -113,13 +116,13 @@
                 android:id="@+id/edittext_picture_editor_name_user_input"
                 style="@style/Body"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:background="@null"
+                android:gravity="center|right"
                 android:hint="@string/picture_editor_user_input"
                 android:inputType="text|textImeMultiLine"
-                android:text="@={vm.name}"
                 android:maxLines="1"
-                android:gravity="right"
+                android:text="@={vm.name}"
                 app:layout_constraintBottom_toBottomOf="@id/textview_picture_editor_picture_name"
                 app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
                 app:layout_constraintTop_toTopOf="@id/textview_picture_editor_picture_name" />

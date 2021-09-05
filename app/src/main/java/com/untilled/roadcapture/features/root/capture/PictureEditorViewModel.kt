@@ -10,6 +10,7 @@ class PictureEditorViewModel : ViewModel() {
     val searchResult : MutableLiveData <SearchResult>? = MutableLiveData<SearchResult>()
     val name = MutableLiveData<String>()
     val description = MutableLiveData<String>()
+    val isRemoved = MutableLiveData(false)
 
     fun initProperty() {
         imageUri.value = ""
@@ -17,5 +18,6 @@ class PictureEditorViewModel : ViewModel() {
         searchResult?.value = null
         name.value = ""
         description.value = ""
+        isRemoved.value = false
     }
 }
