@@ -9,11 +9,16 @@
 
         <variable
             name="searchResult"
-            type="com.untilled.roadcapture.data.response.search.SearchResult" />
+            type="com.untilled.roadcapture.data.entity.SearchResult" />
+
+        <variable
+            name="onClickItem"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/item_search_place_result_name_container"
+        android:onClick="@{onClickItem}"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -63,21 +68,21 @@
             tools:text="경기도 시흥시 정왕동" />
 
         <TextView
-            android:id="@+id/textview_item_search_place_address_roadname_icon"
+            android:id="@+id/textview_item_search_place_address_road_name_icon"
             android:layout_width="36dp"
             android:layout_height="wrap_content"
             android:background="@drawable/address"
             android:fontFamily="@font/eland_choice_medium"
             android:gravity="center"
             android:padding="4dp"
-            android:text="@string/search_place_roadname"
+            android:text="@string/search_place_road_name"
             android:textColor="@color/secondaryColor"
             android:textSize="8sp"
             app:layout_constraintStart_toStartOf="@id/textview_item_search_place_result_name"
-            app:layout_constraintTop_toTopOf="@id/textview_item_search_place_result_roadname" />
+            app:layout_constraintTop_toTopOf="@id/textview_item_search_place_result_road_name" />
 
         <TextView
-            android:id="@+id/textview_item_search_place_result_roadname"
+            android:id="@+id/textview_item_search_place_result_road_name"
             style="@style/Body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -85,7 +90,7 @@
             android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             android:textColor="@color/gray"
-            android:text="@{searchResult.roadname}"
+            android:text="@{searchResult.roadName}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
             app:layout_constraintStart_toStartOf="parent"
@@ -101,6 +106,6 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_item_search_place_result_roadname" />
+            app:layout_constraintTop_toBottomOf="@id/textview_item_search_place_result_road_name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

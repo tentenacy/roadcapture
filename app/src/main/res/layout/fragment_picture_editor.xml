@@ -4,10 +4,9 @@
     xmlns:bind="http://schemas.android.com/apk/res-auto">
 
     <data>
-
         <variable
-            name="imageUri"
-            type="String" />
+            name="vm"
+            type="com.untilled.roadcapture.features.root.capture.PictureEditorViewModel" />
     </data>
 
     <ScrollView
@@ -43,11 +42,12 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:src="@drawable/plus_dotted_square"
+                bind:Image = "@{vm.imageUri}"
                 app:layout_constraintDimensionRatio="H,1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageview_picture_editor_back"
-                bind:Image="@{imageUri}" />
+                />
 
             <ImageView
                 android:id="@+id/imageview_picture_editor_remove"
@@ -73,6 +73,7 @@
                 style="@style/Body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@={vm.date}"
                 android:hint="@string/picture_editor_user_input"
                 app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
                 app:layout_constraintTop_toTopOf="@id/textview_picture_editor_date" />
@@ -92,7 +93,9 @@
                 style="@style/Body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@={vm.searchResult.name}"
                 android:hint="@string/picture_editor_user_input"
+                android:gravity="right"
                 app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
                 app:layout_constraintTop_toTopOf="@id/textview_picture_editor_place" />
 
@@ -114,7 +117,9 @@
                 android:background="@null"
                 android:hint="@string/picture_editor_user_input"
                 android:inputType="text|textImeMultiLine"
+                android:text="@={vm.name}"
                 android:maxLines="1"
+                android:gravity="right"
                 app:layout_constraintBottom_toBottomOf="@id/textview_picture_editor_picture_name"
                 app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
                 app:layout_constraintTop_toTopOf="@id/textview_picture_editor_picture_name" />
@@ -140,6 +145,7 @@
                 android:gravity="top|left"
                 android:hint="@string/picture_editor_user_input"
                 android:maxLines="10"
+                android:text="@={vm.description}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
                 app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_body_start"

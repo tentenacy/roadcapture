@@ -4,7 +4,7 @@ import com.untilled.roadcapture.data.entity.Album
 import com.untilled.roadcapture.data.entity.Comment
 import com.untilled.roadcapture.data.entity.Place
 import com.untilled.roadcapture.data.entity.User
-import com.untilled.roadcapture.data.response.search.SearchResult
+import com.untilled.roadcapture.data.entity.SearchResult
 
 object DummyDataSet {
     val albums = listOf(
@@ -437,52 +437,5 @@ object DummyDataSet {
             username = "tentancy",
             profileUrl = "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80"
         )
-    )
-    val searchResult = listOf(
-        SearchResult(
-            name = "한국산업기술대학교",
-            addressNumber = "경기 시흥시 정왕동 2121-1 한국산업기술대학교",
-            roadname = "산기대학로 237 한국산업기술대학교"
-        ),
-        SearchResult(
-            name = "한국산업기술대학교 기숙혁신파크 기술혁신파크 기술혁신파크",
-            addressNumber = "경기 시흥시 정왕동 2121-1 한국산업기술대학교 기술혁신파크 기술혁신파크 기술혁신파크",
-            roadname = "산기대학로 237 한국산업기술대학교 기술혁신파크 기술혁신파크 기술혁신파크"
-        ),
-        SearchResult(
-            name = "한국산업기술대학교 정문",
-            addressNumber = "경기 시흥시 정왕동 2121-1 한국산업기술대학교 정문",
-            roadname = "산기대학로 237 한국산업기술대학교 정문"
-        ),
-        SearchResult(
-            name = "한국산업기술대학교 후문",
-            addressNumber = "경기 시흥시 정왕동 2121-1 한국산업기술대학교 후문",
-            roadname = "산기대학로 237 한국산업기술대학교 후문"
-        ),
-        SearchResult(
-            name = "모스까사 산기대점",
-            addressNumber = "경기 시흥시 정왕동 2121-1 모스까사 산기대점",
-            roadname = "산기대학로 237 모스까사 산기대점"
-        ),
-        SearchResult(
-            name = "맘스터치 산기대점",
-            addressNumber = "경기 시흥시 정왕동 2121-1 맘스터치 산기대점",
-            roadname = "산기대학로 237 맘스터치 산기대점"
-        ),
-        SearchResult(
-            name = "멕시카나 산기대점",
-            addressNumber = "경기 시흥시 정왕동 2121-1 멕시카나 산기대점",
-            roadname = "산기대학로 237 멕시카나 산기대점"
-        ),
-        SearchResult(
-            name = "토마토도시락 산기대점",
-            addressNumber = "경기 시흥시 정왕동 2121-1 토마토도시락 산기대점",
-            roadname = "산기대학로 237 토마토도시락 산기대점"
-        ),
-        SearchResult(
-            name = "CU 산기대점",
-            addressNumber = "경기 시흥시 정왕동 2121-1 CU 산기대점",
-            roadname = "산기대학로 237 CU 산기대점"
-        ),
     )
 }

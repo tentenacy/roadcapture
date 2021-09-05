@@ -126,7 +126,7 @@
         android:label="PictureEditorFragment"
         tools:layout="@layout/fragment_picture_editor">
         <argument
-            android:name="imageUrl"
+            android:name="imageUri"
             app:argType="string"
             android:defaultValue='""' />
         <action
@@ -136,9 +136,7 @@
     <fragment
         android:id="@+id/searchPlaceFragment"
         android:name="com.untilled.roadcapture.features.root.capture.SearchPlaceFragment"
-        android:label="SearchPlaceFragment" >
-        <action
-            android:id="@+id/action_searchPlaceFragment_to_pictureEditorFragment"
-            app:destination="@id/pictureEditorFragment" />
+        android:label="SearchPlaceFragment"
+        tools:layout="@layout/fragment_search_place">
     </fragment>
 </navigation>

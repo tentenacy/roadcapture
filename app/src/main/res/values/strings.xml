@@ -60,7 +60,7 @@
     <string name="picture_editor_picture_name">사진 이름</string>
     <string name="picture_editor_user_input">사용자 입력</string>
     <string name="picture_editor_description">설명</string>
-    <string name="search_place_roadname">도로명</string>
+    <string name="search_place_road_name">도로명</string>
     <string name="search_place_address_number">지번</string>
     <string name="search_place_title">장소 검색</string>
     <string name="search_place_input_hint">예) 로드캡처</string>

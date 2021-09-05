@@ -38,11 +38,11 @@ object CommonBindingAdapters {
 
     @JvmStatic
     @BindingAdapter("Image")
-    fun setImageView(imageView: ImageView, uri: String) {
+    fun setImageView(imageView: ImageView, uri: String?) {
         imageView.context.apply {
             Glide.with(this)
                 .asBitmap()
-                .load(uri)
+                .load(uri?:R.drawable.plus_dotted_square)
                 .centerCrop()
                 .into(imageView)
         }

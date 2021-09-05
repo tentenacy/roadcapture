@@ -211,7 +211,7 @@ class CropFragment : Fragment() {
         if (resultUri != null) {
             // crop 성공하였으므로 crop한 이미지 uri 전달
             Navigation.findNavController(binding.root)
-                .navigate(CropFragmentDirections.actionCropFragmentToPictureEditorFragment(resultUri.toString()))
+                .navigate(CropFragmentDirections.actionCropFragmentToPictureEditorFragment(imageUri = resultUri.toString()))
         } else {
             Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
         }
