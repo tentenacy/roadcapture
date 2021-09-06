@@ -43,26 +43,11 @@ class FollowingAlbumsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 아래로 스크롤 시 플로팅 버튼 hide
-        binding.recyclerviewFollowingAlbums.addOnScrollListener(object : RecyclerView.OnScrollListener(){
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                //super.onScrolled(recyclerView, dx, dy)
-                if(dy>0) {  // 아래로 스크롤
-                    binding.fabFollowingAlbumsSort.hide()
-                } else if(dy < 0) { // 위로 스크롤
-                    binding.fabFollowingAlbumsSort.show()
-                }
-            }
-        })
-
         setOnClickListeners()
     }
 
     private fun setOnClickListeners() {
-        binding.fabFollowingAlbumsSort.setOnClickListener {
-            val sortingBottomSheetDialog = SortingBottomSheetDialog()
-            sortingBottomSheetDialog.show(childFragmentManager, "sortingBottomSheetDialog")
-        }
+
     }
 
     override fun onDestroyView() {

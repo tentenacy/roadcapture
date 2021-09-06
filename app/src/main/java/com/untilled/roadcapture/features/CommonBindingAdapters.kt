@@ -31,6 +31,12 @@ object CommonBindingAdapters {
     }
 
     @JvmStatic
+    @BindingAdapter("rippleEffect")
+    fun setRippleEffect(view: View, any: Any?) {
+        view.setRippleEffect()
+    }
+
+    @JvmStatic
     @BindingAdapter("countFormat")
     fun setCountFormat(view: TextView, count: Int) {
 

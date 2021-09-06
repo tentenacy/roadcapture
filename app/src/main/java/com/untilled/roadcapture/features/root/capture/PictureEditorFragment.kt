@@ -5,14 +5,17 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentPictureEditorBinding
+import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
 
+@AndroidEntryPoint
 class PictureEditorFragment : Fragment() {
     private var _binding: FragmentPictureEditorBinding? = null
     private val binding get() = _binding!!
@@ -72,7 +75,7 @@ class PictureEditorFragment : Fragment() {
         }
 
         binding.imageviewPictureEditorImage.setOnClickListener {
-            if(viewModel.isRemoved.value == true){
+            if (viewModel.isRemoved.value == true) {
                 //Todo 카메라 찍기 or 갤러리 선택
             }
         }
@@ -80,7 +83,7 @@ class PictureEditorFragment : Fragment() {
 
     private fun removeImage() {
         binding.imageviewPictureEditorImage.setImageResource(R.drawable.plus_dotted_square)
-        binding.imageviewPictureEditorRemove.visibility = View.GONE
+        binding.imageviewPictureEditorRemove.isVisible = false
     }
 
     private fun onCreateDatePicker() {
@@ -90,7 +93,7 @@ class PictureEditorFragment : Fragment() {
             requireContext(),
             R.style.DialogTheme,
             { _, year, month, dayOfMonth ->
-                val date = makeDate(year, month, dayOfMonth)
+                val date = makeDate(year, month + 1, dayOfMonth)
                 viewModel.date.value = date
                 binding.textviewPictureEditorDateUserInput.text = date
             },

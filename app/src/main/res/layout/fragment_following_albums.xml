@@ -3,7 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/following_albums_container"
         android:layout_width="match_parent"
@@ -59,15 +58,6 @@
 
                 </com.google.android.material.appbar.CollapsingToolbarLayout>
             </com.google.android.material.appbar.AppBarLayout>
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_following_albums_sort"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_margin="16dp"
-                android:contentDescription="@string/following_albums_sort"
-                android:src="@drawable/ic_align" />
 
             <com.airbnb.epoxy.EpoxyRecyclerView
                 android:id="@+id/recyclerview_following_albums"

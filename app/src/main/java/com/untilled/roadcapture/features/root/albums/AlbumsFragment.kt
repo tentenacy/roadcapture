@@ -2,12 +2,12 @@ package com.untilled.roadcapture.features.root.albums
 
 import android.animation.ValueAnimator
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
@@ -41,10 +41,22 @@ class AlbumsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        onClickListeners()
+        // 아래로 스크롤 시 플로팅 버튼 hide
+        binding.recyclerviewAlbums.addOnScrollListener(object : RecyclerView.OnScrollListener(){
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                //super.onScrolled(recyclerView, dx, dy)
+                if(dy>0) {  // 아래로 스크롤
+                    binding.fabAlbumsSort.hide()
+                } else if(dy < 0) { // 위로 스크롤
+                    binding.fabAlbumsSort.show()
+                }
+            }
+        })
+
+        setOnClickListeners()
     }
 
-    private fun onClickListeners() {
+    private fun setOnClickListeners() {
         binding.imageviewAlbumsSetting.setOnClickListener {
             Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                 .navigate(R.id.action_rootFragment_to_settingsFragment)
@@ -53,6 +65,11 @@ class AlbumsFragment : Fragment() {
         binding.imageviewAlbumsNotification.setOnClickListener {
             Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                 .navigate(R.id.action_rootFragment_to_notificationFragment)
+        }
+
+        binding.fabAlbumsSort.setOnClickListener {
+            val filterBottomSheetDialog = FilterBottomSheetDialog()
+            filterBottomSheetDialog.show(childFragmentManager, "filterBottomSheet")
         }
     }
 

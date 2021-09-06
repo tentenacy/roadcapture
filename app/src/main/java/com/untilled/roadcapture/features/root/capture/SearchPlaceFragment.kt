@@ -15,9 +15,11 @@ import com.untilled.roadcapture.data.response.search.Poi
 import com.untilled.roadcapture.databinding.FragmentSearchPlaceBinding
 import com.untilled.roadcapture.searchPlaceResult
 import com.untilled.roadcapture.utils.RetrofitBuilder
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
 
+@AndroidEntryPoint
 class SearchPlaceFragment : Fragment(), CoroutineScope {
     private var _binding : FragmentSearchPlaceBinding? = null
     private val binding get() = _binding!!

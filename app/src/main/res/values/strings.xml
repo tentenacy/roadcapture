@@ -44,10 +44,6 @@
     <string name="album_creation_asking_title">앨범을 만드시겠습니까?</string>
     <string name="album_creation_asking_yes">예</string>
     <string name="album_creation_asking_no">아니오</string>
-    <string name="sorting_relevance">관련성</string>
-    <string name="sorting_title">정렬기준</string>
-    <string name="sorting_latest">업로드 날짜</string>
-    <string name="sorting_popularity">좋아요 수</string>
     <string name="email_input_signup_hint">abcd@gmail.com</string>
     <string name="password_input_signup_check_hint">비밀번호 확인</string>
     <string name="password_input_signup_hint">6자리 이상</string>
@@ -64,4 +60,19 @@
     <string name="search_place_address_number">지번</string>
     <string name="search_place_title">장소 검색</string>
     <string name="search_place_input_hint">예) 로드캡처</string>
+    <string name="filter_title">필터</string>
+    <string name="filter_reset">초기화</string>
+    <string name="filter_duration">기간</string>
+    <string name="filter_set_duration">기간 설정</string>
+    <string name="filter_whole_duration">전체 기간</string>
+    <string name="filter_today">오늘</string>
+    <string name="filter_this_week">이번 주</string>
+    <string name="filter_this_month">이번 달</string>
+    <string name="filter_this_year">올해</string>
+    <string name="filter_start_date">시작일</string>
+    <string name="filter_end_date">종료일</string>
+    <string name="filter_sorting">정렬</string>
+    <string name="filter_sorting_latest">업로드 날짜</string>
+    <string name="filter_sorting_popularity">좋아요 수</string>
+    <string name="filter_apply">적용하기</string>
 </resources>
