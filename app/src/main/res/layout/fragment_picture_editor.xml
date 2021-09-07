@@ -18,23 +18,43 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/imageview_picture_editor_back"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:padding="20dp"
-                android:src="@drawable/ic_back"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/imageview_picture_editor_check"
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                android:padding="16dp"
-                android:src="@drawable/check"
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_picture_editor"
+                android:layout_width="0dp"
+                android:layout_height="?actionBarSize"
+                app:contentInsetStart="0dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageview_picture_editor_back"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="start|center"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_back" />
+
+                <TextView
+                    android:id="@+id/textview_picture_editor_title"
+                    style="@style/ActionBarTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="?attr/actionBarSize"
+                    android:layout_marginStart="16dp"
+                    android:gravity="start|center"
+                    android:text="@string/picture_editor_title" />
+
+                <ImageView
+                    android:id="@+id/imageview_picture_editor_check"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_gravity="right"
+                    android:padding="16dp"
+                    android:src="@drawable/check"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.appcompat.widget.Toolbar>
 
             <ImageView
                 android:id="@+id/imageview_picture_editor_image"
@@ -46,7 +66,7 @@
                 app:layout_constraintDimensionRatio="H,1:1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageview_picture_editor_back"
+                app:layout_constraintTop_toBottomOf="@id/toolbar_picture_editor"
                 bind:Image="@{vm.imageUri}" />
 
             <ImageView

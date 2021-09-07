@@ -35,12 +35,12 @@ class AlbumCreationAskingBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     private fun setOnClickListeners(){
-        binding.buttonAlbumCreationAskingYes.setOnClickListener {
+        binding.buttonAlbumCreationAskingCreate.setOnClickListener {
             Navigation.findNavController((parentFragment as RootFragment).binding.root)
                 .navigate(R.id.action_rootFragment_to_captureFragment)
             dismiss()
         }
-        binding.buttonAlbumCreationAskingNo.setOnClickListener {
+        binding.buttonAlbumCreationAskingCancel.setOnClickListener {
             dismiss()
         }
     }
