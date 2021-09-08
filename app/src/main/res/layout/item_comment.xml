@@ -17,7 +17,7 @@
         android:id="@+id/item_comment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginVertical="12dp"
         android:paddingHorizontal="16dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -27,7 +27,7 @@
             android:src="@drawable/sample_thumbnail"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textview_item_comment_username"
-            bind:commentProfileImage="@{comment.profileUrl}" />
+            bind:circleProfileImage="@{comment.profileUrl}" />
 
         <TextView
             android:id="@+id/textview_item_comment_username"
@@ -63,14 +63,5 @@
             app:layout_constraintTop_toBottomOf="@id/textview_item_comment_username"
             tools:text="개발 진행중" />
 
-        <View
-            android:id="@+id/divider_item_comment"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="12dp"
-            android:background="@color/divider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_item_comment_content" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

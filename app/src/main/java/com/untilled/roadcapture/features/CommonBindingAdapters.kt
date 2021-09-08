@@ -8,9 +8,23 @@ import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.utils.extension.setRippleEffect
+import de.hdodenhof.circleimageview.CircleImageView
 
 
 object CommonBindingAdapters {
+
+    @JvmStatic
+    @BindingAdapter("circleProfileImage")
+    fun setCircleProfileImage(view: CircleImageView, url: String) {
+        view.context.apply {
+            Glide.with(this)
+                .asBitmap()
+                .load(url)
+                .centerCrop()
+                .into(view)
+        }
+    }
+
 
     @JvmStatic
     @BindingAdapter("clickableTextView")
