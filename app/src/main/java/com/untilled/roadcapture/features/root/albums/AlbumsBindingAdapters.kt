@@ -43,10 +43,10 @@ object AlbumsBindingAdapters {
     }
 
     @JvmStatic
-    @BindingAdapter("albumOverlayUsername", "albumOverlayCreatedDate")
-    fun setAlbumOverlayText(view: TextView, username: String, createdDate: String) {
+    @BindingAdapter("albumOverlayUsername")
+    fun setAlbumOverlayText(view: TextView, username: String) {
         // TODO: createdDate를 지정된 형식으로 변환
-        view.text = "$username · $createdDate"
+        view.text = "$username · "
     }
 
     @JvmStatic

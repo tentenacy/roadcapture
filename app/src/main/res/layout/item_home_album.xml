@@ -135,9 +135,21 @@
             android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:albumOverlayCreatedDate="@{album.createdDate}"
             bind:albumOverlayUsername="@{album.username}"
-            tools:text="tenutz · 3분전" />
+            tools:text="tenutz ·" />
+
+        <TextView
+            android:id="@+id/textview_item_home_album_overlay_date"
+            style="@style/Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@id/textview_item_home_album_overlay"
+            app:layout_constraintTop_toTopOf="@id/textview_item_home_album_overlay"
+            app:layout_constraintBottom_toBottomOf="@id/textview_item_home_album_overlay"
+            android:text="@{album.createdDate}"
+            tools:text="3분전" />
+
 
         <TextView
             android:id="@+id/textview_item_home_album_title"

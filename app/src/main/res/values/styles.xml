@@ -39,7 +39,7 @@
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 
-    <style name="Body" parent ="android:TextAppearance">
+    <style name="Body" parent="android:TextAppearance">
         <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">4sp</item>
@@ -47,7 +47,15 @@
         <item name="android:maxLines">2</item>
     </style>
 
-    <style name="CommentContent" parent ="android:TextAppearance">
+    <style name="Date" parent="android:TextAppearance">
+        <item name="android:fontFamily">@font/eland_choice_medium</item>
+        <item name="android:textSize">12sp</item>
+        <item name="android:lineSpacingExtra">4sp</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
+    </style>
+
+    <style name="CommentContent" parent="android:TextAppearance">
         <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">4sp</item>
@@ -57,7 +65,7 @@
     </style>
 
 
-    <style name="AlbumContent" parent ="android:TextAppearance">
+    <style name="AlbumContent" parent="android:TextAppearance">
         <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">4sp</item>
@@ -84,7 +92,7 @@
         <item name="android:textColor">@color/primaryColor</item>
     </style>
 
-    <style name="BodyWhite" parent ="android:TextAppearance">
+    <style name="BodyWhite" parent="android:TextAppearance">
         <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/primaryColor</item>
