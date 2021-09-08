@@ -11,14 +11,13 @@ import com.untilled.roadcapture.R
 object StudiosBindingAdapters {
 
     @JvmStatic
-    @BindingAdapter("studioThumbnailImage", "studioThumbnailImageIndex")
-    fun setStudioThumbnailImage(view: ShapeableImageView, url: String, index: String) {
+    @BindingAdapter("studioThumbnailImage")
+    fun setStudioThumbnailImage(view: ShapeableImageView, url: String) {
         view.context.apply {
 
-            val radius = resources.getDimension(R.dimen.album_corner_radius)
+            val radius = resources.getDimension(R.dimen.studio_album_corner_radius)
             val shapeAppearanceModel = view.shapeAppearanceModel.toBuilder()
-                .setTopRightCorner(CornerFamily.ROUNDED, radius)
-                .setBottomRightCorner(CornerFamily.ROUNDED, radius)
+                .setAllCorners(CornerFamily.ROUNDED,radius)
                 .build()
             view.shapeAppearanceModel = shapeAppearanceModel
 

@@ -72,6 +72,7 @@ class MyStudioFragment : Fragment() {
                     studio(album)
                 }
             }
+
         }
         binding.recyclerviewMyStudioPlace.withModels {
             DummyDataSet.places.forEachIndexed { index, place ->

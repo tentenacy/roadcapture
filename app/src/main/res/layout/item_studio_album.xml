@@ -14,82 +14,68 @@
 
     </data>
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="16dp"
+        app:contentPadding="8dp"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="3dp">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/item_studios_album_container"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingVertical="12dp">
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageview_item_studios_album_thumbnail"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:studioThumbnailImage="@{studio.thumbnailUrl}"
+            tools:src="@drawable/sample_thumbnail" />
+
+        <TextView
+            android:id="@+id/textview_item_studios_album_title"
+            style="@style/SubHeadBold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="24dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:text="@{studio.title}"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/imageview_item_studios_album_thumbnail"
+            app:layout_constraintTop_toTopOf="@id/imageview_item_studios_album_thumbnail"
+            tools:text="로드캡처 스터디" />
+
+        <kr.co.prnd.readmore.ReadMoreTextView
+            android:id="@+id/textview_item_studios_album_description"
+            style="@style/AlbumContent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@{studio.description}"
+            app:layout_constraintEnd_toEndOf="@id/textview_item_studios_album_title"
+            app:layout_constraintStart_toStartOf="@+id/textview_item_studios_album_title"
+            app:layout_constraintTop_toBottomOf="@+id/textview_item_studios_album_title"
+            tools:text="안녕하세요 저는 한상우입니다. 잘 부탁드립니다." />
 
         <TextView
             android:id="@+id/textview_item_studios_album_date"
             style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             android:text="@{studio.createdDate}"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:text="2021년 08월 21일 03시 46분" />
-
-        <View
-            android:id="@+id/divider_item_studios_album_circle"
-            android:layout_width="6dp"
-            android:layout_height="6dp"
-            android:layout_marginStart="12dp"
-            android:background="@drawable/circle"
-            android:backgroundTint="@color/secondaryColor"
-            app:layout_constraintBottom_toBottomOf="@id/textview_item_studios_album_date"
-            app:layout_constraintTop_toTopOf="@id/textview_item_studios_album_date"
-            app:layout_constraintStart_toEndOf="@id/textview_item_studios_album_date"
-             />
-
-        <View
-            android:id="@+id/divider_item_studios_album_line"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="@color/secondaryColor"
-            app:layout_constraintBottom_toBottomOf="@id/divider_item_studios_album_circle"
-            app:layout_constraintTop_toTopOf="@id/divider_item_studios_album_circle"
-            app:layout_constraintStart_toEndOf="@id/divider_item_studios_album_circle"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
-        <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageview_item_studios_album_thumbnail"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintDimensionRatio="1"
-            app:layout_constraintEnd_toEndOf="@+id/textview_item_studios_album_date"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textview_item_studios_album_date"
-            app:layout_constraintTop_toBottomOf="@+id/textview_item_studios_album_date"
-            bind:studioThumbnailImage="@{studio.thumbnailUrl}"
-            bind:studioThumbnailImageIndex="@{studio.index}"
-            tools:src="@drawable/sample_thumbnail" />
-
-        <TextView
-            android:id="@+id/textview_item_studios_album_title"
-            style="@style/SubHeadBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginStart="24dp"
-            android:text="@{studio.title}"
-            app:layout_constraintTop_toTopOf="@id/imageview_item_studios_album_thumbnail"
-            app:layout_constraintStart_toEndOf="@id/imageview_item_studios_album_thumbnail"
-            tools:ignore="MissingConstraints"
-            tools:text="로드캡처 스터디" />
-
-        <TextView
-            android:id="@+id/textview_item_studios_album_description"
-            style="@style/Body"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@{studio.description}"
-            app:layout_constraintStart_toStartOf="@+id/textview_item_studios_album_title"
-            app:layout_constraintTop_toBottomOf="@+id/textview_item_studios_album_title"
-            tools:text="안녕하세요 저는 한상우입니다.\n잘 부탁드립니다." />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_item_studios_album_description"
+            app:layout_constraintVertical_bias="1.0"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:text="하루 전" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </androidx.cardview.widget.CardView>
 </layout>

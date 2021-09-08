@@ -127,7 +127,7 @@
 
         <TextView
             android:id="@+id/textview_item_home_album_overlay"
-            style="@style/SubHeadBoldWhite"
+            style="@style/SubHeadWhite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
