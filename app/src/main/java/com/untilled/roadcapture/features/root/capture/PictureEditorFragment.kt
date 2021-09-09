@@ -2,6 +2,7 @@ package com.untilled.roadcapture.features.root.capture
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPictureEditorBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
@@ -78,6 +80,18 @@ class PictureEditorFragment : Fragment() {
             if (viewModel.isRemoved.value == true) {
                 //Todo 카메라 찍기 or 갤러리 선택
             }
+        }
+
+        binding.imageviewPictureEditorCheck.setOnClickListener {
+            val picture = Picture(
+                imageUri = viewModel.imageUri.value,
+                date = viewModel.date.value,
+                searchResult = viewModel.searchResult?.value,
+                name = viewModel.name.value,
+                description = viewModel.description.value
+            )
+            Navigation.findNavController(binding.root)
+                .navigate(PictureEditorFragmentDirections.actionPictureEditorFragmentToCaptureFragment(picture = picture))
         }
     }
 

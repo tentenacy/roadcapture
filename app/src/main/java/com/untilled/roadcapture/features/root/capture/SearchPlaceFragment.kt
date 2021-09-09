@@ -86,7 +86,7 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
     private fun setData(pois : Pois) {
          resultList = pois.poi.map {
              SearchResult(
-                 name = it.name ?: "",
+                 placeName = it.name ?: "",
                  addressNumber = makeAddressNumber(it),
                  roadName = makeRoadName(it),
                  locationLatLng = LocationLatLng(it.noorLat, it.noorLon)

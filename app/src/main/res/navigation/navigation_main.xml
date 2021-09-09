@@ -52,6 +52,11 @@
         <action
             android:id="@+id/action_captureFragment_to_cropFragment"
             app:destination="@id/cropFragment" />
+        <argument
+            android:name="picture"
+            app:argType="com.untilled.roadcapture.data.entity.Picture"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -132,6 +137,11 @@
         <action
             android:id="@+id/action_pictureEditorFragment_to_searchPlaceFragment"
             app:destination="@id/searchPlaceFragment" />
+        <action
+            android:id="@+id/action_pictureEditorFragment_to_captureFragment"
+            app:popUpTo="@id/captureFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/captureFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchPlaceFragment"

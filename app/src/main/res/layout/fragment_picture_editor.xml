@@ -117,7 +117,7 @@
                 android:layout_height="40dp"
                 android:gravity="center|right"
                 android:hint="@string/picture_editor_user_input"
-                android:text="@={vm.searchResult.name}"
+                android:text="@={vm.searchResult.placeName}"
                 app:layout_constraintBottom_toBottomOf="@id/textview_picture_editor_place"
                 app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
                 app:layout_constraintTop_toTopOf="@id/textview_picture_editor_place" />
