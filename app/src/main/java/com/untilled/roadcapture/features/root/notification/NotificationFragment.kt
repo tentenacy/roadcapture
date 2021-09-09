@@ -1,5 +1,6 @@
 package com.untilled.roadcapture.features.root.notification
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentNotificationBinding
+import com.untilled.roadcapture.features.base.CustomDivider
 import com.untilled.roadcapture.notification
 import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,6 +52,11 @@ class NotificationFragment : Fragment(){
     }
 
     private fun initAdapter(){
+
+        val customDivider = CustomDivider(2.5f,1f, Color.parseColor("#EFEFEF"))
+
+        binding.recyclerviewNotification.addItemDecoration(customDivider)
+
         binding.recyclerviewNotification.withModels {
             DummyDataSet.notification.forEachIndexed { index, album ->
                 notification {

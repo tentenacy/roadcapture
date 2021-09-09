@@ -1,11 +1,13 @@
 package com.untilled.roadcapture.features.root.mystudio.follow
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.untilled.roadcapture.databinding.FragmentFollowerBinding
+import com.untilled.roadcapture.features.base.CustomDivider
 import com.untilled.roadcapture.follow
 import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,6 +48,11 @@ class FollowerFragment : Fragment(){
     }
 
     private fun initAdapter(){
+
+        val customDivider = CustomDivider(2.5f,1f, Color.parseColor("#EFEFEF"))
+
+        binding.recyclerviewFollower.addItemDecoration(customDivider)
+
         binding.recyclerviewFollower.withModels {
             DummyDataSet.user.forEachIndexed { index, user ->
                 follow {

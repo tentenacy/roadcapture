@@ -25,7 +25,6 @@ object CommonBindingAdapters {
         }
     }
 
-
     @JvmStatic
     @BindingAdapter("clickableTextView")
     fun setClickableTextView(view: TextView, any: Any?) {
