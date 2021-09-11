@@ -10,7 +10,7 @@
         <TextView
             android:id="@+id/textview_album_creation_asking_title"
             android:fontFamily="@font/eland_choice_medium"
-            android:textSize="28sp"
+            android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
@@ -24,9 +24,10 @@
             android:id="@+id/imageview_album_creation_asking_album"
             android:layout_width="128dp"
             android:layout_height="128dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.43"
             app:layout_constraintTop_toBottomOf="@id/textview_album_creation_asking_title"
             android:src="@drawable/ic_photo_album"/>
 
@@ -35,7 +36,7 @@
             style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="56dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:layout_marginStart="24dp"
             android:layout_marginEnd="24dp"
             android:background="@drawable/bottom_sheet_button"
@@ -60,6 +61,12 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_album_creation_asking_create" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
