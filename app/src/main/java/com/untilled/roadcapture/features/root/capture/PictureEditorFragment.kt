@@ -2,7 +2,6 @@ package com.untilled.roadcapture.features.root.capture
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +15,7 @@ import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPictureEditorBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.time.LocalDate
+import java.util.*
 
 @AndroidEntryPoint
 class PictureEditorFragment : Fragment() {
@@ -41,7 +41,6 @@ class PictureEditorFragment : Fragment() {
         } else {
             removeImage()
         }
-
         return binding.root
     }
 
@@ -107,15 +106,18 @@ class PictureEditorFragment : Fragment() {
             requireContext(),
             R.style.DialogTheme,
             { _, year, month, dayOfMonth ->
-                val date = makeDate(year, month + 1, dayOfMonth)
+                val date = makeDateString(year, month + 1, dayOfMonth)
                 viewModel.date.value = date
                 binding.textviewPictureEditorDateUserInput.text = date
             },
             date.year, date.monthValue - 1, date.dayOfMonth
         )
-        datePickerDialog.show()
+        datePickerDialog.apply {
+            val cal = Calendar.getInstance()
+            datePicker.maxDate = cal.timeInMillis
+        }.show()
     }
 
-    private fun makeDate(year: Int, month: Int, dayOfMonth: Int): String =
-        "${year}년 ${month}월 ${dayOfMonth}일"
+    private fun makeDateString(year: Int, month: Int, dayOfMonth: Int): String  =
+        "${year}년 ${String.format("%02d",month)}월 ${String.format("%02d",dayOfMonth)}일"
 }

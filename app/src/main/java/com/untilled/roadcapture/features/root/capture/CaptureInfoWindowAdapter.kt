@@ -8,6 +8,7 @@ import android.widget.ImageView
 import androidx.core.net.toUri
 import com.naver.maps.map.overlay.InfoWindow
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.databinding.ItemCaptureInfowindowBinding
 
 class CaptureInfoWindowAdapter(val _context: Context, val _parent : ViewGroup, val uri : String)
     : InfoWindow.DefaultViewAdapter(_context) {

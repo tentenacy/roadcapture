@@ -94,7 +94,7 @@
 
             <RadioButton
                 android:id="@+id/radiobutton_filter_whole_duration"
-                style="@style/Body"
+                android:textAppearance="@style/Body"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"

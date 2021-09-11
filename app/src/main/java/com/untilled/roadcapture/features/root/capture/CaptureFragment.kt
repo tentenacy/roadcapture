@@ -215,4 +215,5 @@ class CaptureFragment : Fragment(), OnMapReadyCallback, CoroutineScope {
 
         getNavArgs()
     }
+
 }
