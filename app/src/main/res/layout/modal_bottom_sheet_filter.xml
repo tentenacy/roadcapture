@@ -24,24 +24,24 @@
 
         <TextView
             android:id="@+id/textview_filter_title"
-            style="@style/SubHeadBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/filter_title"
+            android:textAppearance="@style/SubHeadBold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textview_filter_reset"
-            style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:layout_marginEnd="16dp"
             android:clickable="true"
             android:gravity="center"
             android:text="@string/filter_reset"
+            android:textAppearance="@style/Body"
             app:layout_constraintBottom_toBottomOf="@id/view_filter_divider_first"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -68,161 +68,152 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_filter_divider_first" />
 
-        <TextView
-            android:id="@+id/textview_filter_set_duration"
-            style="@style/Body"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_marginEnd="16dp"
-            android:gravity="center"
-            android:text="@string/filter_set_duration"
-            app:layout_constraintBottom_toBottomOf="@id/textview_filter_duration"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/textview_filter_duration"
-            bind:rippleEffect="@{null}" />
-
-        <RadioGroup
-            android:id="@+id/radiogroup_filter_duration"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
+        <HorizontalScrollView
+            android:id="@+id/scrollview_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:gravity="center|start"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_filter_set_duration">
+            app:layout_constraintTop_toBottomOf="@id/textview_filter_duration">
 
-            <RadioButton
-                android:id="@+id/radiobutton_filter_whole_duration"
-                android:textAppearance="@style/Body"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:background="@drawable/selector_radio_button"
-                android:button="@null"
-                android:checked="true"
-                android:elevation="1dp"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="@string/filter_whole_duration"
-                android:textColor="@drawable/selector_radio_text" />
-
-            <RadioButton
-                android:id="@+id/radiobutton_filter_today"
-                style="@style/Body"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:background="@drawable/selector_radio_button"
-                android:button="@null"
-                android:elevation="1dp"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="@string/filter_today"
-                android:textColor="@drawable/selector_radio_text" />
-
-            <RadioButton
-                android:id="@+id/radiobutton_filter_this_week"
-                style="@style/Body"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:background="@drawable/selector_radio_button"
-                android:button="@null"
-                android:elevation="2dp"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="@string/filter_this_week"
-                android:textColor="@drawable/selector_radio_text" />
-
-            <RadioButton
-                android:id="@+id/radiobutton_filter_this_month"
-                style="@style/Body"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:background="@drawable/selector_radio_button"
-                android:button="@null"
-                android:elevation="2dp"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="@string/filter_this_month"
-                android:textColor="@drawable/selector_radio_text" />
-
-            <RadioButton
-                android:id="@+id/radiobutton_filter_this_year"
-                style="@style/Body"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:background="@drawable/selector_radio_button"
-                android:button="@null"
-                android:elevation="2dp"
-                android:gravity="center"
-                android:padding="8dp"
-                android:text="@string/filter_this_year"
-                android:textColor="@drawable/selector_radio_text" />
-
-        </RadioGroup>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/layout_filter_set_duration"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/radiogroup_filter_duration"
-            tools:visibility="visible">
-
-            <TextView
-                android:id="@+id/textview_filter_start_date"
-                style="@style/Body"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="11dp"
-                android:layout_marginTop="16dp"
-                android:text="@string/filter_start_date"
-                app:layout_constraintStart_toStartOf="@id/button_filter_start_date"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/button_filter_start_date"
-                style="@style/ButtonWhite"
-                android:layout_width="176dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="2dp"
-                android:background="@drawable/bottom_sheet_button"
-                android:elevation="1dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_filter_start_date"
-                bind:rippleEffect="@{null}"
-                tools:text="2021년 9월 7일" />
-
-            <TextView
-                android:id="@+id/textview_filter_end_date"
-                style="@style/Body"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="11dp"
-                android:text="@string/filter_end_date"
-                app:layout_constraintStart_toStartOf="@id/button_filter_end_date"
-                app:layout_constraintTop_toTopOf="@id/textview_filter_start_date" />
-
-            <Button
-                android:id="@+id/button_filter_end_date"
-                style="@style/ButtonWhite"
-                android:layout_width="176dp"
-                android:layout_height="40dp"
-                android:layout_marginEnd="16dp"
-                android:background="@drawable/bottom_sheet_button"
-                android:elevation="1dp"
+            <RadioGroup
+                android:id="@+id/radiogroup_filter_duration"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginBottom="8dp"
+                android:gravity="center|start"
+                android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/button_filter_start_date"
-                tools:text="2021년 9월 7일" />
+                app:layout_constraintStart_toStartOf="parent">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <RadioButton
+                    android:id="@+id/radiobutton_filter_whole_duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/selector_radio_button"
+                    android:button="@null"
+                    android:checked="true"
+                    android:elevation="1dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/filter_whole_duration"
+                    android:textAppearance="@style/Body"
+                    android:textColor="@drawable/selector_radio_text" />
+
+                <RadioButton
+                    android:id="@+id/radiobutton_filter_today"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/selector_radio_button"
+                    android:button="@null"
+                    android:elevation="1dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/filter_today"
+                    android:textAppearance="@style/Body"
+                    android:textColor="@drawable/selector_radio_text" />
+
+                <RadioButton
+                    android:id="@+id/radiobutton_filter_this_week"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/selector_radio_button"
+                    android:button="@null"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/filter_this_week"
+                    android:textAppearance="@style/Body"
+                    android:textColor="@drawable/selector_radio_text" />
+
+                <RadioButton
+                    android:id="@+id/radiobutton_filter_this_month"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/selector_radio_button"
+                    android:button="@null"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/filter_this_month"
+                    android:textAppearance="@style/Body"
+                    android:textColor="@drawable/selector_radio_text" />
+
+                <RadioButton
+                    android:id="@+id/radiobutton_filter_this_year"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginStart="16dp"
+                    android:background="@drawable/selector_radio_button"
+                    android:button="@null"
+                    android:elevation="2dp"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:text="@string/filter_this_year"
+                    android:textAppearance="@style/Body"
+                    android:textColor="@drawable/selector_radio_text" />
+
+            </RadioGroup>
+
+        </HorizontalScrollView>
+
+        <TextView
+            android:id="@+id/textview_filter_start_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/filter_start_date"
+            android:textAppearance="@style/Body"
+            app:layout_constraintStart_toStartOf="@id/button_filter_start_date"
+            app:layout_constraintTop_toBottomOf="@id/scrollview_filter" />
+
+        <Button
+            android:id="@+id/button_filter_start_date"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="2dp"
+            android:background="@drawable/bottom_sheet_button"
+            android:elevation="1dp"
+            style="@style/ButtonWhite"
+            app:layout_constraintEnd_toEndOf="@id/guideline_filter_center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_filter_start_date"
+            bind:rippleEffect="@{null}"
+            tools:text="2021년 09월 07일" />
+
+        <TextView
+            android:id="@+id/textview_filter_end_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="11dp"
+            android:text="@string/filter_end_date"
+            android:textAppearance="@style/Body"
+            app:layout_constraintStart_toStartOf="@id/button_filter_end_date"
+            app:layout_constraintTop_toTopOf="@id/textview_filter_start_date" />
+
+        <Button
+            android:id="@+id/button_filter_end_date"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/bottom_sheet_button"
+            android:elevation="1dp"
+            style="@style/ButtonWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/guideline_filter_center"
+            app:layout_constraintTop_toTopOf="@id/button_filter_start_date"
+            tools:text="2021년 9월 7일" />
 
         <View
             android:id="@+id/view_filter_divider_second"
@@ -232,16 +223,16 @@
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/layout_filter_set_duration" />
+            app:layout_constraintTop_toBottomOf="@id/button_filter_start_date" />
 
         <TextView
             android:id="@+id/textview_filter_sorting"
-            style="@style/SubHeadBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:text="@string/filter_sorting"
+            android:textAppearance="@style/SubHeadBold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_filter_divider_second" />
 
@@ -258,7 +249,6 @@
 
             <RadioButton
                 android:id="@+id/radiobutton_filter_sorting_latest"
-                style="@style/Body"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
@@ -269,11 +259,11 @@
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="@string/filter_sorting_latest"
+                android:textAppearance="@style/Body"
                 android:textColor="@drawable/selector_radio_text" />
 
             <RadioButton
                 android:id="@+id/radiobutton_filter_sorting_popularity"
-                style="@style/Body"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
@@ -283,6 +273,7 @@
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="@string/filter_sorting_popularity"
+                android:textAppearance="@style/Body"
                 android:textColor="@drawable/selector_radio_text" />
         </RadioGroup>
 
@@ -302,6 +293,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/radiogroup_filter_sorting" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_filter_center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

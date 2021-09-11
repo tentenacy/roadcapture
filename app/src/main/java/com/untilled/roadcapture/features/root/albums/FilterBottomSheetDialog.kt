@@ -24,7 +24,6 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
 
     private var _binding: ModalBottomSheetFilterBinding? = null
     private val binding get() = _binding!!
-    private lateinit var date: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +38,19 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initViews()
         setOnClickListeners()
+    }
+
+    private fun initViews() {
+        binding.run {
+            buttonFilterStartDate.text = makeDateString(LocalDate.now())
+            buttonFilterEndDate.text = makeDateString(LocalDate.now())
+            radiogroupFilterDuration.clearCheck()
+            radiogroupFilterSorting.clearCheck()
+            radiobuttonFilterWholeDuration.isChecked = true
+            radiobuttonFilterSortingLatest.isChecked = true
+        }
     }
 
     private fun setOnClickListeners() {
@@ -50,21 +61,7 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
             dismiss()
         }
         binding.textviewFilterReset.setOnClickListener {
-            binding.run {
-                radiogroupFilterDuration.clearCheck()
-                radiogroupFilterSorting.clearCheck()
-                radiobuttonFilterWholeDuration.isChecked = true
-                radiobuttonFilterSortingLatest.isChecked = true
-                layoutFilterSetDuration.isVisible = false
-            }
-        }
-        binding.textviewFilterSetDuration.setOnClickListener {
-            binding.run {
-                radiogroupFilterDuration.clearCheck()
-                layoutFilterSetDuration.isVisible = true
-                buttonFilterStartDate.text = makeDateString(LocalDate.now())
-                buttonFilterEndDate.text = makeDateString(LocalDate.now())
-            }
+            initViews()
         }
         binding.buttonFilterStartDate.setOnClickListener {
             onCreateDatePicker(it as Button)
@@ -89,6 +86,7 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
                 if (compareDate(view, year, month + 1, dayOfMonth)) {
                     Toast.makeText(requireContext(), "시작일과 종료일이 올바르지 않습니다.", Toast.LENGTH_SHORT).show()
                 } else {
+                    binding.radiogroupFilterDuration.clearCheck()
                     val date = makeDateString(year, month + 1, dayOfMonth)
                     view.text = date
                 }
