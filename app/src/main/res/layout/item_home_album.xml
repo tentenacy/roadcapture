@@ -167,9 +167,9 @@
             app:layout_constraintTop_toBottomOf="@+id/imageview_item_home_albums_thumbnail"
             tools:text="나의 첫 부산 여행기" />
 
-        <kr.co.prnd.readmore.ReadMoreTextView
+        <TextView
             android:id="@+id/textview_item_home_album_desc"
-            style="@style/AlbumContent"
+            style="@style/Body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
