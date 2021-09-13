@@ -61,17 +61,19 @@
         <TextView
             android:id="@+id/textview_setting_account"
             style="@style/Head"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:layout_marginTop="12dp"
             android:text="@string/setting_account"
+            android:gravity="center|start"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <View
+            android:id="@+id/textview_setting_account_divider"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="24dp"
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -90,19 +92,19 @@
         <TextView
             android:id="@+id/textview_setting_service_location"
             style="@style/SubHead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
             android:layout_marginStart="12dp"
-            android:layout_marginTop="24dp"
+            android:gravity="center|left"
             android:text="@string/setting_service_location"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_service" />
 
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="24dp"
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -111,17 +113,17 @@
         <TextView
             android:id="@+id/textview_setting_service_notification"
             style="@style/SubHead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:gravity="center|left"
             android:text="@string/setting_service_notification"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_service_location" />
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="24dp"
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -141,18 +143,27 @@
         <TextView
             android:id="@+id/textview_setting_support_version"
             style="@style/SubHead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
+            android:gravity="center|left"
             android:text="@string/setting_support_version"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_support" />
+
+        <TextView
+            android:id="@+id/textview_setting_support_version_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1.0v"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/textview_setting_support_version"/>
 
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="24dp"
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -161,10 +172,11 @@
         <TextView
             android:id="@+id/textview_setting_support_opinion"
             style="@style/SubHead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
             android:text="@string/setting_support_opinion"
+            android:gravity="center|left"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_support_version" />
 
@@ -172,7 +184,6 @@
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="24dp"
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -181,18 +192,18 @@
         <TextView
             android:id="@+id/textview_setting_support_terms"
             style="@style/SubHead"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_width="0dp"
+            android:layout_height="64dp"
             android:text="@string/setting_support_terms"
+            android:gravity="center|left"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_support_opinion" />
 
 
         <View
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="24dp"
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

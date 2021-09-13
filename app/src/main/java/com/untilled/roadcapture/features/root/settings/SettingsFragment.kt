@@ -9,6 +9,10 @@ import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentSettingBinding
 import dagger.hilt.android.AndroidEntryPoint
+import android.content.Intent
+
+
+
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
@@ -43,6 +47,15 @@ class SettingsFragment : Fragment() {
         }
         binding.imageviewSettingBack.setOnClickListener {
             requireActivity().onBackPressed()
+        }
+        binding.textviewSettingSupportOpinion.setOnClickListener {
+            val email = Intent(Intent.ACTION_SEND)
+            email.type = "plain/text"
+            val address = arrayOf("kwangddang12@naver.com")
+            email.putExtra(Intent.EXTRA_EMAIL, address)
+            email.putExtra(Intent.EXTRA_SUBJECT, "로드캡처 건의사항")
+            email.putExtra(Intent.EXTRA_TEXT, "이 메일은 개발자에게 전송됩니다.")
+            startActivity(email)
         }
     }
 }
