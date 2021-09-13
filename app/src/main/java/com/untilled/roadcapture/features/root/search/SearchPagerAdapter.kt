@@ -10,7 +10,7 @@ const val PLACE_CRITERIA_PAGE_INDEX = 2
 
 class SearchPagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
     private val tabFragmentsCreators: Map<Int, () -> Fragment> = mapOf(
-        TITLE_CRITERIA_PAGE_INDEX to { TitleCriteriaSearchFragment() },
+        TITLE_CRITERIA_PAGE_INDEX to { TitleSearchFragment() },
         USERNAME_CRITERIA_PAGE_INDEX to { UsernameSearchFragment() },
         PLACE_CRITERIA_PAGE_INDEX to { PlaceCriteriaSearchFragment() }
     )
