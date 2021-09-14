@@ -5,6 +5,8 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -28,7 +30,7 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
 
     private var picture : Picture? = null
 
-    private var resultList = listOf<SearchResult>()
+    private var resultList : List<SearchResult>? = listOf<SearchResult>()
 
     private lateinit var job: Job
 
@@ -70,20 +72,26 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
                 ))
         }
         binding.imageviewSearchPlaceSearch.setOnClickListener {
-            searchKeyword(binding.edittextSearchPlaceInput.text.toString())
+            binding.edittextSearchPlaceInput.text.toString().run {
+                if(isNullOrBlank()) {
+                    Toast.makeText(requireContext(), "검색어를 입력해 주세요.", Toast.LENGTH_SHORT).show()
+                } else {
+                    searchKeyword(this)
+                }
+            }
         }
     }
 
     private fun initAdapter() {
         binding.recyclerviewSearchPlace.withModels {
-            resultList.forEachIndexed { index, searchResult ->
+            resultList?.forEachIndexed { index, searchResult ->
                 searchPlaceResult {
                     id(index)
                     searchResult(searchResult)
 
                     onClickItem { model, parentView, clickedView, position ->
                         if(clickedView.id == R.id.item_search_place_result_name_container){
-                            picture?.searchResult = resultList[position]
+                            picture?.searchResult = resultList!![position]
                             Navigation.findNavController(binding.root)
                                 .navigate(SearchPlaceFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
                                     picture = picture
@@ -137,6 +145,8 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
         }
 
     private fun searchKeyword(keyword : String) {
+        binding.progressbarSearchPlaceLoading.isVisible = true  // 로딩 애니메이션 on
+
         launch(coroutineContext) {
             try {
                 withContext(Dispatchers.IO) {
@@ -145,15 +155,25 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
                     )
                     if (response.isSuccessful) {
                         val body = response.body()
+
                         withContext(Dispatchers.Main) {
-                            Log.e("List", body.toString())
+                            if(body == null) {  // 검색 결과 없을때 처리
+                                binding.textviewSearchPlaceNoResult.isVisible = true
+                                resultList = null   // 결과 리스트 초기화
+                                binding.recyclerviewSearchPlace.requestModelBuild()
+                            }
+                            binding.progressbarSearchPlaceLoading.isVisible = false // 로딩 애니메이션 off
+
+                            Log.d("searchResult", body.toString())
                             body?.let {
+                                binding.textviewSearchPlaceNoResult.isVisible = false
                                 setData(it.searchPoiInfo.pois)
                             }
                         }
                     }
                 }
             } catch (e : Exception){
+                binding.progressbarSearchPlaceLoading.isVisible = false
                 e.printStackTrace()
             }
         }
@@ -165,5 +185,4 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
         job.cancel()
         _binding = null
     }
-
 }

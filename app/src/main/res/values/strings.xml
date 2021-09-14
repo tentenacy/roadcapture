@@ -76,4 +76,5 @@
     <string name="album_creation_asking_create">앨범 만들기</string>
     <string name="album_creation_asking_title">앨범을 만드시겠습니까?</string>
     <string name="picture_editor_title">앨범 만들기</string>
+    <string name="search_place_no_result">검색결과가 없습니다. 다시 입력해주세요.</string>
 </resources>
