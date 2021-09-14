@@ -6,7 +6,6 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.*
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
@@ -71,8 +70,8 @@ class CaptureFragment : Fragment(), OnMapReadyCallback, CoroutineScope {
         _binding = FragmentCaptureBinding.inflate(inflater, container, false)
 
         job = Job()
-        setDb()
-        setNaverMap()
+        initDb()
+        initNaverMap()
 
         return binding.root
     }
@@ -138,7 +137,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback, CoroutineScope {
         }
     }
 
-    private fun setDb() {
+    private fun initDb() {
         db = Room.databaseBuilder(
             requireContext(),
             PictureThumbnailDB::class.java,
@@ -171,7 +170,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback, CoroutineScope {
         }
     }
 
-    private fun setNaverMap() {
+    private fun initNaverMap() {
         val mapFragment = childFragmentManager.findFragmentById(R.id.fragment_map) as? MapFragment
             ?: MapFragment.newInstance().also {
                 childFragmentManager.beginTransaction().add(R.id.fragment_map, it).commit()

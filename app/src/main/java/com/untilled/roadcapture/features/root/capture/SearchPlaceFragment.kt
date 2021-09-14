@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.LocationLatLng
+import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.data.response.search.Pois
 import com.untilled.roadcapture.data.entity.SearchResult
 import com.untilled.roadcapture.data.response.search.Poi
@@ -24,7 +26,7 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
     private var _binding : FragmentSearchPlaceBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel : PictureEditorViewModel by viewModels({requireParentFragment()})
+    private var picture : Picture? = null
 
     private var resultList = listOf<SearchResult>()
 
@@ -40,11 +42,6 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
     ): View? {
         _binding = FragmentSearchPlaceBinding.inflate(inflater, container, false)
 
-        binding.apply{
-            lifecycleOwner = parentFragment
-            vm = viewModel
-        }
-
         job = Job()
         initAdapter()
 
@@ -54,12 +51,23 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val args: SearchPlaceFragmentArgs by navArgs()
+        if (args.picture != null) {
+            picture = args.picture
+            if(picture?.searchResult != null) {
+                binding.edittextSearchPlaceInput.setText(picture?.searchResult?.placeName)
+                searchKeyword(binding.edittextSearchPlaceInput.text.toString())
+            }
+        }
         setOnClickListeners()
     }
 
     private fun setOnClickListeners() {
         binding.imageviewSearchPlaceBack.setOnClickListener {
-            requireActivity().onBackPressed()
+            Navigation.findNavController(binding.root)
+                .navigate(SearchPlaceFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
+                    picture = picture
+                ))
         }
         binding.imageviewSearchPlaceSearch.setOnClickListener {
             searchKeyword(binding.edittextSearchPlaceInput.text.toString())
@@ -75,8 +83,11 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
 
                     onClickItem { model, parentView, clickedView, position ->
                         if(clickedView.id == R.id.item_search_place_result_name_container){
-                            viewModel.searchResult?.value = resultList[position]
-                            requireActivity().onBackPressed()
+                            picture?.searchResult = resultList[position]
+                            Navigation.findNavController(binding.root)
+                                .navigate(SearchPlaceFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
+                                    picture = picture
+                                ))
                         }
                     }
                 }

@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
@@ -21,7 +20,7 @@ import java.util.*
 class PictureEditorFragment : Fragment() {
     private var _binding: FragmentPictureEditorBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: PictureEditorViewModel by viewModels({ requireParentFragment() })
+    private var picture: Picture? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,28 +29,26 @@ class PictureEditorFragment : Fragment() {
     ): View? {
         _binding = FragmentPictureEditorBinding.inflate(inflater, container, false)
 
-        binding.apply {
-            lifecycleOwner = lifecycleOwner
-            vm = viewModel
-        }
-
-        val args: PictureEditorFragmentArgs by navArgs()
-        if (args.imageUri != null && (viewModel.isRemoved.value == false)) {
-            viewModel.imageUri.value = args.imageUri
-        } else {
-            removeImage()
-        }
         return binding.root
     }
 
     override fun onDestroy() {
         super.onDestroy()
         _binding = null
-        viewModel.initProperty()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        val args: PictureEditorFragmentArgs by navArgs()
+        if (args.picture != null) {
+            picture = args.picture
+            binding.picture = picture
+            if(picture?.imageUri != null) {
+                binding.imageviewPictureEditorRemove.isVisible = true
+            }
+        }
+
         setOnClickListeners()
     }
 
@@ -61,14 +58,17 @@ class PictureEditorFragment : Fragment() {
         }
 
         binding.imageviewPictureEditorRemove.setOnClickListener {
-            viewModel.isRemoved.value = true
-            viewModel.imageUri.value = null
+            picture?.imageUri = null
             removeImage()
         }
 
         binding.textviewPictureEditorPlaceUserInput.setOnClickListener {
             Navigation.findNavController(binding.root)
-                .navigate(R.id.action_pictureEditorFragment_to_searchPlaceFragment)
+                .navigate(
+                    PictureEditorFragmentDirections.actionPictureEditorFragmentToSearchPlaceFragment(
+                        picture = makePicture()
+                    )
+                )
         }
 
         binding.textviewPictureEditorDateUserInput.setOnClickListener {
@@ -76,21 +76,18 @@ class PictureEditorFragment : Fragment() {
         }
 
         binding.imageviewPictureEditorImage.setOnClickListener {
-            if (viewModel.isRemoved.value == true) {
-                //Todo 카메라 찍기 or 갤러리 선택
-            }
+            // if (viewModel.isRemoved.value == true) {
+            //     //Todo 카메라 찍기 or 갤러리 선택
+            // }
         }
 
         binding.imageviewPictureEditorCheck.setOnClickListener {
-            val picture = Picture(
-                imageUri = viewModel.imageUri.value,
-                date = viewModel.date.value,
-                searchResult = viewModel.searchResult?.value,
-                name = viewModel.name.value,
-                description = viewModel.description.value
-            )
             Navigation.findNavController(binding.root)
-                .navigate(PictureEditorFragmentDirections.actionPictureEditorFragmentToCaptureFragment(picture = picture))
+                .navigate(
+                    PictureEditorFragmentDirections.actionPictureEditorFragmentToCaptureFragment(
+                        picture = makePicture()
+                    )
+                )
         }
     }
 
@@ -107,7 +104,7 @@ class PictureEditorFragment : Fragment() {
             R.style.DialogTheme,
             { _, year, month, dayOfMonth ->
                 val date = makeDateString(year, month + 1, dayOfMonth)
-                viewModel.date.value = date
+                picture?.date = date
                 binding.textviewPictureEditorDateUserInput.text = date
             },
             date.year, date.monthValue - 1, date.dayOfMonth
@@ -118,6 +115,16 @@ class PictureEditorFragment : Fragment() {
         }.show()
     }
 
-    private fun makeDateString(year: Int, month: Int, dayOfMonth: Int): String  =
-        "${year}년 ${String.format("%02d",month)}월 ${String.format("%02d",dayOfMonth)}일"
+    private fun makeDateString(year: Int, month: Int, dayOfMonth: Int): String =
+        "${year}년 ${String.format("%02d", month)}월 ${String.format("%02d", dayOfMonth)}일"
+
+    private fun makePicture(): Picture =
+        Picture(
+            imageUri = picture?.imageUri,
+            date = picture?.date,
+            searchResult = picture?.searchResult,
+            name = binding.edittextPictureEditorNameUserInput.text.toString(),
+            description = binding.editPictureEditorDescriptionUserInput.text.toString()
+        )
+
 }

@@ -7,9 +7,9 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Picture(
-    var imageUri: String?,
-    var date: String?,
-    @Embedded var searchResult : SearchResult?,
-    var name : String?,
-    var description : String?
+    var imageUri: String? = null,
+    var date: String? = null,
+    @Embedded var searchResult : SearchResult? = null,
+    var name : String? = null,
+    var description : String? = null
 ) : Parcelable

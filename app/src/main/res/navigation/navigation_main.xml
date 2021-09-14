@@ -130,10 +130,6 @@
         android:name="com.untilled.roadcapture.features.root.capture.PictureEditorFragment"
         android:label="PictureEditorFragment"
         tools:layout="@layout/fragment_picture_editor">
-        <argument
-            android:name="imageUri"
-            app:argType="string"
-            android:defaultValue='""' />
         <action
             android:id="@+id/action_pictureEditorFragment_to_searchPlaceFragment"
             app:destination="@id/searchPlaceFragment" />
@@ -142,11 +138,26 @@
             app:popUpTo="@id/captureFragment"
             app:popUpToInclusive="true"
             app:destination="@id/captureFragment" />
+        <argument
+            android:name="picture"
+            app:argType="com.untilled.roadcapture.data.entity.Picture"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
     <fragment
         android:id="@+id/searchPlaceFragment"
         android:name="com.untilled.roadcapture.features.root.capture.SearchPlaceFragment"
         android:label="SearchPlaceFragment"
         tools:layout="@layout/fragment_search_place">
+        <action
+            android:id="@+id/action_searchPlaceFragment_to_pictureEditorFragment"
+            app:popUpTo="@id/pictureEditorFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/pictureEditorFragment" />
+        <argument
+            android:name="picture"
+            app:argType="com.untilled.roadcapture.data.entity.Picture"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 </navigation>
