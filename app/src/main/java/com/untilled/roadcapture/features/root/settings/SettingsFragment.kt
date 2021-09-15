@@ -17,7 +17,7 @@ import android.content.Intent
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
     private var _binding : FragmentSettingBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -56,6 +56,10 @@ class SettingsFragment : Fragment() {
             email.putExtra(Intent.EXTRA_SUBJECT, "로드캡처 건의사항")
             email.putExtra(Intent.EXTRA_TEXT, "이 메일은 개발자에게 전송됩니다.")
             startActivity(email)
+        }
+        binding.textviewSettingServiceLocation.setOnClickListener {
+            val locationPermissionBottomSheetDialog = LocationPermissionBottomSheetDialog()
+            locationPermissionBottomSheetDialog.show(childFragmentManager, "locationPermissionBottomSheet")
         }
     }
 }

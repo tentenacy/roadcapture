@@ -77,4 +77,8 @@
     <string name="album_creation_asking_title">앨범을 만드시겠습니까?</string>
     <string name="picture_editor_title">앨범 만들기</string>
     <string name="search_place_no_result">검색결과가 없습니다. 다시 입력해주세요.</string>
+    <string name="location_permission_always">항상 허용</string>
+    <string name="location_permission_using">앱 사용중에만 허용</string>
+    <string name="location_permission_confirm">항상 확인</string>
+    <string name="location_permission_deny">거부</string>
 </resources>

@@ -93,7 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
-                    android:background="@drawable/selector_radio_button"
+                    android:background="@drawable/selector_radio_filter_button"
                     android:button="@null"
                     android:checked="true"
                     android:elevation="1dp"
@@ -101,63 +101,63 @@
                     android:padding="8dp"
                     android:text="@string/filter_whole_duration"
                     android:textAppearance="@style/Body"
-                    android:textColor="@drawable/selector_radio_text" />
+                    android:textColor="@drawable/selector_radio_filter_text" />
 
                 <RadioButton
                     android:id="@+id/radiobutton_filter_today"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
-                    android:background="@drawable/selector_radio_button"
+                    android:background="@drawable/selector_radio_filter_button"
                     android:button="@null"
                     android:elevation="1dp"
                     android:gravity="center"
                     android:padding="8dp"
                     android:text="@string/filter_today"
                     android:textAppearance="@style/Body"
-                    android:textColor="@drawable/selector_radio_text" />
+                    android:textColor="@drawable/selector_radio_filter_text" />
 
                 <RadioButton
                     android:id="@+id/radiobutton_filter_this_week"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
-                    android:background="@drawable/selector_radio_button"
+                    android:background="@drawable/selector_radio_filter_button"
                     android:button="@null"
                     android:elevation="2dp"
                     android:gravity="center"
                     android:padding="8dp"
                     android:text="@string/filter_this_week"
                     android:textAppearance="@style/Body"
-                    android:textColor="@drawable/selector_radio_text" />
+                    android:textColor="@drawable/selector_radio_filter_text" />
 
                 <RadioButton
                     android:id="@+id/radiobutton_filter_this_month"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
-                    android:background="@drawable/selector_radio_button"
+                    android:background="@drawable/selector_radio_filter_button"
                     android:button="@null"
                     android:elevation="2dp"
                     android:gravity="center"
                     android:padding="8dp"
                     android:text="@string/filter_this_month"
                     android:textAppearance="@style/Body"
-                    android:textColor="@drawable/selector_radio_text" />
+                    android:textColor="@drawable/selector_radio_filter_text" />
 
                 <RadioButton
                     android:id="@+id/radiobutton_filter_this_year"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
-                    android:background="@drawable/selector_radio_button"
+                    android:background="@drawable/selector_radio_filter_button"
                     android:button="@null"
                     android:elevation="2dp"
                     android:gravity="center"
                     android:padding="8dp"
                     android:text="@string/filter_this_year"
                     android:textAppearance="@style/Body"
-                    android:textColor="@drawable/selector_radio_text" />
+                    android:textColor="@drawable/selector_radio_filter_text" />
 
             </RadioGroup>
 
@@ -252,7 +252,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
-                android:background="@drawable/selector_radio_button"
+                android:background="@drawable/selector_radio_filter_button"
                 android:button="@null"
                 android:checked="true"
                 android:elevation="1dp"
@@ -260,21 +260,21 @@
                 android:padding="8dp"
                 android:text="@string/filter_sorting_latest"
                 android:textAppearance="@style/Body"
-                android:textColor="@drawable/selector_radio_text" />
+                android:textColor="@drawable/selector_radio_filter_text" />
 
             <RadioButton
                 android:id="@+id/radiobutton_filter_sorting_popularity"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
-                android:background="@drawable/selector_radio_button"
+                android:background="@drawable/selector_radio_filter_button"
                 android:button="@null"
                 android:elevation="1dp"
                 android:gravity="center"
                 android:padding="8dp"
                 android:text="@string/filter_sorting_popularity"
                 android:textAppearance="@style/Body"
-                android:textColor="@drawable/selector_radio_text" />
+                android:textColor="@drawable/selector_radio_filter_text" />
         </RadioGroup>
 
         <Button

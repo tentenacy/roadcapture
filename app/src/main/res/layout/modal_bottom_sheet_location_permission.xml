@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/location_permission_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_bottom_sheet_dialog"
+    android:paddingHorizontal="24dp"
+    android:paddingTop="24dp">
+
+    <TextView
+        android:id="@+id/textview_location_permission_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/setting_service_location"
+        android:textAppearance="@style/SubHeadBold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radioGroup_location_permission"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_location_permission_title">
+
+        <RadioButton
+            android:id="@+id/radiobutton_location_permission_always"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@android:color/transparent"
+            android:button="@null"
+            android:gravity="center|left"
+            android:text="@string/location_permission_always"
+            android:textAppearance="@style/SubHead"
+            android:textColor="@drawable/selector_radio_location_permission_text" />
+
+        <RadioButton
+            android:id="@+id/radiobutton_location_permission_using"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@android:color/transparent"
+            android:button="@null"
+            android:gravity="center|left"
+            android:text="@string/location_permission_using"
+            android:textAppearance="@style/SubHead"
+            android:textColor="@drawable/selector_radio_location_permission_text" />
+
+        <RadioButton
+            android:id="@+id/radiobutton_location_permission_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@android:color/transparent"
+            android:button="@null"
+            android:gravity="center|left"
+            android:text="@string/location_permission_confirm"
+            android:textAppearance="@style/SubHead"
+            android:textColor="@drawable/selector_radio_location_permission_text" />
+
+        <RadioButton
+            android:id="@+id/radiobutton_location_permission_deny"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
+            android:background="@android:color/transparent"
+            android:button="@null"
+            android:gravity="center|left"
+            android:text="@string/location_permission_deny"
+            android:textAppearance="@style/SubHead"
+            android:textColor="@drawable/selector_radio_location_permission_text" />
+
+    </RadioGroup>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

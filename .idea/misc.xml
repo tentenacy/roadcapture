@@ -6,6 +6,12 @@
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/drawable/overlay_gradient_studio_album_thumbnail.xml" value="0.1984375" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/drawable/overlay_gradient_thumbnail.xml" value="0.1984375" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/drawable/place_button.xml" value="0.19739583333333333" />
+        <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/drawable/selector_radio_button.xml" value="0.3194444444444444" />
+        <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/drawable/selector_radio_filter_button.xml" value="0.3640625" />
+        <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/drawable/selector_radio_filter_text.xml" value="0.22314814814814815" />
+        <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/drawable/selector_radio_location_permisson_text.xml" value="0.3640625" />
+        <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/drawable/selector_radio_text.xml" value="0.22314814814814815" />
+        <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/drawable/shape_bottom_sheet_dialog.xml" value="0.3640625" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/activity_main.xml" value="0.228125" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/fragment_albums.xml" value="0.1875" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/fragment_comment.xml" value="0.30625" />
@@ -31,6 +37,9 @@
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/item_studio_album.xml" value="0.25" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/item_studios_place.xml" value="0.5753803596127247" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/item_username_search.xml" value="0.23541666666666666" />
+        <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/modal_bottom_sheet_album_creation_asking.xml" value="0.2234375" />
+        <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/modal_bottom_sheet_filter.xml" value="0.2234375" />
+        <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/modal_bottom_sheet_location_permission.xml" value="0.33" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/my_studio_scene.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/stack_host_fragment.xml" value="0.228125" />
       </map>

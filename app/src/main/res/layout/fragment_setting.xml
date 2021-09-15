@@ -60,7 +60,7 @@
 
         <TextView
             android:id="@+id/textview_setting_account"
-            style="@style/Head"
+            android:textAppearance="@style/Head"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:layout_marginTop="12dp"
@@ -81,7 +81,7 @@
 
         <TextView
             android:id="@+id/textview_setting_service"
-            style="@style/Head"
+            android:textAppearance="@style/Head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
@@ -91,7 +91,7 @@
 
         <TextView
             android:id="@+id/textview_setting_service_location"
-            style="@style/SubHead"
+            android:textAppearance="@style/SubHead"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:layout_marginStart="12dp"
@@ -101,6 +101,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_service" />
 
+        <TextView
+            android:id="@+id/textview_setting_service_location_detail"
+            android:textAppearance="@style/Body"
+            android:textColor="@color/secondaryColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="앱 사용중에만 허용"
+            app:layout_constraintTop_toTopOf="@id/textview_setting_service_location"
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <View
             android:layout_width="0dp"
@@ -112,7 +122,7 @@
 
         <TextView
             android:id="@+id/textview_setting_service_notification"
-            style="@style/SubHead"
+            android:textAppearance="@style/SubHead"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:gravity="center|left"
@@ -131,7 +141,7 @@
 
         <TextView
             android:id="@+id/textview_setting_support"
-            style="@style/Head"
+            android:textAppearance="@style/Head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
@@ -142,7 +152,7 @@
 
         <TextView
             android:id="@+id/textview_setting_support_version"
-            style="@style/SubHead"
+            android:textAppearance="@style/SubHead"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:gravity="center|left"
@@ -171,7 +181,7 @@
 
         <TextView
             android:id="@+id/textview_setting_support_opinion"
-            style="@style/SubHead"
+            android:textAppearance="@style/SubHead"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:text="@string/setting_support_opinion"
@@ -191,7 +201,7 @@
 
         <TextView
             android:id="@+id/textview_setting_support_terms"
-            style="@style/SubHead"
+            android:textAppearance="@style/SubHead"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:text="@string/setting_support_terms"
