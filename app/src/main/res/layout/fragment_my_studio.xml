@@ -172,7 +172,8 @@
                 android:paddingVertical="16dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textview_my_studio_place" />
+                app:layout_constraintTop_toBottomOf="@+id/textview_my_studio_place"
+                tools:listitem="@layout/item_studios_place"/>
 
             <com.airbnb.epoxy.EpoxyRecyclerView
                 android:id="@+id/recyclerview_my_studio_albums"

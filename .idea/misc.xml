@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/drawable/overlay_gradient_studio_album_thumbnail.xml" value="0.1984375" />
+        <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/drawable/overlay_gradient_test.xml" value="0.3640625" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/drawable/overlay_gradient_thumbnail.xml" value="0.1984375" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/drawable/place_button.xml" value="0.19739583333333333" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/drawable/selector_radio_button.xml" value="0.3194444444444444" />
@@ -21,10 +22,12 @@
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/fragment_following_albums.xml" value="0.1828125" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/fragment_my_studio.xml" value="0.25" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/fragment_password_input_signup.xml" value="0.22456140350877193" />
+        <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/fragment_picture_editor.xml" value="0.34791666666666665" />
+        <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/fragment_picture_viewer.xml" value="0.33" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/fragment_root.xml" value="0.228125" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/fragment_search.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/fragment_search_place.xml" value="0.22083333333333333" />
-        <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/fragment_setting.xml" value="0.25" />
+        <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/fragment_setting.xml" value="0.264" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/fragment_title_search.xml" value="0.22552083333333334" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/fragment_username_criteria_search.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/fragment_username_input_signup.xml" value="0.36397748592870544" />
@@ -33,6 +36,8 @@
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/item_follow.xml" value="0.3425641025641026" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/item_home_album.xml" value="0.23541666666666666" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/item_notification.xml" value="0.5" />
+        <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/item_picture_viewer_content.xml" value="0.34791666666666665" />
+        <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/item_picture_viewer_thumbnail.xml" value="0.17447916666666666" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/item_search_place_result.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/item_studio_album.xml" value="0.25" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/item_studios_place.xml" value="0.5753803596127247" />
@@ -42,6 +47,7 @@
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/modal_bottom_sheet_location_permission.xml" value="0.33" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/my_studio_scene.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/stack_host_fragment.xml" value="0.228125" />
+        <entry key="..\:/Users/KwangHyun/Desktop/roadcapture/app/src/main/res/layout/test.xml" value="0.33" />
       </map>
     </option>
   </component>

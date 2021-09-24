@@ -34,6 +34,15 @@ object AlbumsBindingAdapters {
     }
 
     @JvmStatic
+    @BindingAdapter("pictureViewerBackgroundImage")
+    fun setPictureViewerBackgroundImage(view: ImageView, url: String){
+        Glide.with(view.context)
+            .load(url)
+            .centerCrop()
+            .into(view)
+    }
+
+    @JvmStatic
     @BindingAdapter("albumProfileImage")
     fun setAlbumProfileImage(view: ImageView, url: String) {
         Glide.with(view.context)

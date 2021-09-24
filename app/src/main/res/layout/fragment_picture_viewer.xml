@@ -7,11 +7,21 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
+    <com.airbnb.epoxy.EpoxyRecyclerView
+        android:id="@+id/recyclerview_picture_viewer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/item_picture_viewer_thumbnail" />
+
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarlayout_picture_viewer"
         android:layout_width="0dp"
         android:layout_height="?attr/actionBarSize"
-        android:background="@color/black"
+        android:background="@color/transparent"
         android:fitsSystemWindows="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -43,60 +53,38 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
+
     <ImageView
-        android:id="@+id/imageview_picture_viewer"
+        android:id="@+id/imageview_item_picture_viewer_content_like"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:adjustViewBounds="true"
-        android:scaleType="fitXY"
-        tools:src="@drawable/sample_thumbnail"
+        android:layout_height="48dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_like"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageview_item_picture_viewer_content_comment"
+        app:layout_constraintStart_toStartOf="parent"
+        app:tint="@color/primaryColor" />
+
+    <ImageView
+        android:id="@+id/imageview_item_picture_viewer_content_comment"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_comment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageview_item_picture_viewer_content_share"
+        app:layout_constraintStart_toEndOf="@+id/imageview_item_picture_viewer_content_like"
+        app:tint="@color/primaryColor" />
+
+    <ImageView
+        android:id="@+id/imageview_item_picture_viewer_content_share"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:padding="8dp"
+        android:src="@drawable/ic_share"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/imageview_item_picture_viewer_content_comment" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/picture_viewer_bottom_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-
-        <ImageView
-            android:id="@+id/imageview_picture_viewer_like"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:padding="8dp"
-            android:src="@drawable/ic_like"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageview_picture_viewer_comment"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/primaryColor" />
-
-        <ImageView
-            android:id="@+id/imageview_picture_viewer_comment"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:padding="8dp"
-            android:src="@drawable/ic_comment"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageview_picture_viewer_share"
-            app:layout_constraintStart_toEndOf="@+id/imageview_picture_viewer_like"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="@color/primaryColor" />
-
-        <ImageView
-            android:id="@+id/imageview_picture_viewer_share"
-            android:layout_width="0dp"
-            android:layout_height="48dp"
-            android:padding="8dp"
-            android:src="@drawable/ic_share"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageview_picture_viewer_comment"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

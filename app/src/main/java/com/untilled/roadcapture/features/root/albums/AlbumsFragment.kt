@@ -2,6 +2,7 @@ package com.untilled.roadcapture.features.root.albums
 
 import android.animation.ValueAnimator
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +14,7 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentAlbumsBinding
 import com.untilled.roadcapture.features.root.RootFragment
+import com.untilled.roadcapture.features.root.RootFragmentDirections
 import com.untilled.roadcapture.homeAlbum
 import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
@@ -108,7 +110,9 @@ class AlbumsFragment : Fragment() {
                                 animator.start()
                                 flagLike = false
                             }
-
+                            R.id.imageview_item_home_albums_thumbnail ->
+                                Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
+                                        navigate(RootFragmentDirections.actionRootFragmentToPictureViewerFragment(model.album()))
                         }
                     }
                 }

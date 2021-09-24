@@ -1,10 +1,6 @@
 package com.untilled.roadcapture.utils
 
-import com.untilled.roadcapture.data.entity.Album
-import com.untilled.roadcapture.data.entity.Comment
-import com.untilled.roadcapture.data.entity.Place
-import com.untilled.roadcapture.data.entity.User
-import com.untilled.roadcapture.data.entity.SearchResult
+import com.untilled.roadcapture.data.entity.*
 
 object DummyDataSet {
     val albums = listOf(
@@ -430,6 +426,30 @@ object DummyDataSet {
         User(
             username = "tentancy",
             profileUrl = "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80"
+        )
+    )
+
+    val picture = listOf(
+        Picture(
+            imageUri = "https://cdn.pixabay.com/photo/2018/07/05/12/24/mountain-3518219_960_720.jpg",
+            date = "9월 24일",
+            searchResult = null,
+            name = null,
+            description = "PictureViewer 테스트 중입니다."
+        ),
+        Picture(
+            imageUri = "https://cdn.pixabay.com/photo/2017/10/15/13/54/doll-2853763_960_720.jpg",
+            date = "8월 23일",
+            searchResult = null,
+            name = null,
+            description = "저번에 이어 이번에도 제주도로 향했습니다. 이번에는 저만 알고 있는 제주도의 특별 여행 코스를 안내해드리겠습니다!"
+        ),
+        Picture(
+            imageUri = "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/2fG8/image/wgtUIZSe7IVwsEGZFg1MNf9CRZ0.jpg",
+            date = "9월 24일",
+            searchResult = null,
+            name = null,
+            description = "전국의 아름다운 10대 가로수길 중 하나로 선정된 곡교천변 은행나무길은 현충사 입구의 곡교천 충무교에서부터 현충사 입구까지 조성되어 있는 2.2km 길이의 도로입니다. 가을이면 350여 그루의 은행나무가 일제히 노란 빛을 내 평일에도 많은 인파가 몰려드는 명소입니다."
         )
     )
 }
