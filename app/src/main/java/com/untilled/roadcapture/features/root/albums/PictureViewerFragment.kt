@@ -9,6 +9,9 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearSnapHelper
+import androidx.recyclerview.widget.PagerSnapHelper
+import androidx.recyclerview.widget.SnapHelper
 import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
@@ -18,6 +21,7 @@ import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
 import com.untilled.roadcapture.features.root.capture.PictureEditorFragmentArgs
 import com.untilled.roadcapture.homeAlbum
+import com.untilled.roadcapture.pictureViewerContent
 import com.untilled.roadcapture.pictureViewerThumbnail
 import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,21 +60,20 @@ class PictureViewerFragment : Fragment() {
     }
 
     private fun initAdapter() {
-
         val args: PictureViewerFragmentArgs by navArgs()
-
+        PagerSnapHelper().attachToRecyclerView(binding.recyclerviewPictureViewer)
         binding.recyclerviewPictureViewer.withModels {
-
             pictureViewerThumbnail {
                 id(1)
                 album(args.album)
             }
-//            DummyDataSet.albums.forEachIndexed { index, album ->
-//                homeAlbum {
-//                    id(index)
-//                    album(album)
-//                }
-//            }
+            DummyDataSet.picture.forEachIndexed { index, picture ->
+                pictureViewerContent {
+                    id(index)
+                    picture(picture)
+                }
+            }
+
         }
     }
 }
