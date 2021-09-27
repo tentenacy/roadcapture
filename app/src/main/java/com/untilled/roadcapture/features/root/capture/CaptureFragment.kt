@@ -68,11 +68,10 @@ class CaptureFragment : Fragment(), OnMapReadyCallback, CoroutineScope {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCaptureBinding.inflate(inflater, container, false)
-
         job = Job()
+
         initDb()
         initNaverMap()
-
         return binding.root
     }
 

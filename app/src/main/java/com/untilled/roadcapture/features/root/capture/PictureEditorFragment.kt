@@ -12,8 +12,9 @@ import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPictureEditorBinding
+import com.untilled.roadcapture.utils.dateToString
+import com.untilled.roadcapture.utils.getCalendar
 import dagger.hilt.android.AndroidEntryPoint
-import java.time.LocalDate
 import java.util.*
 
 @AndroidEntryPoint
@@ -43,10 +44,16 @@ class PictureEditorFragment : Fragment() {
         val args: PictureEditorFragmentArgs by navArgs()
         if (args.picture != null) {
             picture = args.picture
+
+            if(picture?.date.isNullOrBlank()){
+                picture?.date = dateToString()
+            }
+
             binding.picture = picture
             if(picture?.imageUri != null) {
                 binding.imageviewPictureEditorRemove.isVisible = true
             }
+
         }
 
         setOnClickListeners()
@@ -97,26 +104,23 @@ class PictureEditorFragment : Fragment() {
     }
 
     private fun onCreateDatePicker() {
-        val date: LocalDate = LocalDate.now()
+        val cal = getCalendar(binding.textviewPictureEditorDateUserInput.text.toString())
 
         val datePickerDialog = DatePickerDialog(
             requireContext(),
             R.style.DialogTheme,
             { _, year, month, dayOfMonth ->
-                val date = makeDateString(year, month + 1, dayOfMonth)
+                val date = dateToString(year, month + 1, dayOfMonth)
                 picture?.date = date
                 binding.textviewPictureEditorDateUserInput.text = date
             },
-            date.year, date.monthValue - 1, date.dayOfMonth
+            cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)
         )
         datePickerDialog.apply {
             val cal = Calendar.getInstance()
             datePicker.maxDate = cal.timeInMillis
         }.show()
     }
-
-    private fun makeDateString(year: Int, month: Int, dayOfMonth: Int): String =
-        "${year}년 ${String.format("%02d", month)}월 ${String.format("%02d", dayOfMonth)}일"
 
     private fun makePicture(): Picture =
         Picture(
@@ -126,5 +130,4 @@ class PictureEditorFragment : Fragment() {
             name = binding.edittextPictureEditorNameUserInput.text.toString(),
             description = binding.editPictureEditorDescriptionUserInput.text.toString()
         )
-
 }

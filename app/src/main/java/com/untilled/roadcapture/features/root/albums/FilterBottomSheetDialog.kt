@@ -1,24 +1,18 @@
 package com.untilled.roadcapture.features.root.albums
 
 import android.app.DatePickerDialog
-import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.Toast
-import androidx.annotation.RequiresApi
-import androidx.core.view.isVisible
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.ModalBottomSheetFilterBinding
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.time.LocalDate
 import java.util.*
+import com.untilled.roadcapture.utils.*
 
-@RequiresApi(Build.VERSION_CODES.O) // LocalDate.now() 함수 사용하기 위함
 @AndroidEntryPoint
 class FilterBottomSheetDialog : BottomSheetDialogFragment() {
 
@@ -44,8 +38,8 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
 
     private fun initViews() {
         binding.run {
-            buttonFilterStartDate.text = makeDateString(LocalDate.now())
-            buttonFilterEndDate.text = makeDateString(LocalDate.now())
+            buttonFilterStartDate.text = dateToString()
+            buttonFilterEndDate.text = dateToString()
             radiogroupFilterDuration.clearCheck()
             radiogroupFilterSorting.clearCheck()
             radiobuttonFilterWholeDuration.isChecked = true
@@ -77,66 +71,44 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     private fun onCreateDatePicker(view: Button) {
-        val dateNow = LocalDate.now()
-
+        val cal = getCalendar(view.text.toString())
         val datePickerDialog = DatePickerDialog(
             requireContext(),
             R.style.DialogTheme,
             { _, year, month, dayOfMonth ->
-                if (compareDate(view, year, month + 1, dayOfMonth)) {
-                    Toast.makeText(requireContext(), "시작일과 종료일이 올바르지 않습니다.", Toast.LENGTH_SHORT).show()
-                } else {
-                    binding.radiogroupFilterDuration.clearCheck()
-                    val date = makeDateString(year, month + 1, dayOfMonth)
-                    view.text = date
-                }
+                binding.radiogroupFilterDuration.clearCheck()
+                compareDate(view, year, month, dayOfMonth)
             },
-            dateNow.year, dateNow.monthValue - 1, dateNow.dayOfMonth
+            cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)
         )
         // 날짜 선택 제한
         datePickerDialog.apply {
-            val cal = Calendar.getInstance()
-            datePicker.maxDate = cal.timeInMillis
+            val now = Calendar.getInstance()
+            datePicker.maxDate = now.timeInMillis
 
-            cal.add(Calendar.YEAR, -2)
-            datePicker.minDate = cal.timeInMillis
+            now.add(Calendar.YEAR, -2)
+            datePicker.minDate = now.timeInMillis
         }.show()
     }
 
-    private fun makeDateString(year: Int, month: Int, dayOfMonth: Int): String =
-        "${year}년 ${String.format("%02d", month)}월 ${String.format("%02d", dayOfMonth)}일"
-
-    private fun makeDateString(date: LocalDate): String =
-        "${date.year}년 ${String.format("%02d", date.monthValue)}월 ${String.format("%02d", date.dayOfMonth)}일"
-
-    private fun makeDateFormat(date: String): String {
-        var token = date.split(" ")
-
-        return token[0].substring(0, 4) +
-                token[1].substring(0, 2) +
-                token[2].substring(0, 2)
-    }
-
-    private fun compareDate(view: Button, year: Int, month: Int, dayOfMonth: Int): Boolean {
-        val dateFormat = SimpleDateFormat("yyyyMMdd")
+    private fun compareDate(view: Button, year: Int, month: Int, dayOfMonth: Int) {
         when (view.id) {
             R.id.button_filter_start_date -> {  // 시작일 입력 시 종료일과 비교
-                val startDate =
-                    dateFormat.parse("${year}${String.format("%02d", month)}${dayOfMonth}").time
-                val endDate =
-                    dateFormat.parse(makeDateFormat(binding.buttonFilterEndDate.text.toString())).time
-                val result = (endDate - startDate) / (24 * 60 * 60 * 1000)
-                return result < 0
+                val startDate = getCalendar(year, month, dayOfMonth)
+                val endDate = getCalendar(binding.buttonFilterEndDate.text.toString())
+                view.text = dateToString(startDate)
+                if(!startDate.before(endDate)) {
+                    binding.buttonFilterEndDate.text = dateToString(startDate)
+                }
             }
             R.id.button_filter_end_date -> { // 종료일 입력 시 시작일과 비교
-                val startDate =
-                    dateFormat.parse(makeDateFormat(binding.buttonFilterStartDate.text.toString())).time
-                val endDate =
-                    dateFormat.parse("${year}${String.format("%02d", month)}${dayOfMonth}").time
-                val result = (endDate - startDate) / (24 * 60 * 60 * 1000)
-                return result < 0
+                val startDate = getCalendar(binding.buttonFilterStartDate.text.toString())
+                val endDate = getCalendar(year, month, dayOfMonth)
+                view.text = dateToString(endDate)
+                if(!startDate.before(endDate)) {
+                    binding.buttonFilterStartDate.text = dateToString(endDate)
+                }
             }
         }
-        return true
     }
 }
