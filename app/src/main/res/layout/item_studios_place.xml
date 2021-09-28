@@ -11,6 +11,10 @@
         <variable
             name="place"
             type="com.untilled.roadcapture.data.entity.Place" />
+
+        <variable
+            name="onClickItem"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,8 +28,9 @@
             android:layout_width="64dp"
             android:layout_height="32dp"
             android:background="@drawable/place_button"
-            android:text="@{place.place}"
             android:elevation="10dp"
+            android:onClick="@{onClickItem}"
+            android:text="@{place.place}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

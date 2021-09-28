@@ -5,11 +5,18 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.core.navigation.StackHostFragment
 import com.untilled.roadcapture.databinding.FragmentMyStudioBinding
 import com.untilled.roadcapture.features.root.RootFragment
+import com.untilled.roadcapture.features.root.search.SearchFragment
 import com.untilled.roadcapture.studioAlbum
 import com.untilled.roadcapture.studiosPlace
 import com.untilled.roadcapture.utils.DummyDataSet
@@ -79,6 +86,22 @@ class MyStudioFragment : Fragment() {
                 studiosPlace {
                     id(index)
                     place(place)
+
+                    onClickItem { model, parentView, clickedView, position ->
+                        val root = parentFragment?.parentFragment?.parentFragment as RootFragment
+
+                        val searchRootFragment =
+                            root.childFragmentManager.findFragmentByTag("searchRootFragment") as StackHostFragment
+                        val myStudioFragment =
+                            root.childFragmentManager.findFragmentByTag("myStudioFragment") as StackHostFragment
+
+                        val searchFragment = searchRootFragment.childFragmentManager.fragments.first().childFragmentManager.fragments.first() as SearchFragment
+                        searchFragment.binding.edittextSearchInput.setText((clickedView as Button).text.toString())
+                        root.childFragmentManager.beginTransaction()
+                            .show(searchRootFragment)
+                            .hide(myStudioFragment)
+                            .commit()
+                    }
                 }
             }
         }

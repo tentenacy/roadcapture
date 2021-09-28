@@ -171,6 +171,7 @@ class RootFragment : Fragment() {
             .commit()
     }
 
+
     private fun setOnClickListeners() {
         binding.imageviewRootCaptureTab.setOnClickListener {
             val askMakeAlbumBottomSheetDialog = AlbumCreationAskingBottomSheetDialog()

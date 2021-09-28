@@ -1,6 +1,7 @@
 package com.untilled.roadcapture.features.root.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +35,12 @@ class SearchFragment : Fragment() {
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = getTabTitle(position)
         }.attach()
+
+        Log.d("Tag", arguments.toString())
+        if (arguments != null)
+        {
+            binding.edittextSearchInput.setText(requireArguments().getString("searchTitle"))
+        }
 
         return binding.root
     }
