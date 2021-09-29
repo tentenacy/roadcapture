@@ -69,6 +69,10 @@ class MyStudioFragment : Fragment() {
             Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                 .navigate(R.id.action_rootFragment_to_followingFragment)
         }
+        binding.imageviewMyStudioModification.setOnClickListener {
+            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                .navigate(R.id.action_rootFragment_to_myStudioModification)
+        }
     }
 
     private fun initAdapter() {
@@ -89,14 +93,17 @@ class MyStudioFragment : Fragment() {
 
                     onClickItem { model, parentView, clickedView, position ->
                         val root = parentFragment?.parentFragment?.parentFragment as RootFragment
-
                         val searchRootFragment =
                             root.childFragmentManager.findFragmentByTag("searchRootFragment") as StackHostFragment
                         val myStudioFragment =
                             root.childFragmentManager.findFragmentByTag("myStudioFragment") as StackHostFragment
 
-                        val searchFragment = searchRootFragment.childFragmentManager.fragments.first().childFragmentManager.fragments.first() as SearchFragment
+                        val searchFragment =
+                            searchRootFragment.childFragmentManager.fragments.first().childFragmentManager.fragments.first() as SearchFragment
                         searchFragment.binding.edittextSearchInput.setText((clickedView as Button).text.toString())
+
+                        root.setupTabSelectedState(1)
+
                         root.childFragmentManager.beginTransaction()
                             .show(searchRootFragment)
                             .hide(myStudioFragment)

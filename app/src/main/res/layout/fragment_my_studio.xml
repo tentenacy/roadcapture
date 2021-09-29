@@ -30,7 +30,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
-                android:id="@+id/view_item_home_album_overlay"
+                android:id="@+id/view_my_studio_background_overlay"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@drawable/overlay_gradient_background"
@@ -138,6 +138,18 @@
                 android:text="100"
                 app:layout_constraintStart_toEndOf="@+id/textview_my_studio_following"
                 app:layout_constraintTop_toTopOf="@+id/textview_my_studio_follower" />
+
+            <ImageView
+                android:id="@+id/imageview_my_studio_modification"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:padding="12dp"
+                android:src="@drawable/ic_modification"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/imageview_my_studio_background"
+                app:layout_constraintTop_toTopOf="@id/textview_my_studio_follower"
+                app:layout_constraintBottom_toBottomOf="@id/textview_my_studio_follower"
+                app:tint="@color/white" />
 
         </com.untilled.roadcapture.utils.CollapsibleToolbar>
 

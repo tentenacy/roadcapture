@@ -11,9 +11,6 @@ import com.untilled.roadcapture.databinding.FragmentSettingBinding
 import dagger.hilt.android.AndroidEntryPoint
 import android.content.Intent
 
-
-
-
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
     private var _binding : FragmentSettingBinding? = null

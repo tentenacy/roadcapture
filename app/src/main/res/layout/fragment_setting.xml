@@ -91,11 +91,11 @@
 
         <TextView
             android:id="@+id/textview_setting_service_location"
-            android:textAppearance="@style/SubHead"
+            style="@style/ListLeftAlign"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:layout_marginStart="12dp"
-            android:gravity="center|left"
+            android:gravity="center|start"
             android:text="@string/setting_service_location"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service"
             app:layout_constraintEnd_toEndOf="parent"
@@ -122,10 +122,9 @@
 
         <TextView
             android:id="@+id/textview_setting_service_notification"
-            android:textAppearance="@style/SubHead"
+            style="@style/ListLeftAlign"
             android:layout_width="0dp"
             android:layout_height="64dp"
-            android:gravity="center|left"
             android:text="@string/setting_service_notification"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
             app:layout_constraintEnd_toEndOf="parent"
@@ -152,7 +151,7 @@
 
         <TextView
             android:id="@+id/textview_setting_support_version"
-            android:textAppearance="@style/SubHead"
+            style="@style/ListLeftAlign"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:gravity="center|left"
@@ -181,7 +180,7 @@
 
         <TextView
             android:id="@+id/textview_setting_support_opinion"
-            android:textAppearance="@style/SubHead"
+            style="@style/ListLeftAlign"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:text="@string/setting_support_opinion"
@@ -201,7 +200,7 @@
 
         <TextView
             android:id="@+id/textview_setting_support_terms"
-            android:textAppearance="@style/SubHead"
+            style="@style/ListLeftAlign"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:text="@string/setting_support_terms"

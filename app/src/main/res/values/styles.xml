@@ -39,6 +39,20 @@
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 
+    <style name="ListLeftAlign" parent="android:TextAppearance">
+        <item name="fontFamily">@font/eland_choice_medium</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:gravity">start|center</item>
+    </style>
+
+    <style name="ListCenterAlign" parent="android:TextAppearance">
+        <item name="fontFamily">@font/eland_choice_medium</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="Body" parent="android:TextAppearance">
         <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">14sp</item>

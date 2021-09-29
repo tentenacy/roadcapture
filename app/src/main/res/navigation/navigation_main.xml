@@ -43,6 +43,13 @@
         <action
             android:id="@+id/action_rootFragment_to_pictureViewerFragment"
             app:destination="@id/pictureViewerFragment" />
+        <action
+            android:id="@+id/action_rootFragment_to_myStudioModification"
+            app:destination="@id/myStudioModification"
+            app:enterAnim="@anim/from_bottom"
+            app:exitAnim="@anim/to_top"
+            app:popEnterAnim="@anim/from_top"
+            app:popExitAnim="@anim/to_bottom" />
     </fragment>
     <fragment
         android:id="@+id/captureFragment"
@@ -172,4 +179,9 @@
             android:name="album"
             app:argType="com.untilled.roadcapture.data.entity.Album" />
     </fragment>
+    <fragment
+        android:id="@+id/myStudioModification"
+        android:name="com.untilled.roadcapture.features.root.mystudio.MyStudioModification"
+        android:label="MyStudioModification"
+        tools:layout="@layout/fragment_my_studio_modification"/>
 </navigation>
