@@ -101,6 +101,7 @@ class MyStudioFragment : Fragment() {
                         val searchFragment =
                             searchStackHostFragment.childFragmentManager.fragments.first().childFragmentManager.fragments.first() as SearchFragment
                         searchFragment.binding.edittextSearchInput.setText((clickedView as Button).text.toString())
+                        searchFragment.setSearchFragmentTab()
 
                         root.setupTabSelectedState(1)
 

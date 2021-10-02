@@ -1,12 +1,16 @@
 package com.untilled.roadcapture.features.root.search
 
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.ViewPager
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
@@ -18,6 +22,13 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     val binding get() = _binding!!
 
+    private val tabLayout: TabLayout by lazy{
+        binding.tablayoutSearch
+    }
+    private val viewPager: ViewPager2 by lazy{
+        binding.viewpagerSearch
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,22 +38,22 @@ class SearchFragment : Fragment() {
 
         (requireActivity() as MainActivity).window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
-        val tabLayout = binding.tablayoutSearch
-        val viewPager = binding.viewpagerSearch
-
         viewPager.adapter = SearchPagerAdapter(this)
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             tab.text = getTabTitle(position)
         }.attach()
 
-        Log.d("Tag", arguments.toString())
-        if (arguments != null)
-        {
-            binding.edittextSearchInput.setText(requireArguments().getString("searchTitle"))
-        }
-
         return binding.root
+    }
+
+    fun setSearchFragmentTab(){
+        Handler().postDelayed(
+            Runnable {
+                tabLayout.getTabAt(2)?.select()
+                viewPager.currentItem = 2
+                     }, 100
+        )
     }
 
     private fun getTabTitle(position: Int): String? = when(position) {
