@@ -46,6 +46,16 @@
             motion:layout_constraintTop_toTopOf="@id/imageview_my_studio_profile" />
 
         <Constraint
+            android:id="@+id/imageview_my_studio_modification"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:padding="4dp"
+            android:layout_marginBottom="16dp"
+            motion:layout_constraintStart_toEndOf="@id/textview_my_studio_profile_name"
+            motion:layout_constraintTop_toTopOf="@id/textview_my_studio_profile_name"
+            motion:layout_constraintBottom_toBottomOf="@id/textview_my_studio_profile_name"/>
+
+        <Constraint
             android:id="@+id/textview_my_studio_profile_name_motion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -109,16 +119,6 @@
             motion:layout_constraintStart_toEndOf="@+id/textview_my_studio_following"
             motion:layout_constraintTop_toTopOf="@+id/textview_my_studio_follower" />
 
-        <Constraint
-            android:id="@+id/imageview_my_studio_modification"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="16dp"
-            android:padding="12dp"
-            motion:layout_constraintBottom_toBottomOf="@id/textview_my_studio_follower"
-            motion:layout_constraintEnd_toEndOf="@id/imageview_my_studio_background"
-            motion:layout_constraintTop_toTopOf="@id/textview_my_studio_follower" />
-
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/end">
@@ -161,6 +161,17 @@
             android:alpha="0"
             motion:layout_constraintStart_toEndOf="@id/imageview_my_studio_profile"
             motion:layout_constraintTop_toTopOf="@id/imageview_my_studio_profile" />
+
+        <Constraint
+            android:id="@+id/imageview_my_studio_modification"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:padding="4dp"
+            android:alpha="0"
+            android:layout_marginBottom="16dp"
+            motion:layout_constraintStart_toEndOf="@id/textview_my_studio_profile_name"
+            motion:layout_constraintTop_toTopOf="@id/textview_my_studio_profile_name"
+            motion:layout_constraintBottom_toBottomOf="@id/textview_my_studio_profile_name"/>
 
         <Constraint
             android:id="@+id/textview_my_studio_profile_name_motion"
@@ -230,17 +241,6 @@
             android:alpha="0"
             motion:layout_constraintStart_toEndOf="@+id/textview_my_studio_following"
             motion:layout_constraintTop_toTopOf="@+id/textview_my_studio_follower" />
-
-        <Constraint
-            android:id="@+id/imageview_my_studio_modification"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:layout_marginEnd="16dp"
-            android:alpha="0"
-            android:padding="12dp"
-            motion:layout_constraintBottom_toBottomOf="@id/textview_my_studio_follower"
-            motion:layout_constraintEnd_toEndOf="@id/imageview_my_studio_background"
-            motion:layout_constraintTop_toTopOf="@id/textview_my_studio_follower" />
 
     </ConstraintSet>
 </MotionScene>

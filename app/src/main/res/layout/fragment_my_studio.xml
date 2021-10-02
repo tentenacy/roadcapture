@@ -62,17 +62,17 @@
                 app:layout_constraintStart_toEndOf="@id/imageview_my_studio_profile"
                 app:layout_constraintTop_toTopOf="@id/imageview_my_studio_profile" />
 
-            <TextView
-                android:id="@+id/textview_my_studio_profile_name_motion"
-                style="@style/Head"
-                android:textColor="@color/black"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="kvvangddang의 스튜디오"
-                android:visibility="invisible"
-                android:layout_marginStart="24dp"
-                app:layout_constraintStart_toStartOf="@id/imageview_my_studio_background"
-                app:layout_constraintTop_toBottomOf="@id/imageview_my_studio_background" />
+            <ImageView
+                android:id="@+id/imageview_my_studio_modification"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:padding="4dp"
+                android:src="@drawable/ic_modification"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintStart_toEndOf="@id/textview_my_studio_profile_name"
+                app:layout_constraintTop_toTopOf="@id/textview_my_studio_profile_name"
+                app:layout_constraintBottom_toBottomOf="@id/textview_my_studio_profile_name"
+                app:tint="@color/white" />
 
             <TextView
                 android:id="@+id/textview_my_studio_profile_description"
@@ -140,17 +140,17 @@
                 app:layout_constraintStart_toEndOf="@+id/textview_my_studio_following"
                 app:layout_constraintTop_toTopOf="@+id/textview_my_studio_follower" />
 
-            <ImageView
-                android:id="@+id/imageview_my_studio_modification"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:padding="12dp"
-                android:src="@drawable/ic_modification"
-                android:layout_marginEnd="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/imageview_my_studio_background"
-                app:layout_constraintTop_toTopOf="@id/textview_my_studio_follower"
-                app:layout_constraintBottom_toBottomOf="@id/textview_my_studio_follower"
-                app:tint="@color/white" />
+            <TextView
+                android:id="@+id/textview_my_studio_profile_name_motion"
+                style="@style/Head"
+                android:textColor="@color/black"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="kvvangddang의 스튜디오"
+                android:visibility="invisible"
+                android:layout_marginStart="24dp"
+                app:layout_constraintStart_toStartOf="@id/imageview_my_studio_background"
+                app:layout_constraintTop_toBottomOf="@id/imageview_my_studio_background" />
 
         </com.untilled.roadcapture.utils.CollapsibleToolbar>
 
