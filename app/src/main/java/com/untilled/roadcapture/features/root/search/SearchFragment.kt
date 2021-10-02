@@ -22,12 +22,8 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     val binding get() = _binding!!
 
-    private val tabLayout: TabLayout by lazy{
-        binding.tablayoutSearch
-    }
-    private val viewPager: ViewPager2 by lazy{
-        binding.viewpagerSearch
-    }
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager2
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -37,6 +33,9 @@ class SearchFragment : Fragment() {
         _binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
 
         (requireActivity() as MainActivity).window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
+
+        tabLayout = binding.tablayoutSearch
+        viewPager = binding.viewpagerSearch
 
         viewPager.adapter = SearchPagerAdapter(this)
 
