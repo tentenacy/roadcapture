@@ -70,8 +70,9 @@
                 android:layout_height="wrap_content"
                 android:text="kvvangddang의 스튜디오"
                 android:visibility="invisible"
-                app:layout_constraintStart_toEndOf="@id/imageview_my_studio_background"
-                app:layout_constraintTop_toTopOf="@id/imageview_my_studio_profile" />
+                android:layout_marginStart="24dp"
+                app:layout_constraintStart_toStartOf="@id/imageview_my_studio_background"
+                app:layout_constraintTop_toBottomOf="@id/imageview_my_studio_background" />
 
             <TextView
                 android:id="@+id/textview_my_studio_profile_description"

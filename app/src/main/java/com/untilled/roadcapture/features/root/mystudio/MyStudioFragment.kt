@@ -27,7 +27,7 @@ import hilt_aggregated_deps._com_untilled_roadcapture_features_root_mystudio_MyS
 class MyStudioFragment : Fragment() {
 
     private var _binding: FragmentMyStudioBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
 
     override fun onCreateView(
@@ -93,20 +93,20 @@ class MyStudioFragment : Fragment() {
 
                     onClickItem { model, parentView, clickedView, position ->
                         val root = parentFragment?.parentFragment?.parentFragment as RootFragment
-                        val searchRootFragment =
+                        val searchStackHostFragment =
                             root.childFragmentManager.findFragmentByTag("searchRootFragment") as StackHostFragment
-                        val myStudioFragment =
+                        val myStudioStackHostFragment =
                             root.childFragmentManager.findFragmentByTag("myStudioFragment") as StackHostFragment
 
                         val searchFragment =
-                            searchRootFragment.childFragmentManager.fragments.first().childFragmentManager.fragments.first() as SearchFragment
+                            searchStackHostFragment.childFragmentManager.fragments.first().childFragmentManager.fragments.first() as SearchFragment
                         searchFragment.binding.edittextSearchInput.setText((clickedView as Button).text.toString())
 
                         root.setupTabSelectedState(1)
 
                         root.childFragmentManager.beginTransaction()
-                            .show(searchRootFragment)
-                            .hide(myStudioFragment)
+                            .show(searchStackHostFragment)
+                            .hide(myStudioStackHostFragment)
                             .commit()
                     }
                 }
