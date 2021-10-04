@@ -1,21 +1,20 @@
 package com.untilled.roadcapture.features.root
 
-import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.navigation.StackHostFragment
 import com.untilled.roadcapture.databinding.FragmentRootBinding
 import com.untilled.roadcapture.features.root.capture.AlbumCreationAskingBottomSheetDialog
+import com.untilled.roadcapture.features.root.mystudio.MyStudioFragment
 import com.untilled.roadcapture.utils.extension.setTint
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -97,7 +96,8 @@ class RootFragment : Fragment() {
     private fun initChildFragments() {
         albumsFragment = StackHostFragment.newInstance(R.navigation.navigation_root_albums)
         searchRootFragment = StackHostFragment.newInstance(R.navigation.navigation_root_search)
-        followingAlbumsFragment = StackHostFragment.newInstance(R.navigation.navigation_root_following_albums)
+        followingAlbumsFragment =
+            StackHostFragment.newInstance(R.navigation.navigation_root_following_albums)
         myStudioFragment = StackHostFragment.newInstance(R.navigation.navigation_root_my_studio)
     }
 
@@ -175,7 +175,10 @@ class RootFragment : Fragment() {
     private fun setOnClickListeners() {
         binding.imageviewRootCaptureTab.setOnClickListener {
             val askMakeAlbumBottomSheetDialog = AlbumCreationAskingBottomSheetDialog()
-            askMakeAlbumBottomSheetDialog.show(childFragmentManager, "askMakeAlbumBottomSheetDialog")
+            askMakeAlbumBottomSheetDialog.show(
+                childFragmentManager,
+                "askMakeAlbumBottomSheetDialog"
+            )
         }
     }
 }

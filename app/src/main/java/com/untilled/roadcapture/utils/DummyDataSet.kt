@@ -1,6 +1,9 @@
 package com.untilled.roadcapture.utils
 
+import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import com.untilled.roadcapture.data.entity.*
+import kotlinx.android.parcel.Parcelize
 
 object DummyDataSet {
     val albums = listOf(
@@ -393,7 +396,7 @@ object DummyDataSet {
     val user = listOf(
         User(
             username = "hsw0715",
-            profileUrl = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80"
+            profileUrl = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
         ),
         User(
             username = "kwangddang11",
@@ -452,4 +455,12 @@ object DummyDataSet {
             description = "전국의 아름다운 10대 가로수길 중 하나로 선정된 곡교천변 은행나무길은 현충사 입구의 곡교천 충무교에서부터 현충사 입구까지 조성되어 있는 2.2km 길이의 도로입니다. 가을이면 350여 그루의 은행나무가 일제히 노란 빛을 내 평일에도 많은 인파가 몰려드는 명소입니다."
         )
     )
+
+    val studioUser = User(
+        username = "kvvangddang",
+        profileUrl = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+        backgroundUrl = "https://cdn.pixabay.com/photo/2017/10/15/13/54/doll-2853763_960_720.jpg",
+        description = "안녕하세요 저는 최광현입니다."
+    )
+
 }

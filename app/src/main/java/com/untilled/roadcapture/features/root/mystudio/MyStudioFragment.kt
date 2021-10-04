@@ -7,21 +7,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.navigation.StackHostFragment
+import com.untilled.roadcapture.data.entity.User
 import com.untilled.roadcapture.databinding.FragmentMyStudioBinding
 import com.untilled.roadcapture.features.root.RootFragment
+import com.untilled.roadcapture.features.root.RootFragmentDirections
 import com.untilled.roadcapture.features.root.search.SearchFragment
 import com.untilled.roadcapture.studioAlbum
 import com.untilled.roadcapture.studiosPlace
 import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
-import hilt_aggregated_deps._com_untilled_roadcapture_features_root_mystudio_MyStudioFragment_GeneratedInjector
 
 @AndroidEntryPoint
 class MyStudioFragment : Fragment() {
@@ -36,6 +33,7 @@ class MyStudioFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentMyStudioBinding.inflate(layoutInflater, container, false)
+        binding.user = DummyDataSet.studioUser
         initAdapter()
         return binding.root
     }
@@ -48,7 +46,6 @@ class MyStudioFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setOnClickListeners()
     }
 
@@ -71,7 +68,7 @@ class MyStudioFragment : Fragment() {
         }
         binding.imageviewMyStudioModification.setOnClickListener {
             Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(R.id.action_rootFragment_to_myStudioModification)
+                .navigate(RootFragmentDirections.actionRootFragmentToMyStudioModification(binding.user))
         }
     }
 
@@ -115,5 +112,4 @@ class MyStudioFragment : Fragment() {
             }
         }
     }
-
 }

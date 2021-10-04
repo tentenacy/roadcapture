@@ -183,5 +183,10 @@
         android:id="@+id/myStudioModification"
         android:name="com.untilled.roadcapture.features.root.mystudio.MyStudioModification"
         android:label="MyStudioModification"
-        tools:layout="@layout/fragment_my_studio_modification"/>
+        tools:layout="@layout/fragment_my_studio_modification">
+        <argument
+            android:name="user"
+            app:argType="com.untilled.roadcapture.data.entity.User"
+            app:nullable="true" />
+    </fragment>
 </navigation>
