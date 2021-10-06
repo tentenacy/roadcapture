@@ -10,6 +10,7 @@ import android.widget.ImageView
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import java.io.File
 
 
 fun View.setRippleEffect() {
@@ -38,6 +39,31 @@ fun Context.getDrawable(colorId: Int): Drawable? = ContextCompat.getDrawable(thi
 
 fun ImageView.setTint(colorId: Int) {
     DrawableCompat.setTint(DrawableCompat.wrap(drawable), colorId)
+}
+
+fun deleteCache(context: Context) {
+    try {
+        val dir: File = context.cacheDir
+        deleteDir(dir)
+    } catch (e: java.lang.Exception) {
+    }
+}
+
+fun deleteDir(dir: File?): Boolean {
+    return if (dir != null && dir.isDirectory) {
+        val children = dir.list()
+        for (i in children.indices) {
+            val success = deleteDir(File(dir, children[i]))
+            if (!success) {
+                return false
+            }
+        }
+        dir.delete()
+    } else if (dir != null && dir.isFile) {
+        dir.delete()
+    } else {
+        false
+    }
 }
 
 // Milliseconds used for UI animations in Camera

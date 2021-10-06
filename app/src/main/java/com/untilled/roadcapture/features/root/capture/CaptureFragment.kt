@@ -1,7 +1,6 @@
 package com.untilled.roadcapture.features.root.capture
 
 import android.app.Activity.RESULT_OK
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -11,37 +10,31 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import androidx.room.Room
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.MapFragment
 import com.naver.maps.map.NaverMap
 import com.naver.maps.map.OnMapReadyCallback
-import com.naver.maps.map.overlay.InfoWindow
+import com.naver.maps.map.overlay.Marker
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.data.entity.PictureThumbnail
-import com.untilled.roadcapture.data.repository.PictureThumbnailDB
+import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentCaptureBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
-import java.io.File
-import kotlin.coroutines.CoroutineContext
+import androidx.core.net.toUri
+import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.overlay.OverlayImage
+import com.untilled.roadcapture.utils.getCircularBitmap
+
 
 @AndroidEntryPoint
-class CaptureFragment : Fragment(), OnMapReadyCallback, CoroutineScope {
+class CaptureFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentCaptureBinding? = null
     private val binding get() = _binding!!
 
     private var imageUri: Uri? = null
-    private lateinit var pictureThumbnailList: List<PictureThumbnail>
 
-    private lateinit var db: PictureThumbnailDB
     private var naverMap: NaverMap? = null
 
-    private lateinit var job: Job
-
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
+    private var picture: Picture? = null
 
     // 갤러리 사진 가져오는 intent 콜백 등록
     private val getContent = registerForActivityResult(
@@ -68,9 +61,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback, CoroutineScope {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCaptureBinding.inflate(inflater, container, false)
-        job = Job()
 
-        initDb()
         initNaverMap()
         return binding.root
     }
@@ -83,7 +74,6 @@ class CaptureFragment : Fragment(), OnMapReadyCallback, CoroutineScope {
 
     override fun onDestroyView() {
         super.onDestroyView()
-        job.cancel()
         _binding = null
     }
 
@@ -99,73 +89,16 @@ class CaptureFragment : Fragment(), OnMapReadyCallback, CoroutineScope {
             pickFromGallery()
         }
         binding.fabCaptureRecord.setOnClickListener {
-            launch(coroutineContext) {
-                try {
-                    withContext(Dispatchers.IO) {
-                        db.infoWindowDao().deleteAll()
-                        deleteCache(requireContext())
-                    }
-                } catch (e: Exception) {
-                }
-            }
-        }
-    }
 
-    private fun deleteCache(context: Context) {
-        try {
-            val dir: File = context.cacheDir
-            deleteDir(dir)
-        } catch (e: java.lang.Exception) {
         }
-    }
-
-    private fun deleteDir(dir: File?): Boolean {
-        return if (dir != null && dir.isDirectory) {
-            val children = dir.list()
-            for (i in children.indices) {
-                val success = deleteDir(File(dir, children[i]))
-                if (!success) {
-                    return false
-                }
-            }
-            dir.delete()
-        } else if (dir != null && dir.isFile) {
-            dir.delete()
-        } else {
-            false
-        }
-    }
-
-    private fun initDb() {
-        db = Room.databaseBuilder(
-            requireContext(),
-            PictureThumbnailDB::class.java,
-            "InfoWindowDatabase"
-        ).build()
     }
 
     private fun getNavArgs() {
         val args: CaptureFragmentArgs by navArgs()
-        launch(coroutineContext) {
-            try {
-                withContext(Dispatchers.IO) {
-                    if (args.picture != null) {
-                        db.infoWindowDao()
-                            .insertInfoWindow(
-                                PictureThumbnail(
-                                    uid = null,
-                                    picture = args.picture!!
-                                )
-                            )
-                    }
-                    pictureThumbnailList = db.infoWindowDao().getAll()
+        if (args.picture != null) {
+            picture = args.picture
 
-                    withContext(Dispatchers.Main) {
-                        showPictureThumbnails()
-                    }
-                }
-            } catch (e: Exception) {
-            }
+            drawMarker(picture!!)
         }
     }
 
@@ -177,34 +110,26 @@ class CaptureFragment : Fragment(), OnMapReadyCallback, CoroutineScope {
         mapFragment.getMapAsync(this)
     }
 
-    private fun showPictureThumbnails() {
-        for (pictureThumbnail in pictureThumbnailList) {
-            if (pictureThumbnail.picture != null) {
-                val infoWindow = InfoWindow()
-                infoWindow.apply {
-                    adapter = CaptureInfoWindowAdapter(
-                        requireContext(), binding.root as ViewGroup,
-                        pictureThumbnail.picture.imageUri!!
-                    )
-                    position = LatLng(
-                        pictureThumbnail.picture.searchResult?.locationLatLng?.latitude?.toDouble()
-                            ?: 37.5670135,
-                        pictureThumbnail.picture.searchResult?.locationLatLng?.longitude?.toDouble()
-                            ?: 126.9783740
-                    )
-                }.open(naverMap!!)
-            }
-        }
-        naverMap?.moveCamera(
-            CameraUpdate.scrollTo(
-                LatLng(
-                    pictureThumbnailList.last().picture?.searchResult?.locationLatLng?.latitude?.toDouble()
-                        ?: 37.5670135,
-                    pictureThumbnailList.last().picture?.searchResult?.locationLatLng?.longitude?.toDouble()
-                        ?: 126.9783740
-                )
+    private fun drawMarker(picture: Picture) {
+        val marker = Marker()
+
+        marker.apply {
+            icon = OverlayImage.fromBitmap(
+                picture.imageUri!!.toUri().getCircularBitmap(
+                    requireContext(),
+                    250,
+                    250
+                )!!
             )
-        )
+            position = LatLng(
+                picture?.searchResult?.locationLatLng?.latitude?.toDouble()
+                    ?: 37.5670135,
+                picture?.searchResult?.locationLatLng?.longitude?.toDouble()
+                    ?: 126.9783740
+            )
+        }.map = naverMap
+
+        naverMap?.moveCamera(CameraUpdate.scrollTo(marker.position))
     }
 
     override fun onMapReady(_naverMap: NaverMap) {
@@ -213,5 +138,4 @@ class CaptureFragment : Fragment(), OnMapReadyCallback, CoroutineScope {
 
         getNavArgs()
     }
-
 }

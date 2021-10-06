@@ -33,7 +33,6 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
     }
 
     override fun loadingProgress(showLoader: Boolean) {
