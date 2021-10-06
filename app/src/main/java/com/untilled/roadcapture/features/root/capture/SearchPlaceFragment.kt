@@ -2,9 +2,11 @@ package com.untilled.roadcapture.features.root.capture
 
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -25,12 +27,12 @@ import kotlin.coroutines.CoroutineContext
 
 @AndroidEntryPoint
 class SearchPlaceFragment : Fragment(), CoroutineScope {
-    private var _binding : FragmentSearchPlaceBinding? = null
+    private var _binding: FragmentSearchPlaceBinding? = null
     private val binding get() = _binding!!
 
-    private var picture : Picture? = null
+    private var picture: Picture? = null
 
-    private var resultList : List<SearchResult>? = listOf<SearchResult>()
+    private var resultList: List<SearchResult>? = listOf<SearchResult>()
 
     private lateinit var job: Job
 
@@ -56,7 +58,7 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
         val args: SearchPlaceFragmentArgs by navArgs()
         if (args.picture != null) {
             picture = args.picture
-            if(picture?.searchResult != null) {
+            if (picture?.searchResult != null) {
                 binding.edittextSearchPlaceInput.setText(picture?.searchResult?.placeName)
                 searchKeyword(binding.edittextSearchPlaceInput.text.toString())
             }
@@ -67,19 +69,38 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
     private fun setOnClickListeners() {
         binding.imageviewSearchPlaceBack.setOnClickListener {
             Navigation.findNavController(binding.root)
-                .navigate(SearchPlaceFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
-                    picture = picture
-                ))
+                .navigate(
+                    SearchPlaceFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
+                        picture = picture
+                    )
+                )
         }
         binding.imageviewSearchPlaceSearch.setOnClickListener {
             binding.edittextSearchPlaceInput.text.toString().run {
-                if(isNullOrBlank()) {
+                if (isNullOrBlank()) {
                     Toast.makeText(requireContext(), "검색어를 입력해 주세요.", Toast.LENGTH_SHORT).show()
                 } else {
                     searchKeyword(this)
                 }
             }
         }
+        binding.edittextSearchPlaceInput.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            if (event.action == KeyEvent.ACTION_DOWN) {
+                when(keyCode) {
+                    KeyEvent.KEYCODE_ENTER -> {
+                        (v as EditText).text.toString().run {
+                            if (isNullOrBlank()) {
+                                Toast.makeText(requireContext(), "검색어를 입력해 주세요.", Toast.LENGTH_SHORT).show()
+                            } else {
+                                searchKeyword(this)
+                            }
+                        }
+                        return@OnKeyListener true
+                    }
+                }
+        }
+            return@OnKeyListener false
+        })
     }
 
     private fun initAdapter() {
@@ -90,31 +111,34 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
                     searchResult(searchResult)
 
                     onClickItem { model, parentView, clickedView, position ->
-                        if(clickedView.id == R.id.item_search_place_result_name_container){
+                        if (clickedView.id == R.id.item_search_place_result_name_container) {
                             picture?.searchResult = resultList!![position]
                             Navigation.findNavController(binding.root)
-                                .navigate(SearchPlaceFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
-                                    picture = picture
-                                ))
+                                .navigate(
+                                    SearchPlaceFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
+                                        picture = picture
+                                    )
+                                )
                         }
                     }
                 }
             }
         }
     }
-    private fun setData(pois : Pois) {
-         resultList = pois.poi.map {
-             SearchResult(
-                 placeName = it.name ?: "",
-                 addressNumber = makeAddressNumber(it),
-                 roadName = makeRoadName(it),
-                 locationLatLng = LocationLatLng(it.noorLat, it.noorLon)
-             )
-         }
+
+    private fun setData(pois: Pois) {
+        resultList = pois.poi.map {
+            SearchResult(
+                placeName = it.name ?: "",
+                addressNumber = makeAddressNumber(it),
+                roadName = makeRoadName(it),
+                locationLatLng = LocationLatLng(it.noorLat, it.noorLon)
+            )
+        }
         binding.recyclerviewSearchPlace.requestModelBuild()
     }
 
-    private fun makeAddressNumber(poi : Poi) : String =
+    private fun makeAddressNumber(poi: Poi): String =
         if (poi.secondNo?.trim().isNullOrEmpty()) {
             (poi.upperAddrName?.trim() ?: "") + " " +
                     (poi.middleAddrName?.trim() ?: "") + " " +
@@ -130,7 +154,7 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
                     poi.secondNo?.trim()
         }
 
-    private fun makeRoadName(poi : Poi) : String =
+    private fun makeRoadName(poi: Poi): String =
         if (poi.secondBuildNo?.trim().isNullOrEmpty()) {
             (poi.upperAddrName?.trim() ?: "") + " " +
                     (poi.middleAddrName?.trim() ?: "") + " " +
@@ -144,7 +168,7 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
                     poi.secondBuildNo?.trim()
         }
 
-    private fun searchKeyword(keyword : String) {
+    private fun searchKeyword(keyword: String) {
         binding.progressbarSearchPlaceLoading.isVisible = true  // 로딩 애니메이션 on
 
         launch(coroutineContext) {
@@ -157,7 +181,7 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
                         val body = response.body()
 
                         withContext(Dispatchers.Main) {
-                            if(body == null) {  // 검색 결과 없을때 처리
+                            if (body == null) {  // 검색 결과 없을때 처리
                                 binding.textviewSearchPlaceNoResult.isVisible = true
                                 resultList = null   // 결과 리스트 초기화
                                 binding.recyclerviewSearchPlace.requestModelBuild()
@@ -172,7 +196,7 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
                         }
                     }
                 }
-            } catch (e : Exception){
+            } catch (e: Exception) {
                 binding.progressbarSearchPlaceLoading.isVisible = false
                 e.printStackTrace()
             }
