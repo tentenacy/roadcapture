@@ -46,7 +46,7 @@ class PictureEditorFragment : Fragment() {
             picture = args.picture
 
             if(picture?.date.isNullOrBlank()){
-                picture?.date = dateToString()
+                picture?.date = dateToString(Calendar.getInstance())
             }
 
             binding.picture = picture

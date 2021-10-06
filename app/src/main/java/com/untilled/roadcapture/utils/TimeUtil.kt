@@ -5,11 +5,6 @@ import java.util.*
 fun dateToString(year: Int, month: Int, dayOfMonth: Int): String =
     "${year}년 ${String.format("%02d", month)}월 ${String.format("%02d", dayOfMonth)}일"
 
-fun dateToString(): String {
-    val cal = Calendar.getInstance()
-    return dateToString(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH))
-}
-
 fun dateToString(cal : Calendar): String {
     return dateToString(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH))
 }

@@ -38,8 +38,9 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
 
     private fun initViews() {
         binding.run {
-            buttonFilterStartDate.text = dateToString()
-            buttonFilterEndDate.text = dateToString()
+            val now = Calendar.getInstance()
+            buttonFilterStartDate.text = dateToString(now)
+            buttonFilterEndDate.text = dateToString(now)
             radiogroupFilterDuration.clearCheck()
             radiogroupFilterSorting.clearCheck()
             radiobuttonFilterWholeDuration.isChecked = true
@@ -77,7 +78,25 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
             R.style.DialogTheme,
             { _, year, month, dayOfMonth ->
                 binding.radiogroupFilterDuration.clearCheck()
-                compareDate(view, year, month, dayOfMonth)
+
+                when (view.id) {
+                    R.id.button_filter_start_date -> {
+                        val startDate = getCalendar(year, month, dayOfMonth)
+                        val endDate = getCalendar(binding.buttonFilterEndDate.text.toString())
+                        view.text = dateToString(startDate)
+                        if(compareDate(startDate, endDate)) {
+                            binding.buttonFilterEndDate.text = dateToString(startDate)
+                        }
+                    }
+                    R.id.button_filter_end_date -> {
+                        val startDate = getCalendar(binding.buttonFilterStartDate.text.toString())
+                        val endDate = getCalendar(year, month, dayOfMonth)
+                        view.text = dateToString(endDate)
+                        if(compareDate(startDate, endDate)) {
+                            binding.buttonFilterStartDate.text = dateToString(endDate)
+                        }
+                    }
+                }
             },
             cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)
         )
@@ -91,24 +110,7 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
         }.show()
     }
 
-    private fun compareDate(view: Button, year: Int, month: Int, dayOfMonth: Int) {
-        when (view.id) {
-            R.id.button_filter_start_date -> {  // 시작일 입력 시 종료일과 비교
-                val startDate = getCalendar(year, month, dayOfMonth)
-                val endDate = getCalendar(binding.buttonFilterEndDate.text.toString())
-                view.text = dateToString(startDate)
-                if(!startDate.before(endDate)) {
-                    binding.buttonFilterEndDate.text = dateToString(startDate)
-                }
-            }
-            R.id.button_filter_end_date -> { // 종료일 입력 시 시작일과 비교
-                val startDate = getCalendar(binding.buttonFilterStartDate.text.toString())
-                val endDate = getCalendar(year, month, dayOfMonth)
-                view.text = dateToString(endDate)
-                if(!startDate.before(endDate)) {
-                    binding.buttonFilterStartDate.text = dateToString(endDate)
-                }
-            }
-        }
-    }
+    private fun compareDate(startDate: Calendar, endDate: Calendar): Boolean =
+        !startDate.before(endDate)
+
 }
