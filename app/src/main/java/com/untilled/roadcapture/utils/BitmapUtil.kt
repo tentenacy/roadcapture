@@ -5,6 +5,8 @@ import android.graphics.*
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
+import com.untilled.roadcapture.utils.extension.getDpFromPx
+import com.untilled.roadcapture.utils.extension.getPxFromDp
 import java.io.IOException
 
 fun drawCircularBitmap(canvas: Canvas) {
@@ -43,7 +45,7 @@ fun drawCircularBitmap(bitmap: Bitmap): Bitmap {
     return output
 }
 
-fun Uri.getCircularBitmap(context: Context, width: Int, height: Int): Bitmap? {
+fun Uri.getCircularBitmap(context: Context, width: Float, height: Float): Bitmap? {
     var bitmap: Bitmap? = null
 
     try {
@@ -63,5 +65,5 @@ fun Uri.getCircularBitmap(context: Context, width: Int, height: Int): Bitmap? {
         e.printStackTrace()
     }
 
-    return Bitmap.createScaledBitmap(bitmap!!, width, height, true)
+    return Bitmap.createScaledBitmap(bitmap!!, context.getPxFromDp(width), context.getPxFromDp(height), true)
 }

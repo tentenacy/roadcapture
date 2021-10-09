@@ -21,3 +21,6 @@ fun getCalendar(date : String): Calendar {
     cal.set(token[0].substring(0,4).toInt(), token[1].substring(0, 2).toInt() - 1, token[2].substring(0, 2).toInt())
     return cal
 }
+
+fun compareDate(startDate: Calendar, endDate: Calendar): Boolean =
+    !startDate.before(endDate)

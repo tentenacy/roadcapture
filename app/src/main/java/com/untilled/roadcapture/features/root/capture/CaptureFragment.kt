@@ -117,8 +117,8 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
             icon = OverlayImage.fromBitmap(
                 picture.imageUri!!.toUri().getCircularBitmap(
                     requireContext(),
-                    250,
-                    250
+                    72f,
+                    72f
                 )!!
             )
             position = LatLng(

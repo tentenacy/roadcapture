@@ -109,8 +109,4 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
             datePicker.minDate = now.timeInMillis
         }.show()
     }
-
-    private fun compareDate(startDate: Calendar, endDate: Calendar): Boolean =
-        !startDate.before(endDate)
-
 }
