@@ -22,9 +22,6 @@ class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     val binding get() = _binding!!
 
-    private lateinit var tabLayout: TabLayout
-    private lateinit var viewPager: ViewPager2
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -34,12 +31,9 @@ class SearchFragment : Fragment() {
 
         (requireActivity() as MainActivity).window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
-        tabLayout = binding.tablayoutSearch
-        viewPager = binding.viewpagerSearch
+        binding.viewpagerSearch.adapter = SearchPagerAdapter(this)
 
-        viewPager.adapter = SearchPagerAdapter(this)
-
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
+        TabLayoutMediator(binding.tablayoutSearch, binding.viewpagerSearch) { tab, position ->
             tab.text = getTabTitle(position)
         }.attach()
 
@@ -49,8 +43,8 @@ class SearchFragment : Fragment() {
     fun setSearchFragmentTab(){
         Handler().postDelayed(
             Runnable {
-                tabLayout.getTabAt(2)?.select()
-                viewPager.currentItem = 2
+                binding.tablayoutSearch.getTabAt(2)?.select()
+                binding.viewpagerSearch.currentItem = 2
                      }, 100
         )
     }
