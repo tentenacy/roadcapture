@@ -9,7 +9,6 @@
 
         <TextView
             android:id="@+id/textview_album_creation_asking_title"
-            android:fontFamily="@font/eland_choice_medium"
             android:textSize="24sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

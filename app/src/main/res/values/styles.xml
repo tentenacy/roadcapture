@@ -2,59 +2,52 @@
 <resources>
 
     <style name="ActionBarTitle" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/eland_choice_bold</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 
     <style name="Button" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/primaryColor</item>
         <item name="backgroundTint">@color/secondaryColor</item>
     </style>
 
     <style name="ButtonWhite" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black</item>
         <item name="backgroundTint">@color/white</item>
     </style>
 
     <style name="Head" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/eland_choice_bold</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 
     <style name="SubHeadBold" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/eland_choice_bold</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 
     <style name="SubHead" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
     </style>
 
     <style name="ListLeftAlign" parent="android:TextAppearance">
-        <item name="fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:gravity">start|center</item>
     </style>
 
     <style name="ListCenterAlign" parent="android:TextAppearance">
-        <item name="fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:gravity">center</item>
     </style>
 
     <style name="Body" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">4sp</item>
         <item name="android:ellipsize">end</item>
@@ -62,7 +55,6 @@
     </style>
 
     <style name="Date" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">12sp</item>
         <item name="android:lineSpacingExtra">4sp</item>
         <item name="android:ellipsize">end</item>
@@ -70,7 +62,6 @@
     </style>
 
     <style name="CommentContent" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">4sp</item>
         <item name="readMoreMaxLine">6</item>
@@ -80,7 +71,6 @@
 
 
     <style name="AlbumContent" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:lineSpacingExtra">4sp</item>
         <item name="readMoreMaxLine">2</item>
@@ -89,25 +79,23 @@
     </style>
 
     <style name="HeadWhite" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/eland_choice_bold</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/primaryColor</item>
     </style>
 
     <style name="SubHeadBoldWhite" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/eland_choice_bold</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/primaryColor</item>
     </style>
 
     <style name="SubHeadWhite" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/primaryColor</item>
     </style>
 
     <style name="BodyWhite" parent="android:TextAppearance">
-        <item name="android:fontFamily">@font/eland_choice_medium</item>
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/primaryColor</item>
         <item name="android:lineSpacingExtra">4sp</item>
