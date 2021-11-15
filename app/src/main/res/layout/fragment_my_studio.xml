@@ -180,27 +180,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/textview_my_studio_place"
-                    style="@style/SubHeadBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="12dp"
-                    android:text="관심지역"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-
                 <com.airbnb.epoxy.EpoxyRecyclerView
                     android:id="@+id/recyclerview_my_studio_place"
                     android:layout_width="match_parent"
-                    android:layout_height="72dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
                     android:orientation="horizontal"
-                    android:paddingVertical="16dp"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textview_my_studio_place"
-                    tools:listitem="@layout/item_studios_place" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:listitem="@layout/item_studio_place" />
 
                 <com.airbnb.epoxy.EpoxyRecyclerView
                     android:id="@+id/recyclerview_my_studio_albums"
@@ -208,7 +197,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="16dp"
                     android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/recyclerview_my_studio_place"
                     tools:listitem="@layout/item_studio_album" />

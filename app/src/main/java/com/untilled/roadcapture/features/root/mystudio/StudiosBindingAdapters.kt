@@ -38,7 +38,6 @@ object StudiosBindingAdapters {
             Glide.with(this)
                 .asBitmap()
                 .load(url)
-                .centerCrop()
                 .into(view)
         }
     }
@@ -50,6 +49,25 @@ object StudiosBindingAdapters {
             Glide.with(this)
                 .asBitmap()
                 .load(url)
+                .into(view)
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("studioPlaceImage")
+    fun setStudioPlaceImage(view: ShapeableImageView, url: String){
+        view.context.apply {
+            val radius = resources.getDimension(R.dimen.studio_place_corner_radius)
+            val shapeAppearanceModel = view.shapeAppearanceModel.toBuilder()
+                .setAllCorners(CornerFamily.ROUNDED,radius)
+                .setBottomLeftCorner(CornerFamily.ROUNDED,radius)
+                .build()
+            view.shapeAppearanceModel = shapeAppearanceModel
+
+            Glide.with(this)
+                .asBitmap()
+                .load(url)
+                .centerCrop()
                 .into(view)
         }
     }

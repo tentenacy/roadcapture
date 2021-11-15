@@ -47,22 +47,28 @@ object DummyDataSet {
 
     val places = listOf(
         Place(
-            place = "경기도"
+            image = "https://cdn.pixabay.com/photo/2013/12/31/03/17/namhansanseong-236223_960_720.jpg",
+            name = "경기도"
         ),
         Place(
-            place = "강원도"
+            image = "https://cdn.pixabay.com/photo/2015/09/26/05/06/mt-seoraksan-958642_960_720.jpg",
+            name = "강원도"
         ),
         Place(
-            place = "전라도"
+            image = "https://cdn.pixabay.com/photo/2018/08/23/22/18/jeonju-3626873_960_720.jpg",
+            name = "전라도"
         ),
         Place(
-            place = "충청도"
+            image = "https://cdn.pixabay.com/photo/2015/09/23/08/10/haemieupseong-953103_960_720.jpg",
+            name = "충청도"
         ),
         Place(
-            place = "경상도"
+            image = "https://cdn.pixabay.com/photo/2020/05/24/11/56/to-5213925_960_720.jpg",
+            name = "경상도"
         ),
         Place(
-            place = "제주도"
+            image = "https://images.unsplash.com/photo-1621268698058-ef5c3da2963e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=387&q=80",
+            name = "제주도"
         )
     )
 

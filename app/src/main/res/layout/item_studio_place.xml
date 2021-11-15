@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="place"
+            type="com.untilled.roadcapture.data.entity.Place" />
+
+        <variable
+            name="onClickItem"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_studio_place_container"
+        android:layout_width="wrap_content"
+        android:layout_height="144dp"
+        android:paddingEnd="16dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/item_studio_place_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:onClick="@{onClickItem}"
+            android:scaleType="fitXY"
+            app:layout_constraintDimensionRatio="3:4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            bind:studioPlaceImage="@{place.image}"
+            tools:src="@drawable/sample_thumbnail" />
+
+        <View
+            android:id="@+id/view_item_studio_place_overlay"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/overlay_gradient_studio_place"
+            app:layout_constraintBottom_toBottomOf="@+id/item_studio_place_image"
+            app:layout_constraintEnd_toEndOf="@+id/item_studio_place_image"
+            app:layout_constraintStart_toStartOf="@+id/item_studio_place_image"
+            app:layout_constraintTop_toTopOf="@+id/item_studio_place_image" />
+
+        <TextView
+            android:id="@+id/textview_item_studio_place"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/BodyWhite"
+            android:text="@{place.name}"
+            tools:text="경기도"
+            android:layout_margin="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -8,15 +8,15 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.airbnb.epoxy.carousel
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.navigation.StackHostFragment
-import com.untilled.roadcapture.data.entity.User
 import com.untilled.roadcapture.databinding.FragmentMyStudioBinding
 import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
 import com.untilled.roadcapture.features.root.search.SearchFragment
 import com.untilled.roadcapture.studioAlbum
-import com.untilled.roadcapture.studiosPlace
+import com.untilled.roadcapture.studioPlace
 import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -84,7 +84,7 @@ class MyStudioFragment : Fragment() {
         }
         binding.recyclerviewMyStudioPlace.withModels {
             DummyDataSet.places.forEachIndexed { index, place ->
-                studiosPlace {
+                studioPlace {
                     id(index)
                     place(place)
 
@@ -98,7 +98,7 @@ class MyStudioFragment : Fragment() {
                         val searchFragment =
                             searchStackHostFragment.childFragmentManager.fragments.first().childFragmentManager.fragments.first() as SearchFragment
 
-                        searchFragment.setSearchInputText((clickedView as Button).text.toString())
+                        searchFragment.setSearchInputText(model.place().name)
                         searchFragment.setSearchFragmentTab()
 
                         root.setupTabSelectedState(1)
