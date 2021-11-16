@@ -22,7 +22,7 @@
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbarlayout_picture_viewer"
         android:layout_width="0dp"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="48dp"
         android:background="@color/transparent"
         android:fitsSystemWindows="true"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,7 +38,7 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar_picture_viewer"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="48dp"
                 app:layout_collapseMode="parallax" />
 
             <ImageView

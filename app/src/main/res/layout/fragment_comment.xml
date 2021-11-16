@@ -32,7 +32,7 @@
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar_comment"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
+                    android:layout_height="48dp"
                     app:contentInsetStart="0dp"
                     app:layout_collapseMode="parallax" />
 
@@ -48,7 +48,7 @@
                     android:id="@+id/textview_albums_title"
                     style="@style/ActionBarTitle"
                     android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
+                    android:layout_height="48dp"
                     android:layout_marginStart="64dp"
                     android:gravity="start|center"
                     android:text="댓글 0" />
