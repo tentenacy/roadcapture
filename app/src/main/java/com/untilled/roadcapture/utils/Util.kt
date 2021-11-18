@@ -1,13 +1,13 @@
 package com.untilled.roadcapture.utils.extension
 
 import android.R
+import android.app.Activity
 import android.content.Context
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.TypedValue
 import android.view.View
+import android.view.WindowManager
 import android.widget.ImageView
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import java.io.File
@@ -63,6 +63,35 @@ fun deleteDir(dir: File?): Boolean {
         dir.delete()
     } else {
         false
+    }
+}
+
+fun Context.statusBarHeight(): Int {
+    val resourceId = resources.getIdentifier("status_bar_height", "dimen", "android")
+
+    return if (resourceId > 0) resources.getDimensionPixelSize(resourceId)
+    else 0
+}
+
+fun Context.navigationHeight(): Int {
+    val resourceId = resources.getIdentifier("navigation_bar_height", "dimen", "android")
+
+    return if (resourceId > 0) resources.getDimensionPixelSize(resourceId)
+    else 0
+}
+
+fun Activity.setStatusBarTransparent() {
+    window.apply {
+        setFlags(
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
+            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
+        )
+    }
+}
+
+fun Activity.setStatusBarOrigin() {
+    window.apply {
+        clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
     }
 }
 

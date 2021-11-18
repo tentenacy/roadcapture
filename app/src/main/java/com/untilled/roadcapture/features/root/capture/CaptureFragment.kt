@@ -43,6 +43,10 @@ import com.karumi.dexter.listener.single.PermissionListener
 import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.overlay.OverlayImage
+import com.untilled.roadcapture.utils.extension.navigationHeight
+import com.untilled.roadcapture.utils.extension.setStatusBarOrigin
+import com.untilled.roadcapture.utils.extension.setStatusBarTransparent
+import com.untilled.roadcapture.utils.extension.statusBarHeight
 import com.untilled.roadcapture.utils.getCircularBitmap
 
 
@@ -90,11 +94,22 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        requireActivity().apply {
+            setStatusBarTransparent()
+            binding.coordinatorCapture.setPadding(0, requireContext().statusBarHeight(), 0, requireContext().navigationHeight() )
+        }
+
         setOnClickListeners()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+
+        requireActivity().apply {
+            setStatusBarOrigin()
+            binding.coordinatorCapture.setPadding(0, 0, 0, 0)
+        }
+
         _binding = null
     }
 

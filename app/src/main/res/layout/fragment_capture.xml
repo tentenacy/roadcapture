@@ -9,16 +9,16 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true">
 
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_map"
+            android:name="com.naver.maps.map.MapFragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/coordinator_capture"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/fragment_map"
-                android:name="com.naver.maps.map.MapFragment"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
 
             <ImageView
                 android:id="@+id/imageview_capture_back"
