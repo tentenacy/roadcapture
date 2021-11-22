@@ -17,7 +17,8 @@ object DummyDataSet {
             description = "",
             createdDate = "3분전",
             modifiedDate = "",
-            thumbnailUrl = "https://cdn.pixabay.com/photo/2018/07/05/12/24/mountain-3518219_960_720.jpg",
+            //thumbnailUrl = "https://cdn.pixabay.com/photo/2018/07/05/12/24/mountain-3518219_960_720.jpg",
+            thumbnailUrl = "https://pixabay.com/get/gce3f3dc9eac4aad981d4797691ed701cecf1f74c68f5aea5b9f910a309cf14e625e9e6e7c20f69c6980915f77c8cd5a8c6bb7797d859f0311ae5c3135e6ca4755b1a5075fa5ef24350fb131f3abef660_1920.jpg"
         ),
         Album(
             id = "2",
@@ -29,7 +30,8 @@ object DummyDataSet {
             description = "저번에 이어 이번에도 제주도로 향했습니다. 이번에는 저만 알고 있는 제주도의 특별 여행 코스를 안내해드리겠습니다!",
             createdDate = "5일전",
             modifiedDate = "",
-            thumbnailUrl = "https://cdn.pixabay.com/photo/2017/10/15/13/54/doll-2853763_960_720.jpg",
+            //thumbnailUrl = "https://cdn.pixabay.com/photo/2017/10/15/13/54/doll-2853763_960_720.jpg",
+            thumbnailUrl = "https://pixabay.com/get/g2aee644d5f2322f4ad8e410309da0daebc3c018c261e341448a8ed1ddf05a7d2687a4f6ab6c354ac600be5d5b887fb73d893e804aafc431de02ace3ff1b6cc288fa542e44b07a054ff891aad1da72653_1920.jpg"
         ),
         Album(
             id = "3",
@@ -41,7 +43,8 @@ object DummyDataSet {
             description = "전국의 아름다운 10대 가로수길 중 하나로 선정된 곡교천변 은행나무길은 현충사 입구의 곡교천 충무교에서부터 현충사 입구까지 조성되어 있는 2.2km 길이의 도로입니다. 가을이면 350여 그루의 은행나무가 일제히 노란 빛을 내 평일에도 많은 인파가 몰려드는 명소입니다.",
             createdDate = "1달전",
             modifiedDate = "",
-            thumbnailUrl = "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/2fG8/image/wgtUIZSe7IVwsEGZFg1MNf9CRZ0.jpg",
+            //thumbnailUrl = "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/2fG8/image/wgtUIZSe7IVwsEGZFg1MNf9CRZ0.jpg",
+            thumbnailUrl = "https://pixabay.com/get/ga84b67c4695381e891a97a9a378b3a2ced2dcd72da9ae424a7fe30995e34c719679293c22c6175112f12ff83675627c465e7694928c2b078a0c0cd819061c788b6e2298ed4bbbd2ab24f9612d0306359_1920.jpg"
         ),
     )
 
