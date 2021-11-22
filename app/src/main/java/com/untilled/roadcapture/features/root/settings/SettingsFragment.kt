@@ -1,5 +1,6 @@
 package com.untilled.roadcapture.features.root.settings
 
+import android.Manifest
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,14 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentSettingBinding
 import dagger.hilt.android.AndroidEntryPoint
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.util.Log
+import androidx.core.content.ContextCompat
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
@@ -28,11 +37,31 @@ class SettingsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         setOnClickListeners()
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        when (PackageManager.PERMISSION_GRANTED) {
+            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION)
+            -> {
+                binding.textviewSettingServiceLocationDetail.text = "항상 허용"
+            }
+            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
+            -> {
+                binding.textviewSettingServiceLocationDetail.text = "앱 사용 중에만 허용"
+            }
+            else -> {
+                binding.textviewSettingServiceLocationDetail.text = "거부"
+            }
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+
         _binding = null
     }
 

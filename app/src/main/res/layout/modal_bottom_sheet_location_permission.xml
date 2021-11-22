@@ -10,7 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/setting_service_location"
+        android:text="@string/setting_service_location_enable"
         android:textColor="@color/gray"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"

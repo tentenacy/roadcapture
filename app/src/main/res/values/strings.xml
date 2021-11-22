@@ -28,7 +28,8 @@
     <string name="setting_account">계정 설정</string>
     <string name="setting_service">서비스 설정</string>
     <string name="setting_support">고객지원</string>
-    <string name="setting_service_location">위치 서비스 활성화</string>
+    <string name="setting_service_location">위치 서비스</string>
+    <string name="setting_service_location_enable">위치 서비스 활성화</string>
     <string name="setting_service_notification">알림</string>
     <string name="setting_support_version">버전</string>
     <string name="setting_support_opinion">의견 보내기</string>
