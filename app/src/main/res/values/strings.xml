@@ -86,4 +86,5 @@
     <string name="my_studio_modification_change_background_image">배경 사진 변경</string>
     <string name="my_studio_modification_change_profile_description">프로필 설명 변경</string>
     <string name="my_studio_following">팔로잉</string>
+    <string name="my_studio_place">관심 지역</string>
 </resources>

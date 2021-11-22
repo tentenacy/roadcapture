@@ -87,7 +87,7 @@
             android:id="@+id/view_my_studio_modification_background_overlay"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/overlay_gradient_background"
+            android:background="@drawable/overlay_gradient_white"
             app:layout_constraintBottom_toBottomOf="@+id/imageview_my_studio_modification_background"
             app:layout_constraintEnd_toEndOf="@+id/imageview_my_studio_modification_background"
             app:layout_constraintStart_toStartOf="@+id/imageview_my_studio_modification_background"
