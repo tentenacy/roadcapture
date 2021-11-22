@@ -1,6 +1,9 @@
 package com.untilled.roadcapture.features.root.settings
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,12 +27,13 @@ class LocationPermissionBottomSheetDialog : BottomSheetDialogFragment() {
     ): View? {
         _binding = ModalBottomSheetLocationPermissionBinding.inflate(inflater, container, false)
 
-        setOnClickListeners()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        setOnClickListeners()
     }
 
     override fun onDestroyView() {
@@ -38,30 +42,16 @@ class LocationPermissionBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.radioGroupLocationPermission.setOnCheckedChangeListener { radioGroup, id ->
-            when (id) {
-                R.id.radiobutton_location_permission_always -> {
-                    (parentFragment as SettingsFragment).binding.textviewSettingServiceLocationDetail.text =
-                        "항상 허용"
-                    dismiss()
-                }
-                R.id.radiobutton_location_permission_using-> {
-                    (parentFragment as SettingsFragment).binding.textviewSettingServiceLocationDetail.text =
-                        "앱 사용중에만 허용"
-                    dismiss()
-                }
-                R.id.radiobutton_location_permission_confirm-> {
-                    (parentFragment as SettingsFragment).binding.textviewSettingServiceLocationDetail.text =
-                        "항상 확인"
-                    dismiss()
-                }
-                R.id.radiobutton_location_permission_deny-> {
-                    (parentFragment as SettingsFragment).binding.textviewSettingServiceLocationDetail.text =
-                        "거부"
-                    dismiss()
-                }
-            }
+        binding.buttonLocationPermission.setOnClickListener {
+            val intent = Intent()
+            intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+            val uri = Uri.fromParts("package", requireActivity().packageName, null)
+            intent.data = uri
+            startActivity(intent)
+            dismiss()
+        }
+        binding.buttonLocationPermissionCancel.setOnClickListener {
+            dismiss()
         }
     }
-
 }

@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">로드캡처</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login_email_login">이메일로 로그인</string>
     <string name="login_no_account">아직 계정이 없으신가요?</string>
@@ -29,7 +28,7 @@
     <string name="setting_account">계정 설정</string>
     <string name="setting_service">서비스 설정</string>
     <string name="setting_support">고객지원</string>
-    <string name="setting_service_location">위치 서비스</string>
+    <string name="setting_service_location">위치 서비스 활성화</string>
     <string name="setting_service_notification">알림</string>
     <string name="setting_support_version">버전</string>
     <string name="setting_support_opinion">의견 보내기</string>
@@ -87,4 +86,6 @@
     <string name="my_studio_modification_change_profile_description">프로필 설명 변경</string>
     <string name="my_studio_following">팔로잉</string>
     <string name="my_studio_place">관심 지역</string>
+    <string name="location_permission_setting">설정으로</string>
+    <string name="location_permission_cancel">취소하기</string>
 </resources>

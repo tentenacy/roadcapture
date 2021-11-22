@@ -63,12 +63,20 @@
             android:textAppearance="@style/Head"
             android:layout_width="0dp"
             android:layout_height="64dp"
-            android:layout_marginTop="12dp"
             android:text="@string/setting_account"
             android:gravity="center|start"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            app:layout_constraintTop_toTopOf="@id/textview_setting_account"
+            app:layout_constraintBottom_toBottomOf="@id/textview_setting_account"
+            app:layout_constraintEnd_toEndOf="@id/textview_setting_account"
+            android:src="@drawable/ic_arrow_right"
+            app:tint="@color/gray" />
 
         <View
             android:id="@+id/textview_setting_account_divider"
@@ -94,7 +102,7 @@
             style="@style/ListLeftAlign"
             android:layout_width="0dp"
             android:layout_height="64dp"
-            android:layout_marginStart="12dp"
+            android:layout_marginStart="10dp"
             android:gravity="center|start"
             android:text="@string/setting_service_location"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service"
@@ -129,6 +137,16 @@
             app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_service_location" />
+
+        <Switch
+            android:id="@+id/switch_setting_service_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            app:layout_constraintTop_toTopOf="@id/textview_setting_service_notification"
+            app:layout_constraintBottom_toBottomOf="@id/textview_setting_service_notification"
+            app:layout_constraintEnd_toEndOf="@id/textview_setting_service_notification"
+            />
 
         <View
             android:layout_width="0dp"
@@ -189,6 +207,14 @@
             app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_support_version" />
 
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            app:layout_constraintTop_toTopOf="@id/textview_setting_support_opinion"
+            app:layout_constraintBottom_toBottomOf="@id/textview_setting_support_opinion"
+            app:layout_constraintEnd_toEndOf="@id/textview_setting_support_opinion"
+            android:src="@drawable/ic_arrow_right"
+            app:tint="@color/gray" />
 
         <View
             android:layout_width="0dp"
@@ -209,6 +235,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_support_opinion" />
 
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            app:layout_constraintTop_toTopOf="@id/textview_setting_support_terms"
+            app:layout_constraintBottom_toBottomOf="@id/textview_setting_support_terms"
+            app:layout_constraintEnd_toEndOf="@id/textview_setting_support_terms"
+            android:src="@drawable/ic_arrow_right"
+            app:tint="@color/gray" />
 
         <View
             android:layout_width="0dp"

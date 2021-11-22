@@ -3,73 +3,76 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/location_permission_container"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/shape_bottom_sheet_dialog"
-    android:paddingHorizontal="24dp"
-    android:paddingTop="24dp">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/textview_location_permission_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:text="@string/setting_service_location"
-        android:textAppearance="@style/SubHeadBold"
+        android:textColor="@color/gray"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <RadioGroup
-        android:id="@+id/radioGroup_location_permission"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
+    <ImageView
+        android:id="@+id/imageview_location_permission"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginTop="24dp"
+        android:src="@drawable/ic_location"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_location_permission_title">
+        app:layout_constraintTop_toBottomOf="@id/textview_location_permission_title" />
 
-        <RadioButton
-            android:id="@+id/radiobutton_location_permission_always"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:background="@android:color/transparent"
-            android:button="@null"
-            android:gravity="center|left"
-            android:text="@string/location_permission_always"
-            android:textAppearance="@style/SubHead"
-            android:textColor="@drawable/selector_radio_location_permission_text" />
+    <TextView
+        android:id="@+id/textview_location_permission_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="48dp"
+        android:gravity="center"
+        android:text="위치 서비스를 허용하면\n여행을 기록할 수 있습니다."
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/imageview_location_permission" />
 
-        <RadioButton
-            android:id="@+id/radiobutton_location_permission_using"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:background="@android:color/transparent"
-            android:button="@null"
-            android:gravity="center|left"
-            android:text="@string/location_permission_using"
-            android:textAppearance="@style/SubHead"
-            android:textColor="@drawable/selector_radio_location_permission_text" />
+    <Button
+        android:id="@+id/button_location_permission"
+        style="@style/Button"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:background="@drawable/bottom_sheet_button"
+        android:text="@string/location_permission_setting"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/textview_location_permission_description" />
 
-        <RadioButton
-            android:id="@+id/radiobutton_location_permission_confirm"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:background="@android:color/transparent"
-            android:button="@null"
-            android:gravity="center|left"
-            android:text="@string/location_permission_confirm"
-            android:textAppearance="@style/SubHead"
-            android:textColor="@drawable/selector_radio_location_permission_text" />
+    <Button
+        android:id="@+id/button_location_permission_cancel"
+        style="@style/SubHead"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/bottom_sheet_button"
+        android:text="@string/location_permission_cancel"
+        android:textColor="@color/gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button_location_permission" />
 
-        <RadioButton
-            android:id="@+id/radiobutton_location_permission_deny"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:background="@android:color/transparent"
-            android:button="@null"
-            android:gravity="center|left"
-            android:text="@string/location_permission_deny"
-            android:textAppearance="@style/SubHead"
-            android:textColor="@drawable/selector_radio_location_permission_text" />
-
-    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

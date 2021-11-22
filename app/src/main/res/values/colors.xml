@@ -23,7 +23,7 @@
     <color name="control_normal">#c5c5c5</color>
     <color name="control_activated">@color/secondaryColor</color>
     <color name="control_highlight">@android:color/holo_red_light</color>
-    <color name="divider">#EFEFEF</color>
+    <color name="divider">#F5F5F5</color>
     <color name="gray">#8c8c8c</color>
     <color name="transparent">#00000000</color>
     <color name="bottom_sheet_background">#f4f7f8</color>
