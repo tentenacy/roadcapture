@@ -10,9 +10,18 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.utils.extension.getPxFromDp
+import dagger.*
+import dagger.multibindings.*
+import java.security.SecureRandom
+import java.util.*
+import javax.inject.Inject
+import javax.inject.Named
+import javax.inject.Provider
+import javax.inject.Singleton
 
 
 object AlbumsBindingAdapters {
+
     @JvmStatic
     @BindingAdapter("albumThumbnailImage")
     fun setAlbumThumbnailImage(view: ShapeableImageView, url: String) {
@@ -56,6 +65,7 @@ object AlbumsBindingAdapters {
     fun setAlbumOverlayText(view: TextView, username: String) {
         // TODO: createdDate를 지정된 형식으로 변환
         view.text = "$username · "
+
     }
 
     @JvmStatic

@@ -8,15 +8,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.airbnb.epoxy.CarouselModel_
 import com.airbnb.epoxy.carousel
-import com.untilled.roadcapture.R
+import com.untilled.roadcapture.*
 import com.untilled.roadcapture.core.navigation.StackHostFragment
 import com.untilled.roadcapture.databinding.FragmentMyStudioBinding
 import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
 import com.untilled.roadcapture.features.root.search.SearchFragment
-import com.untilled.roadcapture.studioAlbum
-import com.untilled.roadcapture.studioPlace
 import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,31 +45,31 @@ class MyStudioFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setOnClickListeners()
+        //setOnClickListeners()
     }
 
-    private fun setOnClickListeners() {
-        binding.textviewMyStudioFollower.setOnClickListener {
-            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(R.id.action_rootFragment_to_followerFragment)
-        }
-        binding.textviewMyStudioFollowerNum.setOnClickListener {
-            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(R.id.action_rootFragment_to_followerFragment)
-        }
-        binding.textviewMyStudioFollowing.setOnClickListener {
-            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(R.id.action_rootFragment_to_followingFragment)
-        }
-        binding.textviewMyStudioFollowingNum.setOnClickListener {
-            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(R.id.action_rootFragment_to_followingFragment)
-        }
-        binding.imageviewMyStudioModification.setOnClickListener {
-            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(RootFragmentDirections.actionRootFragmentToMyStudioModification(binding.user))
-        }
-    }
+//    private fun setOnClickListeners() {
+//        binding.textviewMyStudioFollower.setOnClickListener {
+//            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+//                .navigate(R.id.action_rootFragment_to_followerFragment)
+//        }
+//        binding.textviewMyStudioFollowerNum.setOnClickListener {
+//            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+//                .navigate(R.id.action_rootFragment_to_followerFragment)
+//        }
+//        binding.textviewMyStudioFollowing.setOnClickListener {
+//            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+//                .navigate(R.id.action_rootFragment_to_followingFragment)
+//        }
+//        binding.textviewMyStudioFollowingNum.setOnClickListener {
+//            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+//                .navigate(R.id.action_rootFragment_to_followingFragment)
+//        }
+//        binding.imageviewMyStudioModification.setOnClickListener {
+//            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+//                .navigate(RootFragmentDirections.actionRootFragmentToMyStudioModification(binding.user))
+//        }
+//    }
 
     private fun initAdapter() {
         binding.recyclerviewMyStudioAlbums.withModels {
