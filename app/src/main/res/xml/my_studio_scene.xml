@@ -133,6 +133,17 @@
             motion:layout_constraintEnd_toEndOf="@id/textview_my_studio_following"
             motion:layout_constraintTop_toTopOf="@id/textview_my_studio_album_num" />
 
+        <Constraint
+            android:id="@+id/textview_my_studio_title"
+            style="@style/Head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="200dp"
+            android:alpha="0"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="parent"/>
+
 
     </ConstraintSet>
 

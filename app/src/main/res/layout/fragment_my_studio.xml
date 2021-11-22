@@ -91,12 +91,12 @@
                     style="@style/Head"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="48dp"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="14dp"
                     android:text="@{user.username}"
                     android:visibility="invisible"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/imageview_my_studio_profile"
+                    app:layout_constraintTop_toBottomOf="parent"
                     tools:text="kvvangddang" />
 
                 <TextView
@@ -217,6 +217,7 @@
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="48dp"
                     android:orientation="horizontal"
+                    android:nestedScrollingEnabled="false"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"

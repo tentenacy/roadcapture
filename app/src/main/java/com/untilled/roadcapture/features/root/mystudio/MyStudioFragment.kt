@@ -45,31 +45,31 @@ class MyStudioFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //setOnClickListeners()
+        setOnClickListeners()
     }
 
-//    private fun setOnClickListeners() {
-//        binding.textviewMyStudioFollower.setOnClickListener {
-//            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-//                .navigate(R.id.action_rootFragment_to_followerFragment)
-//        }
-//        binding.textviewMyStudioFollowerNum.setOnClickListener {
-//            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-//                .navigate(R.id.action_rootFragment_to_followerFragment)
-//        }
-//        binding.textviewMyStudioFollowing.setOnClickListener {
-//            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-//                .navigate(R.id.action_rootFragment_to_followingFragment)
-//        }
-//        binding.textviewMyStudioFollowingNum.setOnClickListener {
-//            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-//                .navigate(R.id.action_rootFragment_to_followingFragment)
-//        }
-//        binding.imageviewMyStudioModification.setOnClickListener {
-//            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-//                .navigate(RootFragmentDirections.actionRootFragmentToMyStudioModification(binding.user))
-//        }
-//    }
+    private fun setOnClickListeners() {
+        binding.textviewMyStudioFollower.setOnClickListener {
+            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                .navigate(R.id.action_rootFragment_to_followerFragment)
+        }
+        binding.textviewMyStudioFollowerNum.setOnClickListener {
+            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                .navigate(R.id.action_rootFragment_to_followerFragment)
+        }
+        binding.textviewMyStudioFollowing.setOnClickListener {
+            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                .navigate(R.id.action_rootFragment_to_followingFragment)
+        }
+        binding.textviewMyStudioFollowingNum.setOnClickListener {
+            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                .navigate(R.id.action_rootFragment_to_followingFragment)
+        }
+        binding.buttonMyStudioEditProfile.setOnClickListener {
+            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                .navigate(RootFragmentDirections.actionRootFragmentToMyStudioModification(binding.user))
+        }
+    }
 
     private fun initAdapter() {
         binding.recyclerviewMyStudioAlbums.withModels {
