@@ -91,4 +91,7 @@
     <string name="location_permission_cancel">취소하기</string>
     <string name="my_studio_albums_subtitle">앨범</string>
     <string name="my_studio_place_subtitle">관심 지역</string>
+    <string name="popup_menu_albums_more_share">공유</string>
+    <string name="popup_menu_albums_more_report">신고</string>
+    <string name="popup_menu_albums_more_hide">숨기기</string>
 </resources>

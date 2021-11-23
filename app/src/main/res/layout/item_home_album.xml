@@ -119,6 +119,7 @@
             app:layout_constraintEnd_toEndOf="@id/textview_item_home_album_comment"
             app:layout_constraintStart_toStartOf="@id/textview_item_home_album_comment"
             app:layout_constraintTop_toTopOf="@id/imageview_item_home_album_profile"
+            android:onClick="@{onClickItem}"
             />
 
         <TextView

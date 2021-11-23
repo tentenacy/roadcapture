@@ -2,10 +2,10 @@ package com.untilled.roadcapture.features.root.albums
 
 import android.animation.ValueAnimator
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -113,6 +113,20 @@ class AlbumsFragment : Fragment() {
                             R.id.imageview_item_home_albums_thumbnail ->
                                 Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
                                         navigate(RootFragmentDirections.actionRootFragmentToPictureViewerFragment(model.album()))
+                            R.id.imageview_item_home_album_more -> {
+                                val popupMenu = PopupMenu(requireContext(), clickedView)
+                                popupMenu.apply {
+                                    menuInflater.inflate(R.menu.popup_menu_albums_more, popupMenu.menu)
+                                    setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+                                        when(item.itemId) {
+                                            R.id.popup_menu_albums_more_share -> {}
+                                            R.id.popup_menu_albums_more_report -> {}
+                                            R.id.popup_menu_albums_more_hide -> {}
+                                        }
+                                        true
+                                    })
+                                }.show()
+                            }
                         }
                     }
                 }
