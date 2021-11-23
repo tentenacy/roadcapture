@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:minHeight="48dp"
                 app:layoutDescription="@xml/my_studio_scene"
-                app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed|snap">
+                app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed">
 
                 <ImageView
                     android:id="@+id/imageview_my_studio_background"
