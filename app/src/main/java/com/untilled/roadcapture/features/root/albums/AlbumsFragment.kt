@@ -117,14 +117,17 @@ class AlbumsFragment : Fragment() {
                                 val popupMenu = PopupMenu(requireContext(), clickedView)
                                 popupMenu.apply {
                                     menuInflater.inflate(R.menu.popup_menu_albums_more, popupMenu.menu)
-                                    setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
-                                        when(item.itemId) {
-                                            R.id.popup_menu_albums_more_share -> {}
-                                            R.id.popup_menu_albums_more_report -> {}
-                                            R.id.popup_menu_albums_more_hide -> {}
+                                    setOnMenuItemClickListener { item ->
+                                        when (item.itemId) {
+                                            R.id.popup_menu_albums_more_share -> {
+                                            }
+                                            R.id.popup_menu_albums_more_report -> {
+                                            }
+                                            R.id.popup_menu_albums_more_hide -> {
+                                            }
                                         }
                                         true
-                                    })
+                                    }
                                 }.show()
                             }
                         }

@@ -244,7 +244,7 @@ object DummyDataSet {
             description = "님이 앨범을 만들었습니다.",
             createdDate = "3분전",
             modifiedDate = "",
-            thumbnailUrl = "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/2fG8/image/wgtUIZSe7IVwsEGZFg1MNf9CRZ0.jpg",
+            thumbnailUrl = "https://pixabay.com/get/gce3f3dc9eac4aad981d4797691ed701cecf1f74c68f5aea5b9f910a309cf14e625e9e6e7c20f69c6980915f77c8cd5a8c6bb7797d859f0311ae5c3135e6ca4755b1a5075fa5ef24350fb131f3abef660_1920.jpg",
         ),
 
         Album(
@@ -257,7 +257,7 @@ object DummyDataSet {
             description = "님이 작가님의 앨범을 좋아합니다.",
             createdDate = "30분전",
             modifiedDate = "",
-            thumbnailUrl = "https://cdn.pixabay.com/photo/2017/10/15/13/54/doll-2853763_960_720.jpg",
+            thumbnailUrl = "https://pixabay.com/get/g2aee644d5f2322f4ad8e410309da0daebc3c018c261e341448a8ed1ddf05a7d2687a4f6ab6c354ac600be5d5b887fb73d893e804aafc431de02ace3ff1b6cc288fa542e44b07a054ff891aad1da72653_1920.jpg",
         ),
 
         Album(
@@ -268,7 +268,7 @@ object DummyDataSet {
             commentCount = "",
             title = "",
             description = "님이 작가님을 팔로우합니다.",
-            createdDate = "1년전",
+            createdDate = "1시간전",
             modifiedDate = "",
             thumbnailUrl = "",
         ),
@@ -281,9 +281,9 @@ object DummyDataSet {
             commentCount = "",
             title = "",
             description = "님이 작가님의 앨범에 댓글을 남겼습니다",
-            createdDate = "1시간전",
+            createdDate = "3시간전",
             modifiedDate = "",
-            thumbnailUrl = "https://cdn.pixabay.com/photo/2018/07/05/12/24/mountain-3518219_960_720.jpg",
+            thumbnailUrl = "https://pixabay.com/get/ga84b67c4695381e891a97a9a378b3a2ced2dcd72da9ae424a7fe30995e34c719679293c22c6175112f12ff83675627c465e7694928c2b078a0c0cd819061c788b6e2298ed4bbbd2ab24f9612d0306359_1920.jpg",
         ),
         Album(
             username = "hsw0715",
@@ -293,9 +293,9 @@ object DummyDataSet {
             commentCount = "",
             title = "",
             description = "님이 앨범을 만들었습니다.",
-            createdDate = "3분전",
+            createdDate = "1일전",
             modifiedDate = "",
-            thumbnailUrl = "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/2fG8/image/wgtUIZSe7IVwsEGZFg1MNf9CRZ0.jpg",
+            thumbnailUrl = "https://pixabay.com/get/gce3f3dc9eac4aad981d4797691ed701cecf1f74c68f5aea5b9f910a309cf14e625e9e6e7c20f69c6980915f77c8cd5a8c6bb7797d859f0311ae5c3135e6ca4755b1a5075fa5ef24350fb131f3abef660_1920.jpg",
         ),
 
         Album(
@@ -306,9 +306,9 @@ object DummyDataSet {
             commentCount = "",
             title = "",
             description = "님이 작가님의 앨범을 좋아합니다.",
-            createdDate = "30분전",
+            createdDate = "5일전",
             modifiedDate = "",
-            thumbnailUrl = "https://cdn.pixabay.com/photo/2017/10/15/13/54/doll-2853763_960_720.jpg",
+            thumbnailUrl = "https://pixabay.com/get/g2aee644d5f2322f4ad8e410309da0daebc3c018c261e341448a8ed1ddf05a7d2687a4f6ab6c354ac600be5d5b887fb73d893e804aafc431de02ace3ff1b6cc288fa542e44b07a054ff891aad1da72653_1920.jpg",
         ),
 
         Album(
@@ -319,7 +319,7 @@ object DummyDataSet {
             commentCount = "",
             title = "",
             description = "님이 작가님을 팔로우합니다.",
-            createdDate = "1년전",
+            createdDate = "1주전",
             modifiedDate = "",
             thumbnailUrl = "",
         ),
@@ -332,9 +332,9 @@ object DummyDataSet {
             commentCount = "",
             title = "",
             description = "님이 작가님의 앨범에 댓글을 남겼습니다",
-            createdDate = "1시간전",
+            createdDate = "3주전",
             modifiedDate = "",
-            thumbnailUrl = "https://cdn.pixabay.com/photo/2018/07/05/12/24/mountain-3518219_960_720.jpg",
+            thumbnailUrl = "https://pixabay.com/get/ga84b67c4695381e891a97a9a378b3a2ced2dcd72da9ae424a7fe30995e34c719679293c22c6175112f12ff83675627c465e7694928c2b078a0c0cd819061c788b6e2298ed4bbbd2ab24f9612d0306359_1920.jpg",
         ),
         Album(
             username = "hsw0715",
@@ -344,7 +344,7 @@ object DummyDataSet {
             commentCount = "",
             title = "",
             description = "님이 앨범을 만들었습니다.",
-            createdDate = "3분전",
+            createdDate = "4주전",
             modifiedDate = "",
             thumbnailUrl = "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/2fG8/image/wgtUIZSe7IVwsEGZFg1MNf9CRZ0.jpg",
         ),
@@ -357,9 +357,9 @@ object DummyDataSet {
             commentCount = "",
             title = "",
             description = "님이 작가님의 앨범을 좋아합니다.",
-            createdDate = "30분전",
+            createdDate = "1달전",
             modifiedDate = "",
-            thumbnailUrl = "https://cdn.pixabay.com/photo/2017/10/15/13/54/doll-2853763_960_720.jpg",
+            thumbnailUrl = "https://pixabay.com/get/gce3f3dc9eac4aad981d4797691ed701cecf1f74c68f5aea5b9f910a309cf14e625e9e6e7c20f69c6980915f77c8cd5a8c6bb7797d859f0311ae5c3135e6ca4755b1a5075fa5ef24350fb131f3abef660_1920.jpg",
         ),
 
         Album(
@@ -370,7 +370,7 @@ object DummyDataSet {
             commentCount = "",
             title = "",
             description = "님이 작가님을 팔로우합니다.",
-            createdDate = "1년전",
+            createdDate = "3달전",
             modifiedDate = "",
             thumbnailUrl = "",
         ),
@@ -383,10 +383,49 @@ object DummyDataSet {
             commentCount = "",
             title = "",
             description = "님이 작가님의 앨범에 댓글을 남겼습니다",
-            createdDate = "1시간전",
+            createdDate = "6달전",
             modifiedDate = "",
-            thumbnailUrl = "https://cdn.pixabay.com/photo/2018/07/05/12/24/mountain-3518219_960_720.jpg",
+            thumbnailUrl = "https://pixabay.com/get/g2aee644d5f2322f4ad8e410309da0daebc3c018c261e341448a8ed1ddf05a7d2687a4f6ab6c354ac600be5d5b887fb73d893e804aafc431de02ace3ff1b6cc288fa542e44b07a054ff891aad1da72653_1920.jpg\n",
         ),
+
+        Album(
+            username = "kwangddang11",
+            id = "",
+            profileUrl = "https://images.unsplash.com/photo-1552058544-f2b08422138a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=344&q=80",
+            likeCount = "",
+            commentCount = "",
+            title = "",
+            description = "님이 작가님의 앨범을 좋아합니다.",
+            createdDate = "10달전",
+            modifiedDate = "",
+            thumbnailUrl = "https://pixabay.com/get/gce3f3dc9eac4aad981d4797691ed701cecf1f74c68f5aea5b9f910a309cf14e625e9e6e7c20f69c6980915f77c8cd5a8c6bb7797d859f0311ae5c3135e6ca4755b1a5075fa5ef24350fb131f3abef660_1920.jpg",
+        ),
+
+        Album(
+            username = "haj1196",
+            id = "",
+            profileUrl = "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+            likeCount = "",
+            commentCount = "",
+            title = "",
+            description = "님이 작가님을 팔로우합니다.",
+            createdDate = "1년전",
+            modifiedDate = "",
+            thumbnailUrl = "",
+        ),
+
+        Album(
+            username = "gogigood",
+            id = "",
+            profileUrl = "https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=333&q=80",
+            likeCount = "",
+            commentCount = "",
+            title = "",
+            description = "님이 작가님의 앨범에 댓글을 남겼습니다",
+            createdDate = "2년전",
+            modifiedDate = "",
+            thumbnailUrl = "https://pixabay.com/get/g2aee644d5f2322f4ad8e410309da0daebc3c018c261e341448a8ed1ddf05a7d2687a4f6ab6c354ac600be5d5b887fb73d893e804aafc431de02ace3ff1b6cc288fa542e44b07a054ff891aad1da72653_1920.jpg\n",
+        )
     )
 
     val user = listOf(
