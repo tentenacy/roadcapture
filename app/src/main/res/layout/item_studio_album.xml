@@ -34,7 +34,7 @@
         <View
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/overlay_gradient_black"
+            android:background="@drawable/overlay_gradient_studio_thumbnail"
             app:layout_constraintStart_toStartOf="@id/imageview_item_studio_album_thumbnail"
             app:layout_constraintEnd_toEndOf="@id/imageview_item_studio_album_thumbnail"
             app:layout_constraintTop_toTopOf="@id/imageview_item_studio_album_thumbnail"

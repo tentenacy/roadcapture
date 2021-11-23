@@ -7,4 +7,7 @@
         android:endColor="#99000000"
         android:startColor="#00000000"/>
 
+    <corners
+        android:radius="@dimen/studio_album_corner_radius" />
+
 </shape>

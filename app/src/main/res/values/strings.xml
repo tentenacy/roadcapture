@@ -89,4 +89,6 @@
     <string name="my_studio_place">관심 지역</string>
     <string name="location_permission_setting">설정으로</string>
     <string name="location_permission_cancel">취소하기</string>
+    <string name="my_studio_albums_subtitle">앨범</string>
+    <string name="my_studio_place_subtitle">관심 지역</string>
 </resources>
