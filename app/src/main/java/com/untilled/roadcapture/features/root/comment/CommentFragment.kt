@@ -5,12 +5,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
+import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.comment
 import com.untilled.roadcapture.databinding.FragmentCommentBinding
 import com.untilled.roadcapture.features.base.CustomDivider
 import com.untilled.roadcapture.utils.DummyDataSet
+import com.untilled.roadcapture.utils.extension.getPxFromDp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -61,6 +65,24 @@ class CommentFragment : Fragment() {
                 comment {
                     id(index)
                     comment(comment)
+
+                    onClickItem { model, parentView, clickedView, position ->
+                        when(clickedView.id) {
+                            R.id.imageview_item_comment_more -> {
+                                val popupMenu = PopupMenu(requireContext(), clickedView)
+                                popupMenu.apply {
+                                    menuInflater.inflate(R.menu.popup_menu_comment_more, popupMenu.menu)
+                                    setOnMenuItemClickListener { item ->
+                                        when (item.itemId) {
+                                            R.id.popup_menu_comment_more_report -> {
+                                            }
+                                        }
+                                        true
+                                    }
+                                }.show()
+                            }
+                        }
+                    }
                 }
             }
         }

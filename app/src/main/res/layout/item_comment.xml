@@ -11,6 +11,10 @@
         <variable
             name="comment"
             type="com.untilled.roadcapture.data.entity.Comment" />
+
+        <variable
+            name="onClickItem"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -42,11 +46,15 @@
             tools:text="hsw0715" />
 
         <ImageView
-            android:layout_width="16dp"
-            android:layout_height="16dp"
+            android:id="@+id/imageview_item_comment_more"
+            android:paddingStart="8dp"
+            android:paddingBottom="8dp"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
             app:layout_constraintTop_toTopOf="@+id/textview_item_comment_username"
             app:layout_constraintBottom_toBottomOf="@+id/textview_item_comment_username"
             app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{onClickItem}"
             android:src="@drawable/ic_more"/>
 
         <kr.co.prnd.readmore.ReadMoreTextView

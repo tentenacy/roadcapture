@@ -94,4 +94,6 @@
     <string name="popup_menu_albums_more_share">공유</string>
     <string name="popup_menu_albums_more_report">신고</string>
     <string name="popup_menu_albums_more_hide">숨기기</string>
+    <string name="popup_menu_comment_more_report">신고</string>
+    <string name="comment_input_hint">댓글을 남겨주세요.</string>
 </resources>

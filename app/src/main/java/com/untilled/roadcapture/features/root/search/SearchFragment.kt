@@ -29,8 +29,6 @@ class SearchFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
 
-        (requireActivity() as MainActivity).window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
-
         binding.viewpagerSearch.adapter = SearchPagerAdapter(this)
 
         TabLayoutMediator(binding.tablayoutSearch, binding.viewpagerSearch) { tab, position ->
@@ -38,6 +36,18 @@ class SearchFragment : Fragment() {
         }.attach()
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.edittextSearchInput.setOnFocusChangeListener { v, hasFocus ->
+            if(hasFocus) {
+                (requireActivity() as MainActivity).window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
+            } else {
+                (requireActivity() as MainActivity).window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+            }
+        }
     }
 
     fun setSearchFragmentTab(){
