@@ -22,15 +22,24 @@
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tablayout_search"
             android:layout_width="0dp"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="48dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar_search"
             app:tabIndicatorColor="@color/secondaryColor"
             app:tabSelectedTextColor="@color/secondaryColor"
-            app:tabTextAppearance="@style/SubHead"
+            app:tabTextAppearance="@style/Body"
             app:tabTextColor="@color/black" />
+
+        <View
+            android:id="@+id/view_search_divider"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/divider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tablayout_search" />
 
         <LinearLayout
             android:id="@+id/linear_search_input"

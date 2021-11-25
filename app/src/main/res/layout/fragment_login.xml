@@ -75,6 +75,7 @@
             android:layout_width="240dp"
             android:layout_height="40dp"
             android:layout_marginBottom="32dp"
+            android:elevation="1dp"
             android:paddingVertical="8dp"
             app:layout_constraintBottom_toTopOf="@+id/textview_login_no_account"
             app:layout_constraintEnd_toEndOf="parent"
