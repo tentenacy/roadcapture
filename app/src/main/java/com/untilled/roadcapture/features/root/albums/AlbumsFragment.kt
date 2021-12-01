@@ -43,33 +43,16 @@ class AlbumsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // 아래로 스크롤 시 플로팅 버튼 hide
-        binding.recyclerviewAlbums.addOnScrollListener(object : RecyclerView.OnScrollListener(){
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                //super.onScrolled(recyclerView, dx, dy)
-                if(dy>0) {  // 아래로 스크롤
-                    binding.fabAlbumsSort.hide()
-                } else if(dy < 0) { // 위로 스크롤
-                    binding.fabAlbumsSort.show()
-                }
-            }
-        })
-
         setOnClickListeners()
     }
 
     private fun setOnClickListeners() {
-        binding.imageviewAlbumsSetting.setOnClickListener {
-            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(R.id.action_rootFragment_to_settingsFragment)
-        }
-
         binding.imageviewAlbumsNotification.setOnClickListener {
             Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                 .navigate(R.id.action_rootFragment_to_notificationFragment)
         }
 
-        binding.fabAlbumsSort.setOnClickListener {
+        binding.imageviewAlbumsFilter.setOnClickListener {
             val filterBottomSheetDialog = FilterBottomSheetDialog()
             filterBottomSheetDialog.show(childFragmentManager, "filterBottomSheet")
         }

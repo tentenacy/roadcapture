@@ -69,6 +69,14 @@ class MyStudioFragment : Fragment() {
             Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                 .navigate(RootFragmentDirections.actionRootFragmentToMyStudioModification(binding.user))
         }
+        binding.imageviewMyStudioSetting.setOnClickListener {
+            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                .navigate(R.id.action_rootFragment_to_settingsFragment)
+        }
+        binding.imageviewMyStudioTitleSetting.setOnClickListener {
+            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                .navigate(R.id.action_rootFragment_to_settingsFragment)
+        }
     }
 
     private fun initAdapter() {
