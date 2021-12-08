@@ -7,20 +7,20 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.databinding.FragmentLoginBinding
+import com.untilled.roadcapture.databinding.FragmentEmailLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
-    private var _binding: FragmentLoginBinding? = null
+class EmailLoginFragment : Fragment() {
+    private var _binding: FragmentEmailLoginBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentEmailLoginBinding.inflate(layoutInflater,container,false)
 
         return binding.root
     }
@@ -33,18 +33,16 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setOnClickListeners()
     }
 
-    private fun setOnClickListeners() {
-        binding.constraintLoginContainerEmail.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_loginFragment_to_emailLoginFragment)
+    private fun setOnClickListeners(){
+        binding.imageviewEmailLoginBack.setOnClickListener {
+            requireActivity().onBackPressed()
         }
-        binding.textviewLoginSignup.setOnClickListener {
+        binding.buttonEmailLogin.setOnClickListener {
             Navigation.findNavController(binding.root)
-                .navigate(R.id.action_loginFragment_to_signupFragment)
+                .navigate(R.id.action_emailLoginFragment_to_rootFragment)
         }
     }
 }

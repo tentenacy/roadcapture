@@ -95,4 +95,10 @@
     <string name="popup_menu_albums_more_hide">숨기기</string>
     <string name="popup_menu_comment_more_report">신고</string>
     <string name="comment_input_hint">댓글을 남겨주세요.</string>
+    <string name="email_login_title">이메일 로그인</string>
+    <string name="email_login_email_label">이메일 입력</string>
+    <string name="email_login_password_label">비밀번호 입력</string>
+    <string name="email_login_email_hint">abcd@gmail.com</string>
+    <string name="email_login_password_hint">6자리 이상</string>
+    <string name="email_login">로그인</string>
 </resources>

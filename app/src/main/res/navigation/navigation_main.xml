@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_emailLoginFragment"
+            app:destination="@id/emailLoginFragment" />
     </fragment>
     <fragment
         android:id="@+id/rootFragment"
@@ -188,5 +191,15 @@
             android:name="user"
             app:argType="com.untilled.roadcapture.data.entity.User"
             app:nullable="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailLoginFragment"
+        android:name="com.untilled.roadcapture.features.login.EmailLoginFragment"
+        android:label="EmailLoginFragment" >
+        <action
+            android:id="@+id/action_emailLoginFragment_to_rootFragment"
+            app:destination="@id/rootFragment"
+            app:popUpTo="@id/emailLoginFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
