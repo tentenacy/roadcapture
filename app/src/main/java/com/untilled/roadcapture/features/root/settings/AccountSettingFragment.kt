@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentSettingAccountBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -35,6 +37,14 @@ class AccountSettingFragment : Fragment() {
     private fun setOnClickListeners(){
         binding.imageviewSettingAccountBack.setOnClickListener {
             requireActivity().onBackPressed()
+        }
+        binding.textviewSettingAccountUsername.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_accountSettingFragment_to_usernameSettingFragment)
+        }
+        binding.textviewSettingAccountPassword.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_accountSettingFragment_to_passwordSettingFragment)
         }
     }
 }

@@ -80,7 +80,14 @@
         android:id="@+id/accountSettingFragment"
         android:name="com.untilled.roadcapture.features.root.settings.AccountSettingFragment"
         tools:layout="@layout/fragment_setting_account"
-        android:label="AccountSettingFragment" />
+        android:label="AccountSettingFragment" >
+        <action
+            android:id="@+id/action_accountSettingFragment_to_usernameSettingFragment"
+            app:destination="@id/usernameSettingFragment" />
+        <action
+            android:id="@+id/action_accountSettingFragment_to_passwordSettingFragment"
+            app:destination="@id/passwordSettingFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cameraFragment"
         android:name="com.untilled.roadcapture.features.root.capture.CameraFragment"
@@ -191,7 +198,8 @@
     <fragment
         android:id="@+id/emailLoginFragment"
         android:name="com.untilled.roadcapture.features.login.EmailLoginFragment"
-        android:label="EmailLoginFragment" >
+        android:label="EmailLoginFragment"
+        tools:layout="@layout/fragment_email_login">
         <action
             android:id="@+id/action_emailLoginFragment_to_rootFragment"
             app:destination="@id/rootFragment"
@@ -204,5 +212,16 @@
     <fragment
         android:id="@+id/passwordFindFragment"
         android:name="com.untilled.roadcapture.features.login.PasswordFindFragment"
-        android:label="PasswordFindFragment" />
+        android:label="PasswordFindFragment"
+        tools:layout="@layout/fragment_password_find"/>
+    <fragment
+        android:id="@+id/passwordSettingFragment"
+        android:name="com.untilled.roadcapture.features.root.settings.PasswordSettingFragment"
+        android:label="PasswordSettingFragment"
+        tools:layout="@layout/fragment_setting_password"/>
+    <fragment
+        android:id="@+id/usernameSettingFragment"
+        android:name="com.untilled.roadcapture.features.root.settings.UsernameSettingFragment"
+        android:label="UsernameSettingFragment"
+        tools:layout="@layout/fragment_setting_username"/>
 </navigation>

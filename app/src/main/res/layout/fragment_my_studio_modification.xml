@@ -83,10 +83,18 @@
             bind:studioBackgroundImage="@{user.backgroundUrl}"
             tools:src="@drawable/sample_profile_background" />
 
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/ic_modification"
+            app:layout_constraintStart_toEndOf="@id/textview_my_studio_modification_username"
+            app:layout_constraintTop_toTopOf="@id/textview_my_studio_modification_username"
+            app:layout_constraintBottom_toTopOf="@id/textview_my_studio_modification_username"/>
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageview_my_studio_modification_profile_background"
-            android:layout_width="108dp"
-            android:layout_height="108dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:src="@color/white"
             app:layout_constraintBottom_toBottomOf="@+id/imageview_my_studio_modification_background"
             app:layout_constraintEnd_toEndOf="parent"
@@ -104,53 +112,31 @@
             bind:studioProfileImage="@{user.profileUrl}"
             tools:src="@drawable/sample_profile" />
 
+
         <TextView
-            android:id="@+id/textview_my_studio_modification_username_label"
+            android:id="@+id/textview_my_studio_modification_username"
+            style="@style/Head"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/SubHead"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageview_my_studio_modification_profile"
-            android:text="닉네임"/>
-
-        <EditText
-            android:id="@+id/textview_my_studio_modification_username"
-            style="@style/Body"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginHorizontal="48dp"
+            android:layout_marginTop="32dp"
             android:text="@{user.username}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_my_studio_modification_username_label"
+            app:layout_constraintTop_toBottomOf="@id/imageview_my_studio_modification_profile"
             tools:text="kvvangddang" />
 
         <TextView
-            android:id="@+id/textview_my_studio_modification_description_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            style="@style/SubHead"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_my_studio_modification_username"
-            android:text="소개"/>
-
-        <EditText
             android:id="@+id/textview_my_studio_modification_profile_description"
             style="@style/Body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="48dp"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
             android:text="@{user.description}"
-            android:hint="소개"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_my_studio_modification_description_label"
+            app:layout_constraintTop_toBottomOf="@id/textview_my_studio_modification_username"
             tools:text="안녕하세요. 저는 최광현입니다." />
 
 
