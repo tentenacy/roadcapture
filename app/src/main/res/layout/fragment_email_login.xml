@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/imageview_email_login_back"
@@ -71,6 +71,18 @@
         app:layout_constraintStart_toStartOf="@+id/textview_email_login_email_label"
         app:layout_constraintTop_toBottomOf="@+id/textview_email_login_password_label" />
 
+    <TextView
+        android:id="@+id/textview_email_login_find_password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/email_login_find_password"
+        style="@style/Body"
+        android:textColor="@color/gray"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintStart_toStartOf="@id/guideline_email_login_body_start"
+        app:layout_constraintEnd_toEndOf="@id/guideline_email_login_body_end"
+        app:layout_constraintBottom_toTopOf="@id/button_email_login"/>
+
 
     <Button
         android:id="@+id/button_email_login"
@@ -81,7 +93,9 @@
         android:layout_marginTop="200dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_email_login_body_end"
         app:layout_constraintStart_toStartOf="@+id/guideline_email_login_body_start"
-        app:layout_constraintTop_toBottomOf="@id/edittext_email_login_email_input"/>
+        app:layout_constraintTop_toBottomOf="@id/edittext_email_login_email_input"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="1.0"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_email_login_body_start"

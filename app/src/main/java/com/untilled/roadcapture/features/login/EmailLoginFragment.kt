@@ -4,9 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentEmailLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -21,7 +23,7 @@ class EmailLoginFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentEmailLoginBinding.inflate(layoutInflater,container,false)
-
+        (requireActivity() as MainActivity).window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         return binding.root
     }
 
@@ -43,6 +45,10 @@ class EmailLoginFragment : Fragment() {
         binding.buttonEmailLogin.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_emailLoginFragment_to_rootFragment)
+        }
+        binding.textviewEmailLoginFindPassword.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_emailLoginFragment_to_passwordFindFragment)
         }
     }
 }

@@ -201,5 +201,12 @@
             app:destination="@id/rootFragment"
             app:popUpTo="@id/emailLoginFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_emailLoginFragment_to_passwordFindFragment"
+            app:destination="@id/passwordFindFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/passwordFindFragment"
+        android:name="com.untilled.roadcapture.features.login.PasswordFindFragment"
+        android:label="PasswordFindFragment" />
 </navigation>

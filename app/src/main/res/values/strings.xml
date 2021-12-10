@@ -101,4 +101,8 @@
     <string name="email_login_email_hint">abcd@gmail.com</string>
     <string name="email_login_password_hint">6자리 이상</string>
     <string name="email_login">로그인</string>
+    <string name="email_login_find_password"><u>비밀번호를 잊으셨나요?</u></string>
+    <string name="password_find_title">비밀번호를 잊으셨나요?</string>
+    <string name="password_find_email_input">abcd@gmail.com</string>
+    <string name="password_find_label">비밀번호 재설정을 위해 이메일을\n입력해주세요.</string>
 </resources>
