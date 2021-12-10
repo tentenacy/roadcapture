@@ -41,21 +41,10 @@
                     bind:studioBackgroundImage="@{user.backgroundUrl}"
                     tools:src="@drawable/sample_profile_background" />
 
-                <View
-                    android:id="@+id/view_my_studio_background_overlay"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintBottom_toBottomOf="@+id/imageview_my_studio_background"
-                    app:layout_constraintEnd_toEndOf="@+id/imageview_my_studio_background"
-                    app:layout_constraintHorizontal_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@+id/imageview_my_studio_background"
-                    app:layout_constraintTop_toTopOf="@+id/imageview_my_studio_background"
-                    app:layout_constraintVertical_bias="0.0" />
-
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imageview_my_studio_profile_background"
-                    android:layout_width="108dp"
-                    android:layout_height="108dp"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:src="@color/white"
                     app:layout_constraintBottom_toBottomOf="@+id/imageview_my_studio_background"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +67,7 @@
                     style="@style/Head"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
+                    android:layout_marginTop="32dp"
                     android:text="@{user.username}"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -106,8 +95,8 @@
                     android:layout_marginEnd="16dp"
                     android:src="@drawable/ic_setting"
                     android:visibility="invisible"
-                    app:layout_constraintTop_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="parent" />
 
                 <TextView
                     android:id="@+id/textview_my_studio_profile_description"
@@ -123,40 +112,18 @@
                     app:layout_constraintTop_toBottomOf="@id/textview_my_studio_profile_name"
                     tools:text="안녕하세요 최광현입니다." />
 
-                <TextView
-                    android:id="@+id/textview_my_studio_album"
-                    style="@style/Body"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="앨범"
-                    android:textColor="@color/gray"
-                    app:layout_constraintEnd_toStartOf="@id/textview_my_studio_follower"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textview_my_studio_album_num" />
-
-                <TextView
-                    android:id="@+id/textview_my_studio_album_num"
-                    style="@style/SubHeadBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:text="4개"
-                    app:layout_constraintEnd_toEndOf="@+id/textview_my_studio_album"
-                    app:layout_constraintStart_toStartOf="@+id/textview_my_studio_album"
-                    app:layout_constraintTop_toBottomOf="@+id/textview_my_studio_profile_description" />
-
 
                 <TextView
                     android:id="@+id/textview_my_studio_follower"
                     style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="@string/my_studio_follower"
                     android:textColor="@color/gray"
-                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/imageview_my_studio_profile_background"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/textview_my_studio_album" />
+                    app:layout_constraintTop_toBottomOf="@id/textview_my_studio_follower_num" />
 
 
                 <TextView
@@ -164,21 +131,23 @@
                     style="@style/SubHeadBold"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
                     android:text="81.9만"
-                    app:layout_constraintEnd_toEndOf="@id/textview_my_studio_follower"
-                    app:layout_constraintStart_toStartOf="@+id/textview_my_studio_follower"
-                    app:layout_constraintTop_toTopOf="@id/textview_my_studio_album_num" />
+                    app:layout_constraintEnd_toStartOf="@id/imageview_my_studio_profile_background"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/imageview_my_studio_background" />
 
                 <TextView
                     android:id="@+id/textview_my_studio_following"
                     style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
                     android:text="@string/my_studio_following"
                     android:textColor="@color/gray"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/textview_my_studio_follower"
-                    app:layout_constraintTop_toTopOf="@+id/textview_my_studio_follower" />
+                    app:layout_constraintStart_toEndOf="@id/imageview_my_studio_profile_background"
+                    app:layout_constraintTop_toBottomOf="@+id/textview_my_studio_following_num" />
 
 
                 <TextView
@@ -187,9 +156,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="100"
-                    app:layout_constraintEnd_toEndOf="@id/textview_my_studio_following"
-                    app:layout_constraintStart_toStartOf="@id/textview_my_studio_following"
-                    app:layout_constraintTop_toTopOf="@id/textview_my_studio_album_num" />
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/imageview_my_studio_profile_background"
+                    app:layout_constraintTop_toTopOf="@id/textview_my_studio_follower_num" />
 
                 <Button
                     android:id="@+id/button_my_studio_edit_profile"
@@ -201,7 +170,7 @@
                     app:backgroundTint="@color/secondaryColor"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textview_my_studio_follower" />
+                    app:layout_constraintTop_toBottomOf="@+id/textview_my_studio_profile_description" />
 
                 <ImageView
                     android:id="@+id/imageview_my_studio_setting"

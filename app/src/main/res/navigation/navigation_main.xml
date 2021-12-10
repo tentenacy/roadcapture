@@ -48,11 +48,7 @@
             app:destination="@id/pictureViewerFragment" />
         <action
             android:id="@+id/action_rootFragment_to_myStudioModification"
-            app:destination="@id/myStudioModification"
-            app:enterAnim="@anim/from_bottom"
-            app:exitAnim="@anim/to_top"
-            app:popEnterAnim="@anim/from_top"
-            app:popExitAnim="@anim/to_bottom" />
+            app:destination="@id/myStudioModification" />
     </fragment>
     <fragment
         android:id="@+id/captureFragment"
