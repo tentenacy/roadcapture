@@ -27,4 +27,5 @@
     <color name="gray">#8c8c8c</color>
     <color name="transparent">#00000000</color>
     <color name="bottom_sheet_background">#FBFBFB</color>
+    <color name="red">#ff0000</color>
 </resources>

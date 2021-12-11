@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/location_permission_container"
+    android:id="@+id/service_withdrawal_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textview_location_permission_title"
+        android:id="@+id/textview_service_withdrawal_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/setting_service_location_enable"
+        android:text="@string/service_withdrawal_title"
         android:textColor="@color/gray"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -18,58 +18,59 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/imageview_location_permission"
+        android:id="@+id/imageview_service_withdrawal"
         android:layout_width="128dp"
         android:layout_height="128dp"
         android:layout_marginTop="24dp"
-        android:src="@drawable/ic_location"
+        android:src="@drawable/ic_service_withdrawal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_location_permission_title" />
+        app:layout_constraintTop_toBottomOf="@id/textview_service_withdrawal_title" />
 
     <TextView
-        android:id="@+id/textview_location_permission_description"
-        style="@style/Head"
+        android:id="@+id/textview_service_withdrawal_description"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="48dp"
         android:gravity="center"
-        android:text="위치 서비스를 허용하면\n여행을 기록할 수 있습니다."
+        android:text="탈퇴한 계정은 복구할 수 없습니다.\n정말로 탈퇴하시겠습니까?"
+        style="@style/SubHead"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageview_location_permission" />
+        app:layout_constraintTop_toBottomOf="@id/imageview_service_withdrawal" />
 
     <Button
-        android:id="@+id/button_location_permission"
-        style="@style/Button"
+        android:id="@+id/button_service_withdrawal_confirm"
+        style="@style/ButtonWhite"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="24dp"
         android:background="@drawable/bottom_sheet_button"
-        android:text="@string/location_permission_setting"
+        android:text="@string/service_withdrawal_confirm"
         android:textSize="16sp"
+        android:textColor="@color/red"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_location_permission_description" />
+        app:layout_constraintTop_toBottomOf="@id/textview_service_withdrawal_description" />
 
     <Button
-        android:id="@+id/button_location_permission_cancel"
-        style="@style/SubHead"
+        android:id="@+id/button_service_withdrawal_cancel"
+        style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginHorizontal="24dp"
         android:layout_marginVertical="16dp"
         android:background="@drawable/bottom_sheet_button"
-        android:text="@string/location_permission_cancel"
-        android:textColor="@color/gray"
+        android:text="@string/service_withdrawal_cancel"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/button_location_permission" />
+        app:layout_constraintTop_toBottomOf="@id/button_service_withdrawal_confirm" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

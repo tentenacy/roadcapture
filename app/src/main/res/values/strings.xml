@@ -112,4 +112,7 @@
     <string name="setting_password_title">비밀번호 변경</string>
     <string name="setting_password_current_label">현재 비밀번호 입력</string>
     <string name="setting_password_button">변경하기</string>
+    <string name="service_withdrawal_title">서비스 탈퇴</string>
+    <string name="service_withdrawal_confirm">탈퇴하기</string>
+    <string name="service_withdrawal_cancel">취소하기</string>
 </resources>

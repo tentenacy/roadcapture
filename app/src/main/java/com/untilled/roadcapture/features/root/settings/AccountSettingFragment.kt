@@ -46,5 +46,9 @@ class AccountSettingFragment : Fragment() {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_accountSettingFragment_to_passwordSettingFragment)
         }
+        binding.textviewSettingAccountServiceWithdrawal.setOnClickListener {
+            val serviceWithdrawalBottomSheetDialog = ServiceWithdrawalBottomSheetDialog()
+            serviceWithdrawalBottomSheetDialog.show(childFragmentManager,"serviceWithdrawalBottomSheet")
+        }
     }
 }

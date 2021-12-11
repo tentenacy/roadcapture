@@ -61,7 +61,7 @@
 
         <TextView
             android:id="@+id/textview_setting_account"
-            android:textAppearance="@style/Head"
+            android:textAppearance="@style/HeadBold"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:text="@string/setting_account"
@@ -90,7 +90,7 @@
 
         <TextView
             android:id="@+id/textview_setting_service"
-            android:textAppearance="@style/Head"
+            android:textAppearance="@style/HeadBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
@@ -159,7 +159,7 @@
 
         <TextView
             android:id="@+id/textview_setting_support"
-            android:textAppearance="@style/Head"
+            android:textAppearance="@style/HeadBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
