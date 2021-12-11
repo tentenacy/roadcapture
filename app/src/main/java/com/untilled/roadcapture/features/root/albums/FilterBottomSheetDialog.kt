@@ -1,11 +1,16 @@
 package com.untilled.roadcapture.features.root.albums
 
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.FrameLayout
+import android.widget.TextView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.ModalBottomSheetFilterBinding
@@ -32,8 +37,15 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        expandFullHeight()
         initViews()
         setOnClickListeners()
+    }
+
+    private fun expandFullHeight(){
+        val bottomSheet = dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+        val behavior = BottomSheetBehavior.from<View>(bottomSheet!!)
+        behavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
     private fun initViews() {
@@ -46,6 +58,7 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
             radiobuttonFilterWholeDuration.isChecked = true
             radiobuttonFilterSortingLatest.isChecked = true
         }
+
     }
 
     private fun setOnClickListeners() {
@@ -65,6 +78,7 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
             onCreateDatePicker(it as Button)
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
