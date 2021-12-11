@@ -1,18 +1,22 @@
 package com.untilled.roadcapture.features.root.settings
 
+import android.app.AlertDialog
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentSettingAccountBinding
 import dagger.hilt.android.AndroidEntryPoint
+import org.w3c.dom.Text
 
 @AndroidEntryPoint
 class AccountSettingFragment : Fragment() {
-    private var _binding : FragmentSettingAccountBinding? = null
+    private var _binding: FragmentSettingAccountBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -20,21 +24,23 @@ class AccountSettingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSettingAccountBinding.inflate(inflater,container,false)
+        _binding = FragmentSettingAccountBinding.inflate(inflater, container, false)
 
         return binding.root
 
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setOnClickListeners()
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }
 
-    private fun setOnClickListeners(){
+    private fun setOnClickListeners() {
         binding.imageviewSettingAccountBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
@@ -48,7 +54,34 @@ class AccountSettingFragment : Fragment() {
         }
         binding.textviewSettingAccountServiceWithdrawal.setOnClickListener {
             val serviceWithdrawalBottomSheetDialog = ServiceWithdrawalBottomSheetDialog()
-            serviceWithdrawalBottomSheetDialog.show(childFragmentManager,"serviceWithdrawalBottomSheet")
+            serviceWithdrawalBottomSheetDialog.show(
+                childFragmentManager,
+                "serviceWithdrawalBottomSheet"
+            )
         }
+        binding.textviewSettingAccountLogout.setOnClickListener {
+            showLogoutConfirmationDialog()
+        }
+    }
+
+    private fun showLogoutConfirmationDialog() {
+        val layoutInflater = LayoutInflater.from(requireContext())
+        val dialogView = layoutInflater.inflate(R.layout.alert_dialog_logout_confirmation, null)
+
+        val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
+            .setView(dialogView)
+            .create()
+
+        val textViewLogout = dialogView.findViewById<TextView>(R.id.textview_logout_confirmation_logout)
+        val textViewCancel = dialogView.findViewById<TextView>(R.id.textview_logout_confirmation_cancel)
+
+        textViewLogout?.setOnClickListener {
+
+        }
+        textViewCancel?.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 }

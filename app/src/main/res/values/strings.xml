@@ -115,4 +115,7 @@
     <string name="service_withdrawal_title">서비스 탈퇴</string>
     <string name="service_withdrawal_confirm">탈퇴하기</string>
     <string name="service_withdrawal_cancel">취소하기</string>
+    <string name="logout_confirmation_title">정말 로그아웃 하시겠습니까?</string>
+    <string name="logout_confirmation_logout">로그아웃</string>
+    <string name="logout_confirmation_cancel">취소</string>
 </resources>

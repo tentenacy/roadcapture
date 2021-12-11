@@ -6,4 +6,5 @@
     <dimen name="bottom_sheet_corner_radius">16dp</dimen>
     <dimen name="comment_corner_radius">8dp</dimen>
     <dimen name="search_edittext_corner_radius">8dp</dimen>
+    <dimen name="dialog_corner_radius">16dp</dimen>
 </resources>
