@@ -9,8 +9,10 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.provider.Settings
 import android.util.Log
 import android.view.*
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
@@ -296,14 +298,30 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun showBackgroundPermissionDialog(requestPermission: () -> Unit) {
-        val builder = AlertDialog.Builder(requireContext(), R.style.DialogTheme)
-        builder.setTitle("위치 권한 항상 허용")
-            .setMessage("여행을 기록하기 위해서는 위치권한 항상 허용이 필요합니다. 설정으로 이동합니다.")
-            .setPositiveButton("확인") { _, _ ->
-                requestPermission()
-            }
-            .setNegativeButton("취소") {_,_ -> }
+        val layoutInflater = LayoutInflater.from(requireContext())
+        val dialogView = layoutInflater.inflate(R.layout.alert_dialog_background_location_permission, null)
+
+        val dialog = android.app.AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
+            .setView(dialogView)
             .create()
-            .show()
+
+        val textViewConfirm = dialogView.findViewById<TextView>(R.id.textview_background_location_permission_confirm)
+        val textViewCancel = dialogView.findViewById<TextView>(R.id.textview_background_location_permission_cancel)
+
+        textViewConfirm?.setOnClickListener {
+            //requestPermission()
+            startActivity(
+                Intent().apply {
+                    action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
+                    data = Uri.fromParts("package", requireActivity().packageName, null)
+                }
+            )
+            dialog.dismiss()
+        }
+        textViewCancel?.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 }

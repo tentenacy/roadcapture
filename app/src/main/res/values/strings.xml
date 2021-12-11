@@ -118,4 +118,8 @@
     <string name="logout_confirmation_title">정말 로그아웃 하시겠습니까?</string>
     <string name="logout_confirmation_logout">로그아웃</string>
     <string name="logout_confirmation_cancel">취소</string>
+    <string name="background_location_permission_title">위치 권한 항상 허용</string>
+    <string name="background_location_permission_description">여행을 기록하기 위해서는\n위치 권한 항상 허용이 필요합니다.\n확인을 누르면 설정으로 이동합니다.</string>
+    <string name="background_location_permission_confirm">확인</string>
+    <string name="background_location_permission_cancel">취소</string>
 </resources>
