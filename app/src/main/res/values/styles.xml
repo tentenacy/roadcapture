@@ -4,12 +4,20 @@
     <style name="ActionBarTitle" parent="android:TextAppearance">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:gravity">start|center</item>
     </style>
 
     <style name="Button" parent="android:TextAppearance">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/primaryColor</item>
         <item name="backgroundTint">@color/secondaryColor</item>
+    </style>
+
+    <style name="BackArrow" parent="android:TextAppearance">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:src">@drawable/ic_back</item>
     </style>
 
     <style name="ButtonWhite" parent="android:TextAppearance">
@@ -19,6 +27,48 @@
         <item name="android:stateListAnimator">@null</item>
         <item name="android:elevation">2dp</item>
     </style>
+
+    <style name="BottomSheetButton" parent="android:TextAppearance">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primaryColor</item>
+        <item name="backgroundTint">@color/secondaryColor</item>
+        <item name="android:background">@drawable/bottom_sheet_button</item>
+    </style>
+
+    <style name="BottomSheetButtonWhite" parent="android:TextAppearance">
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/bottom_sheet_button</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="backgroundTint">@color/white</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:elevation">2dp</item>
+    </style>
+
+    <style name="BottomSheetHead" parent="android:TextAppearance">
+        <item name="android:textSize">24sp</item>
+        <item name="android:textColor">@color/gray</item>
+    </style>
+
+    <style name="DialogButton" parent="android:TextAppearance">
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/primaryTextColor</item>
+    </style>
+
+    <style name="RadioButton" parent="android:TextAppearance">
+        <item name="android:textSize">14sp</item>
+        <item name="android:button">@null</item>
+        <item name="android:checked">false</item>
+        <item name="android:elevation">1dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:background">@drawable/selector_radio_filter_button</item>
+        <item name="android:textColor">@drawable/selector_radio_filter_text</item>
+    </style>
+
+
 
     <style name="Head" parent="android:TextAppearance">
         <item name="android:textSize">20sp</item>
@@ -126,23 +176,24 @@
 
     <style name="Theme.RoadCapture.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
-<!--    <style name="CustomBottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">-->
-<!--        <item name="bottomSheetStyle">@style/CustomBottomSheet</item>-->
-<!--    </style>-->
+    <!--    <style name="CustomBottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">-->
+    <!--        <item name="bottomSheetStyle">@style/CustomBottomSheet</item>-->
+    <!--    </style>-->
 
-<!--    <style name="CustomBottomSheet" parent="Widget.MaterialComponents.BottomSheet.Modal">-->
-<!--        <item name="shapeAppearanceOverlay">@style/CustomShapeAppearanceBottomSheetDialog</item>-->
-<!--    </style>-->
+    <!--    <style name="CustomBottomSheet" parent="Widget.MaterialComponents.BottomSheet.Modal">-->
+    <!--        <item name="shapeAppearanceOverlay">@style/CustomShapeAppearanceBottomSheetDialog</item>-->
+    <!--    </style>-->
 
-<!--    <style name="CustomShapeAppearanceBottomSheetDialog" parent="">-->
-<!--        <item name="cornerFamily">rounded</item>-->
-<!--        <item name="cornerSizeTopRight">@dimen/bottom_sheet_corner_radius</item>-->
-<!--        <item name="cornerSizeTopLeft">@dimen/bottom_sheet_corner_radius</item>-->
-<!--    </style>-->
+    <!--    <style name="CustomShapeAppearanceBottomSheetDialog" parent="">-->
+    <!--        <item name="cornerFamily">rounded</item>-->
+    <!--        <item name="cornerSizeTopRight">@dimen/bottom_sheet_corner_radius</item>-->
+    <!--        <item name="cornerSizeTopLeft">@dimen/bottom_sheet_corner_radius</item>-->
+    <!--    </style>-->
     <style name="BottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/BottomSheet</item>
         <item name="android:colorBackground">@color/white</item>
     </style>
+
     <style name="BottomSheet" parent="Widget.MaterialComponents.BottomSheet.Modal">
         <item name="backgroundTint">@android:color/transparent</item>
     </style>

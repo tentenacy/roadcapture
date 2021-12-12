@@ -31,11 +31,7 @@
 
             <ImageView
                 android:id="@+id/imageview_setting_account_back"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:padding="16dp"
-                android:layout_gravity="start|center"
-                android:src="@drawable/ic_back" />
+                style="@style/BackArrow" />
 
             <TextView
                 android:id="@+id/textview_setting_account_title"
@@ -43,7 +39,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginStart="64dp"
-                android:gravity="start|center"
                 android:text="@string/setting_account_title" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -61,7 +56,7 @@
 
         <TextView
             android:id="@+id/textview_setting_account_connected"
-            android:textAppearance="@style/HeadBold"
+            style="@style/HeadBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
@@ -71,7 +66,7 @@
 
         <TextView
             android:id="@+id/textview_setting_account_connected_email"
-            android:textAppearance="@style/SubHead"
+            style="@style/SubHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
@@ -99,7 +94,7 @@
 
         <TextView
             android:id="@+id/textview_setting_account_username"
-            android:textAppearance="@style/SubHead"
+            style="@style/SubHead"
             android:layout_width="0dp"
             android:layout_marginTop="24dp"
             android:layout_height="64dp"
@@ -128,7 +123,7 @@
 
         <TextView
             android:id="@+id/textview_setting_account_password"
-            android:textAppearance="@style/SubHead"
+            style="@style/SubHead"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:text="@string/setting_account_password"
@@ -156,7 +151,7 @@
 
         <TextView
             android:id="@+id/textview_setting_account_logout"
-            android:textAppearance="@style/SubHead"
+            style="@style/SubHead"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:gravity="center|start"
@@ -175,7 +170,7 @@
 
         <TextView
             android:id="@+id/textview_setting_account_service_withdrawal"
-            android:textAppearance="@style/SubHead"
+            style="@style/SubHead"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:layout_marginBottom="24dp"

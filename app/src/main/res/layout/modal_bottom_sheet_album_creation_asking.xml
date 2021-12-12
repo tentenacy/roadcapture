@@ -10,13 +10,12 @@
 
         <TextView
             android:id="@+id/textview_album_creation_asking_title"
-            android:textSize="24sp"
+            style="@style/BottomSheetHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
             android:text="@string/album_creation_asking_title"
-            android:textColor="@color/gray"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,48 +24,36 @@
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_marginTop="24dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:src="@drawable/ic_photo_album"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.43"
-            app:layout_constraintTop_toBottomOf="@id/textview_album_creation_asking_title"
-            android:src="@drawable/ic_photo_album"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_album_creation_asking_title" />
 
         <Button
             android:id="@+id/button_album_creation_asking_create"
-            style="@style/Button"
+            style="@style/BottomSheetButton"
             android:layout_width="0dp"
             android:layout_height="56dp"
+            android:layout_marginHorizontal="24dp"
             android:layout_marginTop="24dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
-            android:background="@drawable/bottom_sheet_button"
             android:text="@string/album_creation_asking_create"
-            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imageview_album_creation_asking_album" />
 
         <Button
             android:id="@+id/button_album_creation_asking_cancel"
-            style="@style/SubHead"
+            style="@style/BottomSheetButtonWhite"
             android:layout_width="0dp"
             android:layout_height="56dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginVertical="16dp"
             android:text="@string/album_creation_asking_cancel"
             android:textColor="@color/gray"
-            android:background="@drawable/bottom_sheet_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/button_album_creation_asking_create" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

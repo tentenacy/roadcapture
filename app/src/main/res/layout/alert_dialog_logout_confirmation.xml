@@ -7,12 +7,12 @@
 
     <TextView
         android:id="@+id/textview_logout_confirmation_title"
+        style="@style/HeadBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="48dp"
         android:layout_marginTop="32dp"
         android:text="@string/logout_confirmation_title"
-        android:textAppearance="@style/HeadBold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -29,12 +29,10 @@
 
     <TextView
         android:id="@+id/textview_logout_confirmation_logout"
+        style="@style/DialogButton"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:background="?attr/selectableItemBackground"
-        android:gravity="center"
         android:text="@string/logout_confirmation_logout"
-        android:textAppearance="@style/SubHeadBold"
         android:textColor="@color/secondaryColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,12 +49,10 @@
 
     <TextView
         android:id="@+id/textview_logout_confirmation_cancel"
+        style="@style/DialogButton"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:background="?attr/selectableItemBackground"
-        android:gravity="center"
         android:text="@string/logout_confirmation_cancel"
-        android:textAppearance="@style/SubHeadBold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_logout_confirmation_divider_second" />

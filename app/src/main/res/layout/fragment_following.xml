@@ -32,11 +32,7 @@
 
             <ImageView
                 android:id="@+id/imageview_following_back"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_gravity="start|center"
-                android:padding="16dp"
-                android:src="@drawable/ic_back" />
+                style="@style/BackArrow" />
 
             <TextView
                 android:id="@+id/textview_following_title"
@@ -44,7 +40,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginStart="64dp"
-                android:gravity="start|center"
                 android:text="@string/following_title" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>

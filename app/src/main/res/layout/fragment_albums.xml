@@ -41,7 +41,6 @@
                         style="@style/ActionBarTitle"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
-                        android:gravity="start|center"
                         android:paddingHorizontal="16dp"
                         android:text="@string/app_name" />
 

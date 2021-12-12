@@ -31,11 +31,7 @@
 
             <ImageView
                 android:id="@+id/imageview_setting_back"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:padding="16dp"
-                android:layout_gravity="start|center"
-                android:src="@drawable/ic_back" />
+                style="@style/BackArrow"/>
 
             <TextView
                 android:id="@+id/textview_setting_title"
@@ -43,7 +39,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginStart="64dp"
-                android:gravity="start|center"
                 android:text="@string/setting_title" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -61,7 +56,7 @@
 
         <TextView
             android:id="@+id/textview_setting_account"
-            android:textAppearance="@style/HeadBold"
+            style="@style/HeadBold"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:text="@string/setting_account"
@@ -90,7 +85,7 @@
 
         <TextView
             android:id="@+id/textview_setting_service"
-            android:textAppearance="@style/HeadBold"
+            style="@style/HeadBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
@@ -104,7 +99,6 @@
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:layout_marginStart="10dp"
-            android:gravity="center|start"
             android:text="@string/setting_service_location"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service"
             app:layout_constraintEnd_toEndOf="parent"
@@ -159,7 +153,7 @@
 
         <TextView
             android:id="@+id/textview_setting_support"
-            android:textAppearance="@style/HeadBold"
+            style="@style/HeadBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
@@ -173,7 +167,6 @@
             style="@style/ListLeftAlign"
             android:layout_width="0dp"
             android:layout_height="64dp"
-            android:gravity="center|left"
             android:text="@string/setting_support_version"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
             app:layout_constraintEnd_toEndOf="parent"
@@ -203,7 +196,6 @@
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:text="@string/setting_support_opinion"
-            android:gravity="center|left"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_support_version" />
@@ -231,7 +223,6 @@
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:text="@string/setting_support_terms"
-            android:gravity="center|left"
             app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_support_opinion" />

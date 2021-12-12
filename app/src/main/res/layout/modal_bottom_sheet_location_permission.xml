@@ -51,7 +51,6 @@
         android:layout_marginTop="24dp"
         android:background="@drawable/bottom_sheet_button"
         android:text="@string/location_permission_setting"
-        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +58,7 @@
 
     <Button
         android:id="@+id/button_location_permission_cancel"
-        style="@style/SubHead"
+        style="@style/ButtonWhite"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginHorizontal="24dp"

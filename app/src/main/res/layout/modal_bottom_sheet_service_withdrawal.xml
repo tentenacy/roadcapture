@@ -44,14 +44,12 @@
 
     <Button
         android:id="@+id/button_service_withdrawal_confirm"
-        style="@style/ButtonWhite"
+        style="@style/BottomSheetButtonWhite"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/bottom_sheet_button"
         android:text="@string/service_withdrawal_confirm"
-        android:textSize="16sp"
         android:textColor="@color/red"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -60,14 +58,12 @@
 
     <Button
         android:id="@+id/button_service_withdrawal_cancel"
-        style="@style/Button"
+        style="@style/BottomSheetButton"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginHorizontal="24dp"
         android:layout_marginVertical="16dp"
-        android:background="@drawable/bottom_sheet_button"
         android:text="@string/service_withdrawal_cancel"
-        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

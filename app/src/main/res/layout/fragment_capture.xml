@@ -22,11 +22,7 @@
 
             <ImageView
                 android:id="@+id/imageview_capture_back"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_margin="8dp"
-                android:padding="8dp"
-                android:src="@drawable/ic_back"
+                style="@style/BackArrow"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

@@ -29,11 +29,7 @@
 
                 <ImageView
                     android:id="@+id/imageview_picture_editor_back"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_gravity="start|center"
-                    android:padding="16dp"
-                    android:src="@drawable/ic_back" />
+                    style="@style/BackArrow"/>
 
                 <TextView
                     android:id="@+id/textview_picture_editor_title"
@@ -41,7 +37,6 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_marginStart="16dp"
-                    android:gravity="start|center"
                     android:text="@string/picture_editor_title" />
 
                 <ImageView
@@ -95,7 +90,7 @@
                 style="@style/Body"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:gravity="center|right"
+                android:gravity="center|end"
                 android:hint="@string/picture_editor_user_input"
                 android:text="@{picture.date}"
                 app:layout_constraintBottom_toBottomOf="@id/textview_picture_editor_date"
@@ -117,7 +112,7 @@
                 style="@style/Body"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:gravity="center|right"
+                android:gravity="center|end"
                 android:hint="@string/picture_editor_user_input"
                 android:text="@{picture.searchResult.placeName}"
                 app:layout_constraintBottom_toBottomOf="@id/textview_picture_editor_place"
@@ -140,7 +135,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:background="@null"
-                android:gravity="center|right"
+                android:gravity="center|end"
                 android:hint="@string/picture_editor_user_input"
                 android:inputType="text|textImeMultiLine"
                 android:maxLines="1"
@@ -167,7 +162,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="16dp"
                 android:background="@null"
-                android:gravity="top|left"
+                android:gravity="top|end"
                 android:hint="@string/picture_editor_user_input"
                 android:maxLines="10"
                 android:text="@{picture.description}"

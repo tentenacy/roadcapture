@@ -38,11 +38,7 @@
 
                 <ImageView
                     android:id="@+id/imageview_comment_back"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:layout_gravity="start|center"
-                    android:padding="16dp"
-                    android:src="@drawable/ic_back" />
+                    style="@style/BackArrow" />
 
                 <TextView
                     android:id="@+id/textview_albums_title"
@@ -50,7 +46,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginStart="64dp"
-                    android:gravity="start|center"
                     android:text="댓글 0" />
 
 
@@ -80,6 +75,7 @@
 
             <EditText
                 android:id="@+id/edittext_comment_input"
+                style="@style/CommentContent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
@@ -88,8 +84,7 @@
                 android:background="@null"
                 android:gravity="center_vertical"
                 android:hint="@string/comment_input_hint"
-                android:inputType="text"
-                android:textAppearance="@style/CommentContent" />
+                android:inputType="text" />
 
             <ImageView
                 android:id="@+id/imageview_comment_input"
@@ -97,10 +92,10 @@
                 android:layout_height="24dp"
                 android:layout_gravity="center|end"
                 android:layout_marginEnd="16dp"
-                app:tint="@color/secondaryColor"
-                android:src="@drawable/ic_send" />
+                android:src="@drawable/ic_send"
+                app:tint="@color/secondaryColor" />
 
-            </com.google.android.material.bottomnavigation.BottomNavigationView>
+        </com.google.android.material.bottomnavigation.BottomNavigationView>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
