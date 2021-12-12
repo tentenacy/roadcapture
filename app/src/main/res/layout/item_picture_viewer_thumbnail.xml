@@ -30,18 +30,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:pictureViewerBackgroundImage="@{album.thumbnailUrl}"
             tools:src="@drawable/sample_thumbnail" />
 
-        <View
-            android:id="@+id/item_picture_viewer_thumbnail_background_overlay"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="@drawable/overlay_gradient_picture_viewer"
-            app:layout_constraintBottom_toBottomOf="@id/imageview_item_picture_viewer_thumbnail_background"
-            app:layout_constraintEnd_toEndOf="@id/imageview_item_picture_viewer_thumbnail_background"
-            app:layout_constraintStart_toStartOf="@id/imageview_item_picture_viewer_thumbnail_background"
-            app:layout_constraintTop_toTopOf="@id/imageview_item_picture_viewer_thumbnail_background" />
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageview_item_picture_viewer_thumbnail_profile"

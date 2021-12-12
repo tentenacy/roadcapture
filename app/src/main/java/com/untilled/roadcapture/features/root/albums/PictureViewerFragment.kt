@@ -1,26 +1,16 @@
 package com.untilled.roadcapture.features.root.albums
 
-import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.PagerSnapHelper
-import androidx.recyclerview.widget.SnapHelper
-import com.airbnb.lottie.LottieAnimationView
-import com.untilled.roadcapture.R
+import com.bumptech.glide.Glide
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.entity.Album
 import com.untilled.roadcapture.databinding.FragmentPictureViewerBinding
-import com.untilled.roadcapture.features.root.RootFragment
-import com.untilled.roadcapture.features.root.RootFragmentDirections
-import com.untilled.roadcapture.features.root.capture.PictureEditorFragmentArgs
-import com.untilled.roadcapture.homeAlbum
 import com.untilled.roadcapture.pictureViewerContent
 import com.untilled.roadcapture.pictureViewerThumbnail
 import com.untilled.roadcapture.utils.DummyDataSet
@@ -61,6 +51,10 @@ class PictureViewerFragment : Fragment() {
 
     private fun initAdapter() {
         val args: PictureViewerFragmentArgs by navArgs()
+        Glide.with(binding.imageviewPictureViewerBackground.context)
+            .load(args.album.thumbnailUrl)
+            .centerCrop()
+            .into(binding.imageviewPictureViewerBackground)
         PagerSnapHelper().attachToRecyclerView(binding.recyclerviewPictureViewer)
         binding.recyclerviewPictureViewer.withModels {
             pictureViewerThumbnail {

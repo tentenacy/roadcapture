@@ -20,8 +20,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/item_picture_viewer_content_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black">
+        android:layout_height="match_parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/overlay_gradient_picture_viewer"/>
 
         <ImageView
             android:id="@+id/imageview_item_picture_viewer_content_background"

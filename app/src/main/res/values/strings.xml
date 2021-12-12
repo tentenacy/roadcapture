@@ -122,4 +122,5 @@
     <string name="background_location_permission_description">여행을 기록하기 위해서는\n위치 권한 항상 허용이 필요합니다.\n확인을 누르면 설정으로 이동합니다.</string>
     <string name="background_location_permission_confirm">확인</string>
     <string name="background_location_permission_cancel">취소</string>
+    <string name="password_find_button">확인</string>
 </resources>

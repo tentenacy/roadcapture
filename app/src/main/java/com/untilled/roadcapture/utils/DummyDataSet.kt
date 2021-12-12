@@ -498,21 +498,21 @@ object DummyDataSet {
 
     val picture = listOf(
         Picture(
-            imageUri = "https://cdn.pixabay.com/photo/2018/07/05/12/24/mountain-3518219_960_720.jpg",
+            imageUri = "https://mblogthumb-phinf.pstatic.net/MjAxOTAxMDJfMjcz/MDAxNTQ2NDM5MjA3NjM2.qZOKA4N7NWbBjNH-ZcWdSvDXDAqpFbPc1_WGoY_A9gsg.6Vd7g-wE1Mt0Afe9_JwdONfQ8w9qo5OSOpq_7hbJQOQg.PNG.comeinto_/SE-c6d9cab3-86b1-4cfa-a3a1-72db7764c20e.png?type=w800",
             date = "9월 24일",
             searchResult = null,
             name = null,
             description = "PictureViewer 테스트 중입니다."
         ),
         Picture(
-            imageUri = "https://cdn.pixabay.com/photo/2017/10/15/13/54/doll-2853763_960_720.jpg",
+            imageUri = "https://mblogthumb-phinf.pstatic.net/MjAxOTAxMDJfMjg1/MDAxNTQ2NDM5MjA5NDkx.KlJz_JE814P9bjsdYtf7lOLhON-MPDLvgveGDuv5mnog.DnF_JGAjkuOBGpEksGO11pvaF1cJ8YTa_ryffxMTx9Yg.PNG.comeinto_/SE-a303eff9-aa83-4dc5-b2ea-b3459a31de53.png?type=w800",
             date = "5월 19일",
             searchResult = null,
             name = null,
             description = "저번에 이어 이번에도 제주도로 향했습니다. 이번에는 저만 알고 있는 제주도의 특별 여행 코스를 안내해드리겠습니다!"
         ),
         Picture(
-            imageUri = "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/2fG8/image/wgtUIZSe7IVwsEGZFg1MNf9CRZ0.jpg",
+            imageUri = "https://mblogthumb-phinf.pstatic.net/MjAxOTAxMDJfMTg1/MDAxNTQ2NDM5MjEzODI0.9v4NAMbYyVr_86gPd_-D4n3EsJpXQteCuPyhngbKCE0g.L6neteSOx3JVK1oKld0oo0Mt1_IdhrvdLINQiAa01BMg.PNG.comeinto_/SE-c013fe0e-dad9-4aeb-a1fd-bae00add7a71.png?type=w800",
             date = "4월 11일",
             searchResult = null,
             name = null,
