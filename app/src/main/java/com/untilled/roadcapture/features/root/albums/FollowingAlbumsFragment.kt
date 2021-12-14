@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
@@ -85,7 +86,23 @@ class FollowingAlbumsFragment : Fragment() {
                                 animator.start()
                                 flagLike = false
                             }
-
+                            R.id.imageview_item_home_album_more -> {
+                                val popupMenu = PopupMenu(requireContext(), clickedView)
+                                popupMenu.apply {
+                                    menuInflater.inflate(R.menu.popup_menu_albums_more, popupMenu.menu)
+                                    setOnMenuItemClickListener { item ->
+                                        when (item.itemId) {
+                                            R.id.popup_menu_albums_more_share -> {
+                                            }
+                                            R.id.popup_menu_albums_more_report -> {
+                                            }
+                                            R.id.popup_menu_albums_more_hide -> {
+                                            }
+                                        }
+                                        true
+                                    }
+                                }.show()
+                            }
                         }
                     }
                 }

@@ -13,7 +13,7 @@
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar_search"
             android:layout_width="0dp"
-            android:layout_height="48dp"
+            android:layout_height="56dp"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,6 +44,7 @@
         <LinearLayout
             android:id="@+id/linear_search_input"
             android:layout_width="0dp"
+            android:layout_marginTop="8dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
             android:background="@drawable/search_edit_text"

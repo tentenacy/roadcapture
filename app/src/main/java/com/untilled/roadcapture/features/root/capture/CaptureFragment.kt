@@ -1,6 +1,7 @@
 package com.untilled.roadcapture.features.root.capture
 
 import android.Manifest
+import android.animation.ObjectAnimator
 import android.app.Activity.RESULT_OK
 import android.content.DialogInterface
 import android.content.Intent
@@ -15,6 +16,7 @@ import android.view.*
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -30,6 +32,7 @@ import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentCaptureBinding
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.net.toUri
+import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -45,15 +48,18 @@ import com.karumi.dexter.listener.single.PermissionListener
 import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener
 import com.naver.maps.map.CameraUpdate
 import com.naver.maps.map.overlay.OverlayImage
-import com.untilled.roadcapture.utils.extension.navigationHeight
-import com.untilled.roadcapture.utils.extension.setStatusBarOrigin
-import com.untilled.roadcapture.utils.extension.setStatusBarTransparent
-import com.untilled.roadcapture.utils.extension.statusBarHeight
+import com.untilled.roadcapture.utils.extension.*
 import com.untilled.roadcapture.utils.getCircularBitmap
 
 
 @AndroidEntryPoint
 class CaptureFragment : Fragment(), OnMapReadyCallback {
+    companion object {
+        private const val RUN: Int = 1
+        private const val PAUSE: Int = 2
+        private const val STOP: Int = 3
+    }
+
     private var _binding: FragmentCaptureBinding? = null
     private val binding get() = _binding!!
 
@@ -62,6 +68,8 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     private var naverMap: NaverMap? = null
 
     private var picture: Picture? = null
+
+    private var status: Int = STOP
 
     // 갤러리 사진 가져오는 intent 콜백 등록
     private val getContent = registerForActivityResult(
@@ -98,9 +106,13 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
 
         requireActivity().apply {
             setStatusBarTransparent()
-            binding.coordinatorCapture.setPadding(0, requireContext().statusBarHeight(), 0, requireContext().navigationHeight() )
+            binding.coordinatorCapture.setPadding(
+                0,
+                requireContext().statusBarHeight(),
+                0,
+                requireContext().navigationHeight()
+            )
         }
-
         setOnClickListeners()
     }
 
@@ -115,13 +127,15 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         _binding = null
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     private fun setOnClickListeners() {
         binding.fabCaptureCapture.setOnClickListener {
             //requestCameraPermission()
             requestSinglePermission(
                 Manifest.permission.CAMERA,
                 "사진을 찍기위해서는 카메라 권한이 필요합니다. 설정으로 이동합니다.",
-            ) { Navigation.findNavController(binding.root)
+            ) {
+                Navigation.findNavController(binding.root)
                     .navigate(R.id.action_captureFragment_to_cameraFragment)
             }
         }
@@ -132,9 +146,54 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
             pickFromGallery()
         }
         binding.fabCaptureRecord.setOnClickListener {
-            requestLocationPermission {
-                // Todo 기록시작
-                Toast.makeText(requireContext(), "기록 시작", Toast.LENGTH_SHORT).show()
+            when (status) {
+                STOP -> requestLocationPermission {     // 초기 상태(정지)
+                    // Todo 기록시작
+                    status = RUN
+                    binding.fabCaptureRecord.setImageResource(R.drawable.ic_pause)
+                    binding.fabCaptureStop.show()
+                    Toast.makeText(requireContext(), "기록 시작", Toast.LENGTH_SHORT).show()
+                }
+                RUN -> {    // 기록 중
+                    status = PAUSE
+                    ObjectAnimator.ofFloat(
+                        binding.fabCaptureStop,
+                        "translationX",
+                        requireContext().getPxFromDp(32f).toFloat()
+                    ).apply { start() }
+                    ObjectAnimator.ofFloat(
+                        binding.fabCaptureRecord,
+                        "translationX",
+                        -requireContext().getPxFromDp(32f).toFloat()
+                    ).apply { start() }
+                    binding.fabCaptureRecord.setImageResource(R.drawable.ic_play)
+                    Toast.makeText(requireContext(), "일시정지", Toast.LENGTH_SHORT).show()
+                }
+                PAUSE -> {  // 일시 정지
+                    status = RUN
+                    ObjectAnimator.ofFloat(binding.fabCaptureStop, "translationX", 0f)
+                        .apply { start() }
+                    ObjectAnimator.ofFloat(binding.fabCaptureRecord, "translationX", 0f)
+                        .apply { start() }
+                    binding.fabCaptureRecord.setImageResource(R.drawable.ic_pause)
+                    Toast.makeText(requireContext(), "기록 재개", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        binding.fabCaptureStop.setOnClickListener {
+            when (status) {
+                PAUSE -> {
+                    status = STOP
+                    ObjectAnimator.ofFloat(binding.fabCaptureStop, "translationX", 0f)
+                        .apply {
+                            start()
+                            binding.fabCaptureStop.hide()
+                        }
+                    ObjectAnimator.ofFloat(binding.fabCaptureRecord, "translationX", 0f).apply {
+                        start()
+                    }
+                    Toast.makeText(requireContext(), "기록 중지", Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
@@ -185,31 +244,40 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         requestSinglePermission(
             Manifest.permission.ACCESS_FINE_LOCATION,
             "지도에 현재 위치를 표시하기 위해서는 위치권한이 필요합니다. 설정으로 이동합니다."
-        ){
+        ) {
             //Todo 현재 위치 지도에 표시
         }
         getNavArgs()
     }
 
     private fun requestLocationPermission(startRecord: () -> Unit) {
-        when(Build.VERSION.SDK_INT) {
+        when (Build.VERSION.SDK_INT) {
             in 23..28 -> {  // android 9.0 (api 28 이하)
-                requestSinglePermission(Manifest.permission.ACCESS_FINE_LOCATION,
+                requestSinglePermission(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
                     "여행 기록을 위해서는 위치권한 항상 허용이 필요합니다. 설정으로 이동합니다."
                 ) {
                     startRecord()
                 }
             }
             29 -> { // android 10.0 (api 29)
-                if(ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-                    requestSinglePermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                if (ContextCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    requestSinglePermission(
+                        Manifest.permission.ACCESS_BACKGROUND_LOCATION,
                         "여행을 기록하기 위해서는 위치권한 항상 허용이 필요합니다. 설정으로 이동합니다."
                     ) {
                         startRecord()
                     }
                 } else {
-                    requestMultiplePermission(arrayListOf(
-                        Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_BACKGROUND_LOCATION),
+                    requestMultiplePermission(
+                        arrayListOf(
+                            Manifest.permission.ACCESS_FINE_LOCATION,
+                            Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                        ),
                         "여행 기록을 위해서는 위치권한 항상 허용이 필요합니다. 설정으로 이동합니다."
                     ) {
                         startRecord()
@@ -218,12 +286,19 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
             }
             30 -> { // android 11.0 (api 30)
                 when (PackageManager.PERMISSION_GRANTED) {
-                    ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION) -> {
+                    ContextCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.ACCESS_BACKGROUND_LOCATION
+                    ) -> {
                         startRecord()
                     }
-                    ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) -> {
+                    ContextCompat.checkSelfPermission(
+                        requireContext(),
+                        Manifest.permission.ACCESS_FINE_LOCATION
+                    ) -> {
                         showBackgroundPermissionDialog {
-                            requestSinglePermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                            requestSinglePermission(
+                                Manifest.permission.ACCESS_BACKGROUND_LOCATION,
                                 "여행을 기록하기 위해서는 위치권한 항상 허용이 필요합니다. 설정으로 이동합니다."
                             ) {
                                 startRecord()
@@ -231,11 +306,13 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                         }
                     }
                     else -> {
-                        requestSinglePermission(Manifest.permission.ACCESS_FINE_LOCATION,
+                        requestSinglePermission(
+                            Manifest.permission.ACCESS_FINE_LOCATION,
                             "여행을 기록하기 위해서는 위치권한 항상 허용이 필요합니다. 설정으로 이동합니다."
                         ) {
                             showBackgroundPermissionDialog {
-                                requestSinglePermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                                requestSinglePermission(
+                                    Manifest.permission.ACCESS_BACKGROUND_LOCATION,
                                     "여행을 기록하기 위해서는 위치권한 항상 허용이 필요합니다. 설정으로 이동합니다."
                                 ) {
                                     startRecord()
@@ -248,32 +325,53 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun requestSinglePermission(permission: String, deniedMessage: String, logic: () -> Unit) {
-        val basicPermissionListener : PermissionListener = object : PermissionListener {
-            override fun onPermissionGranted(p0: PermissionGrantedResponse?) { logic() } // 권한 허용 됬을때
-            override fun onPermissionDenied(p0: PermissionDeniedResponse?) { }    // 권한 거부 됬을대
-            override fun onPermissionRationaleShouldBeShown(p0: PermissionRequest?, p1: PermissionToken?) { }
+    private fun requestSinglePermission(
+        permission: String,
+        deniedMessage: String,
+        logic: () -> Unit
+    ) {
+        val basicPermissionListener: PermissionListener = object : PermissionListener {
+            override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
+                logic()
+            } // 권한 허용 됬을때
+
+            override fun onPermissionDenied(p0: PermissionDeniedResponse?) {}    // 권한 거부 됬을대
+            override fun onPermissionRationaleShouldBeShown(
+                p0: PermissionRequest?,
+                p1: PermissionToken?
+            ) {
+            }
         }
         val snackbarPermissionListener: PermissionListener =
             SnackbarOnDeniedPermissionListener.Builder
                 .with(view, deniedMessage)
                 .withOpenSettingsButton("설정")
                 .withCallback(object : Snackbar.Callback() {
-                    override fun onShown(snackbar: Snackbar) { }
-                    override fun onDismissed(snackbar: Snackbar, event: Int) { }
+                    override fun onShown(snackbar: Snackbar) {}
+                    override fun onDismissed(snackbar: Snackbar, event: Int) {}
                 }).build()
 
         Dexter.withContext(requireContext())
             .withPermission(permission)
-            .withListener(CompositePermissionListener(basicPermissionListener, snackbarPermissionListener)).check()
+            .withListener(
+                CompositePermissionListener(
+                    basicPermissionListener,
+                    snackbarPermissionListener
+                )
+            ).check()
     }
 
-    private fun requestMultiplePermission(permissions: ArrayList<String>, deniedMessage: String, logic: () -> Unit ) {
-        val basicMultiplePermissionListener : MultiplePermissionsListener = object :
+    private fun requestMultiplePermission(
+        permissions: ArrayList<String>,
+        deniedMessage: String,
+        logic: () -> Unit
+    ) {
+        val basicMultiplePermissionListener: MultiplePermissionsListener = object :
             MultiplePermissionsListener {
             override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
                 logic()
             }
+
             override fun onPermissionRationaleShouldBeShown(
                 p0: MutableList<PermissionRequest>?,
                 p1: PermissionToken?
@@ -287,26 +385,34 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                 .with(view, deniedMessage)
                 .withOpenSettingsButton("설정")
                 .withCallback(object : Snackbar.Callback() {
-                    override fun onShown(snackbar: Snackbar) { }
-                    override fun onDismissed(snackbar: Snackbar, event: Int) {  }
+                    override fun onShown(snackbar: Snackbar) {}
+                    override fun onDismissed(snackbar: Snackbar, event: Int) {}
                 })
                 .build()
 
         Dexter.withContext(requireContext())
             .withPermissions(permissions)
-            .withListener(CompositeMultiplePermissionsListener(basicMultiplePermissionListener, snackbarMultiplePermissionsListener)).check()
+            .withListener(
+                CompositeMultiplePermissionsListener(
+                    basicMultiplePermissionListener,
+                    snackbarMultiplePermissionsListener
+                )
+            ).check()
     }
 
     private fun showBackgroundPermissionDialog(requestPermission: () -> Unit) {
         val layoutInflater = LayoutInflater.from(requireContext())
-        val dialogView = layoutInflater.inflate(R.layout.alert_dialog_background_location_permission, null)
+        val dialogView =
+            layoutInflater.inflate(R.layout.alert_dialog_background_location_permission, null)
 
         val dialog = android.app.AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
             .setView(dialogView)
             .create()
 
-        val textViewConfirm = dialogView.findViewById<TextView>(R.id.textview_background_location_permission_confirm)
-        val textViewCancel = dialogView.findViewById<TextView>(R.id.textview_background_location_permission_cancel)
+        val textViewConfirm =
+            dialogView.findViewById<TextView>(R.id.textview_background_location_permission_confirm)
+        val textViewCancel =
+            dialogView.findViewById<TextView>(R.id.textview_background_location_permission_cancel)
 
         textViewConfirm?.setOnClickListener {
             //requestPermission()

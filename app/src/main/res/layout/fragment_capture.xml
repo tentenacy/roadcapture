@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/coordinator_capture"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -30,32 +30,49 @@
                 android:id="@+id/fab_capture_picker_gallery"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_margin="16dp"
+                android:layout_margin="24dp"
                 android:contentDescription="@string/capture_picker_gallery"
                 android:src="@drawable/ic_picker_gallery"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:maxImageSize="35dp" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/fab_capture_stop"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="24dp"
+                android:contentDescription="@string/capture_stop"
+                android:src="@drawable/ic_stop"
+                app:layout_constraintBottom_toBottomOf="@+id/fab_capture_record"
+                app:layout_constraintEnd_toEndOf="@+id/fab_capture_record"
+                app:layout_constraintStart_toStartOf="@id/fab_capture_record"
+                app:layout_constraintTop_toTopOf="@+id/fab_capture_record"
                 app:maxImageSize="35dp" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_capture_record"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|center"
-                android:layout_marginBottom="16dp"
+                android:layout_margin="24dp"
                 android:contentDescription="@string/capture_record"
-                android:src="@drawable/circle"
-                app:maxImageSize="50dp" />
+                android:src="@drawable/ic_play"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:maxImageSize="35dp" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/fab_capture_capture"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|start"
-                android:layout_margin="16dp"
+                android:layout_margin="24dp"
                 android:contentDescription="@string/capture_capture"
                 android:src="@drawable/camera"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:maxImageSize="35dp" />
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
