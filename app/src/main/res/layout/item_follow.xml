@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="16dp"
-        android:layout_marginVertical="12dp">
+        android:layout_marginVertical="10dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageview_item_follower_profile"
@@ -32,7 +32,7 @@
 
         <TextView
             android:id="@+id/textview_item_follower_username"
-            style="@style/SubHead"
+            android:textAppearance="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
@@ -44,8 +44,11 @@
 
         <Button
             android:id="@+id/button_follower_relation"
-            android:layout_width="72dp"
+            android:layout_width="96dp"
             android:layout_height="40dp"
+            android:text="@string/follower_relation"
+            android:textColor="@color/white"
+            android:textAppearance="@style/BodyWhite"
             app:backgroundTint="@color/secondaryColor"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
