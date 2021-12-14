@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/album_registration_asking_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_bottom_sheet_dialog">
+
+        <TextView
+            android:id="@+id/textview_album_registration_asking_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textColor="@color/gray"
+            android:textSize="24sp"
+            android:text="@string/album_registration_asking_title"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/textview_album_registration_asking_description"
+            android:textAppearance="@style/Head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_horizontal"
+            android:text="@string/album_registration_asking_description"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textview_album_registration_asking_title" />
+
+        <Button
+            android:id="@+id/button_album_registration_asking_create"
+            style="@style/BottomSheetButton"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="28dp"
+            android:text="@string/album_registration_asking_create"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/textview_album_registration_asking_description" />
+
+        <Button
+            android:id="@+id/button_album_registration_asking_cancel"
+            style="@style/BottomSheetButtonWhite"
+            android:layout_width="0dp"
+            android:layout_height="56dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginVertical="16dp"
+            android:text="@string/album_registration_asking_cancel"
+            android:textColor="@color/gray"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/button_album_registration_asking_create" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

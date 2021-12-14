@@ -125,4 +125,8 @@
     <string name="password_find_button">확인</string>
     <string name="follower_relation">팔로우</string>
     <string name="capture_stop">정지</string>
+    <string name="album_registration_asking_title">앨범 등록하기</string>
+    <string name="album_registration_asking_description">기록을 종료하고\n앨범을 등록하시겠습니까?</string>
+    <string name="album_registration_asking_create">앨범 등록하기</string>
+    <string name="album_registration_asking_cancel">돌아가기</string>
 </resources>

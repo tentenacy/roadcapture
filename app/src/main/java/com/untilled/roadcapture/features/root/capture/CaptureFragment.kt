@@ -101,6 +101,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         return binding.root
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -184,6 +185,11 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
             when (status) {
                 PAUSE -> {
                     status = STOP
+                    val askRegisterAlbumBottomSheetDialog = AlbumRegistrationAskingBottomSheetDialog()
+                    askRegisterAlbumBottomSheetDialog.show(
+                        childFragmentManager,
+                        "askRegisterAlbumBottomSheetDialog"
+                    )
                     ObjectAnimator.ofFloat(binding.fabCaptureStop, "translationX", 0f)
                         .apply {
                             start()
