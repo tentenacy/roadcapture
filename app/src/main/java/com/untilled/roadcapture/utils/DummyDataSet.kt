@@ -517,6 +517,14 @@ object DummyDataSet {
             searchResult = null,
             name = null,
             description = "전국의 아름다운 10대 가로수길 중 하나로 선정된 곡교천변 은행나무길은 현충사 입구의 곡교천 충무교에서부터 현충사 입구까지 조성되어 있는 2.2km 길이의 도로입니다. 가을이면 350여 그루의 은행나무가 일제히 노란 빛을 내 평일에도 많은 인파가 몰려드는 명소입니다."
+        ),
+
+        Picture(
+            imageUri = "https://mblogthumb-phinf.pstatic.net/MjAxOTAxMDJfMyAg/MDAxNTQ2NDM5MjE4OTU4.NdSqgiRwXMB23Z0cIeCd-9mlgjCaoB3iwwCSVr_bbOIg.GbdlII4SlA__5puJpVDRcqp5nOT2Q11qd3e0tYivsYAg.PNG.comeinto_/SE-7d33c08e-ef63-4a29-8cbb-b29deee55121.png?type=w800",
+            date = "10월 12일",
+            searchResult = null,
+            name = null,
+            description = "설명이 길면 어떻게 될까요?\nPictureViewer 테스트 중입니다.\n저번에 이어 이번에도 제주도로 향했습니다. 이번에는 저만 알고 있는 제주도의 특별 여행 코스를 안내해드리겠습니다!\n전국의 아름다운 10대 가로수길 중 하나로 선정된 곡교천변 은행나무길은 현충사 입구의 곡교천 충무교에서부터 현충사 입구까지 조성되어 있는 2.2km 길이의 도로입니다. 가을이면 350여 그루의 은행나무가 일제히 노란 빛을 내 평일에도 많은 인파가 몰려드는 명소입니다."
         )
     )
 
