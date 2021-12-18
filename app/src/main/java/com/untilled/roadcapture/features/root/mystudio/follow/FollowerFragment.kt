@@ -5,11 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import com.untilled.roadcapture.databinding.FragmentFollowerBinding
 import com.untilled.roadcapture.features.base.CustomDivider
 import com.untilled.roadcapture.follow
 import com.untilled.roadcapture.utils.DummyDataSet
+import com.untilled.roadcapture.utils.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -44,6 +46,16 @@ class FollowerFragment : Fragment(){
     private fun setOnClickListeners(){
         binding.imageviewFollowerBack.setOnClickListener {
             requireActivity().onBackPressed()
+        }
+        binding.edittextFollowerSearchInput.setOnEditorActionListener { v, actionId, event ->
+            when(actionId) {
+                EditorInfo.IME_ACTION_SEARCH -> {
+
+                    requireActivity().hideKeyboard(binding.edittextFollowerSearchInput)
+                    return@setOnEditorActionListener true
+                }
+                else -> return@setOnEditorActionListener false
+            }
         }
     }
 

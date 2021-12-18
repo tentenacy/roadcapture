@@ -32,7 +32,7 @@
 
             <ImageView
                 android:id="@+id/imageview_follower_back"
-                style="@style/BackArrow"/>
+                style="@style/BackArrow" />
 
             <TextView
                 android:id="@+id/textview_follower_title"
@@ -88,6 +88,9 @@
                 android:layout_marginHorizontal="16dp"
                 android:background="@android:color/transparent"
                 android:hint="@string/search_input"
+                android:imeOptions="actionSearch"
+                android:inputType="text"
+                android:maxLines="1"
                 app:layout_constraintBottom_toBottomOf="@id/follower_search_background"
                 app:layout_constraintEnd_toEndOf="@id/follower_search_background"
                 app:layout_constraintStart_toEndOf="@id/imageview_follower_search"

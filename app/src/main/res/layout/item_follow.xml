@@ -18,41 +18,44 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="16dp"
-        android:paddingVertical="8dp">
+        android:paddingVertical="12dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageview_item_follower_profile"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/sample_thumbnail"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             bind:circleProfileImage="@{user.profileUrl}" />
 
         <TextView
             android:id="@+id/textview_item_follower_username"
-            android:textAppearance="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:text="@{user.username}"
+            android:textAppearance="@style/Body"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_item_follower_profile"
             app:layout_constraintStart_toEndOf="@id/imageview_item_follower_profile"
             app:layout_constraintTop_toTopOf="@+id/imageview_item_follower_profile"
-            app:layout_constraintBottom_toBottomOf="@+id/imageview_item_follower_profile"
             tools:text="hsw0715" />
 
         <Button
             android:id="@+id/button_follower_relation"
             android:layout_width="96dp"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:padding="4dp"
             android:text="@string/follower_relation"
             android:textColor="@color/white"
-            android:textAppearance="@style/BodyWhite"
+            android:textSize="14sp"
             app:backgroundTint="@color/secondaryColor"
-            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
