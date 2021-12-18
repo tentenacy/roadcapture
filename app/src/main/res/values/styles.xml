@@ -135,10 +135,7 @@
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:scrollbars">vertical</item>
-        <item name="readMoreMaxLine">2</item>
-        <item name="android:lineSpacingExtra">4sp</item>
-        <item name="readMoreColor">@color/gray</item>
-        <item name="readMoreText"> ···더보기</item>
+        <item name="android:lineSpacingExtra">8sp</item>
     </style>
 
     <style name="AlbumContent" parent="android:TextAppearance">
