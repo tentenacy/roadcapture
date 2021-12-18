@@ -235,7 +235,7 @@
             style="@style/BottomSheetButton"
             android:layout_width="0dp"
             android:layout_height="56dp"
-            android:layout_marginVertical="24dp"
+            android:layout_marginVertical="16dp"
             android:text="@string/filter_apply"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
