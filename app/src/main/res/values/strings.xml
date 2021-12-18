@@ -55,7 +55,7 @@
     <string name="search_place_road_name">도로명</string>
     <string name="search_place_address_number">지번</string>
     <string name="search_place_title">장소 검색</string>
-    <string name="search_place_input_hint">예) 로드캡처</string>
+    <string name="search_place_input_hint">장소를 입력하세요</string>
     <string name="filter_title">필터</string>
     <string name="filter_reset">초기화</string>
     <string name="filter_duration">기간</string>

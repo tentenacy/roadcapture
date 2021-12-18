@@ -8,6 +8,8 @@ import android.os.Build
 import android.util.TypedValue
 import android.view.View
 import android.view.WindowManager
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
@@ -101,6 +103,11 @@ fun Activity.setStatusBarOrigin() {
     if(Build.VERSION.SDK_INT >= 30) {
         WindowCompat.setDecorFitsSystemWindows(window, true)
     }
+}
+
+fun Activity.hideKeyboard(editText: EditText) {
+    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(editText.windowToken, 0)
 }
 
 // Milliseconds used for UI animations in Camera

@@ -1,13 +1,18 @@
 package com.untilled.roadcapture.features.root.capture
 
+import android.content.Context.INPUT_METHOD_SERVICE
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.EditorInfo
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.content.getSystemService
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -19,8 +24,10 @@ import com.untilled.roadcapture.data.response.search.Pois
 import com.untilled.roadcapture.data.entity.SearchResult
 import com.untilled.roadcapture.data.response.search.Poi
 import com.untilled.roadcapture.databinding.FragmentSearchPlaceBinding
+import com.untilled.roadcapture.features.base.CustomDivider
 import com.untilled.roadcapture.searchPlaceResult
 import com.untilled.roadcapture.utils.RetrofitBuilder
+import com.untilled.roadcapture.utils.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import kotlin.coroutines.CoroutineContext
@@ -75,35 +82,30 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
                     )
                 )
         }
-        binding.imageviewSearchPlaceSearch.setOnClickListener {
-            binding.edittextSearchPlaceInput.text.toString().run {
-                if (isNullOrBlank()) {
-                    Toast.makeText(requireContext(), "검색어를 입력해 주세요.", Toast.LENGTH_SHORT).show()
-                } else {
-                    searchKeyword(this)
+
+        binding.edittextSearchPlaceInput.setOnEditorActionListener { v, actionId, event ->
+            when(actionId) {
+                EditorInfo.IME_ACTION_SEARCH -> {
+                    (v as EditText).text.toString().run {
+                        if (isNullOrBlank()) {
+                            Toast.makeText(requireContext(), "검색어를 입력해 주세요.", Toast.LENGTH_SHORT).show()
+                        } else {
+                            searchKeyword(this)
+                        }
+                    }
+                    requireActivity().hideKeyboard(binding.edittextSearchPlaceInput)
+                    return@setOnEditorActionListener true
                 }
+                else -> return@setOnEditorActionListener false
             }
         }
-        binding.edittextSearchPlaceInput.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
-            if (event.action == KeyEvent.ACTION_DOWN) {
-                when(keyCode) {
-                    KeyEvent.KEYCODE_ENTER -> {
-                        (v as EditText).text.toString().run {
-                            if (isNullOrBlank()) {
-                                Toast.makeText(requireContext(), "검색어를 입력해 주세요.", Toast.LENGTH_SHORT).show()
-                            } else {
-                                searchKeyword(this)
-                            }
-                        }
-                        return@OnKeyListener true
-                    }
-                }
-        }
-            return@OnKeyListener false
-        })
     }
 
     private fun initAdapter() {
+        val customDivider = CustomDivider(2.5f,1f, Color.parseColor("#EFEFEF"))
+
+        binding.recyclerviewSearchPlace.addItemDecoration(customDivider)
+
         binding.recyclerviewSearchPlace.withModels {
             resultList?.forEachIndexed { index, searchResult ->
                 searchPlaceResult {
