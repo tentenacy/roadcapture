@@ -2,7 +2,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="ActionBarTitle" parent="android:TextAppearance">
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:gravity">start|center</item>
     </style>
@@ -10,18 +12,24 @@
     <style name="Button" parent="android:TextAppearance">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
         <item name="backgroundTint">@color/secondaryColor</item>
     </style>
 
     <style name="ButtonWhite" parent="android:TextAppearance">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
         <item name="backgroundTint">@color/white</item>
     </style>
 
     <style name="ButtonDisable" parent="android:TextAppearance">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/black</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
         <item name="backgroundTint">@color/control_normal</item>
     </style>
 
@@ -29,6 +37,8 @@
         <item name="android:layout_width">48dp</item>
         <item name="android:layout_height">48dp</item>
         <item name="android:padding">16dp</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
         <item name="android:src">@drawable/ic_back</item>
     </style>
 
@@ -37,6 +47,8 @@
         <item name="android:textColor">@color/primaryColor</item>
         <item name="backgroundTint">@color/secondaryColor</item>
         <item name="android:stateListAnimator">@null</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
         <item name="android:background">@drawable/bottom_sheet_button</item>
     </style>
 
@@ -46,19 +58,24 @@
         <item name="android:textColor">@color/black</item>
         <item name="backgroundTint">@color/white</item>
         <item name="android:stateListAnimator">@null</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="BottomSheetHead" parent="android:TextAppearance">
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/gray</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="DialogButton" parent="android:TextAppearance">
         <item name="android:background">?attr/selectableItemBackground</item>
         <item name="android:gravity">center</item>
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:fontFamily">@font/notosanskr_medium</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="RadioButton" parent="android:TextAppearance">
@@ -70,6 +87,8 @@
         <item name="android:padding">8dp</item>
         <item name="android:background">@drawable/selector_radio_filter_button</item>
         <item name="android:textColor">@drawable/selector_radio_filter_text</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
 
@@ -77,35 +96,45 @@
     <style name="Head" parent="android:TextAppearance">
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="HeadBold" parent="android:TextAppearance">
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:fontFamily">@font/notosanskr_medium</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="SubHeadBold" parent="android:TextAppearance">
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:fontFamily">@font/notosanskr_medium</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="SubHead" parent="android:TextAppearance">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="ListLeftAlign" parent="android:TextAppearance">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:gravity">start|center</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="ListCenterAlign" parent="android:TextAppearance">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/primaryTextColor</item>
         <item name="android:gravity">center</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="Body" parent="android:TextAppearance">
@@ -113,6 +142,8 @@
         <item name="android:lineSpacingExtra">4sp</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">2</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="Date" parent="android:TextAppearance">
@@ -121,6 +152,8 @@
         <item name="android:lineSpacingExtra">4sp</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">2</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="CommentContent" parent="android:TextAppearance">
@@ -129,6 +162,8 @@
         <item name="readMoreMaxLine">6</item>
         <item name="readMoreColor">@color/black</item>
         <item name="readMoreText">...</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="PictureContent" parent="android:TextAppearance">
@@ -136,6 +171,8 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:scrollbars">vertical</item>
         <item name="android:lineSpacingExtra">8sp</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="AlbumContent" parent="android:TextAppearance">
@@ -144,23 +181,29 @@
         <item name="readMoreMaxLine">2</item>
         <item name="readMoreColor">@color/black</item>
         <item name="readMoreText">...</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="HeadWhite" parent="android:TextAppearance">
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">20sp</item>
         <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="SubHeadBoldWhite" parent="android:TextAppearance">
-        <item name="android:textStyle">bold</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:fontFamily">@font/notosanskr_medium</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="SubHeadWhite" parent="android:TextAppearance">
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@color/primaryColor</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="BodyWhite" parent="android:TextAppearance">
@@ -169,6 +212,8 @@
         <item name="android:lineSpacingExtra">4sp</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">2</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 
 
