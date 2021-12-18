@@ -105,25 +105,21 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requireActivity().apply {
-            setStatusBarTransparent()
-            binding.coordinatorCapture.setPadding(
-                0,
-                requireContext().statusBarHeight(),
-                0,
-                requireContext().navigationHeight()
-            )
-        }
+        requireActivity().setStatusBarTransparent()
+        binding.coordinatorCapture.setPadding(
+            0,
+            requireContext().statusBarHeight(),
+            0,
+            requireContext().navigationHeight()
+        )
+
         setOnClickListeners()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
 
-        requireActivity().apply {
-            setStatusBarOrigin()
-            binding.coordinatorCapture.setPadding(0, 0, 0, 0)
-        }
+        requireActivity().setStatusBarOrigin()
 
         _binding = null
     }

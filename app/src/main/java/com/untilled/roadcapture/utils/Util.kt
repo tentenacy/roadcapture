@@ -4,12 +4,14 @@ import android.R
 import android.app.Activity
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.util.TypedValue
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
+import androidx.core.view.WindowCompat
 import java.io.File
 
 
@@ -87,11 +89,17 @@ fun Activity.setStatusBarTransparent() {
             WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
         )
     }
+    if(Build.VERSION.SDK_INT >= 30) {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+    }
 }
 
 fun Activity.setStatusBarOrigin() {
     window.apply {
         clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
+    }
+    if(Build.VERSION.SDK_INT >= 30) {
+        WindowCompat.setDecorFitsSystemWindows(window, true)
     }
 }
 
