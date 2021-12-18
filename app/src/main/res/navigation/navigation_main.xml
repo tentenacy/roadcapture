@@ -87,6 +87,9 @@
         <action
             android:id="@+id/action_accountSettingFragment_to_passwordSettingFragment"
             app:destination="@id/passwordSettingFragment" />
+        <action
+            android:id="@+id/action_accountSettingFragment_to_serviceWithdrawalFragment"
+            app:destination="@id/serviceWithdrawalFragment" />
     </fragment>
     <fragment
         android:id="@+id/cameraFragment"
@@ -224,4 +227,9 @@
         android:name="com.untilled.roadcapture.features.root.settings.UsernameSettingFragment"
         android:label="UsernameSettingFragment"
         tools:layout="@layout/fragment_setting_username"/>
+    <fragment
+        android:id="@+id/serviceWithdrawalFragment"
+        android:name="com.untilled.roadcapture.features.root.settings.ServiceWithdrawalFragment"
+        android:label="ServiceWithdrawalFragment"
+        tools:layout="@layout/fragment_service_withdrawal"/>
 </navigation>
