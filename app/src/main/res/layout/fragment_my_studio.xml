@@ -118,21 +118,22 @@
                     style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:text="@string/my_studio_follower"
                     android:textColor="@color/gray"
+                    android:layout_marginTop="32dp"
                     app:layout_constraintEnd_toStartOf="@id/imageview_my_studio_profile_background"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textview_my_studio_follower_num" />
+                    app:layout_constraintTop_toTopOf="@id/textview_my_studio_follower_num" />
 
 
                 <TextView
                     android:id="@+id/textview_my_studio_follower_num"
                     style="@style/SubHeadBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
                     android:layout_marginTop="16dp"
                     android:text="81.9만"
+                    android:gravity="top|center"
                     app:layout_constraintEnd_toStartOf="@id/imageview_my_studio_profile_background"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/imageview_my_studio_background" />
@@ -142,20 +143,21 @@
                     style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
+                    android:layout_marginTop="32dp"
                     android:text="@string/my_studio_following"
                     android:textColor="@color/gray"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/imageview_my_studio_profile_background"
-                    app:layout_constraintTop_toBottomOf="@+id/textview_my_studio_following_num" />
+                    app:layout_constraintTop_toTopOf="@id/textview_my_studio_following_num" />
 
 
                 <TextView
                     android:id="@+id/textview_my_studio_following_num"
                     style="@style/SubHeadBold"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
                     android:text="100"
+                    android:gravity="top|center"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/imageview_my_studio_profile_background"
                     app:layout_constraintTop_toTopOf="@id/textview_my_studio_follower_num" />
