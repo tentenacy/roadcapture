@@ -110,7 +110,7 @@
     <string name="setting_username_input_hint">두 글자 이상 입력</string>
     <string name="setting_username_button">변경하기</string>
     <string name="setting_password_title">비밀번호 변경</string>
-    <string name="setting_password_current_label">현재 비밀번호 입력</string>
+    <string name="setting_password_current_label">현재 비밀번호</string>
     <string name="setting_password_button">변경하기</string>
     <string name="service_withdrawal_title">서비스 탈퇴</string>
     <string name="service_withdrawal_confirm">탈퇴하기</string>
@@ -129,4 +129,7 @@
     <string name="album_registration_asking_description">기록을 종료하고\n앨범을 등록하시겠습니까?</string>
     <string name="album_registration_asking_create">앨범 등록하기</string>
     <string name="album_registration_asking_cancel">돌아가기</string>
+    <string name="setting_password_after_label">변경할 비밀번호</string>
+    <string name="setting_password_current_input">현재 비밀번호를 입력해주세요</string>
+    <string name="setting_password_after_input">변경할 비밀번호를 입력해주세요</string>
 </resources>
