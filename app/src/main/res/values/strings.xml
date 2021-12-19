@@ -132,4 +132,5 @@
     <string name="service_withdrawal_title">서비스 탈퇴</string>
     <string name="service_withdrawal_button">탈퇴하기</string>
     <string name="service_withdrawal_confirm_email">kwangddang11@naver.com</string>
+    <string name="terms_of_service_title">이용 약관</string>
 </resources>

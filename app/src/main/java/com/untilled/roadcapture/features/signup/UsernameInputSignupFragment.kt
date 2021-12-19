@@ -50,6 +50,11 @@ class UsernameInputSignupFragment : Fragment() {
             Navigation.findNavController((parentFragment?.parentFragment as SignupFragment).binding.root)
                 .navigate(R.id.action_signupFragment_to_rootFragment)
         }
+        binding.textviewUsernameInputSignupTermsOfService.setOnClickListener {
+            Navigation.findNavController((parentFragment?.parentFragment as SignupFragment).binding.root)
+                .navigate(R.id.action_signupFragment_to_termsOfServiceFragment)
+        }
+
         (parentFragment?.parentFragment as SignupFragment).binding.imageviewSignupBack.setOnClickListener {
             viewModel.username.value = ""
             requireActivity().onBackPressed()

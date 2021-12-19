@@ -110,6 +110,9 @@
             app:popUpTo="@id/signupFragment"
             app:popUpToInclusive="true"
             app:destination="@id/rootFragment" />
+        <action
+            android:id="@+id/action_signupFragment_to_termsOfServiceFragment"
+            app:destination="@id/termsOfServiceFragment" />
     </fragment>
     <fragment
         android:id="@+id/cropFragment"
@@ -232,4 +235,9 @@
         android:name="com.untilled.roadcapture.features.root.settings.ServiceWithdrawalFragment"
         android:label="ServiceWithdrawalFragment"
         tools:layout="@layout/fragment_service_withdrawal"/>
+    <fragment
+        android:id="@+id/termsOfServiceFragment"
+        android:name="com.untilled.roadcapture.features.signup.TermsOfServiceFragment"
+        android:label="TermsOfServiceFragment"
+        tools:layout="@layout/fragment_terms_of_service"/>
 </navigation>

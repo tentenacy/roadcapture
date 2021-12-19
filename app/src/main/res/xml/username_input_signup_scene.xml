@@ -25,19 +25,19 @@
             motion:layout_constraintVertical_bias="1.0" />
 
         <Constraint
-            android:id="@+id/textview_username_input_signup_terms_shell"
+            android:id="@+id/textview_username_input_signup_terms_of_service_shell"
             style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/username_input_signup_terms_shell"
             android:visibility="invisible"
-            motion:layout_constraintBottom_toBottomOf="@+id/textview_username_input_signup_terms"
+            motion:layout_constraintBottom_toBottomOf="@+id/textview_username_input_signup_terms_of_service"
             motion:layout_constraintEnd_toStartOf="@+id/guideline_username_input_signup_body_end"
-            motion:layout_constraintStart_toEndOf="@+id/textview_username_input_signup_terms"
-            motion:layout_constraintTop_toTopOf="@+id/textview_username_input_signup_terms"/>
+            motion:layout_constraintStart_toEndOf="@+id/textview_username_input_signup_terms_of_service"
+            motion:layout_constraintTop_toTopOf="@+id/textview_username_input_signup_terms_of_service"/>
 
         <Constraint
-            android:id="@+id/textview_username_input_signup_terms"
+            android:id="@+id/textview_username_input_signup_terms_of_service"
             style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -46,7 +46,7 @@
             android:textColor="@color/secondaryColor"
             android:visibility="invisible"
             motion:layout_constraintBottom_toTopOf="@+id/button_username_input_signup_submit"
-            motion:layout_constraintEnd_toStartOf="@+id/textview_username_input_signup_terms_shell"
+            motion:layout_constraintEnd_toStartOf="@+id/textview_username_input_signup_terms_of_service_shell"
             motion:layout_constraintHorizontal_chainStyle="packed"
             motion:layout_constraintStart_toStartOf="@+id/guideline_username_input_signup_body_start" />
 
@@ -68,18 +68,18 @@
             motion:layout_constraintVertical_bias="1.0" />
 
         <Constraint
-            android:id="@+id/textview_username_input_signup_terms_shell"
+            android:id="@+id/textview_username_input_signup_terms_of_service_shell"
             style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/username_input_signup_terms_shell"
-            motion:layout_constraintBottom_toBottomOf="@+id/textview_username_input_signup_terms"
+            motion:layout_constraintBottom_toBottomOf="@+id/textview_username_input_signup_terms_of_service"
             motion:layout_constraintEnd_toStartOf="@+id/guideline_username_input_signup_body_end"
-            motion:layout_constraintStart_toEndOf="@+id/textview_username_input_signup_terms"
-            motion:layout_constraintTop_toTopOf="@+id/textview_username_input_signup_terms"/>
+            motion:layout_constraintStart_toEndOf="@+id/textview_username_input_signup_terms_of_service"
+            motion:layout_constraintTop_toTopOf="@+id/textview_username_input_signup_terms_of_service"/>
 
         <Constraint
-            android:id="@+id/textview_username_input_signup_terms"
+            android:id="@+id/textview_username_input_signup_terms_of_service"
             style="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -87,7 +87,7 @@
             android:text="@string/username_input_signup_terms"
             android:textColor="@color/secondaryColor"
             motion:layout_constraintBottom_toTopOf="@+id/button_username_input_signup_submit"
-            motion:layout_constraintEnd_toStartOf="@+id/textview_username_input_signup_terms_shell"
+            motion:layout_constraintEnd_toStartOf="@+id/textview_username_input_signup_terms_of_service_shell"
             motion:layout_constraintHorizontal_chainStyle="packed"
             motion:layout_constraintStart_toStartOf="@+id/guideline_username_input_signup_body_start" />
 
