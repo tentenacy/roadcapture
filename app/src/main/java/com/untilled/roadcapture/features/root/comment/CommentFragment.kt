@@ -1,5 +1,6 @@
 package com.untilled.roadcapture.features.root.comment
 
+import android.app.AlertDialog
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.PopupMenu
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
@@ -75,6 +77,7 @@ class CommentFragment : Fragment() {
                                     setOnMenuItemClickListener { item ->
                                         when (item.itemId) {
                                             R.id.popup_menu_comment_more_report -> {
+                                                showReportDialog()
                                             }
                                         }
                                         true
@@ -86,5 +89,25 @@ class CommentFragment : Fragment() {
                 }
             }
         }
+    }
+    private fun showReportDialog() {
+        val layoutInflater = LayoutInflater.from(requireContext())
+        val dialogView = layoutInflater.inflate(R.layout.alert_dialog_report, null)
+
+        val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
+            .setView(dialogView)
+            .create()
+
+        val textViewReport = dialogView.findViewById<TextView>(R.id.textview_report_report)
+        val textViewCancel = dialogView.findViewById<TextView>(R.id.textview_report_cancel)
+
+        textViewReport?.setOnClickListener {
+            dialog.dismiss()
+        }
+        textViewCancel?.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 }

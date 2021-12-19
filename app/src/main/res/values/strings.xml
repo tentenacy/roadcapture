@@ -133,4 +133,10 @@
     <string name="service_withdrawal_button">탈퇴하기</string>
     <string name="service_withdrawal_confirm_email">kwangddang11@naver.com</string>
     <string name="terms_of_service_title">이용 약관</string>
+    <string name="report_report">신고하기</string>
+    <string name="report_cancel">취소</string>
+    <string name="report_sexual">성적인 콘텐츠</string>
+    <string name="report_violent">폭력적인 콘텐츠</string>
+    <string name="report_dangerous">유해하거나 위험한 행위</string>
+    <string name="report_spam">스팸 또는 바이럴 마케팅</string>
 </resources>

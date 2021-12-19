@@ -6,6 +6,7 @@ import android.app.Activity.RESULT_OK
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -32,6 +33,7 @@ import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentCaptureBinding
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.net.toUri
+import androidx.core.view.WindowCompat
 import androidx.core.view.isVisible
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
@@ -71,6 +73,8 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
 
     private var status: Int = STOP
 
+    private var navigationBarColor: Int = 0
+
     // 갤러리 사진 가져오는 intent 콜백 등록
     private val getContent = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
@@ -105,7 +109,14 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requireActivity().setStatusBarTransparent()
+        requireActivity().run {
+            setStatusBarTransparent()
+            if(Build.VERSION.SDK_INT >= 30) {
+                navigationBarColor = window.navigationBarColor
+                window.navigationBarColor = Color.TRANSPARENT
+            }
+        }
+
         binding.coordinatorCapture.setPadding(
             0,
             requireContext().statusBarHeight(),
@@ -119,7 +130,12 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     override fun onDestroyView() {
         super.onDestroyView()
 
-        requireActivity().setStatusBarOrigin()
+        requireActivity().run {
+            setStatusBarOrigin()
+            if(Build.VERSION.SDK_INT >= 30) {
+                window.navigationBarColor = navigationBarColor
+            }
+        }
 
         _binding = null
     }

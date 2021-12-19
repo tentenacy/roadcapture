@@ -3,8 +3,10 @@ package com.untilled.roadcapture.utils.extension
 import android.R
 import android.app.Activity
 import android.content.Context
+import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.os.Build
+import android.util.Log
 import android.util.TypedValue
 import android.view.View
 import android.view.WindowManager
