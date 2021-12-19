@@ -253,7 +253,7 @@ object DummyDataSet {
             description = "님이 앨범을 만들었습니다.",
             createdDate = "3분전",
             modifiedDate = "",
-            thumbnailUrl = "https://pixabay.com/get/gce3f3dc9eac4aad981d4797691ed701cecf1f74c68f5aea5b9f910a309cf14e625e9e6e7c20f69c6980915f77c8cd5a8c6bb7797d859f0311ae5c3135e6ca4755b1a5075fa5ef24350fb131f3abef660_1920.jpg",
+            thumbnailUrl = "https://cdn.pixabay.com/photo/2016/11/14/09/14/cat-1822979_960_720.jpg",
         ),
 
         Album(
@@ -266,7 +266,7 @@ object DummyDataSet {
             description = "님이 작가님의 앨범을 좋아합니다.",
             createdDate = "30분전",
             modifiedDate = "",
-            thumbnailUrl = "https://pixabay.com/get/g2aee644d5f2322f4ad8e410309da0daebc3c018c261e341448a8ed1ddf05a7d2687a4f6ab6c354ac600be5d5b887fb73d893e804aafc431de02ace3ff1b6cc288fa542e44b07a054ff891aad1da72653_1920.jpg",
+            thumbnailUrl = "https://cdn.pixabay.com/photo/2019/07/25/06/51/thuja-4361821_960_720.jpg",
         ),
 
         Album(
@@ -292,7 +292,7 @@ object DummyDataSet {
             description = "님이 작가님의 앨범에 댓글을 남겼습니다",
             createdDate = "3시간전",
             modifiedDate = "",
-            thumbnailUrl = "https://pixabay.com/get/ga84b67c4695381e891a97a9a378b3a2ced2dcd72da9ae424a7fe30995e34c719679293c22c6175112f12ff83675627c465e7694928c2b078a0c0cd819061c788b6e2298ed4bbbd2ab24f9612d0306359_1920.jpg",
+            thumbnailUrl = "https://cdn.pixabay.com/photo/2021/12/01/17/28/branch-6838719_960_720.jpg",
         ),
         Album(
             username = "hsw0715",
@@ -304,7 +304,7 @@ object DummyDataSet {
             description = "님이 앨범을 만들었습니다.",
             createdDate = "1일전",
             modifiedDate = "",
-            thumbnailUrl = "https://pixabay.com/get/gce3f3dc9eac4aad981d4797691ed701cecf1f74c68f5aea5b9f910a309cf14e625e9e6e7c20f69c6980915f77c8cd5a8c6bb7797d859f0311ae5c3135e6ca4755b1a5075fa5ef24350fb131f3abef660_1920.jpg",
+            thumbnailUrl = "https://cdn.pixabay.com/photo/2020/07/29/03/58/child-5446839_960_720.jpg",
         ),
 
         Album(
@@ -317,7 +317,7 @@ object DummyDataSet {
             description = "님이 작가님의 앨범을 좋아합니다.",
             createdDate = "5일전",
             modifiedDate = "",
-            thumbnailUrl = "https://pixabay.com/get/g2aee644d5f2322f4ad8e410309da0daebc3c018c261e341448a8ed1ddf05a7d2687a4f6ab6c354ac600be5d5b887fb73d893e804aafc431de02ace3ff1b6cc288fa542e44b07a054ff891aad1da72653_1920.jpg",
+            thumbnailUrl = "https://cdn.pixabay.com/photo/2021/12/05/21/39/christmas-balls-6848782_960_720.jpg",
         ),
 
         Album(
@@ -343,7 +343,7 @@ object DummyDataSet {
             description = "님이 작가님의 앨범에 댓글을 남겼습니다",
             createdDate = "3주전",
             modifiedDate = "",
-            thumbnailUrl = "https://pixabay.com/get/ga84b67c4695381e891a97a9a378b3a2ced2dcd72da9ae424a7fe30995e34c719679293c22c6175112f12ff83675627c465e7694928c2b078a0c0cd819061c788b6e2298ed4bbbd2ab24f9612d0306359_1920.jpg",
+            thumbnailUrl = "https://cdn.pixabay.com/photo/2021/11/19/05/08/bicycle-6808140_960_720.jpg",
         ),
         Album(
             username = "hsw0715",
@@ -355,7 +355,7 @@ object DummyDataSet {
             description = "님이 앨범을 만들었습니다.",
             createdDate = "4주전",
             modifiedDate = "",
-            thumbnailUrl = "https://t1.daumcdn.net/thumb/R1280x0/?fname=http://t1.daumcdn.net/brunch/service/user/2fG8/image/wgtUIZSe7IVwsEGZFg1MNf9CRZ0.jpg",
+            thumbnailUrl = "https://cdn.pixabay.com/photo/2021/11/02/10/46/lemur-6762935_960_720.jpg",
         ),
 
         Album(
@@ -368,7 +368,7 @@ object DummyDataSet {
             description = "님이 작가님의 앨범을 좋아합니다.",
             createdDate = "1달전",
             modifiedDate = "",
-            thumbnailUrl = "https://pixabay.com/get/gce3f3dc9eac4aad981d4797691ed701cecf1f74c68f5aea5b9f910a309cf14e625e9e6e7c20f69c6980915f77c8cd5a8c6bb7797d859f0311ae5c3135e6ca4755b1a5075fa5ef24350fb131f3abef660_1920.jpg",
+            thumbnailUrl = "https://cdn.pixabay.com/photo/2020/11/28/10/09/mountains-5784153_960_720.jpg",
         ),
 
         Album(
@@ -394,7 +394,7 @@ object DummyDataSet {
             description = "님이 작가님의 앨범에 댓글을 남겼습니다",
             createdDate = "6달전",
             modifiedDate = "",
-            thumbnailUrl = "https://pixabay.com/get/g2aee644d5f2322f4ad8e410309da0daebc3c018c261e341448a8ed1ddf05a7d2687a4f6ab6c354ac600be5d5b887fb73d893e804aafc431de02ace3ff1b6cc288fa542e44b07a054ff891aad1da72653_1920.jpg\n",
+            thumbnailUrl = "https://cdn.pixabay.com/photo/2021/11/23/11/14/town-6818441_960_720.jpg",
         ),
 
         Album(
@@ -407,7 +407,7 @@ object DummyDataSet {
             description = "님이 작가님의 앨범을 좋아합니다.",
             createdDate = "10달전",
             modifiedDate = "",
-            thumbnailUrl = "https://pixabay.com/get/gce3f3dc9eac4aad981d4797691ed701cecf1f74c68f5aea5b9f910a309cf14e625e9e6e7c20f69c6980915f77c8cd5a8c6bb7797d859f0311ae5c3135e6ca4755b1a5075fa5ef24350fb131f3abef660_1920.jpg",
+            thumbnailUrl = "https://cdn.pixabay.com/photo/2021/12/08/19/34/laptop-6856557_960_720.jpg",
         ),
 
         Album(
@@ -433,7 +433,7 @@ object DummyDataSet {
             description = "님이 작가님의 앨범에 댓글을 남겼습니다",
             createdDate = "2년전",
             modifiedDate = "",
-            thumbnailUrl = "https://pixabay.com/get/g2aee644d5f2322f4ad8e410309da0daebc3c018c261e341448a8ed1ddf05a7d2687a4f6ab6c354ac600be5d5b887fb73d893e804aafc431de02ace3ff1b6cc288fa542e44b07a054ff891aad1da72653_1920.jpg\n",
+            thumbnailUrl = "https://cdn.pixabay.com/photo/2021/10/17/02/29/blackish-oystercatcher-6716397_960_720.jpg",
         )
     )
 
