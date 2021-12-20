@@ -83,6 +83,11 @@ object AlbumsBindingAdapters {
                 view.context.getPxFromDp(48f)
             )
             constraints.applyTo(view)
+        } else{
+            val constraints = ConstraintSet()
+            constraints.clone(view)
+            constraints.clear(R.id.textview_item_home_album_title,ConstraintSet.BOTTOM)
+            constraints.applyTo(view)
         }
     }
 

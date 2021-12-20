@@ -24,7 +24,7 @@
         bind:adjustConstraintEmptyDesc="@{album.description}">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageview_item_home_albums_thumbnail"
+            android:id="@+id/imageview_item_home_album_thumbnail"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="24dp"
@@ -43,10 +43,10 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/overlay_gradient_thumbnail"
-            app:layout_constraintBottom_toBottomOf="@+id/imageview_item_home_albums_thumbnail"
-            app:layout_constraintEnd_toEndOf="@+id/imageview_item_home_albums_thumbnail"
-            app:layout_constraintStart_toStartOf="@+id/imageview_item_home_albums_thumbnail"
-            app:layout_constraintTop_toTopOf="@+id/imageview_item_home_albums_thumbnail" />
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_item_home_album_thumbnail"
+            app:layout_constraintEnd_toEndOf="@+id/imageview_item_home_album_thumbnail"
+            app:layout_constraintStart_toStartOf="@+id/imageview_item_home_album_thumbnail"
+            app:layout_constraintTop_toTopOf="@+id/imageview_item_home_album_thumbnail" />
 
         <ImageView
             android:id="@+id/imageview_item_home_album_profile"
@@ -54,8 +54,8 @@
             android:layout_height="32dp"
             android:layout_marginStart="12dp"
             android:layout_marginTop="12dp"
-            app:layout_constraintStart_toStartOf="@id/imageview_item_home_albums_thumbnail"
-            app:layout_constraintTop_toTopOf="@id/imageview_item_home_albums_thumbnail"
+            app:layout_constraintStart_toStartOf="@id/imageview_item_home_album_thumbnail"
+            app:layout_constraintTop_toTopOf="@id/imageview_item_home_album_thumbnail"
             bind:albumProfileImage="@{album.profileUrl}"
             tools:src="@drawable/sample_profile" />
 
@@ -106,9 +106,9 @@
             android:layout_marginBottom="10dp"
             android:text="@{album.commentCount}"
             android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="@id/imageview_item_home_albums_thumbnail"
+            app:layout_constraintBottom_toBottomOf="@id/imageview_item_home_album_thumbnail"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/imageview_item_home_albums_thumbnail"
+            app:layout_constraintStart_toEndOf="@id/imageview_item_home_album_thumbnail"
             tools:text="39" />
 
         <ImageView
@@ -161,7 +161,7 @@
             android:text="@{album.title}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageview_item_home_albums_thumbnail"
+            app:layout_constraintTop_toBottomOf="@+id/imageview_item_home_album_thumbnail"
             tools:text="나의 첫 부산 여행기" />
 
         <TextView

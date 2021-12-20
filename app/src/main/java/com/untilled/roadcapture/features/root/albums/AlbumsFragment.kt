@@ -10,7 +10,6 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
@@ -95,7 +94,7 @@ class AlbumsFragment : Fragment() {
                                 animator.start()
                                 flagLike = false
                             }
-                            R.id.imageview_item_home_albums_thumbnail ->
+                            R.id.imageview_item_home_album_thumbnail ->
                                 Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
                                         navigate(RootFragmentDirections.actionRootFragmentToPictureViewerFragment(model.album()))
                             R.id.imageview_item_home_album_more -> {
