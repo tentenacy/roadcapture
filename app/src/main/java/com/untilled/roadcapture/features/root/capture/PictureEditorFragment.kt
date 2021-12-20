@@ -50,10 +50,6 @@ class PictureEditorFragment : Fragment() {
             }
 
             binding.picture = picture
-            if(picture?.imageUri != null) {
-                binding.imageviewPictureEditorRemove.isVisible = true
-            }
-
         }
 
         setOnClickListeners()
@@ -62,11 +58,6 @@ class PictureEditorFragment : Fragment() {
     private fun setOnClickListeners() {
         binding.imageviewPictureEditorBack.setOnClickListener {
             requireActivity().onBackPressed()
-        }
-
-        binding.imageviewPictureEditorRemove.setOnClickListener {
-            picture?.imageUri = null
-            removeImage()
         }
 
         binding.textviewPictureEditorPlaceUserInput.setOnClickListener {
@@ -96,11 +87,6 @@ class PictureEditorFragment : Fragment() {
                     )
                 )
         }
-    }
-
-    private fun removeImage() {
-        binding.imageviewPictureEditorImage.setImageResource(R.drawable.plus_dotted_square)
-        binding.imageviewPictureEditorRemove.isVisible = false
     }
 
     private fun onCreateDatePicker() {

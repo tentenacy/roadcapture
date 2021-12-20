@@ -9,18 +9,6 @@
         android:background="@drawable/shape_bottom_sheet_dialog">
 
         <TextView
-            android:id="@+id/textview_album_registration_asking_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:textColor="@color/gray"
-            android:textSize="24sp"
-            android:text="@string/album_registration_asking_title"
-            android:layout_marginTop="16dp"/>
-
-        <TextView
             android:id="@+id/textview_album_registration_asking_description"
             android:textAppearance="@style/Head"
             android:layout_width="wrap_content"
@@ -30,7 +18,7 @@
             android:text="@string/album_registration_asking_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_album_registration_asking_title" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/button_album_registration_asking_create"

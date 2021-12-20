@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="picture"
             type="com.untilled.roadcapture.data.entity.Picture" />
@@ -12,7 +13,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -29,7 +30,7 @@
 
                 <ImageView
                     android:id="@+id/imageview_picture_editor_back"
-                    style="@style/BackArrow"/>
+                    style="@style/BackArrow" />
 
                 <TextView
                     android:id="@+id/textview_picture_editor_title"
@@ -64,26 +65,35 @@
                 app:layout_constraintTop_toBottomOf="@id/toolbar_picture_editor"
                 bind:Image="@{picture.imageUri}" />
 
-            <ImageView
-                android:id="@+id/imageview_picture_editor_remove"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:src="@drawable/ic_remove"
-                android:visibility="invisible"
-                tools:visibility = "visible"
-                app:layout_constraintBottom_toBottomOf="@id/imageview_picture_editor_image"
+            <TextView
+                android:id="@+id/textview_picture_editor_thumbnail"
+                style="@style/SubHeadBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="앨범 썸네일로 사용"
                 app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_body_start"
                 app:layout_constraintTop_toBottomOf="@id/imageview_picture_editor_image" />
+
+            <CheckBox
+                android:id="@+id/checkbox_picture_editor_thumbnail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:layout_constraintBottom_toBottomOf="@id/textview_picture_editor_thumbnail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/textview_picture_editor_thumbnail"
+                tools:checked="true" />
 
             <TextView
                 android:id="@+id/textview_picture_editor_date"
                 style="@style/SubHeadBold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
+                android:layout_marginTop="32dp"
                 android:text="@string/picture_editor_date"
                 app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_body_start"
-                app:layout_constraintTop_toBottomOf="@id/imageview_picture_editor_image" />
+                app:layout_constraintTop_toBottomOf="@id/textview_picture_editor_thumbnail" />
 
             <TextView
                 android:id="@+id/textview_picture_editor_date_user_input"
@@ -91,7 +101,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:gravity="center|end"
-                android:hint="@string/picture_editor_user_input"
+                android:hint="@string/picture_editor_date_user_input"
                 android:text="@{picture.date}"
                 app:layout_constraintBottom_toBottomOf="@id/textview_picture_editor_date"
                 app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
@@ -113,7 +123,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:gravity="center|end"
-                android:hint="@string/picture_editor_user_input"
+                android:hint="@string/picture_editor_place_user_input"
                 android:text="@{picture.searchResult.placeName}"
                 app:layout_constraintBottom_toBottomOf="@id/textview_picture_editor_place"
                 app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
@@ -136,7 +146,7 @@
                 android:layout_height="40dp"
                 android:background="@null"
                 android:gravity="center|end"
-                android:hint="@string/picture_editor_user_input"
+                android:hint="@string/picture_editor_name_user_input"
                 android:inputType="text|textImeMultiLine"
                 android:maxLines="1"
                 android:text="@{picture.name}"
@@ -156,19 +166,17 @@
 
             <EditText
                 android:id="@+id/edit_picture_editor_description_user_input"
-                style="@style/Body"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
                 android:background="@null"
-                android:gravity="top|end"
-                android:hint="@string/picture_editor_user_input"
-                android:maxLines="10"
+                android:gravity="top|start"
+                android:hint="@string/picture_editor_description_user_input"
+                android:minLines="5"
+                android:padding="16dp"
                 android:text="@{picture.description}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
-                app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_body_start"
+                android:textAppearance="@style/Body"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textview_picture_editor_description" />
 
             <androidx.constraintlayout.widget.Guideline

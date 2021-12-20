@@ -31,7 +31,7 @@
 
             <ImageView
                 android:id="@+id/imageview_setting_back"
-                style="@style/BackArrow"/>
+                style="@style/BackArrow" />
 
             <TextView
                 android:id="@+id/textview_setting_title"
@@ -59,19 +59,19 @@
             style="@style/HeadBold"
             android:layout_width="0dp"
             android:layout_height="64dp"
-            android:text="@string/setting_account"
             android:gravity="center|start"
-            app:layout_constraintStart_toStartOf="parent"
+            android:text="@string/setting_account"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:layout_width="12dp"
             android:layout_height="12dp"
-            app:layout_constraintTop_toTopOf="@id/textview_setting_account"
+            android:src="@drawable/ic_arrow_right"
             app:layout_constraintBottom_toBottomOf="@id/textview_setting_account"
             app:layout_constraintEnd_toEndOf="@id/textview_setting_account"
-            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintTop_toTopOf="@id/textview_setting_account"
             app:tint="@color/gray" />
 
         <View
@@ -100,20 +100,20 @@
             android:layout_height="64dp"
             android:layout_marginStart="10dp"
             android:text="@string/setting_service_location"
-            app:layout_constraintStart_toStartOf="@id/textview_setting_service"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textview_setting_service"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_service" />
 
         <TextView
             android:id="@+id/textview_setting_service_location_detail"
-            android:textAppearance="@style/Body"
-            android:textColor="@color/secondaryColor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="앱 사용중에만 허용"
+            android:textAppearance="@style/Body"
+            android:textColor="@color/secondaryColor"
+            app:layout_constraintBottom_toBottomOf="@+id/textview_setting_service_location"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/textview_setting_service_location"
-            android:layout_marginTop="24dp"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            tools:text="앱 사용중에만 허용" />
 
         <View
             android:layout_width="0dp"
@@ -129,8 +129,8 @@
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:text="@string/setting_service_notification"
-            app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_service_location" />
 
         <Switch
@@ -138,10 +138,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            app:layout_constraintTop_toTopOf="@id/textview_setting_service_notification"
             app:layout_constraintBottom_toBottomOf="@id/textview_setting_service_notification"
             app:layout_constraintEnd_toEndOf="@id/textview_setting_service_notification"
-            />
+            app:layout_constraintTop_toTopOf="@id/textview_setting_service_notification" />
 
         <View
             android:layout_width="0dp"
@@ -168,18 +167,18 @@
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:text="@string/setting_support_version"
-            app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_support" />
 
         <TextView
             android:id="@+id/textview_setting_support_version_num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1.0v"
             android:layout_marginTop="24dp"
+            android:text="1.0v"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/textview_setting_support_version"/>
+            app:layout_constraintTop_toTopOf="@id/textview_setting_support_version" />
 
 
         <View
@@ -203,10 +202,10 @@
         <ImageView
             android:layout_width="12dp"
             android:layout_height="12dp"
-            app:layout_constraintTop_toTopOf="@id/textview_setting_support_opinion"
+            android:src="@drawable/ic_arrow_right"
             app:layout_constraintBottom_toBottomOf="@id/textview_setting_support_opinion"
             app:layout_constraintEnd_toEndOf="@id/textview_setting_support_opinion"
-            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintTop_toTopOf="@id/textview_setting_support_opinion"
             app:tint="@color/gray" />
 
         <View
@@ -223,17 +222,17 @@
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:text="@string/setting_support_terms"
-            app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/textview_setting_service_location"
             app:layout_constraintTop_toBottomOf="@id/textview_setting_support_opinion" />
 
         <ImageView
             android:layout_width="12dp"
             android:layout_height="12dp"
-            app:layout_constraintTop_toTopOf="@id/textview_setting_support_terms"
+            android:src="@drawable/ic_arrow_right"
             app:layout_constraintBottom_toBottomOf="@id/textview_setting_support_terms"
             app:layout_constraintEnd_toEndOf="@id/textview_setting_support_terms"
-            android:src="@drawable/ic_arrow_right"
+            app:layout_constraintTop_toTopOf="@id/textview_setting_support_terms"
             app:tint="@color/gray" />
 
         <View

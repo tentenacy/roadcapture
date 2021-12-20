@@ -49,8 +49,7 @@
     <string name="following_title">팔로잉</string>
     <string name="picture_editor_place">장소</string>
     <string name="picture_editor_date">날짜</string>
-    <string name="picture_editor_picture_name">사진 이름</string>
-    <string name="picture_editor_user_input">사용자 입력</string>
+    <string name="picture_editor_picture_name">제목</string>
     <string name="picture_editor_description">설명</string>
     <string name="search_place_road_name">도로명</string>
     <string name="search_place_address_number">지번</string>
@@ -123,7 +122,7 @@
     <string name="follower_relation">팔로우</string>
     <string name="capture_stop">정지</string>
     <string name="album_registration_asking_title">앨범 등록하기</string>
-    <string name="album_registration_asking_description">기록을 종료하고\n앨범을 등록하시겠습니까?</string>
+    <string name="album_registration_asking_description">기록을 중단하고\n앨범을 등록하시겠습니까?</string>
     <string name="album_registration_asking_create">앨범 등록하기</string>
     <string name="album_registration_asking_cancel">돌아가기</string>
     <string name="setting_password_after_label">변경할 비밀번호</string>
@@ -139,4 +138,8 @@
     <string name="report_violent">폭력적인 콘텐츠</string>
     <string name="report_dangerous">유해하거나 위험한 행위</string>
     <string name="report_spam">스팸 또는 바이럴 마케팅</string>
+    <string name="picture_editor_date_user_input">날자를 입력해주세요</string>
+    <string name="picture_editor_place_user_input">장소를 입력해주세요</string>
+    <string name="picture_editor_name_user_input">제목을 입력해주세요</string>
+    <string name="picture_editor_description_user_input">설명을 입력해주세요</string>
 </resources>
