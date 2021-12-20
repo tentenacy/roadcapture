@@ -25,6 +25,7 @@
     <color name="control_highlight">@android:color/holo_red_light</color>
     <color name="divider">#EFEFEF</color>
     <color name="gray">#8c8c8c</color>
+    <color name="lightGray">#E0E0E0</color>
     <color name="transparent">#00000000</color>
     <color name="bottom_sheet_background">#FBFBFB</color>
     <color name="red">#ff0000</color>

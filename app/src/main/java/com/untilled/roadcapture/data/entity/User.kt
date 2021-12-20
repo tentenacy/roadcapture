@@ -14,5 +14,7 @@ data class User(
     @SerializedName("background_url")
     var backgroundUrl: String = "",
     @SerializedName("description")
-    var description: String = ""
+    var description: String = "",
+    @SerializedName("update")
+    var update: Int = 0
 ): Parcelable

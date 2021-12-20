@@ -12,6 +12,7 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.utils.extension.getPxFromDp
 import dagger.*
 import dagger.multibindings.*
+import de.hdodenhof.circleimageview.CircleImageView
 import java.security.SecureRandom
 import java.util.*
 import javax.inject.Inject
@@ -83,5 +84,25 @@ object AlbumsBindingAdapters {
             )
             constraints.applyTo(view)
         }
+    }
+
+    @JvmStatic
+    @BindingAdapter("FollowingAlbumProfileImage")
+    fun setFollowingAlbumProfileImage(view: CircleImageView, url: String){
+        view.context.apply {
+            Glide.with(this)
+                .asBitmap()
+                .load(url)
+                .into(view)
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("FollowingAlbumUpdate")
+    fun setFollowingAlbumUpdate(view: CircleImageView, update: Int){
+        if(update == 1)
+            view.setImageResource(R.color.secondaryColor)
+        else
+            view.setImageResource(R.color.lightGray)
     }
 }
