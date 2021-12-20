@@ -72,7 +72,7 @@
     <string name="filter_apply">적용하기</string>
     <string name="album_creation_asking_cancel">취소하기</string>
     <string name="album_creation_asking_create">앨범 만들기</string>
-    <string name="album_creation_asking_title">앨범을 만드시겠습니까?</string>
+    <string name="album_creation_asking_title">앨범 만들기</string>
     <string name="picture_editor_title">앨범 만들기</string>
     <string name="search_place_no_result">검색결과가 없습니다. 다시 입력해주세요.</string>
     <string name="location_permission_always">항상 허용</string>
@@ -142,4 +142,6 @@
     <string name="picture_editor_place_user_input">장소를 입력해주세요</string>
     <string name="picture_editor_name_user_input">제목을 입력해주세요</string>
     <string name="picture_editor_description_user_input">설명을 입력해주세요</string>
+    <string name="location_permission_description">위치 서비스를 허용하면\n여행을 기록할 수 있습니다.</string>
+    <string name="album_creation_description">앨범을 만드시겠습니까?</string>
 </resources>

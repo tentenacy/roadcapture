@@ -8,12 +8,11 @@
 
     <TextView
         android:id="@+id/textview_location_permission_title"
+        style="@style/BottomSheetHead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/setting_service_location_enable"
-        android:textColor="@color/gray"
-        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,19 +36,18 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="48dp"
         android:gravity="center"
-        android:text="위치 서비스를 허용하면\n여행을 기록할 수 있습니다."
+        android:text="@string/location_permission_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/imageview_location_permission" />
 
     <Button
         android:id="@+id/button_location_permission"
-        style="@style/Button"
+        style="@style/BottomSheetButton"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="24dp"
-        android:background="@drawable/bottom_sheet_button"
         android:text="@string/location_permission_setting"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -58,7 +56,7 @@
 
     <Button
         android:id="@+id/button_location_permission_cancel"
-        style="@style/ButtonWhite"
+        style="@style/BottomSheetButtonWhite"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginHorizontal="24dp"
