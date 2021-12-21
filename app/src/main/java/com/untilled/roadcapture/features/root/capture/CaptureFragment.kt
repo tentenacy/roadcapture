@@ -1,9 +1,9 @@
 package com.untilled.roadcapture.features.root.capture
 
 import android.Manifest
+import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.animation.ObjectAnimator
 import android.app.Activity.RESULT_OK
-import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
@@ -11,57 +11,43 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.provider.Settings
-import android.util.Log
 import android.view.*
-import android.widget.TextView
+import android.view.Gravity.END
+import android.view.Gravity.TOP
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.naver.maps.geometry.LatLng
-import com.naver.maps.map.MapFragment
-import com.naver.maps.map.NaverMap
-import com.naver.maps.map.OnMapReadyCallback
 import com.naver.maps.map.overlay.Marker
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentCaptureBinding
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.net.toUri
-import androidx.core.view.WindowCompat
-import androidx.core.view.isVisible
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
 import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.CompositeMultiplePermissionsListener
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-import com.karumi.dexter.listener.multi.SnackbarOnAnyDeniedMultiplePermissionsListener
 import com.karumi.dexter.listener.single.CompositePermissionListener
 import com.karumi.dexter.listener.single.PermissionListener
 import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener
-import com.naver.maps.map.CameraUpdate
+import com.naver.maps.map.*
 import com.naver.maps.map.overlay.OverlayImage
+import com.naver.maps.map.util.FusedLocationSource
 import com.untilled.roadcapture.utils.extension.*
 import com.untilled.roadcapture.utils.getCircularBitmap
 
 
 @AndroidEntryPoint
 class CaptureFragment : Fragment(), OnMapReadyCallback {
-    companion object {
-        private const val RUN: Int = 1
-        private const val PAUSE: Int = 2
-        private const val STOP: Int = 3
-    }
-
     private var _binding: FragmentCaptureBinding? = null
     private val binding get() = _binding!!
 
@@ -69,11 +55,11 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
 
     private var naverMap: NaverMap? = null
 
+    private var uiSettings: UiSettings? = null
+
+    private lateinit var locationSource: FusedLocationSource
+
     private var picture: Picture? = null
-
-    private var status: Int = STOP
-
-    private var navigationBarColor: Int = 0
 
     // 갤러리 사진 가져오는 intent 콜백 등록
     private val getContent = registerForActivityResult(
@@ -101,6 +87,8 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     ): View? {
         _binding = FragmentCaptureBinding.inflate(inflater, container, false)
 
+        locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
+
         initNaverMap()
         return binding.root
     }
@@ -109,13 +97,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requireActivity().run {
-            setStatusBarTransparent()
-            if(Build.VERSION.SDK_INT >= 30) {
-                navigationBarColor = window.navigationBarColor
-                window.navigationBarColor = Color.TRANSPARENT
-            }
-        }
+        requireActivity().setStatusBarTransparent()
 
         binding.coordinatorCapture.setPadding(
             0,
@@ -130,89 +112,15 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     override fun onDestroyView() {
         super.onDestroyView()
 
-        requireActivity().run {
-            setStatusBarOrigin()
-            if(Build.VERSION.SDK_INT >= 30) {
-                window.navigationBarColor = navigationBarColor
-            }
-        }
+        requireActivity().setStatusBarOrigin()
 
         _binding = null
     }
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setOnClickListeners() {
-        binding.fabCaptureCapture.setOnClickListener {
-            //requestCameraPermission()
-            requestSinglePermission(
-                Manifest.permission.CAMERA,
-                "사진을 찍기위해서는 카메라 권한이 필요합니다. 설정으로 이동합니다.",
-            ) {
-                Navigation.findNavController(binding.root)
-                    .navigate(R.id.action_captureFragment_to_cameraFragment)
-            }
-        }
         binding.imageviewCaptureBack.setOnClickListener {
             requireActivity().onBackPressed()
-        }
-        binding.fabCapturePickerGallery.setOnClickListener {
-            pickFromGallery()
-        }
-        binding.fabCaptureRecord.setOnClickListener {
-            when (status) {
-                STOP -> requestLocationPermission {     // 초기 상태(정지)
-                    // Todo 기록시작
-                    status = RUN
-                    binding.fabCaptureRecord.setImageResource(R.drawable.ic_pause)
-                    binding.fabCaptureStop.show()
-                    Toast.makeText(requireContext(), "기록 시작", Toast.LENGTH_SHORT).show()
-                }
-                RUN -> {    // 기록 중
-                    status = PAUSE
-                    ObjectAnimator.ofFloat(
-                        binding.fabCaptureStop,
-                        "translationX",
-                        requireContext().getPxFromDp(32f).toFloat()
-                    ).apply { start() }
-                    ObjectAnimator.ofFloat(
-                        binding.fabCaptureRecord,
-                        "translationX",
-                        -requireContext().getPxFromDp(32f).toFloat()
-                    ).apply { start() }
-                    binding.fabCaptureRecord.setImageResource(R.drawable.ic_play)
-                    Toast.makeText(requireContext(), "일시정지", Toast.LENGTH_SHORT).show()
-                }
-                PAUSE -> {  // 일시 정지
-                    status = RUN
-                    ObjectAnimator.ofFloat(binding.fabCaptureStop, "translationX", 0f)
-                        .apply { start() }
-                    ObjectAnimator.ofFloat(binding.fabCaptureRecord, "translationX", 0f)
-                        .apply { start() }
-                    binding.fabCaptureRecord.setImageResource(R.drawable.ic_pause)
-                    Toast.makeText(requireContext(), "기록 재개", Toast.LENGTH_SHORT).show()
-                }
-            }
-        }
-        binding.fabCaptureStop.setOnClickListener {
-            when (status) {
-                PAUSE -> {
-                    status = STOP
-                    val askRegisterAlbumBottomSheetDialog = AlbumRegistrationAskingBottomSheetDialog()
-                    askRegisterAlbumBottomSheetDialog.show(
-                        childFragmentManager,
-                        "askRegisterAlbumBottomSheetDialog"
-                    )
-                    ObjectAnimator.ofFloat(binding.fabCaptureStop, "translationX", 0f)
-                        .apply {
-                            start()
-                            binding.fabCaptureStop.hide()
-                        }
-                    ObjectAnimator.ofFloat(binding.fabCaptureRecord, "translationX", 0f).apply {
-                        start()
-                    }
-                    Toast.makeText(requireContext(), "기록 중지", Toast.LENGTH_SHORT).show()
-                }
-            }
         }
     }
 
@@ -231,6 +139,24 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                 childFragmentManager.beginTransaction().add(R.id.fragment_map, it).commit()
             }
         mapFragment.getMapAsync(this)
+    }
+
+    private fun initNaverMapUiSetting() {
+        uiSettings = naverMap!!.uiSettings
+        uiSettings?.isCompassEnabled = false // 나침반 비활성화
+        uiSettings?.isZoomControlEnabled = false // 확대 축소 버튼 비활성화
+        uiSettings?.isScaleBarEnabled = false // 스케일 바 비활성화
+        uiSettings?.isLocationButtonEnabled = false // 기본 내 위치 버튼 비활성화
+        binding.location.map = naverMap // 내 위치 버튼 설정
+
+        uiSettings?.logoGravity = TOP
+        uiSettings?.logoGravity = END
+        uiSettings?.setLogoMargin(
+            0,
+            requireContext().getPxFromDp(16f) + requireContext().statusBarHeight(),
+            requireContext().getPxFromDp(16f),
+            0
+        )
     }
 
     private fun drawMarker(picture: Picture) {
@@ -258,14 +184,36 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     override fun onMapReady(_naverMap: NaverMap) {
         _naverMap.isLiteModeEnabled = true
         naverMap = _naverMap
+        naverMap!!.locationSource = locationSource
+
+        initNaverMapUiSetting()
 
         requestSinglePermission(
             Manifest.permission.ACCESS_FINE_LOCATION,
             "지도에 현재 위치를 표시하기 위해서는 위치권한이 필요합니다. 설정으로 이동합니다."
         ) {
             //Todo 현재 위치 지도에 표시
+            naverMap?.locationTrackingMode = LocationTrackingMode.Follow
         }
         getNavArgs()
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        if (locationSource.onRequestPermissionsResult(
+                requestCode, permissions,
+                grantResults
+            )
+        ) {
+            if (!locationSource.isActivated) { // 권한 거부됨
+                naverMap?.locationTrackingMode = LocationTrackingMode.None
+            }
+            return
+        }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
     private fun requestLocationPermission(startRecord: () -> Unit) {
@@ -319,5 +267,9 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                     snackbarPermissionListener
                 )
             ).check()
+    }
+
+    companion object {
+        private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }
 }

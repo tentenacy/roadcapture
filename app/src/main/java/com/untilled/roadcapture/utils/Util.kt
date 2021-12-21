@@ -87,24 +87,11 @@ fun Context.navigationHeight(): Int {
 }
 
 fun Activity.setStatusBarTransparent() {
-    window.apply {
-        setFlags(
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS,
-            WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS
-        )
-    }
-    if(Build.VERSION.SDK_INT >= 30) {
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-    }
+    WindowCompat.setDecorFitsSystemWindows(window, false)
 }
 
 fun Activity.setStatusBarOrigin() {
-    window.apply {
-        clearFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS)
-    }
-    if(Build.VERSION.SDK_INT >= 30) {
-        WindowCompat.setDecorFitsSystemWindows(window, true)
-    }
+    WindowCompat.setDecorFitsSystemWindows(window, true)
 }
 
 fun Activity.hideKeyboard(editText: EditText) {

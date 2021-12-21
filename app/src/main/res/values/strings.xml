@@ -20,9 +20,6 @@
     <string name="search_title_criteria">제목</string>
     <string name="search_username_criteria">닉네임</string>
     <string name="search_place_criteria">장소</string>
-    <string name="capture_capture">캡처</string>
-    <string name="capture_record">기록</string>
-    <string name="capture_picker_gallery">갤러리에서 선택</string>
     <string name="setting_title">설정</string>
     <string name="setting_account">계정 설정</string>
     <string name="setting_service">서비스 설정</string>
@@ -120,7 +117,6 @@
     <string name="background_location_permission_cancel">취소</string>
     <string name="password_find_button">확인</string>
     <string name="follower_relation">팔로우</string>
-    <string name="capture_stop">정지</string>
     <string name="album_registration_asking_title">앨범 등록하기</string>
     <string name="album_registration_asking_description">기록을 중단하고\n앨범을 등록하시겠습니까?</string>
     <string name="album_registration_asking_create">앨범 등록하기</string>
