@@ -28,6 +28,9 @@ import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
 import com.untilled.roadcapture.features.root.capture.CaptureFragmentDirections
 import com.untilled.roadcapture.features.root.search.SearchFragment
+import com.untilled.roadcapture.studioAlbum
+import com.untilled.roadcapture.studioPlace
+import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -74,6 +77,7 @@ class MyStudioModification : Fragment() {
     ): View? {
         _binding = FragmentMyStudioModificationBinding.inflate(inflater,container,false)
         binding.user = args.user
+        initAdapter()
         return binding.root
     }
 
@@ -96,11 +100,11 @@ class MyStudioModification : Fragment() {
         binding.imageviewMyStudioModificationBack.setOnClickListener {
             Navigation.findNavController(binding.root).popBackStack()
         }
-        binding.imageviewMyStudioModificationProfile.setOnClickListener {
-            pickFromGallery(PROFILE)
-        }
-        binding.imageviewMyStudioModificationBackground.setOnClickListener {
+        binding.imageviewEditBackground.setOnClickListener {
             pickFromGallery(BACKGROUND)
+        }
+        binding.imageviewEditProfile.setOnClickListener {
+            pickFromGallery(PROFILE)
         }
     }
 
@@ -121,7 +125,24 @@ class MyStudioModification : Fragment() {
         if(backgroundImageUri != null)
             args.user?.backgroundUrl = backgroundImageUri.toString()
 
-        args.user?.description = binding.textviewMyStudioModificationProfileDescription.text.toString()
+        args.user?.description = binding.edittextMyStudioModificationProfileDescription.text.toString()
+        args.user?.username = binding.edittextMyStudioModificationUsername.text.toString()
+    }
+
+    private fun initAdapter() {
+        binding.recyclerviewMyStudioModificationPlace.withModels {
+            DummyDataSet.places.forEachIndexed { index, place ->
+                studioPlace {
+                    id(index)
+                    place(place)
+                    onClickItem { model, parentView, clickedView, position ->
+                        when(clickedView.id){
+
+                        }
+                    }
+                }
+            }
+        }
     }
 
     companion object{

@@ -46,26 +46,34 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent">
 
-                <ImageView
+                <TextView
                     android:id="@+id/imageview_capture_play"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
+                    android:background="?selectableItemBackgroundBorderless"
                     android:padding="16dp"
-                    android:src="@drawable/ic_play"
-                    app:tint="@color/secondaryColor" />
+                    android:gravity="center"
+                    android:text="등록"
+                    android:textAppearance="@style/SubHeadBold"
+                    android:textColor="@color/secondaryColor"/>
 
-                <ImageView
+                <TextView
                     android:id="@+id/imageview_capture_stop"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
-                    android:padding="16dp"
-                    android:src="@drawable/ic_stop"
-                    app:tint="@color/secondaryColor" />
+                    android:background="?selectableItemBackgroundBorderless"
+                    android:gravity="center"
+                    android:text="취소"
+                    android:textAppearance="@style/SubHeadBold"
+                    android:textColor="@color/secondaryColor"
+                    tools:layout_editor_absoluteY="128dp" />
+
 
                 <ImageView
                     android:id="@+id/imageview_capture_arrow"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
+                    android:background="?selectableItemBackgroundBorderless"
                     android:padding="20dp"
                     android:src="@drawable/ic_arrow_capture"
                     app:tint="@color/secondaryColor" />
@@ -74,6 +82,7 @@
                     android:id="@+id/imageview_capture_camera"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
+                    android:background="?selectableItemBackgroundBorderless"
                     android:padding="16dp"
                     android:src="@drawable/camera"
                     app:tint="@color/secondaryColor" />
@@ -82,6 +91,7 @@
                     android:id="@+id/imageview_capture_gallery"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
+                    android:background="?selectableItemBackgroundBorderless"
                     android:padding="16dp"
                     android:src="@drawable/ic_picker_gallery"
                     app:tint="@color/secondaryColor" />

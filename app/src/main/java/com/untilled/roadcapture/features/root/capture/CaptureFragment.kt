@@ -122,6 +122,18 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         binding.imageviewCaptureBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
+        binding.imageviewCaptureCamera.setOnClickListener {
+            requestSinglePermission(
+                Manifest.permission.CAMERA,
+                "사진을 찍기위해서는 카메라 권한이 필요합니다. 설정으로 이동합니다.",
+            ) {
+                Navigation.findNavController(binding.root)
+                    .navigate(R.id.action_captureFragment_to_cameraFragment)
+            }
+        }
+        binding.imageviewCaptureGallery.setOnClickListener {
+            pickFromGallery()
+        }
     }
 
     private fun getNavArgs() {
