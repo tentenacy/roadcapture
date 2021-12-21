@@ -62,6 +62,14 @@
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/item_comment" />
 
+        <View
+            android:id="@+id/view_comment_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="28dp"
+            android:layout_gravity="bottom"
+            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
+            android:background="@color/white"/>
+
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/comment_input_container"
             android:layout_width="match_parent"
