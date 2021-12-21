@@ -68,19 +68,6 @@ class SearchFragment : Fragment() {
         }
     }
 
-    fun setSearchFragmentTab(){
-        Handler().postDelayed(
-            Runnable {
-                binding.tablayoutSearch.getTabAt(2)?.select()
-                binding.viewpagerSearch.currentItem = 2
-                     }, 100
-        )
-    }
-
-    fun setSearchInputText(text: String){
-        binding.edittextSearchInput.setText(text)
-    }
-
     private fun getTabTitle(position: Int): String? = when(position) {
         TITLE_CRITERIA_PAGE_INDEX -> getString(R.string.search_title_criteria)
         USERNAME_CRITERIA_PAGE_INDEX -> getString(R.string.search_username_criteria)

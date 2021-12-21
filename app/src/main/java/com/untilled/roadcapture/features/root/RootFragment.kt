@@ -150,7 +150,7 @@ class RootFragment : Fragment() {
         return this
     }
 
-    fun setupTabSelectedState(selectedIndex: Int) {
+    private fun setupTabSelectedState(selectedIndex: Int) {
         tabs.forEachIndexed { index, imageView ->
             imageView.setTint(
                 when (index) {

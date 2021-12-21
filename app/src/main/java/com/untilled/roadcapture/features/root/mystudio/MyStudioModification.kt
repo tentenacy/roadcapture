@@ -80,8 +80,7 @@ class MyStudioModification : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        setOnClickListeners()
-//        setEditTextChangeListeners()
+        setOnClickListeners()
     }
 
     override fun onDestroyView() {
@@ -89,37 +88,21 @@ class MyStudioModification : Fragment() {
         _binding = null
     }
 
-//    private fun setOnClickListeners(){
-//        binding.imageviewMyStudioModificationCheck.setOnClickListener {
-//            saveUserInfo()
-//            Navigation.findNavController(binding.root).popBackStack()
-//        }
-//        binding.imageviewMyStudioModificationBack.setOnClickListener {
-//            Navigation.findNavController(binding.root).popBackStack()
-//        }
-//        binding.textviewMyStudioModificationChangeProfileImage.setOnClickListener {
-//            pickFromGallery(PROFILE)
-//        }
-//        binding.textviewMyStudioModificationChangeBackgroundImage.setOnClickListener {
-//            pickFromGallery(BACKGROUND)
-//        }
-//    }
-//
-//    private fun setEditTextChangeListeners(){
-//        binding.edittextMyStudioModificationChangeProfileDescription.setText(args.user?.description)
-//        binding.edittextMyStudioModificationChangeProfileDescription.addTextChangedListener(object: TextWatcher{
-//            override fun beforeTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//            }
-//
-//            override fun onTextChanged(text: CharSequence?, p1: Int, p2: Int, p3: Int) {
-//                binding.textviewMyStudioModificationProfileDescription.text = text.toString()
-//            }
-//
-//            override fun afterTextChanged(text: Editable?) {
-//            }
-//
-//        })
-//    }
+    private fun setOnClickListeners(){
+        binding.imageviewMyStudioModificationCheck.setOnClickListener {
+            saveUserInfo()
+            Navigation.findNavController(binding.root).popBackStack()
+        }
+        binding.imageviewMyStudioModificationBack.setOnClickListener {
+            Navigation.findNavController(binding.root).popBackStack()
+        }
+        binding.imageviewMyStudioModificationProfile.setOnClickListener {
+            pickFromGallery(PROFILE)
+        }
+        binding.imageviewMyStudioModificationBackground.setOnClickListener {
+            pickFromGallery(BACKGROUND)
+        }
+    }
 
     private fun pickFromGallery(type: Int) {
         val intent = Intent(Intent.ACTION_PICK)

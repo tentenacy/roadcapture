@@ -6,10 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.airbnb.epoxy.CarouselModel_
 import com.airbnb.epoxy.carousel
+import com.google.android.material.imageview.ShapeableImageView
 import com.untilled.roadcapture.*
 import com.untilled.roadcapture.core.navigation.StackHostFragment
 import com.untilled.roadcapture.databinding.FragmentMyStudioBinding
@@ -88,24 +90,10 @@ class MyStudioFragment : Fragment() {
                     place(place)
 
                     onClickItem { model, parentView, clickedView, position ->
-                        val root = parentFragment?.parentFragment?.parentFragment as RootFragment
-                        val searchStackHostFragment =
-                            root.childFragmentManager.findFragmentByTag("searchRootFragment") as StackHostFragment
-                        val myStudioStackHostFragment =
-                            root.childFragmentManager.findFragmentByTag("myStudioFragment") as StackHostFragment
-
-                        val searchFragment =
-                            searchStackHostFragment.childFragmentManager.fragments.first().childFragmentManager.fragments.first() as SearchFragment
-
-                        searchFragment.setSearchInputText(model.place().name)
-                        searchFragment.setSearchFragmentTab()
-
-                        root.setupTabSelectedState(1)
-
-                        root.childFragmentManager.beginTransaction()
-                            .show(searchStackHostFragment)
-                            .hide(myStudioStackHostFragment)
-                            .commit()
+                        when(clickedView.id){
+                            R.id.view_item_studio_place_overlay ->
+                                clickedView.isSelected = !clickedView.isSelected
+                        }
                     }
                 }
             }
