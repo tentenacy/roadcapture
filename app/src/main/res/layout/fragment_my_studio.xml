@@ -35,9 +35,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
-                    app:layout_constraintDimensionRatio="4:3"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     bind:studioBackgroundImage="@{user.backgroundUrl}"
                     tools:src="@drawable/sample_profile_background" />
 
@@ -45,10 +42,6 @@
                     android:id="@+id/imageview_my_studio_profile"
                     android:layout_width="96dp"
                     android:layout_height="96dp"
-                    app:layout_constraintBottom_toBottomOf="@id/imageview_my_studio_background"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/imageview_my_studio_background"
                     app:civ_border_color="@color/white"
                     app:civ_border_width="2dp"
                     bind:studioProfileImage="@{user.profileUrl}"
@@ -61,9 +54,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:text="@{user.username}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/imageview_my_studio_profile"
                     tools:text="kvvangddang" />
 
                 <TextView
@@ -75,8 +65,6 @@
                     android:layout_marginTop="200dp"
                     android:text="@{user.username}"
                     android:visibility="invisible"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent"
                     tools:text="kvvangddang" />
 
                 <ImageView
@@ -86,9 +74,7 @@
                     android:layout_marginTop="200dp"
                     android:layout_marginEnd="16dp"
                     android:src="@drawable/ic_setting"
-                    android:visibility="invisible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="parent" />
+                    android:visibility="invisible" />
 
                 <TextView
                     android:id="@+id/textview_my_studio_profile_description"
@@ -99,9 +85,6 @@
                     android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:text="@{user.description}"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/textview_my_studio_profile_name"
                     tools:text="안녕하세요 최광현입니다." />
 
 
@@ -112,11 +95,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:text="@string/my_studio_follower"
-                    android:textColor="@color/gray"
-                    app:layout_constraintEnd_toStartOf="@id/imageview_my_studio_profile"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/textview_my_studio_follower_num" />
-
+                    android:textColor="@color/gray"/>
 
                 <TextView
                     android:id="@+id/textview_my_studio_follower_num"
@@ -126,10 +105,7 @@
                     android:layout_marginTop="16dp"
                     android:background="?attr/selectableItemBackground"
                     android:gravity="top|center"
-                    android:text="81.9만"
-                    app:layout_constraintEnd_toStartOf="@id/imageview_my_studio_profile"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/imageview_my_studio_background" />
+                    android:text="81.9만" />
 
                 <TextView
                     android:id="@+id/textview_my_studio_following"
@@ -138,11 +114,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:text="@string/my_studio_following"
-                    android:textColor="@color/gray"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/imageview_my_studio_profile"
-                    app:layout_constraintTop_toTopOf="@id/textview_my_studio_following_num" />
-
+                    android:textColor="@color/gray" />
 
                 <TextView
                     android:id="@+id/textview_my_studio_following_num"
@@ -151,10 +123,7 @@
                     android:layout_height="56dp"
                     android:background="?attr/selectableItemBackground"
                     android:gravity="top|center"
-                    android:text="100"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/imageview_my_studio_profile"
-                    app:layout_constraintTop_toTopOf="@id/textview_my_studio_follower_num" />
+                    android:text="100" />
 
                 <Button
                     android:id="@+id/button_my_studio_edit_profile"
@@ -163,20 +132,14 @@
                     android:layout_height="48dp"
                     android:layout_marginTop="32dp"
                     android:text="프로필 편집"
-                    app:backgroundTint="@color/secondaryColor"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textview_my_studio_profile_description" />
+                    app:backgroundTint="@color/secondaryColor" />
 
                 <ImageView
                     android:id="@+id/imageview_my_studio_setting"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    android:src="@drawable/ic_setting"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:padding="12dp"
+                    android:src="@drawable/ic_setting" />
 
 
             </com.untilled.roadcapture.utils.CollapsibleToolbar>
