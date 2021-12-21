@@ -9,7 +9,7 @@ import com.untilled.roadcapture.databinding.FragmentPasswordFindBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PasswordFindFragment : Fragment() {
+class  PasswordFindFragment : Fragment() {
     private var _binding: FragmentPasswordFindBinding? = null
     private val binding get() = _binding!!
 

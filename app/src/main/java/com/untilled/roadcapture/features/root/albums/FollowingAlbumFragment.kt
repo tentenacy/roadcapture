@@ -46,7 +46,10 @@ class FollowingAlbumFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-
+        binding.imageviewFollowingAlbumNotification.setOnClickListener {
+            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                .navigate(R.id.action_rootFragment_to_notificationFragment)
+        }
     }
 
     override fun onDestroyView() {

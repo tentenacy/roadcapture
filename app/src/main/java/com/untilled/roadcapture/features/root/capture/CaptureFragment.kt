@@ -269,76 +269,18 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun requestLocationPermission(startRecord: () -> Unit) {
-        when (Build.VERSION.SDK_INT) {
-            in 23..28 -> {  // android 9.0 (api 28 이하)
-                requestSinglePermission(
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    "여행 기록을 위해서는 위치권한 항상 허용이 필요합니다. 설정으로 이동합니다."
-                ) {
-                    startRecord()
-                }
-            }
-            29 -> { // android 10.0 (api 29)
-                if (ContextCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.ACCESS_FINE_LOCATION
-                    ) == PackageManager.PERMISSION_GRANTED
-                ) {
-                    requestSinglePermission(
-                        Manifest.permission.ACCESS_BACKGROUND_LOCATION,
-                        "여행을 기록하기 위해서는 위치권한 항상 허용이 필요합니다. 설정으로 이동합니다."
-                    ) {
-                        startRecord()
-                    }
-                } else {
-                    requestMultiplePermission(
-                        arrayListOf(
-                            Manifest.permission.ACCESS_FINE_LOCATION,
-                            Manifest.permission.ACCESS_BACKGROUND_LOCATION
-                        ),
-                        "여행 기록을 위해서는 위치권한 항상 허용이 필요합니다. 설정으로 이동합니다."
-                    ) {
-                        startRecord()
-                    }
-                }
-            }
-            30 -> { // android 11.0 (api 30)
-                when (PackageManager.PERMISSION_GRANTED) {
-                    ContextCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.ACCESS_BACKGROUND_LOCATION
-                    ) -> {
-                        startRecord()
-                    }
-                    ContextCompat.checkSelfPermission(
-                        requireContext(),
-                        Manifest.permission.ACCESS_FINE_LOCATION
-                    ) -> {
-                        showBackgroundPermissionDialog {
-                            requestSinglePermission(
-                                Manifest.permission.ACCESS_BACKGROUND_LOCATION,
-                                "여행을 기록하기 위해서는 위치권한 항상 허용이 필요합니다. 설정으로 이동합니다."
-                            ) {
-                                startRecord()
-                            }
-                        }
-                    }
-                    else -> {
-                        requestSinglePermission(
-                            Manifest.permission.ACCESS_FINE_LOCATION,
-                            "여행을 기록하기 위해서는 위치권한 항상 허용이 필요합니다. 설정으로 이동합니다."
-                        ) {
-                            showBackgroundPermissionDialog {
-                                requestSinglePermission(
-                                    Manifest.permission.ACCESS_BACKGROUND_LOCATION,
-                                    "여행을 기록하기 위해서는 위치권한 항상 허용이 필요합니다. 설정으로 이동합니다."
-                                ) {
-                                    startRecord()
-                                }
-                            }
-                        }
-                    }
-                }
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED
+        ) {
+            startRecord()
+        } else {
+            requestSinglePermission(
+                Manifest.permission.ACCESS_FINE_LOCATION,
+                "여행을 기록하기 위해서는 위치권한 허용이 필요합니다. 설정으로 이동합니다."
+            ) {
+                startRecord()
             }
         }
     }
@@ -377,75 +319,5 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                     snackbarPermissionListener
                 )
             ).check()
-    }
-
-    private fun requestMultiplePermission(
-        permissions: ArrayList<String>,
-        deniedMessage: String,
-        logic: () -> Unit
-    ) {
-        val basicMultiplePermissionListener: MultiplePermissionsListener = object :
-            MultiplePermissionsListener {
-            override fun onPermissionsChecked(p0: MultiplePermissionsReport?) {
-                logic()
-            }
-
-            override fun onPermissionRationaleShouldBeShown(
-                p0: MutableList<PermissionRequest>?,
-                p1: PermissionToken?
-            ) {
-                Toast.makeText(requireContext(), "거절됨", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        val snackbarMultiplePermissionsListener: MultiplePermissionsListener =
-            SnackbarOnAnyDeniedMultiplePermissionsListener.Builder
-                .with(view, deniedMessage)
-                .withOpenSettingsButton("설정")
-                .withCallback(object : Snackbar.Callback() {
-                    override fun onShown(snackbar: Snackbar) {}
-                    override fun onDismissed(snackbar: Snackbar, event: Int) {}
-                })
-                .build()
-
-        Dexter.withContext(requireContext())
-            .withPermissions(permissions)
-            .withListener(
-                CompositeMultiplePermissionsListener(
-                    basicMultiplePermissionListener,
-                    snackbarMultiplePermissionsListener
-                )
-            ).check()
-    }
-
-    private fun showBackgroundPermissionDialog(requestPermission: () -> Unit) {
-        val layoutInflater = LayoutInflater.from(requireContext())
-        val dialogView =
-            layoutInflater.inflate(R.layout.alert_dialog_background_location_permission, null)
-
-        val dialog = android.app.AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
-            .setView(dialogView)
-            .create()
-
-        val textViewConfirm =
-            dialogView.findViewById<TextView>(R.id.textview_background_location_permission_confirm)
-        val textViewCancel =
-            dialogView.findViewById<TextView>(R.id.textview_background_location_permission_cancel)
-
-        textViewConfirm?.setOnClickListener {
-            //requestPermission()
-            startActivity(
-                Intent().apply {
-                    action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-                    data = Uri.fromParts("package", requireActivity().packageName, null)
-                }
-            )
-            dialog.dismiss()
-        }
-        textViewCancel?.setOnClickListener {
-            dialog.dismiss()
-        }
-
-        dialog.show()
     }
 }

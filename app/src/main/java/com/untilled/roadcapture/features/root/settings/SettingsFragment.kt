@@ -45,10 +45,6 @@ class SettingsFragment : Fragment() {
         super.onStart()
 
         when (PackageManager.PERMISSION_GRANTED) {
-            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_BACKGROUND_LOCATION)
-            -> {
-                binding.textviewSettingServiceLocationDetail.text = "항상 허용"
-            }
             ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
             -> {
                 binding.textviewSettingServiceLocationDetail.text = "앱 사용 중에만 허용"
