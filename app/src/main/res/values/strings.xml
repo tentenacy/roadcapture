@@ -150,4 +150,8 @@
     <string name="album_registration_name_user_input">앨범 제목을 입력해주세요</string>
     <string name="album_registration_description">앨범 설명</string>
     <string name="album_registration_description_user_input">앨범 설명을 작성해주세요</string>
+    <string name="cancel_album_creation_asking_title">앨범 만들기 취소</string>
+    <string name="cancel_album_creation_asking_description">앨범 만들기를 취소하시겠어요?\n기록했던 모든 사진들이 사라집니다.</string>
+    <string name="cancel_album_creation_asking_confirm">확인</string>
+    <string name="cancel_album_creation_asking_cancel">취소</string>
 </resources>

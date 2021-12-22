@@ -1,12 +1,10 @@
 package com.untilled.roadcapture.features.root.capture
 
 import android.Manifest
-import android.Manifest.permission.ACCESS_FINE_LOCATION
-import android.animation.ObjectAnimator
 import android.app.Activity.RESULT_OK
+import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -14,7 +12,7 @@ import android.provider.MediaStore
 import android.view.*
 import android.view.Gravity.END
 import android.view.Gravity.TOP
-import android.widget.Toast
+import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
@@ -29,8 +27,6 @@ import com.untilled.roadcapture.databinding.FragmentCaptureBinding
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.net.toUri
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.location.FusedLocationProviderClient
-import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -61,6 +57,8 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     private lateinit var locationSource: FusedLocationSource
 
     private var picture: Picture? = null
+
+    private var markerList: MutableList<Marker> = mutableListOf()
 
     // 갤러리 사진 가져오는 intent 콜백 등록
     private val getContent = registerForActivityResult(
@@ -145,7 +143,17 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                 )
         }
         binding.imageviewCaptureStop.setOnClickListener {
-            // Todo 앨범 등록 취소 다이얼로그 띄우기
+            if(markerList.isNotEmpty()) {
+                showCancelAlbumCreationAskingDialog {
+                    for (i in markerList) {
+                        i.map = null    // 지도에서 마커 제거
+                    }
+                    markerList.clear()  // 마커 리스트 클리어
+                    deleteCache(requireContext())   // 캐시 디렉토리에 있는 사진들 제거
+                    picture = null
+                    requireArguments().clear() // navArgs 도 함께 초기화해야 함 (안그러면 마커 그릴때 에러)
+                }
+            }
         }
     }
 
@@ -202,6 +210,8 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                     ?: 126.9783740
             )
         }.map = naverMap
+
+        markerList.add(marker)
 
         naverMap?.moveCamera(CameraUpdate.scrollTo(marker.position))
     }
@@ -292,6 +302,28 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                     snackbarPermissionListener
                 )
             ).check()
+    }
+
+    private fun showCancelAlbumCreationAskingDialog(logic: () -> Unit) {
+        val layoutInflater = LayoutInflater.from(requireContext())
+        val dialogView = layoutInflater.inflate(R.layout.alert_dialog_cancel_album_creation_asking, null)
+
+        val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
+            .setView(dialogView)
+            .create()
+
+        val textViewLogout = dialogView.findViewById<TextView>(R.id.textview_cancel_album_creation_asking_confirm)
+        val textViewCancel = dialogView.findViewById<TextView>(R.id.textview_cancel_album_creation_asking_cancel)
+
+        textViewLogout?.setOnClickListener {
+            logic()
+            dialog.dismiss()
+        }
+        textViewCancel?.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 
     companion object {
