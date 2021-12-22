@@ -39,7 +39,6 @@ object CommonBindingAdapters {
     @BindingAdapter("clickableLayout")
     fun setClickableLayout(view: View, any: Any?) {
         val context = view.context
-        view.setBackgroundColor(context.getColor(R.color.secondaryColor))
         view.setRippleEffect()
     }
 
