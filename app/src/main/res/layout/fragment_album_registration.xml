@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="picture"
+            type="com.untilled.roadcapture.data.entity.Picture" />
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar_album_registration"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                app:contentInsetStart="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:id="@+id/imageview_album_registration_back"
+                    style="@style/BackArrow" />
+
+                <TextView
+                    android:id="@+id/textview_album_registration_toolbar_title"
+                    style="@style/ActionBarTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/album_registration_toolbar_title" />
+
+                <ImageView
+                    android:id="@+id/imageview_album_registration_check"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:layout_gravity="right"
+                    android:padding="16dp"
+                    android:src="@drawable/check"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.appcompat.widget.Toolbar>
+
+            <TextView
+                android:id="@+id/textview_album_registration_thumbnail"
+                style="@style/SubHeadBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="@string/album_registration_thumbnail"
+                app:layout_constraintStart_toStartOf="@+id/guideline_registration_description_body_start"
+                app:layout_constraintTop_toBottomOf="@id/toolbar_album_registration" />
+
+            <ImageView
+                android:id="@+id/imageview_album_registration_image"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/plus_dotted_square"
+                app:layout_constraintDimensionRatio="H,1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_album_registration_thumbnail"
+                bind:Image="@{picture.imageUri}" />
+
+            <TextView
+                android:id="@+id/textview_album_registration_title"
+                style="@style/SubHeadBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/album_registration_title"
+                app:layout_constraintStart_toStartOf="@id/guideline_registration_description_body_start"
+                app:layout_constraintTop_toBottomOf="@id/imageview_album_registration_image" />
+
+            <EditText
+                android:id="@+id/edittext_album_registration_name_user_input"
+                style="@style/Body"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:background="@null"
+                android:gravity="center|end"
+                android:hint="@string/album_registration_name_user_input"
+                android:inputType="text|textImeMultiLine"
+                android:maxLines="1"
+                app:layout_constraintBottom_toBottomOf="@id/textview_album_registration_title"
+                app:layout_constraintEnd_toEndOf="@id/guideline_registration_description_body_end"
+                app:layout_constraintTop_toTopOf="@id/textview_album_registration_title" />
+
+            <TextView
+                android:id="@+id/textview_album_registration_description"
+                style="@style/SubHeadBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="32dp"
+                android:text="@string/album_registration_description"
+                app:layout_constraintStart_toStartOf="@id/guideline_registration_description_body_start"
+                app:layout_constraintTop_toBottomOf="@id/textview_album_registration_title" />
+
+            <EditText
+                android:id="@+id/edittext_album_registration_description_user_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:gravity="top|start"
+                android:hint="@string/album_registration_description_user_input"
+                android:minLines="5"
+                android:padding="16dp"
+                android:textAppearance="@style/Body"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textview_album_registration_description" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_registration_description_body_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="16dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline_registration_description_body_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="16dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

@@ -28,6 +28,7 @@ import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentCaptureBinding
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.net.toUri
+import androidx.navigation.fragment.findNavController
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.material.snackbar.Snackbar
@@ -134,6 +135,18 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         binding.imageviewCaptureGallery.setOnClickListener {
             pickFromGallery()
         }
+        binding.imageviewCapturePlay.setOnClickListener {
+            // Todo 앨범을 등록하시겠습니까 bottomsheet 띄우기, 썸네일 여부 체크하여 알려주기
+            Navigation.findNavController(binding.root)
+                .navigate(
+                    CaptureFragmentDirections.actionCaptureFragmentToAlbumRegestrationFragment(
+                        picture = picture
+                    )
+                )
+        }
+        binding.imageviewCaptureStop.setOnClickListener {
+            // Todo 앨범 등록 취소 다이얼로그 띄우기
+        }
     }
 
     private fun getNavArgs() {
@@ -205,7 +218,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
             "지도에 현재 위치를 표시하기 위해서는 위치권한이 필요합니다. 설정으로 이동합니다."
         ) {
             //Todo 현재 위치 지도에 표시
-            naverMap?.locationTrackingMode = LocationTrackingMode.Follow
+            //naverMap?.locationTrackingMode = LocationTrackingMode.Follow
         }
         getNavArgs()
     }

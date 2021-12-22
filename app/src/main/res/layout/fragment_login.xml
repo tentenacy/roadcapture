@@ -8,8 +8,13 @@
         android:id="@+id/login_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/login_background"
         tools:context=".features.login.LoginFragment">
+<!--        android:background="@drawable/login_background"-->
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/login_background"/>
 
         <View
             android:id="@+id/view_login_overlay"
@@ -21,139 +26,145 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageView
-            android:id="@+id/imageview_login_logo"
-            android:layout_width="108dp"
-            android:layout_height="107dp"
-            android:src="@drawable/logo_transparent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.25"/>
-
-        <TextView
-            android:id="@+id/textview_login_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/login_title"
-            style="@style/HeadWhite"
-            android:fontFamily="@font/notosanskr_thin"
-            app:layout_constraintStart_toStartOf="@id/imageview_login_logo"
-            app:layout_constraintEnd_toEndOf="@id/imageview_login_logo"
-            app:layout_constraintTop_toBottomOf="@id/imageview_login_logo"/>
-
-        <ImageView
-            android:id="@+id/imageview_login_naver_logo"
-            style="@style/RippleEffect"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/ic_naver"
-            app:layout_constraintBottom_toTopOf="@+id/constraint_login_container_email"
-            app:layout_constraintEnd_toStartOf="@+id/imageview_login_google_logo"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
-            app:layout_constraintStart_toStartOf="@+id/constraint_login_container_email"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.95"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <ImageView
-            android:id="@+id/imageview_login_google_logo"
-            style="@style/RippleEffect"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_google"
-            app:layout_constraintBottom_toBottomOf="@+id/imageview_login_naver_logo"
-            app:layout_constraintEnd_toStartOf="@+id/imageview_login_kakao_logo"
-            app:layout_constraintStart_toEndOf="@+id/imageview_login_naver_logo"
-            app:layout_constraintTop_toTopOf="@+id/imageview_login_naver_logo" />
-
-        <ImageView
-            android:id="@+id/imageview_login_kakao_logo"
-            style="@style/RippleEffect"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_kakao"
-            app:layout_constraintBottom_toBottomOf="@+id/imageview_login_naver_logo"
-            app:layout_constraintEnd_toStartOf="@+id/imageview_login_facebook_logo"
-            app:layout_constraintStart_toEndOf="@+id/imageview_login_google_logo"
-            app:layout_constraintTop_toTopOf="@+id/imageview_login_naver_logo" />
-
-        <ImageView
-            android:id="@+id/imageview_login_facebook_logo"
-            style="@style/RippleEffect"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:src="@drawable/ic_facebook"
-            app:layout_constraintBottom_toBottomOf="@+id/imageview_login_naver_logo"
-            app:layout_constraintEnd_toEndOf="@+id/constraint_login_container_email"
-            app:layout_constraintStart_toEndOf="@+id/imageview_login_kakao_logo"
-            app:layout_constraintTop_toTopOf="@+id/imageview_login_naver_logo" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraint_login_container_email"
-            android:layout_width="240dp"
-            android:layout_height="40dp"
-            android:layout_marginBottom="48dp"
-            android:elevation="10dp"
-            android:paddingVertical="8dp"
-            android:background="@drawable/login_button_radius"
-            app:layout_constraintBottom_toTopOf="@+id/textview_login_no_account"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageview_login_naver_logo"
-            bind:clickableLayout="@{null}"
-            tools:style="@style/RippleEffect">
+            android:id="@+id/login_inner_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageview_login_email_icon"
-                android:layout_width="24dp"
-                android:layout_height="18dp"
-                android:src="@drawable/ic_email"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/textview_login_email_login"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-
-            <TextView
-                android:id="@+id/textview_login_email_login"
-                style="@style/Button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/login_email_login"
+                android:id="@+id/imageview_login_logo"
+                android:layout_width="108dp"
+                android:layout_height="107dp"
+                android:src="@drawable/logo_transparent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.25" />
+
+            <TextView
+                android:id="@+id/textview_login_title"
+                style="@style/HeadWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/notosanskr_thin"
+                android:text="@string/login_title"
+                app:layout_constraintEnd_toEndOf="@id/imageview_login_logo"
+                app:layout_constraintStart_toStartOf="@id/imageview_login_logo"
+                app:layout_constraintTop_toBottomOf="@id/imageview_login_logo" />
+
+            <ImageView
+                android:id="@+id/imageview_login_naver_logo"
+                style="@style/RippleEffect"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/ic_naver"
+                app:layout_constraintBottom_toTopOf="@+id/constraint_login_container_email"
+                app:layout_constraintEnd_toStartOf="@+id/imageview_login_google_logo"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="@+id/constraint_login_container_email"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.95"
+                app:layout_constraintVertical_chainStyle="packed" />
+
+            <ImageView
+                android:id="@+id/imageview_login_google_logo"
+                style="@style/RippleEffect"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_google"
+                app:layout_constraintBottom_toBottomOf="@+id/imageview_login_naver_logo"
+                app:layout_constraintEnd_toStartOf="@+id/imageview_login_kakao_logo"
+                app:layout_constraintStart_toEndOf="@+id/imageview_login_naver_logo"
+                app:layout_constraintTop_toTopOf="@+id/imageview_login_naver_logo" />
+
+            <ImageView
+                android:id="@+id/imageview_login_kakao_logo"
+                style="@style/RippleEffect"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_kakao"
+                app:layout_constraintBottom_toBottomOf="@+id/imageview_login_naver_logo"
+                app:layout_constraintEnd_toStartOf="@+id/imageview_login_facebook_logo"
+                app:layout_constraintStart_toEndOf="@+id/imageview_login_google_logo"
+                app:layout_constraintTop_toTopOf="@+id/imageview_login_naver_logo" />
+
+            <ImageView
+                android:id="@+id/imageview_login_facebook_logo"
+                style="@style/RippleEffect"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/ic_facebook"
+                app:layout_constraintBottom_toBottomOf="@+id/imageview_login_naver_logo"
+                app:layout_constraintEnd_toEndOf="@+id/constraint_login_container_email"
+                app:layout_constraintStart_toEndOf="@+id/imageview_login_kakao_logo"
+                app:layout_constraintTop_toTopOf="@+id/imageview_login_naver_logo" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraint_login_container_email"
+                android:layout_width="240dp"
+                android:layout_height="40dp"
+                android:layout_marginBottom="48dp"
+                android:background="@drawable/login_button_radius"
+                android:elevation="10dp"
+                android:paddingVertical="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/textview_login_no_account"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageview_login_naver_logo"
+                bind:clickableLayout="@{null}"
+                tools:style="@style/RippleEffect">
+
+                <ImageView
+                    android:id="@+id/imageview_login_email_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_email"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/textview_login_email_login"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/textview_login_email_login"
+                    style="@style/Button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_email_login"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/textview_login_no_account"
+                style="@style/BodyWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:text="@string/login_no_account"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/textview_login_signup"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textview_login_signup"
+                style="@style/BodyWhite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:fontFamily="@font/notosanskr_medium"
+                android:text="@string/login_signup"
+                app:layout_constraintBottom_toBottomOf="@+id/textview_login_no_account"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textview_login_no_account"
+                app:layout_constraintTop_toTopOf="@+id/textview_login_no_account" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/textview_login_no_account"
-            style="@style/BodyWhite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:text="@string/login_no_account"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/textview_login_signup"
-            app:layout_constraintHorizontal_chainStyle="packed"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/textview_login_signup"
-            style="@style/BodyWhite"
-            android:fontFamily="@font/notosanskr_medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:text="@string/login_signup"
-            app:layout_constraintBottom_toBottomOf="@+id/textview_login_no_account"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textview_login_no_account"
-            app:layout_constraintTop_toTopOf="@+id/textview_login_no_account" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

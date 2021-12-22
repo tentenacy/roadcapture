@@ -8,6 +8,10 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentLoginBinding
+import com.untilled.roadcapture.utils.extension.navigationHeight
+import com.untilled.roadcapture.utils.extension.setStatusBarOrigin
+import com.untilled.roadcapture.utils.extension.setStatusBarTransparent
+import com.untilled.roadcapture.utils.extension.statusBarHeight
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -28,11 +32,22 @@ class LoginFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
 
+        requireActivity().setStatusBarOrigin()
+
         _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        requireActivity().setStatusBarTransparent()
+
+        binding.loginInnerContainer.setPadding(
+            0,
+            requireContext().statusBarHeight(),
+            0,
+            requireContext().navigationHeight()
+        )
 
         setOnClickListeners()
     }

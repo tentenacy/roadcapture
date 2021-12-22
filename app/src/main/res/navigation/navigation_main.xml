@@ -66,6 +66,9 @@
             app:argType="com.untilled.roadcapture.data.entity.Picture"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_captureFragment_to_albumRegestrationFragment"
+            app:destination="@id/albumRegistrationFragment" />
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
@@ -240,4 +243,15 @@
         android:name="com.untilled.roadcapture.features.signup.TermsOfServiceFragment"
         android:label="TermsOfServiceFragment"
         tools:layout="@layout/fragment_terms_of_service"/>
+    <fragment
+        android:id="@+id/albumRegistrationFragment"
+        android:name="com.untilled.roadcapture.features.root.capture.AlbumRegistrationFragment"
+        android:label="AlbumRegistrationFragment"
+        tools:layout="@layout/fragment_album_registration">
+        <argument
+            android:name="picture"
+            app:argType="com.untilled.roadcapture.data.entity.Picture"
+            app:nullable="true"
+            android:defaultValue="@null" />
+    </fragment>
 </navigation>

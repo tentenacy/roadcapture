@@ -73,12 +73,6 @@ class PictureEditorFragment : Fragment() {
             onCreateDatePicker()
         }
 
-        binding.imageviewPictureEditorImage.setOnClickListener {
-            // if (viewModel.isRemoved.value == true) {
-            //     //Todo 카메라 찍기 or 갤러리 선택
-            // }
-        }
-
         binding.imageviewPictureEditorCheck.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(

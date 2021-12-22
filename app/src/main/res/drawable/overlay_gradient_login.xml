@@ -6,7 +6,4 @@
         android:endColor="#99000000"
         android:startColor="#7C272727" />
 
-    <corners
-        android:radius="@dimen/studio_place_corner_radius"/>
-
 </shape>
