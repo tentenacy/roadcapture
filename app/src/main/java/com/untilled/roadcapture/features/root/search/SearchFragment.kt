@@ -71,7 +71,6 @@ class SearchFragment : Fragment() {
     private fun getTabTitle(position: Int): String? = when(position) {
         TITLE_CRITERIA_PAGE_INDEX -> getString(R.string.search_title_criteria)
         USERNAME_CRITERIA_PAGE_INDEX -> getString(R.string.search_username_criteria)
-        PLACE_CRITERIA_PAGE_INDEX -> getString(R.string.search_place_criteria)
         else -> null
     }
 

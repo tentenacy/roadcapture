@@ -6,13 +6,11 @@ import java.lang.IndexOutOfBoundsException
 
 const val TITLE_CRITERIA_PAGE_INDEX = 0
 const val USERNAME_CRITERIA_PAGE_INDEX = 1
-const val PLACE_CRITERIA_PAGE_INDEX = 2
 
 class SearchPagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment) {
     private val tabFragmentsCreators: Map<Int, () -> Fragment> = mapOf(
         TITLE_CRITERIA_PAGE_INDEX to { TitleSearchFragment() },
-        USERNAME_CRITERIA_PAGE_INDEX to { UsernameSearchFragment() },
-        PLACE_CRITERIA_PAGE_INDEX to { PlaceCriteriaSearchFragment() }
+        USERNAME_CRITERIA_PAGE_INDEX to { UsernameSearchFragment() }
     )
 
     override fun getItemCount(): Int = tabFragmentsCreators.size

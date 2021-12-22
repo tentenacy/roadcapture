@@ -17,8 +17,8 @@
         android:id="@+id/item_username_search_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
-        android:paddingHorizontal="16dp">
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/imageview_item_username_search_profile"
@@ -31,14 +31,14 @@
 
         <TextView
             android:id="@+id/textview_item_username_search_username"
-            android:textAppearance="@style/Body"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:text="@{user.username}"
-            app:layout_constraintTop_toTopOf="@id/imageview_item_username_search_profile"
+            android:textAppearance="@style/Body"
             app:layout_constraintBottom_toBottomOf="@id/imageview_item_username_search_profile"
             app:layout_constraintStart_toEndOf="@id/imageview_item_username_search_profile"
+            app:layout_constraintTop_toTopOf="@id/imageview_item_username_search_profile"
             tools:text="hsw0715" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
