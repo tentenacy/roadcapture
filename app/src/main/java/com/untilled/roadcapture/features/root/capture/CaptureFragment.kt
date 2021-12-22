@@ -135,12 +135,16 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         }
         binding.imageviewCapturePlay.setOnClickListener {
             // Todo 앨범을 등록하시겠습니까 bottomsheet 띄우기, 썸네일 여부 체크하여 알려주기
-            Navigation.findNavController(binding.root)
-                .navigate(
-                    CaptureFragmentDirections.actionCaptureFragmentToAlbumRegestrationFragment(
-                        picture = picture
+            if(markerList.isEmpty()) {
+                showThumbnailSettingDialog()
+            } else {
+                Navigation.findNavController(binding.root)
+                    .navigate(
+                        CaptureFragmentDirections.actionCaptureFragmentToAlbumRegestrationFragment(
+                            picture = picture
+                        )
                     )
-                )
+            }
         }
         binding.imageviewCaptureStop.setOnClickListener {
             if(markerList.isNotEmpty()) {
@@ -312,14 +316,31 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
             .setView(dialogView)
             .create()
 
-        val textViewLogout = dialogView.findViewById<TextView>(R.id.textview_cancel_album_creation_asking_confirm)
+        val textViewConfirm = dialogView.findViewById<TextView>(R.id.textview_cancel_album_creation_asking_confirm)
         val textViewCancel = dialogView.findViewById<TextView>(R.id.textview_cancel_album_creation_asking_cancel)
 
-        textViewLogout?.setOnClickListener {
+        textViewConfirm?.setOnClickListener {
             logic()
             dialog.dismiss()
         }
         textViewCancel?.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun showThumbnailSettingDialog() {
+        val layoutInflater = LayoutInflater.from(requireContext())
+        val dialogView = layoutInflater.inflate(R.layout.alert_dialog_thumbnail_setting, null)
+
+        val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
+            .setView(dialogView)
+            .create()
+
+        val textViewConfirm = dialogView.findViewById<TextView>(R.id.textview_thumbnail_setting_confirm)
+
+        textViewConfirm?.setOnClickListener {
             dialog.dismiss()
         }
 

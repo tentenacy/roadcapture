@@ -1,11 +1,13 @@
 package com.untilled.roadcapture.features.root.albums
 
 import android.animation.ValueAnimator
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.airbnb.lottie.LottieAnimationView
@@ -106,6 +108,7 @@ class FollowingAlbumFragment : Fragment() {
                                             R.id.popup_menu_albums_more_share -> {
                                             }
                                             R.id.popup_menu_albums_more_report -> {
+                                                showReportDialog()
                                             }
                                             R.id.popup_menu_albums_more_hide -> {
                                             }
@@ -119,5 +122,26 @@ class FollowingAlbumFragment : Fragment() {
                 }
             }
         }
+    }
+
+    private fun showReportDialog() {
+        val layoutInflater = LayoutInflater.from(requireContext())
+        val dialogView = layoutInflater.inflate(R.layout.alert_dialog_report, null)
+
+        val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
+            .setView(dialogView)
+            .create()
+
+        val textViewReport = dialogView.findViewById<TextView>(R.id.textview_report_report)
+        val textViewCancel = dialogView.findViewById<TextView>(R.id.textview_report_cancel)
+
+        textViewReport?.setOnClickListener {
+            dialog.dismiss()
+        }
+        textViewCancel?.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
     }
 }

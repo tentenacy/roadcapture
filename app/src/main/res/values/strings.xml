@@ -111,16 +111,8 @@
     <string name="logout_confirmation_title">정말 로그아웃 하시겠습니까?</string>
     <string name="logout_confirmation_logout">로그아웃</string>
     <string name="logout_confirmation_cancel">취소</string>
-    <string name="background_location_permission_title">위치 권한 항상 허용</string>
-    <string name="background_location_permission_description">여행을 기록하기 위해서는\n위치 권한 항상 허용이 필요합니다.\n확인을 누르면 설정으로 이동합니다.</string>
-    <string name="background_location_permission_confirm">확인</string>
-    <string name="background_location_permission_cancel">취소</string>
     <string name="password_find_button">확인</string>
     <string name="follower_relation">팔로우</string>
-    <string name="album_registration_asking_title">앨범 등록하기</string>
-    <string name="album_registration_asking_description">기록을 중단하고\n앨범을 등록하시겠습니까?</string>
-    <string name="album_registration_asking_create">앨범 등록하기</string>
-    <string name="album_registration_asking_cancel">돌아가기</string>
     <string name="setting_password_after_label">변경할 비밀번호</string>
     <string name="setting_password_current_input">현재 비밀번호를 입력해주세요</string>
     <string name="setting_password_after_input">변경할 비밀번호를 입력해주세요</string>
@@ -154,4 +146,7 @@
     <string name="cancel_album_creation_asking_description">앨범 만들기를 취소하시겠어요?\n기록했던 모든 사진들이 사라집니다.</string>
     <string name="cancel_album_creation_asking_confirm">확인</string>
     <string name="cancel_album_creation_asking_cancel">취소</string>
+    <string name="thumbnail_setting_title">썸네일 설정</string>
+    <string name="thumbnail_setting_description">앨범 등록을 위한 썸네일 설정이 필요합니다.\n앨범 썸네일 사용 체크를 해주세요.</string>
+    <string name="thumbnail_setting_confirm">확인</string>
 </resources>
