@@ -96,7 +96,7 @@ class AlbumsFragment : Fragment() {
                             }
                             R.id.imageview_item_home_album_thumbnail ->
                                 Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
-                                        navigate(RootFragmentDirections.actionRootFragmentToPictureViewerFragment(model.album()))
+                                        navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(model.album()))
                             R.id.imageview_item_home_album_more -> {
                                 val popupMenu = PopupMenu(requireContext(), clickedView)
                                 popupMenu.apply {

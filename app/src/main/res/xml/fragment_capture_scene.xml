@@ -4,7 +4,7 @@
     <Transition
         motion:constraintSetEnd="@id/end"
         motion:constraintSetStart="@+id/start"
-        motion:duration="500">
+        motion:duration="250">
 
         <OnClick
             motion:targetId="@id/imageview_capture_arrow"

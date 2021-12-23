@@ -44,11 +44,11 @@
             android:id="@+id/action_rootFragment_to_followingFragment"
             app:destination="@id/followingFragment" />
         <action
-            android:id="@+id/action_rootFragment_to_pictureViewerFragment"
-            app:destination="@id/pictureViewerFragment" />
-        <action
             android:id="@+id/action_rootFragment_to_myStudioModification"
             app:destination="@id/myStudioModification" />
+        <action
+            android:id="@+id/action_rootFragment_to_pictureViewerContainerFragment"
+            app:destination="@id/pictureViewerContainerFragment" />
     </fragment>
     <fragment
         android:id="@+id/captureFragment"
@@ -189,15 +189,6 @@
             android:defaultValue="@null" />
     </fragment>
     <fragment
-        android:id="@+id/pictureViewerFragment"
-        android:name="com.untilled.roadcapture.features.root.albums.PictureViewerFragment"
-        android:label="PictureViewerFragment"
-        tools:layout="@layout/fragment_picture_viewer">
-        <argument
-            android:name="album"
-            app:argType="com.untilled.roadcapture.data.entity.Album" />
-    </fragment>
-    <fragment
         android:id="@+id/myStudioModification"
         android:name="com.untilled.roadcapture.features.root.mystudio.MyStudioModification"
         android:label="MyStudioModification"
@@ -256,5 +247,14 @@
             app:argType="com.untilled.roadcapture.data.entity.Picture"
             app:nullable="true"
             android:defaultValue="@null" />
+    </fragment>
+    <fragment
+        android:id="@+id/pictureViewerContainerFragment"
+        android:name="com.untilled.roadcapture.features.root.albums.PictureViewerContainerFragment"
+        tools:layout="@layout/fragment_picture_viewer_container"
+        android:label="PictureViewerContainerFragment" >
+        <argument
+            android:name="albums"
+            app:argType="com.untilled.roadcapture.data.entity.Album" />
     </fragment>
 </navigation>

@@ -62,6 +62,16 @@
         <item name="android:includeFontPadding">false</item>
     </style>
 
+    <style name="BottomSheetButtonGray" parent="android:TextAppearance">
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/bottom_sheet_button</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="backgroundTint">@color/divider</item>
+        <item name="android:stateListAnimator">@null</item>
+        <item name="android:fontFamily">@font/notosanskr_regular</item>
+        <item name="android:includeFontPadding">false</item>
+    </style>
+
     <style name="BottomSheetHead" parent="android:TextAppearance">
         <item name="android:textSize">24sp</item>
         <item name="android:textColor">@color/gray</item>
