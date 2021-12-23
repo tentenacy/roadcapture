@@ -1,14 +1,21 @@
 package com.untilled.roadcapture.features.root.albums
 
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentPictureViewerContainerBinding
+import com.untilled.roadcapture.utils.extension.navigationHeight
+import com.untilled.roadcapture.utils.extension.setStatusBarOrigin
+import com.untilled.roadcapture.utils.extension.setStatusBarTransparent
+import com.untilled.roadcapture.utils.extension.statusBarHeight
 
 class PictureViewerContainerFragment : Fragment() {
     private var _binding: FragmentPictureViewerContainerBinding? = null
@@ -33,6 +40,7 @@ class PictureViewerContainerFragment : Fragment() {
                 pictureViewerMapFragment,
                 "PictureViewerMapFragment"
             )
+            hide(pictureViewerMapFragment)
             add(
                 R.id.framelayout_picture_viewer_container,
                 pictureViewerFragment,
@@ -56,6 +64,13 @@ class PictureViewerContainerFragment : Fragment() {
         val args: PictureViewerContainerFragmentArgs by navArgs()
         viewModel.album = args.albums
 
+        requireActivity().setStatusBarTransparent()
+        binding.pictureViewerContainerInnerContainer.setPadding(
+            0, requireContext().statusBarHeight(), 0, requireContext().navigationHeight()
+        )
+
+        setIconWhite()
+
         setOnClickListeners()
     }
 
@@ -63,23 +78,56 @@ class PictureViewerContainerFragment : Fragment() {
         binding.imageviewPictureViewerContainerBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        binding.fabMap.setOnClickListener {
+        binding.fabPictureViewerContainerSwitch.setOnClickListener {
             childFragmentManager.beginTransaction().apply {
                 isMapScreen = if(isMapScreen) {
                     show(pictureViewerFragment)
                     hide(pictureViewerMapFragment)
+                    setIconWhite()
                     false
                 } else {
                     show(pictureViewerMapFragment)
                     hide(pictureViewerFragment)
+                    setIconBlack()
                     true
                 }
             }.commit()
         }
     }
 
+    private fun setIconWhite() {
+        binding.run {
+            imageviewPictureViewerContainerBack.setColorFilter(requireContext().getColor(R.color.white))
+            imageviewPictureViewerContainerShare.setColorFilter(requireContext().getColor(R.color.white))
+            imageviewPictureViewerContainerComment.setColorFilter(requireContext().getColor(R.color.white))
+            imageviewPictureViewerContainerLike.setColorFilter(requireContext().getColor(R.color.white))
+            fabPictureViewerContainerSwitch.run {
+                setImageResource(R.drawable.ic_map)
+                setColorFilter(requireContext().getColor(R.color.secondaryColor))
+                backgroundTintList = AppCompatResources.getColorStateList(requireContext(), android.R.color.white)
+            }
+        }
+    }
+
+    private fun setIconBlack() {
+        binding.run {
+            imageviewPictureViewerContainerBack.setColorFilter(requireContext().getColor(R.color.black))
+            imageviewPictureViewerContainerShare.setColorFilter(requireContext().getColor(R.color.black))
+            imageviewPictureViewerContainerComment.setColorFilter(requireContext().getColor(R.color.black))
+            imageviewPictureViewerContainerLike.setColorFilter(requireContext().getColor(R.color.black))
+            fabPictureViewerContainerSwitch.run {
+                setImageResource(R.drawable.ic_album)
+                setColorFilter(requireContext().getColor(R.color.white))
+                backgroundTintList = AppCompatResources.getColorStateList(requireContext(), R.color.secondaryColor)
+            }
+        }
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
+
+        requireActivity().setStatusBarOrigin()
+
         _binding = null
     }
 }

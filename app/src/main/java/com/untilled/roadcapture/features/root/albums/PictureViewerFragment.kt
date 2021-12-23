@@ -12,6 +12,8 @@ import com.untilled.roadcapture.databinding.FragmentPictureViewerBinding
 import com.untilled.roadcapture.pictureViewerContent
 import com.untilled.roadcapture.pictureViewerThumbnail
 import com.untilled.roadcapture.utils.DummyDataSet
+import com.untilled.roadcapture.utils.extension.navigationHeight
+import com.untilled.roadcapture.utils.extension.statusBarHeight
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -36,6 +38,10 @@ class PictureViewerFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.pictureViewerInnerContainer.setPadding(
+            0, requireContext().statusBarHeight(), 0, requireContext().navigationHeight()
+        )
 
         onClickListeners()
     }

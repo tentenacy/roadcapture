@@ -52,14 +52,11 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
 
     private var imageUri: Uri? = null
 
-    private var naverMap: NaverMap? = null
-
-    private var uiSettings: UiSettings? = null
-
-    private lateinit var locationSource: FusedLocationSource
-
     private var picture: Picture? = null
 
+    private var naverMap: NaverMap? = null
+    private var uiSettings: UiSettings? = null
+    private lateinit var locationSource: FusedLocationSource
     private var markerList: MutableList<Marker> = mutableListOf()
 
     // 갤러리 사진 가져오는 intent 콜백 등록
