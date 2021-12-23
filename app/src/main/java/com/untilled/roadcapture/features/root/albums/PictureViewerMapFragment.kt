@@ -1,21 +1,22 @@
 package com.untilled.roadcapture.features.root.albums
 
+import android.graphics.Color
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.naver.maps.map.MapFragment
-import com.naver.maps.map.NaverMap
-import com.naver.maps.map.OnMapReadyCallback
-import com.naver.maps.map.UiSettings
+import com.naver.maps.geometry.LatLng
+import com.naver.maps.map.*
+import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.PathOverlay
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPictureViewerMapBinding
+import com.untilled.roadcapture.utils.DummyDataSet
 import com.untilled.roadcapture.utils.extension.getPxFromDp
 import com.untilled.roadcapture.utils.extension.navigationHeight
-import com.untilled.roadcapture.utils.extension.statusBarHeight
 
 class PictureViewerMapFragment : Fragment(), OnMapReadyCallback {
     private var _binding : FragmentPictureViewerMapBinding? = null
@@ -25,6 +26,13 @@ class PictureViewerMapFragment : Fragment(), OnMapReadyCallback {
 
     private var naverMap: NaverMap? = null
     private var uiSettings: UiSettings? = null
+    private lateinit var path : PathOverlay
+
+    private lateinit var pictureList: List<Picture>
+    private var markerList = mutableListOf<Marker>()
+
+    private var latitude: Float = 0f
+    private var longitude: Float = 0f
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,6 +41,7 @@ class PictureViewerMapFragment : Fragment(), OnMapReadyCallback {
     ): View? {
         _binding = FragmentPictureViewerMapBinding.inflate(inflater, container, false)
 
+        pictureList = DummyDataSet.picture
         initNaverMap()
 
         return binding.root
@@ -73,5 +82,46 @@ class PictureViewerMapFragment : Fragment(), OnMapReadyCallback {
 
         naverMap = _naverMap
         initNaverMapUiSetting()
+
+        for(i in pictureList) {
+            drawMarker(i)
+            latitude += i.searchResult?.locationLatLng!!.latitude
+            longitude += i.searchResult?.locationLatLng!!.longitude
+        }
+
+        drawPolyline()
+
+        naverMap?.moveCamera(CameraUpdate.scrollTo(LatLng(latitude/pictureList.size.toDouble(), longitude/pictureList.size.toDouble())))
+    }
+
+    private fun drawMarker(picture: Picture) {
+        val marker = Marker()
+
+        marker.apply {
+            position = LatLng(
+                picture?.searchResult?.locationLatLng?.latitude?.toDouble()
+                    ?: 37.5670135,
+                picture?.searchResult?.locationLatLng?.longitude?.toDouble()
+                    ?: 126.9783740
+            )
+        }.map = naverMap
+
+        markerList.add(marker)
+    }
+
+    private fun drawPolyline() {
+        path = PathOverlay()
+
+        val _coords = mutableListOf<LatLng>()
+        for(i in markerList) {
+            _coords.add(i.position)
+        }
+
+        path.apply {
+            color = Color.parseColor("#3d86c7")
+            outlineColor = Color.parseColor("#3d86c7")
+            outlineWidth = requireContext().getPxFromDp(3f)
+            coords = _coords
+        }.map = naverMap
     }
 }
