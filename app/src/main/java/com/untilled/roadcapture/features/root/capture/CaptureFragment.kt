@@ -13,6 +13,7 @@ import android.view.*
 import android.view.Gravity.END
 import android.view.Gravity.TOP
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
@@ -37,6 +38,7 @@ import com.karumi.dexter.listener.single.CompositePermissionListener
 import com.karumi.dexter.listener.single.PermissionListener
 import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener
 import com.naver.maps.map.*
+import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import com.untilled.roadcapture.utils.extension.*
@@ -213,12 +215,23 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                 picture?.searchResult?.locationLatLng?.longitude?.toDouble()
                     ?: 126.9783740
             )
+            onClickListener = Overlay.OnClickListener {     // 마커 클릭 이벤트
+                Navigation.findNavController(binding.root)
+                    .navigate(
+                        CaptureFragmentDirections.actionCaptureFragmentToPictureEditorFragment(
+                            picture = picture
+                        )
+                    )
+                return@OnClickListener true
+            }
+
         }.map = naverMap
 
         markerList.add(marker)
 
         naverMap?.moveCamera(CameraUpdate.scrollTo(marker.position))
     }
+
 
     override fun onMapReady(_naverMap: NaverMap) {
         _naverMap.isLiteModeEnabled = true
