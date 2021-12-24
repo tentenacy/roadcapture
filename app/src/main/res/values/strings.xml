@@ -149,4 +149,8 @@
     <string name="thumbnail_setting_title">썸네일 설정</string>
     <string name="thumbnail_setting_description">앨범 등록을 위한 썸네일 설정이 필요합니다.\n앨범 썸네일 사용 체크를 해주세요.</string>
     <string name="thumbnail_setting_confirm">확인</string>
+    <string name="delete_picture_asking_title">사진 삭제</string>
+    <string name="delete_picture_asking_description">사진을 삭제하시겠어요?\n작성한 내용이 모두 사라집니다.</string>
+    <string name="delete_picture_asking_delete">삭제하기</string>
+    <string name="delete_picture_asking_cancel">취소</string>
 </resources>

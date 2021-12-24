@@ -111,7 +111,6 @@ class MyStudioModification : Fragment() {
             args.user?.backgroundUrl = backgroundImageUri.toString()
 
         args.user?.description = binding.edittextMyStudioModificationProfileDescription.text.toString()
-        args.user?.username = binding.edittextMyStudioModificationUsername.text.toString()
     }
 
     private fun initAdapter() {
@@ -134,5 +133,4 @@ class MyStudioModification : Fragment() {
         const val PROFILE: Int = 1
         const val BACKGROUND: Int = 2
     }
-
 }

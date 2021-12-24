@@ -124,29 +124,16 @@
                 app:tint="@color/white" />
 
             <TextView
-                android:id="@+id/textview_my_studio_modification_username_title"
-                style="@style/SubHeadBold"
+                android:id="@+id/textview_my_studio_modification_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                style="@style/HeadBold"
                 android:layout_marginTop="32dp"
-                android:textColor="@color/gray"
-                android:text="@string/my_studio_modification_username_title"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageview_my_studio_modification_profile" />
-
-            <EditText
-                android:id="@+id/edittext_my_studio_modification_username"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:backgroundTint="@color/lightGray"
                 android:text="@{user.username}"
-                android:textAppearance="@style/SubHead"
+                tools:text="kvvangddang"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@id/textview_my_studio_modification_username_title"
-                app:layout_constraintTop_toBottomOf="@id/textview_my_studio_modification_username_title"
-                tools:text="kvvangddang" />
+                app:layout_constraintTop_toBottomOf="@id/imageview_my_studio_modification_profile"/>
 
             <TextView
                 android:id="@+id/textview_my_studio_modification_description_title"
@@ -154,11 +141,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="32dp"
                 android:text="@string/my_studio_modification_description_title"
                 android:textColor="@color/gray"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edittext_my_studio_modification_username" />
+                app:layout_constraintTop_toBottomOf="@id/textview_my_studio_modification_username" />
 
             <EditText
                 android:id="@+id/edittext_my_studio_modification_profile_description"

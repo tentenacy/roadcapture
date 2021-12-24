@@ -1,10 +1,12 @@
 package com.untilled.roadcapture.features.root.capture
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -81,6 +83,12 @@ class PictureEditorFragment : Fragment() {
                     )
                 )
         }
+
+        binding.imageviewPictureEditorDelete.setOnClickListener {
+            showDeletePictureAskingDialog {
+                // todo 사진 삭제 기능
+            }
+        }
     }
 
     private fun onCreateDatePicker() {
@@ -110,4 +118,26 @@ class PictureEditorFragment : Fragment() {
             name = binding.edittextPictureEditorNameUserInput.text.toString(),
             description = binding.editPictureEditorDescriptionUserInput.text.toString()
         )
+
+    private fun showDeletePictureAskingDialog(logic: () -> Unit) {
+        val layoutInflater = LayoutInflater.from(requireContext())
+        val dialogView = layoutInflater.inflate(R.layout.alert_dialog_delete_picture_asking, null)
+
+        val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
+            .setView(dialogView)
+            .create()
+
+        val textViewDelete = dialogView.findViewById<TextView>(R.id.textview_delete_picture_asking_delete)
+        val textViewCancel = dialogView.findViewById<TextView>(R.id.textview_delete_picture_asking_cancel)
+
+        textViewDelete?.setOnClickListener {
+            logic()
+            dialog.dismiss()
+        }
+        textViewCancel?.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
 }

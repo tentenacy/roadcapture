@@ -42,11 +42,21 @@
 
                 <ImageView
                     android:id="@+id/imageview_picture_editor_check"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
                     android:layout_gravity="right"
-                    android:padding="16dp"
+                    android:padding="12dp"
                     android:src="@drawable/check"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/imageview_picture_editor_delete"
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:layout_gravity="right"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_delete"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
