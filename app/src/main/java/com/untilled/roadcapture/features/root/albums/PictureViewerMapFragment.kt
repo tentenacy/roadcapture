@@ -112,12 +112,14 @@ class PictureViewerMapFragment : Fragment(), OnMapReadyCallback {
                 picture?.searchResult?.locationLatLng?.longitude?.toDouble()
                     ?: 126.9783740
             )
+            isHideCollidedMarkers = true    // 마커 겹치면 사라지기
+            //zIndex = 0    //  zIndex로 마커들 겹쳤을때 우선순위 정할 수 있음 (썸네일로 설정된 사진이 zIndex가장 높게)
         }
 
         Glide.with(requireContext()).asBitmap().load(picture.imageUri!!.toUri())
             .apply(RequestOptions().centerCrop().circleCrop()).into(object : SimpleTarget<Bitmap>() {
             override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                val bitmap = Bitmap.createScaledBitmap(resource, requireContext().getPxFromDp(72f), requireContext().getPxFromDp(72f), true)
+                val bitmap = Bitmap.createScaledBitmap(resource, requireContext().getPxFromDp(64f), requireContext().getPxFromDp(64f), true)
                 marker.apply {
                     icon = OverlayImage.fromBitmap(bitmap)
                 }.map = naverMap
