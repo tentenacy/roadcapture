@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="album"
+            type="com.untilled.roadcapture.data.entity.Album" />
+
+        <variable
+            name="onClickItem"
+            type="android.view.View.OnClickListener" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_title_search_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="16dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/imageview_item_title_search_thumbnail"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:onClick="@{onClickItem}"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:titleSearchThumbnailImage="@{album.thumbnailUrl}"
+            tools:src="@drawable/sample_thumbnail" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/overlay_gradient_studio_thumbnail"
+            app:layout_constraintStart_toStartOf="@id/imageview_item_title_search_thumbnail"
+            app:layout_constraintEnd_toEndOf="@id/imageview_item_title_search_thumbnail"
+            app:layout_constraintTop_toTopOf="@id/imageview_item_title_search_thumbnail"
+            app:layout_constraintBottom_toBottomOf="@id/imageview_item_title_search_thumbnail"/>
+
+        <ImageView
+            android:id="@+id/imageview_item_title_search_profile"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="8dp"
+            android:onClick="@{onClickItem}"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toTopOf="@+id/textview_item_title_search_title"
+            bind:titleSearchProfileImage="@{album.profileUrl}"
+            tools:src="@drawable/sample_profile" />
+
+        <TextView
+            android:id="@+id/textview_item_title_search_overlay"
+            style="@style/Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/imageview_item_title_search_profile"
+            app:layout_constraintStart_toEndOf="@id/imageview_item_title_search_profile"
+            app:layout_constraintTop_toTopOf="@+id/imageview_item_title_search_profile"
+            bind:albumOverlayUsername="@{album.username}"
+            tools:text="tenutz ·" />
+
+        <TextView
+            android:id="@+id/textview_item_title_search_overlay_date"
+            style="@style/Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{album.createdDate}"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@id/textview_item_title_search_overlay"
+            app:layout_constraintStart_toEndOf="@id/textview_item_title_search_overlay"
+            app:layout_constraintTop_toTopOf="@id/textview_item_title_search_overlay"
+            tools:text="3분전" />
+
+        <TextView
+            android:id="@+id/textview_item_title_search_title"
+            style="@style/SubHeadBoldWhite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@{album.title}"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintStart_toStartOf="@id/imageview_item_title_search_thumbnail"
+            app:layout_constraintEnd_toEndOf="@id/imageview_item_title_search_thumbnail"
+            app:layout_constraintBottom_toBottomOf="@id/imageview_item_title_search_thumbnail"
+            tools:text="로드캡처 스터디" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

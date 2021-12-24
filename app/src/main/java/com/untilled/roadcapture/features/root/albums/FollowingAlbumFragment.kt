@@ -15,6 +15,7 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentFollowingAlbumBinding
 import com.untilled.roadcapture.features.root.RootFragment
+import com.untilled.roadcapture.features.root.RootFragmentDirections
 import com.untilled.roadcapture.followingAlbumNews
 import com.untilled.roadcapture.homeAlbum
 import com.untilled.roadcapture.utils.DummyDataSet
@@ -86,6 +87,9 @@ class FollowingAlbumFragment : Fragment() {
 
                     onClickItem { model, parentView, clickedView, position ->
                         when (clickedView.id) {
+                            R.id.imageview_item_home_album_thumbnail -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
+                                navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(model.album()))
+
                             R.id.imageview_item_home_album_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                                 .navigate(R.id.action_rootFragment_to_studioFragment)
 

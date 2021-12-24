@@ -11,19 +11,18 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.airbnb.lottie.LottieAnimationView
 import com.orhanobut.logger.Logger
-import com.untilled.roadcapture.R
+import com.untilled.roadcapture.*
 import com.untilled.roadcapture.databinding.FragmentTitleSearchBinding
 import com.untilled.roadcapture.features.base.CustomDivider
 import com.untilled.roadcapture.features.root.RootFragment
-import com.untilled.roadcapture.homeAlbum
-import com.untilled.roadcapture.notification
+import com.untilled.roadcapture.features.root.RootFragmentDirections
+import com.untilled.roadcapture.studioAlbum
 import com.untilled.roadcapture.utils.DummyDataSet
 
 class TitleSearchFragment : Fragment() {
 
     private var _binding: FragmentTitleSearchBinding? = null
     private val binding get() = _binding!!
-    private var flagLike = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,39 +44,26 @@ class TitleSearchFragment : Fragment() {
         _binding = null
     }
 
-    private fun initAdapter(){
+    private fun initAdapter() {
         binding.recyclerviewTitleSearch.withModels {
             DummyDataSet.albums.forEachIndexed { index, album ->
-                homeAlbum {
+                titleSearch {
                     id(index)
                     album(album)
 
                     onClickItem { model, parentView, clickedView, position ->
                         when (clickedView.id) {
-                            R.id.imageview_item_home_album_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                                .navigate(R.id.action_rootFragment_to_studioFragment)
+                            R.id.imageview_item_title_search_profile -> Navigation.findNavController(
+                                (parentFragment?.parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root
+                            ).navigate(R.id.action_rootFragment_to_studioFragment)
 
-                            R.id.imageview_item_home_album_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                                .navigate(R.id.action_rootFragment_to_commentFragment)
-
-                            R.id.imageview_item_home_album_like -> if (!flagLike) {
-                                val animator = ValueAnimator.ofFloat(0f, 0.5f).setDuration(800)
-                                animator.addUpdateListener {
-                                    (clickedView as LottieAnimationView).progress =
-                                        it.animatedValue as Float
-                                }
-                                animator.start()
-                                flagLike = true
-                            } else {
-                                val animator = ValueAnimator.ofFloat(0.5f, 1f).setDuration(800)
-                                animator.addUpdateListener {
-                                    (clickedView as LottieAnimationView).progress =
-                                        it.animatedValue as Float
-                                }
-                                animator.start()
-                                flagLike = false
-                            }
-
+                            R.id.imageview_item_title_search_thumbnail -> Navigation.findNavController(
+                                (parentFragment?.parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root
+                            ).navigate(
+                                RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(
+                                    model.album()
+                                )
+                            )
                         }
                     }
                 }

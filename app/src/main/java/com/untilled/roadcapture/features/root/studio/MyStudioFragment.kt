@@ -81,7 +81,6 @@ class MyStudioFragment : Fragment() {
                     }
                 }
             }
-
         }
         binding.recyclerviewMyStudioPlace.withModels {
             DummyDataSet.places.forEachIndexed { index, place ->
