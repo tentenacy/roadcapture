@@ -1,15 +1,24 @@
 package com.untilled.roadcapture.features.root.albums
 
+import android.graphics.Bitmap
 import android.graphics.Color
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
+import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.overlay.PathOverlay
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.Picture
@@ -67,7 +76,6 @@ class PictureViewerMapFragment : Fragment(), OnMapReadyCallback {
         )
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
     }
@@ -104,7 +112,17 @@ class PictureViewerMapFragment : Fragment(), OnMapReadyCallback {
                 picture?.searchResult?.locationLatLng?.longitude?.toDouble()
                     ?: 126.9783740
             )
-        }.map = naverMap
+        }
+
+        Glide.with(requireContext()).asBitmap().load(picture.imageUri!!.toUri())
+            .apply(RequestOptions().centerCrop().circleCrop()).into(object : SimpleTarget<Bitmap>() {
+            override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                val bitmap = Bitmap.createScaledBitmap(resource, requireContext().getPxFromDp(72f), requireContext().getPxFromDp(72f), true)
+                marker.apply {
+                    icon = OverlayImage.fromBitmap(bitmap)
+                }.map = naverMap
+            }
+        })
 
         markerList.add(marker)
     }

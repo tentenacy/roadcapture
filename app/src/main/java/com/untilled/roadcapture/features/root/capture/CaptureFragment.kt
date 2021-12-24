@@ -5,6 +5,7 @@ import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -28,6 +29,10 @@ import com.untilled.roadcapture.databinding.FragmentCaptureBinding
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.net.toUri
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.PermissionToken
@@ -199,13 +204,6 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         val marker = Marker()
 
         marker.apply {
-            icon = OverlayImage.fromBitmap(
-                picture.imageUri!!.toUri().getCircularBitmap(
-                    requireContext(),
-                    72f,
-                    72f
-                )!!
-            )
             position = LatLng(
                 picture?.searchResult?.locationLatLng?.latitude?.toDouble()
                     ?: 37.5670135,
@@ -221,8 +219,17 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                     )
                 return@OnClickListener true
             }
+        }
 
-        }.map = naverMap
+        Glide.with(requireContext()).asBitmap().load(picture.imageUri!!.toUri())
+            .apply(RequestOptions().centerCrop().circleCrop()).into(object : SimpleTarget<Bitmap>() {
+                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                    val bitmap = Bitmap.createScaledBitmap(resource, requireContext().getPxFromDp(72f), requireContext().getPxFromDp(72f), true)
+                    marker.apply {
+                        icon = OverlayImage.fromBitmap(bitmap)
+                    }.map = naverMap
+                }
+            })
 
         markerList.add(marker)
 
