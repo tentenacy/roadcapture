@@ -71,6 +71,14 @@ class MyStudioFragment : Fragment() {
                 studioAlbum {
                     id(index)
                     studio(album)
+
+                    onClickItem { model, parentView, clickedView, position ->
+                        when(clickedView.id){
+                            R.id.imageview_item_studio_album_thumbnail ->
+                                Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
+                                navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(model.studio()))
+                        }
+                    }
                 }
             }
 

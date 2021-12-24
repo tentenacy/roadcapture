@@ -87,8 +87,8 @@ object DummyDataSet {
     val studios = listOf(
         Album(
             id = "10",
-            username = "tenutz",
-            profileUrl = "",
+            username = "kvvangddang",
+            profileUrl = "https://cdn.pixabay.com/photo/2016/11/14/09/14/cat-1822979_960_720.jpg",
             likeCount = "100",
             commentCount = "3",
             title = "마이 스튜디오 제작",
@@ -99,8 +99,8 @@ object DummyDataSet {
         ),
         Album(
             id = "11",
-            username = "tenutz",
-            profileUrl = "",
+            username = "kvvangddang",
+            profileUrl = "https://cdn.pixabay.com/photo/2016/11/14/09/14/cat-1822979_960_720.jpg",
             likeCount = "100",
             commentCount = "3",
             title = "광현 생일",
@@ -112,11 +112,11 @@ object DummyDataSet {
         Album(
 
             id = "12",
-            username = "tenutz",
-            profileUrl = "",
+            username = "kvvangddang",
+            profileUrl = "https://cdn.pixabay.com/photo/2016/11/14/09/14/cat-1822979_960_720.jpg",
             likeCount = "100",
             commentCount = "3",
-            title = "제목이 길면 어떻게 될까요???????????????????",
+            title = "제목이 길면 어떻게 될까요??????????",
             description = "1교시 수업을 하였습니다.",
             createdDate = "6개월 전",
             modifiedDate = "",
@@ -124,8 +124,8 @@ object DummyDataSet {
         ),
         Album(
             id = "13",
-            username = "tenutz",
-            profileUrl = "",
+            username = "kvvangddang",
+            profileUrl = "https://cdn.pixabay.com/photo/2016/11/14/09/14/cat-1822979_960_720.jpg",
             likeCount = "100",
             commentCount = "3",
             title = "2021년이 시작되었습니다.",

@@ -1,13 +1,17 @@
 package com.untilled.roadcapture.features.root.studio
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import com.untilled.roadcapture.*
 import com.untilled.roadcapture.databinding.FragmentStudioBinding
+import com.untilled.roadcapture.features.root.RootFragment
+import com.untilled.roadcapture.features.root.RootFragmentDirections
 import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +29,7 @@ class StudioFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentStudioBinding.inflate(layoutInflater, container, false)
         binding.user = DummyDataSet.studioUser
+
         initAdapter()
         return binding.root
     }
@@ -72,6 +77,14 @@ class StudioFragment : Fragment() {
                 studioAlbum {
                     id(index)
                     studio(album)
+
+                    onClickItem { model, parentView, clickedView, position ->
+                        when(clickedView.id){
+                            R.id.imageview_item_studio_album_thumbnail ->
+                                Navigation.findNavController(binding.root).
+                                navigate(StudioFragmentDirections.actionStudioFragmentToPictureViewerContainerFragment(model.studio()))
+                        }
+                    }
                 }
             }
 
