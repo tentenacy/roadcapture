@@ -1,14 +1,18 @@
 package com.untilled.roadcapture.features.root.albums
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.bumptech.glide.Glide
+import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentPictureViewerBinding
+import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.pictureViewerContent
 import com.untilled.roadcapture.pictureViewerThumbnail
 import com.untilled.roadcapture.utils.DummyDataSet
@@ -66,6 +70,13 @@ class PictureViewerFragment : Fragment() {
             pictureViewerThumbnail {
                 id(1)
                 album(viewModel.album)
+
+                onClickItem { model, parentView, clickedView, position ->
+                    when(clickedView.id){
+                        R.id.imageview_item_picture_viewer_thumbnail_profile -> Navigation.findNavController((parentFragment as PictureViewerContainerFragment).binding.root)
+                            .navigate(R.id.action_pictureViewerContainerFragment_to_studioFragment)
+                    }
+                }
             }
             DummyDataSet.picture.forEachIndexed { index, picture ->
                 pictureViewerContent {

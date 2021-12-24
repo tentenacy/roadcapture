@@ -531,11 +531,20 @@ object DummyDataSet {
         )
     )
 
-    val studioUser = User(
+    val myStudioUser = User(
         username = "kvvangddang",
         profileUrl = "https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
         backgroundUrl = "https://mblogthumb-phinf.pstatic.net/MjAxOTAxMDJfODMg/MDAxNTQ2NDM5MjIwOTE5.5qxiNSGpSnjZ-KC_2Qz9MUMhsf84ydJ9NXlEk8vclJ4g.3fByHBJcHRjla2Y3LUZVxjW26_NObEp_52PmYmoMjL8g.PNG.comeinto_/SE-b386b581-67d9-4da3-a037-dd19c54509c5.png?type=w800",
         description = "안녕하세요 저는 최광현입니다."
     )
+
+    val studioUser = User(
+        username = "hsw0715",
+        profileUrl = "https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80",
+        backgroundUrl = "https://mblogthumb-phinf.pstatic.net/MjAxOTAxMDJfMjcz/MDAxNTQ2NDM5MjA3NjM2.qZOKA4N7NWbBjNH-ZcWdSvDXDAqpFbPc1_WGoY_A9gsg.6Vd7g-wE1Mt0Afe9_JwdONfQ8w9qo5OSOpq_7hbJQOQg.PNG.comeinto_/SE-c6d9cab3-86b1-4cfa-a3a1-72db7764c20e.png?type=w800",
+        description = "안녕하세요 김포 장기동에 사는 장기고를 나온 한상우입니다 잘 부탁드립니다. 주저리 주저리 주저리 주저리 주저리"
+    )
+
+
 
 }

@@ -50,10 +50,12 @@
 
         <ImageView
             android:id="@+id/imageview_item_home_album_profile"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="12dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="8dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:onClick="@{onClickItem}"
             app:layout_constraintStart_toStartOf="@id/imageview_item_home_album_thumbnail"
             app:layout_constraintTop_toTopOf="@id/imageview_item_home_album_thumbnail"
             bind:albumProfileImage="@{album.profileUrl}"

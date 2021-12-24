@@ -11,6 +11,10 @@
         <variable
             name="user"
             type="com.untilled.roadcapture.data.entity.User" />
+
+        <variable
+            name="onClickItem"
+            type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,6 +29,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/sample_thumbnail"
+            android:onClick="@{onClickItem}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             bind:circleProfileImage="@{user.profileUrl}" />

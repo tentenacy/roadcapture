@@ -21,7 +21,7 @@ import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AlbumsFragment : Fragment() {
+class AlbumFragment : Fragment() {
 
     private var _binding: FragmentAlbumsBinding? = null
     private val binding get() = _binding!!
@@ -74,6 +74,9 @@ class AlbumsFragment : Fragment() {
 
                     onClickItem { model, parentView, clickedView, position ->
                         when (clickedView.id) {
+                            R.id.imageview_item_home_album_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                                .navigate(R.id.action_rootFragment_to_studioFragment)
+
                             R.id.imageview_item_home_album_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                                 .navigate(R.id.action_rootFragment_to_commentFragment)
 

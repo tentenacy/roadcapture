@@ -30,6 +30,7 @@
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:src="@drawable/sample_thumbnail"
+            android:onClick="@{onClickItem}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textview_item_comment_username"
             bind:circleProfileImage="@{comment.profileUrl}" />

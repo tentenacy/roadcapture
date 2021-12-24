@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.root.mystudio.follow
+package com.untilled.roadcapture.features.root.studio
 
 import android.graphics.Color
 import android.os.Bundle
@@ -6,9 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentFollowingBinding
 import com.untilled.roadcapture.features.base.CustomDivider
 import com.untilled.roadcapture.follow
@@ -52,7 +52,6 @@ class FollowingFragment : Fragment(){
         binding.edittextFollowingSearchInput.setOnEditorActionListener { v, actionId, event ->
             when(actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> {
-
                     requireActivity().hideKeyboard(binding.edittextFollowingSearchInput)
                     return@setOnEditorActionListener true
                 }
@@ -72,6 +71,13 @@ class FollowingFragment : Fragment(){
                 follow {
                     id(index)
                     user(user)
+
+                    onClickItem { model, parentView, clickedView, position ->
+                        when(clickedView.id){
+                            R.id.imageview_item_follower_profile -> Navigation.findNavController(binding.root)
+                                .navigate(R.id.action_followingFragment_to_studioFragment)
+                        }
+                    }
                 }
             }
         }

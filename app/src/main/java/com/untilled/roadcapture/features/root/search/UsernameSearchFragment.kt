@@ -1,19 +1,16 @@
 package com.untilled.roadcapture.features.root.search
 
-import android.content.Context
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView.VERTICAL
+import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.comment
 import com.untilled.roadcapture.databinding.FragmentUsernameSearchBinding
 import com.untilled.roadcapture.features.base.CustomDivider
+import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.usernameSearch
 import com.untilled.roadcapture.utils.DummyDataSet
 
@@ -38,9 +35,9 @@ class UsernameSearchFragment : Fragment() {
         _binding = null
     }
 
-    private fun initAdapter(){
+    private fun initAdapter() {
 
-        val customDivider = CustomDivider(2.5f,1f, Color.parseColor("#EFEFEF"))
+        val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
 
         binding.recyclerviewUsernameSearch.addItemDecoration(customDivider)
 
@@ -49,9 +46,15 @@ class UsernameSearchFragment : Fragment() {
                 usernameSearch {
                     id(index)
                     user(user)
+
+                    onClickItem { model, parentView, clickedView, position ->
+                        when (clickedView.id) {
+                            R.id.imageview_item_username_search_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root                            )
+                                .navigate(R.id.action_rootFragment_to_studioFragment)
+                        }
+                    }
                 }
             }
         }
     }
-
 }

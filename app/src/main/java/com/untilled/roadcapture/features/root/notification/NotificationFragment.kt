@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentNotificationBinding
 import com.untilled.roadcapture.features.base.CustomDivider
@@ -62,6 +64,14 @@ class NotificationFragment : Fragment(){
                 notification {
                     id(index)
                     notification(album)
+
+                    onClickItem { model, parentView, clickedView, position ->
+                        when(clickedView.id){
+                            R.id.imageview_item_notification_profile->
+                                Navigation.findNavController(binding.root)
+                                    .navigate(R.id.action_notificationFragment_to_studioFragment)
+                        }
+                    }
                 }
             }
         }

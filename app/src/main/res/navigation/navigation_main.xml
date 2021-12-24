@@ -49,6 +49,9 @@
         <action
             android:id="@+id/action_rootFragment_to_pictureViewerContainerFragment"
             app:destination="@id/pictureViewerContainerFragment" />
+        <action
+            android:id="@+id/action_rootFragment_to_studioFragment"
+            app:destination="@id/studioFragment" />
     </fragment>
     <fragment
         android:id="@+id/captureFragment"
@@ -137,22 +140,38 @@
         android:id="@+id/commentFragment"
         android:name="com.untilled.roadcapture.features.root.comment.CommentFragment"
         android:label="CommentFragment"
-        tools:layout="@layout/fragment_comment"/>
+        tools:layout="@layout/fragment_comment">
+        <action
+            android:id="@+id/action_commentFragment_to_studioFragment"
+            app:destination="@id/studioFragment" />
+    </fragment>
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.untilled.roadcapture.features.root.notification.NotificationFragment"
         android:label="NotificationFragment"
-        tools:layout="@layout/fragment_notification"/>
+        tools:layout="@layout/fragment_notification">
+        <action
+            android:id="@+id/action_notificationFragment_to_studioFragment"
+            app:destination="@id/studioFragment" />
+    </fragment>
     <fragment
         android:id="@+id/followerFragment"
-        android:name="com.untilled.roadcapture.features.root.mystudio.follow.FollowerFragment"
+        android:name="com.untilled.roadcapture.features.root.studio.FollowerFragment"
         android:label="FollowerFragment"
-        tools:layout="@layout/fragment_follower"/>
+        tools:layout="@layout/fragment_follower">
+        <action
+            android:id="@+id/action_followerFragment_to_studioFragment"
+            app:destination="@id/studioFragment" />
+    </fragment>
     <fragment
         android:id="@+id/followingFragment"
-        android:name="com.untilled.roadcapture.features.root.mystudio.follow.FollowingFragment"
+        android:name="com.untilled.roadcapture.features.root.studio.FollowingFragment"
         android:label="FollowingFragment"
-        tools:layout="@layout/fragment_following"/>
+        tools:layout="@layout/fragment_following">
+        <action
+            android:id="@+id/action_followingFragment_to_studioFragment"
+            app:destination="@id/studioFragment" />
+    </fragment>
     <fragment
         android:id="@+id/pictureEditorFragment"
         android:name="com.untilled.roadcapture.features.root.capture.PictureEditorFragment"
@@ -190,7 +209,7 @@
     </fragment>
     <fragment
         android:id="@+id/myStudioModification"
-        android:name="com.untilled.roadcapture.features.root.mystudio.MyStudioModification"
+        android:name="com.untilled.roadcapture.features.root.studio.MyStudioModification"
         android:label="MyStudioModification"
         tools:layout="@layout/fragment_my_studio_modification">
         <argument
@@ -256,5 +275,20 @@
         <argument
             android:name="albums"
             app:argType="com.untilled.roadcapture.data.entity.Album" />
+        <action
+            android:id="@+id/action_pictureViewerContainerFragment_to_studioFragment"
+            app:destination="@id/studioFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/studioFragment"
+        android:name="com.untilled.roadcapture.features.root.studio.StudioFragment"
+        android:label="StudioFragment"
+        tools:layout="@layout/fragment_studio">
+        <action
+            android:id="@+id/action_studioFragment_to_followerFragment"
+            app:destination="@id/followerFragment" />
+        <action
+            android:id="@+id/action_studioFragment_to_followingFragment"
+            app:destination="@id/followingFragment" />
     </fragment>
 </navigation>

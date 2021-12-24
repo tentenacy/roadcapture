@@ -3,6 +3,7 @@ package com.untilled.roadcapture.features.root.search
 import android.animation.ValueAnimator
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,7 +54,10 @@ class TitleSearchFragment : Fragment() {
 
                     onClickItem { model, parentView, clickedView, position ->
                         when (clickedView.id) {
-                            R.id.imageview_item_home_album_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                            R.id.imageview_item_home_album_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                                .navigate(R.id.action_rootFragment_to_studioFragment)
+
+                            R.id.imageview_item_home_album_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                                 .navigate(R.id.action_rootFragment_to_commentFragment)
 
                             R.id.imageview_item_home_album_like -> if (!flagLike) {

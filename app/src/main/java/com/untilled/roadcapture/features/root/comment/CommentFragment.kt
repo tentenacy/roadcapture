@@ -10,6 +10,7 @@ import android.view.WindowManager
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.comment
@@ -83,6 +84,10 @@ class CommentFragment : Fragment() {
                                         true
                                     }
                                 }.show()
+                            }
+                            R.id.imageview_item_comment_profile->{
+                                Navigation.findNavController(binding.root)
+                                    .navigate(R.id.action_commentFragment_to_studioFragment)
                             }
                         }
                     }

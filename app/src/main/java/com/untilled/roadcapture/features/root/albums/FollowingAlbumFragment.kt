@@ -67,6 +67,13 @@ class FollowingAlbumFragment : Fragment() {
                 followingAlbumNews {
                     id(index)
                     user(user)
+
+                    onClickItem { model, parentView, clickedView, position ->
+                        when (clickedView.id) {
+                            R.id.imageview_item_following_album_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                                .navigate(R.id.action_rootFragment_to_studioFragment)
+                        }
+                    }
                 }
             }
         }
@@ -79,6 +86,9 @@ class FollowingAlbumFragment : Fragment() {
 
                     onClickItem { model, parentView, clickedView, position ->
                         when (clickedView.id) {
+                            R.id.imageview_item_home_album_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                                .navigate(R.id.action_rootFragment_to_studioFragment)
+
                             R.id.imageview_item_home_album_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                                 .navigate(R.id.action_rootFragment_to_commentFragment)
 

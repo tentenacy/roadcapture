@@ -19,7 +19,7 @@ import com.untilled.roadcapture.utils.extension.statusBarHeight
 
 class PictureViewerContainerFragment : Fragment() {
     private var _binding: FragmentPictureViewerContainerBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     private var isMapScreen = false
 

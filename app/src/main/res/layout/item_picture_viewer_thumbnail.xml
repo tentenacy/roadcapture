@@ -38,6 +38,7 @@
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="16dp"
+            android:onClick="@{onClickItem}"
             app:layout_constraintBottom_toBottomOf="@id/imageview_item_picture_viewer_thumbnail_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/imageview_item_picture_viewer_thumbnail_background"

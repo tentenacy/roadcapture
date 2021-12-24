@@ -1,8 +1,6 @@
-package com.untilled.roadcapture.features.root.mystudio
+package com.untilled.roadcapture.features.root.studio
 
 import android.widget.ImageView
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
