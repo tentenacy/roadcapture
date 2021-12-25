@@ -1,15 +1,19 @@
 package com.untilled.roadcapture.features.root.albums
 
+import android.animation.ValueAnimator
 import android.content.res.ColorStateList
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentPictureViewerContainerBinding
 import com.untilled.roadcapture.utils.extension.navigationHeight
@@ -20,7 +24,7 @@ import com.untilled.roadcapture.utils.extension.statusBarHeight
 class PictureViewerContainerFragment : Fragment() {
     private var _binding: FragmentPictureViewerContainerBinding? = null
     val binding get() = _binding!!
-
+    private var flagLike: Boolean = false
     private var isMapScreen = false
 
     private lateinit var pictureViewerFragment: PictureViewerFragment
@@ -92,6 +96,29 @@ class PictureViewerContainerFragment : Fragment() {
                     true
                 }
             }.commit()
+        }
+        binding.imageviewPictureViewerContainerComment.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_pictureViewerContainerFragment_to_commentFragment)
+        }
+        binding.imageviewPictureViewerContainerLike.setOnClickListener { lottie ->
+            if (!flagLike) {
+                val animator = ValueAnimator.ofFloat(0f, 0.5f).setDuration(800)
+                animator.addUpdateListener {
+                    (lottie as LottieAnimationView).progress =
+                        it.animatedValue as Float
+                }
+                animator.start()
+                flagLike = true
+            } else {
+                val animator = ValueAnimator.ofFloat(0.5f, 1f).setDuration(800)
+                animator.addUpdateListener {
+                    (lottie as LottieAnimationView).progress =
+                        it.animatedValue as Float
+                }
+                animator.start()
+                flagLike = false
+            }
         }
     }
 
