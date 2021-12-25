@@ -94,7 +94,6 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:layout_marginTop="16dp"
-                    android:background="?attr/selectableItemBackground"
                     android:gravity="top|center"
                     android:text="81.9만" />
 
@@ -112,7 +111,6 @@
                     style="@style/SubHeadBold"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
-                    android:background="?attr/selectableItemBackground"
                     android:gravity="top|center"
                     android:text="100" />
 
