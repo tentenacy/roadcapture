@@ -52,10 +52,10 @@
             android:id="@+id/imageview_item_home_album_profile"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:padding="8dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:onClick="@{onClickItem}"
+            android:padding="8dp"
             app:layout_constraintStart_toStartOf="@id/imageview_item_home_album_thumbnail"
             app:layout_constraintTop_toTopOf="@id/imageview_item_home_album_thumbnail"
             bind:albumProfileImage="@{album.profileUrl}"
@@ -81,8 +81,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:textColor="@color/black"
             android:text="@{album.likeCount}"
+            android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@id/imageview_item_home_album_comment"
             app:layout_constraintEnd_toEndOf="@id/textview_item_home_album_comment"
             app:layout_constraintStart_toStartOf="@id/textview_item_home_album_comment"
@@ -117,12 +117,11 @@
             android:id="@+id/imageview_item_home_album_more"
             android:layout_width="24dp"
             android:layout_height="24dp"
+            android:onClick="@{onClickItem}"
             android:src="@drawable/ic_more"
             app:layout_constraintEnd_toEndOf="@id/textview_item_home_album_comment"
             app:layout_constraintStart_toStartOf="@id/textview_item_home_album_comment"
-            app:layout_constraintTop_toTopOf="@id/imageview_item_home_album_profile"
-            android:onClick="@{onClickItem}"
-            />
+            app:layout_constraintTop_toTopOf="@id/imageview_item_home_album_profile" />
 
         <TextView
             android:id="@+id/textview_item_home_album_overlay"
@@ -161,6 +160,7 @@
             android:ellipsize="end"
             android:maxLines="2"
             android:text="@{album.title}"
+            android:onClick="@{onClickItem}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageview_item_home_album_thumbnail"
@@ -175,6 +175,7 @@
             android:layout_marginBottom="48dp"
             android:text="@{album.description}"
             android:visibility='@{album.description.equals("") ? View.GONE : View.VISIBLE}'
+            android:onClick="@{onClickItem}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/textview_item_home_album_title"
             app:layout_constraintStart_toStartOf="@+id/textview_item_home_album_title"

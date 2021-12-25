@@ -1,18 +1,7 @@
 package com.untilled.roadcapture.application
 
-import android.content.Context
-import android.content.res.Resources
-import android.graphics.Color
-import android.os.Build
 import android.os.Bundle
-import android.view.View
-import android.view.View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-import android.view.View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-import android.view.WindowManager
-import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.WindowCompat
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.ActivityMainBinding

@@ -87,7 +87,10 @@ class FollowingAlbumFragment : Fragment() {
 
                     onClickItem { model, parentView, clickedView, position ->
                         when (clickedView.id) {
-                            R.id.imageview_item_home_album_thumbnail -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
+                            R.id.imageview_item_home_album_thumbnail,
+                            R.id.textview_item_home_album_title,
+                            R.id.textview_item_home_album_desc
+                            -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
                                 navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(model.album()))
 
                             R.id.imageview_item_home_album_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
