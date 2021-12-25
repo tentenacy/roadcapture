@@ -65,9 +65,9 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/imageview_picture_viewer_container_like"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:padding="8dp"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/imageview_picture_viewer_container_comment"
             app:lottie_autoPlay="false"
@@ -75,16 +75,38 @@
             app:lottie_rawRes="@raw/like_white"
             tools:src="@drawable/ic_like" />
 
+        <TextView
+            android:id="@+id/textview_picture_viewer_container_like"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Date"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/imageview_picture_viewer_container_like"
+            app:layout_constraintEnd_toEndOf="@id/imageview_picture_viewer_container_like"
+            android:text="39.1천"/>
+
+
         <ImageView
             android:id="@+id/imageview_picture_viewer_container_comment"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_marginEnd="8dp"
-            android:padding="16dp"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:padding="24dp"
             android:src="@drawable/ic_comment2"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:tint="@color/primaryColor" />
+
+        <TextView
+            android:id="@+id/textview_picture_viewer_container_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Date"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/imageview_picture_viewer_container_comment"
+            app:layout_constraintEnd_toEndOf="@id/imageview_picture_viewer_container_comment"
+            android:text="392"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
