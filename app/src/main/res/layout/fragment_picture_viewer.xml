@@ -37,6 +37,51 @@
             app:layout_constraintVertical_bias="0.0"
             tools:listitem="@layout/item_picture_viewer_thumbnail" />
 
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/imageview_picture_viewer_like"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:padding="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/imageview_picture_viewer_comment"
+            app:lottie_autoPlay="false"
+            app:lottie_loop="false"
+            app:lottie_rawRes="@raw/like_white"
+            tools:src="@drawable/ic_like" />
+
+        <TextView
+            android:id="@+id/textview_picture_viewer_like"
+            style="@style/Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="39.1천"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/imageview_picture_viewer_like"
+            app:layout_constraintStart_toStartOf="@id/imageview_picture_viewer_like" />
+
+
+        <ImageView
+            android:id="@+id/imageview_picture_viewer_comment"
+            android:layout_width="72dp"
+            android:layout_height="72dp"
+            android:padding="24dp"
+            android:src="@drawable/ic_comment2"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:tint="@color/primaryColor" />
+
+        <TextView
+            android:id="@+id/textview_picture_viewer_comment"
+            style="@style/Date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="4dp"
+            android:text="392"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/imageview_picture_viewer_comment"
+            app:layout_constraintStart_toStartOf="@id/imageview_picture_viewer_comment" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

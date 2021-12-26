@@ -61,6 +61,26 @@
                 app:layout_constraintStart_toStartOf="@+id/guideline_registration_description_body_start"
                 app:layout_constraintTop_toBottomOf="@id/toolbar_album_registration" />
 
+            <TextView
+                android:id="@+id/textview_album_registration_place"
+                style="@style/Body"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="김포시 장기동"
+                app:layout_constraintBottom_toBottomOf="@+id/textview_album_registration_thumbnail"
+                app:layout_constraintEnd_toEndOf="@id/guideline_registration_description_body_end"
+                app:layout_constraintTop_toTopOf="@+id/textview_album_registration_thumbnail" />
+
+            <ImageView
+                android:id="@+id/imageview_album_registration_place_icon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/ic_location_mini"
+                app:layout_constraintBottom_toBottomOf="@+id/textview_album_registration_place"
+                app:layout_constraintEnd_toStartOf="@+id/textview_album_registration_place"
+                app:layout_constraintTop_toTopOf="@+id/textview_album_registration_place" />
+
             <ImageView
                 android:id="@+id/imageview_album_registration_image"
                 android:layout_width="match_parent"

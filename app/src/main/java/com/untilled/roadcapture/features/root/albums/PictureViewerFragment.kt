@@ -1,5 +1,6 @@
 package com.untilled.roadcapture.features.root.albums
 
+import android.animation.ValueAnimator
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.PagerSnapHelper
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentPictureViewerBinding
@@ -27,6 +29,8 @@ class PictureViewerFragment : Fragment() {
     private var _binding: FragmentPictureViewerBinding? = null
     private val binding get() = _binding!!
     private val viewModel: PictureViewerContainerViewModel by viewModels({requireParentFragment()})
+
+    private var flagLike: Boolean = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,7 +55,29 @@ class PictureViewerFragment : Fragment() {
     }
 
     private fun onClickListeners() {
-
+        binding.imageviewPictureViewerComment.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_pictureViewerContainerFragment_to_commentFragment)
+        }
+        binding.imageviewPictureViewerLike.setOnClickListener { lottie ->
+            if (!flagLike) {
+                val animator = ValueAnimator.ofFloat(0f, 0.5f).setDuration(800)
+                animator.addUpdateListener {
+                    (lottie as LottieAnimationView).progress =
+                        it.animatedValue as Float
+                }
+                animator.start()
+                flagLike = true
+            } else {
+                val animator = ValueAnimator.ofFloat(0.5f, 1f).setDuration(800)
+                animator.addUpdateListener {
+                    (lottie as LottieAnimationView).progress =
+                        it.animatedValue as Float
+                }
+                animator.start()
+                flagLike = false
+            }
+        }
     }
 
     override fun onDestroyView() {

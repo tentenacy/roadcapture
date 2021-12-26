@@ -24,7 +24,6 @@ import com.untilled.roadcapture.utils.extension.statusBarHeight
 class PictureViewerContainerFragment : Fragment() {
     private var _binding: FragmentPictureViewerContainerBinding? = null
     val binding get() = _binding!!
-    private var flagLike: Boolean = false
     private var isMapScreen = false
 
     private lateinit var pictureViewerFragment: PictureViewerFragment
@@ -97,37 +96,12 @@ class PictureViewerContainerFragment : Fragment() {
                 }
             }.commit()
         }
-        binding.imageviewPictureViewerContainerComment.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_pictureViewerContainerFragment_to_commentFragment)
-        }
-        binding.imageviewPictureViewerContainerLike.setOnClickListener { lottie ->
-            if (!flagLike) {
-                val animator = ValueAnimator.ofFloat(0f, 0.5f).setDuration(800)
-                animator.addUpdateListener {
-                    (lottie as LottieAnimationView).progress =
-                        it.animatedValue as Float
-                }
-                animator.start()
-                flagLike = true
-            } else {
-                val animator = ValueAnimator.ofFloat(0.5f, 1f).setDuration(800)
-                animator.addUpdateListener {
-                    (lottie as LottieAnimationView).progress =
-                        it.animatedValue as Float
-                }
-                animator.start()
-                flagLike = false
-            }
-        }
     }
 
     private fun setIconWhite() {
         binding.run {
             imageviewPictureViewerContainerBack.setColorFilter(requireContext().getColor(R.color.white))
             imageviewPictureViewerContainerShare.setColorFilter(requireContext().getColor(R.color.white))
-            imageviewPictureViewerContainerComment.setColorFilter(requireContext().getColor(R.color.white))
-            imageviewPictureViewerContainerLike.setColorFilter(requireContext().getColor(R.color.white))
             fabPictureViewerContainerSwitch.run {
                 setImageResource(R.drawable.ic_map)
                 setColorFilter(requireContext().getColor(R.color.secondaryColor))
@@ -140,8 +114,6 @@ class PictureViewerContainerFragment : Fragment() {
         binding.run {
             imageviewPictureViewerContainerBack.setColorFilter(requireContext().getColor(R.color.black))
             imageviewPictureViewerContainerShare.setColorFilter(requireContext().getColor(R.color.black))
-            imageviewPictureViewerContainerComment.setColorFilter(requireContext().getColor(R.color.black))
-            imageviewPictureViewerContainerLike.setColorFilter(requireContext().getColor(R.color.black))
             fabPictureViewerContainerSwitch.run {
                 setImageResource(R.drawable.ic_album)
                 setColorFilter(requireContext().getColor(R.color.white))
