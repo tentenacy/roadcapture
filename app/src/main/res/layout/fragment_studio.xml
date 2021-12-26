@@ -38,9 +38,21 @@
                     bind:studioBackgroundImage="@{user.backgroundUrl}"
                     tools:src="@drawable/sample_profile_background" />
 
+                <View
+                    android:id="@+id/view_studio_background_overlay"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/overlay_gradient_thumbnail"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageview_studio_background"
+                    app:layout_constraintEnd_toEndOf="@+id/imageview_studio_background"
+                    app:layout_constraintStart_toStartOf="@+id/imageview_studio_background"
+                    app:layout_constraintTop_toTopOf="@+id/imageview_studio_background" />
+
                 <ImageView
                     android:id="@+id/imageview_studio_back_before"
-                    style="@style/BackArrow" />
+                    style="@style/BackArrow"
+                    app:tint="@color/white" />
+
                 <ImageView
                     android:id="@+id/imageview_studio_back_after"
                     style="@style/BackArrow" />
@@ -79,9 +91,9 @@
                     style="@style/Body"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="48dp"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
+                    android:paddingHorizontal="48dp"
                     android:text="@{user.description}"
                     tools:text="안녕하세요 최광현입니다." />
 
@@ -93,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:text="@string/my_studio_follower"
-                    android:textColor="@color/gray"/>
+                    android:textColor="@color/gray" />
 
                 <TextView
                     android:id="@+id/textview_studio_follower_num"
@@ -135,14 +147,15 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:padding="12dp"
-                    android:src="@drawable/ic_more" />
+                    android:src="@drawable/ic_more"
+                    app:tint="@color/white" />
 
                 <ImageView
                     android:id="@+id/imageview_studio_more_after"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:padding="12dp"
-                    android:src="@drawable/ic_more"/>
+                    android:src="@drawable/ic_more" />
 
             </com.untilled.roadcapture.utils.CollapsibleToolbar>
 

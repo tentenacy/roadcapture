@@ -38,6 +38,16 @@
                     bind:studioBackgroundImage="@{user.backgroundUrl}"
                     tools:src="@drawable/sample_profile_background" />
 
+                <View
+                    android:id="@+id/view_my_studio_background_overlay"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:background="@drawable/overlay_gradient_thumbnail"
+                    app:layout_constraintBottom_toBottomOf="@+id/imageview_my_studio_background"
+                    app:layout_constraintEnd_toEndOf="@+id/imageview_my_studio_background"
+                    app:layout_constraintStart_toStartOf="@+id/imageview_my_studio_background"
+                    app:layout_constraintTop_toTopOf="@+id/imageview_my_studio_background" />
+
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/imageview_my_studio_profile"
                     android:layout_width="96dp"
@@ -73,8 +83,8 @@
                     style="@style/Body"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:paddingHorizontal="48dp"
                     android:gravity="center"
+                    android:paddingHorizontal="48dp"
                     android:text="@{user.description}"
                     tools:text="안녕하세요 최광현입니다." />
 
@@ -86,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
                     android:text="@string/my_studio_follower"
-                    android:textColor="@color/gray"/>
+                    android:textColor="@color/gray" />
 
                 <TextView
                     android:id="@+id/textview_my_studio_follower_num"
@@ -128,14 +138,15 @@
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:padding="12dp"
-                    android:src="@drawable/ic_setting" />
+                    android:src="@drawable/ic_setting"
+                    app:tint="@color/white" />
 
                 <ImageView
                     android:id="@+id/imageview_my_studio_setting_after"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:padding="12dp"
-                    android:src="@drawable/ic_setting"/>
+                    android:src="@drawable/ic_setting" />
 
 
             </com.untilled.roadcapture.utils.CollapsibleToolbar>
