@@ -1,17 +1,17 @@
-package com.untilled.roadcapture.data.dao
+package com.untilled.roadcapture.data.api
 
 import com.untilled.roadcapture.data.response.address.AddressInfoResponse
 import com.untilled.roadcapture.data.response.search.SearchResponse
 import com.untilled.roadcapture.utils.Key
-import com.untilled.roadcapture.utils.Url
+import com.untilled.roadcapture.data.url.TmapUrl
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
 
-interface TmapApi {
+interface TmapService {
 
-    @GET(Url.GET_TMAP_LOCATION)
+    @GET(TmapUrl.GET_TMAP_LOCATION)
     suspend fun getSearchLocation(
         @Header("appKey") appKey: String = Key.TMAP_API,
         @Query("version") version: Int = 1,
@@ -30,7 +30,7 @@ interface TmapApi {
         @Query("centerLat") centerLat: String? = null
     ): Response<SearchResponse>
 
-    @GET(Url.GET_TMAP_REVERSE_GEO_CODE)
+    @GET(TmapUrl.GET_TMAP_REVERSE_GEO_CODE)
     suspend fun getReverseGeoCode(
         @Header("appKey") appKey: String = Key.TMAP_API,
         @Query("version") version: Int = 1,

@@ -1,6 +1,6 @@
-package com.untilled.roadcapture.utils
+package com.untilled.roadcapture.data.url
 
-object Url {
+object TmapUrl {
     const val TMAP_URL = "https://apis.openapi.sk.com"
 
     const val GET_TMAP_LOCATION = "/tmap/pois"

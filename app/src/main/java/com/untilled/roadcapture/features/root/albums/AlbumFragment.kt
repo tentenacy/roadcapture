@@ -9,15 +9,16 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
+import com.untilled.roadcapture.data.response.albums.AlbumsResponse
 import com.untilled.roadcapture.databinding.FragmentAlbumsBinding
 import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
 import com.untilled.roadcapture.homeAlbum
-import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -26,6 +27,8 @@ class AlbumFragment : Fragment() {
     private var _binding: FragmentAlbumsBinding? = null
     private val binding get() = _binding!!
     private var flagLike: Boolean = false
+
+    private val viewModel: AlbumsFragmentViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,9 +39,15 @@ class AlbumFragment : Fragment() {
 
         (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarAlbums)
 
-        initAdapter()
+        subscribeUi()
 
         return binding.root
+    }
+
+    private fun subscribeUi() {
+        viewModel.albums.observe(viewLifecycleOwner) { result ->
+            initAdapter(result)
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -65,12 +74,12 @@ class AlbumFragment : Fragment() {
         _binding = null
     }
 
-    private fun initAdapter(){
+    private fun initAdapter(albumsResponse: AlbumsResponse){
         binding.recyclerviewAlbums.withModels {
-            DummyDataSet.albums.forEachIndexed { index, album ->
+            albumsResponse.albums.forEachIndexed { index, albums ->
                 homeAlbum {
                     id(index)
-                    album(album)
+                    albums(albums)
 
                     onClickItem { model, parentView, clickedView, position ->
                         when (clickedView.id) {
@@ -97,11 +106,12 @@ class AlbumFragment : Fragment() {
                                 animator.start()
                                 flagLike = false
                             }
-                            R.id.imageview_item_home_album_thumbnail,
-                            R.id.textview_item_home_album_title,
-                            R.id.textview_item_home_album_desc->
-                                Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
-                                        navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(model.album()))
+                            //Todo 네비게이션 args 변경해야 함
+//                            R.id.imageview_item_home_album_thumbnail,
+//                            R.id.textview_item_home_album_title,
+//                            R.id.textview_item_home_album_desc->
+//                                Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
+//                                navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(model.albums()))
                             R.id.imageview_item_home_album_more -> {
                                 val popupMenu = PopupMenu(requireContext(), clickedView)
                                 popupMenu.apply {
@@ -120,6 +130,7 @@ class AlbumFragment : Fragment() {
                                     }
                                 }.show()
                             }
+
                         }
                     }
                 }

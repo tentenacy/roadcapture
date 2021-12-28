@@ -79,66 +79,66 @@ class FollowingAlbumFragment : Fragment() {
             }
         }
 
-        binding.recyclerviewFollowingAlbum.withModels {
-            DummyDataSet.albums.forEachIndexed { index, album ->
-                homeAlbum {
-                    id(index)
-                    album(album)
-
-                    onClickItem { model, parentView, clickedView, position ->
-                        when (clickedView.id) {
-                            R.id.imageview_item_home_album_thumbnail,
-                            R.id.textview_item_home_album_title,
-                            R.id.textview_item_home_album_desc
-                            -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
-                                navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(model.album()))
-
-                            R.id.imageview_item_home_album_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                                .navigate(R.id.action_rootFragment_to_studioFragment)
-
-                            R.id.imageview_item_home_album_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                                .navigate(R.id.action_rootFragment_to_commentFragment)
-
-                            R.id.imageview_item_home_album_like -> if (!flagLike) {
-                                val animator = ValueAnimator.ofFloat(0f, 0.5f).setDuration(800)
-                                animator.addUpdateListener {
-                                    (clickedView as LottieAnimationView).progress =
-                                        it.animatedValue as Float
-                                }
-                                animator.start()
-                                flagLike = true
-                            } else {
-                                val animator = ValueAnimator.ofFloat(0.5f, 1f).setDuration(800)
-                                animator.addUpdateListener {
-                                    (clickedView as LottieAnimationView).progress =
-                                        it.animatedValue as Float
-                                }
-                                animator.start()
-                                flagLike = false
-                            }
-                            R.id.imageview_item_home_album_more -> {
-                                val popupMenu = PopupMenu(requireContext(), clickedView)
-                                popupMenu.apply {
-                                    menuInflater.inflate(R.menu.popup_menu_albums_more, popupMenu.menu)
-                                    setOnMenuItemClickListener { item ->
-                                        when (item.itemId) {
-                                            R.id.popup_menu_albums_more_share -> {
-                                            }
-                                            R.id.popup_menu_albums_more_report -> {
-                                                showReportDialog()
-                                            }
-                                            R.id.popup_menu_albums_more_hide -> {
-                                            }
-                                        }
-                                        true
-                                    }
-                                }.show()
-                            }
-                        }
-                    }
-                }
-            }
-        }
+//        binding.recyclerviewFollowingAlbum.withModels {
+//            DummyDataSet.albums.forEachIndexed { index, album ->
+//                homeAlbum {
+//                    id(index)
+//                    album(album)
+//
+//                    onClickItem { model, parentView, clickedView, position ->
+//                        when (clickedView.id) {
+//                            R.id.imageview_item_home_album_thumbnail,
+//                            R.id.textview_item_home_album_title,
+//                            R.id.textview_item_home_album_desc
+//                            -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
+//                                navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(model.album()))
+//
+//                            R.id.imageview_item_home_album_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+//                                .navigate(R.id.action_rootFragment_to_studioFragment)
+//
+//                            R.id.imageview_item_home_album_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+//                                .navigate(R.id.action_rootFragment_to_commentFragment)
+//
+//                            R.id.imageview_item_home_album_like -> if (!flagLike) {
+//                                val animator = ValueAnimator.ofFloat(0f, 0.5f).setDuration(800)
+//                                animator.addUpdateListener {
+//                                    (clickedView as LottieAnimationView).progress =
+//                                        it.animatedValue as Float
+//                                }
+//                                animator.start()
+//                                flagLike = true
+//                            } else {
+//                                val animator = ValueAnimator.ofFloat(0.5f, 1f).setDuration(800)
+//                                animator.addUpdateListener {
+//                                    (clickedView as LottieAnimationView).progress =
+//                                        it.animatedValue as Float
+//                                }
+//                                animator.start()
+//                                flagLike = false
+//                            }
+//                            R.id.imageview_item_home_album_more -> {
+//                                val popupMenu = PopupMenu(requireContext(), clickedView)
+//                                popupMenu.apply {
+//                                    menuInflater.inflate(R.menu.popup_menu_albums_more, popupMenu.menu)
+//                                    setOnMenuItemClickListener { item ->
+//                                        when (item.itemId) {
+//                                            R.id.popup_menu_albums_more_share -> {
+//                                            }
+//                                            R.id.popup_menu_albums_more_report -> {
+//                                                showReportDialog()
+//                                            }
+//                                            R.id.popup_menu_albums_more_hide -> {
+//                                            }
+//                                        }
+//                                        true
+//                                    }
+//                                }.show()
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
     }
 
     private fun showReportDialog() {

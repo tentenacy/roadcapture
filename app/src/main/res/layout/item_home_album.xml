@@ -9,8 +9,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="album"
-            type="com.untilled.roadcapture.data.entity.Album" />
+            name="albums"
+            type="com.untilled.roadcapture.data.response.albums.Albums" />
 
         <variable
             name="onClickItem"
@@ -21,7 +21,7 @@
         android:id="@+id/item_home_album_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        bind:adjustConstraintEmptyDesc="@{album.description}">
+        bind:adjustConstraintEmptyDesc="@{albums.description}">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/imageview_item_home_album_thumbnail"
@@ -35,7 +35,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:albumThumbnailImage="@{album.thumbnailUrl}"
+            bind:albumThumbnailImage="@{albums.thumbnailUrl}"
             tools:src="@drawable/sample_thumbnail" />
 
         <View
@@ -58,7 +58,7 @@
             android:padding="8dp"
             app:layout_constraintStart_toStartOf="@id/imageview_item_home_album_thumbnail"
             app:layout_constraintTop_toTopOf="@id/imageview_item_home_album_thumbnail"
-            bind:albumProfileImage="@{album.profileUrl}"
+            bind:albumProfileImage="@{albums.user.profileImageUrl}"
             tools:src="@drawable/sample_profile" />
 
         <com.airbnb.lottie.LottieAnimationView
@@ -81,7 +81,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text="@{album.likeCount}"
+            android:text='@{String.format("%d",albums.likeCount)}'
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@id/imageview_item_home_album_comment"
             app:layout_constraintEnd_toEndOf="@id/textview_item_home_album_comment"
@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="10dp"
-            android:text="@{album.commentCount}"
+            android:text='@{String.format("%d",albums.commentCount)}'
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/imageview_item_home_album_thumbnail"
             app:layout_constraintEnd_toEndOf="parent"
@@ -134,7 +134,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/imageview_item_home_album_profile"
             app:layout_constraintStart_toEndOf="@id/imageview_item_home_album_profile"
             app:layout_constraintTop_toTopOf="@+id/imageview_item_home_album_profile"
-            bind:albumOverlayUsername="@{album.username}"
+            bind:albumOverlayUsername="@{albums.user.username}"
             tools:text="tenutz ·" />
 
         <TextView
@@ -142,7 +142,7 @@
             style="@style/Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{album.createdDate}"
+            android:text="@{albums.createdAt}"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@id/textview_item_home_album_overlay"
             app:layout_constraintStart_toEndOf="@id/textview_item_home_album_overlay"
@@ -159,7 +159,7 @@
             android:layout_marginTop="16dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="@{album.title}"
+            android:text="@{albums.title}"
             android:onClick="@{onClickItem}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -173,8 +173,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="48dp"
-            android:text="@{album.description}"
-            android:visibility='@{album.description.equals("") ? View.GONE : View.VISIBLE}'
+            android:text="@{albums.description}"
+            android:visibility='@{albums.description.equals("") ? View.GONE : View.VISIBLE}'
             android:onClick="@{onClickItem}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/textview_item_home_album_title"
