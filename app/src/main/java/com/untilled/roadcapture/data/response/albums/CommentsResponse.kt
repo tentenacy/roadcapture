@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class AlbumsResponse(
+data class CommentsResponse(
     @SerializedName("content")
-    val albums: List<Albums>,
+    val comments: List<Comments>,
     val pageable: Pageable,
     val totalElements: Int,
     val totalPages: Int,

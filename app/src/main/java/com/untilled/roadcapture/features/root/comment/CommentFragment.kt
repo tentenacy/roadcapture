@@ -10,12 +10,17 @@ import android.view.WindowManager
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.comment
+import com.untilled.roadcapture.data.response.albums.CommentsResponse
 import com.untilled.roadcapture.databinding.FragmentCommentBinding
 import com.untilled.roadcapture.features.base.CustomDivider
+import com.untilled.roadcapture.features.root.albums.AlbumsFragmentViewModel
+import com.untilled.roadcapture.features.root.albums.PictureViewerContainerFragmentArgs
 import com.untilled.roadcapture.utils.DummyDataSet
 import com.untilled.roadcapture.utils.extension.getPxFromDp
 import dagger.hilt.android.AndroidEntryPoint
@@ -25,6 +30,7 @@ class CommentFragment : Fragment() {
 
     private var _binding: FragmentCommentBinding? = null
     private val binding get() = _binding!!
+    private val viewModel: AlbumsFragmentViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,15 +41,23 @@ class CommentFragment : Fragment() {
 
         (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarComment)
 
-        initAdapter()
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        subscribeUi()
+
+        val args: CommentFragmentArgs by navArgs()
+        viewModel.getComments(args.albumsId)
         setOnClickListeners()
+    }
+
+    private fun subscribeUi() {
+        viewModel.comments.observe(viewLifecycleOwner){
+            initAdapter(it)
+        }
     }
 
     private fun setOnClickListeners() {
@@ -58,16 +72,16 @@ class CommentFragment : Fragment() {
         _binding = null
     }
 
-    private fun initAdapter(){
+    private fun initAdapter(commentsResponse: CommentsResponse){
         val customDivider = CustomDivider(2.5f,1f, Color.parseColor("#EFEFEF"))
 
         binding.recyclerviewComment.addItemDecoration(customDivider)
 
         binding.recyclerviewComment.withModels {
-            DummyDataSet.comment.forEachIndexed { index, comment ->
+            commentsResponse.comments.forEachIndexed { index, comments ->
                 comment {
                     id(index)
-                    comment(comment)
+                    comments(comments)
 
                     onClickItem { model, parentView, clickedView, position ->
                         when(clickedView.id) {

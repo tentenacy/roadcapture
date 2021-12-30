@@ -2,6 +2,7 @@ package com.untilled.roadcapture.data.api
 
 import com.untilled.roadcapture.BuildConfig
 import com.untilled.roadcapture.data.response.albums.AlbumsResponse
+import com.untilled.roadcapture.data.response.albums.CommentsResponse
 import com.untilled.roadcapture.data.url.RoadCaptureUrl.GET_ALBUMS
 import com.untilled.roadcapture.data.url.RoadCaptureUrl.ROAD_CAPTURE_BASE_URL
 import okhttp3.OkHttpClient
@@ -20,6 +21,12 @@ interface RoadCaptureService {
         @Query("page") page: String? = null,
         @Query("size") size: String? = null
     ): Response<AlbumsResponse>
+
+    @GET(GET_ALBUMS)
+    // todo: query 추가해야 함
+    suspend fun getCommentsList(
+        @Query("albumsId") albumsId: String
+    ): Response<CommentsResponse>
 
     companion object {
         fun create(): RoadCaptureService {

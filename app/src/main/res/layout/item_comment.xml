@@ -9,8 +9,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="comment"
-            type="com.untilled.roadcapture.data.entity.Comment" />
+            name="comments"
+            type="com.untilled.roadcapture.data.response.albums.Comments" />
 
         <variable
             name="onClickItem"
@@ -33,7 +33,7 @@
             android:onClick="@{onClickItem}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textview_item_comment_username"
-            bind:circleProfileImage="@{comment.profileUrl}" />
+            bind:circleProfileImage="@{comments.user.profileImageUrl}" />
 
         <TextView
             android:id="@+id/textview_item_comment_username"
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:text="@{comment.username}"
+            android:text="@{comments.user.username}"
             app:layout_constraintStart_toEndOf="@id/imageview_item_comment_profile"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="hsw0715" />
@@ -67,7 +67,7 @@
             android:layout_marginTop="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16dp"
-            android:text="@{comment.content}"
+            android:text="@{comments.content}"
             app:layout_constraintStart_toStartOf="@id/textview_item_comment_username"
             app:layout_constraintTop_toBottomOf="@id/textview_item_comment_username"
             tools:text="개발 진행중" />
@@ -78,7 +78,7 @@
             android:textColor="@color/gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{comment.createdDate}"
+            android:text="@{comments.createdAt}"
             app:layout_constraintTop_toBottomOf="@+id/textview_item_comment_content"
             app:layout_constraintStart_toStartOf="@+id/textview_item_comment_content"
             android:layout_marginTop="8dp"

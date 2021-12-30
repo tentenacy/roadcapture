@@ -3,6 +3,7 @@ package com.untilled.roadcapture.features.root.albums
 import android.animation.ValueAnimator
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -82,12 +83,13 @@ class AlbumFragment : Fragment() {
                     albums(albums)
 
                     onClickItem { model, parentView, clickedView, position ->
+                        Log.d("test",model.albums().id.toString())
                         when (clickedView.id) {
                             R.id.imageview_item_home_album_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                                 .navigate(R.id.action_rootFragment_to_studioFragment)
 
                             R.id.imageview_item_home_album_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                                .navigate(R.id.action_rootFragment_to_commentFragment)
+                                .navigate(RootFragmentDirections.actionRootFragmentToCommentFragment(model.albums().id.toString()))
 
                             R.id.imageview_item_home_album_like -> if (!flagLike) {
                                 val animator = ValueAnimator.ofFloat(0f, 0.5f).setDuration(800)

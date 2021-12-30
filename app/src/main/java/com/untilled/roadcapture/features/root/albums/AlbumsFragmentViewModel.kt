@@ -11,6 +11,7 @@ import com.untilled.roadcapture.data.database.AppDataBase
 import com.untilled.roadcapture.data.entity.Album
 import com.untilled.roadcapture.data.repository.albums.AlbumsRepository
 import com.untilled.roadcapture.data.response.albums.AlbumsResponse
+import com.untilled.roadcapture.data.response.albums.CommentsResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -19,10 +20,11 @@ import javax.inject.Inject
 @HiltViewModel
 class AlbumsFragmentViewModel
 @Inject constructor(private val repository: AlbumsRepository) : ViewModel() {
-    private val _albums = MutableLiveData<AlbumsResponse>()
     @Inject lateinit var db : AppDataBase
+    private val _albums = MutableLiveData<AlbumsResponse>()
+    private val _comments = MutableLiveData<CommentsResponse>()
     val albums: LiveData<AlbumsResponse> get() = _albums
-
+    val comments: LiveData<CommentsResponse> get() = _comments
     init {
         getAlbums()
     }
@@ -33,11 +35,23 @@ class AlbumsFragmentViewModel
                 if(albumsResponse.isSuccessful) {
                     _albums.postValue(albumsResponse.body())
                 } else {
-                    Log.d("response", "error: ${albumsResponse.code()}")
+                    Log.d("AlbumsResponse", "error: ${albumsResponse.code()}")
                 }
             }
         }
     }
+    fun getComments(albumsId: String){
+        viewModelScope.launch {
+            repository.getCommentsList(albumsId).let { commentsResponse ->
+                if(commentsResponse.isSuccessful){
+                    _comments.postValue(commentsResponse.body())
+                } else {
+                    Log.d("CommentsResponse", "error: ${commentsResponse.code()}")
+                }
+            }
+        }
+    }
+
     fun insertAlbum(album: Album){
         viewModelScope.launch {
             db.albumDao().insertAlbum(album)
