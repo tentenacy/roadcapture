@@ -5,10 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.room.Delete
-import androidx.room.Room
-import com.untilled.roadcapture.data.database.AppDataBase
-import com.untilled.roadcapture.data.entity.Album
 import com.untilled.roadcapture.data.repository.albums.AlbumsRepository
 import com.untilled.roadcapture.data.response.albums.AlbumsResponse
 import com.untilled.roadcapture.data.response.albums.CommentsResponse
@@ -20,7 +16,6 @@ import javax.inject.Inject
 @HiltViewModel
 class AlbumsFragmentViewModel
 @Inject constructor(private val repository: AlbumsRepository) : ViewModel() {
-    @Inject lateinit var db : AppDataBase
     private val _albums = MutableLiveData<AlbumsResponse>()
     private val _comments = MutableLiveData<CommentsResponse>()
     val albums: LiveData<AlbumsResponse> get() = _albums
@@ -49,17 +44,6 @@ class AlbumsFragmentViewModel
                     Log.d("CommentsResponse", "error: ${commentsResponse.code()}")
                 }
             }
-        }
-    }
-
-    fun insertAlbum(album: Album){
-        viewModelScope.launch {
-            db.albumDao().insertAlbum(album)
-        }
-    }
-    fun deleteAlbum(album: Album){
-        viewModelScope.launch {
-            db.albumDao().deleteAlbum(album)
         }
     }
 }
