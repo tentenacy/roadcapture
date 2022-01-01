@@ -1,6 +1,7 @@
 package com.untilled.roadcapture.data.api
 
 import com.untilled.roadcapture.BuildConfig
+import com.untilled.roadcapture.data.entity.Album
 import com.untilled.roadcapture.data.response.albums.AlbumsResponse
 import com.untilled.roadcapture.data.response.albums.CommentsResponse
 import com.untilled.roadcapture.data.url.RoadCaptureUrl.GET_ALBUMS
@@ -12,6 +13,8 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface RoadCaptureService {
@@ -22,11 +25,15 @@ interface RoadCaptureService {
         @Query("size") size: String? = null
     ): Response<AlbumsResponse>
 
-    @GET(GET_ALBUMS)
-    // todo: query 추가해야 함
+    @GET("albums/{albumId}/pictures/comments")
     suspend fun getCommentsList(
-        @Query("albumsId") albumsId: String
+        @Path("albumId") albumId: String
     ): Response<CommentsResponse>
+
+    @GET("albums/{id}")
+    suspend fun getAlbumDetail(
+        @Path("id") id: String
+    ): Response<Album>
 
     companion object {
         fun create(): RoadCaptureService {

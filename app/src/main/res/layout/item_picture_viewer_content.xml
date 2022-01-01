@@ -37,7 +37,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:pictureViewerBackgroundImage="@{picture.imageUri}"
+            bind:pictureViewerBackgroundImage="@{picture.imageUrl}"
             tools:src="@drawable/sample_thumbnail" />
 
         <ScrollView

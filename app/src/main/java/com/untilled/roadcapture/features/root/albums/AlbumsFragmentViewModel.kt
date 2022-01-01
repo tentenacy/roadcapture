@@ -35,9 +35,10 @@ class AlbumsFragmentViewModel
             }
         }
     }
-    fun getComments(albumsId: String){
+    fun getComments(albumId: String){
         viewModelScope.launch {
-            repository.getCommentsList(albumsId).let { commentsResponse ->
+            repository.getCommentsList(albumId).let { commentsResponse ->
+                Log.d("testt", commentsResponse.raw().request.url.toUrl().toString())
                 if(commentsResponse.isSuccessful){
                     _comments.postValue(commentsResponse.body())
                 } else {
@@ -46,4 +47,6 @@ class AlbumsFragmentViewModel
             }
         }
     }
+
+
 }

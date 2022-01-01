@@ -109,11 +109,11 @@ class AlbumFragment : Fragment() {
                                 flagLike = false
                             }
                             //Todo 네비게이션 args 변경해야 함
-//                            R.id.imageview_item_home_album_thumbnail,
-//                            R.id.textview_item_home_album_title,
-//                            R.id.textview_item_home_album_desc->
-//                                Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
-//                                navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(model.albums()))
+                            R.id.imageview_item_home_album_thumbnail,
+                            R.id.textview_item_home_album_title,
+                            R.id.textview_item_home_album_desc->
+                                Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
+                                navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(model.albums().id.toString()))
                             R.id.imageview_item_home_album_more -> {
                                 val popupMenu = PopupMenu(requireContext(), clickedView)
                                 popupMenu.apply {

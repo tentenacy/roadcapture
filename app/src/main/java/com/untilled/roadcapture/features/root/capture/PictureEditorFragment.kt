@@ -44,80 +44,80 @@ class PictureEditorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val args: PictureEditorFragmentArgs by navArgs()
-        if (args.picture != null) {
-            picture = args.picture
-
-            if(picture?.date.isNullOrBlank()){
-                picture?.date = dateToString(Calendar.getInstance())
-            }
-
-            binding.picture = picture
-        }
+//        if (args.picture != null) {
+//            picture = args.picture
+//
+//            if(picture?.date.isNullOrBlank()){
+//                picture?.date = dateToString(Calendar.getInstance())
+//            }
+//
+//            binding.picture = picture
+//        }
 
         setOnClickListeners()
     }
 
     private fun setOnClickListeners() {
-        binding.imageviewPictureEditorBack.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
-
-        binding.textviewPictureEditorPlaceUserInput.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(
-                    PictureEditorFragmentDirections.actionPictureEditorFragmentToSearchPlaceFragment(
-                        picture = makePicture()
-                    )
-                )
-        }
-
-        binding.textviewPictureEditorDateUserInput.setOnClickListener {
-            onCreateDatePicker()
-        }
-
-        binding.imageviewPictureEditorCheck.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(
-                    PictureEditorFragmentDirections.actionPictureEditorFragmentToCaptureFragment(
-                        picture = makePicture()
-                    )
-                )
-        }
-
-        binding.imageviewPictureEditorDelete.setOnClickListener {
-            showDeletePictureAskingDialog {
-                // todo 사진 삭제 기능
-            }
-        }
+//        binding.imageviewPictureEditorBack.setOnClickListener {
+//            requireActivity().onBackPressed()
+//        }
+//
+//        binding.textviewPictureEditorPlaceUserInput.setOnClickListener {
+//            Navigation.findNavController(binding.root)
+//                .navigate(
+//                    PictureEditorFragmentDirections.actionPictureEditorFragmentToSearchPlaceFragment(
+//                        picture = makePicture()
+//                    )
+//                )
+//        }
+//
+//        binding.textviewPictureEditorDateUserInput.setOnClickListener {
+//            onCreateDatePicker()
+//        }
+//
+//        binding.imageviewPictureEditorCheck.setOnClickListener {
+//            Navigation.findNavController(binding.root)
+//                .navigate(
+//                    PictureEditorFragmentDirections.actionPictureEditorFragmentToCaptureFragment(
+//                        picture = makePicture()
+//                    )
+//                )
+//        }
+//
+//        binding.imageviewPictureEditorDelete.setOnClickListener {
+//            showDeletePictureAskingDialog {
+//                // todo 사진 삭제 기능
+//            }
+//        }
     }
 
     private fun onCreateDatePicker() {
         val cal = getCalendar(binding.textviewPictureEditorDateUserInput.text.toString())
 
-        val datePickerDialog = DatePickerDialog(
-            requireContext(),
-            R.style.DialogTheme,
-            { _, year, month, dayOfMonth ->
-                val date = dateToString(year, month + 1, dayOfMonth)
-                picture?.date = date
-                binding.textviewPictureEditorDateUserInput.text = date
-            },
-            cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)
-        )
-        datePickerDialog.apply {
-            val cal = Calendar.getInstance()
-            datePicker.maxDate = cal.timeInMillis
-        }.show()
+//        val datePickerDialog = DatePickerDialog(
+//            requireContext(),
+//            R.style.DialogTheme,
+//            { _, year, month, dayOfMonth ->
+//                val date = dateToString(year, month + 1, dayOfMonth)
+//                picture?.date = date
+//                binding.textviewPictureEditorDateUserInput.text = date
+//            },
+//            cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)
+//        )
+//        datePickerDialog.apply {
+//            val cal = Calendar.getInstance()
+//            datePicker.maxDate = cal.timeInMillis
+//        }.show()
     }
 
-    private fun makePicture(): Picture =
-        Picture(
-            imageUri = picture?.imageUri,
-            date = picture?.date,
-            searchResult = picture?.searchResult,
-            name = binding.edittextPictureEditorNameUserInput.text.toString(),
-            description = binding.editPictureEditorDescriptionUserInput.text.toString()
-        )
+//    private fun makePicture(): Picture =
+//        Picture(
+//            imageUri = picture?.imageUri,
+//            date = picture?.date,
+//            searchResult = picture?.searchResult,
+//            name = binding.edittextPictureEditorNameUserInput.text.toString(),
+//            description = binding.editPictureEditorDescriptionUserInput.text.toString()
+//        )
 
     private fun showDeletePictureAskingDialog(logic: () -> Unit) {
         val layoutInflater = LayoutInflater.from(requireContext())

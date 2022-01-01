@@ -208,16 +208,16 @@ class CropFragment : Fragment() {
     }
 
     fun handleCropResult(result: Intent) {
-        val resultUri = UCrop.getOutput(result)
-        if (resultUri != null) {
-            // crop 성공하였으므로 crop한 이미지 uri 전달
-            Navigation.findNavController(binding.root)
-                .navigate(CropFragmentDirections.actionCropFragmentToPictureEditorFragment(
-                    picture = Picture(imageUri = resultUri.toString())
-                ))
-        } else {
-            Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
-        }
+//        val resultUri = UCrop.getOutput(result)
+//        if (resultUri != null) {
+//            // crop 성공하였으므로 crop한 이미지 uri 전달
+//            Navigation.findNavController(binding.root)
+//                .navigate(CropFragmentDirections.actionCropFragmentToPictureEditorFragment(
+//                    picture = Picture(imageUrl = resultUri.toString())
+//                ))
+//        } else {
+//            Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
+//        }
     }
 
     fun handleCropError(result: Intent) {

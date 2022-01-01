@@ -56,14 +56,14 @@ class TitleSearchFragment : Fragment() {
                             R.id.imageview_item_title_search_profile -> Navigation.findNavController(
                                 (parentFragment?.parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root
                             ).navigate(R.id.action_rootFragment_to_studioFragment)
-
-                            R.id.imageview_item_title_search_thumbnail -> Navigation.findNavController(
-                                (parentFragment?.parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root
-                            ).navigate(
-                                RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(
-                                    model.album()
-                                )
-                            )
+//
+//                            R.id.imageview_item_title_search_thumbnail -> Navigation.findNavController(
+//                                (parentFragment?.parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root
+//                            ).navigate(
+//                                RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(
+//                                    model.album()
+//                                )
+//                            )
                         }
                     }
                 }

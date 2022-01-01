@@ -32,7 +32,7 @@
             android:onClick="@{onClickItem}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:notificationProfileImage="@{notification.profileUrl}" />
+            bind:notificationProfileImage="@{notification.user.profileUrl}" />
 
         <TextView
             android:id="@+id/textview_item_notification_username"
@@ -44,7 +44,7 @@
             app:layout_constraintStart_toEndOf="@id/imageview_item_notification_profile"
             app:layout_constraintTop_toTopOf="@id/imageview_item_notification_profile"
             bind:notificationContent="@{notification.description}"
-            bind:notificationUsername="@{notification.username}"
+            bind:notificationUsername="@{notification.user.username}"
             tools:text="hsw0715" />
 
         <TextView
@@ -52,7 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@{notification.createdDate}"
+            android:text="@{notification.createdAt}"
             style="@style/Date"
             android:textColor="@color/gray"
             app:layout_constraintStart_toStartOf="@id/textview_item_notification_username"

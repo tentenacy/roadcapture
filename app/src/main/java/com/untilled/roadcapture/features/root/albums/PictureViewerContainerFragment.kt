@@ -11,16 +11,21 @@ import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.data.repository.albums.AlbumsRepository
 import com.untilled.roadcapture.databinding.FragmentPictureViewerContainerBinding
 import com.untilled.roadcapture.utils.extension.navigationHeight
 import com.untilled.roadcapture.utils.extension.setStatusBarOrigin
 import com.untilled.roadcapture.utils.extension.setStatusBarTransparent
 import com.untilled.roadcapture.utils.extension.statusBarHeight
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PictureViewerContainerFragment : Fragment() {
     private var _binding: FragmentPictureViewerContainerBinding? = null
     val binding get() = _binding!!
@@ -65,8 +70,8 @@ class PictureViewerContainerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val args: PictureViewerContainerFragmentArgs by navArgs()
-        viewModel.album = args.albums
-
+//        viewModel.getAlbumDetail(args.id)
+        viewModel.id = args.id
         requireActivity().setStatusBarTransparent()
         binding.pictureViewerContainerInnerContainer.setPadding(
             0, requireContext().statusBarHeight(), 0, requireContext().navigationHeight()

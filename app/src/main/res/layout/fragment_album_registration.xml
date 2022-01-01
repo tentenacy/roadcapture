@@ -93,7 +93,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textview_album_registration_thumbnail"
-                bind:Image="@{picture.imageUri}" />
+                bind:Image="@{picture.imageUrl}" />
 
             <TextView
                 android:id="@+id/textview_album_registration_title"

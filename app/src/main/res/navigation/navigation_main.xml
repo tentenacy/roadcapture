@@ -276,8 +276,8 @@
         tools:layout="@layout/fragment_picture_viewer_container"
         android:label="PictureViewerContainerFragment" >
         <argument
-            android:name="albums"
-            app:argType="com.untilled.roadcapture.data.entity.Album" />
+            android:name="id"
+            app:argType="string" />
         <action
             android:id="@+id/action_pictureViewerContainerFragment_to_studioFragment"
             app:destination="@id/studioFragment" />

@@ -73,7 +73,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/toolbar_picture_editor"
-                bind:Image="@{picture.imageUri}" />
+                bind:Image="@{picture.imageUrl}" />
 
             <TextView
                 android:id="@+id/textview_picture_editor_thumbnail"
@@ -112,7 +112,7 @@
                 android:layout_height="40dp"
                 android:gravity="center|end"
                 android:hint="@string/picture_editor_date_user_input"
-                android:text="@{picture.date}"
+                android:text="@{picture.createdAt}"
                 app:layout_constraintBottom_toBottomOf="@id/textview_picture_editor_date"
                 app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
                 app:layout_constraintTop_toTopOf="@id/textview_picture_editor_date" />
@@ -134,7 +134,7 @@
                 android:layout_height="40dp"
                 android:gravity="center|end"
                 android:hint="@string/picture_editor_place_user_input"
-                android:text="@{picture.searchResult.placeName}"
+                android:text="@{picture.description}"
                 app:layout_constraintBottom_toBottomOf="@id/textview_picture_editor_place"
                 app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
                 app:layout_constraintTop_toTopOf="@id/textview_picture_editor_place" />
@@ -159,7 +159,7 @@
                 android:hint="@string/picture_editor_name_user_input"
                 android:inputType="text|textImeMultiLine"
                 android:maxLines="1"
-                android:text="@{picture.name}"
+                android:text="@{picture.description}"
                 app:layout_constraintBottom_toBottomOf="@id/textview_picture_editor_picture_name"
                 app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
                 app:layout_constraintTop_toTopOf="@id/textview_picture_editor_picture_name" />

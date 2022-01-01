@@ -1,11 +1,14 @@
 package com.untilled.roadcapture.data.entity
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.android.parcel.Parcelize
 
+@Parcelize
 data class Place(
-    @SerializedName("image")
-    var image: String,
-
-    @SerializedName("name")
-    var name: String
-)
+    val id: Int,
+    val name: String,
+    val latitude: String,
+    val longitude: String,
+    val address: Address
+): Parcelable

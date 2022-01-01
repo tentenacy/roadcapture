@@ -43,15 +43,15 @@ class AlbumRegistrationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val args: AlbumRegistrationFragmentArgs by navArgs()
-        if (args.picture != null) {
-            picture = args.picture
-
-            if(picture?.date.isNullOrBlank()){
-                picture?.date = dateToString(Calendar.getInstance())
-            }
-
-            binding.picture = picture
-        }
+//        if (args.picture != null) {
+//            picture = args.picture
+//
+//            if(picture?.date.isNullOrBlank()){
+//                picture?.date = dateToString(Calendar.getInstance())
+//            }
+//
+//            binding.picture = picture
+//        }
 
         setOnClickListeners()
     }

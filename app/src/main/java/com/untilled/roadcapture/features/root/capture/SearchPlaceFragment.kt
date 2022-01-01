@@ -59,13 +59,13 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
         super.onViewCreated(view, savedInstanceState)
 
         val args: SearchPlaceFragmentArgs by navArgs()
-        if (args.picture != null) {
-            picture = args.picture
-            if (picture?.searchResult != null) {
-                binding.edittextSearchPlaceInput.setText(picture?.searchResult?.placeName)
-                searchKeyword(binding.edittextSearchPlaceInput.text.toString())
-            }
-        }
+//        if (args.picture != null) {
+//            picture = args.picture
+//            if (picture?.searchResult != null) {
+//                binding.edittextSearchPlaceInput.setText(picture?.searchResult?.placeName)
+//                searchKeyword(binding.edittextSearchPlaceInput.text.toString())
+//            }
+//        }
         setOnClickListeners()
     }
 
@@ -109,15 +109,15 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
                     searchResult(searchResult)
 
                     onClickItem { model, parentView, clickedView, position ->
-                        if (clickedView.id == R.id.item_search_place_result_name_container) {
-                            picture?.searchResult = resultList!![position]
-                            Navigation.findNavController(binding.root)
-                                .navigate(
-                                    SearchPlaceFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
-                                        picture = picture
-                                    )
-                                )
-                        }
+//                        if (clickedView.id == R.id.item_search_place_result_name_container) {
+//                            picture?.searchResult = resultList!![position]
+//                            Navigation.findNavController(binding.root)
+//                                .navigate(
+//                                    SearchPlaceFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
+//                                        picture = picture
+//                                    )
+//                                )
+//                        }
                     }
                 }
             }

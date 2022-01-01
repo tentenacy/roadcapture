@@ -55,7 +55,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toTopOf="@+id/textview_item_title_search_title"
-            bind:titleSearchProfileImage="@{album.profileUrl}"
+            bind:titleSearchProfileImage="@{album.user.profileUrl}"
             tools:src="@drawable/sample_profile" />
 
         <TextView
@@ -69,7 +69,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/imageview_item_title_search_profile"
             app:layout_constraintStart_toEndOf="@id/imageview_item_title_search_profile"
             app:layout_constraintTop_toTopOf="@+id/imageview_item_title_search_profile"
-            bind:albumOverlayUsername="@{album.username}"
+            bind:albumOverlayUsername="@{album.user.username}"
             tools:text="tenutz ·" />
 
         <TextView
@@ -77,7 +77,7 @@
             style="@style/Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{album.createdDate}"
+            android:text="@{album.createdAt}"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@id/textview_item_title_search_overlay"
             app:layout_constraintStart_toEndOf="@id/textview_item_title_search_overlay"

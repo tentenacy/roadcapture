@@ -67,20 +67,20 @@ class MyStudioFragment : Fragment() {
 
     private fun initAdapter() {
         binding.recyclerviewMyStudioAlbum.withModels {
-            DummyDataSet.studios.forEachIndexed { index, album ->
-                studioAlbum {
-                    id(index)
-                    studio(album)
-
-                    onClickItem { model, parentView, clickedView, position ->
-                        when(clickedView.id){
-                            R.id.imageview_item_studio_album_thumbnail ->
-                                Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
-                                navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(model.studio()))
-                        }
-                    }
-                }
-            }
+//            DummyDataSet.studios.forEachIndexed { index, album ->
+//                studioAlbum {
+//                    id(index)
+//                    studio(album)
+//
+//                    onClickItem { model, parentView, clickedView, position ->
+//                        when(clickedView.id){
+//                            R.id.imageview_item_studio_album_thumbnail ->
+//                                Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
+//                                navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(model.studio().id))
+//                        }
+//                    }
+//                }
+//            }
         }
         binding.recyclerviewMyStudioPlace.withModels {
             DummyDataSet.places.forEachIndexed { index, place ->

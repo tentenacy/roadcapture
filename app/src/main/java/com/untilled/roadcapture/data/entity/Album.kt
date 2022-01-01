@@ -6,24 +6,15 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Album(
-    @SerializedName("id")
-    var id: String,
-    @SerializedName("username")
-    var username: String,
-    @SerializedName("profile_url")
-    var profileUrl: String,
-    @SerializedName("like_count")
-    var likeCount: String,
-    @SerializedName("comment_count")
-    var commentCount: String,
-    @SerializedName("title")
-    var title: String,
-    @SerializedName("description")
-    var description: String,
-    @SerializedName("created_date")
-    var createdDate: String,
-    @SerializedName("modified_date")
-    var modifiedDate: String,
-    @SerializedName("thumbnail_url")
-    var thumbnailUrl: String
+    val id: Int,
+    val createdAt: String?,
+    val lastModifiedAt: String,
+    val title: String,
+    val description: String,
+    val thumbnailUrl: String,
+    val user: User,
+    val viewCount: String,
+    val likeCount: String,
+    val commentCount: String,
+    val pictures: List<Picture>
 ) : Parcelable
