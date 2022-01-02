@@ -16,8 +16,6 @@ class PictureViewerContainerViewModel
 @Inject constructor(private val repository: AlbumsRepository) : ViewModel() {
     private val _album = MutableLiveData<Album>()
     val album: LiveData<Album> get() = _album
-    lateinit var id: String
-
 
     fun getAlbumDetail(id: String) {
         viewModelScope.launch {

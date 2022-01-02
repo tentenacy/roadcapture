@@ -48,7 +48,6 @@ class PictureViewerFragment : Fragment() {
             0, requireContext().statusBarHeight(), 0, requireContext().navigationHeight()
         )
         subscribeUi()
-        viewModel.getAlbumDetail(viewModel.id)
         setOnClickListeners()
     }
 
@@ -61,7 +60,7 @@ class PictureViewerFragment : Fragment() {
     private fun setOnClickListeners() {
         binding.imageviewPictureViewerComment.setOnClickListener {
             Navigation.findNavController(binding.root)
-                .navigate(R.id.action_pictureViewerContainerFragment_to_commentFragment)
+                .navigate(PictureViewerContainerFragmentDirections.actionPictureViewerContainerFragmentToCommentFragment(viewModel.album.value?.id.toString()))
         }
         binding.imageviewPictureViewerLike.setOnClickListener { lottie ->
             if (!flagLike) {
@@ -95,7 +94,9 @@ class PictureViewerFragment : Fragment() {
             .load(album.thumbnailUrl)
             .centerCrop()
             .into(binding.imageviewPictureViewerBackground)
-        PagerSnapHelper().attachToRecyclerView(binding.recyclerviewPictureViewer)
+        if(binding.recyclerviewPictureViewer.onFlingListener == null) {
+            PagerSnapHelper().attachToRecyclerView(binding.recyclerviewPictureViewer)
+        }
         binding.recyclerviewPictureViewer.withModels {
             pictureViewerThumbnail {
                 id(1)
