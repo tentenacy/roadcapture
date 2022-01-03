@@ -9,7 +9,7 @@ import kotlinx.android.parcel.Parcelize
 data class Comments(
     val id: Int,
     val pictureId: Int,
-    val createdAt : String,
+    var createdAt : String,
     val lastModifiedAt: String,
     val content: String?,
     @SerializedName("user")

@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import com.untilled.roadcapture.data.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.dto.comment.CommentsResponse
+import com.untilled.roadcapture.utils.dateToSnsFormat
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -28,6 +29,9 @@ class AlbumsViewModel
         viewModelScope.launch {
             repository.getAlbumsList(0,10)?.let { albumsResponse ->
                 if(albumsResponse.isSuccessful) {
+                    albumsResponse.body()?.albums?.forEachIndexed { index, albums ->
+                        albums.createdAt = dateToSnsFormat(albums.createdAt)
+                    }
                     _albumsResponse.postValue(albumsResponse.body())
                 } else {
                     Log.d("AlbumsResponse", "error: ${albumsResponse.code()}")
@@ -39,8 +43,10 @@ class AlbumsViewModel
     fun getComments(albumId: String){
         viewModelScope.launch {
             repository.getCommentsList(albumId).let { commentsResponse ->
-                Log.d("testt", commentsResponse.raw().request.url.toUrl().toString())
                 if(commentsResponse.isSuccessful){
+                    commentsResponse.body()?.comments?.forEachIndexed { index, comments ->
+                        comments.createdAt = dateToSnsFormat(comments.createdAt)
+                    }
                     _comments.postValue(commentsResponse.body())
                 } else {
                     Log.d("CommentsResponse", "error: ${commentsResponse.code()}")
