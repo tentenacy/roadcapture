@@ -22,12 +22,13 @@ class AlbumsViewModel
     val albumsResponse: LiveData<AlbumsResponse> get() = _albumsResponse
     val comments: LiveData<CommentsResponse> get() = _comments
     init {
-        getAlbums()
+        getAlbums(" ", " ")
     }
 
-    private fun getAlbums() {
+    fun getAlbums(dateTimeFrom: String, dateTimeTo: String) {
         viewModelScope.launch {
-            repository.getAlbumsList(0,10)?.let { albumsResponse ->
+            repository.getAlbumsList(0,10, dateTimeFrom, dateTimeTo)?.let { albumsResponse ->
+                //Log.d("Test",albumsResponse.raw().request.url.toUrl().toString())
                 if(albumsResponse.isSuccessful) {
                     albumsResponse.body()?.albums?.forEachIndexed { index, albums ->
                         albums.createdAt = dateToSnsFormat(albums.createdAt)

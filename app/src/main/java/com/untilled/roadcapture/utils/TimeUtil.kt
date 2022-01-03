@@ -1,6 +1,7 @@
 package com.untilled.roadcapture.utils
 
 import android.annotation.SuppressLint
+import android.util.Log
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -22,20 +23,56 @@ fun dateToSnsFormat(str: String): String{
     var diffTime = (curTime - regTime) / 1000
 
     var msg: String?
-    if (diffTime < TIME_MAXIMUM.SEC) {
+    if (diffTime < TimeUtil.SEC) {
         msg = "방금 전"
-    } else if (TIME_MAXIMUM.SEC.let { diffTime /= it; diffTime } < TIME_MAXIMUM.MIN) {
+    } else if (TimeUtil.SEC.let { diffTime /= it; diffTime } < TimeUtil.MIN) {
         msg = diffTime.toString() + "분 전"
-    } else if (TIME_MAXIMUM.MIN.let { diffTime /= it; diffTime } < TIME_MAXIMUM.HOUR){
+    } else if (TimeUtil.MIN.let { diffTime /= it; diffTime } < TimeUtil.HOUR){
         msg = diffTime.toString() + "시간 전"
-    } else if (TIME_MAXIMUM.HOUR.let { diffTime /= it; diffTime } < TIME_MAXIMUM.DAY) {
+    } else if (TimeUtil.HOUR.let { diffTime /= it; diffTime } < TimeUtil.DAY) {
         msg = diffTime.toString() + "일 전"
-    } else if (TIME_MAXIMUM.DAY.let { diffTime /= it; diffTime } < TIME_MAXIMUM.MONTH) {
+    } else if (TimeUtil.DAY.let { diffTime /= it; diffTime } < TimeUtil.A_MONTH) {
         msg = diffTime.toString() + "달 전"
     } else {
         msg = diffTime.toString() + "년 전"
     }
     return msg
+}
+
+fun getFilterDate(filter: Int): String{
+    val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    val calendar = Calendar.getInstance()
+    when(filter){
+
+        TimeUtil.TODAY ->{
+        }
+
+        TimeUtil.WEEK -> {
+            calendar.add(Calendar.DATE, -7)
+        }
+
+        TimeUtil.MONTH -> {
+            calendar.add(Calendar.MONTH, -1)
+        }
+
+        TimeUtil.YEAR -> {
+            calendar.add(Calendar.YEAR, -1)
+        }
+    }
+    val time = calendar.time
+    val date = format.format(time)
+    return date.toString()
+}
+
+fun getFilterDate(str: String): String{
+    val year = str.substring(0,4).toInt()
+    val month = str.substring(6,8).toInt() - 1
+    val day = str.substring(10,12).toInt()
+    val calendar = getCalendar(year,month,day)
+    val format = SimpleDateFormat("yyyy-MM-dd 00:00:00")
+    val time = calendar.time
+    val date = format.format(time)
+    return date.toString()
 }
 
 fun getCalendar(year: Int, month: Int, dayOfMonth: Int): Calendar {
@@ -54,10 +91,18 @@ fun getCalendar(date : String): Calendar {
 fun compareDate(startDate: Calendar, endDate: Calendar): Boolean =
     !startDate.before(endDate)
 
-private object TIME_MAXIMUM {
-    const val SEC = 60
-    const val MIN = 60
-    const val HOUR = 24
-    const val DAY = 30
-    const val MONTH = 12
+class TimeUtil{
+    companion object {
+        const val SEC = 60
+        const val MIN = 60
+        const val HOUR = 24
+        const val DAY = 30
+        const val A_MONTH = 12
+        const val WHOLE = 1
+        const val TODAY = 2
+        const val WEEK = 3
+        const val MONTH = 4
+        const val YEAR = 5
+    }
 }
+

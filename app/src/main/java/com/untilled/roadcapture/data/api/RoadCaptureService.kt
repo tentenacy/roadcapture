@@ -21,7 +21,9 @@ interface RoadCaptureService {
     // todo: query 추가해야 함
     suspend fun getAlbumsList(
         @Query("page") page: String? = null,
-        @Query("size") size: String? = null
+        @Query("size") size: String? = null,
+        @Query("dateTimeFrom") dateTimeFrom: String,
+        @Query("dateTimeTo")dateTimeTo: String
     ): Response<AlbumsResponse>
 
     @GET("albums/{albumId}/pictures/comments")
