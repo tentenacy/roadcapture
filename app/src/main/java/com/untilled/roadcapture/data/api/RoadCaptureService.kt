@@ -1,9 +1,9 @@
 package com.untilled.roadcapture.data.api
 
 import com.untilled.roadcapture.BuildConfig
-import com.untilled.roadcapture.data.entity.Album
-import com.untilled.roadcapture.data.response.albums.AlbumsResponse
-import com.untilled.roadcapture.data.response.albums.CommentsResponse
+import com.untilled.roadcapture.data.dto.album.AlbumResponse
+import com.untilled.roadcapture.data.dto.album.AlbumsResponse
+import com.untilled.roadcapture.data.dto.comment.CommentsResponse
 import com.untilled.roadcapture.data.url.RoadCaptureUrl.GET_ALBUMS
 import com.untilled.roadcapture.data.url.RoadCaptureUrl.ROAD_CAPTURE_BASE_URL
 import okhttp3.OkHttpClient
@@ -13,7 +13,6 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -33,7 +32,7 @@ interface RoadCaptureService {
     @GET("albums/{id}")
     suspend fun getAlbumDetail(
         @Path("id") id: String
-    ): Response<Album>
+    ): Response<AlbumResponse>
 
     companion object {
         fun create(): RoadCaptureService {

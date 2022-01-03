@@ -14,21 +14,18 @@ import android.view.*
 import android.view.Gravity.END
 import android.view.Gravity.TOP
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.overlay.Marker
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.data.entity.Picture
+import com.untilled.roadcapture.data.dto.picture.PictureResponse
 import com.untilled.roadcapture.databinding.FragmentCaptureBinding
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.net.toUri
-import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.SimpleTarget
@@ -43,11 +40,9 @@ import com.karumi.dexter.listener.single.CompositePermissionListener
 import com.karumi.dexter.listener.single.PermissionListener
 import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener
 import com.naver.maps.map.*
-import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import com.untilled.roadcapture.utils.extension.*
-import com.untilled.roadcapture.utils.getCircularBitmap
 
 
 @AndroidEntryPoint
@@ -57,7 +52,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
 
     private var imageUri: Uri? = null
 
-    private var picture: Picture? = null
+    private var pictureResponse: PictureResponse? = null
 
     private var naverMap: NaverMap? = null
     private var uiSettings: UiSettings? = null
@@ -145,7 +140,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                 Navigation.findNavController(binding.root)
                     .navigate(
                         CaptureFragmentDirections.actionCaptureFragmentToAlbumRegestrationFragment(
-                            picture = picture
+                            //picture = pictureResponse
                         )
                     )
             }
@@ -158,7 +153,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                     }
                     markerList.clear()  // 마커 리스트 클리어
                     deleteCache(requireContext())   // 캐시 디렉토리에 있는 사진들 제거
-                    picture = null
+                    pictureResponse = null
                     requireArguments().clear() // navArgs 도 함께 초기화해야 함 (안그러면 마커 그릴때 에러)
                 }
             }
@@ -168,9 +163,9 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     private fun getNavArgs() {
         val args: CaptureFragmentArgs by navArgs()
         if (args.picture != null) {
-            picture = args.picture
+            //pictureResponse = args.picture
 
-            drawMarker(picture!!)
+            drawMarker(pictureResponse!!)
         }
     }
 
@@ -200,7 +195,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         )
     }
 
-    private fun drawMarker(picture: Picture) {
+    private fun drawMarker(pictureResponse: PictureResponse) {
         val marker = Marker()
 
 //        marker.apply {
@@ -223,7 +218,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
 //            }
 //        }
 
-        Glide.with(requireContext()).asBitmap().load(picture.imageUrl!!.toUri())
+        Glide.with(requireContext()).asBitmap().load(pictureResponse.imageUrl!!.toUri())
             .apply(RequestOptions().centerCrop().circleCrop()).into(object : SimpleTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                     val bitmap = Bitmap.createScaledBitmap(resource, requireContext().getPxFromDp(64f), requireContext().getPxFromDp(64f), true)

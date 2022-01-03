@@ -1,13 +1,12 @@
 package com.untilled.roadcapture.utils
 
-import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
+import com.untilled.roadcapture.data.dto.album.AlbumResponse
+import com.untilled.roadcapture.data.dto.picture.PictureResponse
 import com.untilled.roadcapture.data.entity.*
-import kotlinx.android.parcel.Parcelize
 
 object DummyDataSet {
     val albums = listOf(
-        Album(
+        AlbumResponse(
             id = 1,
             createdAt = "3dlfwjs",
             lastModifiedAt = "4일전",
@@ -23,8 +22,8 @@ object DummyDataSet {
                 "https://c.pxhere.com/photos/86/48/one_world_trade_center_manhattan_owtc_new_york_architecture_downtown_skyscraper_city-1239341.jpg!s1",
                 "테스트중"
             ),
-            pictures = listOf(
-                Picture(
+            pictureResponses = listOf(
+                PictureResponse(
                     1,
                     "3일전",
                     lastModifiedAt = "4일전",
@@ -302,7 +301,7 @@ object DummyDataSet {
     )
 
     val notification = listOf(
-        Album(
+        AlbumResponse(
             id = 1,
             createdAt = "3dlfwjs",
             lastModifiedAt = "4일전",
@@ -318,8 +317,8 @@ object DummyDataSet {
                 "https://c.pxhere.com/photos/86/48/one_world_trade_center_manhattan_owtc_new_york_architecture_downtown_skyscraper_city-1239341.jpg!s1",
                 "테스트중"
             ),
-            pictures = listOf(
-                Picture(
+            pictureResponses = listOf(
+                PictureResponse(
                     1,
                     "3일전",
                     lastModifiedAt = "4일전",
@@ -603,7 +602,7 @@ object DummyDataSet {
     )
 
     val picture = listOf(
-        Picture(
+        PictureResponse(
             1,
             "3일전",
             lastModifiedAt = "4일전",

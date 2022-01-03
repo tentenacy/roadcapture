@@ -1,7 +1,7 @@
 package com.untilled.roadcapture.data.api
 
-import com.untilled.roadcapture.data.response.address.AddressInfoResponse
-import com.untilled.roadcapture.data.response.search.SearchResponse
+import com.untilled.roadcapture.data.dto.address.AddressInfoResponse
+import com.untilled.roadcapture.data.dto.search.SearchResponse
 import com.untilled.roadcapture.utils.Key
 import com.untilled.roadcapture.data.url.TmapUrl
 import retrofit2.Response

@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.data.response.address
+package com.untilled.roadcapture.data.dto.address
 
 data class AddressInfoResponse(
     val addressInfo: AddressInfo

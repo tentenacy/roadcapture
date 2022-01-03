@@ -1,6 +1,7 @@
-package com.untilled.roadcapture.data.response.albums
+package com.untilled.roadcapture.data.dto.comment
 
 import android.os.Parcelable
+import com.untilled.roadcapture.data.dto.user.Users
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -10,5 +11,5 @@ data class Comments(
     val createdAt : String,
     val lastModifiedAt: String,
     val content: String?,
-    val user: User
+    val users: Users
 ) : Parcelable

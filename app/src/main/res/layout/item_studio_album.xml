@@ -10,7 +10,7 @@
 
         <variable
             name="studio"
-            type="com.untilled.roadcapture.data.entity.Album" />
+            type="com.untilled.roadcapture.data.dto.album.AlbumResponse" />
 
         <variable
             name="onClickItem"

@@ -5,20 +5,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.untilled.roadcapture.data.repository.albums.AlbumsRepository
-import com.untilled.roadcapture.data.response.albums.AlbumsResponse
-import com.untilled.roadcapture.data.response.albums.CommentsResponse
+import com.untilled.roadcapture.data.repository.album.AlbumRepository
+import com.untilled.roadcapture.data.dto.album.AlbumsResponse
+import com.untilled.roadcapture.data.dto.comment.CommentsResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 
 @HiltViewModel
-class AlbumsFragmentViewModel
-@Inject constructor(private val repository: AlbumsRepository) : ViewModel() {
-    private val _albums = MutableLiveData<AlbumsResponse>()
+class AlbumsViewModel
+@Inject constructor(private val repository: AlbumRepository) : ViewModel() {
+    private val _albumsResponse = MutableLiveData<AlbumsResponse>()
     private val _comments = MutableLiveData<CommentsResponse>()
-    val albums: LiveData<AlbumsResponse> get() = _albums
+    val albumsResponse: LiveData<AlbumsResponse> get() = _albumsResponse
     val comments: LiveData<CommentsResponse> get() = _comments
     init {
         getAlbums()
@@ -28,13 +28,14 @@ class AlbumsFragmentViewModel
         viewModelScope.launch {
             repository.getAlbumsList(0,10)?.let { albumsResponse ->
                 if(albumsResponse.isSuccessful) {
-                    _albums.postValue(albumsResponse.body())
+                    _albumsResponse.postValue(albumsResponse.body())
                 } else {
                     Log.d("AlbumsResponse", "error: ${albumsResponse.code()}")
                 }
             }
         }
     }
+
     fun getComments(albumId: String){
         viewModelScope.launch {
             repository.getCommentsList(albumId).let { commentsResponse ->
@@ -47,6 +48,4 @@ class AlbumsFragmentViewModel
             }
         }
     }
-
-
 }

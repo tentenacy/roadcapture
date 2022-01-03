@@ -1,27 +1,18 @@
 package com.untilled.roadcapture.features.root.albums
 
-import android.graphics.Bitmap
 import android.graphics.Color
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.request.target.SimpleTarget
-import com.bumptech.glide.request.transition.Transition
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
-import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.overlay.PathOverlay
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.data.entity.Picture
+import com.untilled.roadcapture.data.dto.picture.PictureResponse
 import com.untilled.roadcapture.databinding.FragmentPictureViewerMapBinding
 import com.untilled.roadcapture.utils.DummyDataSet
 import com.untilled.roadcapture.utils.extension.getPxFromDp
@@ -37,7 +28,7 @@ class PictureViewerMapFragment : Fragment(), OnMapReadyCallback {
     private var uiSettings: UiSettings? = null
     private lateinit var path : PathOverlay
 
-    private lateinit var pictureList: List<Picture>
+    private lateinit var pictureResponseList: List<PictureResponse>
     private var markerList = mutableListOf<Marker>()
 
     private var latitude: Float = 0f
@@ -50,7 +41,7 @@ class PictureViewerMapFragment : Fragment(), OnMapReadyCallback {
     ): View? {
         _binding = FragmentPictureViewerMapBinding.inflate(inflater, container, false)
 
-        pictureList = DummyDataSet.picture
+        pictureResponseList = DummyDataSet.picture
         initNaverMap()
 
         return binding.root
@@ -99,7 +90,7 @@ class PictureViewerMapFragment : Fragment(), OnMapReadyCallback {
 
         drawPolyline()
 
-        naverMap?.moveCamera(CameraUpdate.scrollTo(LatLng(latitude/pictureList.size.toDouble(), longitude/pictureList.size.toDouble())))
+        naverMap?.moveCamera(CameraUpdate.scrollTo(LatLng(latitude/pictureResponseList.size.toDouble(), longitude/pictureResponseList.size.toDouble())))
     }
 
 //    private fun drawMarker(picture: Picture) {

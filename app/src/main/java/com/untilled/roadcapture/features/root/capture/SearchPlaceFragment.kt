@@ -13,12 +13,11 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.LocationLatLng
-import com.untilled.roadcapture.data.entity.Picture
-import com.untilled.roadcapture.data.response.search.Pois
+import com.untilled.roadcapture.data.dto.picture.PictureResponse
+import com.untilled.roadcapture.data.dto.search.Pois
 import com.untilled.roadcapture.data.entity.SearchResult
-import com.untilled.roadcapture.data.response.search.Poi
+import com.untilled.roadcapture.data.dto.search.Poi
 import com.untilled.roadcapture.databinding.FragmentSearchPlaceBinding
 import com.untilled.roadcapture.features.base.CustomDivider
 import com.untilled.roadcapture.searchPlaceResult
@@ -33,7 +32,7 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
     private var _binding: FragmentSearchPlaceBinding? = null
     private val binding get() = _binding!!
 
-    private var picture: Picture? = null
+    private var pictureResponse: PictureResponse? = null
 
     private var resultList: List<SearchResult>? = listOf<SearchResult>()
 
@@ -74,7 +73,7 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
             Navigation.findNavController(binding.root)
                 .navigate(
                     SearchPlaceFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
-                        picture = picture
+                        //picture = pictureResponse
                     )
                 )
         }

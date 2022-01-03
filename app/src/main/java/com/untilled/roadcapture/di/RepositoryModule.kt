@@ -1,7 +1,7 @@
 package com.untilled.roadcapture.di
 
-import com.untilled.roadcapture.data.repository.albums.AlbumsRepository
-import com.untilled.roadcapture.data.repository.albums.AlbumsRepositoryImpl
+import com.untilled.roadcapture.data.repository.album.AlbumRepository
+import com.untilled.roadcapture.data.repository.album.AlbumRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -12,6 +12,6 @@ import dagger.hilt.components.SingletonComponent
 abstract class RepositoryModule {
     @Binds
     abstract fun providesRepository(
-        albumsRepositoryImpl: AlbumsRepositoryImpl
-    ) : AlbumsRepository
+        albumsRepositoryImpl: AlbumRepositoryImpl
+    ) : AlbumRepository
 }

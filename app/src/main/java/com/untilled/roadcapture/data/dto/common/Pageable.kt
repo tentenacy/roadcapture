@@ -1,6 +1,7 @@
-package com.untilled.roadcapture.data.response.albums
+package com.untilled.roadcapture.data.dto.common
 
 import android.os.Parcelable
+import com.untilled.roadcapture.data.dto.common.Sort
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

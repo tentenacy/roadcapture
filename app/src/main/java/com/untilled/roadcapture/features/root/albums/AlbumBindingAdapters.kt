@@ -54,7 +54,7 @@ object AlbumBindingAdapters {
 
     @JvmStatic
     @BindingAdapter("albumProfileImage")
-    fun setAlbumProfileImage(view: ImageView, url: String) {
+    fun setAlbumProfileImage(view: ImageView, url: String?) {
         Glide.with(view.context)
             .load(url)
             .circleCrop()
@@ -63,7 +63,7 @@ object AlbumBindingAdapters {
 
     @JvmStatic
     @BindingAdapter("albumOverlayUsername")
-    fun setAlbumOverlayText(view: TextView, username: String) {
+    fun setAlbumOverlayText(view: TextView, username: String?) {
         // TODO: createdDate를 지정된 형식으로 변환
         view.text = "$username · "
 

@@ -13,12 +13,10 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
-import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentCropBinding
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropFragment

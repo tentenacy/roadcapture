@@ -1,11 +1,12 @@
-package com.untilled.roadcapture.data.entity
+package com.untilled.roadcapture.data.dto.album
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
+import com.untilled.roadcapture.data.dto.picture.PictureResponse
+import com.untilled.roadcapture.data.entity.User
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Album(
+data class AlbumResponse(
     val id: Int,
     val createdAt: String?,
     val lastModifiedAt: String,
@@ -16,5 +17,5 @@ data class Album(
     val viewCount: String,
     val likeCount: String,
     val commentCount: String,
-    val pictures: List<Picture>
+    val pictureResponses: List<PictureResponse>
 ) : Parcelable

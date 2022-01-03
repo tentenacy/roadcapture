@@ -1,6 +1,7 @@
-package com.untilled.roadcapture.data.response.albums
+package com.untilled.roadcapture.data.dto.album
 
 import android.os.Parcelable
+import com.untilled.roadcapture.data.dto.user.Users
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -13,6 +14,6 @@ data class Albums(
     val likeCount: Int,
     val thumbnailUrl: String,
     val title: String,
-    val user: User,
+    val users: Users?,
     val viewCount: Int
 ) : Parcelable

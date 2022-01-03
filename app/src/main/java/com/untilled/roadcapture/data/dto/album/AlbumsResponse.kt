@@ -1,13 +1,15 @@
-package com.untilled.roadcapture.data.response.albums
+package com.untilled.roadcapture.data.dto.album
 
 import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import com.untilled.roadcapture.data.dto.common.Pageable
+import com.untilled.roadcapture.data.dto.common.Sort
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class CommentsResponse(
+data class AlbumsResponse(
     @SerializedName("content")
-    val comments: List<Comments>,
+    val albums: List<Albums>,
     val pageable: Pageable,
     val totalElements: Int,
     val totalPages: Int,

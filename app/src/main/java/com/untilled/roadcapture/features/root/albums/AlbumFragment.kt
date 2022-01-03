@@ -15,7 +15,7 @@ import androidx.navigation.Navigation
 import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
-import com.untilled.roadcapture.data.response.albums.AlbumsResponse
+import com.untilled.roadcapture.data.dto.album.AlbumsResponse
 import com.untilled.roadcapture.databinding.FragmentAlbumsBinding
 import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
@@ -29,7 +29,7 @@ class AlbumFragment : Fragment() {
     private val binding get() = _binding!!
     private var flagLike: Boolean = false
 
-    private val viewModel: AlbumsFragmentViewModel by viewModels()
+    private val viewModel: AlbumsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,8 +46,8 @@ class AlbumFragment : Fragment() {
     }
 
     private fun subscribeUi() {
-        viewModel.albums.observe(viewLifecycleOwner) { result ->
-            initAdapter(result)
+        viewModel.albumsResponse.observe(viewLifecycleOwner) { albumResponse ->
+            initAdapter(albumResponse)
         }
     }
 

@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.WindowManager
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.fragment.app.Fragment
@@ -16,13 +15,10 @@ import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.comment
-import com.untilled.roadcapture.data.response.albums.CommentsResponse
+import com.untilled.roadcapture.data.dto.comment.CommentsResponse
 import com.untilled.roadcapture.databinding.FragmentCommentBinding
 import com.untilled.roadcapture.features.base.CustomDivider
-import com.untilled.roadcapture.features.root.albums.AlbumsFragmentViewModel
-import com.untilled.roadcapture.features.root.albums.PictureViewerContainerFragmentArgs
-import com.untilled.roadcapture.utils.DummyDataSet
-import com.untilled.roadcapture.utils.extension.getPxFromDp
+import com.untilled.roadcapture.features.root.albums.AlbumsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,7 +26,7 @@ class CommentFragment : Fragment() {
 
     private var _binding: FragmentCommentBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: AlbumsFragmentViewModel by viewModels()
+    private val viewModel: AlbumsViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

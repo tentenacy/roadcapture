@@ -12,11 +12,10 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.data.entity.Album
+import com.untilled.roadcapture.data.dto.album.AlbumResponse
 import com.untilled.roadcapture.databinding.FragmentPictureViewerBinding
 import com.untilled.roadcapture.pictureViewerContent
 import com.untilled.roadcapture.pictureViewerThumbnail
-import com.untilled.roadcapture.utils.DummyDataSet
 import com.untilled.roadcapture.utils.extension.navigationHeight
 import com.untilled.roadcapture.utils.extension.statusBarHeight
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,7 +51,7 @@ class PictureViewerFragment : Fragment() {
     }
 
     private fun subscribeUi(){
-        viewModel.album.observe(viewLifecycleOwner){
+        viewModel.albumResponse.observe(viewLifecycleOwner){
             initAdapter(it)
         }
     }
@@ -60,7 +59,7 @@ class PictureViewerFragment : Fragment() {
     private fun setOnClickListeners() {
         binding.imageviewPictureViewerComment.setOnClickListener {
             Navigation.findNavController(binding.root)
-                .navigate(PictureViewerContainerFragmentDirections.actionPictureViewerContainerFragmentToCommentFragment(viewModel.album.value?.id.toString()))
+                .navigate(PictureViewerContainerFragmentDirections.actionPictureViewerContainerFragmentToCommentFragment(viewModel.albumResponse.value?.id.toString()))
         }
         binding.imageviewPictureViewerLike.setOnClickListener { lottie ->
             if (!flagLike) {
@@ -89,9 +88,9 @@ class PictureViewerFragment : Fragment() {
         _binding = null
     }
 
-    private fun initAdapter(album: Album) {
+    private fun initAdapter(albumResponse: AlbumResponse) {
         Glide.with(binding.imageviewPictureViewerBackground.context)
-            .load(album.thumbnailUrl)
+            .load(albumResponse.thumbnailUrl)
             .centerCrop()
             .into(binding.imageviewPictureViewerBackground)
         if(binding.recyclerviewPictureViewer.onFlingListener == null) {
@@ -100,7 +99,7 @@ class PictureViewerFragment : Fragment() {
         binding.recyclerviewPictureViewer.withModels {
             pictureViewerThumbnail {
                 id(1)
-                album(album)
+                album(albumResponse)
                 onClickItem { model, parentView, clickedView, position ->
                     when(clickedView.id){
                         R.id.imageview_item_picture_viewer_thumbnail_profile -> Navigation.findNavController((parentFragment as PictureViewerContainerFragment).binding.root)
@@ -108,7 +107,7 @@ class PictureViewerFragment : Fragment() {
                     }
                 }
             }
-            album.pictures.forEachIndexed { index, picture ->
+            albumResponse.pictureResponses.forEachIndexed { index, picture ->
                 pictureViewerContent {
                     id(index)
                     picture(picture)
