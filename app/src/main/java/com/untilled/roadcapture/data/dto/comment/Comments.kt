@@ -1,6 +1,7 @@
 package com.untilled.roadcapture.data.dto.comment
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import com.untilled.roadcapture.data.dto.user.Users
 import kotlinx.android.parcel.Parcelize
 
@@ -11,5 +12,6 @@ data class Comments(
     val createdAt : String,
     val lastModifiedAt: String,
     val content: String?,
-    val users: Users
+    @SerializedName("user")
+    val user: Users
 ) : Parcelable

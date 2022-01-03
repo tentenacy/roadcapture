@@ -33,7 +33,7 @@
             android:onClick="@{onClickItem}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/textview_item_comment_username"
-            bind:circleProfileImage="@{comments.users.profileImageUrl}" />
+            bind:circleProfileImage="@{comments.user.profileImageUrl}" />
 
         <TextView
             android:id="@+id/textview_item_comment_username"
@@ -42,7 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:text="@{comments.users.username}"
+            android:text="@{comments.user.username}"
             app:layout_constraintStart_toEndOf="@id/imageview_item_comment_profile"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="hsw0715" />
