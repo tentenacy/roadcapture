@@ -1,24 +1,31 @@
 package com.untilled.roadcapture.features.root.capture
 
 import android.app.AlertDialog
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.data.dto.picture.PictureResponse
+import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPictureEditorBinding
+import com.untilled.roadcapture.utils.dateToString
 import com.untilled.roadcapture.utils.getCalendar
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.*
 
 @AndroidEntryPoint
 class PictureEditorFragment : Fragment() {
     private var _binding: FragmentPictureEditorBinding? = null
     private val binding get() = _binding!!
-    private var pictureResponse: PictureResponse? = null
+    private var picture: Picture? = null
+
+    private val viewModel: PictureEditorViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,81 +45,81 @@ class PictureEditorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // todo: 어떤 Fragment에서 왔는지 알아야 함 (수정 인지, 새로 만드는 것인지 판단 위해)
         val args: PictureEditorFragmentArgs by navArgs()
-//        if (args.picture != null) {
-//            picture = args.picture
-//
-//            if(picture?.date.isNullOrBlank()){
-//                picture?.date = dateToString(Calendar.getInstance())
-//            }
-//
-//            binding.picture = picture
-//        }
+        if (args.picture != null) {
+            picture = args.picture
+
+            if(picture?.createdAt.isNullOrBlank()){
+                picture?.createdAt = dateToString(Calendar.getInstance())
+            }
+
+            binding.picture = picture
+        }
 
         setOnClickListeners()
     }
 
     private fun setOnClickListeners() {
-//        binding.imageviewPictureEditorBack.setOnClickListener {
-//            requireActivity().onBackPressed()
-//        }
-//
-//        binding.textviewPictureEditorPlaceUserInput.setOnClickListener {
-//            Navigation.findNavController(binding.root)
-//                .navigate(
-//                    PictureEditorFragmentDirections.actionPictureEditorFragmentToSearchPlaceFragment(
-//                        picture = makePicture()
-//                    )
-//                )
-//        }
-//
-//        binding.textviewPictureEditorDateUserInput.setOnClickListener {
-//            onCreateDatePicker()
-//        }
-//
-//        binding.imageviewPictureEditorCheck.setOnClickListener {
-//            Navigation.findNavController(binding.root)
-//                .navigate(
-//                    PictureEditorFragmentDirections.actionPictureEditorFragmentToCaptureFragment(
-//                        picture = makePicture()
-//                    )
-//                )
-//        }
-//
-//        binding.imageviewPictureEditorDelete.setOnClickListener {
-//            showDeletePictureAskingDialog {
-//                // todo 사진 삭제 기능
-//            }
-//        }
+        binding.imageviewPictureEditorBack.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+
+        binding.textviewPictureEditorPlaceUserInput.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(
+                    PictureEditorFragmentDirections.actionPictureEditorFragmentToSearchPlaceFragment(
+                        picture = makePicture()
+                    )
+                )
+        }
+
+        binding.textviewPictureEditorDateUserInput.setOnClickListener {
+            onCreateDatePicker()
+        }
+
+        binding.imageviewPictureEditorCheck.setOnClickListener {
+            // todo Room에 picture insert
+            viewModel.insertPicture(picture!!)
+
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_pictureEditorFragment_to_captureFragment)
+        }
+
+        binding.imageviewPictureEditorDelete.setOnClickListener {
+            showDeletePictureAskingDialog {
+                // todo 사진 삭제 기능
+            }
+        }
     }
 
     private fun onCreateDatePicker() {
         val cal = getCalendar(binding.textviewPictureEditorDateUserInput.text.toString())
 
-//        val datePickerDialog = DatePickerDialog(
-//            requireContext(),
-//            R.style.DialogTheme,
-//            { _, year, month, dayOfMonth ->
-//                val date = dateToString(year, month + 1, dayOfMonth)
-//                picture?.date = date
-//                binding.textviewPictureEditorDateUserInput.text = date
-//            },
-//            cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)
-//        )
-//        datePickerDialog.apply {
-//            val cal = Calendar.getInstance()
-//            datePicker.maxDate = cal.timeInMillis
-//        }.show()
+        val datePickerDialog = DatePickerDialog(
+            requireContext(),
+            R.style.DialogTheme,
+            { _, year, month, dayOfMonth ->
+                val date = dateToString(year, month + 1, dayOfMonth)
+                picture?.createdAt = date
+                binding.textviewPictureEditorDateUserInput.text = date
+            },
+            cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)
+        )
+        datePickerDialog.apply {
+            val cal = Calendar.getInstance()
+            datePicker.maxDate = cal.timeInMillis
+        }.show()
     }
 
-//    private fun makePicture(): Picture =
-//        Picture(
-//            imageUri = picture?.imageUri,
-//            date = picture?.date,
-//            searchResult = picture?.searchResult,
-//            name = binding.edittextPictureEditorNameUserInput.text.toString(),
-//            description = binding.editPictureEditorDescriptionUserInput.text.toString()
-//        )
+    private fun makePicture(): Picture =
+        Picture(
+            imageUrl = picture?.imageUrl,
+            createdAt = picture?.createdAt,
+            lastModifiedAt = picture?.lastModifiedAt,
+            description = binding.editPictureEditorDescriptionUserInput.text.toString(),
+            place = picture?.place
+        )
 
     private fun showDeletePictureAskingDialog(logic: () -> Unit) {
         val layoutInflater = LayoutInflater.from(requireContext())

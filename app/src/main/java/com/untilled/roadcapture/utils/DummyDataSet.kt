@@ -1,7 +1,9 @@
 package com.untilled.roadcapture.utils
 
+import com.untilled.roadcapture.data.dto.address.Address
 import com.untilled.roadcapture.data.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.dto.picture.PictureResponse
+import com.untilled.roadcapture.data.dto.place.Place
 import com.untilled.roadcapture.data.entity.*
 
 object DummyDataSet {

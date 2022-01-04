@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.*
 import android.view.Gravity.END
 import android.view.Gravity.TOP
@@ -26,6 +27,7 @@ import com.untilled.roadcapture.data.dto.picture.PictureResponse
 import com.untilled.roadcapture.databinding.FragmentCaptureBinding
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.net.toUri
+import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.SimpleTarget
@@ -39,9 +41,12 @@ import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.single.CompositePermissionListener
 import com.karumi.dexter.listener.single.PermissionListener
 import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener
+import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
+import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
+import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.utils.extension.*
 
 
@@ -50,9 +55,9 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentCaptureBinding? = null
     private val binding get() = _binding!!
 
-    private var imageUri: Uri? = null
+    private val viewModel: CaptureViewModel by viewModels()
 
-    private var pictureResponse: PictureResponse? = null
+    private var imageUri: Uri? = null
 
     private var naverMap: NaverMap? = null
     private var uiSettings: UiSettings? = null
@@ -87,7 +92,10 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
 
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
 
+        viewModel.pictureList.observe(viewLifecycleOwner) {   }
+
         initNaverMap()
+
         return binding.root
     }
 
@@ -153,19 +161,9 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                     }
                     markerList.clear()  // 마커 리스트 클리어
                     deleteCache(requireContext())   // 캐시 디렉토리에 있는 사진들 제거
-                    pictureResponse = null
-                    requireArguments().clear() // navArgs 도 함께 초기화해야 함 (안그러면 마커 그릴때 에러)
+                    viewModel.deleteAll()   // Room에 저장된 picture 모두 제거
                 }
             }
-        }
-    }
-
-    private fun getNavArgs() {
-        val args: CaptureFragmentArgs by navArgs()
-        if (args.picture != null) {
-            //pictureResponse = args.picture
-
-            drawMarker(pictureResponse!!)
         }
     }
 
@@ -195,30 +193,26 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         )
     }
 
-    private fun drawMarker(pictureResponse: PictureResponse) {
+    private fun drawMarker(picture: Picture) {
         val marker = Marker()
-
-//        marker.apply {
-//            position = LatLng(
-//                picture?.searchResult?.locationLatLng?.latitude?.toDouble()
-//                    ?: 37.5670135,
-//                picture?.searchResult?.locationLatLng?.longitude?.toDouble()
-//                    ?: 126.9783740
-//            )
-//            isHideCollidedMarkers = true    // 마커 겹치면 사라지기
-//            //zIndex = 0    //  zIndex로 마커들 겹쳤을때 우선순위 정할 수 있음 (썸네일로 설정된 사진이 zIndex가장 높게)
-//            onClickListener = Overlay.OnClickListener {     // 마커 클릭 이벤트
-//                Navigation.findNavController(binding.root)
-//                    .navigate(
-//                        CaptureFragmentDirections.actionCaptureFragmentToPictureEditorFragment(
-//                            picture = picture
-//                        )
-//                    )
-//                return@OnClickListener true
-//            }
-//        }
-
-        Glide.with(requireContext()).asBitmap().load(pictureResponse.imageUrl!!.toUri())
+        marker.apply {
+            position = LatLng(
+                picture.place?.latitude?.toDouble() ?: 37.5670135,
+                picture.place?.longitude?.toDouble() ?: 126.9783740,
+            )
+            isHideCollidedMarkers = true    // 마커 겹치면 사라지기
+            //zIndex = 0    //  zIndex로 마커들 겹쳤을때 우선순위 정할 수 있음 (썸네일
+            onClickListener = Overlay.OnClickListener {     // 마커
+                Navigation.findNavController(binding.root)
+                    .navigate(
+                        CaptureFragmentDirections.actionCaptureFragmentToPictureEditorFragment(
+                                picture = picture
+                    )
+                )
+                return@OnClickListener true
+            }
+        }
+        Glide.with(requireContext()).asBitmap().load(picture.imageUrl!!.toUri())
             .apply(RequestOptions().centerCrop().circleCrop()).into(object : SimpleTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                     val bitmap = Bitmap.createScaledBitmap(resource, requireContext().getPxFromDp(64f), requireContext().getPxFromDp(64f), true)
@@ -227,9 +221,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                     }.map = naverMap
                 }
             })
-
         markerList.add(marker)
-
         naverMap?.moveCamera(CameraUpdate.scrollTo(marker.position))
     }
 
@@ -245,10 +237,14 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
             Manifest.permission.ACCESS_FINE_LOCATION,
             "지도에 현재 위치를 표시하기 위해서는 위치권한이 필요합니다. 설정으로 이동합니다."
         ) {
-            //Todo 현재 위치 지도에 표시
-            //naverMap?.locationTrackingMode = LocationTrackingMode.Follow
+
         }
-        getNavArgs()
+
+        if(viewModel.pictureList.value!!.isNotEmpty()) {
+            for(i in viewModel.pictureList.value!!) {
+                drawMarker(i)
+            }
+        }
     }
 
     override fun onRequestPermissionsResult(
@@ -267,23 +263,6 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
             return
         }
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-    }
-
-    private fun requestLocationPermission(startRecord: () -> Unit) {
-        if (ContextCompat.checkSelfPermission(
-                requireContext(),
-                Manifest.permission.ACCESS_FINE_LOCATION
-            ) == PackageManager.PERMISSION_GRANTED
-        ) {
-            startRecord()
-        } else {
-            requestSinglePermission(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                "여행을 기록하기 위해서는 위치권한 허용이 필요합니다. 설정으로 이동합니다."
-            ) {
-                startRecord()
-            }
-        }
     }
 
     private fun requestSinglePermission(

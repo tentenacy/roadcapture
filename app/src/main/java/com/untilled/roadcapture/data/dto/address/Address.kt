@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.data.entity
+package com.untilled.roadcapture.data.dto.address
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

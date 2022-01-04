@@ -1,7 +1,7 @@
 package com.untilled.roadcapture.data.dto.picture
 
 import android.os.Parcelable
-import com.untilled.roadcapture.data.entity.Place
+import com.untilled.roadcapture.data.dto.place.Place
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

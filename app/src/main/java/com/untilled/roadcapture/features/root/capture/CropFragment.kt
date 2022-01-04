@@ -13,10 +13,12 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
+import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentCropBinding
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropFragment
@@ -206,16 +208,16 @@ class CropFragment : Fragment() {
     }
 
     fun handleCropResult(result: Intent) {
-//        val resultUri = UCrop.getOutput(result)
-//        if (resultUri != null) {
-//            // crop 성공하였으므로 crop한 이미지 uri 전달
-//            Navigation.findNavController(binding.root)
-//                .navigate(CropFragmentDirections.actionCropFragmentToPictureEditorFragment(
-//                    picture = Picture(imageUrl = resultUri.toString())
-//                ))
-//        } else {
-//            Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
-//        }
+        val resultUri = UCrop.getOutput(result)
+        if (resultUri != null) {
+            // crop 성공하였으므로 crop한 이미지 uri 전달
+            Navigation.findNavController(binding.root)
+                .navigate(CropFragmentDirections.actionCropFragmentToPictureEditorFragment(
+                    picture = Picture(imageUrl = resultUri.toString())
+                ))
+        } else {
+            Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
+        }
     }
 
     fun handleCropError(result: Intent) {

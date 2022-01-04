@@ -64,11 +64,6 @@
         <action
             android:id="@+id/action_captureFragment_to_cropFragment"
             app:destination="@id/cropFragment" />
-        <argument
-            android:name="picture"
-            app:argType="com.untilled.roadcapture.data.entity.Picture"
-            app:nullable="true"
-            android:defaultValue="@null" />
         <action
             android:id="@+id/action_captureFragment_to_albumRegestrationFragment"
             app:destination="@id/albumRegistrationFragment" />

@@ -8,7 +8,7 @@
 
         <variable
             name="picture"
-            type="com.untilled.roadcapture.data.dto.picture.PictureResponse" />
+            type="com.untilled.roadcapture.data.entity.Picture" />
     </data>
 
     <ScrollView
@@ -134,35 +134,10 @@
                 android:layout_height="40dp"
                 android:gravity="center|end"
                 android:hint="@string/picture_editor_place_user_input"
-                android:text="@{picture.description}"
+                android:text="@{picture.place.name}"
                 app:layout_constraintBottom_toBottomOf="@id/textview_picture_editor_place"
                 app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
                 app:layout_constraintTop_toTopOf="@id/textview_picture_editor_place" />
-
-            <TextView
-                android:id="@+id/textview_picture_editor_picture_name"
-                style="@style/SubHeadBold"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
-                android:text="@string/picture_editor_picture_name"
-                app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_body_start"
-                app:layout_constraintTop_toBottomOf="@id/textview_picture_editor_place" />
-
-            <EditText
-                android:id="@+id/edittext_picture_editor_name_user_input"
-                style="@style/Body"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:gravity="center|end"
-                android:hint="@string/picture_editor_name_user_input"
-                android:inputType="text|textImeMultiLine"
-                android:maxLines="1"
-                android:text="@{picture.description}"
-                app:layout_constraintBottom_toBottomOf="@id/textview_picture_editor_picture_name"
-                app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_body_end"
-                app:layout_constraintTop_toTopOf="@id/textview_picture_editor_picture_name" />
 
             <TextView
                 android:id="@+id/textview_picture_editor_description"
@@ -172,7 +147,7 @@
                 android:layout_marginTop="32dp"
                 android:text="@string/picture_editor_description"
                 app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_body_start"
-                app:layout_constraintTop_toBottomOf="@id/textview_picture_editor_picture_name" />
+                app:layout_constraintTop_toBottomOf="@id/textview_picture_editor_place" />
 
             <EditText
                 android:id="@+id/edit_picture_editor_description_user_input"
@@ -181,7 +156,7 @@
                 android:background="@null"
                 android:gravity="top|start"
                 android:hint="@string/picture_editor_description_user_input"
-                android:minLines="5"
+                android:minLines="8"
                 android:padding="16dp"
                 android:text="@{picture.description}"
                 android:textAppearance="@style/Body"

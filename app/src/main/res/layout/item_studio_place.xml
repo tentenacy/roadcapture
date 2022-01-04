@@ -10,7 +10,7 @@
 
         <variable
             name="place"
-            type="com.untilled.roadcapture.data.entity.Place" />
+            type="com.untilled.roadcapture.data.dto.place.Place" />
 
         <variable
             name="onClickItem"
