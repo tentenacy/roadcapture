@@ -17,7 +17,9 @@ interface AlbumRepository {
     ): Response<AlbumsResponse>
 
     suspend fun getCommentsList(
-        @Path("albumId") albumId: String
+        @Path("albumId") albumId: String,
+        @Query("page") page: Int? = null,
+        @Query("size") size: Int? = null
     ): Response<CommentsResponse>
 
     suspend fun getAlbumDetail(

@@ -2,7 +2,6 @@ package com.untilled.roadcapture.features.root.albums
 
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +21,7 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
     private var _binding: ModalBottomSheetFilterBinding? = null
     private val binding get() = _binding!!
     private val viewModel: AlbumsViewModel by viewModels({requireParentFragment()})
+    private lateinit var albumFragment: AlbumFragment
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +36,7 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        albumFragment = parentFragment as AlbumFragment
         expandFullHeight()
         initViews()
         setOnClickListeners()
@@ -82,30 +83,29 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
     private fun filterApply() {
         when (binding.radiogroupFilterDuration.checkedRadioButtonId) {
             binding.radiobuttonFilterWholeDuration.id -> {
-                viewModel.getAlbums(" ", getFilterDate(TimeUtil.TODAY))
+                albumFragment.updateView(" ", getFilterDate(TimeUtil.TODAY))
             }
 
             binding.radiobuttonFilterToday.id -> {
-                viewModel.getAlbums(getFilterDate(TimeUtil.TODAY), getFilterDate(TimeUtil.TODAY))
+                albumFragment.updateView(getFilterDate(TimeUtil.TODAY), getFilterDate(TimeUtil.TODAY))
             }
             binding.radiobuttonFilterThisWeek.id -> {
-                viewModel.getAlbums(getFilterDate(TimeUtil.WEEK), getFilterDate(TimeUtil.TODAY))
+                albumFragment.updateView(getFilterDate(TimeUtil.WEEK), getFilterDate(TimeUtil.TODAY))
             }
 
             binding.radiobuttonFilterThisMonth.id -> {
-                viewModel.getAlbums(getFilterDate(TimeUtil.MONTH), getFilterDate(TimeUtil.TODAY))
+                albumFragment.updateView(getFilterDate(TimeUtil.MONTH), getFilterDate(TimeUtil.TODAY))
             }
 
             binding.radiobuttonFilterThisYear.id -> {
-                viewModel.getAlbums(getFilterDate(TimeUtil.YEAR), getFilterDate(TimeUtil.TODAY))
+                albumFragment.updateView(getFilterDate(TimeUtil.YEAR), getFilterDate(TimeUtil.TODAY))
             }
             else -> {
-                viewModel.getAlbums(getFilterDate(binding.buttonFilterStartDate.text.toString()), getFilterDate(binding.buttonFilterEndDate.text.toString()))
+                albumFragment.updateView(getFilterDate(binding.buttonFilterStartDate.text.toString()), getFilterDate(binding.buttonFilterEndDate.text.toString()))
             }
         }
         dismiss()
     }
-
 
     override fun onDestroyView() {
         super.onDestroyView()

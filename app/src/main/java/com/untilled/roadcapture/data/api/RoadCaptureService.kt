@@ -28,7 +28,9 @@ interface RoadCaptureService {
 
     @GET("albums/{albumId}/pictures/comments")
     suspend fun getCommentsList(
-        @Path("albumId") albumId: String
+        @Path("albumId") albumId: String,
+        @Query("page") page: Int? = null,
+        @Query("size") size: Int? = null,
     ): Response<CommentsResponse>
 
     @GET("albums/{id}")
