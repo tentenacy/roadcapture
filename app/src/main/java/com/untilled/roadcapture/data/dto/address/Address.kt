@@ -5,10 +5,10 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Address(
-    val addressName: String,
-    var roadAddressName: String?,
-    val region1DepthName: String,
-    val region2DepthName: String,
-    val region3DepthName: String,
-    val zoneNo: String
+    var addressName: String,        // 지번 주소
+    var roadAddressName: String?,   // 도로명 주소
+    var region1DepthName: String,   // 시구명
+    var region2DepthName: String,   // 시군구명
+    var region3DepthName: String,   // 읍면동명
+    var zoneNo: String              // 우편번호
 ):Parcelable

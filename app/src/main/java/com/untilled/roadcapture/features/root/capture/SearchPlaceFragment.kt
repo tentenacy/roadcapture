@@ -2,7 +2,6 @@ package com.untilled.roadcapture.features.root.capture
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,35 +10,33 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import com.untilled.roadcapture.R
+import com.untilled.roadcapture.data.dto.address.Address
+import com.untilled.roadcapture.data.dto.place.Place
 import com.untilled.roadcapture.data.entity.LocationLatLng
-import com.untilled.roadcapture.data.dto.picture.PictureResponse
-import com.untilled.roadcapture.data.dto.search.Pois
+import com.untilled.roadcapture.data.dto.poi.Pois
 import com.untilled.roadcapture.data.entity.SearchResult
-import com.untilled.roadcapture.data.dto.search.Poi
+import com.untilled.roadcapture.data.dto.poi.Poi
+import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentSearchPlaceBinding
 import com.untilled.roadcapture.features.base.CustomDivider
 import com.untilled.roadcapture.searchPlaceResult
-import com.untilled.roadcapture.utils.RetrofitBuilder
 import com.untilled.roadcapture.utils.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
-import kotlin.coroutines.CoroutineContext
 
 @AndroidEntryPoint
-class SearchPlaceFragment : Fragment(), CoroutineScope {
+class SearchPlaceFragment : Fragment() {
     private var _binding: FragmentSearchPlaceBinding? = null
     private val binding get() = _binding!!
 
-    private var pictureResponse: PictureResponse? = null
+    private val viewModel: SearchPlaceViewModel by viewModels()
 
-    private var resultList: List<SearchResult>? = listOf<SearchResult>()
-
-    private lateinit var job: Job
-
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
+    private lateinit var picture: Picture
+    private var resultList: List<SearchResult>? = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,9 +45,18 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
     ): View? {
         _binding = FragmentSearchPlaceBinding.inflate(inflater, container, false)
 
-        job = Job()
         initAdapter()
 
+        viewModel.searchPlaceResponse.observe(viewLifecycleOwner) { searchPlaceResponse ->
+
+            binding.progressbarSearchPlaceLoading.isVisible = false // 로딩 애니메이션 off
+
+            if(searchPlaceResponse != null) {
+                setData(searchPlaceResponse.searchPoiInfo.pois)
+            } else {
+                displayNoResult()
+            }
+        }
         return binding.root
     }
 
@@ -58,13 +64,15 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
         super.onViewCreated(view, savedInstanceState)
 
         val args: SearchPlaceFragmentArgs by navArgs()
-//        if (args.picture != null) {
-//            picture = args.picture
-//            if (picture?.searchResult != null) {
-//                binding.edittextSearchPlaceInput.setText(picture?.searchResult?.placeName)
-//                searchKeyword(binding.edittextSearchPlaceInput.text.toString())
-//            }
-//        }
+        if (args.picture != null) {
+            picture = args.picture!!
+            picture.place?.name?.let {
+                binding.edittextSearchPlaceInput.setText(it)
+
+                displayLoadingAnimation()
+                viewModel.getSearchPlace(it)
+            }
+        }
         setOnClickListeners()
     }
 
@@ -73,7 +81,7 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
             Navigation.findNavController(binding.root)
                 .navigate(
                     SearchPlaceFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
-                        //picture = pictureResponse
+                        picture = picture
                     )
                 )
         }
@@ -85,7 +93,8 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
                         if (isNullOrBlank()) {
                             Toast.makeText(requireContext(), "검색어를 입력해 주세요.", Toast.LENGTH_SHORT).show()
                         } else {
-                            searchKeyword(this)
+                            displayLoadingAnimation()
+                            viewModel.getSearchPlace(this)
                         }
                     }
                     requireActivity().hideKeyboard(binding.edittextSearchPlaceInput)
@@ -108,28 +117,61 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
                     searchResult(searchResult)
 
                     onClickItem { model, parentView, clickedView, position ->
-//                        if (clickedView.id == R.id.item_search_place_result_name_container) {
-//                            picture?.searchResult = resultList!![position]
-//                            Navigation.findNavController(binding.root)
-//                                .navigate(
-//                                    SearchPlaceFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
-//                                        picture = picture
-//                                    )
-//                                )
-//                        }
+                        if (clickedView.id == R.id.item_search_place_result_name_container) {
+                            updatePicture(resultList!![position])
+
+                            Navigation.findNavController(binding.root)
+                                .navigate(
+                                    SearchPlaceFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
+                                        picture = picture
+                                    )
+                                )
+                        }
                     }
                 }
             }
         }
     }
 
+    private fun updatePicture(searchResult: SearchResult) {
+        picture.place = Place(
+            latitude = searchResult.locationLatLng.latitude.toString(),
+            longitude = searchResult.locationLatLng.longitude.toString(),
+            name = searchResult.name,
+            address = Address(
+                addressName = searchResult.addressName,
+                roadAddressName = searchResult.roadAddressName,
+                region1DepthName = searchResult.region1DepthName,
+                region2DepthName = searchResult.region2DepthName,
+                region3DepthName = searchResult.region3DepthName,
+                zoneNo = searchResult.zoneNo
+            ),
+            id = 0
+        )
+    }
+
+    private fun displayNoResult() {
+        binding.textviewSearchPlaceNoResult.isVisible = true
+        resultList = null   // 결과 리스트 초기화
+        binding.recyclerviewSearchPlace.requestModelBuild()
+    }
+
+    private fun displayLoadingAnimation() {
+        binding.progressbarSearchPlaceLoading.isVisible = true  // 로딩 애니메이션 on
+        binding.textviewSearchPlaceNoResult.isVisible = false
+    }
+
     private fun setData(pois: Pois) {
         resultList = pois.poi.map {
             SearchResult(
-                placeName = it.name ?: "",
-                addressNumber = makeAddressNumber(it),
-                roadName = makeRoadName(it),
-                locationLatLng = LocationLatLng(it.noorLat, it.noorLon)
+                name = it.name ?: "",
+                addressName = makeAddressNumber(it),
+                roadAddressName = makeRoadName(it),
+                locationLatLng = LocationLatLng(it.noorLat, it.noorLon),
+                region1DepthName = it.upperAddrName ?: "",
+                region2DepthName = it.middleAddrName ?: "",
+                region3DepthName = it.lowerAddrName ?: "",
+                zoneNo = ""
             )
         }
         binding.recyclerviewSearchPlace.requestModelBuild()
@@ -165,45 +207,8 @@ class SearchPlaceFragment : Fragment(), CoroutineScope {
                     poi.secondBuildNo?.trim()
         }
 
-    private fun searchKeyword(keyword: String) {
-        binding.progressbarSearchPlaceLoading.isVisible = true  // 로딩 애니메이션 on
-
-        launch(coroutineContext) {
-            try {
-                withContext(Dispatchers.IO) {
-                    val response = RetrofitBuilder.TMAP_SERVICE.getSearchLocation(
-                        keyword = keyword
-                    )
-                    if (response.isSuccessful) {
-                        val body = response.body()
-
-                        withContext(Dispatchers.Main) {
-                            if (body == null) {  // 검색 결과 없을때 처리
-                                binding.textviewSearchPlaceNoResult.isVisible = true
-                                resultList = null   // 결과 리스트 초기화
-                                binding.recyclerviewSearchPlace.requestModelBuild()
-                            }
-                            binding.progressbarSearchPlaceLoading.isVisible = false // 로딩 애니메이션 off
-
-                            Log.d("searchResult", body.toString())
-                            body?.let {
-                                binding.textviewSearchPlaceNoResult.isVisible = false
-                                setData(it.searchPoiInfo.pois)
-                            }
-                        }
-                    }
-                }
-            } catch (e: Exception) {
-                binding.progressbarSearchPlaceLoading.isVisible = false
-                e.printStackTrace()
-            }
-        }
-    }
-
-
     override fun onDestroy() {
         super.onDestroy()
-        job.cancel()
         _binding = null
     }
 }

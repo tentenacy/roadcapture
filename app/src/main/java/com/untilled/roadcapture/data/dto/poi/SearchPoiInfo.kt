@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.data.dto.search
+package com.untilled.roadcapture.data.dto.poi
 
 
 data class SearchPoiInfo(

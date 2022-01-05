@@ -4,6 +4,8 @@ import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import com.untilled.roadcapture.data.repository.album.AlbumRepositoryImpl
 import com.untilled.roadcapture.data.repository.picture.PictureRepository
 import com.untilled.roadcapture.data.repository.picture.PictureRepositoryImpl
+import com.untilled.roadcapture.data.repository.place.SearchPlaceRepository
+import com.untilled.roadcapture.data.repository.place.SearchPlaceRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -21,4 +23,9 @@ abstract class RepositoryModule {
     abstract fun providePictureRepository(
         pictureRepositoryImpl: PictureRepositoryImpl
     ) : PictureRepository
+
+    @Binds
+    abstract fun provideSearchPlaceRepository(
+        searchPlaceRepositoryImpl: SearchPlaceRepositoryImpl
+    ) : SearchPlaceRepository
 }

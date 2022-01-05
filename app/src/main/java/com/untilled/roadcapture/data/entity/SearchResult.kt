@@ -9,11 +9,15 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class SearchResult(
     @SerializedName("name")
-    var placeName: String,
+    var name: String,
     @SerializedName("address_number")
-    var addressNumber: String,
+    var addressName: String,
     @SerializedName("roadname")
-    var roadName: String,
+    var roadAddressName: String,
     @SerializedName("location_lat_lng")
-    @Embedded var locationLatLng: LocationLatLng
+    @Embedded var locationLatLng: LocationLatLng,
+    var region1DepthName: String,   // 시구명
+    var region2DepthName: String,   // 시군구명
+    var region3DepthName: String,   // 읍면동명
+    var zoneNo: String              // 우편번호
 ) : Parcelable
