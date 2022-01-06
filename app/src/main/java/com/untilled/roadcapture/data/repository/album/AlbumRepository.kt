@@ -16,8 +16,8 @@ interface AlbumRepository {
         @Query("dateTimeTo")dateTimeTo: String
     ): Response<AlbumsResponse>
 
-    suspend fun getCommentsList(
-        @Path("albumId") albumId: String,
+    suspend fun getAlbumCommentsList(
+        @Path("albumId") albumId: Int,
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null
     ): Response<CommentsResponse>
@@ -25,5 +25,11 @@ interface AlbumRepository {
     suspend fun getAlbumDetail(
         @Path("id") id: String
     ): Response<AlbumResponse>
+
+    suspend fun getPictureCommentsList(
+        @Path("pictureId") pictureId: Int,
+        @Query("page") page: Int? = null,
+        @Query("size") size: Int? = null
+    ): Response<CommentsResponse>
 
 }

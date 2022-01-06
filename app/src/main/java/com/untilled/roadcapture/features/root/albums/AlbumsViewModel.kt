@@ -1,7 +1,5 @@
 package com.untilled.roadcapture.features.root.albums
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.Pager
@@ -9,12 +7,10 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.untilled.roadcapture.data.dto.album.Albums
-import com.untilled.roadcapture.data.repository.album.AlbumRepository
-import com.untilled.roadcapture.data.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.dto.comment.Comments
-import com.untilled.roadcapture.data.dto.comment.CommentsResponse
+import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import com.untilled.roadcapture.data.repository.album.AlbumsPagingSource
-import com.untilled.roadcapture.data.repository.album.CommentsPagingSource
+import com.untilled.roadcapture.data.repository.album.AlbumCommentsPagingSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -23,10 +19,6 @@ import javax.inject.Inject
 @HiltViewModel
 class AlbumsViewModel
 @Inject constructor(private val repository: AlbumRepository) : ViewModel() {
-    private val _albumsResponse = MutableLiveData<AlbumsResponse>()
-    private val _comments = MutableLiveData<CommentsResponse>()
-    val albumsResponse: LiveData<AlbumsResponse> get() = _albumsResponse
-    val comments: LiveData<CommentsResponse> get() = _comments
 
     private var currentDateTimeFrom: String? = null
     private var currentDateTimeTo: String? = null
@@ -55,19 +47,19 @@ class AlbumsViewModel
         return newResult
     }
 
-    private fun getCommentsResultStream(albumId: String): Flow<PagingData<Comments>> {
+    private fun getAlbumCommentsResultStream(albumId: Int): Flow<PagingData<Comments>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 10,
                 prefetchDistance = 20,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { CommentsPagingSource(repository,albumId) }
+            pagingSourceFactory = { AlbumCommentsPagingSource(repository,albumId) }
         ).flow
     }
 
-    fun getComments(albumId: String): Flow<PagingData<Comments>> {
-        return getCommentsResultStream(albumId).cachedIn(viewModelScope)
+    fun getAlbumComments(albumId: Int): Flow<PagingData<Comments>> {
+        return getAlbumCommentsResultStream(albumId).cachedIn(viewModelScope)
     }
 
 //    fun getAlbums(dateTimeFrom: String, dateTimeTo: String) {

@@ -1,6 +1,5 @@
 package com.untilled.roadcapture.data.repository.album
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.untilled.roadcapture.data.dto.comment.Comments
@@ -8,14 +7,14 @@ import com.untilled.roadcapture.utils.dateToSnsFormat
 import retrofit2.HttpException
 import java.io.IOException
 
-class CommentsPagingSource(
+class AlbumCommentsPagingSource(
     private val repository: AlbumRepository,
-    private val albumId: String
+    private val albumId: Int
 ): PagingSource<Int,Comments>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Comments> {
         return try{
             val position = params.key ?: AlbumsPagingSource.STARTING_PAGE_INDEX
-            val response = repository.getCommentsList(
+            val response = repository.getAlbumCommentsList(
                 albumId = albumId,
                 page = position,
                 size = 10

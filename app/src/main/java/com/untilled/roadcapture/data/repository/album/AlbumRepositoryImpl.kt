@@ -21,10 +21,16 @@ class AlbumRepositoryImpl
     ): Response<AlbumsResponse> =
         service.getAlbumsList(page?.toString(), size?.toString(), dateTimeFrom, dateTimeTo)
 
-    override suspend fun getCommentsList(albumsId: String, page: Int?, size: Int?): Response<CommentsResponse> =
-        service.getCommentsList(albumsId, page, size)
+    override suspend fun getAlbumCommentsList(albumsId: Int, page: Int?, size: Int?): Response<CommentsResponse> =
+        service.getAlbumCommentsList(albumsId, page, size)
 
     override suspend fun getAlbumDetail(id: String): Response<AlbumResponse> =
         service.getAlbumDetail(id)
 
+    override suspend fun getPictureCommentsList(
+        pictureId: Int,
+        page: Int?,
+        size: Int?
+    ): Response<CommentsResponse> =
+        service.getPictureCommentsList(pictureId,page,size)
 }

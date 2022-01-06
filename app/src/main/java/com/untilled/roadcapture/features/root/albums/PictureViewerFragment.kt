@@ -2,6 +2,7 @@ package com.untilled.roadcapture.features.root.albums
 
 import android.animation.ValueAnimator
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,11 +12,10 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
-import com.untilled.roadcapture.R
+import com.untilled.roadcapture.*
 import com.untilled.roadcapture.data.dto.album.AlbumResponse
 import com.untilled.roadcapture.databinding.FragmentPictureViewerBinding
-import com.untilled.roadcapture.pictureViewerContent
-import com.untilled.roadcapture.pictureViewerThumbnail
+import com.untilled.roadcapture.features.root.comment.CommentBottomSheetDialog
 import com.untilled.roadcapture.utils.extension.navigationHeight
 import com.untilled.roadcapture.utils.extension.statusBarHeight
 import dagger.hilt.android.AndroidEntryPoint
@@ -58,8 +58,8 @@ class PictureViewerFragment : Fragment() {
 
     private fun setOnClickListeners() {
         binding.imageviewPictureViewerComment.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(PictureViewerContainerFragmentDirections.actionPictureViewerContainerFragmentToCommentFragment(viewModel.albumResponse.value?.id.toString()))
+            val commentBottomSheetDialog = CommentBottomSheetDialog()
+            commentBottomSheetDialog.show(childFragmentManager, "commentBottomSheet")
         }
         binding.imageviewPictureViewerLike.setOnClickListener { lottie ->
             if (!flagLike) {
@@ -93,10 +93,24 @@ class PictureViewerFragment : Fragment() {
             .load(albumResponse.thumbnailUrl)
             .centerCrop()
             .into(binding.imageviewPictureViewerBackground)
+
         if(binding.recyclerviewPictureViewer.onFlingListener == null) {
-            PagerSnapHelper().attachToRecyclerView(binding.recyclerviewPictureViewer)
+            val pagerSnapHelper = PagerSnapHelper()
+            pagerSnapHelper.attachToRecyclerView(binding.recyclerviewPictureViewer)
+            val pictureSnapPagerScrollListener: PictureSnapPagerScrollListener = PictureSnapPagerScrollListener(
+                pagerSnapHelper,
+                PictureSnapPagerScrollListener.ON_SETTLED,
+                true,
+                object: PictureSnapPagerScrollListener.OnChangeListener {
+                    override fun onSnapped(position: Int) {
+                        viewModel.currentPosition = position
+                    }
+                }
+            )
+            binding.recyclerviewPictureViewer.addOnScrollListener(pictureSnapPagerScrollListener)
         }
         binding.recyclerviewPictureViewer.withModels {
+
             pictureViewerThumbnail {
                 id(1)
                 album(albumResponse)
@@ -113,7 +127,6 @@ class PictureViewerFragment : Fragment() {
                     picture(picture)
                 }
             }
-
         }
     }
 }

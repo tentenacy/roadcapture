@@ -8,30 +8,29 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.navArgs
 import androidx.paging.PagingData
 import com.airbnb.epoxy.DataBindingEpoxyModel
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.dto.comment.Comments
-import com.untilled.roadcapture.databinding.FragmentCommentBinding
+import com.untilled.roadcapture.databinding.ModalBottomSheetCommentBinding
 import com.untilled.roadcapture.features.base.CustomDivider
 import com.untilled.roadcapture.features.base.EpoxyItemClickListener
-import com.untilled.roadcapture.features.root.albums.AlbumsViewModel
+import com.untilled.roadcapture.features.root.albums.PictureViewerContainerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class CommentFragment : Fragment() {
-
-    private var _binding: FragmentCommentBinding? = null
+class CommentBottomSheetDialog : BottomSheetDialogFragment(){
+    private var _binding: ModalBottomSheetCommentBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: AlbumsViewModel by viewModels({requireParentFragment()})
+    private val viewModel: PictureViewerContainerViewModel by viewModels({requireParentFragment().requireParentFragment()})
     private val epoxyController = CommentsEpoxyController()
 
     private val epoxyItemClickListener = object : EpoxyItemClickListener {
@@ -65,13 +64,12 @@ class CommentFragment : Fragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        _binding = FragmentCommentBinding.inflate(layoutInflater, container, false)
-
-        (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarComment)
+        _binding = ModalBottomSheetCommentBinding.inflate(inflater,container,false)
+        (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarBottomSheetComment)
 
         return binding.root
     }
@@ -79,37 +77,54 @@ class CommentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val args: CommentFragmentArgs by navArgs()
-        initAdapter(args.albumsId.toInt())
+        initAdapter(viewModel.currentPosition)
+        expandFullHeight()
         setOnClickListeners()
-    }
-
-
-    private fun setOnClickListeners() {
-        binding.imageviewCommentBack.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-
         _binding = null
     }
 
-    private fun initAdapter(albumId: Int) {
-        val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
-        binding.recyclerviewComment.addItemDecoration(customDivider)
-        epoxyController.setOnClickListener(epoxyItemClickListener)
-        updateView(albumId)
-        binding.recyclerviewComment.setController(epoxyController)
-
+    private fun expandFullHeight() {
+        val bottomSheet =
+            dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+        val behavior = BottomSheetBehavior.from<View>(bottomSheet!!)
+        behavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
-    private fun updateView(albumId: Int) {
-        lifecycleScope.launch {
-            viewModel.getAlbumComments(albumId).collectLatest { pagingData: PagingData<Comments> ->
-                epoxyController.submitData(pagingData)
+    private fun setOnClickListeners() {
+        binding.imageviewBottomSheetCommentBack.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+    }
+
+    private fun initAdapter(position: Int) {
+        val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
+        binding.recyclerviewBottomSheetComment.addItemDecoration(customDivider)
+        epoxyController.setOnClickListener(epoxyItemClickListener)
+        updateView(position - 1)
+        binding.recyclerviewBottomSheetComment.setController(epoxyController)
+    }
+
+    private fun updateView(position: Int) {
+        when(position){
+            -1 -> {
+                lifecycleScope.launch {
+                    viewModel.getAlbumComments(viewModel.albumResponse.value!!.id)
+                        .collectLatest { pagingData: PagingData<Comments> ->
+                            epoxyController.submitData(pagingData)
+                        }
+                }
+            }
+            else -> {
+                val pictureId = viewModel.albumResponse.value?.pictureResponses?.get(position)!!.id
+                lifecycleScope.launch {
+                    viewModel.getPictureComments(pictureId).collectLatest { pagingData: PagingData<Comments> ->
+                        epoxyController.submitData(pagingData)
+                    }
+                }
             }
         }
     }

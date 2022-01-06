@@ -12,8 +12,6 @@ class AlbumsEpoxyController : PagingDataEpoxyController<Albums>() {
     private lateinit var epoxyItemClickListener: EpoxyItemClickListener
 
     override fun buildItemModel(currentPosition: Int, item: Albums?): EpoxyModel<*> {
-        Log.d("Test",adapter.toString())
-
         return HomeAlbumBindingModel_()
             .id("albums${currentPosition}")
             .albums(item)
