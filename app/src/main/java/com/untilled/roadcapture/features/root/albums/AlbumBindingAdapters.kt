@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.utils.dateToSnsFormat
 import com.untilled.roadcapture.utils.extension.getPxFromDp
 import dagger.*
 import dagger.multibindings.*
@@ -109,5 +110,11 @@ object AlbumBindingAdapters {
             view.setImageResource(R.color.secondaryColor)
         else
             view.setImageResource(R.color.lightGray)
+    }
+
+    @JvmStatic
+    @BindingAdapter("DateToSnsFormat")
+    fun setDateToSnsFormat(view: TextView, text: String){
+        view.text = dateToSnsFormat(text)
     }
 }

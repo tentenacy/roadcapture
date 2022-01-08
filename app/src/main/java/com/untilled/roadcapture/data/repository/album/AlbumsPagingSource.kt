@@ -1,6 +1,5 @@
 package com.untilled.roadcapture.data.repository.album
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.untilled.roadcapture.data.dto.album.Albums
@@ -10,6 +9,7 @@ import java.io.IOException
 
 class AlbumsPagingSource (
     private val repository: AlbumRepository,
+    private val token: String,
     private val dateTimeFrom: String,
     private val dateTimeTo: String)
     : PagingSource<Int, Albums>() {
@@ -19,6 +19,7 @@ class AlbumsPagingSource (
             val position = params.key ?: STARTING_PAGE_INDEX
 
             val response = repository.getAlbumsList(
+                token = token,
                 page = position,
                 size = 10,
                 dateTimeFrom = dateTimeFrom,
@@ -26,9 +27,7 @@ class AlbumsPagingSource (
             )
 
             val post = response.body()?.albums
-            post?.forEachIndexed { index, albums ->
-                albums.createdAt = dateToSnsFormat(albums.createdAt)
-            }
+
             LoadResult.Page(
                 data = post!!,
                 prevKey = if (position == STARTING_PAGE_INDEX) null else position - 1,

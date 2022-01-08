@@ -61,7 +61,7 @@ class PictureViewerContainerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val args: PictureViewerContainerFragmentArgs by navArgs()
-        viewModel.getAlbumDetail(args.id)
+        viewModel.getAlbumDetail(token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY0MTYyNzIyNywiZXhwIjoxNjQxNjMwODI3fQ.qT8yBAYnciGhJGREpJlJDnARO5RnbPstc2E2WoZSWpc",args.id)
 //        viewModel.id = args.id
         requireActivity().setStatusBarTransparent()
         binding.pictureViewerContainerInnerContainer.setPadding(

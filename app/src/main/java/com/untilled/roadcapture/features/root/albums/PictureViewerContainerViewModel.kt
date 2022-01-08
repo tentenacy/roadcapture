@@ -25,9 +25,9 @@ class PictureViewerContainerViewModel
     private val _album = MutableLiveData<AlbumResponse>()
     val albumResponse: LiveData<AlbumResponse> get() = _album
     var currentPosition: Int = 0
-    fun getAlbumDetail(id: String) {
+    fun getAlbumDetail(token: String,id: String) {
         viewModelScope.launch {
-            repository.getAlbumDetail(id).let { album ->
+            repository.getAlbumDetail(token,id).let { album ->
                 Log.d("testt", album.raw().request.url.toUrl().toString())
                 if (album.isSuccessful) {
                     _album.postValue(album.body())
@@ -38,34 +38,34 @@ class PictureViewerContainerViewModel
         }
     }
 
-    private fun getPictureCommentsResultStream(pictureId: Int): Flow<PagingData<Comments>> {
+    private fun getPictureCommentsResultStream(token: String,pictureId: Int): Flow<PagingData<Comments>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 10,
                 prefetchDistance = 20,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { PictureCommentsPagingSource(repository,pictureId) }
+            pagingSourceFactory = { PictureCommentsPagingSource(repository,token,pictureId) }
         ).flow
     }
 
-    fun getPictureComments(pictureId: Int): Flow<PagingData<Comments>> {
-        return getPictureCommentsResultStream(pictureId).cachedIn(viewModelScope)
+    fun getPictureComments(token: String,pictureId: Int): Flow<PagingData<Comments>> {
+        return getPictureCommentsResultStream(token,pictureId).cachedIn(viewModelScope)
     }
 
-    private fun getAlbumCommentsResultStream(albumId: Int): Flow<PagingData<Comments>> {
+    private fun getAlbumCommentsResultStream(token: String,albumId: Int): Flow<PagingData<Comments>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 10,
                 prefetchDistance = 20,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { AlbumCommentsPagingSource(repository,albumId) }
+            pagingSourceFactory = { AlbumCommentsPagingSource(repository,token,albumId) }
         ).flow
     }
 
-    fun getAlbumComments(albumId: Int): Flow<PagingData<Comments>> {
-        return getAlbumCommentsResultStream(albumId).cachedIn(viewModelScope)
+    fun getAlbumComments(token: String,albumId: Int): Flow<PagingData<Comments>> {
+        return getAlbumCommentsResultStream(token,albumId).cachedIn(viewModelScope)
     }
 }
 

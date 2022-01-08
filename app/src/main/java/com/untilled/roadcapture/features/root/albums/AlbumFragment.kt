@@ -142,7 +142,7 @@ class AlbumFragment : Fragment() {
 
     fun updateView(dateTimeFrom: String, dateTimeTo: String) {
         lifecycleScope.launch{
-            viewModel.getAlbums(dateTimeFrom, dateTimeTo).collectLatest{ pagingData: PagingData<Albums> ->
+            viewModel.getAlbums(token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY0MTYzMjA3OSwiZXhwIjoxNjQxNjM1Njc5fQ.Ro6y-9YurhNMam5AP0_EwTL6MakvlbubHw2knBJAmPI",dateTimeFrom, dateTimeTo).collectLatest{ pagingData: PagingData<Albums> ->
                 epoxyController.submitData(pagingData)
             }
         }

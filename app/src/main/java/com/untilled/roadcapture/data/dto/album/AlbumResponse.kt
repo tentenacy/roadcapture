@@ -13,7 +13,7 @@ data class AlbumResponse(
     val lastModifiedAt: String,
     val title: String,
     val description: String,
-    val thumbnailUrl: String,
+    val thumbnailUrl: String?,
     val user: User,
     val viewCount: String,
     val likeCount: String,

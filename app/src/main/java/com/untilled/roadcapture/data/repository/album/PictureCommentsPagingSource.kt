@@ -9,20 +9,20 @@ import java.io.IOException
 
 class PictureCommentsPagingSource(
     private val repository: AlbumRepository,
+    private val token: String,
     private val pictureId: Int
 ): PagingSource<Int,Comments>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Comments> {
         return try{
             val position = params.key ?: AlbumsPagingSource.STARTING_PAGE_INDEX
             val response = repository.getPictureCommentsList(
+                token = token,
                 pictureId = pictureId,
                 page = position,
                 size = 10
             )
             val post = response.body()?.comments
-            post?.forEachIndexed { index, comments ->
-                comments.createdAt = dateToSnsFormat(comments.createdAt)
-            }
+
             LoadResult.Page(
                 data = post!!,
                 prevKey = if (position == AlbumsPagingSource.STARTING_PAGE_INDEX) null else position - 1,

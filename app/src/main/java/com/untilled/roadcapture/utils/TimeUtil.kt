@@ -40,10 +40,9 @@ fun dateToSnsFormat(str: String): String{
 }
 
 fun getFilterDate(filter: Int): String{
-    val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
+    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS")
     val calendar = Calendar.getInstance()
     when(filter){
-
         TimeUtil.TODAY ->{
         }
 
@@ -69,7 +68,7 @@ fun getFilterDate(str: String): String{
     val month = str.substring(6,8).toInt() - 1
     val day = str.substring(10,12).toInt()
     val calendar = getCalendar(year,month,day)
-    val format = SimpleDateFormat("yyyy-MM-dd 00:00:00")
+    val format = SimpleDateFormat("yyyy-MM-dd'T'00:00:00.000000000")
     val time = calendar.time
     val date = format.format(time)
     return date.toString()
