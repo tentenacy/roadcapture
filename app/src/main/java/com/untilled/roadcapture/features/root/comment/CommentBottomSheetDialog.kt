@@ -62,7 +62,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
         savedInstanceState: Bundle?
     ): View? {
         _binding = BottomsheetCommentBinding.inflate(inflater,container,false)
-        (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarBottomSheetComment)
+        (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarBottomsheetComment)
 
         return binding.root
     }
@@ -88,17 +88,17 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
     }
 
     private fun setOnClickListeners() {
-        binding.imageviewBottomSheetCommentBack.setOnClickListener {
+        binding.imgBottomsheetCommentBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
     }
 
     private fun initAdapter(position: Int) {
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
-        binding.recyclerviewBottomSheetComment.addItemDecoration(customDivider)
+        binding.recycleBottomsheetComment.addItemDecoration(customDivider)
         epoxyController.setOnClickListener(epoxyItemClickListener)
         updateView(position - 1)
-        binding.recyclerviewBottomSheetComment.setController(epoxyController)
+        binding.recycleBottomsheetComment.setController(epoxyController)
     }
 
     private fun updateView(position: Int) {

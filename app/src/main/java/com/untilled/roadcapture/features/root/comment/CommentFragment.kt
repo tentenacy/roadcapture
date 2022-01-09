@@ -78,7 +78,7 @@ class CommentFragment : Fragment() {
 
 
     private fun setOnClickListeners() {
-        binding.imageviewCommentBack.setOnClickListener {
+        binding.imgCommentBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
     }
@@ -91,10 +91,10 @@ class CommentFragment : Fragment() {
 
     private fun initAdapter(albumId: Int) {
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
-        binding.recyclerviewComment.addItemDecoration(customDivider)
+        binding.recyclerComment.addItemDecoration(customDivider)
         epoxyController.setOnClickListener(epoxyItemClickListener)
         updateView(albumId)
-        binding.recyclerviewComment.setController(epoxyController)
+        binding.recyclerComment.setController(epoxyController)
 
     }
 

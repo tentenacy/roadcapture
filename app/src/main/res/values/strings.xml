@@ -154,4 +154,7 @@
     <string name="delete_picture_asking_description">사진을 삭제하시겠어요?\n작성한 내용이 모두 사라집니다.</string>
     <string name="delete_picture_asking_delete">삭제하기</string>
     <string name="delete_picture_asking_cancel">취소</string>
+    <string name="comment_title">댓글</string>
+    <string name="bottomsheet_comment_title">댓글</string>
+    <string name="bottomsheet_comment_input_hint">댓글을 남겨주세요.</string>
 </resources>
