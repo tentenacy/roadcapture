@@ -9,12 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
-import com.untilled.roadcapture.databinding.FragmentEmailLoginBinding
+import com.untilled.roadcapture.databinding.FragmentLoginEmailBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class EmailLoginFragment : Fragment() {
-    private var _binding: FragmentEmailLoginBinding? = null
+class LoginEmailFragment : Fragment() {
+    private var _binding: FragmentLoginEmailBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,7 +22,7 @@ class EmailLoginFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentEmailLoginBinding.inflate(layoutInflater,container,false)
+        _binding = FragmentLoginEmailBinding.inflate(layoutInflater,container,false)
         (requireActivity() as MainActivity).window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         return binding.root
     }
@@ -39,14 +39,14 @@ class EmailLoginFragment : Fragment() {
     }
 
     private fun setOnClickListeners(){
-        binding.imageviewEmailLoginBack.setOnClickListener {
+        binding.imgLoginEmailBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        binding.buttonEmailLogin.setOnClickListener {
+        binding.btnLoginEmail.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_emailLoginFragment_to_rootFragment)
         }
-        binding.textviewEmailLoginFindPassword.setOnClickListener {
+        binding.textLoginEmailFind.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_emailLoginFragment_to_passwordFindFragment)
         }

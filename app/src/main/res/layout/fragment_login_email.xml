@@ -1,109 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/email_login_container"
+    android:id="@+id/constraint_login_email_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imageview_email_login_back"
+        android:id="@+id/img_login_email_back"
         style="@style/BackArrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textview_email_login_title"
+        android:id="@+id/text_login_email_title"
         style="@style/HeadBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
-        android:text="@string/email_login_title"
-        app:layout_constraintStart_toStartOf="@+id/guideline_email_login_body_start"
+        android:text="@string/login_email_title"
+        app:layout_constraintStart_toStartOf="@+id/guideline_login_email_start_56dp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textview_email_login_email_label"
+        android:id="@+id/text_login_email_label_email"
         style="@style/SubHead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:text="@string/email_login_email_label"
-        app:layout_constraintStart_toStartOf="@+id/guideline_email_login_body_start"
-        app:layout_constraintTop_toBottomOf="@+id/textview_email_login_title" />
+        android:text="@string/login_email_label_email"
+        app:layout_constraintStart_toStartOf="@+id/guideline_login_email_start_56dp"
+        app:layout_constraintTop_toBottomOf="@+id/text_login_email_title" />
 
 
     <EditText
-        android:id="@+id/edittext_email_login_email_input"
+        android:id="@+id/edt_login_email_email"
         style="@style/SubHead"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:hint="@string/email_login_email_hint"
+        android:hint="@string/login_email_hint_email"
         android:inputType="textPassword"
         app:boxBackgroundColor="@android:color/transparent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_email_login_body_end"
-        app:layout_constraintStart_toStartOf="@+id/textview_email_login_email_label"
-        app:layout_constraintTop_toBottomOf="@+id/textview_email_login_email_label"/>
+        app:layout_constraintEnd_toStartOf="@+id/guideline_login_email_end_56dp"
+        app:layout_constraintStart_toStartOf="@+id/text_login_email_label_email"
+        app:layout_constraintTop_toBottomOf="@+id/text_login_email_label_email"/>
 
 
     <TextView
-        android:id="@+id/textview_email_login_password_label"
+        android:id="@+id/text_login_email_label_pwd"
         style="@style/SubHead"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/email_login_password_label"
-        app:layout_constraintStart_toStartOf="@+id/guideline_email_login_body_start"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_email_login_email_input" />
+        android:text="@string/login_email_label_pwd"
+        app:layout_constraintStart_toStartOf="@+id/guideline_login_email_start_56dp"
+        app:layout_constraintTop_toBottomOf="@+id/edt_login_email_email" />
 
 
     <EditText
-        android:id="@+id/edittext_email_login_password_input"
+        android:id="@+id/edt_login_email_pwd"
         style="@style/SubHead"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:hint="@string/email_login_password_hint"
+        android:hint="@string/login_email_hint_pwd"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_email_login_body_end"
-        app:layout_constraintStart_toStartOf="@+id/textview_email_login_email_label"
-        app:layout_constraintTop_toBottomOf="@+id/textview_email_login_password_label" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline_login_email_end_56dp"
+        app:layout_constraintStart_toStartOf="@+id/text_login_email_label_email"
+        app:layout_constraintTop_toBottomOf="@+id/text_login_email_label_pwd" />
 
     <TextView
-        android:id="@+id/textview_email_login_find_password"
+        android:id="@+id/text_login_email_find"
         style="@style/Body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/email_login_find_password"
+        android:text="@string/login_email_find"
         android:textColor="@color/gray"
         android:layout_marginTop="56dp"
-        app:layout_constraintEnd_toEndOf="@id/guideline_email_login_body_end"
-        app:layout_constraintStart_toStartOf="@id/guideline_email_login_body_start"
-        app:layout_constraintTop_toBottomOf="@+id/edittext_email_login_password_input" />
+        app:layout_constraintEnd_toEndOf="@id/guideline_login_email_end_56dp"
+        app:layout_constraintStart_toStartOf="@id/guideline_login_email_start_56dp"
+        app:layout_constraintTop_toBottomOf="@+id/edt_login_email_pwd" />
 
 
     <Button
-        android:id="@+id/button_email_login"
+        android:id="@+id/btn_login_email"
         style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:text="@string/email_login"
+        android:text="@string/btn_login_email"
         android:layout_marginTop="200dp"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_email_login_body_end"
-        app:layout_constraintStart_toStartOf="@+id/guideline_email_login_body_start"
-        app:layout_constraintTop_toBottomOf="@id/edittext_email_login_email_input"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_login_email_end_56dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline_login_email_start_56dp"
+        app:layout_constraintTop_toBottomOf="@id/edt_login_email_email"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="1.0"/>
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_email_login_body_start"
+        android:id="@+id/guideline_login_email_start_56dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="56dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_email_login_body_end"
+        android:id="@+id/guideline_login_email_end_56dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"

@@ -42,7 +42,7 @@ class LoginFragment : Fragment() {
 
         requireActivity().setStatusBarTransparent()
 
-        binding.loginInnerContainer.setPadding(
+        binding.constraintLoginInnerContainer.setPadding(
             0,
             requireContext().statusBarHeight(),
             0,
@@ -53,11 +53,11 @@ class LoginFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.constraintLoginContainerEmail.setOnClickListener {
+        binding.constraintLoginBtnContainer.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_loginFragment_to_emailLoginFragment)
         }
-        binding.textviewLoginSignup.setOnClickListener {
+        binding.textLoginSignup.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_loginFragment_to_signupFragment)
         }

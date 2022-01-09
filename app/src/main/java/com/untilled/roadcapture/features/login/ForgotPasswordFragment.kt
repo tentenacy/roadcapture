@@ -34,7 +34,7 @@ class  ForgotPasswordFragment : Fragment() {
     }
 
     private fun setOnClickListeners(){
-        binding.imageviewPasswordFindBack.setOnClickListener {
+        binding.imgForgotpwdBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
     }

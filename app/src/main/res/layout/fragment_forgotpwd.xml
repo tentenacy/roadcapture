@@ -1,69 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraint_forgotpwd_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imageview_password_find_back"
+        android:id="@+id/img_forgotpwd_back"
         style="@style/BackArrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textview_password_find_title"
+        android:id="@+id/text_forgotpwd_title"
         style="@style/HeadBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="64dp"
-        android:text="@string/password_find_title"
-        app:layout_constraintStart_toStartOf="@+id/guideline_password_find_body_start"
+        android:layout_marginTop="60dp"
+        android:text="@string/forgotpwd_title"
+        app:layout_constraintStart_toStartOf="@+id/guideline_forgotpwd_start_56dp"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textview_password_find_label"
+        android:id="@+id/text_forgotpwd_label"
         style="@style/Body"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="@string/password_find_label"
-        app:layout_constraintEnd_toEndOf="@id/textview_password_find_title"
-        app:layout_constraintStart_toStartOf="@+id/guideline_password_find_body_start"
-        app:layout_constraintTop_toBottomOf="@+id/textview_password_find_title" />
+        android:text="@string/forgotpwd_label"
+        app:layout_constraintEnd_toEndOf="@id/text_forgotpwd_title"
+        app:layout_constraintStart_toStartOf="@+id/guideline_forgotpwd_start_56dp"
+        app:layout_constraintTop_toBottomOf="@+id/text_forgotpwd_title" />
 
 
     <EditText
-        android:id="@+id/edittext_password_find_email_input"
+        android:id="@+id/edt_forgotpwdl"
         style="@style/SubHead"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:hint="@string/password_find_email_input"
+        android:hint="@string/forgotpwd_hint"
         android:inputType="textPassword"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_password_find_body_end"
-        app:layout_constraintStart_toStartOf="@+id/guideline_password_find_body_start"
-        app:layout_constraintTop_toBottomOf="@+id/textview_password_find_label" />
+        app:layout_constraintEnd_toStartOf="@+id/guideline_forgotpwd_end_56dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline_forgotpwd_start_56dp"
+        app:layout_constraintTop_toBottomOf="@+id/text_forgotpwd_label" />
 
     <Button
-        android:id="@+id/button_password_find"
+        android:id="@+id/btn_forgotpwd"
         style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
-        android:text="@string/password_find_button"
-        app:layout_constraintEnd_toStartOf="@+id/guideline_password_find_body_end"
-        app:layout_constraintStart_toStartOf="@+id/guideline_password_find_body_start"
-        app:layout_constraintTop_toBottomOf="@id/edittext_password_find_email_input" />
+        android:text="@string/btn_forgotpwd"
+        app:layout_constraintEnd_toStartOf="@+id/guideline_forgotpwd_end_56dp"
+        app:layout_constraintStart_toStartOf="@+id/guideline_forgotpwd_start_56dp"
+        app:layout_constraintTop_toBottomOf="@id/edt_forgotpwdl" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_password_find_body_start"
+        android:id="@+id/guideline_forgotpwd_start_56dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_begin="56dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_password_find_body_end"
+        android:id="@+id/guideline_forgotpwd_end_56dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"

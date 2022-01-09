@@ -217,9 +217,9 @@
     </fragment>
     <fragment
         android:id="@+id/emailLoginFragment"
-        android:name="com.untilled.roadcapture.features.login.EmailLoginFragment"
+        android:name="com.untilled.roadcapture.features.login.LoginEmailFragment"
         android:label="EmailLoginFragment"
-        tools:layout="@layout/fragment_email_login">
+        tools:layout="@layout/fragment_login_email">
         <action
             android:id="@+id/action_emailLoginFragment_to_rootFragment"
             app:destination="@id/rootFragment"
