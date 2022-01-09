@@ -35,7 +35,7 @@ class TermsOfServiceFragment : Fragment() {
     }
 
     private fun setOnClickListeners(){
-        binding.imageviewTermsOfServiceBack.setOnClickListener {
+        binding.imgTermsofserviceBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
     }

@@ -9,15 +9,15 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.databinding.FragmentUsernameinputSignupBinding
+import com.untilled.roadcapture.databinding.FragmentSignupEmailBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class UsernameInputSignupFragment : Fragment() {
+class SignupEmailFragment : Fragment() {
 
     private val viewModel: SignupViewModel by viewModels({ requireParentFragment() })
 
-    private var _binding: FragmentUsernameinputSignupBinding? = null
+    private var _binding: FragmentSignupEmailBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -25,7 +25,7 @@ class UsernameInputSignupFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentUsernameinputSignupBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentSignupEmailBinding.inflate(layoutInflater, container, false)
         binding.apply {
             lifecycleOwner = lifecycleOwner
             vm = viewModel
@@ -46,28 +46,25 @@ class UsernameInputSignupFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.buttonUsernameInputSignupSubmit.setOnClickListener {
-            Navigation.findNavController((parentFragment?.parentFragment as SignupFragment).binding.root)
-                .navigate(R.id.action_signupFragment_to_rootFragment)
-        }
-        binding.textviewUsernameInputSignupTermsOfService.setOnClickListener {
-            Navigation.findNavController((parentFragment?.parentFragment as SignupFragment).binding.root)
-                .navigate(R.id.action_signupFragment_to_termsOfServiceFragment)
-        }
 
-        (parentFragment?.parentFragment as SignupFragment).binding.imageviewSignupBack.setOnClickListener {
-            viewModel.username.value = ""
+        binding.btnSignupEmail.setOnClickListener {
+            Navigation.findNavController(binding.root)
+                .navigate(R.id.action_emailLoginFragment_to_passwordFindFragment)
+        }
+        (parentFragment?.parentFragment as SignupFragment).binding.imgSignupBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
     }
 
-    private fun observeValidation() {
-        viewModel.username.observe(viewLifecycleOwner, Observer {
-            if (it.length >= 2)
-                binding.usernameInputSignupContainer.transitionToEnd()
-            else
-                binding.usernameInputSignupContainer.transitionToStart()
-        })
 
+    private fun observeValidation() {
+        viewModel.email.observe(viewLifecycleOwner, Observer {
+            if (android.util.Patterns.EMAIL_ADDRESS.matcher(it).matches()) {
+                binding.motionSignupEmailContainer.transitionToEnd()
+            } else {
+                binding.motionSignupEmailContainer.transitionToStart()
+            }
+        })
     }
+
 }

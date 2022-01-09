@@ -12,35 +12,35 @@
     </data>
 
     <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/password_input_signup_container"
+        android:id="@+id/motion_signup_pwd_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutDescription="@xml/password_input_signup_xml_scene"
-        tools:context=".features.signup.PasswordInputSignupFragment">
+        tools:context=".features.signup.SignupPasswordFragment">
 
         <TextView
-            android:id="@+id/textview_password_input_signup_title"
+            android:id="@+id/text_signup_pwd_title"
             style="@style/HeadBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/password_input_signup_title"
-            app:layout_constraintStart_toStartOf="@+id/guideline_password_input_signup_body_start"
+            app:layout_constraintStart_toStartOf="@+id/guideline_signup_pwd_start_56dp"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textview_password_input_signup_label"
+            android:id="@+id/text_signup_pwd_label"
             style="@style/SubHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="@string/password_input_signup_label"
-            app:layout_constraintStart_toStartOf="@+id/guideline_password_input_signup_body_start"
-            app:layout_constraintTop_toBottomOf="@+id/textview_password_input_signup_title" />
+            app:layout_constraintStart_toStartOf="@+id/guideline_signup_pwd_start_56dp"
+            app:layout_constraintTop_toBottomOf="@+id/text_signup_pwd_title" />
 
 
         <EditText
-            android:id="@+id/edittext_password_input_signup"
+            android:id="@+id/edt_signup_pwd"
             style="@style/SubHead"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -48,39 +48,39 @@
             android:hint="@string/password_input_signup_hint"
             android:inputType="textPassword"
             app:boxBackgroundColor="@android:color/transparent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_password_input_signup_body_end"
-            app:layout_constraintStart_toStartOf="@+id/textview_password_input_signup_label"
-            app:layout_constraintTop_toBottomOf="@+id/textview_password_input_signup_label"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_signup_pwd_end_56dp"
+            app:layout_constraintStart_toStartOf="@+id/text_signup_pwd_label"
+            app:layout_constraintTop_toBottomOf="@+id/text_signup_pwd_label"
             bind:passwordValidation="@={vm.password}" />
 
 
         <TextView
-            android:id="@+id/textview_password_input_signup_label_check"
+            android:id="@+id/text_signup_pwd_label_confirm"
             style="@style/SubHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="@string/password_input_signup_label_check"
-            app:layout_constraintStart_toStartOf="@+id/guideline_password_input_signup_body_start"
-            app:layout_constraintTop_toBottomOf="@+id/edittext_password_input_signup" />
+            app:layout_constraintStart_toStartOf="@+id/guideline_signup_pwd_start_56dp"
+            app:layout_constraintTop_toBottomOf="@+id/edt_signup_pwd" />
 
 
         <EditText
-            android:id="@+id/edittext_password_input_signup_verification"
+            android:id="@+id/edt_signup_pwd_confirm"
             style="@style/SubHead"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:hint="@string/password_input_signup_check_hint"
             android:inputType="textPassword"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_password_input_signup_body_end"
-            app:layout_constraintStart_toStartOf="@+id/textview_password_input_signup_label"
-            app:layout_constraintTop_toBottomOf="@+id/textview_password_input_signup_label_check"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_signup_pwd_end_56dp"
+            app:layout_constraintStart_toStartOf="@+id/text_signup_pwd_label"
+            app:layout_constraintTop_toBottomOf="@+id/text_signup_pwd_label_confirm"
             bind:passwordValidation="@={vm.passwordVerification}" />
 
 
         <Button
-            android:id="@+id/button_password_input_signup_next"
+            android:id="@+id/btn_signup_pwd"
             style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="48dp"
@@ -89,14 +89,14 @@
             android:visibility="invisible"/>
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_password_input_signup_body_start"
+            android:id="@+id/guideline_signup_pwd_start_56dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="56dp" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_password_input_signup_body_end"
+            android:id="@+id/guideline_signup_pwd_end_56dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"

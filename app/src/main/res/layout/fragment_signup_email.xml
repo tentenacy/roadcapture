@@ -12,48 +12,48 @@
     </data>
 
     <androidx.constraintlayout.motion.widget.MotionLayout
-        android:id="@+id/email_input_signup_container"
+        android:id="@+id/motion_signup_email_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layoutDescription="@xml/email_input_signup_scene"
-        tools:context=".features.signup.EmailInputSignupFragment">
+        tools:context=".features.signup.SignupEmailFragment">
 
         <TextView
-            android:id="@+id/textview_email_input_signup_title"
+            android:id="@+id/text_signup_email_title"
             style="@style/HeadBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/email_input_signup_title"
-            app:layout_constraintStart_toStartOf="@+id/guideline_username_input_signup_body_start"
+            app:layout_constraintStart_toStartOf="@+id/guideline_signup_username_start_56dp"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textview_email_input_signup_label"
+            android:id="@+id/text_signup_email_label"
             style="@style/SubHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="@string/email_input_signup_label"
-            app:layout_constraintStart_toStartOf="@+id/guideline_username_input_signup_body_start"
-            app:layout_constraintTop_toBottomOf="@+id/textview_email_input_signup_title" />
+            app:layout_constraintStart_toStartOf="@+id/guideline_signup_username_start_56dp"
+            app:layout_constraintTop_toBottomOf="@+id/text_signup_email_title" />
 
 
         <EditText
-            android:id="@+id/edittext_email_input_signup"
+            android:id="@+id/edt_signup_email"
             style="@style/SubHead"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:hint="@string/email_input_signup_hint"
             android:inputType="textEmailAddress"
-            app:layout_constraintEnd_toStartOf="@+id/guideline_email_input_signup_body_end"
-            app:layout_constraintStart_toStartOf="@+id/textview_email_input_signup_label"
-            app:layout_constraintTop_toBottomOf="@+id/textview_email_input_signup_label"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_signup_email_end_56dp"
+            app:layout_constraintStart_toStartOf="@+id/text_signup_email_label"
+            app:layout_constraintTop_toBottomOf="@+id/text_signup_email_label"
             bind:emailValidation="@={vm.email}" />
 
         <Button
-            android:id="@+id/button_email_input_signup_next"
+            android:id="@+id/btn_signup_email"
             style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="48dp"
@@ -61,14 +61,14 @@
             android:text="@string/email_input_signup_next"/>
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_username_input_signup_body_start"
+            android:id="@+id/guideline_signup_username_start_56dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_begin="56dp" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_email_input_signup_body_end"
+            android:id="@+id/guideline_signup_email_end_56dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
