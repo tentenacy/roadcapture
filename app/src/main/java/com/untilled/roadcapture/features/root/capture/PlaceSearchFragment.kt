@@ -16,24 +16,24 @@ import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.dto.address.Address
 import com.untilled.roadcapture.data.dto.place.Place
-import com.untilled.roadcapture.data.entity.LocationLatLng
-import com.untilled.roadcapture.data.dto.poi.Pois
-import com.untilled.roadcapture.data.entity.SearchResult
 import com.untilled.roadcapture.data.dto.poi.Poi
+import com.untilled.roadcapture.data.dto.poi.Pois
+import com.untilled.roadcapture.data.entity.LocationLatLng
 import com.untilled.roadcapture.data.entity.Picture
-import com.untilled.roadcapture.databinding.FragmentSearchPlaceBinding
+import com.untilled.roadcapture.data.entity.SearchResult
+import com.untilled.roadcapture.databinding.FragmentPlaceSearchBinding
 import com.untilled.roadcapture.features.base.CustomDivider
-import com.untilled.roadcapture.searchPlaceResult
+import com.untilled.roadcapture.placeSearch
 import com.untilled.roadcapture.utils.extension.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 
 @AndroidEntryPoint
-class SearchPlaceFragment : Fragment() {
-    private var _binding: FragmentSearchPlaceBinding? = null
+class PlaceSearchFragment : Fragment() {
+    private var _binding: FragmentPlaceSearchBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: SearchPlaceViewModel by viewModels()
+    private val searchViewModel: PlaceSearchViewModel by viewModels()
 
     private lateinit var picture: Picture
     private var resultList: List<SearchResult>? = listOf()
@@ -43,11 +43,11 @@ class SearchPlaceFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSearchPlaceBinding.inflate(inflater, container, false)
+        _binding = FragmentPlaceSearchBinding.inflate(inflater, container, false)
 
         initAdapter()
 
-        viewModel.searchPlaceResponse.observe(viewLifecycleOwner) { searchPlaceResponse ->
+        searchViewModel.searchPlaceResponse.observe(viewLifecycleOwner) { searchPlaceResponse ->
 
             binding.progressbarSearchPlaceLoading.isVisible = false // 로딩 애니메이션 off
 
@@ -63,14 +63,14 @@ class SearchPlaceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val args: SearchPlaceFragmentArgs by navArgs()
+        val args: PlaceSearchFragmentArgs by navArgs()
         if (args.picture != null) {
             picture = args.picture!!
             picture.place?.name?.let {
                 binding.edittextSearchPlaceInput.setText(it)
 
                 displayLoadingAnimation()
-                viewModel.getSearchPlace(it)
+                searchViewModel.getSearchPlace(it)
             }
         }
         setOnClickListeners()
@@ -80,7 +80,7 @@ class SearchPlaceFragment : Fragment() {
         binding.imageviewSearchPlaceBack.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(
-                    SearchPlaceFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
+                    PlaceSearchFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
                         picture = picture
                     )
                 )
@@ -94,7 +94,7 @@ class SearchPlaceFragment : Fragment() {
                             Toast.makeText(requireContext(), "검색어를 입력해 주세요.", Toast.LENGTH_SHORT).show()
                         } else {
                             displayLoadingAnimation()
-                            viewModel.getSearchPlace(this)
+                            searchViewModel.getSearchPlace(this)
                         }
                     }
                     requireActivity().hideKeyboard(binding.edittextSearchPlaceInput)
@@ -112,7 +112,7 @@ class SearchPlaceFragment : Fragment() {
 
         binding.recyclerviewSearchPlace.withModels {
             resultList?.forEachIndexed { index, searchResult ->
-                searchPlaceResult {
+                placeSearch {
                     id(index)
                     searchResult(searchResult)
 
@@ -122,7 +122,7 @@ class SearchPlaceFragment : Fragment() {
 
                             Navigation.findNavController(binding.root)
                                 .navigate(
-                                    SearchPlaceFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
+                                    PlaceSearchFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
                                         picture = picture
                                     )
                                 )

@@ -116,7 +116,7 @@ class CommentFragment : Fragment() {
 
     private fun showReportDialog() {
         val layoutInflater = LayoutInflater.from(requireContext())
-        val dialogView = layoutInflater.inflate(R.layout.alert_dialog_report, null)
+        val dialogView = layoutInflater.inflate(R.layout.dlg_report, null)
 
         val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
             .setView(dialogView)

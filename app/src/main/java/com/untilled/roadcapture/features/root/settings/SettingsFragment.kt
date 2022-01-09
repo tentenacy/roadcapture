@@ -1,28 +1,22 @@
 package com.untilled.roadcapture.features.root.settings
 
 import android.Manifest
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.databinding.FragmentSettingBinding
+import com.untilled.roadcapture.databinding.FragmentSettingsBinding
 import dagger.hilt.android.AndroidEntryPoint
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.util.Log
-import androidx.core.content.ContextCompat
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.MultiplePermissionsReport
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 
 @AndroidEntryPoint
 class SettingsFragment : Fragment() {
-    private var _binding : FragmentSettingBinding? = null
+    private var _binding : FragmentSettingsBinding? = null
     val binding get() = _binding!!
 
     override fun onCreateView(
@@ -30,7 +24,7 @@ class SettingsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSettingBinding.inflate(inflater,container,false)
+        _binding = FragmentSettingsBinding.inflate(inflater,container,false)
 
         return binding.root
     }
@@ -79,7 +73,7 @@ class SettingsFragment : Fragment() {
             startActivity(email)
         }
         binding.textviewSettingServiceLocation.setOnClickListener {
-            val locationPermissionBottomSheetDialog = LocationPermissionBottomSheetDialog()
+            val locationPermissionBottomSheetDialog = PermissionLocationBottomSheetDialog()
             locationPermissionBottomSheetDialog.show(childFragmentManager, "locationPermissionBottomSheet")
         }
     }

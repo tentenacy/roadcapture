@@ -13,14 +13,14 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.untilled.roadcapture.databinding.FragmentMyStudioModificationBinding
-import com.untilled.roadcapture.studioPlace
+import com.untilled.roadcapture.databinding.FragmentMystudioModificationBinding
+import com.untilled.roadcapture.placeFilter
 import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MyStudioModification : Fragment() {
-    private var _binding: FragmentMyStudioModificationBinding? = null
+    private var _binding: FragmentMystudioModificationBinding? = null
     private val binding get() = _binding!!
     private var profileImageUri: Uri? = null
     private var backgroundImageUri: Uri? = null
@@ -60,7 +60,7 @@ class MyStudioModification : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentMyStudioModificationBinding.inflate(inflater,container,false)
+        _binding = FragmentMystudioModificationBinding.inflate(inflater,container,false)
         binding.user = args.user
         initAdapter()
         return binding.root
@@ -116,7 +116,7 @@ class MyStudioModification : Fragment() {
     private fun initAdapter() {
         binding.recyclerviewMyStudioModificationPlace.withModels {
             DummyDataSet.places.forEachIndexed { index, place ->
-                studioPlace {
+                placeFilter {
                     id(index)
                     place(place)
                     onClickItem { model, parentView, clickedView, position ->

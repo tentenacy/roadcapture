@@ -101,7 +101,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view_search_place_divider"
-            tools:listitem="@layout/item_search_place_result" />
+            tools:listitem="@layout/item_place_search" />
 
         <TextView
             android:id="@+id/textview_search_place_no_result"

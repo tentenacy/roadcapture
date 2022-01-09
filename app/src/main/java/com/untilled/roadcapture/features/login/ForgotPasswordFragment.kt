@@ -1,27 +1,24 @@
-package com.untilled.roadcapture.features.root.settings
+package com.untilled.roadcapture.features.login
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.untilled.roadcapture.application.MainActivity
-import com.untilled.roadcapture.databinding.FragmentSettingPasswordBinding
-import com.untilled.roadcapture.databinding.FragmentSettingUsernameBinding
+import com.untilled.roadcapture.databinding.FragmentForgotpwdBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PasswordSettingFragment: Fragment() {
-    private var _binding: FragmentSettingPasswordBinding? = null
-    val binding get() = _binding!!
+class  ForgotPasswordFragment : Fragment() {
+    private var _binding: FragmentForgotpwdBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSettingPasswordBinding.inflate(inflater,container,false)
-
+        _binding = FragmentForgotpwdBinding.inflate(layoutInflater,container,false)
         return binding.root
     }
 
@@ -37,7 +34,7 @@ class PasswordSettingFragment: Fragment() {
     }
 
     private fun setOnClickListeners(){
-        binding.imageviewSettingPasswordBack.setOnClickListener {
+        binding.imageviewPasswordFindBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
     }

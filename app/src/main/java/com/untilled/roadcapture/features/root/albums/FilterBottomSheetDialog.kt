@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.databinding.ModalBottomSheetFilterBinding
+import com.untilled.roadcapture.databinding.BottomsheetAlbumsFilterBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
 import com.untilled.roadcapture.utils.*
@@ -18,17 +18,17 @@ import com.untilled.roadcapture.utils.*
 @AndroidEntryPoint
 class FilterBottomSheetDialog : BottomSheetDialogFragment() {
 
-    private var _binding: ModalBottomSheetFilterBinding? = null
+    private var _binding: BottomsheetAlbumsFilterBinding? = null
     private val binding get() = _binding!!
     private val viewModel: AlbumsViewModel by viewModels({requireParentFragment()})
-    private lateinit var albumFragment: AlbumFragment
+    private lateinit var albumsFragment: AlbumsFragment
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = ModalBottomSheetFilterBinding.inflate(inflater, container, false)
+        _binding = BottomsheetAlbumsFilterBinding.inflate(inflater, container, false)
 
         return binding.root
     }
@@ -36,7 +36,7 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        albumFragment = parentFragment as AlbumFragment
+        albumsFragment = parentFragment as AlbumsFragment
         expandFullHeight()
         initViews()
         setOnClickListeners()
@@ -83,25 +83,25 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
     private fun filterApply() {
         when (binding.radiogroupFilterDuration.checkedRadioButtonId) {
             binding.radiobuttonFilterWholeDuration.id -> {
-                albumFragment.updateView(" ", getFilterDate(TimeUtil.TODAY))
+                albumsFragment.updateView(" ", getFilterDate(TimeUtil.TODAY))
             }
 
             binding.radiobuttonFilterToday.id -> {
-                albumFragment.updateView(getFilterDate(TimeUtil.TODAY), getFilterDate(TimeUtil.TODAY))
+                albumsFragment.updateView(getFilterDate(TimeUtil.TODAY), getFilterDate(TimeUtil.TODAY))
             }
             binding.radiobuttonFilterThisWeek.id -> {
-                albumFragment.updateView(getFilterDate(TimeUtil.WEEK), getFilterDate(TimeUtil.TODAY))
+                albumsFragment.updateView(getFilterDate(TimeUtil.WEEK), getFilterDate(TimeUtil.TODAY))
             }
 
             binding.radiobuttonFilterThisMonth.id -> {
-                albumFragment.updateView(getFilterDate(TimeUtil.MONTH), getFilterDate(TimeUtil.TODAY))
+                albumsFragment.updateView(getFilterDate(TimeUtil.MONTH), getFilterDate(TimeUtil.TODAY))
             }
 
             binding.radiobuttonFilterThisYear.id -> {
-                albumFragment.updateView(getFilterDate(TimeUtil.YEAR), getFilterDate(TimeUtil.TODAY))
+                albumsFragment.updateView(getFilterDate(TimeUtil.YEAR), getFilterDate(TimeUtil.TODAY))
             }
             else -> {
-                albumFragment.updateView(getFilterDate(binding.buttonFilterStartDate.text.toString()), getFilterDate(binding.buttonFilterEndDate.text.toString()))
+                albumsFragment.updateView(getFilterDate(binding.buttonFilterStartDate.text.toString()), getFilterDate(binding.buttonFilterEndDate.text.toString()))
             }
         }
         dismiss()

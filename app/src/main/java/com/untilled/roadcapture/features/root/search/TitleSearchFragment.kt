@@ -1,22 +1,16 @@
 package com.untilled.roadcapture.features.root.search
 
-import android.animation.ValueAnimator
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.airbnb.lottie.LottieAnimationView
 import com.orhanobut.logger.Logger
-import com.untilled.roadcapture.*
+import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentTitleSearchBinding
-import com.untilled.roadcapture.features.base.CustomDivider
 import com.untilled.roadcapture.features.root.RootFragment
-import com.untilled.roadcapture.features.root.RootFragmentDirections
-import com.untilled.roadcapture.studioAlbum
+import com.untilled.roadcapture.titleSearch
 import com.untilled.roadcapture.utils.DummyDataSet
 
 class TitleSearchFragment : Fragment() {

@@ -9,12 +9,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.untilled.roadcapture.databinding.FragmentServiceWithdrawalBinding
+import com.untilled.roadcapture.databinding.FragmentWithdrawalBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class ServiceWithdrawalFragment : Fragment(){
-    private var _binding: FragmentServiceWithdrawalBinding? = null
+class WithdrawalFragment : Fragment(){
+    private var _binding: FragmentWithdrawalBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -22,7 +22,7 @@ class ServiceWithdrawalFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentServiceWithdrawalBinding.inflate(inflater,container,false)
+        _binding = FragmentWithdrawalBinding.inflate(inflater,container,false)
         return binding.root
     }
 

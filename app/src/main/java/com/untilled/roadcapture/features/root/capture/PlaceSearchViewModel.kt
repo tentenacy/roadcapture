@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchPlaceViewModel
+class PlaceSearchViewModel
 @Inject constructor(private val repository: SearchPlaceRepository) : ViewModel() {
     private val _searchPlaceResponse = MutableLiveData<SearchPlaceResponse>()
     val searchPlaceResponse: LiveData<SearchPlaceResponse> get() = _searchPlaceResponse

@@ -1,30 +1,25 @@
 package com.untilled.roadcapture.features.root.albums
 
-import android.animation.ValueAnimator
 import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
-import com.untilled.roadcapture.databinding.FragmentFollowingAlbumBinding
+import com.untilled.roadcapture.databinding.FragmentFollowingalbumsBinding
 import com.untilled.roadcapture.features.root.RootFragment
-import com.untilled.roadcapture.features.root.RootFragmentDirections
-import com.untilled.roadcapture.followingAlbumNews
-import com.untilled.roadcapture.homeAlbum
+import com.untilled.roadcapture.followingFilter
 import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FollowingAlbumFragment : Fragment() {
+class FollowingAlbumsFragment : Fragment() {
 
-    private var _binding: FragmentFollowingAlbumBinding? = null
+    private var _binding: FragmentFollowingalbumsBinding? = null
     private val binding get() = _binding!!
     private var flagLike: Boolean = false
 
@@ -33,7 +28,7 @@ class FollowingAlbumFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentFollowingAlbumBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentFollowingalbumsBinding.inflate(layoutInflater, container, false)
 
         (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarFollowingAlbum)
 
@@ -61,17 +56,19 @@ class FollowingAlbumFragment : Fragment() {
         _binding = null
     }
 
-    private fun initAdapter(){
+    private fun initAdapter() {
 
         binding.recyclerviewFollowingAlbumNews.withModels {
             DummyDataSet.user.forEachIndexed { index, user ->
-                followingAlbumNews {
+                followingFilter {
                     id(index)
                     user(user)
 
                     onClickItem { model, parentView, clickedView, position ->
                         when (clickedView.id) {
-                            R.id.imageview_item_following_album_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                            R.id.imageview_item_following_album_profile -> Navigation.findNavController(
+                                (parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root
+                            )
                                 .navigate(R.id.action_rootFragment_to_studioFragment)
                         }
                     }
@@ -143,7 +140,7 @@ class FollowingAlbumFragment : Fragment() {
 
     private fun showReportDialog() {
         val layoutInflater = LayoutInflater.from(requireContext())
-        val dialogView = layoutInflater.inflate(R.layout.alert_dialog_report, null)
+        val dialogView = layoutInflater.inflate(R.layout.dlg_report, null)
 
         val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
             .setView(dialogView)

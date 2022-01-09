@@ -13,16 +13,16 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.PathOverlay
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.dto.picture.PictureResponse
-import com.untilled.roadcapture.databinding.FragmentPictureViewerMapBinding
+import com.untilled.roadcapture.databinding.FragmentPictureMapBinding
 import com.untilled.roadcapture.utils.DummyDataSet
 import com.untilled.roadcapture.utils.extension.getPxFromDp
 import com.untilled.roadcapture.utils.extension.navigationHeight
 
-class PictureViewerMapFragment : Fragment(), OnMapReadyCallback {
-    private var _binding : FragmentPictureViewerMapBinding? = null
+class PictureMapFragment : Fragment(), OnMapReadyCallback {
+    private var _binding : FragmentPictureMapBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: PictureViewerContainerViewModel by viewModels({requireParentFragment()})
+    private val viewModel: PictureViewerViewModel by viewModels({requireParentFragment()})
 
     private var naverMap: NaverMap? = null
     private var uiSettings: UiSettings? = null
@@ -39,7 +39,7 @@ class PictureViewerMapFragment : Fragment(), OnMapReadyCallback {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentPictureViewerMapBinding.inflate(inflater, container, false)
+        _binding = FragmentPictureMapBinding.inflate(inflater, container, false)
 
         pictureResponseList = DummyDataSet.picture
         initNaverMap()

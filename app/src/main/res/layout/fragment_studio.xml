@@ -193,7 +193,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textview_studio_place"
-                    tools:listitem="@layout/item_studio_place" />
+                    tools:listitem="@layout/item_place_filter" />
 
                 <TextView
                     android:id="@+id/textview_studio_album"
@@ -214,7 +214,7 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textview_studio_album"
-                    tools:listitem="@layout/item_studio_album" />
+                    tools:listitem="@layout/item_albums_studio" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.core.widget.NestedScrollView>

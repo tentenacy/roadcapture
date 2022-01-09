@@ -9,7 +9,7 @@
         android:id="@+id/emailInputSignupFragment"
         android:name="com.untilled.roadcapture.features.signup.EmailInputSignupFragment"
         android:label="EmailInputSignupFragment"
-        tools:layout="@layout/fragment_email_input_signup">
+        tools:layout="@layout/fragment_emailinput_signup">
         <action
             android:id="@+id/action_emailInputSignupFragment_to_passwordInputSignupFragment"
             app:destination="@id/passwordInputSignupFragment"
@@ -22,7 +22,7 @@
         android:id="@+id/passwordInputSignupFragment"
         android:name="com.untilled.roadcapture.features.signup.PasswordInputSignupFragment"
         android:label="PasswordInputSignupFragment"
-        tools:layout="@layout/fragment_password_input_signup">
+        tools:layout="@layout/fragment_pwdinput_signup">
         <action
             android:id="@+id/action_passwordInputSignupFragment_to_usernameInputSignupFragment"
             app:destination="@id/usernameInputSignupFragment"
@@ -35,5 +35,5 @@
         android:id="@+id/usernameInputSignupFragment"
         android:name="com.untilled.roadcapture.features.signup.UsernameInputSignupFragment"
         android:label="UsernameInputSignupFragment"
-        tools:layout="@layout/fragment_username_input_signup"/>
+        tools:layout="@layout/fragment_usernameinput_signup"/>
 </navigation>

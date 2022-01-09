@@ -4,26 +4,21 @@ import android.Manifest
 import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.*
 import android.view.Gravity.END
 import android.view.Gravity.TOP
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.navArgs
 import com.naver.maps.map.overlay.Marker
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.data.dto.picture.PictureResponse
 import com.untilled.roadcapture.databinding.FragmentCaptureBinding
 import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.net.toUri
@@ -303,7 +298,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
 
     private fun showCancelAlbumCreationAskingDialog(logic: () -> Unit) {
         val layoutInflater = LayoutInflater.from(requireContext())
-        val dialogView = layoutInflater.inflate(R.layout.alert_dialog_cancel_album_creation_asking, null)
+        val dialogView = layoutInflater.inflate(R.layout.dlg_albumcreation_cancel, null)
 
         val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
             .setView(dialogView)
@@ -325,7 +320,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
 
     private fun showThumbnailSettingDialog() {
         val layoutInflater = LayoutInflater.from(requireContext())
-        val dialogView = layoutInflater.inflate(R.layout.alert_dialog_thumbnail_setting, null)
+        val dialogView = layoutInflater.inflate(R.layout.dlg_thumbnail_setting, null)
 
         val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
             .setView(dialogView)

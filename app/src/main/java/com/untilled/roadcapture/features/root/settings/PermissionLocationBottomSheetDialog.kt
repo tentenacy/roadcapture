@@ -7,18 +7,13 @@ import android.provider.Settings
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.FragmentManager
-import androidx.navigation.Navigation
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.untilled.roadcapture.R
-import com.untilled.roadcapture.application.MainActivity
-import com.untilled.roadcapture.databinding.ModalBottomSheetLocationPermissionBinding
-import com.untilled.roadcapture.features.root.RootFragment
+import com.untilled.roadcapture.databinding.BottomsheetPermissionLocationBinding
 
-class LocationPermissionBottomSheetDialog : BottomSheetDialogFragment() {
+class PermissionLocationBottomSheetDialog : BottomSheetDialogFragment() {
 
-    private var _binding: ModalBottomSheetLocationPermissionBinding? = null
+    private var _binding: BottomsheetPermissionLocationBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -26,7 +21,7 @@ class LocationPermissionBottomSheetDialog : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = ModalBottomSheetLocationPermissionBinding.inflate(inflater, container, false)
+        _binding = BottomsheetPermissionLocationBinding.inflate(inflater, container, false)
 
         return binding.root
     }

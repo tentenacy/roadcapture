@@ -9,5 +9,5 @@
         android:id="@+id/myStudioFragment"
         android:name="com.untilled.roadcapture.features.root.studio.MyStudioFragment"
         android:label="fragment_my_studio"
-        tools:layout="@layout/fragment_my_studio" />
+        tools:layout="@layout/fragment_mystudio" />
 </navigation>

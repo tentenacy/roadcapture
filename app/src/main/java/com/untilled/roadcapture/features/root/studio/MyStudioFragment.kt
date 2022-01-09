@@ -6,17 +6,18 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.untilled.roadcapture.*
-import com.untilled.roadcapture.databinding.FragmentMyStudioBinding
+import com.untilled.roadcapture.R
+import com.untilled.roadcapture.databinding.FragmentMystudioBinding
 import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
+import com.untilled.roadcapture.placeFilter
 import com.untilled.roadcapture.utils.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MyStudioFragment : Fragment() {
 
-    private var _binding: FragmentMyStudioBinding? = null
+    private var _binding: FragmentMystudioBinding? = null
     val binding get() = _binding!!
 
 
@@ -25,7 +26,7 @@ class MyStudioFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentMyStudioBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentMystudioBinding.inflate(layoutInflater, container, false)
         binding.user = DummyDataSet.myStudioUser
         initAdapter()
         return binding.root
@@ -84,7 +85,7 @@ class MyStudioFragment : Fragment() {
         }
         binding.recyclerviewMyStudioPlace.withModels {
             DummyDataSet.places.forEachIndexed { index, place ->
-                studioPlace {
+                placeFilter {
                     id(index)
                     place(place)
 

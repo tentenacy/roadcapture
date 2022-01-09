@@ -15,7 +15,7 @@ import androidx.navigation.Navigation
 import androidx.paging.PagingData
 import com.airbnb.epoxy.DataBindingEpoxyModel
 import com.airbnb.lottie.LottieAnimationView
-import com.untilled.roadcapture.HomeAlbumBindingModel_
+import com.untilled.roadcapture.AlbumsBindingModel_
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.dto.album.Albums
@@ -28,7 +28,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class AlbumFragment : Fragment() {
+class AlbumsFragment : Fragment() {
 
     private var _binding: FragmentAlbumsBinding? = null
     private val binding get() = _binding!!
@@ -50,7 +50,7 @@ class AlbumFragment : Fragment() {
                     .navigate(R.id.action_rootFragment_to_studioFragment)
 
                 R.id.imageview_item_home_album_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                    .navigate(RootFragmentDirections.actionRootFragmentToCommentFragment((model as HomeAlbumBindingModel_).albums().id.toString()))
+                    .navigate(RootFragmentDirections.actionRootFragmentToCommentFragment((model as AlbumsBindingModel_).albums().id.toString()))
 
                 R.id.imageview_item_home_album_like -> if (!flagLike) {
                     val animator = ValueAnimator.ofFloat(0f, 0.5f).setDuration(800)
@@ -74,7 +74,7 @@ class AlbumFragment : Fragment() {
                 R.id.textview_item_home_album_title,
                 R.id.textview_item_home_album_desc->
                     Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
-                    navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment((model as HomeAlbumBindingModel_).albums().id.toString()))
+                    navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment((model as AlbumsBindingModel_).albums().id.toString()))
                 R.id.imageview_item_home_album_more -> {
                     val popupMenu = PopupMenu(requireContext(), clickedView)
                     popupMenu.apply {
@@ -151,7 +151,7 @@ class AlbumFragment : Fragment() {
 
     private fun showReportDialog() {
         val layoutInflater = LayoutInflater.from(requireContext())
-        val dialogView = layoutInflater.inflate(R.layout.alert_dialog_report, null)
+        val dialogView = layoutInflater.inflate(R.layout.dlg_report, null)
 
         val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
             .setView(dialogView)

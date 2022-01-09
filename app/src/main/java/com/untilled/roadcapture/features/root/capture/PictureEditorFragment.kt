@@ -123,7 +123,7 @@ class PictureEditorFragment : Fragment() {
 
     private fun showDeletePictureAskingDialog(logic: () -> Unit) {
         val layoutInflater = LayoutInflater.from(requireContext())
-        val dialogView = layoutInflater.inflate(R.layout.alert_dialog_delete_picture_asking, null)
+        val dialogView = layoutInflater.inflate(R.layout.dlg_picture_delete, null)
 
         val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
             .setView(dialogView)

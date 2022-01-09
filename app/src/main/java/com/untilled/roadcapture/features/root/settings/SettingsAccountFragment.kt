@@ -1,7 +1,6 @@
 package com.untilled.roadcapture.features.root.settings
 
 import android.app.AlertDialog
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,13 +9,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.databinding.FragmentSettingAccountBinding
+import com.untilled.roadcapture.databinding.FragmentSettingsAccountBinding
 import dagger.hilt.android.AndroidEntryPoint
-import org.w3c.dom.Text
 
 @AndroidEntryPoint
-class AccountSettingFragment : Fragment() {
-    private var _binding: FragmentSettingAccountBinding? = null
+class SettingsAccountFragment : Fragment() {
+    private var _binding: FragmentSettingsAccountBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -24,7 +22,7 @@ class AccountSettingFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSettingAccountBinding.inflate(inflater, container, false)
+        _binding = FragmentSettingsAccountBinding.inflate(inflater, container, false)
 
         return binding.root
 
@@ -63,7 +61,7 @@ class AccountSettingFragment : Fragment() {
 
     private fun showLogoutConfirmationDialog() {
         val layoutInflater = LayoutInflater.from(requireContext())
-        val dialogView = layoutInflater.inflate(R.layout.alert_dialog_logout_confirmation, null)
+        val dialogView = layoutInflater.inflate(R.layout.dlg_logout, null)
 
         val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
             .setView(dialogView)

@@ -20,7 +20,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PictureViewerContainerViewModel
+class PictureViewerViewModel
 @Inject constructor(private val repository: AlbumRepository) : ViewModel() {
     private val _album = MutableLiveData<AlbumResponse>()
     val albumResponse: LiveData<AlbumResponse> get() = _album

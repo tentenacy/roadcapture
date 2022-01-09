@@ -18,19 +18,19 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.dto.comment.Comments
-import com.untilled.roadcapture.databinding.ModalBottomSheetCommentBinding
+import com.untilled.roadcapture.databinding.BottomsheetCommentBinding
 import com.untilled.roadcapture.features.base.CustomDivider
 import com.untilled.roadcapture.features.base.EpoxyItemClickListener
-import com.untilled.roadcapture.features.root.albums.PictureViewerContainerViewModel
+import com.untilled.roadcapture.features.root.albums.PictureViewerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CommentBottomSheetDialog : BottomSheetDialogFragment(){
-    private var _binding: ModalBottomSheetCommentBinding? = null
+    private var _binding: BottomsheetCommentBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: PictureViewerContainerViewModel by viewModels({requireParentFragment().requireParentFragment()})
+    private val viewModel: PictureViewerViewModel by viewModels({requireParentFragment().requireParentFragment()})
     private val epoxyController = CommentsEpoxyController()
 
     private val epoxyItemClickListener = object : EpoxyItemClickListener {
@@ -68,7 +68,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = ModalBottomSheetCommentBinding.inflate(inflater,container,false)
+        _binding = BottomsheetCommentBinding.inflate(inflater,container,false)
         (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarBottomSheetComment)
 
         return binding.root
@@ -131,7 +131,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
 
     private fun showReportDialog() {
         val layoutInflater = LayoutInflater.from(requireContext())
-        val dialogView = layoutInflater.inflate(R.layout.alert_dialog_report, null)
+        val dialogView = layoutInflater.inflate(R.layout.dlg_report, null)
 
         val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
             .setView(dialogView)

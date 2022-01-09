@@ -8,7 +8,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.untilled.roadcapture.R
 
-class StackHostFragment : Fragment(R.layout.stack_host_fragment) {
+class StackHostFragment : Fragment(R.layout.fragment_stackhost) {
     companion object {
         fun newInstance(@NavigationRes navigationId: Int): StackHostFragment =
             StackHostFragment().apply {

@@ -9,7 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.databinding.FragmentEmailInputSignupBinding
+import com.untilled.roadcapture.databinding.FragmentEmailinputSignupBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -17,7 +17,7 @@ class EmailInputSignupFragment : Fragment() {
 
     private val viewModel: SignupViewModel by viewModels({ requireParentFragment() })
 
-    private var _binding: FragmentEmailInputSignupBinding? = null
+    private var _binding: FragmentEmailinputSignupBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -25,7 +25,7 @@ class EmailInputSignupFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentEmailInputSignupBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentEmailinputSignupBinding.inflate(layoutInflater, container, false)
         binding.apply {
             lifecycleOwner = lifecycleOwner
             vm = viewModel

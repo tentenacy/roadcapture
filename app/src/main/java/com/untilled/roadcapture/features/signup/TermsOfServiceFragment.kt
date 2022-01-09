@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.untilled.roadcapture.databinding.FragmentTermsOfServiceBinding
+import com.untilled.roadcapture.databinding.FragmentTermsofserviceBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class TermsOfServiceFragment : Fragment() {
-    private var _binding: FragmentTermsOfServiceBinding? = null
+    private var _binding: FragmentTermsofserviceBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -18,7 +18,7 @@ class TermsOfServiceFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentTermsOfServiceBinding.inflate(layoutInflater,container,false)
+        _binding = FragmentTermsofserviceBinding.inflate(layoutInflater,container,false)
 
         return binding.root
     }

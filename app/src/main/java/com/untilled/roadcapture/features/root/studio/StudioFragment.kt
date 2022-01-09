@@ -91,7 +91,7 @@ class StudioFragment : Fragment() {
         }
         binding.recyclerviewStudioPlace.withModels {
             DummyDataSet.places.forEachIndexed { index, place ->
-                studioPlace {
+                placeFilter {
                     id(index)
                     place(place)
 

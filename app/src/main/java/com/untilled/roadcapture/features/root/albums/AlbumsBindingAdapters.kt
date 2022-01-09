@@ -22,7 +22,7 @@ import javax.inject.Provider
 import javax.inject.Singleton
 
 
-object AlbumBindingAdapters {
+object AlbumsBindingAdapters {
 
     @JvmStatic
     @BindingAdapter("albumThumbnailImage")

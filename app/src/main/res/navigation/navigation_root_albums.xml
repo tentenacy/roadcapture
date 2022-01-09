@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/albumsFragment"
-        android:name="com.untilled.roadcapture.features.root.albums.AlbumFragment"
+        android:name="com.untilled.roadcapture.features.root.albums.AlbumsFragment"
         android:label="fragment_albums"
         tools:layout="@layout/fragment_albums" />
 </navigation>
