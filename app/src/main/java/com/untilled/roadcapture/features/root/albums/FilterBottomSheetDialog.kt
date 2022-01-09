@@ -28,6 +28,7 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         _binding = BottomsheetAlbumsFilterBinding.inflate(inflater, container, false)
 
         return binding.root
@@ -52,56 +53,56 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
     private fun initViews() {
         binding.run {
             val now = Calendar.getInstance()
-            buttonFilterStartDate.text = dateToString(now)
-            buttonFilterEndDate.text = dateToString(now)
-            radiogroupFilterDuration.clearCheck()
-            radiogroupFilterSorting.clearCheck()
-            radiobuttonFilterWholeDuration.isChecked = true
-            radiobuttonFilterSortingLatest.isChecked = true
+            btnDlgfilterStartdate.text = dateToString(now)
+            btnDlgfilterEnddate.text = dateToString(now)
+            radiogroupDlgfilterDuration.clearCheck()
+            radiogroupDlgfilterSorting.clearCheck()
+            radiobtnDlgfilterWhole.isChecked = true
+            radiobtnDlgfilterSortLatest.isChecked = true
         }
 
     }
 
     private fun setOnClickListeners() {
-        binding.buttonFilterApply.setOnClickListener {
+        binding.btnDlgfilterApply.setOnClickListener {
             filterApply()
         }
-        binding.imageviewFilterClose.setOnClickListener {
+        binding.imageDlgfilterClose.setOnClickListener {
             dismiss()
         }
-        binding.textviewFilterReset.setOnClickListener {
+        binding.textDlgfilterReset.setOnClickListener {
             initViews()
         }
-        binding.buttonFilterStartDate.setOnClickListener {
+        binding.btnDlgfilterStartdate.setOnClickListener {
             onCreateDatePicker(it as Button)
         }
-        binding.buttonFilterEndDate.setOnClickListener {
+        binding.btnDlgfilterEnddate.setOnClickListener {
             onCreateDatePicker(it as Button)
         }
     }
 
     private fun filterApply() {
-        when (binding.radiogroupFilterDuration.checkedRadioButtonId) {
-            binding.radiobuttonFilterWholeDuration.id -> {
+        when (binding.radiogroupDlgfilterDuration.checkedRadioButtonId) {
+            binding.radiobtnDlgfilterWhole.id -> {
                 albumsFragment.updateView(" ", getFilterDate(TimeUtil.TODAY))
             }
 
-            binding.radiobuttonFilterToday.id -> {
+            binding.radiobtnDlgfilterToday.id -> {
                 albumsFragment.updateView(getFilterDate(TimeUtil.TODAY), getFilterDate(TimeUtil.TODAY))
             }
-            binding.radiobuttonFilterThisWeek.id -> {
+            binding.radiobtnDlgfilterWeek.id -> {
                 albumsFragment.updateView(getFilterDate(TimeUtil.WEEK), getFilterDate(TimeUtil.TODAY))
             }
 
-            binding.radiobuttonFilterThisMonth.id -> {
+            binding.radiobtnDlgfilterMonth.id -> {
                 albumsFragment.updateView(getFilterDate(TimeUtil.MONTH), getFilterDate(TimeUtil.TODAY))
             }
 
-            binding.radiobuttonFilterThisYear.id -> {
+            binding.radiobtnDlgfilterYear.id -> {
                 albumsFragment.updateView(getFilterDate(TimeUtil.YEAR), getFilterDate(TimeUtil.TODAY))
             }
             else -> {
-                albumsFragment.updateView(getFilterDate(binding.buttonFilterStartDate.text.toString()), getFilterDate(binding.buttonFilterEndDate.text.toString()))
+                albumsFragment.updateView(getFilterDate(binding.btnDlgfilterStartdate.text.toString()), getFilterDate(binding.btnDlgfilterEnddate.text.toString()))
             }
         }
         dismiss()
@@ -118,23 +119,23 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
             requireContext(),
             R.style.DialogTheme,
             { _, year, month, dayOfMonth ->
-                binding.radiogroupFilterDuration.clearCheck()
+                binding.radiogroupDlgfilterDuration.clearCheck()
 
                 when (view.id) {
-                    R.id.button_filter_start_date -> {
+                    R.id.btn_dlgfilter_startdate -> {
                         val startDate = getCalendar(year, month, dayOfMonth)
-                        val endDate = getCalendar(binding.buttonFilterEndDate.text.toString())
+                        val endDate = getCalendar(binding.btnDlgfilterEnddate.text.toString())
                         view.text = dateToString(startDate)
                         if (compareDate(startDate, endDate)) {
-                            binding.buttonFilterEndDate.text = dateToString(startDate)
+                            binding.btnDlgfilterEnddate.text = dateToString(startDate)
                         }
                     }
-                    R.id.button_filter_end_date -> {
-                        val startDate = getCalendar(binding.buttonFilterStartDate.text.toString())
+                    R.id.btn_dlgfilter_enddate -> {
+                        val startDate = getCalendar(binding.btnDlgfilterStartdate.text.toString())
                         val endDate = getCalendar(year, month, dayOfMonth)
                         view.text = dateToString(endDate)
                         if (compareDate(startDate, endDate)) {
-                            binding.buttonFilterStartDate.text = dateToString(endDate)
+                            binding.btnDlgfilterStartdate.text = dateToString(endDate)
                         }
                     }
                 }

@@ -5,25 +5,25 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/filter_container"
+        android:id="@+id/constraint_dlgfilter_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingHorizontal="16dp"
-        android:background="@drawable/dlg_bottomsheet">
+        android:background="@drawable/dlg_bottomsheet"
+        android:paddingHorizontal="16dp">
 
         <ImageView
-            android:id="@+id/imageview_filter_close"
+            android:id="@+id/image_dlgfilter_close"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_close"
-            app:layout_constraintBottom_toBottomOf="@id/textview_filter_title"
+            app:layout_constraintBottom_toBottomOf="@id/text_dlgfilter_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/textview_filter_title"
+            app:layout_constraintTop_toTopOf="@id/text_dlgfilter_title"
             app:tint="@color/black"
             bind:rippleEffect="@{null}" />
 
         <TextView
-            android:id="@+id/textview_filter_title"
+            android:id="@+id/text_dlgfilter_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -34,40 +34,40 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/textview_filter_reset"
+            android:id="@+id/text_dlgfilter_reset"
             android:layout_width="wrap_content"
             android:layout_height="0dp"
             android:clickable="true"
             android:gravity="center"
             android:text="@string/filter_reset"
             android:textAppearance="@style/Body"
-            app:layout_constraintBottom_toBottomOf="@id/view_filter_divider_first"
+            app:layout_constraintBottom_toBottomOf="@id/view_dlgfilter_divider1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             bind:rippleEffect="@{null}" />
 
         <View
-            android:id="@+id/view_filter_divider_first"
+            android:id="@+id/view_dlgfilter_divider1"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_filter_title" />
+            app:layout_constraintTop_toBottomOf="@id/text_dlgfilter_title" />
 
         <TextView
-            android:id="@+id/textview_filter_duration"
+            android:id="@+id/text_dlgfilter_label_duration"
             style="@style/SubHeadBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/filter_duration"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view_filter_divider_first" />
+            app:layout_constraintTop_toBottomOf="@id/view_dlgfilter_divider1" />
 
         <HorizontalScrollView
-            android:id="@+id/scrollview_filter"
+            android:id="@+id/scroll_dlgfilter"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -75,10 +75,10 @@
             android:scrollbars="none"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_filter_duration">
+            app:layout_constraintTop_toBottomOf="@id/text_dlgfilter_label_duration">
 
             <RadioGroup
-                android:id="@+id/radiogroup_filter_duration"
+                android:id="@+id/radiogroup_dlgfilter_duration"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_marginBottom="8dp"
@@ -88,15 +88,15 @@
                 app:layout_constraintStart_toStartOf="parent">
 
                 <RadioButton
-                    android:id="@+id/radiobutton_filter_whole_duration"
+                    android:id="@+id/radiobtn_dlgfilter_whole"
                     style="@style/RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:checked="true"
-                    android:text="@string/filter_whole_duration"/>
+                    android:text="@string/filter_whole_duration" />
 
                 <RadioButton
-                    android:id="@+id/radiobutton_filter_today"
+                    android:id="@+id/radiobtn_dlgfilter_today"
                     style="@style/RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
@@ -104,104 +104,110 @@
                     android:text="@string/filter_today" />
 
                 <RadioButton
-                    android:id="@+id/radiobutton_filter_this_week"
+                    android:id="@+id/radiobtn_dlgfilter_week"
                     style="@style/RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
-                    android:text="@string/filter_this_week"/>
+                    android:text="@string/filter_this_week" />
 
                 <RadioButton
-                    android:id="@+id/radiobutton_filter_this_month"
+                    android:id="@+id/radiobtn_dlgfilter_month"
                     style="@style/RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
-                    android:text="@string/filter_this_month"/>
+                    android:text="@string/filter_this_month" />
 
                 <RadioButton
-                    android:id="@+id/radiobutton_filter_this_year"
+                    android:id="@+id/radiobtn_dlgfilter_year"
                     style="@style/RadioButton"
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
-                    android:text="@string/filter_this_year"/>
-
+                    android:text="@string/filter_this_year" />
             </RadioGroup>
-
         </HorizontalScrollView>
 
         <TextView
-            android:id="@+id/textview_filter_start_date"
+            android:id="@+id/text_dlgfilter_label_startdate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
             android:text="@string/filter_start_date"
             android:textAppearance="@style/Body"
-            app:layout_constraintStart_toStartOf="@id/button_filter_start_date"
-            app:layout_constraintTop_toBottomOf="@id/scrollview_filter" />
+            app:layout_constraintStart_toStartOf="@id/btn_dlgfilter_startdate"
+            app:layout_constraintTop_toBottomOf="@id/scroll_dlgfilter" />
 
-        <Button
-            android:id="@+id/button_filter_start_date"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_dlgfilter_startdate"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="2dp"
-            android:backgroundTint="@color/divider"
+            android:background="@drawable/btn_bottomsheet"
+            android:backgroundTint="@color/inactive"
             android:elevation="1dp"
-            style="@style/BottomSheetButtonGray"
+            android:fontFamily="@font/notosanskr_regular"
+            android:includeFontPadding="false"
+            android:stateListAnimator="@null"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@id/guideline_dlgfilter_h50p"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/guideline_filter_center"
-            app:layout_constraintTop_toBottomOf="@id/textview_filter_start_date"
+            app:layout_constraintTop_toBottomOf="@id/text_dlgfilter_label_startdate"
             bind:rippleEffect="@{null}"
             tools:text="2021년 09월 07일" />
 
         <TextView
-            android:id="@+id/textview_filter_end_date"
+            android:id="@+id/text_dlgfilter_label_enddate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
             android:text="@string/filter_end_date"
             android:textAppearance="@style/Body"
-            app:layout_constraintStart_toStartOf="@id/button_filter_end_date"
-            app:layout_constraintTop_toTopOf="@id/textview_filter_start_date" />
+            app:layout_constraintStart_toStartOf="@id/btn_dlgfilter_enddate"
+            app:layout_constraintTop_toTopOf="@id/text_dlgfilter_label_startdate" />
 
-        <Button
-            android:id="@+id/button_filter_end_date"
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_dlgfilter_enddate"
             android:layout_width="0dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
+            android:background="@drawable/btn_bottomsheet"
             android:elevation="1dp"
-            style="@style/BottomSheetButtonGray"
+            android:fontFamily="@font/notosanskr_regular"
+            android:includeFontPadding="false"
+            android:stateListAnimator="@null"
+            android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/guideline_filter_center"
-            app:layout_constraintTop_toTopOf="@id/button_filter_start_date"
-            tools:text="2021년 9월 7일" />
+            app:layout_constraintStart_toStartOf="@id/guideline_dlgfilter_h50p"
+            app:layout_constraintTop_toTopOf="@id/btn_dlgfilter_startdate"
+            tools:text="2021년 09월 07일" />
 
         <View
-            android:id="@+id/view_filter_divider_second"
+            android:id="@+id/view_dlgfilter_divider2"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginTop="15dp"
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_filter_start_date" />
+            app:layout_constraintTop_toBottomOf="@id/btn_dlgfilter_startdate" />
 
         <TextView
-            android:id="@+id/textview_filter_sorting"
+            android:id="@+id/text_dlgfilter_label_sort"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/filter_sorting"
             android:textAppearance="@style/SubHeadBold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/view_filter_divider_second" />
+            app:layout_constraintTop_toBottomOf="@id/view_dlgfilter_divider2" />
 
         <RadioGroup
-            android:id="@+id/radiogroup_filter_sorting"
+            android:id="@+id/radiogroup_dlgfilter_sorting"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="16dp"
@@ -209,28 +215,28 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_filter_sorting">
+            app:layout_constraintTop_toBottomOf="@id/text_dlgfilter_label_sort">
 
             <RadioButton
-                android:id="@+id/radiobutton_filter_sorting_latest"
+                android:id="@+id/radiobtn_dlgfilter_sort_latest"
                 style="@style/RadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:background="@drawable/selector_btn_radio_filter"
+                android:background="@drawable/selector_radio_filter"
                 android:checked="true"
                 android:text="@string/filter_sorting_latest" />
 
             <RadioButton
-                android:id="@+id/radiobutton_filter_sorting_popularity"
+                android:id="@+id/radiobtn_dlgfilter_sort_popularity"
                 style="@style/RadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
-                android:text="@string/filter_sorting_popularity"/>
+                android:text="@string/filter_sorting_popularity" />
         </RadioGroup>
 
         <Button
-            android:id="@+id/button_filter_apply"
+            android:id="@+id/btn_dlgfilter_apply"
             style="@style/BottomSheetButton"
             android:layout_width="0dp"
             android:layout_height="56dp"
@@ -239,15 +245,15 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/radiogroup_filter_sorting"
+            app:layout_constraintTop_toBottomOf="@id/radiogroup_dlgfilter_sorting"
             app:layout_constraintVertical_bias="0.666" />
 
         <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline_filter_center"
+            android:id="@+id/guideline_dlgfilter_h50p"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5"/>
+            app:layout_constraintGuide_percent="0.5" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

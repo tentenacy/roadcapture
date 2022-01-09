@@ -45,7 +45,7 @@ class CommentFragment : Fragment() {
                 R.id.imageview_item_comment_more -> {
                     val popupMenu = PopupMenu(requireContext(), clickedView)
                     popupMenu.apply {
-                        menuInflater.inflate(R.menu.popup_menu_comment_more, popupMenu.menu)
+                        menuInflater.inflate(R.menu.popupmenu_comment_more, popupMenu.menu)
                         setOnMenuItemClickListener { item ->
                             when (item.itemId) {
                                 R.id.popup_menu_comment_more_report -> {

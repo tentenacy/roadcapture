@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/album_creation_asking_container"
+        android:id="@+id/constraint_dlgalbumcreation_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/dlg_bottomsheet">
 
         <TextView
-            android:id="@+id/textview_album_creation_asking_title"
+            android:id="@+id/text_dlgalbumcreation_title"
             style="@style/BottomSheetHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -20,17 +20,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/imageview_album_creation_asking_album"
+            android:id="@+id/image_dlgalbumcreation_album"
             android:layout_width="128dp"
             android:layout_height="128dp"
             android:layout_marginTop="24dp"
             android:src="@drawable/ic_photo_album"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_album_creation_asking_title" />
+            app:layout_constraintTop_toBottomOf="@id/text_dlgalbumcreation_title" />
 
         <TextView
-            android:id="@+id/textview_album_creation_description"
+            android:id="@+id/text_dlgalbumcreation_desc"
             style="@style/Head"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -41,10 +41,10 @@
             android:text="@string/album_creation_description"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageview_album_creation_asking_album" />
+            app:layout_constraintTop_toBottomOf="@id/image_dlgalbumcreation_album" />
 
         <Button
-            android:id="@+id/button_album_creation_asking_create"
+            android:id="@+id/btn_dlgalbumcreation_create"
             style="@style/BottomSheetButton"
             android:layout_width="0dp"
             android:layout_height="56dp"
@@ -53,10 +53,10 @@
             android:text="@string/album_creation_asking_create"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textview_album_creation_description" />
+            app:layout_constraintTop_toBottomOf="@id/text_dlgalbumcreation_desc" />
 
         <Button
-            android:id="@+id/button_album_creation_asking_cancel"
+            android:id="@+id/btn_dlgalbumcreation_cancel"
             style="@style/BottomSheetButtonWhite"
             android:layout_width="0dp"
             android:layout_height="56dp"
@@ -67,7 +67,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/button_album_creation_asking_create" />
+            app:layout_constraintTop_toBottomOf="@id/btn_dlgalbumcreation_create" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

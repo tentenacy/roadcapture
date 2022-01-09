@@ -78,7 +78,7 @@ class AlbumsFragment : Fragment() {
                 R.id.imageview_item_home_album_more -> {
                     val popupMenu = PopupMenu(requireContext(), clickedView)
                     popupMenu.apply {
-                        menuInflater.inflate(R.menu.popup_menu_albums_more, popupMenu.menu)
+                        menuInflater.inflate(R.menu.popupmenu_albums_more, popupMenu.menu)
                         setOnMenuItemClickListener { item ->
                             when (item.itemId) {
                                 R.id.popup_menu_albums_more_share -> {
