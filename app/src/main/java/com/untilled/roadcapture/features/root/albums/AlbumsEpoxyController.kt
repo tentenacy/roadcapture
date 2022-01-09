@@ -1,11 +1,9 @@
 package com.untilled.roadcapture.features.root.albums
 
-import android.util.Log
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.paging3.PagingDataEpoxyController
 import com.untilled.roadcapture.AlbumsBindingModel_
 import com.untilled.roadcapture.data.dto.album.Albums
-import com.untilled.roadcapture.features.base.EpoxyItemClickListener
 import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
 
 class AlbumsEpoxyController : PagingDataEpoxyController<Albums>() {
@@ -21,7 +19,7 @@ class AlbumsEpoxyController : PagingDataEpoxyController<Albums>() {
             }
     }
 
-    fun setOnClickListener(epoxyItemClickListenerListener: (EpoxyItemArgs) -> Unit){
+    fun setOnClickListener(epoxyItemClickListenerListener: (EpoxyItemArgs) -> Unit) {
         this.epoxyItemClickListener = epoxyItemClickListenerListener
     }
 }

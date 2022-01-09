@@ -14,13 +14,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.paging.PagingData
-import com.airbnb.epoxy.DataBindingEpoxyModel
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.dto.comment.Comments
 import com.untilled.roadcapture.databinding.FragmentCommentBinding
 import com.untilled.roadcapture.features.base.CustomDivider
-import com.untilled.roadcapture.features.base.EpoxyItemClickListener
 import com.untilled.roadcapture.features.root.albums.AlbumsViewModel
 import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
 import dagger.hilt.android.AndroidEntryPoint

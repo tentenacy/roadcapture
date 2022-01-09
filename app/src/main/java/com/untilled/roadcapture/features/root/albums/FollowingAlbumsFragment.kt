@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.airbnb.epoxy.EpoxyController
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentFollowingalbumsBinding
@@ -22,6 +23,8 @@ class FollowingAlbumsFragment : Fragment() {
     private var _binding: FragmentFollowingalbumsBinding? = null
     private val binding get() = _binding!!
     private var flagLike: Boolean = false
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,23 +61,7 @@ class FollowingAlbumsFragment : Fragment() {
 
     private fun initAdapter() {
 
-        binding.recyclerviewFollowingAlbumNews.withModels {
-            DummyDataSet.user.forEachIndexed { index, user ->
-                followingFilter {
-                    id(index)
-                    user(user)
-
-                    onClickItem { model, parentView, clickedView, position ->
-                        when (clickedView.id) {
-                            R.id.imageview_item_following_album_profile -> Navigation.findNavController(
-                                (parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root
-                            )
-                                .navigate(R.id.action_rootFragment_to_studioFragment)
-                        }
-                    }
-                }
-            }
-        }
+        binding.recyclerviewFollowingAlbumNews.withModels { initFollowingAlbumsFilter() }
 
 //        binding.recyclerviewFollowingAlbum.withModels {
 //            DummyDataSet.albums.forEachIndexed { index, album ->
@@ -138,21 +125,37 @@ class FollowingAlbumsFragment : Fragment() {
 //        }
     }
 
+    private fun EpoxyController.initFollowingAlbumsFilter() {
+        DummyDataSet.user.forEachIndexed { index, user ->
+            followingFilter {
+                id(index)
+                user(user)
+
+                onClickItem { model, parentView, clickedView, position ->
+                    when (clickedView.id) {
+                        R.id.imageview_item_following_album_profile -> Navigation.findNavController(
+                            (parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root
+                        )
+                            .navigate(R.id.action_rootFragment_to_studioFragment)
+                    }
+                }
+            }
+        }
+    }
+
+
+
     private fun showReportDialog() {
-        val layoutInflater = LayoutInflater.from(requireContext())
-        val dialogView = layoutInflater.inflate(R.layout.dlg_report, null)
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dlg_report, null)
 
         val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
             .setView(dialogView)
             .create()
 
-        val textViewReport = dialogView.findViewById<TextView>(R.id.textview_report_report)
-        val textViewCancel = dialogView.findViewById<TextView>(R.id.textview_report_cancel)
-
-        textViewReport?.setOnClickListener {
+        dialogView.findViewById<TextView>(R.id.textview_report_report)?.setOnClickListener {
             dialog.dismiss()
         }
-        textViewCancel?.setOnClickListener {
+        dialogView.findViewById<TextView>(R.id.textview_report_cancel)?.setOnClickListener {
             dialog.dismiss()
         }
 

@@ -4,7 +4,6 @@ import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.paging3.PagingDataEpoxyController
 import com.untilled.roadcapture.CommentBindingModel_
 import com.untilled.roadcapture.data.dto.comment.Comments
-import com.untilled.roadcapture.features.base.EpoxyItemClickListener
 import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
 
 class CommentsEpoxyController : PagingDataEpoxyController<Comments>(){

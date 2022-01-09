@@ -65,7 +65,7 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
 
     private fun setOnClickListeners() {
         binding.btnDlgfilterApply.setOnClickListener {
-            filterApply()
+            applyFilter()
         }
         binding.imageDlgfilterClose.setOnClickListener {
             dismiss()
@@ -81,7 +81,7 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
         }
     }
 
-    private fun filterApply() {
+    private fun applyFilter() {
         when (binding.radiogroupDlgfilterDuration.checkedRadioButtonId) {
             binding.radiobtnDlgfilterWhole.id -> {
                 albumsFragment.updateView(" ", getFilterDate(TimeUtil.TODAY))
