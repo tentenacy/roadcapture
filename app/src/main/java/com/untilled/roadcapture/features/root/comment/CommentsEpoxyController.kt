@@ -5,10 +5,11 @@ import com.airbnb.epoxy.paging3.PagingDataEpoxyController
 import com.untilled.roadcapture.CommentBindingModel_
 import com.untilled.roadcapture.data.dto.comment.Comments
 import com.untilled.roadcapture.features.base.EpoxyItemClickListener
+import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
 
 class CommentsEpoxyController : PagingDataEpoxyController<Comments>(){
 
-    private lateinit var epoxyItemClickListener: EpoxyItemClickListener
+    private lateinit var epoxyItemClickListener: (EpoxyItemArgs) -> Unit
 
     override fun buildItemModel(currentPosition: Int, item: Comments?): EpoxyModel<*> {
 
@@ -16,12 +17,12 @@ class CommentsEpoxyController : PagingDataEpoxyController<Comments>(){
             .id("comments${currentPosition}")
             .comments(item)
             .onClickItem { model, parentView, clickedView, position ->
-                epoxyItemClickListener.onClick(model,parentView,clickedView,position)
+                epoxyItemClickListener(EpoxyItemArgs(model,parentView,clickedView,position))
             }
 
     }
 
-    fun setOnClickListener(epoxyItemClickListenerListener: EpoxyItemClickListener){
+    fun setOnClickListener(epoxyItemClickListenerListener: (EpoxyItemArgs) -> Unit){
         this.epoxyItemClickListener = epoxyItemClickListenerListener
     }
 }

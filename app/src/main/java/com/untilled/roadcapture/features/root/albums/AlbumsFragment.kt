@@ -23,6 +23,7 @@ import com.untilled.roadcapture.databinding.FragmentAlbumsBinding
 import com.untilled.roadcapture.features.base.EpoxyItemClickListener
 import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
+import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -38,62 +39,54 @@ class AlbumsFragment : Fragment() {
 
     private val epoxyController: AlbumsEpoxyController = AlbumsEpoxyController()
 
-    private val epoxyItemClickListener = object : EpoxyItemClickListener {
-        override fun onClick(
-            model: DataBindingEpoxyModel,
-            parentView: DataBindingEpoxyModel.DataBindingHolder,
-            clickedView: View,
-            position: Int
-        ) {
-            when (clickedView.id) {
-                R.id.imageview_item_home_album_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                    .navigate(R.id.action_rootFragment_to_studioFragment)
+    private val epoxyItemClickListener: (EpoxyItemArgs) -> Unit =  { args ->
+        when (args.clickedView.id) {
+            R.id.imageview_item_home_album_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                .navigate(R.id.action_rootFragment_to_studioFragment)
 
-                R.id.imageview_item_home_album_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                    .navigate(RootFragmentDirections.actionRootFragmentToCommentFragment((model as AlbumsBindingModel_).albums().id.toString()))
+            R.id.imageview_item_home_album_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                .navigate(RootFragmentDirections.actionRootFragmentToCommentFragment((args.model as AlbumsBindingModel_).albums().id.toString()))
 
-                R.id.imageview_item_home_album_like -> if (!flagLike) {
-                    val animator = ValueAnimator.ofFloat(0f, 0.5f).setDuration(800)
-                    animator.addUpdateListener {
-                        (clickedView as LottieAnimationView).progress =
-                            it.animatedValue as Float
-                    }
-                    animator.start()
-                    flagLike = true
-                } else {
-                    val animator = ValueAnimator.ofFloat(0.5f, 1f).setDuration(800)
-                    animator.addUpdateListener {
-                        (clickedView as LottieAnimationView).progress =
-                            it.animatedValue as Float
-                    }
-                    animator.start()
-                    flagLike = false
+            R.id.imageview_item_home_album_like -> if (!flagLike) {
+                val animator = ValueAnimator.ofFloat(0f, 0.5f).setDuration(800)
+                animator.addUpdateListener {
+                    (args.clickedView as LottieAnimationView).progress =
+                        it.animatedValue as Float
                 }
-                //Todo 네비게이션 args 변경해야 함
-                R.id.imageview_item_home_album_thumbnail,
-                R.id.textview_item_home_album_title,
-                R.id.textview_item_home_album_desc->
-                    Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
-                    navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment((model as AlbumsBindingModel_).albums().id.toString()))
-                R.id.imageview_item_home_album_more -> {
-                    val popupMenu = PopupMenu(requireContext(), clickedView)
-                    popupMenu.apply {
-                        menuInflater.inflate(R.menu.popupmenu_albums_more, popupMenu.menu)
-                        setOnMenuItemClickListener { item ->
-                            when (item.itemId) {
-                                R.id.popup_menu_albums_more_share -> {
-                                }
-                                R.id.popup_menu_albums_more_report -> {
-                                    showReportDialog()
-                                }
-                                R.id.popup_menu_albums_more_hide -> {
-                                }
+                animator.start()
+                flagLike = true
+            } else {
+                val animator = ValueAnimator.ofFloat(0.5f, 1f).setDuration(800)
+                animator.addUpdateListener {
+                    (args.clickedView as LottieAnimationView).progress =
+                        it.animatedValue as Float
+                }
+                animator.start()
+                flagLike = false
+            }
+            //Todo: 네비게이션 args 변경해야 함
+            R.id.imageview_item_home_album_thumbnail,
+            R.id.textview_item_home_album_title,
+            R.id.textview_item_home_album_desc->
+                Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
+                navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment((args.model as AlbumsBindingModel_).albums().id.toString()))
+            R.id.imageview_item_home_album_more -> {
+                val popupMenu = PopupMenu(requireContext(), args.clickedView)
+                popupMenu.apply {
+                    menuInflater.inflate(R.menu.popupmenu_albums_more, popupMenu.menu)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.popup_menu_albums_more_share -> {
                             }
-                            true
+                            R.id.popup_menu_albums_more_report -> {
+                                showReportDialog()
+                            }
+                            R.id.popup_menu_albums_more_hide -> {
+                            }
                         }
-                    }.show()
-                }
-
+                        true
+                    }
+                }.show()
             }
         }
     }

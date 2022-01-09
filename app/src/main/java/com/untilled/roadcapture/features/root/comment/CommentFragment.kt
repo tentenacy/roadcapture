@@ -22,6 +22,7 @@ import com.untilled.roadcapture.databinding.FragmentCommentBinding
 import com.untilled.roadcapture.features.base.CustomDivider
 import com.untilled.roadcapture.features.base.EpoxyItemClickListener
 import com.untilled.roadcapture.features.root.albums.AlbumsViewModel
+import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -34,32 +35,25 @@ class CommentFragment : Fragment() {
     private val viewModel: AlbumsViewModel by viewModels({requireParentFragment()})
     private val epoxyController = CommentsEpoxyController()
 
-    private val epoxyItemClickListener = object : EpoxyItemClickListener {
-        override fun onClick(
-            model: DataBindingEpoxyModel,
-            parentView: DataBindingEpoxyModel.DataBindingHolder,
-            clickedView: View,
-            position: Int
-        ) {
-            when (clickedView.id) {
-                R.id.imageview_item_comment_more -> {
-                    val popupMenu = PopupMenu(requireContext(), clickedView)
-                    popupMenu.apply {
-                        menuInflater.inflate(R.menu.popupmenu_comment_more, popupMenu.menu)
-                        setOnMenuItemClickListener { item ->
-                            when (item.itemId) {
-                                R.id.popup_menu_comment_more_report -> {
-                                    showReportDialog()
-                                }
+    private val epoxyItemClickListener: (EpoxyItemArgs) -> Unit = { args ->
+        when (args.clickedView.id) {
+            R.id.imageview_item_comment_more -> {
+                val popupMenu = PopupMenu(requireContext(), args.clickedView)
+                popupMenu.apply {
+                    menuInflater.inflate(R.menu.popupmenu_comment_more, popupMenu.menu)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.popup_menu_comment_more_report -> {
+                                showReportDialog()
                             }
-                            true
                         }
-                    }.show()
-                }
-                R.id.imageview_item_comment_profile -> {
-                    Navigation.findNavController(binding.root)
-                        .navigate(R.id.action_commentFragment_to_studioFragment)
-                }
+                        true
+                    }
+                }.show()
+            }
+            R.id.imageview_item_comment_profile -> {
+                Navigation.findNavController(binding.root)
+                    .navigate(R.id.action_commentFragment_to_studioFragment)
             }
         }
     }
