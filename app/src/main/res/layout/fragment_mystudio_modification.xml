@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:bind="http://schemas.android.com/apk/res-auto"
@@ -16,16 +15,16 @@
     </data>
 
     <ScrollView
+        android:id="@+id/scroll_mystudio_modification_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/my_studio_modification_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/appbarlayout_my_studio_modification"
+                android:id="@+id/appbar_mystudio_modification"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:fitsSystemWindows="true"
@@ -34,23 +33,23 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <com.google.android.material.appbar.CollapsingToolbarLayout
-                    android:id="@+id/ctoolbarlayout_my_studio_modification"
+                    android:id="@+id/ctoolbar_mystudio_modification"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_scrollFlags="scroll|enterAlways">
 
                     <com.google.android.material.appbar.MaterialToolbar
-                        android:id="@+id/toolbar_my_studio_modification"
+                        android:id="@+id/toolbar_mystudio_modification"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"
                         app:layout_collapseMode="parallax" />
 
                     <ImageView
-                        android:id="@+id/imageview_my_studio_modification_back"
+                        android:id="@+id/image_mystudio_modification_back"
                         style="@style/BackArrow" />
 
                     <TextView
-                        android:id="@+id/textview_my_studio_modification_title"
+                        android:id="@+id/text_mystudio_modification_title"
                         style="@style/ActionBarTitle"
                         android:layout_width="wrap_content"
                         android:layout_height="48dp"
@@ -58,7 +57,7 @@
                         android:text="@string/my_studio_modification_title" />
 
                     <ImageView
-                        android:id="@+id/imageview_my_studio_modification_check"
+                        android:id="@+id/image_mystudio_modification_check"
                         android:layout_width="48dp"
                         android:layout_height="48dp"
                         android:layout_gravity="right"
@@ -71,7 +70,7 @@
             </com.google.android.material.appbar.AppBarLayout>
 
             <ImageView
-                android:id="@+id/imageview_my_studio_modification_background"
+                android:id="@+id/image_mystudio_modification_background"
                 style="@style/RippleEffect"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -84,7 +83,7 @@
                 tools:src="@drawable/img_sample_profilebg" />
 
             <ImageView
-                android:id="@+id/imageview_edit_background"
+                android:id="@+id/image_mystudio_modification_edit_background"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_margin="8dp"
@@ -92,39 +91,39 @@
                 android:elevation="1dp"
                 android:padding="8dp"
                 android:src="@drawable/ic_edit"
-                app:layout_constraintBottom_toBottomOf="@id/imageview_my_studio_modification_background"
-                app:layout_constraintEnd_toEndOf="@id/imageview_my_studio_modification_background"
+                app:layout_constraintBottom_toBottomOf="@id/image_mystudio_modification_background"
+                app:layout_constraintEnd_toEndOf="@id/image_mystudio_modification_background"
                 app:tint="@color/white" />
 
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/imageview_my_studio_modification_profile"
+                android:id="@+id/image_mystudio_modification_profile"
                 android:layout_width="96dp"
                 android:layout_height="96dp"
                 android:clickable="true"
                 app:civ_border_color="@color/white"
                 app:civ_border_width="2dp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageview_my_studio_modification_background"
+                app:layout_constraintBottom_toBottomOf="@+id/image_mystudio_modification_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageview_my_studio_modification_background"
+                app:layout_constraintTop_toBottomOf="@+id/image_mystudio_modification_background"
                 bind:studioProfileImage="@{user.profileUrl}"
                 tools:src="@drawable/img_sample_profile" />
 
             <ImageView
-                android:id="@+id/imageview_edit_profile"
+                android:id="@+id/image_mystudio_modification_edit_profile"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:background="@drawable/edit"
                 android:elevation="1dp"
                 android:padding="8dp"
                 android:src="@drawable/ic_edit"
-                app:layout_constraintBottom_toBottomOf="@id/imageview_my_studio_modification_profile"
-                app:layout_constraintEnd_toEndOf="@id/imageview_my_studio_modification_profile"
+                app:layout_constraintBottom_toBottomOf="@id/image_mystudio_modification_profile"
+                app:layout_constraintEnd_toEndOf="@id/image_mystudio_modification_profile"
                 app:tint="@color/white" />
 
             <TextView
-                android:id="@+id/textview_my_studio_modification_username"
+                android:id="@+id/text_mystudio_modification_username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 style="@style/HeadBold"
@@ -133,10 +132,10 @@
                 tools:text="kvvangddang"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/imageview_my_studio_modification_profile"/>
+                app:layout_constraintTop_toBottomOf="@id/image_mystudio_modification_profile"/>
 
             <TextView
-                android:id="@+id/textview_my_studio_modification_description_title"
+                android:id="@+id/text_mystudio_modification_label_desc"
                 style="@style/SubHeadBold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -145,10 +144,10 @@
                 android:text="@string/my_studio_modification_description_title"
                 android:textColor="@color/gray"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_my_studio_modification_username" />
+                app:layout_constraintTop_toBottomOf="@id/text_mystudio_modification_username" />
 
             <EditText
-                android:id="@+id/edittext_my_studio_modification_profile_description"
+                android:id="@+id/edt_mystudio_modification_desc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -156,12 +155,12 @@
                 android:text="@{user.description}"
                 android:textAppearance="@style/SubHead"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/textview_my_studio_modification_description_title"
-                app:layout_constraintTop_toBottomOf="@id/textview_my_studio_modification_description_title"
+                app:layout_constraintStart_toStartOf="@+id/text_mystudio_modification_label_desc"
+                app:layout_constraintTop_toBottomOf="@id/text_mystudio_modification_label_desc"
                 tools:text="안녕하세요. 저는 최광현입니다." />
 
             <TextView
-                android:id="@+id/textview_my_studio_modification_place_title"
+                android:id="@+id/text_mystudio_modification_label_place"
                 style="@style/SubHeadBold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -170,10 +169,10 @@
                 android:text="@string/my_studio_modification_place_title"
                 android:textColor="@color/gray"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/edittext_my_studio_modification_profile_description" />
+                app:layout_constraintTop_toBottomOf="@id/edt_mystudio_modification_desc" />
 
             <com.airbnb.epoxy.EpoxyRecyclerView
-                android:id="@+id/recyclerview_my_studio_modification_place"
+                android:id="@+id/recycle_mystudio_modification_place"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -184,7 +183,7 @@
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textview_my_studio_modification_place_title"
+                app:layout_constraintTop_toBottomOf="@+id/text_mystudio_modification_label_place"
                 tools:listitem="@layout/item_place_filter" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

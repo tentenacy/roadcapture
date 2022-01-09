@@ -11,7 +11,7 @@
     <ConstraintSet android:id="@+id/start">
 
         <Constraint
-            android:id="@+id/imageview_my_studio_background"
+            android:id="@+id/image_mystudio_background"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             motion:layout_constraintDimensionRatio="4:3"
@@ -19,26 +19,26 @@
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
-            android:id="@+id/imageview_my_studio_profile"
+            android:id="@+id/image_mystudio_profile"
             android:layout_width="96dp"
             android:layout_height="96dp"
-            motion:layout_constraintBottom_toBottomOf="@id/imageview_my_studio_background"
+            motion:layout_constraintBottom_toBottomOf="@id/image_mystudio_background"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/imageview_my_studio_background" />
+            motion:layout_constraintTop_toBottomOf="@id/image_mystudio_background" />
 
 
         <Constraint
-            android:id="@+id/textview_my_studio_profile_name"
+            android:id="@+id/text_mystudio_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/imageview_my_studio_profile" />
+            motion:layout_constraintTop_toBottomOf="@id/image_mystudio_profile" />
 
         <Constraint
-            android:id="@+id/textview_my_studio_title"
+            android:id="@+id/text_mystudio_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -48,61 +48,61 @@
             motion:layout_constraintTop_toBottomOf="parent" />
 
         <Constraint
-            android:id="@+id/textview_my_studio_profile_description"
+            android:id="@+id/text_mystudio_desc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/textview_my_studio_profile_name" />
+            motion:layout_constraintTop_toBottomOf="@id/text_mystudio_name" />
 
         <Constraint
-            android:id="@+id/button_my_studio_edit_profile"
+            android:id="@+id/btn_mystudio_edit"
             android:layout_width="192dp"
             android:layout_height="48dp"
             android:layout_marginTop="32dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/textview_my_studio_profile_description" />
+            motion:layout_constraintTop_toBottomOf="@+id/text_mystudio_desc" />
 
         <Constraint
-            android:id="@+id/textview_my_studio_follower"
+            android:id="@+id/text_mystudio_label_follower"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            motion:layout_constraintEnd_toStartOf="@id/imageview_my_studio_profile"
+            motion:layout_constraintEnd_toStartOf="@id/image_mystudio_profile"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="@id/textview_my_studio_follower_num" />
+            motion:layout_constraintTop_toTopOf="@id/text_mystudio_follower" />
 
         <Constraint
-            android:id="@+id/textview_my_studio_follower_num"
+            android:id="@+id/text_mystudio_follower"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_marginTop="16dp"
-            motion:layout_constraintEnd_toStartOf="@id/imageview_my_studio_profile"
+            motion:layout_constraintEnd_toStartOf="@id/image_mystudio_profile"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/imageview_my_studio_background" />
+            motion:layout_constraintTop_toBottomOf="@id/image_mystudio_background" />
 
         <Constraint
-            android:id="@+id/textview_my_studio_following"
+            android:id="@+id/text_mystudio_label_following"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toEndOf="@id/imageview_my_studio_profile"
-            motion:layout_constraintTop_toTopOf="@+id/textview_my_studio_following_num" />
+            motion:layout_constraintStart_toEndOf="@id/image_mystudio_profile"
+            motion:layout_constraintTop_toTopOf="@+id/text_mystudio_following" />
 
 
         <Constraint
-            android:id="@+id/textview_my_studio_following_num"
+            android:id="@+id/text_mystudio_following"
             android:layout_width="56dp"
             android:layout_height="56dp"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toEndOf="@id/imageview_my_studio_profile"
-            motion:layout_constraintTop_toTopOf="@id/textview_my_studio_follower_num" />
+            motion:layout_constraintStart_toEndOf="@id/image_mystudio_profile"
+            motion:layout_constraintTop_toTopOf="@id/text_mystudio_follower" />
 
         <Constraint
-            android:id="@+id/imageview_my_studio_setting_before"
+            android:id="@+id/image_mystudio_setting_before"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:alpha="1"
@@ -110,7 +110,7 @@
             motion:layout_constraintEnd_toEndOf="parent" />
 
         <Constraint
-            android:id="@+id/imageview_my_studio_setting_after"
+            android:id="@+id/image_mystudio_setting_after"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginTop="200dp"
@@ -124,7 +124,7 @@
     <ConstraintSet android:id="@+id/end">
 
         <Constraint
-            android:id="@+id/imageview_my_studio_background"
+            android:id="@+id/image_mystudio_background"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:alpha="0"
@@ -133,88 +133,88 @@
             motion:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
-            android:id="@+id/imageview_my_studio_profile"
+            android:id="@+id/image_mystudio_profile"
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:alpha="0"
-            motion:layout_constraintBottom_toBottomOf="@id/imageview_my_studio_background"
+            motion:layout_constraintBottom_toBottomOf="@id/image_mystudio_background"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/imageview_my_studio_background" />
+            motion:layout_constraintTop_toBottomOf="@id/image_mystudio_background" />
 
 
         <Constraint
-            android:id="@+id/textview_my_studio_profile_name"
+            android:id="@+id/text_mystudio_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:alpha="0"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/imageview_my_studio_profile" />
+            motion:layout_constraintTop_toBottomOf="@id/image_mystudio_profile" />
 
         <Constraint
-            android:id="@+id/textview_my_studio_profile_description"
+            android:id="@+id/text_mystudio_desc"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:alpha="0"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/textview_my_studio_profile_name" />
+            motion:layout_constraintTop_toBottomOf="@id/text_mystudio_name" />
 
         <Constraint
-            android:id="@+id/button_my_studio_edit_profile"
+            android:id="@+id/btn_mystudio_edit"
             android:layout_width="192dp"
             android:layout_height="48dp"
             android:layout_marginTop="32dp"
             android:alpha="0"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@+id/textview_my_studio_profile_description" />
+            motion:layout_constraintTop_toBottomOf="@+id/text_mystudio_desc" />
 
         <Constraint
-            android:id="@+id/textview_my_studio_follower"
+            android:id="@+id/text_mystudio_label_follower"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:alpha="0"
-            motion:layout_constraintEnd_toStartOf="@id/imageview_my_studio_profile"
+            motion:layout_constraintEnd_toStartOf="@id/image_mystudio_profile"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/textview_my_studio_follower_num" />
+            motion:layout_constraintTop_toBottomOf="@id/text_mystudio_follower" />
 
         <Constraint
-            android:id="@+id/textview_my_studio_follower_num"
+            android:id="@+id/text_mystudio_follower"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:alpha="0"
-            motion:layout_constraintEnd_toStartOf="@id/imageview_my_studio_profile"
+            motion:layout_constraintEnd_toStartOf="@id/image_mystudio_profile"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/imageview_my_studio_background" />
+            motion:layout_constraintTop_toBottomOf="@id/image_mystudio_background" />
 
         <Constraint
-            android:id="@+id/textview_my_studio_following"
+            android:id="@+id/text_mystudio_label_following"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:alpha="0"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toEndOf="@id/imageview_my_studio_profile"
-            motion:layout_constraintTop_toBottomOf="@+id/textview_my_studio_following_num" />
+            motion:layout_constraintStart_toEndOf="@id/image_mystudio_profile"
+            motion:layout_constraintTop_toBottomOf="@+id/text_mystudio_following" />
 
 
         <Constraint
-            android:id="@+id/textview_my_studio_following_num"
+            android:id="@+id/text_mystudio_following"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:alpha="0"
             motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toEndOf="@id/imageview_my_studio_profile"
-            motion:layout_constraintTop_toTopOf="@id/textview_my_studio_follower_num" />
+            motion:layout_constraintStart_toEndOf="@id/image_mystudio_profile"
+            motion:layout_constraintTop_toTopOf="@id/text_mystudio_follower" />
 
         <Constraint
-            android:id="@+id/textview_my_studio_title"
+            android:id="@+id/text_mystudio_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -224,7 +224,7 @@
             motion:layout_constraintStart_toStartOf="parent" />
 
         <Constraint
-            android:id="@+id/imageview_my_studio_setting_before"
+            android:id="@+id/image_mystudio_setting_before"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:alpha="0"
@@ -232,7 +232,7 @@
             motion:layout_constraintEnd_toEndOf="parent" />
 
         <Constraint
-            android:id="@+id/imageview_my_studio_setting_after"
+            android:id="@+id/image_mystudio_setting_after"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:alpha="1"

@@ -46,14 +46,14 @@ class FollowerFragment : Fragment(){
     }
 
     private fun setOnClickListeners(){
-        binding.imageviewFollowerBack.setOnClickListener {
+        binding.imageFollowerBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        binding.edittextFollowerSearchInput.setOnEditorActionListener { v, actionId, event ->
+        binding.edtFollowerInput.setOnEditorActionListener { v, actionId, event ->
             when(actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> {
 
-                    requireActivity().hideKeyboard(binding.edittextFollowerSearchInput)
+                    requireActivity().hideKeyboard(binding.edtFollowerInput)
                     return@setOnEditorActionListener true
                 }
                 else -> return@setOnEditorActionListener false
@@ -65,9 +65,9 @@ class FollowerFragment : Fragment(){
 
         val customDivider = CustomDivider(2.5f,1f, Color.parseColor("#EFEFEF"))
 
-        binding.recyclerviewFollower.addItemDecoration(customDivider)
+        binding.recyclerFollower.addItemDecoration(customDivider)
 
-        binding.recyclerviewFollower.withModels {
+        binding.recyclerFollower.withModels {
             DummyDataSet.user.forEachIndexed { index, user ->
                 follow {
                     id(index)

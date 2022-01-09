@@ -31,12 +31,12 @@ class MyStudioModification : Fragment() {
     ) {
         if (it.resultCode == Activity.RESULT_OK) {
             profileImageUri = it.data?.data
-            binding.imageviewMyStudioModificationProfile.context.apply{
+            binding.imageMystudioModificationProfile.context.apply{
                 Glide.with(this)
                     .asBitmap()
                     .load(profileImageUri)
                     .centerCrop()
-                    .into(binding.imageviewMyStudioModificationProfile)
+                    .into(binding.imageMystudioModificationProfile)
             }
         }
     }
@@ -45,12 +45,12 @@ class MyStudioModification : Fragment() {
     ) {
         if (it.resultCode == Activity.RESULT_OK) {
             backgroundImageUri = it.data?.data
-            binding.imageviewMyStudioModificationBackground.context.apply{
+            binding.imageMystudioModificationBackground.context.apply{
                 Glide.with(this)
                     .asBitmap()
                     .load(backgroundImageUri)
                     .centerCrop()
-                    .into(binding.imageviewMyStudioModificationBackground)
+                    .into(binding.imageMystudioModificationBackground)
             }
         }
     }
@@ -78,17 +78,17 @@ class MyStudioModification : Fragment() {
     }
 
     private fun setOnClickListeners(){
-        binding.imageviewMyStudioModificationCheck.setOnClickListener {
+        binding.imageMystudioModificationCheck.setOnClickListener {
             saveUserInfo()
             Navigation.findNavController(binding.root).popBackStack()
         }
-        binding.imageviewMyStudioModificationBack.setOnClickListener {
+        binding.imageMystudioModificationBack.setOnClickListener {
             Navigation.findNavController(binding.root).popBackStack()
         }
-        binding.imageviewEditBackground.setOnClickListener {
+        binding.imageMystudioModificationEditBackground.setOnClickListener {
             pickFromGallery(BACKGROUND)
         }
-        binding.imageviewEditProfile.setOnClickListener {
+        binding.imageMystudioModificationEditProfile.setOnClickListener {
             pickFromGallery(PROFILE)
         }
     }
@@ -110,11 +110,11 @@ class MyStudioModification : Fragment() {
         if(backgroundImageUri != null)
             args.user?.backgroundUrl = backgroundImageUri.toString()
 
-        args.user?.description = binding.edittextMyStudioModificationProfileDescription.text.toString()
+        args.user?.description = binding.edtMystudioModificationDesc.text.toString()
     }
 
     private fun initAdapter() {
-        binding.recyclerviewMyStudioModificationPlace.withModels {
+        binding.recycleMystudioModificationPlace.withModels {
             DummyDataSet.places.forEachIndexed { index, place ->
                 placeFilter {
                     id(index)

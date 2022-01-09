@@ -46,33 +46,33 @@ class StudioFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.textviewStudioFollowerNum.setOnClickListener {
+        binding.textStudioFollower.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_studioFragment_to_followerFragment)
         }
-        binding.textviewStudioFollowingNum.setOnClickListener {
+        binding.textStudioFollowing.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_studioFragment_to_followingFragment)
         }
-        binding.buttonStudioEditProfile.setOnClickListener {
+        binding.btnStudioEdit.setOnClickListener {
 
         }
-        binding.imageviewStudioMorePrevious.setOnClickListener {
+        binding.imageStudioMorePrevious.setOnClickListener {
 
         }
-        binding.imageviewStudioMoreAfter.setOnClickListener {
+        binding.imageStudioMoreAfter.setOnClickListener {
 
         }
-        binding.imageviewStudioBackAfter.setOnClickListener {
+        binding.imageStudioBackAfter.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        binding.imageviewStudioBackBefore.setOnClickListener {
+        binding.imageStudioBackBefore.setOnClickListener {
             requireActivity().onBackPressed()
         }
     }
 
     private fun initAdapter() {
-        binding.recyclerviewStudioAlbum.withModels {
+        binding.recyclerStudioAlbum.withModels {
 //            DummyDataSet.studios.forEachIndexed { index, album ->
 //                studioAlbum {
 //                    id(index)
@@ -89,7 +89,7 @@ class StudioFragment : Fragment() {
 //            }
 
         }
-        binding.recyclerviewStudioPlace.withModels {
+        binding.recyclerStudioPlace.withModels {
             DummyDataSet.places.forEachIndexed { index, place ->
                 placeFilter {
                     id(index)

@@ -44,30 +44,30 @@ class MyStudioFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.textviewMyStudioFollowerNum.setOnClickListener {
+        binding.textMystudioFollower.setOnClickListener {
             Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                 .navigate(R.id.action_rootFragment_to_followerFragment)
         }
-        binding.textviewMyStudioFollowingNum.setOnClickListener {
+        binding.textMystudioFollowing.setOnClickListener {
             Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                 .navigate(R.id.action_rootFragment_to_followingFragment)
         }
-        binding.buttonMyStudioEditProfile.setOnClickListener {
+        binding.btnMystudioEdit.setOnClickListener {
             Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                 .navigate(RootFragmentDirections.actionRootFragmentToMyStudioModification(binding.user))
         }
-        binding.imageviewMyStudioSettingBefore.setOnClickListener {
+        binding.imageMystudioSettingBefore.setOnClickListener {
             Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                 .navigate(R.id.action_rootFragment_to_settingsFragment)
         }
-        binding.imageviewMyStudioSettingAfter.setOnClickListener {
+        binding.imageMystudioSettingAfter.setOnClickListener {
             Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                 .navigate(R.id.action_rootFragment_to_settingsFragment)
         }
     }
 
     private fun initAdapter() {
-        binding.recyclerviewMyStudioAlbum.withModels {
+        binding.recyclerMystudioAlbum.withModels {
 //            DummyDataSet.studios.forEachIndexed { index, album ->
 //                studioAlbum {
 //                    id(index)
@@ -83,7 +83,7 @@ class MyStudioFragment : Fragment() {
 //                }
 //            }
         }
-        binding.recyclerviewMyStudioPlace.withModels {
+        binding.recyclerMystudioPlace.withModels {
             DummyDataSet.places.forEachIndexed { index, place ->
                 placeFilter {
                     id(index)
