@@ -49,7 +49,7 @@ class AlbumRegistrationFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imageviewAlbumRegistrationBack.setOnClickListener {
+        binding.imageAlbumregBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
     }

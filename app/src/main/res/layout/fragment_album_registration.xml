@@ -11,6 +11,7 @@
     </data>
 
     <ScrollView
+        android:id="@+id/scroll_albumreg_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -19,7 +20,7 @@
             android:layout_height="match_parent">
 
             <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar_album_registration"
+                android:id="@+id/toolbar_albumreg"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 app:contentInsetStart="0dp"
@@ -28,11 +29,11 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/imageview_album_registration_back"
+                    android:id="@+id/image_albumreg_back"
                     style="@style/BackArrow" />
 
                 <TextView
-                    android:id="@+id/textview_album_registration_toolbar_title"
+                    android:id="@+id/text_albumreg_toolbar_title"
                     style="@style/ActionBarTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
@@ -40,7 +41,7 @@
                     android:text="@string/album_registration_toolbar_title" />
 
                 <ImageView
-                    android:id="@+id/imageview_album_registration_check"
+                    android:id="@+id/image_albumreg_check"
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:layout_gravity="right"
@@ -52,37 +53,37 @@
             </androidx.appcompat.widget.Toolbar>
 
             <TextView
-                android:id="@+id/textview_album_registration_thumbnail"
+                android:id="@+id/text_albumreg_label_thumbnail"
                 style="@style/SubHeadBold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="@string/album_registration_thumbnail"
-                app:layout_constraintStart_toStartOf="@+id/guideline_registration_description_body_start"
-                app:layout_constraintTop_toBottomOf="@id/toolbar_album_registration" />
+                app:layout_constraintStart_toStartOf="@+id/guideline_albumreg_start"
+                app:layout_constraintTop_toBottomOf="@id/toolbar_albumreg" />
 
             <TextView
-                android:id="@+id/textview_album_registration_place"
+                android:id="@+id/text_albumreg_place"
                 style="@style/Body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="김포시 장기동"
-                app:layout_constraintBottom_toBottomOf="@+id/textview_album_registration_thumbnail"
-                app:layout_constraintEnd_toEndOf="@id/guideline_registration_description_body_end"
-                app:layout_constraintTop_toTopOf="@+id/textview_album_registration_thumbnail" />
+                app:layout_constraintBottom_toBottomOf="@+id/text_albumreg_label_thumbnail"
+                app:layout_constraintEnd_toEndOf="@id/guideline_albumreg_end"
+                app:layout_constraintTop_toTopOf="@+id/text_albumreg_label_thumbnail" />
 
             <ImageView
-                android:id="@+id/imageview_album_registration_place_icon"
+                android:id="@+id/image_albumreg_placeicon"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_marginEnd="4dp"
                 android:src="@drawable/ic_location_mini"
-                app:layout_constraintBottom_toBottomOf="@+id/textview_album_registration_place"
-                app:layout_constraintEnd_toStartOf="@+id/textview_album_registration_place"
-                app:layout_constraintTop_toTopOf="@+id/textview_album_registration_place" />
+                app:layout_constraintBottom_toBottomOf="@+id/text_albumreg_place"
+                app:layout_constraintEnd_toStartOf="@+id/text_albumreg_place"
+                app:layout_constraintTop_toTopOf="@+id/text_albumreg_place" />
 
             <ImageView
-                android:id="@+id/imageview_album_registration_image"
+                android:id="@+id/image_albumreg_thumbnail"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
@@ -90,22 +91,23 @@
                 android:layout_marginEnd="8dp"
                 app:layout_constraintDimensionRatio="H,1:1"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_album_registration_thumbnail"
+                app:layout_constraintTop_toBottomOf="@id/text_albumreg_label_thumbnail"
                 bind:Image="@{picture.imageUrl}" />
 
             <TextView
-                android:id="@+id/textview_album_registration_title"
+                android:id="@+id/text_albumreg_label_title"
                 style="@style/SubHeadBold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="@string/album_registration_title"
-                app:layout_constraintStart_toStartOf="@id/guideline_registration_description_body_start"
-                app:layout_constraintTop_toBottomOf="@id/imageview_album_registration_image" />
+                app:layout_constraintStart_toStartOf="@id/guideline_albumreg_start"
+                app:layout_constraintTop_toBottomOf="@id/image_albumreg_thumbnail" />
 
             <EditText
-                android:id="@+id/edittext_album_registration_name_user_input"
+                android:id="@+id/edt_albumreg_title"
                 style="@style/Body"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
@@ -114,22 +116,22 @@
                 android:hint="@string/album_registration_name_user_input"
                 android:inputType="text|textImeMultiLine"
                 android:maxLines="1"
-                app:layout_constraintBottom_toBottomOf="@id/textview_album_registration_title"
-                app:layout_constraintEnd_toEndOf="@id/guideline_registration_description_body_end"
-                app:layout_constraintTop_toTopOf="@id/textview_album_registration_title" />
+                app:layout_constraintBottom_toBottomOf="@id/text_albumreg_label_title"
+                app:layout_constraintEnd_toEndOf="@id/guideline_albumreg_end"
+                app:layout_constraintTop_toTopOf="@id/text_albumreg_label_title" />
 
             <TextView
-                android:id="@+id/textview_album_registration_description"
+                android:id="@+id/text_albumreg_label_description"
                 style="@style/SubHeadBold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
                 android:text="@string/album_registration_description"
-                app:layout_constraintStart_toStartOf="@id/guideline_registration_description_body_start"
-                app:layout_constraintTop_toBottomOf="@id/textview_album_registration_title" />
+                app:layout_constraintStart_toStartOf="@id/guideline_albumreg_start"
+                app:layout_constraintTop_toBottomOf="@id/text_albumreg_label_title" />
 
             <EditText
-                android:id="@+id/edittext_album_registration_description_user_input"
+                android:id="@+id/edt_albumreg_description"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
@@ -140,17 +142,17 @@
                 android:textAppearance="@style/Body"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/textview_album_registration_description" />
+                app:layout_constraintTop_toBottomOf="@id/text_albumreg_label_description" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_registration_description_body_start"
+                android:id="@+id/guideline_albumreg_start"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_begin="16dp" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_registration_description_body_end"
+                android:id="@+id/guideline_albumreg_end"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"

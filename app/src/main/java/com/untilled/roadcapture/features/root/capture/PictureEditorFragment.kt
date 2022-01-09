@@ -61,11 +61,11 @@ class PictureEditorFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imageviewPictureEditorBack.setOnClickListener {
+        binding.imagePictureEditorBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
 
-        binding.textviewPictureEditorPlaceUserInput.setOnClickListener {
+        binding.textPictureEditorPlace.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(
                     PictureEditorFragmentDirections.actionPictureEditorFragmentToSearchPlaceFragment(
@@ -74,11 +74,11 @@ class PictureEditorFragment : Fragment() {
                 )
         }
 
-        binding.textviewPictureEditorDateUserInput.setOnClickListener {
+        binding.textPictureEditorDate.setOnClickListener {
             onCreateDatePicker()
         }
 
-        binding.imageviewPictureEditorCheck.setOnClickListener {
+        binding.imagePictureEditorCheck.setOnClickListener {
             // todo Room에 picture insert
             viewModel.insertPicture(picture!!)
 
@@ -86,7 +86,7 @@ class PictureEditorFragment : Fragment() {
                 .navigate(R.id.action_pictureEditorFragment_to_captureFragment)
         }
 
-        binding.imageviewPictureEditorDelete.setOnClickListener {
+        binding.imagePictureEditorDelete.setOnClickListener {
             showDeletePictureAskingDialog {
                 // todo 사진 삭제 기능
             }
@@ -94,7 +94,7 @@ class PictureEditorFragment : Fragment() {
     }
 
     private fun onCreateDatePicker() {
-        val cal = getCalendar(binding.textviewPictureEditorDateUserInput.text.toString())
+        val cal = getCalendar(binding.textPictureEditorDate.text.toString())
 
         val datePickerDialog = DatePickerDialog(
             requireContext(),
@@ -102,7 +102,7 @@ class PictureEditorFragment : Fragment() {
             { _, year, month, dayOfMonth ->
                 val date = dateToString(year, month + 1, dayOfMonth)
                 picture?.createdAt = date
-                binding.textviewPictureEditorDateUserInput.text = date
+                binding.textPictureEditorDate.text = date
             },
             cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)
         )
@@ -117,7 +117,7 @@ class PictureEditorFragment : Fragment() {
             imageUrl = picture?.imageUrl,
             createdAt = picture?.createdAt,
             lastModifiedAt = picture?.lastModifiedAt,
-            description = binding.editPictureEditorDescriptionUserInput.text.toString(),
+            description = binding.edtPictureEditorDescription.text.toString(),
             place = picture?.place
         )
 

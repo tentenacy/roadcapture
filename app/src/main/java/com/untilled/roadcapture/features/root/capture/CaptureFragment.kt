@@ -120,10 +120,10 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
 
     @RequiresApi(Build.VERSION_CODES.O)
     private fun setOnClickListeners() {
-        binding.imageviewCaptureBack.setOnClickListener {
+        binding.imageCaptureBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        binding.imageviewCaptureCamera.setOnClickListener {
+        binding.imageCaptureCamera.setOnClickListener {
             requestSinglePermission(
                 Manifest.permission.CAMERA,
                 "사진을 찍기위해서는 카메라 권한이 필요합니다. 설정으로 이동합니다.",
@@ -132,10 +132,10 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                     .navigate(R.id.action_captureFragment_to_cameraFragment)
             }
         }
-        binding.imageviewCaptureGallery.setOnClickListener {
+        binding.imageCaptureGallery.setOnClickListener {
             pickFromGallery()
         }
-        binding.imageviewCapturePlay.setOnClickListener {
+        binding.imageCaptureRegistration.setOnClickListener {
             // Todo 앨범을 등록하시겠습니까 bottomsheet 띄우기, 썸네일 여부 체크하여 알려주기
             if(markerList.isEmpty()) {
                 showThumbnailSettingDialog()
@@ -148,7 +148,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                     )
             }
         }
-        binding.imageviewCaptureStop.setOnClickListener {
+        binding.imageCaptureCancel.setOnClickListener {
             if(markerList.isNotEmpty()) {
                 showCancelAlbumCreationAskingDialog {
                     for (i in markerList) {
@@ -176,7 +176,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         uiSettings?.isZoomControlEnabled = false // 확대 축소 버튼 비활성화
         uiSettings?.isScaleBarEnabled = false // 스케일 바 비활성화
         uiSettings?.isLocationButtonEnabled = false // 기본 내 위치 버튼 비활성화
-        binding.location.map = naverMap // 내 위치 버튼 설정
+        binding.btnCaptureLocation.map = naverMap // 내 위치 버튼 설정
 
         uiSettings?.logoGravity = TOP
         uiSettings?.logoGravity = END

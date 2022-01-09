@@ -5,11 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraint_place_search_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_search_place"
+            android:id="@+id/toolbar_place_search"
             android:layout_width="0dp"
             android:layout_height="48dp"
             app:contentInsetStart="0dp"
@@ -18,11 +19,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/imageview_search_place_back"
+                android:id="@+id/image_place_search_back"
                 style="@style/BackArrow" />
 
             <TextView
-                android:id="@+id/textview_picture_editor_title"
+                android:id="@+id/text_place_search_title"
                 style="@style/ActionBarTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
@@ -32,40 +33,40 @@
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_search_place_search"
+            android:id="@+id/toolbar_place_search_container"
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_search_place" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar_place_search" />
 
         <View
-            android:id="@+id/view_background_edittext_search_place"
+            android:id="@+id/view_place_search_edtbg"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="4dp"
             android:background="@drawable/edit_search"
-            app:layout_constraintEnd_toEndOf="@+id/toolbar_search_place_search"
-            app:layout_constraintStart_toStartOf="@+id/toolbar_search_place_search"
-            app:layout_constraintTop_toTopOf="@+id/toolbar_search_place_search" />
+            app:layout_constraintEnd_toEndOf="@+id/toolbar_place_search_container"
+            app:layout_constraintStart_toStartOf="@+id/toolbar_place_search_container"
+            app:layout_constraintTop_toTopOf="@+id/toolbar_place_search_container" />
 
         <ImageView
-            android:id="@+id/imageview_search_input"
+            android:id="@+id/image_place_search"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_gravity="center"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/ic_search"
-            app:layout_constraintBottom_toBottomOf="@+id/view_background_edittext_search_place"
-            app:layout_constraintStart_toStartOf="@+id/view_background_edittext_search_place"
-            app:layout_constraintTop_toTopOf="@+id/view_background_edittext_search_place"
+            app:layout_constraintBottom_toBottomOf="@+id/view_place_search_edtbg"
+            app:layout_constraintStart_toStartOf="@+id/view_place_search_edtbg"
+            app:layout_constraintTop_toTopOf="@+id/view_place_search_edtbg"
             app:tint="#999999" />
 
         <EditText
-            android:id="@+id/edittext_search_place_input"
+            android:id="@+id/edt_place_search"
             style="@style/Body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -76,10 +77,10 @@
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:maxLines="1"
-            app:layout_constraintBottom_toBottomOf="@+id/view_background_edittext_search_place"
-            app:layout_constraintEnd_toEndOf="@+id/view_background_edittext_search_place"
-            app:layout_constraintStart_toEndOf="@+id/imageview_search_input"
-            app:layout_constraintTop_toTopOf="@+id/view_background_edittext_search_place" />
+            app:layout_constraintBottom_toBottomOf="@+id/view_place_search_edtbg"
+            app:layout_constraintEnd_toEndOf="@+id/view_place_search_edtbg"
+            app:layout_constraintStart_toEndOf="@+id/image_place_search"
+            app:layout_constraintTop_toTopOf="@+id/view_place_search_edtbg" />
 
         <View
             android:id="@+id/view_search_place_divider"
@@ -88,10 +89,10 @@
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_search_place_search" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_place_search_container" />
 
         <com.airbnb.epoxy.EpoxyRecyclerView
-            android:id="@+id/recyclerview_search_place"
+            android:id="@+id/recycler_place_search"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
@@ -104,7 +105,7 @@
             tools:listitem="@layout/item_place_search" />
 
         <TextView
-            android:id="@+id/textview_search_place_no_result"
+            android:id="@+id/text_place_search_no_result"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -114,10 +115,10 @@
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_search_place_search" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar_place_search_container" />
 
         <ProgressBar
-            android:id="@+id/progressbar_search_place_loading"
+            android:id="@+id/progressbar_place_search_loading"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:indeterminateDuration="1000"

@@ -7,21 +7,21 @@
         motion:duration="250">
 
         <OnClick
-            motion:targetId="@id/imageview_capture_arrow"
+            motion:targetId="@id/image_capture_arrow"
             motion:clickAction="toggle"/>
 
     </Transition>
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
-            android:id="@+id/imageview_capture_arrow"
+            android:id="@+id/image_capture_arrow"
             android:layout_width="64dp"
             android:layout_height="64dp"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintStart_toStartOf="parent" />
 
         <Constraint
-            android:id="@+id/imageview_capture_play"
+            android:id="@+id/image_capture_registration"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:visibility="invisible"
@@ -29,7 +29,7 @@
             motion:layout_constraintStart_toStartOf="parent"/>
 
         <Constraint
-            android:id="@+id/imageview_capture_stop"
+            android:id="@+id/image_capture_cancel"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:visibility="invisible"
@@ -40,23 +40,23 @@
 
     <ConstraintSet android:id="@+id/end">
         <Constraint
-            android:id="@+id/imageview_capture_arrow"
+            android:id="@+id/image_capture_arrow"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:rotation="180"
-            motion:layout_constraintBottom_toTopOf="@id/imageview_capture_play"
+            motion:layout_constraintBottom_toTopOf="@id/image_capture_registration"
             motion:layout_constraintStart_toStartOf="parent" />
 
         <Constraint
-            android:id="@+id/imageview_capture_play"
+            android:id="@+id/image_capture_registration"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:visibility="visible"
-            motion:layout_constraintBottom_toTopOf="@id/imageview_capture_stop"
+            motion:layout_constraintBottom_toTopOf="@id/image_capture_cancel"
             motion:layout_constraintStart_toStartOf="parent"/>
 
         <Constraint
-            android:id="@+id/imageview_capture_stop"
+            android:id="@+id/image_capture_cancel"
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:visibility="visible"

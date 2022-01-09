@@ -82,10 +82,10 @@ class CameraFragment : Fragment() {
         windowManager = WindowManager(view.context)
 
         // Wait for the views to be properly laid out
-        binding.viewFinderCamera.post {
+        binding.viewfinderCamera.post {
 
             // Keep track of the display in which this view is attached
-            displayId = binding.viewFinderCamera.display.displayId
+            displayId = binding.viewfinderCamera.display.displayId
 
             // Build UI controls
             updateCameraUi()
@@ -99,7 +99,7 @@ class CameraFragment : Fragment() {
     private fun updateCameraUi() {
 
         // Listener for button used to capture photo
-        binding.imageviewCameraShutter.setOnClickListener {
+        binding.imageCameraShutter.setOnClickListener {
 
             // Get a stable reference of the modifiable image capture use case
             imageCapture?.let { imageCapture ->
@@ -174,7 +174,7 @@ class CameraFragment : Fragment() {
         }
 
         // 카메라 전환(전면, 후면)
-        binding.imageviewCameraFlipCamera.setOnClickListener {
+        binding.imageCameraFlip.setOnClickListener {
             lensFacing = if (CameraSelector.LENS_FACING_FRONT == lensFacing) {
                 CameraSelector.LENS_FACING_BACK
             } else {
@@ -215,7 +215,7 @@ class CameraFragment : Fragment() {
         //val screenAspectRatio = AspectRatio.RATIO_4_3  // 1:1 화면이 없음
         Log.d(TAG, "Preview aspect ratio: $screenAspectRatio")
 
-        val rotation = binding.viewFinderCamera.display.rotation
+        val rotation = binding.viewfinderCamera.display.rotation
 
         // CameraProvider
         val cameraProvider = cameraProvider
@@ -271,7 +271,7 @@ class CameraFragment : Fragment() {
                 this, cameraSelector, preview, imageCapture, imageAnalyzer)
 
             // Attach the viewfinder's surface provider to preview use case
-            preview?.setSurfaceProvider(binding.viewFinderCamera.surfaceProvider)
+            preview?.setSurfaceProvider(binding.viewfinderCamera.surfaceProvider)
         } catch (exc: Exception) {
             Log.e(TAG, "Use case binding failed", exc)
         }

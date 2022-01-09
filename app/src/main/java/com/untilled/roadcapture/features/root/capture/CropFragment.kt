@@ -95,7 +95,7 @@ class CropFragment : Fragment() {
     private fun setupFragment(uCrop: UCrop) {
         uCropFragment = uCrop.getFragment(uCrop.getIntent(requireContext()).extras)
         requireActivity().supportFragmentManager.beginTransaction()
-            .add(R.id.crop_fragment_container, uCropFragment!!, UCropFragment.TAG)
+            .add(R.id.frame_crop_container_content, uCropFragment!!, UCropFragment.TAG)
             .commitAllowingStateLoss()
 
         setupViews(uCrop.getIntent(requireContext()).extras!!)
@@ -127,11 +127,11 @@ class CropFragment : Fragment() {
 
     private fun setupAppBar() {
         // Set all of the Toolbar coloring
-        binding.toolbar.setBackgroundColor(mToolbarColor)
-        binding.toolbar.setTitleTextColor(mToolbarWidgetColor)
-        binding.toolbar.visibility = View.VISIBLE
-        binding.toolbarTitle.setTextColor(mToolbarWidgetColor)
-        binding.toolbarTitle.text = mToolbarTitle
+        binding.toolbarCrop.setBackgroundColor(mToolbarColor)
+        binding.toolbarCrop.setTitleTextColor(mToolbarWidgetColor)
+        binding.toolbarCrop.visibility = View.VISIBLE
+        binding.textCropTitle.setTextColor(mToolbarWidgetColor)
+        binding.textCropTitle.text = mToolbarTitle
 
         // Color buttons inside the Toolbar
         val stateButtonDrawable =
@@ -139,10 +139,10 @@ class CropFragment : Fragment() {
         if (stateButtonDrawable != null) {
             stateButtonDrawable.mutate()
             stateButtonDrawable.setColorFilter(mToolbarWidgetColor, PorterDuff.Mode.SRC_ATOP)
-            binding.toolbar.navigationIcon = stateButtonDrawable
+            binding.toolbarCrop.navigationIcon = stateButtonDrawable
         }
 
-        (requireActivity() as MainActivity).setSupportActionBar(binding.toolbar)
+        (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarCrop)
         (requireActivity() as MainActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
@@ -204,7 +204,7 @@ class CropFragment : Fragment() {
         requireActivity().supportFragmentManager.beginTransaction()
             .remove(uCropFragment!!)
             .commit()
-        binding.toolbar.visibility = View.GONE
+        binding.toolbarCrop.visibility = View.GONE
     }
 
     fun handleCropResult(result: Intent) {

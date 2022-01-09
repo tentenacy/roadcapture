@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/capture_container"
+        android:id="@+id/constraint_capture_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -20,13 +20,13 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/imageview_capture_back"
+                android:id="@+id/image_capture_back"
                 style="@style/BackArrow"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.naver.maps.map.widget.LocationButtonView
-                android:id="@+id/location"
+                android:id="@+id/btn_capture_location"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginStart="16dp"
@@ -35,17 +35,17 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <androidx.constraintlayout.motion.widget.MotionLayout
-                android:id="@+id/motion_capture_bottom_nav_top"
+                android:id="@+id/motion_capture_nav_action_top"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/nav_action_top"
                 android:elevation="2dp"
                 app:layoutDescription="@xml/fragment_capture_scene"
-                app:layout_constraintStart_toStartOf="@id/constraint_capture_bottom_nav_bottom"
-                app:layout_constraintBottom_toTopOf="@id/constraint_capture_bottom_nav_bottom">
+                app:layout_constraintStart_toStartOf="@id/constraint_capture_nav_action_bottom"
+                app:layout_constraintBottom_toTopOf="@id/constraint_capture_nav_action_bottom">
 
                 <TextView
-                    android:id="@+id/imageview_capture_play"
+                    android:id="@+id/image_capture_registration"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     style="@style/RippleEffectBorderless"
@@ -55,7 +55,7 @@
                     android:textColor="@color/secondaryColor"/>
 
                 <TextView
-                    android:id="@+id/imageview_capture_stop"
+                    android:id="@+id/image_capture_cancel"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     style="@style/RippleEffectBorderless"
@@ -65,9 +65,8 @@
                     android:textColor="@color/secondaryColor"
                     tools:layout_editor_absoluteY="128dp" />
 
-
                 <ImageView
-                    android:id="@+id/imageview_capture_arrow"
+                    android:id="@+id/image_capture_arrow"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="?selectableItemBackgroundBorderless"
@@ -78,7 +77,7 @@
             </androidx.constraintlayout.motion.widget.MotionLayout>
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraint_capture_bottom_nav_bottom"
+                android:id="@+id/constraint_capture_nav_action_bottom"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -90,18 +89,18 @@
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <ImageView
-                    android:id="@+id/imageview_capture_camera"
+                    android:id="@+id/image_capture_camera"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="?selectableItemBackgroundBorderless"
                     android:padding="16dp"
                     android:src="@drawable/ic_camera"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintBottom_toTopOf="@id/imageview_capture_gallery"
+                    app:layout_constraintBottom_toTopOf="@id/image_capture_gallery"
                     app:tint="@color/secondaryColor" />
 
                 <ImageView
-                    android:id="@+id/imageview_capture_gallery"
+                    android:id="@+id/image_capture_gallery"
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="?selectableItemBackgroundBorderless"
