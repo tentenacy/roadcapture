@@ -42,7 +42,7 @@ class NotificationFragment : Fragment(){
     }
 
     private fun setOnClickListeners() {
-        binding.imageviewNotificationBack.setOnClickListener {
+        binding.imgNotificationBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
     }
@@ -57,9 +57,9 @@ class NotificationFragment : Fragment(){
 
         val customDivider = CustomDivider(2.5f,1f, Color.parseColor("#EFEFEF"))
 
-        binding.recyclerviewNotification.addItemDecoration(customDivider)
+        binding.recycleNotification.addItemDecoration(customDivider)
 
-        binding.recyclerviewNotification.withModels {
+        binding.recycleNotification.withModels {
             DummyDataSet.notification.forEachIndexed { index, album ->
                 notification {
                     id(index)
