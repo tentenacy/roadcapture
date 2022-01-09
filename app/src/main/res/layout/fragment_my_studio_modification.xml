@@ -63,7 +63,7 @@
                         android:layout_height="48dp"
                         android:layout_gravity="right"
                         android:padding="12dp"
-                        android:src="@drawable/check"
+                        android:src="@drawable/ic_check"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -81,14 +81,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 bind:studioBackgroundImage="@{user.backgroundUrl}"
-                tools:src="@drawable/sample_profile_background" />
+                tools:src="@drawable/img_sample_profilebg" />
 
             <ImageView
                 android:id="@+id/imageview_edit_background"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_margin="8dp"
-                android:background="@drawable/edit_button"
+                android:background="@drawable/edit"
                 android:elevation="1dp"
                 android:padding="8dp"
                 android:src="@drawable/ic_edit"
@@ -109,13 +109,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/imageview_my_studio_modification_background"
                 bind:studioProfileImage="@{user.profileUrl}"
-                tools:src="@drawable/sample_profile" />
+                tools:src="@drawable/img_sample_profile" />
 
             <ImageView
                 android:id="@+id/imageview_edit_profile"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:background="@drawable/edit_button"
+                android:background="@drawable/edit"
                 android:elevation="1dp"
                 android:padding="8dp"
                 android:src="@drawable/ic_edit"

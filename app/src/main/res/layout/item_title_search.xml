@@ -34,7 +34,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             bind:titleSearchThumbnailImage="@{album.thumbnailUrl}"
-            tools:src="@drawable/sample_thumbnail" />
+            tools:src="@drawable/img_sample_thumbnail" />
 
         <View
             android:layout_width="0dp"
@@ -56,7 +56,7 @@
             android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toTopOf="@+id/textview_item_title_search_title"
             bind:titleSearchProfileImage="@{album.user.profileUrl}"
-            tools:src="@drawable/sample_profile" />
+            tools:src="@drawable/img_sample_profile" />
 
         <TextView
             android:id="@+id/textview_item_title_search_overlay"

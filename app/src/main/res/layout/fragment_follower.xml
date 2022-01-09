@@ -65,7 +65,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_margin="16dp"
-                android:background="@drawable/search_edit_text"
+                android:background="@drawable/edit_search"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 

@@ -47,7 +47,7 @@
             android:layout_marginTop="8dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
-            android:background="@drawable/search_edit_text"
+            android:background="@drawable/edit_search"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

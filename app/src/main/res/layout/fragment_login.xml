@@ -13,7 +13,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/login_background"/>
+            android:background="@drawable/img_login"/>
 
         <View
             android:id="@+id/view_login_overlay"
@@ -105,7 +105,7 @@
                 android:layout_width="240dp"
                 android:layout_height="40dp"
                 android:layout_marginBottom="48dp"
-                android:background="@drawable/login_button_radius"
+                android:background="@drawable/btn_login"
                 android:elevation="10dp"
                 android:paddingVertical="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/textview_login_no_account"

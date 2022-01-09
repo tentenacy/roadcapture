@@ -36,7 +36,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             bind:albumThumbnailImage="@{albums.thumbnailUrl}"
-            tools:src="@drawable/sample_thumbnail" />
+            tools:src="@drawable/img_sample_thumbnail" />
 
         <View
             android:id="@+id/view_item_home_album_overlay"
@@ -59,7 +59,7 @@
             app:layout_constraintStart_toStartOf="@id/imageview_item_home_album_thumbnail"
             app:layout_constraintTop_toTopOf="@id/imageview_item_home_album_thumbnail"
             bind:albumProfileImage="@{albums.users.profileImageUrl}"
-            tools:src="@drawable/sample_profile" />
+            tools:src="@drawable/img_sample_profile" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/imageview_item_home_album_like"
@@ -94,7 +94,7 @@
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
             android:onClick="@{onClickItem}"
-            android:src="@drawable/ic_comment2"
+            android:src="@drawable/ic_comment"
             app:layout_constraintBottom_toTopOf="@id/textview_item_home_album_comment"
             app:layout_constraintEnd_toEndOf="@id/textview_item_home_album_comment"
             app:layout_constraintStart_toStartOf="@id/textview_item_home_album_comment" />

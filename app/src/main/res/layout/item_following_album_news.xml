@@ -51,7 +51,7 @@
             app:layout_constraintTop_toTopOf="@+id/imageview_item_follower_profile_border"
             app:layout_constraintBottom_toBottomOf="@+id/imageview_item_follower_profile_border"
             bind:FollowingAlbumProfileImage="@{user.profileUrl}"
-            tools:src="@drawable/sample_thumbnail" />
+            tools:src="@drawable/img_sample_thumbnail" />
 
         <TextView
             android:id="@+id/textview_item_following_album_username"

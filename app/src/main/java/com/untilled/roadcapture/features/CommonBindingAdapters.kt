@@ -60,7 +60,7 @@ object CommonBindingAdapters {
         imageView.context.apply {
             Glide.with(this)
                 .asBitmap()
-                .load(uri?:R.drawable.plus_dotted_square)
+                .load(uri)
                 .centerCrop()
                 .into(imageView)
         }

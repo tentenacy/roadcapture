@@ -28,7 +28,7 @@
             android:id="@+id/imageview_item_notification_profile"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/sample_thumbnail"
+            android:src="@drawable/img_sample_thumbnail"
             android:onClick="@{onClickItem}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -67,7 +67,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/imageview_item_notification_profile"
             bind:notificationThumbnailImage="@{notification.thumbnailUrl}"
-            tools:src="@drawable/sample_thumbnail" />
+            tools:src="@drawable/img_sample_thumbnail" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

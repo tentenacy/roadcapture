@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="16dp"
-        android:background="@drawable/shape_bottom_sheet_dialog">
+        android:background="@drawable/dlg_bottomsheet">
 
         <ImageView
             android:id="@+id/imageview_filter_close"
@@ -216,7 +216,7 @@
                 style="@style/RadioButton"
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
-                android:background="@drawable/selector_radio_filter_button"
+                android:background="@drawable/selector_btn_radio_filter"
                 android:checked="true"
                 android:text="@string/filter_sorting_latest" />
 

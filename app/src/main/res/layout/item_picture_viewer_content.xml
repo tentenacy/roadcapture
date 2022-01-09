@@ -25,7 +25,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/overlay_gradient_picture_viewer"/>
+            android:background="@drawable/overlay_picture_viewer"/>
 
         <ImageView
             android:id="@+id/imageview_item_picture_viewer_content_background"
@@ -38,7 +38,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             bind:pictureViewerBackgroundImage="@{picture.imageUrl}"
-            tools:src="@drawable/sample_thumbnail" />
+            tools:src="@drawable/img_sample_thumbnail" />
 
         <ScrollView
             android:layout_width="0dp"

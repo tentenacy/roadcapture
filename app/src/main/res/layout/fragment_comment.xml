@@ -77,7 +77,7 @@
             android:layout_gravity="bottom"
             android:layout_marginHorizontal="8dp"
             android:layout_marginBottom="8dp"
-            android:background="@drawable/comment_edit_text"
+            android:background="@drawable/comment"
             app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior"
             app:tint="#999999">
 

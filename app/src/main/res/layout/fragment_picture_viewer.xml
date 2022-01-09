@@ -16,7 +16,7 @@
         android:id="@+id/imageview_picture_viewer_background_gradient"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/overlay_gradient_picture_viewer" />
+        android:background="@drawable/overlay_picture_viewer" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/picture_viewer_inner_container"
@@ -66,7 +66,7 @@
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:padding="24dp"
-            android:src="@drawable/ic_comment2"
+            android:src="@drawable/ic_comment"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:tint="@color/primaryColor" />

@@ -28,7 +28,7 @@
             android:id="@+id/imageview_item_username_search_profile"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:src="@drawable/sample_thumbnail"
+            android:src="@drawable/img_sample_thumbnail"
             android:onClick="@{onClickItem}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"

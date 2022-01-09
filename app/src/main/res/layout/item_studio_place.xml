@@ -32,7 +32,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            tools:src="@drawable/sample_thumbnail" />
+            tools:src="@drawable/img_sample_thumbnail" />
 <!--            bind:studioPlaceImage="@{place.}"-->
 
 
@@ -41,7 +41,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{onClickItem}"
-            android:background="@drawable/select_effect"
+            android:background="@drawable/selector_filter_place"
             app:layout_constraintBottom_toBottomOf="@+id/item_studio_place_image"
             app:layout_constraintEnd_toEndOf="@+id/item_studio_place_image"
             app:layout_constraintStart_toStartOf="@+id/item_studio_place_image"

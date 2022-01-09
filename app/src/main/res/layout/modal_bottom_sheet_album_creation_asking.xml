@@ -6,7 +6,7 @@
         android:id="@+id/album_creation_asking_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_bottom_sheet_dialog">
+        android:background="@drawable/dlg_bottomsheet">
 
         <TextView
             android:id="@+id/textview_album_creation_asking_title"

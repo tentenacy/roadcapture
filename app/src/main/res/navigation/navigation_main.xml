@@ -279,7 +279,7 @@
         <action
             android:id="@+id/action_pictureViewerContainerFragment_to_commentFragment"
             app:destination="@id/commentFragment"
-            app:enterAnim="@anim/from_bottom" />
+            app:enterAnim="@anim/anim_from_bottom" />
     </fragment>
     <fragment
         android:id="@+id/studioFragment"

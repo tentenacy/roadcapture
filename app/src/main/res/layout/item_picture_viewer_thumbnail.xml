@@ -30,7 +30,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/sample_thumbnail" />
+            tools:src="@drawable/img_sample_thumbnail" />
 
 
         <de.hdodenhof.circleimageview.CircleImageView
@@ -44,7 +44,7 @@
             app:layout_constraintTop_toTopOf="@id/imageview_item_picture_viewer_thumbnail_background"
             app:layout_constraintVertical_bias="0.4"
             bind:albumProfileImage="@{album.user.profileUrl}"
-            tools:src="@drawable/sample_profile" />
+            tools:src="@drawable/img_sample_profile" />
 
         <TextView
             android:id="@+id/textview_item_picture_viewer_thumbnail_username"
