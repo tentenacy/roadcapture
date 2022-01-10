@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/search_container"
+        android:id="@+id/constraint_search_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".features.root.search.SearchFragment">
@@ -20,7 +20,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tablayout_search"
+            android:id="@+id/tab_search"
             android:layout_width="0dp"
             android:layout_height="48dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -33,13 +33,13 @@
             app:tabTextColor="@color/black" />
 
         <View
-            android:id="@+id/view_search_divider"
+            android:id="@+id/view_search_divider1"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tablayout_search" />
+            app:layout_constraintTop_toBottomOf="@+id/tab_search" />
 
         <LinearLayout
             android:id="@+id/linear_search_input"
@@ -64,7 +64,7 @@
                 app:tint="#999999" />
 
             <EditText
-                android:id="@+id/edittext_search_input"
+                android:id="@+id/edt_search_input"
                 style="@style/Body"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -88,7 +88,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tablayout_search" />
+            app:layout_constraintTop_toBottomOf="@+id/tab_search" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

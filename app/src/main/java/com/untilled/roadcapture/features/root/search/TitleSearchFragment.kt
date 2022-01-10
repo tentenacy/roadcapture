@@ -39,7 +39,7 @@ class TitleSearchFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        binding.recyclerviewTitleSearch.withModels {
+        binding.recyclerTitlesearch.withModels {
             DummyDataSet.albums.forEachIndexed { index, album ->
                 titleSearch {
                     id(index)
@@ -47,7 +47,7 @@ class TitleSearchFragment : Fragment() {
 
                     onClickItem { model, parentView, clickedView, position ->
                         when (clickedView.id) {
-                            R.id.imageview_item_title_search_profile -> Navigation.findNavController(
+                            R.id.image_ititlesearch_profile -> Navigation.findNavController(
                                 (parentFragment?.parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root
                             ).navigate(R.id.action_rootFragment_to_studioFragment)
 //

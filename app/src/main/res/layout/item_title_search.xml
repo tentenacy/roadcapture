@@ -5,7 +5,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <import type="android.view.View" />
 
         <variable
@@ -19,13 +18,13 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/item_title_search_container"
+        android:id="@+id/constraint_ititlesearch_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="16dp">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageview_item_title_search_thumbnail"
+            android:id="@+id/image_ititlesearch_thumbnail"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{onClickItem}"
@@ -37,16 +36,17 @@
             tools:src="@drawable/img_sample_thumbnail" />
 
         <View
+            android:id="@+id/view_ititlesearch_overlay"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/overlay_gradient_studio_thumbnail"
-            app:layout_constraintStart_toStartOf="@id/imageview_item_title_search_thumbnail"
-            app:layout_constraintEnd_toEndOf="@id/imageview_item_title_search_thumbnail"
-            app:layout_constraintTop_toTopOf="@id/imageview_item_title_search_thumbnail"
-            app:layout_constraintBottom_toBottomOf="@id/imageview_item_title_search_thumbnail"/>
+            app:layout_constraintStart_toStartOf="@id/image_ititlesearch_thumbnail"
+            app:layout_constraintEnd_toEndOf="@id/image_ititlesearch_thumbnail"
+            app:layout_constraintTop_toTopOf="@id/image_ititlesearch_thumbnail"
+            app:layout_constraintBottom_toBottomOf="@id/image_ititlesearch_thumbnail"/>
 
         <ImageView
-            android:id="@+id/imageview_item_title_search_profile"
+            android:id="@+id/image_ititlesearch_profile"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:padding="8dp"
@@ -54,38 +54,38 @@
             app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"
             android:layout_marginBottom="4dp"
-            app:layout_constraintBottom_toTopOf="@+id/textview_item_title_search_title"
+            app:layout_constraintBottom_toTopOf="@+id/text_ititlesearch_title"
             bind:titleSearchProfileImage="@{album.user.profileUrl}"
             tools:src="@drawable/img_sample_profile" />
 
         <TextView
-            android:id="@+id/textview_item_title_search_overlay"
+            android:id="@+id/text_ititlesearch_username"
             style="@style/Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:textColor="@color/white"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/imageview_item_title_search_profile"
-            app:layout_constraintStart_toEndOf="@id/imageview_item_title_search_profile"
-            app:layout_constraintTop_toTopOf="@+id/imageview_item_title_search_profile"
+            app:layout_constraintBottom_toBottomOf="@+id/image_ititlesearch_profile"
+            app:layout_constraintStart_toEndOf="@id/image_ititlesearch_profile"
+            app:layout_constraintTop_toTopOf="@+id/image_ititlesearch_profile"
             bind:albumOverlayUsername="@{album.user.username}"
             tools:text="tenutz ·" />
 
         <TextView
-            android:id="@+id/textview_item_title_search_overlay_date"
+            android:id="@+id/text_ititlesearch_date"
             style="@style/Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{album.createdAt}"
             android:textColor="@color/white"
-            app:layout_constraintBottom_toBottomOf="@id/textview_item_title_search_overlay"
-            app:layout_constraintStart_toEndOf="@id/textview_item_title_search_overlay"
-            app:layout_constraintTop_toTopOf="@id/textview_item_title_search_overlay"
+            app:layout_constraintBottom_toBottomOf="@id/text_ititlesearch_username"
+            app:layout_constraintStart_toEndOf="@id/text_ititlesearch_username"
+            app:layout_constraintTop_toTopOf="@id/text_ititlesearch_username"
             tools:text="3분전" />
 
         <TextView
-            android:id="@+id/textview_item_title_search_title"
+            android:id="@+id/text_ititlesearch_title"
             style="@style/SubHeadBoldWhite"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -94,9 +94,9 @@
             android:text="@{album.title}"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="16dp"
-            app:layout_constraintStart_toStartOf="@id/imageview_item_title_search_thumbnail"
-            app:layout_constraintEnd_toEndOf="@id/imageview_item_title_search_thumbnail"
-            app:layout_constraintBottom_toBottomOf="@id/imageview_item_title_search_thumbnail"
+            app:layout_constraintStart_toStartOf="@id/image_ititlesearch_thumbnail"
+            app:layout_constraintEnd_toEndOf="@id/image_ititlesearch_thumbnail"
+            app:layout_constraintBottom_toBottomOf="@id/image_ititlesearch_thumbnail"
             tools:text="로드캡처 스터디" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -39,9 +39,9 @@ class UsernameSearchFragment : Fragment() {
 
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
 
-        binding.recyclerviewUsernameSearch.addItemDecoration(customDivider)
+        binding.recycleUsernamesearch.addItemDecoration(customDivider)
 
-        binding.recyclerviewUsernameSearch.withModels {
+        binding.recycleUsernamesearch.withModels {
             DummyDataSet.user.forEachIndexed { index, user ->
                 usernameSearch {
                     id(index)
@@ -49,7 +49,7 @@ class UsernameSearchFragment : Fragment() {
 
                     onClickItem { model, parentView, clickedView, position ->
                         when (clickedView.id) {
-                            R.id.imageview_item_username_search_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root                            )
+                            R.id.image_iusernamesearch_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root                            )
                                 .navigate(R.id.action_rootFragment_to_studioFragment)
                         }
                     }

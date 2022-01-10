@@ -33,7 +33,7 @@ class SearchFragment : Fragment() {
 
         binding.viewpagerSearch.adapter = SearchPagerAdapter(this)
 
-        TabLayoutMediator(binding.tablayoutSearch, binding.viewpagerSearch) { tab, position ->
+        TabLayoutMediator(binding.tabSearch, binding.viewpagerSearch) { tab, position ->
             tab.text = getTabTitle(position)
         }.attach()
 
@@ -48,7 +48,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.edittextSearchInput.apply {
+        binding.edtSearchInput.apply {
             setOnFocusChangeListener { v, hasFocus ->
                 if(hasFocus) {
                     (requireActivity() as MainActivity).window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
