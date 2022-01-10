@@ -44,7 +44,7 @@ class PictureSliderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.pictureViewerInnerContainer.setPadding(
+        binding.pictureViewerContainer.setPadding(
             0, requireContext().statusBarHeight(), 0, requireContext().navigationHeight()
         )
         subscribeUi()
@@ -58,11 +58,11 @@ class PictureSliderFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imageviewPictureViewerComment.setOnClickListener {
+        binding.imagePictureSliderComment.setOnClickListener {
             val commentBottomSheetDialog = CommentBottomSheetDialog()
             commentBottomSheetDialog.show(childFragmentManager, "commentBottomSheet")
         }
-        binding.imageviewPictureViewerLike.setOnClickListener { lottie ->
+        binding.imagePictureSliderLike.setOnClickListener { lottie ->
             if (!flagLike) {
                 val animator = ValueAnimator.ofFloat(0f, 0.5f).setDuration(800)
                 animator.addUpdateListener {
@@ -90,14 +90,14 @@ class PictureSliderFragment : Fragment() {
     }
 
     private fun initAdapter(albumResponse: AlbumResponse) {
-        Glide.with(binding.imageviewPictureViewerBackground.context)
+        Glide.with(binding.imagePictureSliderBg.context)
             .load(albumResponse.thumbnailUrl)
             .centerCrop()
-            .into(binding.imageviewPictureViewerBackground)
+            .into(binding.imagePictureSliderBg)
 
-        if (binding.recyclerviewPictureViewer.onFlingListener == null) {
+        if (binding.recyclerPictureSlider.onFlingListener == null) {
             val pagerSnapHelper = PagerSnapHelper()
-            pagerSnapHelper.attachToRecyclerView(binding.recyclerviewPictureViewer)
+            pagerSnapHelper.attachToRecyclerView(binding.recyclerPictureSlider)
             val pictureSnapPagerScrollListener: PictureSnapPagerScrollListener =
                 PictureSnapPagerScrollListener(
                     pagerSnapHelper,
@@ -109,16 +109,16 @@ class PictureSliderFragment : Fragment() {
                         }
                     }
                 )
-            binding.recyclerviewPictureViewer.addOnScrollListener(pictureSnapPagerScrollListener)
+            binding.recyclerPictureSlider.addOnScrollListener(pictureSnapPagerScrollListener)
         }
-        binding.recyclerviewPictureViewer.withModels {
+        binding.recyclerPictureSlider.withModels {
 
             pictureSliderThumbnail {
                 id(1)
                 album(albumResponse)
                 onClickItem { model, parentView, clickedView, position ->
                     when (clickedView.id) {
-                        R.id.imageview_item_picture_viewer_thumbnail_profile -> Navigation.findNavController(
+                        R.id.imagw_ipicture_slider_thumbnail_profile -> Navigation.findNavController(
                             (parentFragment as PictureViewerFragment).binding.root
                         )
                             .navigate(R.id.action_pictureViewerContainerFragment_to_studioFragment)

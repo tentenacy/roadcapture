@@ -35,13 +35,13 @@ class PictureViewerFragment : Fragment() {
 
         childFragmentManager.beginTransaction().apply {
             add(
-                R.id.framelayout_picture_viewer_container,
+                R.id.frame_picture_viewer_container,
                 pictureMapFragment,
                 "PictureViewerMapFragment"
             )
             hide(pictureMapFragment)
             add(
-                R.id.framelayout_picture_viewer_container,
+                R.id.frame_picture_viewer_container,
                 pictureSliderFragment,
                 "PictureViewerFragment"
             )
@@ -64,7 +64,7 @@ class PictureViewerFragment : Fragment() {
         viewModel.getAlbumDetail(token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY0MTYyNzIyNywiZXhwIjoxNjQxNjMwODI3fQ.qT8yBAYnciGhJGREpJlJDnARO5RnbPstc2E2WoZSWpc",args.id)
 //        viewModel.id = args.id
         requireActivity().setStatusBarTransparent()
-        binding.pictureViewerContainerInnerContainer.setPadding(
+        binding.constraintPictureViewerContainer.setPadding(
             0, requireContext().statusBarHeight(), 0, requireContext().navigationHeight()
         )
 
@@ -74,10 +74,10 @@ class PictureViewerFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imageviewPictureViewerContainerBack.setOnClickListener {
+        binding.imagePictureViewerBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        binding.fabPictureViewerContainerSwitch.setOnClickListener {
+        binding.fabPictureViewerSwitch.setOnClickListener {
             childFragmentManager.beginTransaction().apply {
                 isMapScreen = if(isMapScreen) {
                     show(pictureSliderFragment)
@@ -96,9 +96,9 @@ class PictureViewerFragment : Fragment() {
 
     private fun setIconWhite() {
         binding.run {
-            imageviewPictureViewerContainerBack.setColorFilter(requireContext().getColor(R.color.white))
-            imageviewPictureViewerContainerShare.setColorFilter(requireContext().getColor(R.color.white))
-            fabPictureViewerContainerSwitch.run {
+            imagePictureViewerBack.setColorFilter(requireContext().getColor(R.color.white))
+            imagePictureViewerShare.setColorFilter(requireContext().getColor(R.color.white))
+            fabPictureViewerSwitch.run {
                 setImageResource(R.drawable.ic_map)
                 setColorFilter(requireContext().getColor(R.color.secondaryColor))
                 backgroundTintList = AppCompatResources.getColorStateList(requireContext(), android.R.color.white)
@@ -108,9 +108,9 @@ class PictureViewerFragment : Fragment() {
 
     private fun setIconBlack() {
         binding.run {
-            imageviewPictureViewerContainerBack.setColorFilter(requireContext().getColor(R.color.black))
-            imageviewPictureViewerContainerShare.setColorFilter(requireContext().getColor(R.color.black))
-            fabPictureViewerContainerSwitch.run {
+            imagePictureViewerBack.setColorFilter(requireContext().getColor(R.color.black))
+            imagePictureViewerShare.setColorFilter(requireContext().getColor(R.color.black))
+            fabPictureViewerSwitch.run {
                 setImageResource(R.drawable.ic_album)
                 setColorFilter(requireContext().getColor(R.color.white))
                 backgroundTintList = AppCompatResources.getColorStateList(requireContext(), R.color.secondaryColor)

@@ -7,24 +7,24 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageview_picture_viewer_background"
+        android:id="@+id/image_picture_slider_bg"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
     <View
-        android:id="@+id/imageview_picture_viewer_background_gradient"
+        android:id="@+id/view_picture_slider_overlay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/overlay_picture_viewer" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/picture_viewer_inner_container"
+        android:id="@+id/constraint_picture_slider_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.airbnb.epoxy.EpoxyRecyclerView
-            android:id="@+id/recyclerview_picture_viewer"
+            android:id="@+id/recycler_picture_slider"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="horizontal"
@@ -38,31 +38,31 @@
             tools:listitem="@layout/item_picture_slider_thumbnail" />
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/imageview_picture_viewer_like"
+            android:id="@+id/image_picture_slider_like"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:padding="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/imageview_picture_viewer_comment"
+            app:layout_constraintEnd_toStartOf="@id/image_picture_slider_comment"
             app:lottie_autoPlay="false"
             app:lottie_loop="false"
             app:lottie_rawRes="@raw/like_white"
             tools:src="@drawable/ic_like" />
 
         <TextView
-            android:id="@+id/textview_picture_viewer_like"
+            android:id="@+id/text_picture_slider_like"
             style="@style/Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:text="39.1천"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/imageview_picture_viewer_like"
-            app:layout_constraintStart_toStartOf="@id/imageview_picture_viewer_like" />
+            app:layout_constraintEnd_toEndOf="@id/image_picture_slider_like"
+            app:layout_constraintStart_toStartOf="@id/image_picture_slider_like" />
 
 
         <ImageView
-            android:id="@+id/imageview_picture_viewer_comment"
+            android:id="@+id/image_picture_slider_comment"
             android:layout_width="72dp"
             android:layout_height="72dp"
             android:padding="24dp"
@@ -72,15 +72,15 @@
             app:tint="@color/primaryColor" />
 
         <TextView
-            android:id="@+id/textview_picture_viewer_comment"
+            android:id="@+id/text_picture_slider_comment"
             style="@style/Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="4dp"
             android:text="392"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/imageview_picture_viewer_comment"
-            app:layout_constraintStart_toStartOf="@id/imageview_picture_viewer_comment" />
+            app:layout_constraintEnd_toEndOf="@id/image_picture_slider_comment"
+            app:layout_constraintStart_toStartOf="@id/image_picture_slider_comment" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
