@@ -44,9 +44,9 @@
         <LinearLayout
             android:id="@+id/linear_search_input"
             android:layout_width="0dp"
-            android:layout_marginTop="8dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="12dp"
+            android:layout_marginTop="8dp"
             android:background="@drawable/edit_search"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
@@ -54,7 +54,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/image_place_search"
+                android:id="@+id/image_search"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center"
@@ -71,10 +71,10 @@
                 android:layout_marginEnd="16dp"
                 android:layout_weight="1"
                 android:hint="@string/search_input"
-                bind:searchEditText="@{null}"
                 android:imeOptions="actionSearch"
                 android:inputType="text"
                 android:maxLines="1"
+                bind:searchEditText="@{null}"
                 tools:background="@android:color/transparent"
                 tools:minHeight="0dp"
                 tools:paddingVertical="12dp" />

@@ -35,7 +35,7 @@ class SettingsUsernameFragment: Fragment() {
     }
 
     private fun setOnClickListeners(){
-        binding.imageviewSettingUsernameBack.setOnClickListener {
+        binding.imageSettingusernameBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
     }

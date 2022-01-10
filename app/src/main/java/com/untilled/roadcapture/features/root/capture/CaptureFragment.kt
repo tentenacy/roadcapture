@@ -87,7 +87,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
 
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
 
-        viewModel.pictureList.observe(viewLifecycleOwner) {   }
+        viewModel.pictureList.observe(viewLifecycleOwner) { }
 
         initNaverMap()
 
@@ -137,7 +137,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         }
         binding.imageCaptureRegistration.setOnClickListener {
             // Todo 앨범을 등록하시겠습니까 bottomsheet 띄우기, 썸네일 여부 체크하여 알려주기
-            if(markerList.isEmpty()) {
+            if (markerList.isEmpty()) {
                 showThumbnailSettingDialog()
             } else {
                 Navigation.findNavController(binding.root)
@@ -149,7 +149,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
             }
         }
         binding.imageCaptureCancel.setOnClickListener {
-            if(markerList.isNotEmpty()) {
+            if (markerList.isNotEmpty()) {
                 showCancelAlbumCreationAskingDialog {
                     for (i in markerList) {
                         i.map = null    // 지도에서 마커 제거
@@ -201,16 +201,22 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                 Navigation.findNavController(binding.root)
                     .navigate(
                         CaptureFragmentDirections.actionCaptureFragmentToPictureEditorFragment(
-                                picture = picture
+                            picture = picture
+                        )
                     )
-                )
                 return@OnClickListener true
             }
         }
         Glide.with(requireContext()).asBitmap().load(picture.imageUrl!!.toUri())
-            .apply(RequestOptions().centerCrop().circleCrop()).into(object : SimpleTarget<Bitmap>() {
+            .apply(RequestOptions().centerCrop().circleCrop())
+            .into(object : SimpleTarget<Bitmap>() {
                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    val bitmap = Bitmap.createScaledBitmap(resource, requireContext().getPxFromDp(64f), requireContext().getPxFromDp(64f), true)
+                    val bitmap = Bitmap.createScaledBitmap(
+                        resource,
+                        requireContext().getPxFromDp(64f),
+                        requireContext().getPxFromDp(64f),
+                        true
+                    )
                     marker.apply {
                         icon = OverlayImage.fromBitmap(bitmap)
                     }.map = naverMap
@@ -235,8 +241,8 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
 
         }
 
-        if(viewModel.pictureList.value!!.isNotEmpty()) {
-            for(i in viewModel.pictureList.value!!) {
+        if (viewModel.pictureList.value!!.isNotEmpty()) {
+            for (i in viewModel.pictureList.value!!) {
                 drawMarker(i)
             }
         }
@@ -297,40 +303,38 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun showCancelAlbumCreationAskingDialog(logic: () -> Unit) {
-        val layoutInflater = LayoutInflater.from(requireContext())
-        val dialogView = layoutInflater.inflate(R.layout.dlg_albumcreation_cancel, null)
+        val dialogView =
+            LayoutInflater.from(requireContext()).inflate(R.layout.dlg_albumcreation_cancel, null)
 
         val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
             .setView(dialogView)
             .create()
 
-        val textViewConfirm = dialogView.findViewById<TextView>(R.id.textview_cancel_album_creation_asking_confirm)
-        val textViewCancel = dialogView.findViewById<TextView>(R.id.textview_cancel_album_creation_asking_cancel)
-
-        textViewConfirm?.setOnClickListener {
-            logic()
-            dialog.dismiss()
-        }
-        textViewCancel?.setOnClickListener {
-            dialog.dismiss()
-        }
+        dialogView.findViewById<TextView>(R.id.text_dlgalbumcreationcancel_confirm)
+            ?.setOnClickListener {
+                logic()
+                dialog.dismiss()
+            }
+        dialogView.findViewById<TextView>(R.id.text_dlgalbumcreationcancel_cancel)
+            ?.setOnClickListener {
+                dialog.dismiss()
+            }
 
         dialog.show()
     }
 
     private fun showThumbnailSettingDialog() {
-        val layoutInflater = LayoutInflater.from(requireContext())
-        val dialogView = layoutInflater.inflate(R.layout.dlg_thumbnail_setting, null)
+        val dialogView =
+            LayoutInflater.from(requireContext()).inflate(R.layout.dlg_thumbnail_setting, null)
 
         val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
             .setView(dialogView)
             .create()
 
-        val textViewConfirm = dialogView.findViewById<TextView>(R.id.textview_thumbnail_setting_confirm)
-
-        textViewConfirm?.setOnClickListener {
-            dialog.dismiss()
-        }
+        dialogView.findViewById<TextView>(R.id.text_dlgthumbnailsetting_confirm)
+            ?.setOnClickListener {
+                dialog.dismiss()
+            }
 
         dialog.show()
     }

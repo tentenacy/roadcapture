@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
@@ -16,14 +17,14 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/item_place_search_container"
+        android:id="@+id/constraint_iplacesearch_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:onClick="@{onClickItem}"
         android:paddingVertical="12dp">
 
         <TextView
-            android:id="@+id/textview_item_search_place_result_name"
+            android:id="@+id/text_iplacesearch_name"
             style="@style/SubHead"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -35,7 +36,7 @@
             tools:text="한국산업기술대학교" />
 
         <TextView
-            android:id="@+id/textview_item_search_place_result_address_number_icon"
+            android:id="@+id/text_iplacesearch_label_addressnumber"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -45,12 +46,12 @@
             android:text="@string/search_place_address_number"
             android:textColor="@color/white"
             android:textSize="12sp"
-            app:layout_constraintEnd_toEndOf="@+id/textview_item_search_place_address_road_name_icon"
-            app:layout_constraintStart_toStartOf="@+id/textview_item_search_place_address_road_name_icon"
-            app:layout_constraintTop_toBottomOf="@+id/textview_item_search_place_result_name" />
+            app:layout_constraintEnd_toEndOf="@+id/text_iplacesearch_label_roadname"
+            app:layout_constraintStart_toStartOf="@+id/text_iplacesearch_label_roadname"
+            app:layout_constraintTop_toBottomOf="@+id/text_iplacesearch_name" />
 
         <TextView
-            android:id="@+id/textview_item_search_place_result_address_number"
+            android:id="@+id/text_iplacesearch_addressnumber"
             style="@style/Body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -59,14 +60,14 @@
             android:gravity="center_vertical"
             android:text="@{searchResult.addressName}"
             android:textColor="@color/gray"
-            app:layout_constraintBottom_toBottomOf="@+id/textview_item_search_place_result_address_number_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/text_iplacesearch_label_addressnumber"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textview_item_search_place_result_address_number_icon"
-            app:layout_constraintTop_toTopOf="@+id/textview_item_search_place_result_address_number_icon"
+            app:layout_constraintStart_toEndOf="@+id/text_iplacesearch_label_addressnumber"
+            app:layout_constraintTop_toTopOf="@+id/text_iplacesearch_label_addressnumber"
             tools:text="경기도 시흥시 정왕동" />
 
         <TextView
-            android:id="@+id/textview_item_search_place_address_road_name_icon"
+            android:id="@+id/text_iplacesearch_label_roadname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -78,10 +79,10 @@
             android:textColor="@color/white"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textview_item_search_place_result_address_number_icon" />
+            app:layout_constraintTop_toBottomOf="@+id/text_iplacesearch_label_addressnumber" />
 
         <TextView
-            android:id="@+id/textview_item_search_place_result_road_name"
+            android:id="@+id/text_iplacesearch_roadname"
             style="@style/Body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -90,10 +91,10 @@
             android:gravity="center_vertical"
             android:text="@{searchResult.roadAddressName}"
             android:textColor="@color/gray"
-            app:layout_constraintBottom_toBottomOf="@+id/textview_item_search_place_address_road_name_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/text_iplacesearch_label_roadname"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textview_item_search_place_address_road_name_icon"
-            app:layout_constraintTop_toTopOf="@+id/textview_item_search_place_address_road_name_icon"
+            app:layout_constraintStart_toEndOf="@+id/text_iplacesearch_label_roadname"
+            app:layout_constraintTop_toTopOf="@+id/text_iplacesearch_label_roadname"
             tools:text="산기대학로 237" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

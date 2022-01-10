@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraint_dlgpicturedelete_container"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/dlg">
 
     <TextView
-        android:id="@+id/textview_delete_picture_asking_title"
+        android:id="@+id/text_dlgpicturedelete_title"
+        style="@style/HeadBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="48dp"
         android:layout_marginTop="24dp"
         android:text="@string/delete_picture_asking_title"
-        style="@style/HeadBold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textview_delete_picture_asking_description"
+        android:id="@+id/text_dlgpicturedelete_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="24dp"
@@ -28,21 +29,21 @@
         android:textAppearance="@style/SubHead"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_delete_picture_asking_title"/>
+        app:layout_constraintTop_toBottomOf="@id/text_dlgpicturedelete_title" />
 
 
     <View
-        android:id="@+id/view_delete_picture_asking_first"
+        android:id="@+id/view_dlgpicturedelete_divider1"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="16dp"
         android:background="@color/divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_delete_picture_asking_description" />
+        app:layout_constraintTop_toBottomOf="@+id/text_dlgpicturedelete_description" />
 
     <TextView
-        android:id="@+id/textview_delete_picture_asking_delete"
+        android:id="@+id/text_dlgpicturedelete_delete"
         style="@style/DialogButton"
         android:layout_width="0dp"
         android:layout_height="48dp"
@@ -50,25 +51,25 @@
         android:textColor="@color/secondaryColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_delete_picture_asking_first" />
+        app:layout_constraintTop_toBottomOf="@+id/view_dlgpicturedelete_divider1" />
 
     <View
-        android:id="@+id/view_delete_picture_asking_second"
+        android:id="@+id/view_dlgpicturedelete_divider2"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@color/divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_delete_picture_asking_delete" />
+        app:layout_constraintTop_toBottomOf="@+id/text_dlgpicturedelete_delete" />
 
     <TextView
-        android:id="@+id/textview_delete_picture_asking_cancel"
+        android:id="@+id/text_dlgpicturedelete_cancel"
         style="@style/DialogButton"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:text="@string/delete_picture_asking_cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_delete_picture_asking_second" />
+        app:layout_constraintTop_toBottomOf="@+id/view_dlgpicturedelete_divider2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

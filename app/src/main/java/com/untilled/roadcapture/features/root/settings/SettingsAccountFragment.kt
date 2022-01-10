@@ -39,41 +39,37 @@ class SettingsAccountFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imageviewSettingAccountBack.setOnClickListener {
+        binding.imageSettingaccountBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        binding.textviewSettingAccountUsername.setOnClickListener {
+        binding.textSettingaccountLabelUsername.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_accountSettingFragment_to_usernameSettingFragment)
         }
-        binding.textviewSettingAccountPassword.setOnClickListener {
+        binding.textSettingaccountLabelPwd.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_accountSettingFragment_to_passwordSettingFragment)
         }
-        binding.textviewSettingAccountServiceWithdrawal.setOnClickListener {
+        binding.textSettingaccountLabelServicewithdrawal.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_accountSettingFragment_to_serviceWithdrawalFragment)
         }
-        binding.textviewSettingAccountLogout.setOnClickListener {
+        binding.textSettingaccountLabelLogout.setOnClickListener {
             showLogoutConfirmationDialog()
         }
     }
 
     private fun showLogoutConfirmationDialog() {
-        val layoutInflater = LayoutInflater.from(requireContext())
-        val dialogView = layoutInflater.inflate(R.layout.dlg_logout, null)
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dlg_logout, null)
 
         val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
             .setView(dialogView)
             .create()
 
-        val textViewLogout = dialogView.findViewById<TextView>(R.id.textview_logout_confirmation_logout)
-        val textViewCancel = dialogView.findViewById<TextView>(R.id.textview_logout_confirmation_cancel)
-
-        textViewLogout?.setOnClickListener {
+        dialogView.findViewById<TextView>(R.id.text_dlglogout_logout)?.setOnClickListener {
 
         }
-        textViewCancel?.setOnClickListener {
+        dialogView.findViewById<TextView>(R.id.text_dlglogout_cancel)?.setOnClickListener {
             dialog.dismiss()
         }
 

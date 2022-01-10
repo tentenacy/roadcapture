@@ -157,4 +157,6 @@
     <string name="comment_title">댓글</string>
     <string name="bottomsheet_comment_title">댓글</string>
     <string name="bottomsheet_comment_input_hint">댓글을 남겨주세요.</string>
+    <string name="withdrawal_description">탈퇴 후 계정 복구는 불가능합니다.\n탈퇴를 원하시면 이메일을 입력해주세요.</string>
+    <string name="withdrawal_label">정말 탈퇴하시겠습니까?</string>
 </resources>

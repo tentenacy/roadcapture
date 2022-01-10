@@ -107,20 +107,16 @@ class CommentFragment : Fragment() {
     }
 
     private fun showReportDialog() {
-        val layoutInflater = LayoutInflater.from(requireContext())
-        val dialogView = layoutInflater.inflate(R.layout.dlg_report, null)
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dlg_report, null)
 
         val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
             .setView(dialogView)
             .create()
 
-        val textViewReport = dialogView.findViewById<TextView>(R.id.textview_report_report)
-        val textViewCancel = dialogView.findViewById<TextView>(R.id.textview_report_cancel)
-
-        textViewReport?.setOnClickListener {
+        dialogView.findViewById<TextView>(R.id.text_dlgreport_report)?.setOnClickListener {
             dialog.dismiss()
         }
-        textViewCancel?.setOnClickListener {
+        dialogView.findViewById<TextView>(R.id.text_dlgreport_cancel)?.setOnClickListener {
             dialog.dismiss()
         }
 

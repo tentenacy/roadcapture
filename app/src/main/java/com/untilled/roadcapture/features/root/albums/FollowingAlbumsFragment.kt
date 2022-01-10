@@ -152,10 +152,10 @@ class FollowingAlbumsFragment : Fragment() {
             .setView(dialogView)
             .create()
 
-        dialogView.findViewById<TextView>(R.id.textview_report_report)?.setOnClickListener {
+        dialogView.findViewById<TextView>(R.id.text_dlgreport_report)?.setOnClickListener {
             dialog.dismiss()
         }
-        dialogView.findViewById<TextView>(R.id.textview_report_cancel)?.setOnClickListener {
+        dialogView.findViewById<TextView>(R.id.text_dlgreport_cancel)?.setOnClickListener {
             dialog.dismiss()
         }
 

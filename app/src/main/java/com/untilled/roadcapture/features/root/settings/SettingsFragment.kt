@@ -41,10 +41,10 @@ class SettingsFragment : Fragment() {
         when (PackageManager.PERMISSION_GRANTED) {
             ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION)
             -> {
-                binding.textviewSettingServiceLocationDetail.text = "앱 사용 중에만 허용"
+                binding.textSettingLocation.text = "앱 사용 중에만 허용"
             }
             else -> {
-                binding.textviewSettingServiceLocationDetail.text = "거부"
+                binding.textSettingLocation.text = "거부"
             }
         }
     }
@@ -56,14 +56,14 @@ class SettingsFragment : Fragment() {
     }
 
     private fun setOnClickListeners(){
-        binding.textviewSettingAccount.setOnClickListener {
+        binding.textSettingLabelAccount.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_settingsFragment_to_accountSettingFragment)
         }
-        binding.imageviewSettingBack.setOnClickListener {
+        binding.imageSettingBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        binding.textviewSettingSupportOpinion.setOnClickListener {
+        binding.textSettingLabelOpinion.setOnClickListener {
             val email = Intent(Intent.ACTION_SEND)
             email.type = "plain/text"
             val address = arrayOf("kwangddang12@naver.com")
@@ -72,7 +72,7 @@ class SettingsFragment : Fragment() {
             email.putExtra(Intent.EXTRA_TEXT, "이 메일은 개발자에게 전송됩니다.")
             startActivity(email)
         }
-        binding.textviewSettingServiceLocation.setOnClickListener {
+        binding.textSettingLabelLocation.setOnClickListener {
             val locationPermissionBottomSheetDialog = PermissionLocationBottomSheetDialog()
             locationPermissionBottomSheetDialog.show(childFragmentManager, "locationPermissionBottomSheet")
         }

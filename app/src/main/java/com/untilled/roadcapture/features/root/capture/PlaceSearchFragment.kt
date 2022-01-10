@@ -49,7 +49,7 @@ class PlaceSearchFragment : Fragment() {
 
         searchViewModel.searchPlaceResponse.observe(viewLifecycleOwner) { searchPlaceResponse ->
 
-            binding.progressbarPlaceSearchLoading.isVisible = false // 로딩 애니메이션 off
+            binding.progressbarPlacesearchLoading.isVisible = false // 로딩 애니메이션 off
 
             if(searchPlaceResponse != null) {
                 setData(searchPlaceResponse.searchPoiInfo.pois)
@@ -67,7 +67,7 @@ class PlaceSearchFragment : Fragment() {
         if (args.picture != null) {
             picture = args.picture!!
             picture.place?.name?.let {
-                binding.edtPlaceSearch.setText(it)
+                binding.edtPlacesearch.setText(it)
 
                 displayLoadingAnimation()
                 searchViewModel.getSearchPlace(it)
@@ -77,7 +77,7 @@ class PlaceSearchFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imagePlaceSearchBack.setOnClickListener {
+        binding.imagePlacesearchBack.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(
                     PlaceSearchFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
@@ -86,7 +86,7 @@ class PlaceSearchFragment : Fragment() {
                 )
         }
 
-        binding.edtPlaceSearch.setOnEditorActionListener { v, actionId, event ->
+        binding.edtPlacesearch.setOnEditorActionListener { v, actionId, event ->
             when(actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> {
                     (v as EditText).text.toString().run {
@@ -97,7 +97,7 @@ class PlaceSearchFragment : Fragment() {
                             searchViewModel.getSearchPlace(this)
                         }
                     }
-                    requireActivity().hideKeyboard(binding.edtPlaceSearch)
+                    requireActivity().hideKeyboard(binding.edtPlacesearch)
                     return@setOnEditorActionListener true
                 }
                 else -> return@setOnEditorActionListener false
@@ -108,16 +108,16 @@ class PlaceSearchFragment : Fragment() {
     private fun initAdapter() {
         val customDivider = CustomDivider(2.5f,1f, Color.parseColor("#EFEFEF"))
 
-        binding.recyclerPlaceSearch.addItemDecoration(customDivider)
+        binding.recyclerPlacesearch.addItemDecoration(customDivider)
 
-        binding.recyclerPlaceSearch.withModels {
+        binding.recyclerPlacesearch.withModels {
             resultList?.forEachIndexed { index, searchResult ->
                 placeSearch {
                     id(index)
                     searchResult(searchResult)
 
                     onClickItem { model, parentView, clickedView, position ->
-                        if (clickedView.id == R.id.item_place_search_container) {
+                        if (clickedView.id == R.id.constraint_iplacesearch_container) {
                             updatePicture(resultList!![position])
 
                             Navigation.findNavController(binding.root)
@@ -151,14 +151,14 @@ class PlaceSearchFragment : Fragment() {
     }
 
     private fun displayNoResult() {
-        binding.textPlaceSearchNoResult.isVisible = true
+        binding.textPlacesearchNoresult.isVisible = true
         resultList = null   // 결과 리스트 초기화
-        binding.recyclerPlaceSearch.requestModelBuild()
+        binding.recyclerPlacesearch.requestModelBuild()
     }
 
     private fun displayLoadingAnimation() {
-        binding.progressbarPlaceSearchLoading.isVisible = true  // 로딩 애니메이션 on
-        binding.textPlaceSearchNoResult.isVisible = false
+        binding.progressbarPlacesearchLoading.isVisible = true  // 로딩 애니메이션 on
+        binding.textPlacesearchNoresult.isVisible = false
     }
 
     private fun setData(pois: Pois) {
@@ -174,7 +174,7 @@ class PlaceSearchFragment : Fragment() {
                 zoneNo = ""
             )
         }
-        binding.recyclerPlaceSearch.requestModelBuild()
+        binding.recyclerPlacesearch.requestModelBuild()
     }
 
     private fun makeAddressNumber(poi: Poi): String =

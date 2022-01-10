@@ -130,8 +130,8 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
             .setView(dialogView)
             .create()
 
-        val textViewReport = dialogView.findViewById<TextView>(R.id.textview_report_report)
-        val textViewCancel = dialogView.findViewById<TextView>(R.id.textview_report_cancel)
+        val textViewReport = dialogView.findViewById<TextView>(R.id.text_dlgreport_report)
+        val textViewCancel = dialogView.findViewById<TextView>(R.id.text_dlgreport_cancel)
 
         textViewReport?.setOnClickListener {
             dialog.dismiss()

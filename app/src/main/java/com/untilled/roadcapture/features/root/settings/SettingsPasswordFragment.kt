@@ -35,7 +35,7 @@ class SettingsPasswordFragment: Fragment() {
     }
 
     private fun setOnClickListeners(){
-        binding.imageviewSettingPasswordBack.setOnClickListener {
+        binding.imageSettingpwdBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
     }

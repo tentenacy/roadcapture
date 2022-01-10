@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/constraint_dlglogout_container"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/dlg">
 
     <TextView
-        android:id="@+id/textview_logout_confirmation_title"
+        android:id="@+id/text_dlglogout_title"
         style="@style/HeadBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,17 +19,17 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <View
-        android:id="@+id/view_logout_confirmation_divider_first"
+        android:id="@+id/view_dlglogout_divider1"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:layout_marginTop="32dp"
         android:background="@color/divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_logout_confirmation_title" />
+        app:layout_constraintTop_toBottomOf="@+id/text_dlglogout_title" />
 
     <TextView
-        android:id="@+id/textview_logout_confirmation_logout"
+        android:id="@+id/text_dlglogout_logout"
         style="@style/DialogButton"
         android:layout_width="0dp"
         android:layout_height="48dp"
@@ -36,25 +37,25 @@
         android:textColor="@color/secondaryColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_logout_confirmation_divider_first" />
+        app:layout_constraintTop_toBottomOf="@+id/view_dlglogout_divider1" />
 
     <View
-        android:id="@+id/view_logout_confirmation_divider_second"
+        android:id="@+id/view_dlglogout_divider2"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@color/divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textview_logout_confirmation_logout" />
+        app:layout_constraintTop_toBottomOf="@+id/text_dlglogout_logout" />
 
     <TextView
-        android:id="@+id/textview_logout_confirmation_cancel"
+        android:id="@+id/text_dlglogout_cancel"
         style="@style/DialogButton"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:text="@string/logout_confirmation_cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_logout_confirmation_divider_second" />
+        app:layout_constraintTop_toBottomOf="@+id/view_dlglogout_divider2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
