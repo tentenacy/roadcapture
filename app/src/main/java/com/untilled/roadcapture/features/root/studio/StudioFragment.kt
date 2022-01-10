@@ -53,16 +53,16 @@ class StudioFragment : Fragment() {
         binding.btnStudioEdit.setOnClickListener {
 
         }
-        binding.imageStudioMorePrevious.setOnClickListener {
+        binding.imgStudioMoreBefore.setOnClickListener {
 
         }
-        binding.imageStudioMoreAfter.setOnClickListener {
+        binding.imgStudioMoreAfter.setOnClickListener {
 
         }
-        binding.imageStudioBackAfter.setOnClickListener {
+        binding.imgStudioBackAfter.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        binding.imageStudioBackBefore.setOnClickListener {
+        binding.imgStudioBackBefore.setOnClickListener {
             requireActivity().onBackPressed()
         }
     }

@@ -49,7 +49,7 @@ class PlaceSearchFragment : Fragment() {
 
         searchViewModel.searchPlaceResponse.observe(viewLifecycleOwner) { searchPlaceResponse ->
 
-            binding.progressbarPlacesearchLoading.isVisible = false // 로딩 애니메이션 off
+            binding.progressbarPlaceSearchLoading.isVisible = false // 로딩 애니메이션 off
 
             if(searchPlaceResponse != null) {
                 setData(searchPlaceResponse.searchPoiInfo.pois)
@@ -67,7 +67,7 @@ class PlaceSearchFragment : Fragment() {
         if (args.picture != null) {
             picture = args.picture!!
             picture.place?.name?.let {
-                binding.edtPlacesearch.setText(it)
+                binding.edtPlaceSearchInput.setText(it)
 
                 displayLoadingAnimation()
                 searchViewModel.getSearchPlace(it)
@@ -77,7 +77,7 @@ class PlaceSearchFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imagePlacesearchBack.setOnClickListener {
+        binding.imagePlaceSearchBack.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(
                     PlaceSearchFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
@@ -86,7 +86,7 @@ class PlaceSearchFragment : Fragment() {
                 )
         }
 
-        binding.edtPlacesearch.setOnEditorActionListener { v, actionId, event ->
+        binding.edtPlaceSearchInput.setOnEditorActionListener { v, actionId, event ->
             when(actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> {
                     (v as EditText).text.toString().run {
@@ -97,7 +97,7 @@ class PlaceSearchFragment : Fragment() {
                             searchViewModel.getSearchPlace(this)
                         }
                     }
-                    requireActivity().hideKeyboard(binding.edtPlacesearch)
+                    requireActivity().hideKeyboard(binding.edtPlaceSearchInput)
                     return@setOnEditorActionListener true
                 }
                 else -> return@setOnEditorActionListener false
@@ -108,9 +108,9 @@ class PlaceSearchFragment : Fragment() {
     private fun initAdapter() {
         val customDivider = CustomDivider(2.5f,1f, Color.parseColor("#EFEFEF"))
 
-        binding.recyclerPlacesearch.addItemDecoration(customDivider)
+        binding.recyclerPlaceSearch.addItemDecoration(customDivider)
 
-        binding.recyclerPlacesearch.withModels {
+        binding.recyclerPlaceSearch.withModels {
             resultList?.forEachIndexed { index, searchResult ->
                 placeSearch {
                     id(index)
@@ -151,14 +151,14 @@ class PlaceSearchFragment : Fragment() {
     }
 
     private fun displayNoResult() {
-        binding.textPlacesearchNoresult.isVisible = true
+        binding.textPlaceSearchNoresult.isVisible = true
         resultList = null   // 결과 리스트 초기화
-        binding.recyclerPlacesearch.requestModelBuild()
+        binding.recyclerPlaceSearch.requestModelBuild()
     }
 
     private fun displayLoadingAnimation() {
-        binding.progressbarPlacesearchLoading.isVisible = true  // 로딩 애니메이션 on
-        binding.textPlacesearchNoresult.isVisible = false
+        binding.progressbarPlaceSearchLoading.isVisible = true  // 로딩 애니메이션 on
+        binding.textPlaceSearchNoresult.isVisible = false
     }
 
     private fun setData(pois: Pois) {
@@ -174,7 +174,7 @@ class PlaceSearchFragment : Fragment() {
                 zoneNo = ""
             )
         }
-        binding.recyclerPlacesearch.requestModelBuild()
+        binding.recyclerPlaceSearch.requestModelBuild()
     }
 
     private fun makeAddressNumber(poi: Poi): String =

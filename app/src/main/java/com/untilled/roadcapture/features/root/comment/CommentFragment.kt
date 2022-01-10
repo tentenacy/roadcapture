@@ -35,7 +35,7 @@ class CommentFragment : Fragment() {
 
     private val epoxyItemClickListener: (EpoxyItemArgs) -> Unit = { args ->
         when (args.clickedView.id) {
-            R.id.image_icomment_more -> {
+            R.id.img_icomment_more -> {
                 val popupMenu = PopupMenu(requireContext(), args.clickedView)
                 popupMenu.apply {
                     menuInflater.inflate(R.menu.popupmenu_comment_more, popupMenu.menu)
@@ -49,7 +49,7 @@ class CommentFragment : Fragment() {
                     }
                 }.show()
             }
-            R.id.image_icomment_profile -> {
+            R.id.img_icomment_profile -> {
                 Navigation.findNavController(binding.root)
                     .navigate(R.id.action_commentFragment_to_studioFragment)
             }
@@ -113,10 +113,10 @@ class CommentFragment : Fragment() {
             .setView(dialogView)
             .create()
 
-        dialogView.findViewById<TextView>(R.id.text_dlgreport_report)?.setOnClickListener {
+        dialogView.findViewById<TextView>(R.id.text_dlgreport_confirm)?.setOnClickListener {
             dialog.dismiss()
         }
-        dialogView.findViewById<TextView>(R.id.text_dlgreport_cancel)?.setOnClickListener {
+        dialogView.findViewById<TextView>(R.id.dlgreport_cancel)?.setOnClickListener {
             dialog.dismiss()
         }
 

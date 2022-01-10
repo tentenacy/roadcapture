@@ -54,7 +54,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="48dp"
                         android:layout_marginStart="64dp"
-                        android:text="@string/my_studio_modification_title" />
+                        android:text="@string/mystudio_modify_title" />
 
                     <ImageView
                         android:id="@+id/image_mystudio_modify_check"
@@ -141,7 +141,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="32dp"
-                android:text="@string/my_studio_modification_description_title"
+                android:text="@string/mystudio_modify_label_desc"
                 android:textColor="@color/gray"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_mystudio_modify_username" />
@@ -166,7 +166,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                android:text="@string/my_studio_modification_place_title"
+                android:text="@string/mystudio_modify_label_place"
                 android:textColor="@color/gray"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/edt_mystudio_modify_desc" />

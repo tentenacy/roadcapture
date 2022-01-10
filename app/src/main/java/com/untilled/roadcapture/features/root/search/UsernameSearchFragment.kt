@@ -49,7 +49,7 @@ class UsernameSearchFragment : Fragment() {
 
                     onClickItem { model, parentView, clickedView, position ->
                         when (clickedView.id) {
-                            R.id.image_iusernamesearch_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root                            )
+                            R.id.img_iusernamesearch_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root                            )
                                 .navigate(R.id.action_rootFragment_to_studioFragment)
                         }
                     }

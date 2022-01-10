@@ -30,7 +30,7 @@
                 app:layout_collapseMode="parallax" />
 
             <ImageView
-                android:id="@+id/image_withdrawal_back"
+                android:id="@+id/img_withdrawal_back"
                 style="@style/BackArrow" />
 
             <TextView
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginStart="64dp"
-                android:text="@string/service_withdrawal_title" />
+                android:text="@string/withdrawal_title" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -64,37 +64,37 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_withdrawal_description"
+            android:id="@+id/text_withdrawal_desc"
             style="@style/SubHead"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="@string/withdrawal_description"
+            android:text="@string/withdrawal_desc"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_withdrawal_label" />
 
         <EditText
-            android:id="@+id/edt_withdrawal_email"
+            android:id="@+id/edt_withdrawal_input"
             style="@style/SubHead"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:hint="@string/service_withdrawal_confirm_email"
+            android:hint="@string/withdrawal_input_hint"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_withdrawal_description" />
+            app:layout_constraintTop_toBottomOf="@id/text_withdrawal_desc" />
 
         <Button
-            android:id="@+id/btn_withdrawal"
+            android:id="@+id/btn_withdrawal_confirm"
             style="@style/ButtonDisable"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:clickable="false"
-            android:text="@string/service_withdrawal_button"
+            android:text="@string/withdrawal_confirm"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/edt_withdrawal_email" />
+            app:layout_constraintTop_toBottomOf="@id/edt_withdrawal_input" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

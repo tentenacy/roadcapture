@@ -33,12 +33,12 @@
 
 
     <EditText
-        android:id="@+id/edt_login_email_email"
+        android:id="@+id/edt_login_email_inputemail"
         style="@style/SubHead"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:hint="@string/login_email_hint_email"
+        android:hint="@string/login_email_inputemail_hint"
         android:inputType="textPassword"
         app:boxBackgroundColor="@android:color/transparent"
         app:layout_constraintEnd_toStartOf="@+id/guideline_login_email_end_56dp"
@@ -54,16 +54,16 @@
         android:layout_marginTop="32dp"
         android:text="@string/login_email_label_pwd"
         app:layout_constraintStart_toStartOf="@+id/guideline_login_email_start_56dp"
-        app:layout_constraintTop_toBottomOf="@+id/edt_login_email_email" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_login_email_inputemail" />
 
 
     <EditText
-        android:id="@+id/edt_login_email_pwd"
+        android:id="@+id/edt_login_email_pwdinput"
         style="@style/SubHead"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:hint="@string/login_email_hint_pwd"
+        android:hint="@string/login_email_pwdinput_hint"
         android:inputType="textPassword"
         app:layout_constraintEnd_toStartOf="@+id/guideline_login_email_end_56dp"
         app:layout_constraintStart_toStartOf="@+id/text_login_email_label_email"
@@ -79,19 +79,19 @@
         android:layout_marginTop="56dp"
         app:layout_constraintEnd_toEndOf="@id/guideline_login_email_end_56dp"
         app:layout_constraintStart_toStartOf="@id/guideline_login_email_start_56dp"
-        app:layout_constraintTop_toBottomOf="@+id/edt_login_email_pwd" />
+        app:layout_constraintTop_toBottomOf="@+id/edt_login_email_pwdinput" />
 
 
     <Button
-        android:id="@+id/btn_login_email"
+        android:id="@+id/btn_login_email_confirm"
         style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="48dp"
-        android:text="@string/btn_login_email"
+        android:text="@string/login_email_confirm"
         android:layout_marginTop="200dp"
         app:layout_constraintEnd_toStartOf="@+id/guideline_login_email_end_56dp"
         app:layout_constraintStart_toStartOf="@+id/guideline_login_email_start_56dp"
-        app:layout_constraintTop_toBottomOf="@id/edt_login_email_email"
+        app:layout_constraintTop_toBottomOf="@id/edt_login_email_inputemail"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="1.0"/>
 

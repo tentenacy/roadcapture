@@ -66,7 +66,7 @@ class SettingsAccountFragment : Fragment() {
             .setView(dialogView)
             .create()
 
-        dialogView.findViewById<TextView>(R.id.text_dlglogout_logout)?.setOnClickListener {
+        dialogView.findViewById<TextView>(R.id.text_dlglogout_confirm)?.setOnClickListener {
 
         }
         dialogView.findViewById<TextView>(R.id.text_dlglogout_cancel)?.setOnClickListener {

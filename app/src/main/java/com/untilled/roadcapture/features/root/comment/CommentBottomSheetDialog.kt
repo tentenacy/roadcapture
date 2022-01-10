@@ -34,7 +34,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
 
     private val epoxyItemClickListener: (EpoxyItemArgs) -> Unit = { args ->
         when (args.clickedView.id) {
-            R.id.image_icomment_more -> {
+            R.id.img_icomment_more -> {
                 val popupMenu = PopupMenu(requireContext(), args.clickedView)
                 popupMenu.apply {
                     menuInflater.inflate(R.menu.popupmenu_comment_more, popupMenu.menu)
@@ -48,7 +48,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
                     }
                 }.show()
             }
-            R.id.image_icomment_profile -> {
+            R.id.img_icomment_profile -> {
                 Navigation.findNavController(binding.root)
                     .navigate(R.id.action_commentFragment_to_studioFragment)
             }
@@ -130,8 +130,8 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
             .setView(dialogView)
             .create()
 
-        val textViewReport = dialogView.findViewById<TextView>(R.id.text_dlgreport_report)
-        val textViewCancel = dialogView.findViewById<TextView>(R.id.text_dlgreport_cancel)
+        val textViewReport = dialogView.findViewById<TextView>(R.id.text_dlgreport_confirm)
+        val textViewCancel = dialogView.findViewById<TextView>(R.id.dlgreport_cancel)
 
         textViewReport?.setOnClickListener {
             dialog.dismiss()

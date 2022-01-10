@@ -27,7 +27,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/filter_title"
+            android:text="@string/dlgfilter_title"
             android:textAppearance="@style/SubHeadBold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
             android:layout_height="0dp"
             android:clickable="true"
             android:gravity="center"
-            android:text="@string/filter_reset"
+            android:text="@string/dlgfilter_reset"
             android:textAppearance="@style/Body"
             app:layout_constraintBottom_toBottomOf="@id/view_dlgfilter_divider1"
             app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +62,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/filter_duration"
+            android:text="@string/dlgfilter_label_duration"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_dlgfilter_divider1" />
 
@@ -93,7 +93,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:checked="true"
-                    android:text="@string/filter_whole_duration" />
+                    android:text="@string/dlgfilter_whole" />
 
                 <RadioButton
                     android:id="@+id/radiobtn_dlgfilter_today"
@@ -101,7 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
-                    android:text="@string/filter_today" />
+                    android:text="@string/dlgfilter_today" />
 
                 <RadioButton
                     android:id="@+id/radiobtn_dlgfilter_week"
@@ -109,7 +109,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
-                    android:text="@string/filter_this_week" />
+                    android:text="@string/dlgfilter_week" />
 
                 <RadioButton
                     android:id="@+id/radiobtn_dlgfilter_month"
@@ -117,7 +117,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
-                    android:text="@string/filter_this_month" />
+                    android:text="@string/dlgfilter_month" />
 
                 <RadioButton
                     android:id="@+id/radiobtn_dlgfilter_year"
@@ -125,7 +125,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="40dp"
                     android:layout_marginStart="16dp"
-                    android:text="@string/filter_this_year" />
+                    android:text="@string/dlgfilter_year" />
             </RadioGroup>
         </HorizontalScrollView>
 
@@ -135,7 +135,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="12dp"
             android:layout_marginTop="8dp"
-            android:text="@string/filter_start_date"
+            android:text="@string/dlgfilter_label_startdate"
             android:textAppearance="@style/Body"
             app:layout_constraintStart_toStartOf="@id/btn_dlgfilter_startdate"
             app:layout_constraintTop_toBottomOf="@id/scroll_dlgfilter" />
@@ -165,7 +165,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="11dp"
-            android:text="@string/filter_end_date"
+            android:text="@string/dlgfilter_label_enddate"
             android:textAppearance="@style/Body"
             app:layout_constraintStart_toStartOf="@id/btn_dlgfilter_enddate"
             app:layout_constraintTop_toTopOf="@id/text_dlgfilter_label_startdate" />
@@ -201,7 +201,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/filter_sorting"
+            android:text="@string/dlgfilter_label_sort"
             android:textAppearance="@style/SubHeadBold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_dlgfilter_divider2" />
@@ -224,7 +224,7 @@
                 android:layout_height="40dp"
                 android:background="@drawable/selector_radio_filter"
                 android:checked="true"
-                android:text="@string/filter_sorting_latest" />
+                android:text="@string/dlgfilter_sort_latest" />
 
             <RadioButton
                 android:id="@+id/radiobtn_dlgfilter_sort_popularity"
@@ -232,7 +232,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginStart="16dp"
-                android:text="@string/filter_sorting_popularity" />
+                android:text="@string/dlgfilter_sort_popularity" />
         </RadioGroup>
 
         <Button
@@ -241,7 +241,7 @@
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:layout_marginVertical="16dp"
-            android:text="@string/filter_apply"
+            android:text="@string/dlgfilter_apply"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

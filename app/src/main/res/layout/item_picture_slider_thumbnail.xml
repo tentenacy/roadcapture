@@ -22,7 +22,7 @@
         android:layout_height="match_parent">
 
         <ImageView
-            android:id="@+id/image_ipicture_slider_thumbnail_bg"
+            android:id="@+id/img_ipicture_slider_thumbnail_bg"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="fitXY"
@@ -34,14 +34,14 @@
 
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imagw_ipicture_slider_thumbnail_profile"
+            android:id="@+id/img_ipicture_slider_thumbnail_profile"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="16dp"
             android:onClick="@{onClickItem}"
-            app:layout_constraintBottom_toBottomOf="@id/image_ipicture_slider_thumbnail_bg"
+            app:layout_constraintBottom_toBottomOf="@id/img_ipicture_slider_thumbnail_bg"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/image_ipicture_slider_thumbnail_bg"
+            app:layout_constraintTop_toTopOf="@id/img_ipicture_slider_thumbnail_bg"
             app:layout_constraintVertical_bias="0.4"
             bind:albumProfileImage="@{album.user.profileUrl}"
             tools:src="@drawable/img_sample_profile" />
@@ -53,9 +53,9 @@
             android:layout_marginStart="16dp"
             android:textAppearance="@style/SubHeadBoldWhite"
             android:text="@{album.user.username}"
-            app:layout_constraintBottom_toBottomOf="@id/imagw_ipicture_slider_thumbnail_profile"
-            app:layout_constraintStart_toEndOf="@id/imagw_ipicture_slider_thumbnail_profile"
-            app:layout_constraintTop_toTopOf="@id/imagw_ipicture_slider_thumbnail_profile"
+            app:layout_constraintBottom_toBottomOf="@id/img_ipicture_slider_thumbnail_profile"
+            app:layout_constraintStart_toEndOf="@id/img_ipicture_slider_thumbnail_profile"
+            app:layout_constraintTop_toTopOf="@id/img_ipicture_slider_thumbnail_profile"
             tools:text="kwangddang11" />
 
         <TextView
@@ -69,7 +69,7 @@
             android:textSize="24sp"
             android:text="@{album.title}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imagw_ipicture_slider_thumbnail_profile"
+            app:layout_constraintTop_toBottomOf="@id/img_ipicture_slider_thumbnail_profile"
             tools:text="로드캡처 스터디" />
 
         <TextView

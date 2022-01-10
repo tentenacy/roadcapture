@@ -46,7 +46,7 @@ class SignupPasswordFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.btnSignupPwd.setOnClickListener {
+        binding.btnSignupPwdConfirm.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_signupPasswordFragment_to_signupUsernameFragment)
         }

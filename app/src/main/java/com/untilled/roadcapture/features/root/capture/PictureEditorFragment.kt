@@ -61,7 +61,7 @@ class PictureEditorFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imagePictureEditorBack.setOnClickListener {
+        binding.imgPictureEditorBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
 
@@ -78,7 +78,7 @@ class PictureEditorFragment : Fragment() {
             onCreateDatePicker()
         }
 
-        binding.imagePictureEditorCheck.setOnClickListener {
+        binding.imgPictureEditorCheck.setOnClickListener {
             // todo Room에 picture insert
             viewModel.insertPicture(picture!!)
 
@@ -86,7 +86,7 @@ class PictureEditorFragment : Fragment() {
                 .navigate(R.id.action_pictureEditorFragment_to_captureFragment)
         }
 
-        binding.imagePictureEditorDelete.setOnClickListener {
+        binding.imgPictureEditorDelete.setOnClickListener {
             showDeletePictureAskingDialog {
                 // todo 사진 삭제 기능
             }
@@ -117,7 +117,7 @@ class PictureEditorFragment : Fragment() {
             imageUrl = picture?.imageUrl,
             createdAt = picture?.createdAt,
             lastModifiedAt = picture?.lastModifiedAt,
-            description = binding.edtPictureEditorDescription.text.toString(),
+            description = binding.edtPictureEditorDesc.text.toString(),
             place = picture?.place
         )
 
@@ -129,7 +129,7 @@ class PictureEditorFragment : Fragment() {
             .setView(dialogView)
             .create()
 
-        dialogView.findViewById<TextView>(R.id.text_dlgpicturedelete_delete)?.setOnClickListener {
+        dialogView.findViewById<TextView>(R.id.text_dlgpicturedelete_confirm)?.setOnClickListener {
             logic()
             dialog.dismiss()
         }

@@ -25,7 +25,7 @@
         android:paddingVertical="16dp">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/image_ialbums_studio_thumbnail"
+            android:id="@+id/img_ialbums_studio_thumbnail"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{onClickItem}"
@@ -37,14 +37,14 @@
             tools:src="@drawable/img_sample_thumbnail" />
 
         <View
-            android:id="@+id/image_ialbums_studio_overlay"
+            android:id="@+id/view_ialbums_studio_overlay"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/overlay_gradient_studio_thumbnail"
-            app:layout_constraintStart_toStartOf="@id/image_ialbums_studio_thumbnail"
-            app:layout_constraintEnd_toEndOf="@id/image_ialbums_studio_thumbnail"
-            app:layout_constraintTop_toTopOf="@id/image_ialbums_studio_thumbnail"
-            app:layout_constraintBottom_toBottomOf="@id/image_ialbums_studio_thumbnail"/>
+            app:layout_constraintStart_toStartOf="@id/img_ialbums_studio_thumbnail"
+            app:layout_constraintEnd_toEndOf="@id/img_ialbums_studio_thumbnail"
+            app:layout_constraintTop_toTopOf="@id/img_ialbums_studio_thumbnail"
+            app:layout_constraintBottom_toBottomOf="@id/img_ialbums_studio_thumbnail"/>
 
         <TextView
             android:id="@+id/text_ialbums_studio_title"
@@ -57,9 +57,9 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="64dp"
-            app:layout_constraintStart_toStartOf="@id/image_ialbums_studio_thumbnail"
+            app:layout_constraintStart_toStartOf="@id/img_ialbums_studio_thumbnail"
             app:layout_constraintEnd_toStartOf="@id/text_ialbums_studio_date"
-            app:layout_constraintBottom_toBottomOf="@id/image_ialbums_studio_thumbnail"
+            app:layout_constraintBottom_toBottomOf="@id/img_ialbums_studio_thumbnail"
             tools:text="로드캡처 스터디" />
 
         <TextView

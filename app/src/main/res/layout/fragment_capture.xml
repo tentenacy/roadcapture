@@ -9,7 +9,7 @@
         android:layout_height="match_parent">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/fragmentcontainer_picture_map"
+            android:id="@+id/fragmentcontainer_capture"
             android:name="com.naver.maps.map.MapFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />

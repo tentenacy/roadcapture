@@ -24,7 +24,7 @@
         android:paddingVertical="16dp">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/image_ititlesearch_thumbnail"
+            android:id="@+id/img_ititlesearch_thumbnail"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{onClickItem}"
@@ -40,13 +40,13 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/overlay_gradient_studio_thumbnail"
-            app:layout_constraintStart_toStartOf="@id/image_ititlesearch_thumbnail"
-            app:layout_constraintEnd_toEndOf="@id/image_ititlesearch_thumbnail"
-            app:layout_constraintTop_toTopOf="@id/image_ititlesearch_thumbnail"
-            app:layout_constraintBottom_toBottomOf="@id/image_ititlesearch_thumbnail"/>
+            app:layout_constraintStart_toStartOf="@id/img_ititlesearch_thumbnail"
+            app:layout_constraintEnd_toEndOf="@id/img_ititlesearch_thumbnail"
+            app:layout_constraintTop_toTopOf="@id/img_ititlesearch_thumbnail"
+            app:layout_constraintBottom_toBottomOf="@id/img_ititlesearch_thumbnail"/>
 
         <ImageView
-            android:id="@+id/image_ititlesearch_profile"
+            android:id="@+id/img_ititlesearch_profile"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:padding="8dp"
@@ -66,9 +66,9 @@
             android:layout_marginStart="8dp"
             android:textColor="@color/white"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/image_ititlesearch_profile"
-            app:layout_constraintStart_toEndOf="@id/image_ititlesearch_profile"
-            app:layout_constraintTop_toTopOf="@+id/image_ititlesearch_profile"
+            app:layout_constraintBottom_toBottomOf="@+id/img_ititlesearch_profile"
+            app:layout_constraintStart_toEndOf="@id/img_ititlesearch_profile"
+            app:layout_constraintTop_toTopOf="@+id/img_ititlesearch_profile"
             bind:albumOverlayUsername="@{album.user.username}"
             tools:text="tenutz ·" />
 
@@ -94,9 +94,9 @@
             android:text="@{album.title}"
             android:layout_marginHorizontal="16dp"
             android:layout_marginBottom="16dp"
-            app:layout_constraintStart_toStartOf="@id/image_ititlesearch_thumbnail"
-            app:layout_constraintEnd_toEndOf="@id/image_ititlesearch_thumbnail"
-            app:layout_constraintBottom_toBottomOf="@id/image_ititlesearch_thumbnail"
+            app:layout_constraintStart_toStartOf="@id/img_ititlesearch_thumbnail"
+            app:layout_constraintEnd_toEndOf="@id/img_ititlesearch_thumbnail"
+            app:layout_constraintBottom_toBottomOf="@id/img_ititlesearch_thumbnail"
             tools:text="로드캡처 스터디" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

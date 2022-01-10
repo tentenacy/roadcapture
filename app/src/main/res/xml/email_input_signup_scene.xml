@@ -11,17 +11,17 @@
     <ConstraintSet android:id="@+id/start">
 
         <Constraint
-            android:id="@+id/btn_signup_email"
+            android:id="@+id/btn_signup_email_confirm"
             style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="248dp"
-            android:text="@string/btn_signup_email"
+            android:text="@string/signup_email_confirm"
             android:visibility="invisible"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toStartOf="@+id/guideline_signup_email_end_56dp"
             motion:layout_constraintStart_toStartOf="@+id/guideline_signup_username_start_56dp"
-            motion:layout_constraintTop_toBottomOf="@+id/edt_signup_email"
+            motion:layout_constraintTop_toBottomOf="@+id/edt_signup_email_input"
             motion:layout_constraintVertical_bias="1.0"/>
 
     </ConstraintSet>
@@ -29,17 +29,17 @@
     <ConstraintSet android:id="@+id/end">
 
         <Constraint
-            android:id="@+id/btn_signup_email"
+            android:id="@+id/btn_signup_email_confirm"
             style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="200dp"
-            android:text="@string/btn_signup_email"
+            android:text="@string/signup_email_confirm"
             android:visibility="visible"
             motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintEnd_toStartOf="@+id/guideline_signup_email_end_56dp"
             motion:layout_constraintStart_toStartOf="@+id/guideline_signup_username_start_56dp"
-            motion:layout_constraintTop_toBottomOf="@+id/edt_signup_email"
+            motion:layout_constraintTop_toBottomOf="@+id/edt_signup_email_input"
             motion:layout_constraintVertical_bias="1.0"/>
 
     </ConstraintSet>

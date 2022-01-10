@@ -31,7 +31,7 @@
                 app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed">
 
                 <ImageView
-                    android:id="@+id/image_studio_background"
+                    android:id="@+id/img_studio_background"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
@@ -43,22 +43,22 @@
                     android:layout_width="0dp"
                     android:layout_height="0dp"
                     android:background="@drawable/overlay_gradient_thumbnail"
-                    app:layout_constraintBottom_toBottomOf="@+id/image_studio_background"
-                    app:layout_constraintEnd_toEndOf="@+id/image_studio_background"
-                    app:layout_constraintStart_toStartOf="@+id/image_studio_background"
-                    app:layout_constraintTop_toTopOf="@+id/image_studio_background" />
+                    app:layout_constraintBottom_toBottomOf="@+id/img_studio_background"
+                    app:layout_constraintEnd_toEndOf="@+id/img_studio_background"
+                    app:layout_constraintStart_toStartOf="@+id/img_studio_background"
+                    app:layout_constraintTop_toTopOf="@+id/img_studio_background" />
 
                 <ImageView
-                    android:id="@+id/image_studio_back_before"
+                    android:id="@+id/img_studio_back_before"
                     style="@style/BackArrow"
                     app:tint="@color/white" />
 
                 <ImageView
-                    android:id="@+id/image_studio_back_after"
+                    android:id="@+id/img_studio_back_after"
                     style="@style/BackArrow" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/image_studio_profile"
+                    android:id="@+id/img_studio_profile"
                     android:layout_width="96dp"
                     android:layout_height="96dp"
                     app:civ_border_color="@color/white"
@@ -104,7 +104,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:text="@string/my_studio_follower"
+                    android:text="@string/studio_label_follower"
                     android:textColor="@color/gray" />
 
                 <TextView
@@ -122,7 +122,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:text="@string/my_studio_following"
+                    android:text="@string/studio_label_following"
                     android:textColor="@color/gray" />
 
                 <TextView
@@ -139,11 +139,11 @@
                     android:layout_width="192dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="32dp"
-                    android:text="팔로우"
+                    android:text="@string/studio_edit"
                     app:backgroundTint="@color/secondaryColor" />
 
                 <ImageView
-                    android:id="@+id/image_studio_more_previous"
+                    android:id="@+id/img_studio_more_before"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:padding="12dp"
@@ -151,7 +151,7 @@
                     app:tint="@color/white" />
 
                 <ImageView
-                    android:id="@+id/image_studio_more_after"
+                    android:id="@+id/img_studio_more_after"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:padding="12dp"
@@ -177,7 +177,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"
-                    android:text="@string/my_studio_place_subtitle"
+                    android:text="@string/studio_label_place"
                     android:textAppearance="@style/SubHeadBold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -200,7 +200,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="@string/my_studio_albums_subtitle"
+                    android:text="@string/studio_label_album"
                     android:textAppearance="@style/SubHeadBold"
                     app:layout_constraintStart_toStartOf="@+id/text_studio_label_place"
                     app:layout_constraintTop_toBottomOf="@+id/recycler_studio_place" />

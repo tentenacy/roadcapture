@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/setting_service_location_enable"
+        android:text="@string/dlgpermissionlocation_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toBottomOf="@id/text_dlgpermissionlocation_title" />
 
     <TextView
-        android:id="@+id/text_dlgpermissionlocation_description"
+        android:id="@+id/text_dlgpermissionlocation_desc"
         style="@style/Head"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -36,23 +36,23 @@
         android:layout_marginTop="24dp"
         android:layout_marginEnd="48dp"
         android:gravity="center"
-        android:text="@string/location_permission_description"
+        android:text="@string/dlgpermissionlocation_desc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/image_dlgpermissionlocation" />
 
     <Button
-        android:id="@+id/btn_dlgpermissionlocation_setting"
+        android:id="@+id/btn_dlgpermissionlocation_confirm"
         style="@style/BottomSheetButton"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginHorizontal="24dp"
         android:layout_marginTop="24dp"
-        android:text="@string/location_permission_setting"
+        android:text="@string/dlgpermissionlocation_confirm"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/text_dlgpermissionlocation_description" />
+        app:layout_constraintTop_toBottomOf="@id/text_dlgpermissionlocation_desc" />
 
     <Button
         android:id="@+id/btn_dlgpermissionlocation_cancel"
@@ -61,11 +61,11 @@
         android:layout_height="56dp"
         android:layout_marginHorizontal="24dp"
         android:layout_marginBottom="16dp"
-        android:text="@string/location_permission_cancel"
+        android:text="@string/dlgpermissionlocation_cancel"
         android:textColor="@color/gray"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_dlgpermissionlocation_setting" />
+        app:layout_constraintTop_toBottomOf="@id/btn_dlgpermissionlocation_confirm" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

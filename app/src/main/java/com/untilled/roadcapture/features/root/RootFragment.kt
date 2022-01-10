@@ -37,10 +37,10 @@ class RootFragment : Fragment() {
     private val tabs: Array<ImageView>
         get() = binding.run {
             arrayOf(
-                imageviewRootAlbumsTab,
-                imageviewRootSearchTab,
-                imageviewRootFollowingAlbumsTab,
-                imageviewRootMyStudioTab,
+                imgRootAlbumsTab,
+                imgRootSearchTab,
+                imgRootFollowingalbumsTab,
+                imgRootMyStudioTab,
             )
         }
 
@@ -170,7 +170,7 @@ class RootFragment : Fragment() {
 
 
     private fun setOnClickListeners() {
-        binding.imageviewRootCaptureTab.setOnClickListener {
+        binding.imgRootCaptureTab.setOnClickListener {
             val askMakeAlbumBottomSheetDialog = AlbumCreationAskingBottomSheetDialog()
             askMakeAlbumBottomSheetDialog.show(
                 childFragmentManager,

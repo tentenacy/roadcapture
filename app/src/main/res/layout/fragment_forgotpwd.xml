@@ -34,27 +34,27 @@
 
 
     <EditText
-        android:id="@+id/edt_forgotpwdl"
+        android:id="@+id/edt_forgotpwd_input"
         style="@style/SubHead"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:hint="@string/forgotpwd_hint"
+        android:hint="@string/forgotpwd_input_hint"
         android:inputType="textPassword"
         app:layout_constraintEnd_toStartOf="@+id/guideline_forgotpwd_end_56dp"
         app:layout_constraintStart_toStartOf="@+id/guideline_forgotpwd_start_56dp"
         app:layout_constraintTop_toBottomOf="@+id/text_forgotpwd_label" />
 
     <Button
-        android:id="@+id/btn_forgotpwd"
+        android:id="@+id/btn_forgotpwd_confirm"
         style="@style/Button"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:layout_marginTop="24dp"
-        android:text="@string/btn_forgotpwd"
+        android:text="@string/forgotpwd_confirm"
         app:layout_constraintEnd_toStartOf="@+id/guideline_forgotpwd_end_56dp"
         app:layout_constraintStart_toStartOf="@+id/guideline_forgotpwd_start_56dp"
-        app:layout_constraintTop_toBottomOf="@id/edt_forgotpwdl" />
+        app:layout_constraintTop_toBottomOf="@id/edt_forgotpwd_input" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_forgotpwd_start_56dp"

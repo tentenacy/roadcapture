@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -10,7 +9,7 @@
         android:layout_height="match_parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_placesearch"
+            android:id="@+id/toolbar_place_search"
             android:layout_width="0dp"
             android:layout_height="48dp"
             app:contentInsetStart="0dp"
@@ -19,11 +18,11 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/image_placesearch_back"
+                android:id="@+id/image_place_search_back"
                 style="@style/BackArrow" />
 
             <TextView
-                android:id="@+id/text_placesearch_title"
+                android:id="@+id/text_place_search_title"
                 style="@style/ActionBarTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
@@ -33,40 +32,40 @@
         </androidx.appcompat.widget.Toolbar>
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar_placesearch_container"
+            android:id="@+id/toolbar_place_search_container"
             android:layout_width="0dp"
             android:layout_height="56dp"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_placesearch" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar_place_search" />
 
         <View
-            android:id="@+id/view_placesearch_edtbg"
+            android:id="@+id/view_place_search_inputbg"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="4dp"
             android:background="@drawable/edit_search"
-            app:layout_constraintEnd_toEndOf="@+id/toolbar_placesearch_container"
-            app:layout_constraintStart_toStartOf="@+id/toolbar_placesearch_container"
-            app:layout_constraintTop_toTopOf="@+id/toolbar_placesearch_container" />
+            app:layout_constraintEnd_toEndOf="@+id/toolbar_place_search_container"
+            app:layout_constraintStart_toStartOf="@+id/toolbar_place_search_container"
+            app:layout_constraintTop_toTopOf="@+id/toolbar_place_search_container" />
 
         <ImageView
-            android:id="@+id/image_placesearch"
+            android:id="@+id/image_place_search_input"
             android:layout_width="16dp"
             android:layout_height="16dp"
             android:layout_gravity="center"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="8dp"
             android:src="@drawable/ic_search"
-            app:layout_constraintBottom_toBottomOf="@+id/view_placesearch_edtbg"
-            app:layout_constraintStart_toStartOf="@+id/view_placesearch_edtbg"
-            app:layout_constraintTop_toTopOf="@+id/view_placesearch_edtbg"
+            app:layout_constraintBottom_toBottomOf="@+id/view_place_search_inputbg"
+            app:layout_constraintStart_toStartOf="@+id/view_place_search_inputbg"
+            app:layout_constraintTop_toTopOf="@+id/view_place_search_inputbg"
             app:tint="#999999" />
 
         <EditText
-            android:id="@+id/edt_placesearch"
+            android:id="@+id/edt_place_search_input"
             style="@style/Body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -77,22 +76,22 @@
             android:imeOptions="actionSearch"
             android:inputType="text"
             android:maxLines="1"
-            app:layout_constraintBottom_toBottomOf="@+id/view_placesearch_edtbg"
-            app:layout_constraintEnd_toEndOf="@+id/view_placesearch_edtbg"
-            app:layout_constraintStart_toEndOf="@+id/image_placesearch"
-            app:layout_constraintTop_toTopOf="@+id/view_placesearch_edtbg" />
+            app:layout_constraintBottom_toBottomOf="@+id/view_place_search_inputbg"
+            app:layout_constraintEnd_toEndOf="@+id/view_place_search_inputbg"
+            app:layout_constraintStart_toEndOf="@+id/image_place_search_input"
+            app:layout_constraintTop_toTopOf="@+id/view_place_search_inputbg" />
 
         <View
-            android:id="@+id/view_searchplace_divider"
+            android:id="@+id/view_place_search_divider"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar_placesearch_container" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar_place_search_container" />
 
         <com.airbnb.epoxy.EpoxyRecyclerView
-            android:id="@+id/recycler_placesearch"
+            android:id="@+id/recycler_place_search"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:orientation="vertical"
@@ -101,24 +100,24 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view_searchplace_divider"
+            app:layout_constraintTop_toBottomOf="@+id/view_place_search_divider"
             tools:listitem="@layout/item_place_search" />
 
         <TextView
-            android:id="@+id/text_placesearch_noresult"
+            android:id="@+id/text_place_search_noresult"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/search_place_no_result"
+            android:text="@string/place_search_noresult"
             android:textAppearance="@style/Body"
             android:textColor="@color/gray"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar_placesearch_container" />
+            app:layout_constraintTop_toBottomOf="@id/toolbar_place_search_container" />
 
         <ProgressBar
-            android:id="@+id/progressbar_placesearch_loading"
+            android:id="@+id/progressbar_place_search_loading"
             android:layout_width="36dp"
             android:layout_height="36dp"
             android:indeterminateDuration="1000"

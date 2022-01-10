@@ -23,7 +23,7 @@
         android:paddingEnd="16dp">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/image_iplace_filter_bg"
+            android:id="@+id/img_iplace_filter_bg"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
@@ -41,10 +41,10 @@
             android:layout_height="0dp"
             android:onClick="@{onClickItem}"
             android:background="@drawable/selector_filter_place"
-            app:layout_constraintBottom_toBottomOf="@+id/image_iplace_filter_bg"
-            app:layout_constraintEnd_toEndOf="@+id/image_iplace_filter_bg"
-            app:layout_constraintStart_toStartOf="@+id/image_iplace_filter_bg"
-            app:layout_constraintTop_toTopOf="@+id/image_iplace_filter_bg" />
+            app:layout_constraintBottom_toBottomOf="@+id/img_iplace_filter_bg"
+            app:layout_constraintEnd_toEndOf="@+id/img_iplace_filter_bg"
+            app:layout_constraintStart_toStartOf="@+id/img_iplace_filter_bg"
+            app:layout_constraintTop_toTopOf="@+id/img_iplace_filter_bg" />
 
         <TextView
             android:id="@+id/text_iplace_filter_title"

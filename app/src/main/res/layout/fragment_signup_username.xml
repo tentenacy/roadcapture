@@ -40,12 +40,12 @@
 
 
         <EditText
-            android:id="@+id/edt_signup_username"
+            android:id="@+id/edt_signup_username_input"
             style="@style/SubHead"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:hint="@string/signup_username_hint"
+            android:hint="@string/signup_username_input_hint"
             app:layout_constraintEnd_toStartOf="@+id/guideline_signup_username_end_56dp"
             app:layout_constraintStart_toStartOf="@+id/text_signup_username_label"
             app:layout_constraintTop_toBottomOf="@+id/text_signup_username_label"
@@ -69,12 +69,12 @@
             android:text="@string/signup_username_label_termsofservice" />
 
         <Button
-            android:id="@+id/btn_signup_username"
+            android:id="@+id/btn_signup_username_confirm"
             style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="200dp"
-            android:text="@string/btn_signup_username" />
+            android:text="@string/signup_username_confirm" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_signup_username_start_56dp"

@@ -42,7 +42,7 @@ class LoginEmailFragment : Fragment() {
         binding.imgLoginEmailBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        binding.btnLoginEmail.setOnClickListener {
+        binding.btnLoginEmailConfirm.setOnClickListener {
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_emailLoginFragment_to_rootFragment)
         }

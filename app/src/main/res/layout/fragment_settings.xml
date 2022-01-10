@@ -8,7 +8,7 @@
     android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar_setting"
+        android:id="@+id/appbar_settings"
         android:layout_width="0dp"
         android:layout_height="48dp"
         android:fitsSystemWindows="true"
@@ -17,35 +17,35 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/ctoolbar_setting"
+            android:id="@+id/ctoolbar_settings"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_scrollFlags="scroll|enterAlways">
 
             <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar_setting"
+                android:id="@+id/toolbar_settings"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="parallax" />
 
             <ImageView
-                android:id="@+id/image_setting_back"
+                android:id="@+id/img_settings_back"
                 style="@style/BackArrow" />
 
             <TextView
-                android:id="@+id/text_setting_title"
+                android:id="@+id/text_settings_title"
                 style="@style/ActionBarTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_marginStart="64dp"
-                android:text="@string/setting_title" />
+                android:text="@string/settings_title" />
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraint_setting_innercontainer"
+        android:id="@+id/constraint_settings_innercontainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="48dp"
@@ -55,202 +55,202 @@
         tools:layout_editor_absoluteY="56dp">
 
         <TextView
-            android:id="@+id/text_setting_label_account"
+            android:id="@+id/text_settings_label_account"
             style="@style/HeadBold"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:gravity="center|start"
-            android:text="@string/setting_account"
+            android:text="@string/settings_label_account"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/image_setting_account"
+            android:id="@+id/img_settings_account"
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:src="@drawable/ic_arrow_right"
-            app:layout_constraintBottom_toBottomOf="@id/text_setting_label_account"
-            app:layout_constraintEnd_toEndOf="@id/text_setting_label_account"
-            app:layout_constraintTop_toTopOf="@id/text_setting_label_account"
+            app:layout_constraintBottom_toBottomOf="@id/text_settings_label_account"
+            app:layout_constraintEnd_toEndOf="@id/text_settings_label_account"
+            app:layout_constraintTop_toTopOf="@id/text_settings_label_account"
             app:tint="@color/gray" />
 
         <View
-            android:id="@+id/view_setting_divider1"
+            android:id="@+id/view_settings_divider1"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_setting_label_account" />
+            app:layout_constraintTop_toBottomOf="@id/text_settings_label_account" />
 
         <TextView
-            android:id="@+id/text_setting_label_service"
+            android:id="@+id/text_settings_label_service"
             style="@style/HeadBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
-            android:text="@string/setting_service"
-            app:layout_constraintStart_toStartOf="@id/text_setting_label_account"
-            app:layout_constraintTop_toBottomOf="@id/text_setting_label_account" />
+            android:text="@string/settings_label_service"
+            app:layout_constraintStart_toStartOf="@id/text_settings_label_account"
+            app:layout_constraintTop_toBottomOf="@id/text_settings_label_account" />
 
         <TextView
-            android:id="@+id/text_setting_label_location"
+            android:id="@+id/text_settings_label_location"
             style="@style/ListLeftAlign"
             android:layout_width="0dp"
             android:layout_height="64dp"
             android:layout_marginStart="10dp"
-            android:text="@string/setting_service_location"
+            android:text="@string/settings_label_location"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/text_setting_label_service"
-            app:layout_constraintTop_toBottomOf="@id/text_setting_label_service" />
+            app:layout_constraintStart_toStartOf="@id/text_settings_label_service"
+            app:layout_constraintTop_toBottomOf="@id/text_settings_label_service" />
 
         <TextView
-            android:id="@+id/text_setting_location"
+            android:id="@+id/text_settings_location"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@style/Body"
             android:textColor="@color/secondaryColor"
-            app:layout_constraintBottom_toBottomOf="@+id/text_setting_label_location"
+            app:layout_constraintBottom_toBottomOf="@+id/text_settings_label_location"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/text_setting_label_location"
+            app:layout_constraintTop_toTopOf="@id/text_settings_label_location"
             tools:text="앱 사용중에만 허용" />
 
         <View
-            android:id="@+id/view_setting_divider2"
+            android:id="@+id/view_settings_divider2"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_setting_label_location" />
+            app:layout_constraintTop_toBottomOf="@id/text_settings_label_location" />
 
         <TextView
-            android:id="@+id/text_setting_label_notification"
+            android:id="@+id/text_settings_label_notification"
             style="@style/ListLeftAlign"
             android:layout_width="0dp"
             android:layout_height="64dp"
-            android:text="@string/setting_service_notification"
+            android:text="@string/settings_label_notification"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/text_setting_label_location"
-            app:layout_constraintTop_toBottomOf="@id/text_setting_label_location" />
+            app:layout_constraintStart_toStartOf="@id/text_settings_label_location"
+            app:layout_constraintTop_toBottomOf="@id/text_settings_label_location" />
 
         <Switch
-            android:id="@+id/switch_setting_notification"
+            android:id="@+id/switch_settings_notification"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:checked="true"
-            app:layout_constraintBottom_toBottomOf="@id/text_setting_label_notification"
-            app:layout_constraintEnd_toEndOf="@id/text_setting_label_notification"
-            app:layout_constraintTop_toTopOf="@id/text_setting_label_notification"
+            app:layout_constraintBottom_toBottomOf="@id/text_settings_label_notification"
+            app:layout_constraintEnd_toEndOf="@id/text_settings_label_notification"
+            app:layout_constraintTop_toTopOf="@id/text_settings_label_notification"
             tools:ignore="UseSwitchCompatOrMaterialXml" />
 
         <View
-            android:id="@+id/view_setting_divider3"
+            android:id="@+id/view_settings_divider3"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_setting_label_notification" />
+            app:layout_constraintTop_toBottomOf="@id/text_settings_label_notification" />
 
         <TextView
-            android:id="@+id/text_setting_label_support"
+            android:id="@+id/text_settings_label_support"
             style="@style/HeadBold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="48dp"
-            android:text="@string/setting_support"
-            app:layout_constraintStart_toStartOf="@id/text_setting_label_service"
-            app:layout_constraintTop_toBottomOf="@id/text_setting_label_notification" />
+            android:text="@string/settings_label_support"
+            app:layout_constraintStart_toStartOf="@id/text_settings_label_service"
+            app:layout_constraintTop_toBottomOf="@id/text_settings_label_notification" />
 
 
         <TextView
-            android:id="@+id/text_setting_label_version"
+            android:id="@+id/text_settings_label_version"
             style="@style/ListLeftAlign"
             android:layout_width="0dp"
             android:layout_height="64dp"
-            android:text="@string/setting_support_version"
+            android:text="@string/settings_label_version"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/text_setting_label_location"
-            app:layout_constraintTop_toBottomOf="@id/text_setting_label_support" />
+            app:layout_constraintStart_toStartOf="@id/text_settings_label_location"
+            app:layout_constraintTop_toBottomOf="@id/text_settings_label_support" />
 
         <TextView
-            android:id="@+id/text_setting_version"
+            android:id="@+id/text_settings_version"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:text="1.0v"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/text_setting_label_version" />
+            app:layout_constraintTop_toTopOf="@id/text_settings_label_version" />
 
 
         <View
-            android:id="@+id/view_setting_divider4"
+            android:id="@+id/view_settings_divider4"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_setting_label_version" />
+            app:layout_constraintTop_toBottomOf="@id/text_settings_label_version" />
 
         <TextView
-            android:id="@+id/text_setting_label_opinion"
+            android:id="@+id/text_settings_label_opinion"
             style="@style/ListLeftAlign"
             android:layout_width="0dp"
             android:layout_height="64dp"
-            android:text="@string/setting_support_opinion"
+            android:text="@string/settings_label_opinion"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/text_setting_label_location"
-            app:layout_constraintTop_toBottomOf="@id/text_setting_label_version" />
+            app:layout_constraintStart_toStartOf="@id/text_settings_label_location"
+            app:layout_constraintTop_toBottomOf="@id/text_settings_label_version" />
 
         <ImageView
-            android:id="@+id/image_setting_opinion"
+            android:id="@+id/img_settings_opinion"
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:src="@drawable/ic_arrow_right"
-            app:layout_constraintBottom_toBottomOf="@id/text_setting_label_opinion"
-            app:layout_constraintEnd_toEndOf="@id/text_setting_label_opinion"
-            app:layout_constraintTop_toTopOf="@id/text_setting_label_opinion"
+            app:layout_constraintBottom_toBottomOf="@id/text_settings_label_opinion"
+            app:layout_constraintEnd_toEndOf="@id/text_settings_label_opinion"
+            app:layout_constraintTop_toTopOf="@id/text_settings_label_opinion"
             app:tint="@color/gray" />
 
         <View
-            android:id="@+id/view_setting_divider5"
+            android:id="@+id/view_settings_divider5"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_setting_label_opinion" />
+            app:layout_constraintTop_toBottomOf="@id/text_settings_label_opinion" />
 
         <TextView
-            android:id="@+id/text_setting_label_terms"
+            android:id="@+id/text_settings_label_terms"
             style="@style/ListLeftAlign"
             android:layout_width="0dp"
             android:layout_height="64dp"
-            android:text="@string/setting_support_terms"
+            android:text="@string/settings_label_terms"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/text_setting_label_location"
-            app:layout_constraintTop_toBottomOf="@id/text_setting_label_opinion" />
+            app:layout_constraintStart_toStartOf="@id/text_settings_label_location"
+            app:layout_constraintTop_toBottomOf="@id/text_settings_label_opinion" />
 
         <ImageView
-            android:id="@+id/image_setting_terms"
+            android:id="@+id/img_settings_terms"
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:src="@drawable/ic_arrow_right"
-            app:layout_constraintBottom_toBottomOf="@id/text_setting_label_terms"
-            app:layout_constraintEnd_toEndOf="@id/text_setting_label_terms"
-            app:layout_constraintTop_toTopOf="@id/text_setting_label_terms"
+            app:layout_constraintBottom_toBottomOf="@id/text_settings_label_terms"
+            app:layout_constraintEnd_toEndOf="@id/text_settings_label_terms"
+            app:layout_constraintTop_toTopOf="@id/text_settings_label_terms"
             app:tint="@color/gray" />
 
         <View
-            android:id="@+id/view_setting_divider6"
+            android:id="@+id/view_settings_divider6"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:background="@color/divider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_setting_label_terms" />
+            app:layout_constraintTop_toBottomOf="@id/text_settings_label_terms" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

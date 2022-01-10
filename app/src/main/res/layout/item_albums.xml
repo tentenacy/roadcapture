@@ -23,7 +23,7 @@
         bind:adjustConstraintEmptyDesc="@{albums.description}">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/image_ialbums_thumbnail"
+            android:id="@+id/img_ialbums_thumbnail"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="24dp"
@@ -42,26 +42,26 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/overlay_gradient_thumbnail"
-            app:layout_constraintBottom_toBottomOf="@+id/image_ialbums_thumbnail"
-            app:layout_constraintEnd_toEndOf="@+id/image_ialbums_thumbnail"
-            app:layout_constraintStart_toStartOf="@+id/image_ialbums_thumbnail"
-            app:layout_constraintTop_toTopOf="@+id/image_ialbums_thumbnail" />
+            app:layout_constraintBottom_toBottomOf="@+id/img_ialbums_thumbnail"
+            app:layout_constraintEnd_toEndOf="@+id/img_ialbums_thumbnail"
+            app:layout_constraintStart_toStartOf="@+id/img_ialbums_thumbnail"
+            app:layout_constraintTop_toTopOf="@+id/img_ialbums_thumbnail" />
 
         <ImageView
-            android:id="@+id/image_ialbums_profile"
+            android:id="@+id/img_ialbums_profile"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="4dp"
             android:layout_marginTop="4dp"
             android:onClick="@{onClickItem}"
             android:padding="8dp"
-            app:layout_constraintStart_toStartOf="@id/image_ialbums_thumbnail"
-            app:layout_constraintTop_toTopOf="@id/image_ialbums_thumbnail"
+            app:layout_constraintStart_toStartOf="@id/img_ialbums_thumbnail"
+            app:layout_constraintTop_toTopOf="@id/img_ialbums_thumbnail"
             bind:albumProfileImage="@{albums.users.profileImageUrl}"
             tools:src="@drawable/img_sample_profile" />
 
         <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/image_ialbums_like"
+            android:id="@+id/img_ialbums_like"
             android:layout_width="38dp"
             android:layout_height="38dp"
             android:layout_marginBottom="2dp"
@@ -82,13 +82,13 @@
             android:layout_marginBottom="16dp"
             android:text='@{String.format("%d",albums.likeCount)}'
             android:textColor="@color/black"
-            app:layout_constraintBottom_toTopOf="@id/image_ialbums_comment"
+            app:layout_constraintBottom_toTopOf="@id/img_ialbums_comment"
             app:layout_constraintEnd_toEndOf="@id/text_ialbums_comment"
             app:layout_constraintStart_toStartOf="@id/text_ialbums_comment"
             tools:text="1천" />
 
         <ImageView
-            android:id="@+id/image_ialbums_comment"
+            android:id="@+id/img_ialbums_comment"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginBottom="8dp"
@@ -107,20 +107,20 @@
             android:layout_marginBottom="10dp"
             android:text='@{String.format("%d",albums.commentCount)}'
             android:textColor="@color/black"
-            app:layout_constraintBottom_toBottomOf="@id/image_ialbums_thumbnail"
+            app:layout_constraintBottom_toBottomOf="@id/img_ialbums_thumbnail"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/image_ialbums_thumbnail"
+            app:layout_constraintStart_toEndOf="@id/img_ialbums_thumbnail"
             tools:text="39" />
 
         <ImageView
-            android:id="@+id/image_ialbums_more"
+            android:id="@+id/img_ialbums_more"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:onClick="@{onClickItem}"
             android:src="@drawable/ic_more"
             app:layout_constraintEnd_toEndOf="@id/text_ialbums_comment"
             app:layout_constraintStart_toStartOf="@id/text_ialbums_comment"
-            app:layout_constraintTop_toTopOf="@id/image_ialbums_profile" />
+            app:layout_constraintTop_toTopOf="@id/img_ialbums_profile" />
 
         <TextView
             android:id="@+id/text_ialbums_username"
@@ -130,9 +130,9 @@
             android:layout_marginStart="8dp"
             android:textColor="@color/white"
             android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/image_ialbums_profile"
-            app:layout_constraintStart_toEndOf="@id/image_ialbums_profile"
-            app:layout_constraintTop_toTopOf="@+id/image_ialbums_profile"
+            app:layout_constraintBottom_toBottomOf="@+id/img_ialbums_profile"
+            app:layout_constraintStart_toEndOf="@id/img_ialbums_profile"
+            app:layout_constraintTop_toTopOf="@+id/img_ialbums_profile"
             bind:albumOverlayUsername="@{albums.users.username}"
             tools:text="tenutz ·" />
 
@@ -162,11 +162,11 @@
             android:onClick="@{onClickItem}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_ialbums_thumbnail"
+            app:layout_constraintTop_toBottomOf="@+id/img_ialbums_thumbnail"
             tools:text="나의 첫 부산 여행기" />
 
         <TextView
-            android:id="@+id/text_ialbums_description"
+            android:id="@+id/text_ialbums_desc"
             style="@style/Body"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

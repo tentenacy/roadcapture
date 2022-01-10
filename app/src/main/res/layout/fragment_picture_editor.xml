@@ -29,7 +29,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <ImageView
-                    android:id="@+id/image_picture_editor_back"
+                    android:id="@+id/img_picture_editor_back"
                     style="@style/BackArrow" />
 
                 <TextView
@@ -41,7 +41,7 @@
                     android:text="@string/picture_editor_title" />
 
                 <ImageView
-                    android:id="@+id/image_picture_editor_check"
+                    android:id="@+id/img_picture_editor_check"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_gravity="right"
@@ -51,7 +51,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/image_picture_editor_delete"
+                    android:id="@+id/img_picture_editor_delete"
                     android:layout_width="48dp"
                     android:layout_height="48dp"
                     android:layout_gravity="right"
@@ -63,7 +63,7 @@
             </androidx.appcompat.widget.Toolbar>
 
             <ImageView
-                android:id="@+id/image_picture_editor_picture"
+                android:id="@+id/img_picture_editor_picture"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
@@ -80,9 +80,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="앨범 썸네일로 사용"
-                app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_start"
-                app:layout_constraintTop_toBottomOf="@id/image_picture_editor_picture" />
+                android:text="@string/picture_editor_label_thumbnail"
+                app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_start_16dp"
+                app:layout_constraintTop_toBottomOf="@id/img_picture_editor_picture" />
 
             <CheckBox
                 android:id="@+id/checkbox_picture_editor_thumbnail"
@@ -100,8 +100,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@string/picture_editor_date"
-                app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_start"
+                android:text="@string/picture_editor_label_date"
+                app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_start_16dp"
                 app:layout_constraintTop_toBottomOf="@id/text_picture_editor_label_thumbnail" />
 
             <TextView
@@ -110,10 +110,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:gravity="center|end"
-                android:hint="@string/picture_editor_date_user_input"
+                android:hint="@string/picture_editor_date_hint"
                 android:text="@{picture.createdAt}"
                 app:layout_constraintBottom_toBottomOf="@id/text_picture_editor_label_date"
-                app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_end"
+                app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_end_16dp"
                 app:layout_constraintTop_toTopOf="@id/text_picture_editor_label_date" />
 
             <TextView
@@ -122,8 +122,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@string/picture_editor_place"
-                app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_start"
+                android:text="@string/picture_editor_label_place"
+                app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_start_16dp"
                 app:layout_constraintTop_toBottomOf="@id/text_picture_editor_label_date" />
 
             <TextView
@@ -132,46 +132,46 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:gravity="center|end"
-                android:hint="@string/picture_editor_place_user_input"
+                android:hint="@string/picture_editor_place_hint"
                 android:text="@{picture.place.name}"
                 app:layout_constraintBottom_toBottomOf="@id/text_picture_editor_label_place"
-                app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_end"
+                app:layout_constraintEnd_toEndOf="@id/guideline_picture_editor_end_16dp"
                 app:layout_constraintTop_toTopOf="@id/text_picture_editor_label_place" />
 
             <TextView
-                android:id="@+id/text_picture_editor_label_description"
+                android:id="@+id/text_picture_editor_label_desc"
                 style="@style/SubHeadBold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@string/picture_editor_description"
-                app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_start"
+                android:text="@string/picture_editor_label_desc"
+                app:layout_constraintStart_toStartOf="@id/guideline_picture_editor_start_16dp"
                 app:layout_constraintTop_toBottomOf="@id/text_picture_editor_label_place" />
 
             <EditText
-                android:id="@+id/edt_picture_editor_description"
+                android:id="@+id/edt_picture_editor_desc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:gravity="top|start"
-                android:hint="@string/picture_editor_description_user_input"
+                android:hint="@string/picture_editor_desc_hint"
                 android:minLines="8"
                 android:padding="16dp"
                 android:text="@{picture.description}"
                 android:textAppearance="@style/Body"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_picture_editor_label_description" />
+                app:layout_constraintTop_toBottomOf="@id/text_picture_editor_label_desc" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_picture_editor_start"
+                android:id="@+id/guideline_picture_editor_start_16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintGuide_begin="16dp" />
 
             <androidx.constraintlayout.widget.Guideline
-                android:id="@+id/guideline_picture_editor_end"
+                android:id="@+id/guideline_picture_editor_end_16dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"

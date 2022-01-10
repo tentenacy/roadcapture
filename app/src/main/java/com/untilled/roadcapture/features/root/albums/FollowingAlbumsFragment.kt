@@ -133,7 +133,7 @@ class FollowingAlbumsFragment : Fragment() {
 
                 onClickItem { model, parentView, clickedView, position ->
                     when (clickedView.id) {
-                        R.id.image_ifollowing_filter_profile -> Navigation.findNavController(
+                        R.id.img_ifollowing_filter_profile -> Navigation.findNavController(
                             (parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root
                         )
                             .navigate(R.id.action_rootFragment_to_studioFragment)
@@ -152,10 +152,10 @@ class FollowingAlbumsFragment : Fragment() {
             .setView(dialogView)
             .create()
 
-        dialogView.findViewById<TextView>(R.id.text_dlgreport_report)?.setOnClickListener {
+        dialogView.findViewById<TextView>(R.id.text_dlgreport_confirm)?.setOnClickListener {
             dialog.dismiss()
         }
-        dialogView.findViewById<TextView>(R.id.text_dlgreport_cancel)?.setOnClickListener {
+        dialogView.findViewById<TextView>(R.id.dlgreport_cancel)?.setOnClickListener {
             dialog.dismiss()
         }
 

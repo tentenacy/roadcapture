@@ -95,7 +95,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:text="@string/my_studio_follower"
+                    android:text="@string/studio_label_follower"
                     android:textColor="@color/gray" />
 
                 <TextView
@@ -113,7 +113,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="32dp"
-                    android:text="@string/my_studio_following"
+                    android:text="@string/studio_label_following"
                     android:textColor="@color/gray" />
 
                 <TextView
@@ -130,7 +130,7 @@
                     android:layout_width="192dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="32dp"
-                    android:text="프로필 편집"
+                    android:text="@string/mystudio_edit"
                     app:backgroundTint="@color/secondaryColor" />
 
                 <ImageView
@@ -169,7 +169,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="24dp"
-                    android:text="@string/my_studio_place_subtitle"
+                    android:text="@string/studio_label_place"
                     android:textAppearance="@style/SubHeadBold"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -192,7 +192,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="@string/my_studio_albums_subtitle"
+                    android:text="@string/studio_label_album"
                     android:textAppearance="@style/SubHeadBold"
                     app:layout_constraintStart_toStartOf="@+id/text_mystudio_label_place"
                     app:layout_constraintTop_toBottomOf="@+id/recycler_mystudio_place" />

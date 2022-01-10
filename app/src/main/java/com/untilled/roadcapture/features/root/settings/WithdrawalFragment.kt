@@ -38,22 +38,22 @@ class WithdrawalFragment : Fragment(){
     }
 
     private fun setOnClickListeners(){
-        binding.imageWithdrawalBack.setOnClickListener {
+        binding.imgWithdrawalBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
     }
 
     private fun checkEmail(){
-        binding.edtWithdrawalEmail.addTextChangedListener (object:TextWatcher {
+        binding.edtWithdrawalInput.addTextChangedListener (object:TextWatcher {
             override fun beforeTextChanged(text: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
             override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
                 Log.d("Tag",text.toString())
                 if(text.toString() == "kwangddang11@naver.com"){
-                    binding.btnWithdrawal.isClickable = true
-                    binding.btnWithdrawal.setBackgroundColor(Color.parseColor("#3d86c7"))
-                    binding.btnWithdrawal.setTextColor(Color.WHITE)
+                    binding.btnWithdrawalConfirm.isClickable = true
+                    binding.btnWithdrawalConfirm.setBackgroundColor(Color.parseColor("#3d86c7"))
+                    binding.btnWithdrawalConfirm.setTextColor(Color.WHITE)
                 }
             }
 

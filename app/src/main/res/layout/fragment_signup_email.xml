@@ -40,12 +40,12 @@
 
 
         <EditText
-            android:id="@+id/edt_signup_email"
+            android:id="@+id/edt_signup_email_input"
             style="@style/SubHead"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:hint="@string/signup_email_hint"
+            android:hint="@string/signup_email_input_hint"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toStartOf="@+id/guideline_signup_email_end_56dp"
             app:layout_constraintStart_toStartOf="@+id/text_signup_email_label"
@@ -53,12 +53,12 @@
             bind:emailValidation="@={vm.email}" />
 
         <Button
-            android:id="@+id/btn_signup_email"
+            android:id="@+id/btn_signup_email_confirm"
             style="@style/Button"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_marginTop="200dp"
-            android:text="@string/btn_signup_email"/>
+            android:text="@string/signup_email_confirm"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_signup_username_start_56dp"

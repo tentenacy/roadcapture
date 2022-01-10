@@ -38,7 +38,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="48dp"
                     android:layout_marginStart="16dp"
-                    android:text="@string/album_registration_toolbar_title" />
+                    android:text="@string/albumreg_toolbar_title" />
 
                 <ImageView
                     android:id="@+id/image_albumreg_check"
@@ -58,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:text="@string/album_registration_thumbnail"
+                android:text="@string/albumreg_label_thumbnail"
                 app:layout_constraintStart_toStartOf="@+id/guideline_albumreg_start"
                 app:layout_constraintTop_toBottomOf="@id/toolbar_albumreg" />
 
@@ -102,7 +102,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@string/album_registration_title"
+                android:text="@string/albumreg_label_title"
                 app:layout_constraintStart_toStartOf="@id/guideline_albumreg_start"
                 app:layout_constraintTop_toBottomOf="@id/image_albumreg_thumbnail" />
 
@@ -113,7 +113,7 @@
                 android:layout_height="40dp"
                 android:background="@null"
                 android:gravity="center|end"
-                android:hint="@string/album_registration_name_user_input"
+                android:hint="@string/albumreg_title"
                 android:inputType="text|textImeMultiLine"
                 android:maxLines="1"
                 app:layout_constraintBottom_toBottomOf="@id/text_albumreg_label_title"
@@ -121,28 +121,28 @@
                 app:layout_constraintTop_toTopOf="@id/text_albumreg_label_title" />
 
             <TextView
-                android:id="@+id/text_albumreg_label_description"
+                android:id="@+id/text_albumreg_label_desc"
                 style="@style/SubHeadBold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:text="@string/album_registration_description"
+                android:text="@string/albumreg_label_desc"
                 app:layout_constraintStart_toStartOf="@id/guideline_albumreg_start"
                 app:layout_constraintTop_toBottomOf="@id/text_albumreg_label_title" />
 
             <EditText
-                android:id="@+id/edt_albumreg_description"
+                android:id="@+id/edt_albumreg_desc"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@null"
                 android:gravity="top|start"
-                android:hint="@string/album_registration_description_user_input"
+                android:hint="@string/albumreg_desc"
                 android:minLines="5"
                 android:padding="16dp"
                 android:textAppearance="@style/Body"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_albumreg_label_description" />
+                app:layout_constraintTop_toBottomOf="@id/text_albumreg_label_desc" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline_albumreg_start"

@@ -45,7 +45,7 @@ class PermissionLocationBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.btnDlgpermissionlocationSetting.setOnClickListener {
+        binding.btnDlgpermissionlocationConfirm.setOnClickListener {
             val intent = Intent()
             intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
             val uri = Uri.fromParts("package", requireActivity().packageName, null)

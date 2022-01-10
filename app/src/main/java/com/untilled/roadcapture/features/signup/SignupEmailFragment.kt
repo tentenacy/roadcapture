@@ -47,9 +47,9 @@ class SignupEmailFragment : Fragment() {
 
     private fun setOnClickListeners() {
 
-        binding.btnSignupEmail.setOnClickListener {
+        binding.btnSignupEmailConfirm.setOnClickListener {
             Navigation.findNavController(binding.root)
-                .navigate(R.id.action_emailLoginFragment_to_passwordFindFragment)
+                .navigate(R.id.action_signupEmailFragment_to_signupPasswordFragment)
         }
         (parentFragment?.parentFragment as SignupFragment).binding.imgSignupBack.setOnClickListener {
             requireActivity().onBackPressed()

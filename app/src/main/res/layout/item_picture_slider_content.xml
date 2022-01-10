@@ -29,7 +29,7 @@
             android:background="@drawable/overlay_picture_viewer"/>
 
         <ImageView
-            android:id="@+id/image_ipicture_slider_content_bg"
+            android:id="@+id/img_ipicture_slider_content_bg"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:adjustViewBounds="true"
@@ -51,7 +51,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/image_ipicture_slider_content_bg">
+            app:layout_constraintTop_toBottomOf="@id/img_ipicture_slider_content_bg">
 
             <TextView
                 android:id="@+id/text_ipicture_viewer_content_desc"

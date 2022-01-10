@@ -25,7 +25,7 @@
         android:paddingHorizontal="16dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/image_inotification_profile"
+            android:id="@+id/img_inotification_profile"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/img_sample_thumbnail"
@@ -40,9 +40,9 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             style="@style/Body"
-            app:layout_constraintEnd_toStartOf="@id/image_inotification_thumbnail"
-            app:layout_constraintStart_toEndOf="@id/image_inotification_profile"
-            app:layout_constraintTop_toTopOf="@id/image_inotification_profile"
+            app:layout_constraintEnd_toStartOf="@id/img_inotification_thumbnail"
+            app:layout_constraintStart_toEndOf="@id/img_inotification_profile"
+            app:layout_constraintTop_toTopOf="@id/img_inotification_profile"
             bind:notificationContent="@{notification.description}"
             bind:notificationUsername="@{notification.user.username}"
             tools:text="hsw0715" />
@@ -60,12 +60,12 @@
             tools:text="3분전" />
 
         <ImageView
-            android:id="@+id/image_inotification_thumbnail"
+            android:id="@+id/img_inotification_thumbnail"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:layout_constraintBottom_toBottomOf="@id/image_inotification_profile"
+            app:layout_constraintBottom_toBottomOf="@id/img_inotification_profile"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/image_inotification_profile"
+            app:layout_constraintTop_toTopOf="@id/img_inotification_profile"
             bind:notificationThumbnailImage="@{notification.thumbnailUrl}"
             tools:src="@drawable/img_sample_thumbnail" />
 

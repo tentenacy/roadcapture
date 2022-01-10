@@ -118,7 +118,7 @@ class PictureSliderFragment : Fragment() {
                 album(albumResponse)
                 onClickItem { model, parentView, clickedView, position ->
                     when (clickedView.id) {
-                        R.id.imagw_ipicture_slider_thumbnail_profile -> Navigation.findNavController(
+                        R.id.img_ipicture_slider_thumbnail_profile -> Navigation.findNavController(
                             (parentFragment as PictureViewerFragment).binding.root
                         )
                             .navigate(R.id.action_pictureViewerContainerFragment_to_studioFragment)

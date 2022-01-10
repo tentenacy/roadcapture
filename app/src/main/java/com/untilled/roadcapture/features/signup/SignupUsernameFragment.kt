@@ -46,7 +46,7 @@ class SignupUsernameFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.btnSignupUsername.setOnClickListener {
+        binding.btnSignupUsernameConfirm.setOnClickListener {
             Navigation.findNavController((parentFragment?.parentFragment as SignupFragment).binding.root)
                 .navigate(R.id.action_signupFragment_to_rootFragment)
         }
