@@ -133,7 +133,7 @@ class FollowingAlbumsFragment : Fragment() {
 
                 onClickItem { model, parentView, clickedView, position ->
                     when (clickedView.id) {
-                        R.id.imageview_item_following_album_profile -> Navigation.findNavController(
+                        R.id.image_ifollowing_filter_profile -> Navigation.findNavController(
                             (parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root
                         )
                             .navigate(R.id.action_rootFragment_to_studioFragment)

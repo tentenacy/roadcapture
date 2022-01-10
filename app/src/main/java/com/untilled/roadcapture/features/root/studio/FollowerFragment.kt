@@ -75,7 +75,7 @@ class FollowerFragment : Fragment(){
 
                     onClickItem { model, parentView, clickedView, position ->
                         when(clickedView.id){
-                            R.id.imageview_item_follower_profile -> Navigation.findNavController(binding.root)
+                            R.id.image_ifollow_profile -> Navigation.findNavController(binding.root)
                                 .navigate(R.id.action_followerFragment_to_studioFragment)
                         }
                     }

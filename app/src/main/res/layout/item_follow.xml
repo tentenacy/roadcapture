@@ -18,14 +18,14 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/item_follower_container"
+        android:id="@+id/constraint_ifollow_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="16dp"
         android:paddingVertical="12dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageview_item_follower_profile"
+            android:id="@+id/image_ifollow_profile"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:src="@drawable/img_sample_thumbnail"
@@ -36,19 +36,19 @@
             bind:circleProfileImage="@{user.profileUrl}" />
 
         <TextView
-            android:id="@+id/textview_item_follower_username"
+            android:id="@+id/text_ifollow_username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:text="@{user.username}"
             android:textAppearance="@style/Body"
-            app:layout_constraintBottom_toBottomOf="@+id/imageview_item_follower_profile"
-            app:layout_constraintStart_toEndOf="@id/imageview_item_follower_profile"
-            app:layout_constraintTop_toTopOf="@+id/imageview_item_follower_profile"
+            app:layout_constraintBottom_toBottomOf="@+id/image_ifollow_profile"
+            app:layout_constraintStart_toEndOf="@id/image_ifollow_profile"
+            app:layout_constraintTop_toTopOf="@+id/image_ifollow_profile"
             tools:text="hsw0715" />
 
         <Button
-            android:id="@+id/button_follower_relation"
+            android:id="@+id/btn_follow"
             android:layout_width="96dp"
             android:layout_height="wrap_content"
             android:minWidth="0dp"

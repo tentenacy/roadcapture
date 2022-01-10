@@ -11,7 +11,7 @@
     <ConstraintSet android:id="@+id/start">
 
         <Constraint
-            android:id="@+id/image_mystudio_background"
+            android:id="@+id/image_mystudio_bg"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             motion:layout_constraintDimensionRatio="4:3"
@@ -22,10 +22,10 @@
             android:id="@+id/image_mystudio_profile"
             android:layout_width="96dp"
             android:layout_height="96dp"
-            motion:layout_constraintBottom_toBottomOf="@id/image_mystudio_background"
+            motion:layout_constraintBottom_toBottomOf="@id/image_mystudio_bg"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/image_mystudio_background" />
+            motion:layout_constraintTop_toBottomOf="@id/image_mystudio_bg" />
 
 
         <Constraint
@@ -81,7 +81,7 @@
             android:layout_marginTop="16dp"
             motion:layout_constraintEnd_toStartOf="@id/image_mystudio_profile"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/image_mystudio_background" />
+            motion:layout_constraintTop_toBottomOf="@id/image_mystudio_bg" />
 
         <Constraint
             android:id="@+id/text_mystudio_label_following"
@@ -124,7 +124,7 @@
     <ConstraintSet android:id="@+id/end">
 
         <Constraint
-            android:id="@+id/image_mystudio_background"
+            android:id="@+id/image_mystudio_bg"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:alpha="0"
@@ -137,10 +137,10 @@
             android:layout_width="96dp"
             android:layout_height="96dp"
             android:alpha="0"
-            motion:layout_constraintBottom_toBottomOf="@id/image_mystudio_background"
+            motion:layout_constraintBottom_toBottomOf="@id/image_mystudio_bg"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/image_mystudio_background" />
+            motion:layout_constraintTop_toBottomOf="@id/image_mystudio_bg" />
 
 
         <Constraint
@@ -191,7 +191,7 @@
             android:alpha="0"
             motion:layout_constraintEnd_toStartOf="@id/image_mystudio_profile"
             motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toBottomOf="@id/image_mystudio_background" />
+            motion:layout_constraintTop_toBottomOf="@id/image_mystudio_bg" />
 
         <Constraint
             android:id="@+id/text_mystudio_label_following"

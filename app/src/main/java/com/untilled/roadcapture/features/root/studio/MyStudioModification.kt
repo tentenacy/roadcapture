@@ -31,12 +31,12 @@ class MyStudioModification : Fragment() {
     ) {
         if (it.resultCode == Activity.RESULT_OK) {
             profileImageUri = it.data?.data
-            binding.imageMystudioModificationProfile.context.apply{
+            binding.imageMystudioModifyProfile.context.apply{
                 Glide.with(this)
                     .asBitmap()
                     .load(profileImageUri)
                     .centerCrop()
-                    .into(binding.imageMystudioModificationProfile)
+                    .into(binding.imageMystudioModifyProfile)
             }
         }
     }
@@ -45,12 +45,12 @@ class MyStudioModification : Fragment() {
     ) {
         if (it.resultCode == Activity.RESULT_OK) {
             backgroundImageUri = it.data?.data
-            binding.imageMystudioModificationBackground.context.apply{
+            binding.imageMystudioModifyBg.context.apply{
                 Glide.with(this)
                     .asBitmap()
                     .load(backgroundImageUri)
                     .centerCrop()
-                    .into(binding.imageMystudioModificationBackground)
+                    .into(binding.imageMystudioModifyBg)
             }
         }
     }
@@ -78,17 +78,17 @@ class MyStudioModification : Fragment() {
     }
 
     private fun setOnClickListeners(){
-        binding.imageMystudioModificationCheck.setOnClickListener {
+        binding.imageMystudioModifyCheck.setOnClickListener {
             saveUserInfo()
             Navigation.findNavController(binding.root).popBackStack()
         }
-        binding.imageMystudioModificationBack.setOnClickListener {
+        binding.imageMystudioModifyBack.setOnClickListener {
             Navigation.findNavController(binding.root).popBackStack()
         }
-        binding.imageMystudioModificationEditBackground.setOnClickListener {
+        binding.imageMystudioModifyBgchange.setOnClickListener {
             pickFromGallery(BACKGROUND)
         }
-        binding.imageMystudioModificationEditProfile.setOnClickListener {
+        binding.imageMystudioModifyProfilechange.setOnClickListener {
             pickFromGallery(PROFILE)
         }
     }
@@ -110,11 +110,11 @@ class MyStudioModification : Fragment() {
         if(backgroundImageUri != null)
             args.user?.backgroundUrl = backgroundImageUri.toString()
 
-        args.user?.description = binding.edtMystudioModificationDesc.text.toString()
+        args.user?.description = binding.edtMystudioModifyDesc.text.toString()
     }
 
     private fun initAdapter() {
-        binding.recycleMystudioModificationPlace.withModels {
+        binding.recycleMystudioModifyPlace.withModels {
             DummyDataSet.places.forEachIndexed { index, place ->
                 placeFilter {
                     id(index)

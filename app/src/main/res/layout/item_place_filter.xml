@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
@@ -18,13 +17,13 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/item_studio_place_container"
+        android:id="@+id/constraint_iplace_filter_container"
         android:layout_width="wrap_content"
         android:layout_height="144dp"
         android:paddingEnd="16dp">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/item_studio_place_image"
+            android:id="@+id/image_iplace_filter_bg"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
@@ -37,18 +36,18 @@
 
 
         <View
-            android:id="@+id/view_item_studio_place_overlay"
+            android:id="@+id/view_iplace_filter_overlay"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{onClickItem}"
             android:background="@drawable/selector_filter_place"
-            app:layout_constraintBottom_toBottomOf="@+id/item_studio_place_image"
-            app:layout_constraintEnd_toEndOf="@+id/item_studio_place_image"
-            app:layout_constraintStart_toStartOf="@+id/item_studio_place_image"
-            app:layout_constraintTop_toTopOf="@+id/item_studio_place_image" />
+            app:layout_constraintBottom_toBottomOf="@+id/image_iplace_filter_bg"
+            app:layout_constraintEnd_toEndOf="@+id/image_iplace_filter_bg"
+            app:layout_constraintStart_toStartOf="@+id/image_iplace_filter_bg"
+            app:layout_constraintTop_toTopOf="@+id/image_iplace_filter_bg" />
 
         <TextView
-            android:id="@+id/textview_item_studio_place"
+            android:id="@+id/text_iplace_filter_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             style="@style/BodyWhite"

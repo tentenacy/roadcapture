@@ -19,13 +19,13 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/item_studio_album_container"
+        android:id="@+id/constraint_ialbums_studio_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="16dp">
 
         <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/imageview_item_studio_album_thumbnail"
+            android:id="@+id/image_ialbums_studio_thumbnail"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:onClick="@{onClickItem}"
@@ -37,16 +37,17 @@
             tools:src="@drawable/img_sample_thumbnail" />
 
         <View
+            android:id="@+id/image_ialbums_studio_overlay"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/overlay_gradient_studio_thumbnail"
-            app:layout_constraintStart_toStartOf="@id/imageview_item_studio_album_thumbnail"
-            app:layout_constraintEnd_toEndOf="@id/imageview_item_studio_album_thumbnail"
-            app:layout_constraintTop_toTopOf="@id/imageview_item_studio_album_thumbnail"
-            app:layout_constraintBottom_toBottomOf="@id/imageview_item_studio_album_thumbnail"/>
+            app:layout_constraintStart_toStartOf="@id/image_ialbums_studio_thumbnail"
+            app:layout_constraintEnd_toEndOf="@id/image_ialbums_studio_thumbnail"
+            app:layout_constraintTop_toTopOf="@id/image_ialbums_studio_thumbnail"
+            app:layout_constraintBottom_toBottomOf="@id/image_ialbums_studio_thumbnail"/>
 
         <TextView
-            android:id="@+id/textview_item_studio_album_title"
+            android:id="@+id/text_ialbums_studio_title"
             style="@style/SubHeadBoldWhite"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -56,13 +57,13 @@
             android:layout_marginStart="16dp"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="64dp"
-            app:layout_constraintStart_toStartOf="@id/imageview_item_studio_album_thumbnail"
-            app:layout_constraintEnd_toStartOf="@id/textview_item_studio_album_date"
-            app:layout_constraintBottom_toBottomOf="@id/imageview_item_studio_album_thumbnail"
+            app:layout_constraintStart_toStartOf="@id/image_ialbums_studio_thumbnail"
+            app:layout_constraintEnd_toStartOf="@id/text_ialbums_studio_date"
+            app:layout_constraintBottom_toBottomOf="@id/image_ialbums_studio_thumbnail"
             tools:text="로드캡처 스터디" />
 
         <TextView
-            android:id="@+id/textview_item_studio_album_date"
+            android:id="@+id/text_ialbums_studio_date"
             style="@style/Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

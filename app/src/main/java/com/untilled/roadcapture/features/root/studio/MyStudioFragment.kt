@@ -67,7 +67,7 @@ class MyStudioFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        binding.recyclerMystudioAlbum.withModels {
+//        binding.recyclerMystudioAlbum.withModels {
 //            DummyDataSet.studios.forEachIndexed { index, album ->
 //                studioAlbum {
 //                    id(index)
@@ -75,14 +75,14 @@ class MyStudioFragment : Fragment() {
 //
 //                    onClickItem { model, parentView, clickedView, position ->
 //                        when(clickedView.id){
-//                            R.id.imageview_item_studio_album_thumbnail ->
+//                            R.id.image_ialbums_studio_thumbnail ->
 //                                Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
 //                                navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(model.studio().id))
 //                        }
 //                    }
 //                }
 //            }
-        }
+//        }
         binding.recyclerMystudioPlace.withModels {
             DummyDataSet.places.forEachIndexed { index, place ->
                 placeFilter {
@@ -91,7 +91,7 @@ class MyStudioFragment : Fragment() {
 
                     onClickItem { model, parentView, clickedView, position ->
                         when(clickedView.id){
-                            R.id.view_item_studio_place_overlay ->
+                            R.id.view_iplace_filter_overlay ->
                                 clickedView.isSelected = !clickedView.isSelected
                         }
                     }
