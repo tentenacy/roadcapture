@@ -11,7 +11,7 @@
         tools:context=".features.login.LoginFragment">
 
         <View
-            android:id="@+id/view_login_background"
+            android:id="@+id/view_login_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/img_login"/>
