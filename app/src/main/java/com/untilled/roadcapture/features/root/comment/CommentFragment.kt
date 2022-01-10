@@ -35,7 +35,7 @@ class CommentFragment : Fragment() {
 
     private val epoxyItemClickListener: (EpoxyItemArgs) -> Unit = { args ->
         when (args.clickedView.id) {
-            R.id.imageview_item_comment_more -> {
+            R.id.image_icomment_more -> {
                 val popupMenu = PopupMenu(requireContext(), args.clickedView)
                 popupMenu.apply {
                     menuInflater.inflate(R.menu.popupmenu_comment_more, popupMenu.menu)
@@ -49,7 +49,7 @@ class CommentFragment : Fragment() {
                     }
                 }.show()
             }
-            R.id.imageview_item_comment_profile -> {
+            R.id.image_icomment_profile -> {
                 Navigation.findNavController(binding.root)
                     .navigate(R.id.action_commentFragment_to_studioFragment)
             }

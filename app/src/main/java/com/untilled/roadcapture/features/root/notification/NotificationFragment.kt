@@ -67,7 +67,7 @@ class NotificationFragment : Fragment(){
 
                     onClickItem { model, parentView, clickedView, position ->
                         when(clickedView.id){
-                            R.id.imageview_item_notification_profile->
+                            R.id.image_inotification_profile->
                                 Navigation.findNavController(binding.root)
                                     .navigate(R.id.action_notificationFragment_to_studioFragment)
                         }

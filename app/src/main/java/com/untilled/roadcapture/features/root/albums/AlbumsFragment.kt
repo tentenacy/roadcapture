@@ -108,12 +108,12 @@ class AlbumsFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imageviewAlbumsNotification.setOnClickListener {
+        binding.imageAlbumsNotification.setOnClickListener {
             Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                 .navigate(R.id.action_rootFragment_to_notificationFragment)
         }
 
-        binding.imageviewAlbumsFilter.setOnClickListener {
+        binding.imageAlbumsFilter.setOnClickListener {
             val filterBottomSheetDialog = FilterBottomSheetDialog()
             filterBottomSheetDialog.show(childFragmentManager, "filterBottomSheet")
         }
@@ -128,7 +128,7 @@ class AlbumsFragment : Fragment() {
     fun initAdapter(){
         epoxyController.setOnClickListener(epoxyItemClickListener)
         updateView("","")
-        binding.recyclerviewAlbums.setController(epoxyController)
+        binding.recycleAlbums.setController(epoxyController)
     }
 
     fun updateView(dateTimeFrom: String, dateTimeTo: String) {

@@ -18,14 +18,14 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/item_notification_container"
+        android:id="@+id/constraint_inotification_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingVertical="12dp"
         android:paddingHorizontal="16dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/imageview_item_notification_profile"
+            android:id="@+id/image_inotification_profile"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:src="@drawable/img_sample_thumbnail"
@@ -35,37 +35,37 @@
             bind:notificationProfileImage="@{notification.user.profileUrl}" />
 
         <TextView
-            android:id="@+id/textview_item_notification_username"
+            android:id="@+id/text_inotification_username"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="24dp"
             style="@style/Body"
-            app:layout_constraintEnd_toStartOf="@id/imageview_item_notification_thumbnail"
-            app:layout_constraintStart_toEndOf="@id/imageview_item_notification_profile"
-            app:layout_constraintTop_toTopOf="@id/imageview_item_notification_profile"
+            app:layout_constraintEnd_toStartOf="@id/image_inotification_thumbnail"
+            app:layout_constraintStart_toEndOf="@id/image_inotification_profile"
+            app:layout_constraintTop_toTopOf="@id/image_inotification_profile"
             bind:notificationContent="@{notification.description}"
             bind:notificationUsername="@{notification.user.username}"
             tools:text="hsw0715" />
 
         <TextView
-            android:id="@+id/textview_item_notification_time"
+            android:id="@+id/text_inotification_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:text="@{notification.createdAt}"
             style="@style/Date"
             android:textColor="@color/gray"
-            app:layout_constraintStart_toStartOf="@id/textview_item_notification_username"
-            app:layout_constraintTop_toBottomOf="@id/textview_item_notification_username"
+            app:layout_constraintStart_toStartOf="@id/text_inotification_username"
+            app:layout_constraintTop_toBottomOf="@id/text_inotification_username"
             tools:text="3분전" />
 
         <ImageView
-            android:id="@+id/imageview_item_notification_thumbnail"
+            android:id="@+id/image_inotification_thumbnail"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            app:layout_constraintBottom_toBottomOf="@id/imageview_item_notification_profile"
+            app:layout_constraintBottom_toBottomOf="@id/image_inotification_profile"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@id/imageview_item_notification_profile"
+            app:layout_constraintTop_toTopOf="@id/image_inotification_profile"
             bind:notificationThumbnailImage="@{notification.thumbnailUrl}"
             tools:src="@drawable/img_sample_thumbnail" />
 
