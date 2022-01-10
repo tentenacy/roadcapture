@@ -8,7 +8,7 @@
     tools:context=".features.root.search.UsernameSearchFragment">
 
     <com.airbnb.epoxy.EpoxyRecyclerView
-        android:id="@+id/recycle_usernamesearch"
+        android:id="@+id/recycler_usernamesearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"

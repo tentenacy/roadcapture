@@ -4,30 +4,30 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinator_following_album"
+        android:id="@+id/coordinator_followingalbums_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbarlayout_following_album"
+            android:id="@+id/appbar_followingalbums"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.appbar.CollapsingToolbarLayout
-                android:id="@+id/ctoolbarlayout_following_album"
+                android:id="@+id/ctoolbar_followingalbums"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll|enterAlways">
 
                 <com.google.android.material.appbar.MaterialToolbar
-                    android:id="@+id/toolbar_following_album"
+                    android:id="@+id/toolbar_followingalbums"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     app:contentInsetStart="0dp"
                     app:layout_collapseMode="parallax" />
 
                 <TextView
-                    android:id="@+id/textview_following_album_title"
+                    android:id="@+id/text_followingalbums_title"
                     style="@style/ActionBarTitle"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
@@ -35,7 +35,7 @@
                     android:text="@string/app_name" />
 
                 <ImageView
-                    android:id="@+id/imageview_following_album_notification"
+                    android:id="@+id/image_followingalbums_notification"
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_gravity="end|center"
@@ -47,18 +47,17 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/following_album_scroll_container"
+            android:id="@+id/nestedscroll_followingalbums_innercontainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/following_albums_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <com.airbnb.epoxy.EpoxyRecyclerView
-                    android:id="@+id/recyclerview_following_album_news"
+                    android:id="@+id/recycler_followingalbums_filter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -69,12 +68,12 @@
                     tools:listitem="@layout/item_following_filter" />
 
                 <com.airbnb.epoxy.EpoxyRecyclerView
-                    android:id="@+id/recyclerview_following_album"
+                    android:id="@+id/recycler_followingalbums"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@id/recyclerview_following_album_news"
+                    app:layout_constraintTop_toBottomOf="@id/recycler_followingalbums_filter"
                     tools:listitem="@layout/item_albums" />
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>

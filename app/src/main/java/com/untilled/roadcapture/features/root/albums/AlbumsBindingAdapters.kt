@@ -14,12 +14,7 @@ import com.untilled.roadcapture.utils.extension.getPxFromDp
 import dagger.*
 import dagger.multibindings.*
 import de.hdodenhof.circleimageview.CircleImageView
-import java.security.SecureRandom
 import java.util.*
-import javax.inject.Inject
-import javax.inject.Named
-import javax.inject.Provider
-import javax.inject.Singleton
 
 
 object AlbumsBindingAdapters {
@@ -77,7 +72,7 @@ object AlbumsBindingAdapters {
             val constraints = ConstraintSet()
             constraints.clone(view)
             constraints.connect(
-                R.id.textview_item_home_album_title,
+                R.id.text_ialbums_title,
                 ConstraintSet.BOTTOM,
                 view.id,
                 ConstraintSet.BOTTOM,
@@ -87,7 +82,7 @@ object AlbumsBindingAdapters {
         } else{
             val constraints = ConstraintSet()
             constraints.clone(view)
-            constraints.clear(R.id.textview_item_home_album_title,ConstraintSet.BOTTOM)
+            constraints.clear(R.id.text_ialbums_title,ConstraintSet.BOTTOM)
             constraints.applyTo(view)
         }
     }

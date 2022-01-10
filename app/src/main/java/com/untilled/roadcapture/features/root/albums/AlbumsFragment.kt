@@ -39,13 +39,13 @@ class AlbumsFragment : Fragment() {
 
     private val epoxyItemClickListener: (EpoxyItemArgs) -> Unit =  { args ->
         when (args.clickedView.id) {
-            R.id.imageview_item_home_album_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+            R.id.image_ialbums_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                 .navigate(R.id.action_rootFragment_to_studioFragment)
 
-            R.id.imageview_item_home_album_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+            R.id.image_ialbums_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                 .navigate(RootFragmentDirections.actionRootFragmentToCommentFragment((args.model as AlbumsBindingModel_).albums().id.toString()))
 
-            R.id.imageview_item_home_album_like -> if (!flagLike) {
+            R.id.image_ialbums_like -> if (!flagLike) {
                 val animator = ValueAnimator.ofFloat(0f, 0.5f).setDuration(800)
                 animator.addUpdateListener {
                     (args.clickedView as LottieAnimationView).progress =
@@ -63,12 +63,12 @@ class AlbumsFragment : Fragment() {
                 flagLike = false
             }
             //Todo: 네비게이션 args 변경해야 함
-            R.id.imageview_item_home_album_thumbnail,
-            R.id.textview_item_home_album_title,
-            R.id.textview_item_home_album_desc->
+            R.id.image_ialbums_thumbnail,
+            R.id.text_ialbums_title,
+            R.id.text_ialbums_description->
                 Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
                 navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment((args.model as AlbumsBindingModel_).albums().id.toString()))
-            R.id.imageview_item_home_album_more -> {
+            R.id.image_ialbums_more -> {
                 val popupMenu = PopupMenu(requireContext(), args.clickedView)
                 popupMenu.apply {
                     menuInflater.inflate(R.menu.popupmenu_albums_more, popupMenu.menu)

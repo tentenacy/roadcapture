@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/albums_container"
+        android:id="@+id/constraint_albums_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".features.root.albums.AlbumsFragment">
@@ -19,12 +19,12 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/appbarlayout_albums"
+                android:id="@+id/appbar_albums"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <com.google.android.material.appbar.CollapsingToolbarLayout
-                    android:id="@+id/ctoolbarlayout_albums"
+                    android:id="@+id/ctoolbar_albums"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     app:layout_scrollFlags="scroll|enterAlways">
@@ -37,7 +37,7 @@
                         app:layout_collapseMode="parallax" />
 
                     <TextView
-                        android:id="@+id/text_comment_title"
+                        android:id="@+id/text_albums_title"
                         style="@style/ActionBarTitle"
                         android:layout_width="match_parent"
                         android:layout_height="48dp"

@@ -39,9 +39,9 @@ class UsernameSearchFragment : Fragment() {
 
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
 
-        binding.recycleUsernamesearch.addItemDecoration(customDivider)
+        binding.recyclerUsernamesearch.addItemDecoration(customDivider)
 
-        binding.recycleUsernamesearch.withModels {
+        binding.recyclerUsernamesearch.withModels {
             DummyDataSet.user.forEachIndexed { index, user ->
                 usernameSearch {
                     id(index)

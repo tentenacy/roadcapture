@@ -33,7 +33,7 @@ class FollowingAlbumsFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentFollowingalbumsBinding.inflate(layoutInflater, container, false)
 
-        (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarFollowingAlbum)
+        (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarFollowingalbums)
 
         initAdapter()
 
@@ -47,7 +47,7 @@ class FollowingAlbumsFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imageviewFollowingAlbumNotification.setOnClickListener {
+        binding.imageFollowingalbumsNotification.setOnClickListener {
             Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                 .navigate(R.id.action_rootFragment_to_notificationFragment)
         }
@@ -61,7 +61,7 @@ class FollowingAlbumsFragment : Fragment() {
 
     private fun initAdapter() {
 
-        binding.recyclerviewFollowingAlbumNews.withModels { initFollowingAlbumsFilter() }
+        binding.recyclerFollowingalbumsFilter.withModels { initFollowingAlbumsFilter() }
 
 //        binding.recyclerviewFollowingAlbum.withModels {
 //            DummyDataSet.albums.forEachIndexed { index, album ->
