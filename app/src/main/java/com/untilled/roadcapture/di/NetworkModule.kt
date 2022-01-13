@@ -1,6 +1,6 @@
 package com.untilled.roadcapture.di
 
-import com.untilled.roadcapture.data.api.RoadCaptureService
+import com.untilled.roadcapture.data.api.RoadCaptureApi
 import com.untilled.roadcapture.data.api.TmapService
 import dagger.Module
 import dagger.Provides
@@ -13,8 +13,8 @@ import javax.inject.Singleton
 class NetworkModule {
     @Singleton
     @Provides
-    fun provideRoadCaptureService(): RoadCaptureService {
-        return RoadCaptureService.create()
+    fun provideRoadCaptureService(): RoadCaptureApi {
+        return RoadCaptureApi.create()
     }
 
     @Singleton

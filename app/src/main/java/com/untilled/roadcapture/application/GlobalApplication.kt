@@ -1,6 +1,7 @@
 package com.untilled.roadcapture.application
 
 import android.app.Application
+import com.chibatching.kotpref.Kotpref
 import com.orhanobut.logger.AndroidLogAdapter
 import com.orhanobut.logger.Logger
 import dagger.hilt.android.HiltAndroidApp
@@ -11,5 +12,6 @@ class GlobalApplication: Application() {
     override fun onCreate() {
         super.onCreate()
         Logger.addLogAdapter(AndroidLogAdapter())
+        Kotpref.init(this)
     }
 }

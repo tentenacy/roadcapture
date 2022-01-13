@@ -90,6 +90,16 @@ class AlbumsFragment : Fragment() {
         }
     }
 
+    private val notificationOnClickListener: (View?) -> Unit = {
+        Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+            .navigate(R.id.action_rootFragment_to_notificationFragment)
+    }
+
+    private val filterOnClickListener: (View?) -> Unit = {
+        val filterBottomSheetDialog = FilterBottomSheetDialog()
+        filterBottomSheetDialog.show(childFragmentManager, "filterBottomSheet")
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -109,15 +119,8 @@ class AlbumsFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imageAlbumsNotification.setOnClickListener {
-            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(R.id.action_rootFragment_to_notificationFragment)
-        }
-
-        binding.imageAlbumsFilter.setOnClickListener {
-            val filterBottomSheetDialog = FilterBottomSheetDialog()
-            filterBottomSheetDialog.show(childFragmentManager, "filterBottomSheet")
-        }
+        binding.imageAlbumsNotification.setOnClickListener(notificationOnClickListener)
+        binding.imageAlbumsFilter.setOnClickListener(filterOnClickListener)
     }
 
     override fun onDestroyView() {

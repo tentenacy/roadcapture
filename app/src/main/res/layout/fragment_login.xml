@@ -8,16 +8,11 @@
         android:id="@+id/constraint_login_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/img_login"
         tools:context=".features.login.LoginFragment">
 
         <View
-            android:id="@+id/view_login_bg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/img_login"/>
-
-        <View
-            android:id="@+id/view_login_overlay"
+            android:id="@+id/view_login_bgoverlay"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/overlay_gradient_login"
@@ -28,8 +23,13 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_login_inner_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
                 android:id="@+id/img_login_logo"
@@ -53,9 +53,8 @@
                 app:layout_constraintStart_toStartOf="@id/img_login_logo"
                 app:layout_constraintTop_toBottomOf="@id/img_login_logo" />
 
-            <ImageView
-                android:id="@+id/img_login_naver"
-                style="@style/RippleEffect"
+            <com.nhn.android.naverlogin.ui.view.OAuthLoginButton
+                android:id="@+id/btn_login_naver"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:layout_marginBottom="16dp"
@@ -74,10 +73,10 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_google"
-                app:layout_constraintBottom_toBottomOf="@+id/img_login_naver"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_login_naver"
                 app:layout_constraintEnd_toStartOf="@+id/img_login_kakao"
-                app:layout_constraintStart_toEndOf="@+id/img_login_naver"
-                app:layout_constraintTop_toTopOf="@+id/img_login_naver" />
+                app:layout_constraintStart_toEndOf="@+id/btn_login_naver"
+                app:layout_constraintTop_toTopOf="@+id/btn_login_naver" />
 
             <ImageView
                 android:id="@+id/img_login_kakao"
@@ -85,10 +84,10 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_kakao"
-                app:layout_constraintBottom_toBottomOf="@+id/img_login_naver"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_login_naver"
                 app:layout_constraintEnd_toStartOf="@+id/img_login_facebook"
                 app:layout_constraintStart_toEndOf="@+id/img_login_google"
-                app:layout_constraintTop_toTopOf="@+id/img_login_naver" />
+                app:layout_constraintTop_toTopOf="@+id/btn_login_naver" />
 
             <ImageView
                 android:id="@+id/img_login_facebook"
@@ -96,10 +95,10 @@
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_facebook"
-                app:layout_constraintBottom_toBottomOf="@+id/img_login_naver"
+                app:layout_constraintBottom_toBottomOf="@+id/btn_login_naver"
                 app:layout_constraintEnd_toEndOf="@+id/constraint_login_btn_container"
                 app:layout_constraintStart_toEndOf="@+id/img_login_kakao"
-                app:layout_constraintTop_toTopOf="@+id/img_login_naver" />
+                app:layout_constraintTop_toTopOf="@+id/btn_login_naver" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraint_login_btn_container"
@@ -112,7 +111,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/text_login_label_signup"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img_login_naver"
+                app:layout_constraintTop_toBottomOf="@+id/btn_login_naver"
                 bind:clickableLayout="@{null}"
                 tools:style="@style/RippleEffect">
 
