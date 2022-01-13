@@ -22,6 +22,7 @@ import com.untilled.roadcapture.databinding.FragmentAlbumsBinding
 import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
 import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
+import com.untilled.roadcapture.utils.constants.Token
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -103,7 +104,7 @@ class AlbumsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //initAdapter()
+        initAdapter()
         setOnClickListeners()
     }
 
@@ -133,7 +134,7 @@ class AlbumsFragment : Fragment() {
 
     fun updateView(dateTimeFrom: String, dateTimeTo: String) {
         lifecycleScope.launch{
-            viewModel.getAlbums(token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY0MTYzMjA3OSwiZXhwIjoxNjQxNjM1Njc5fQ.Ro6y-9YurhNMam5AP0_EwTL6MakvlbubHw2knBJAmPI",dateTimeFrom, dateTimeTo).collectLatest{ pagingData: PagingData<Albums> ->
+            viewModel.getAlbums(token = Token.accessToken,dateTimeFrom, dateTimeTo).collectLatest{ pagingData: PagingData<Albums> ->
                 epoxyController.submitData(pagingData)
             }
         }

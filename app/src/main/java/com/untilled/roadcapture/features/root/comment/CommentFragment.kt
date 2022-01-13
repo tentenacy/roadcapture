@@ -21,6 +21,7 @@ import com.untilled.roadcapture.databinding.FragmentCommentBinding
 import com.untilled.roadcapture.features.base.CustomDivider
 import com.untilled.roadcapture.features.root.albums.AlbumsViewModel
 import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
+import com.untilled.roadcapture.utils.constants.Token
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -100,7 +101,7 @@ class CommentFragment : Fragment() {
 
     private fun updateView(albumId: Int) {
         lifecycleScope.launch {
-            viewModel.getAlbumComments(token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY0MTYzMjA3OSwiZXhwIjoxNjQxNjM1Njc5fQ.Ro6y-9YurhNMam5AP0_EwTL6MakvlbubHw2knBJAmPI",albumId).collectLatest { pagingData: PagingData<Comments> ->
+            viewModel.getAlbumComments(token = Token.accessToken,albumId).collectLatest { pagingData: PagingData<Comments> ->
                 epoxyController.submitData(pagingData)
             }
         }

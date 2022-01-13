@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentPictureViewerBinding
+import com.untilled.roadcapture.utils.constants.Token
 import com.untilled.roadcapture.utils.extension.navigationHeight
 import com.untilled.roadcapture.utils.extension.setStatusBarOrigin
 import com.untilled.roadcapture.utils.extension.setStatusBarTransparent
@@ -61,7 +62,7 @@ class PictureViewerFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val args: PictureViewerFragmentArgs by navArgs()
-        viewModel.getAlbumDetail(token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY0MTYyNzIyNywiZXhwIjoxNjQxNjMwODI3fQ.qT8yBAYnciGhJGREpJlJDnARO5RnbPstc2E2WoZSWpc",args.id)
+        viewModel.getAlbumDetail(token = Token.accessToken,args.id)
 //        viewModel.id = args.id
         requireActivity().setStatusBarTransparent()
         binding.constraintPictureViewerContainer.setPadding(

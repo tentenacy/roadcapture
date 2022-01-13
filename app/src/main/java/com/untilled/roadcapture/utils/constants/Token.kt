@@ -1,0 +1,5 @@
+package com.untilled.roadcapture.utils.constants
+
+object Token {
+    const val accessToken = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1Iiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY0MjA2NTQ5NCwiZXhwIjoxNjQyMDY5MDk0fQ.StyYnAI75i3v1vUUfOphiroztaXenDmK8KnXXj3ZVp8"
+}

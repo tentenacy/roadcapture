@@ -21,6 +21,7 @@ import com.untilled.roadcapture.databinding.BottomsheetCommentBinding
 import com.untilled.roadcapture.features.base.CustomDivider
 import com.untilled.roadcapture.features.root.albums.PictureViewerViewModel
 import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
+import com.untilled.roadcapture.utils.constants.Token
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -105,7 +106,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
         when(position){
             -1 -> {
                 lifecycleScope.launch {
-                    viewModel.getAlbumComments(token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY0MTYyNzIyNywiZXhwIjoxNjQxNjMwODI3fQ.qT8yBAYnciGhJGREpJlJDnARO5RnbPstc2E2WoZSWpc",viewModel.albumResponse.value!!.id)
+                    viewModel.getAlbumComments(token = Token.accessToken,viewModel.albumResponse.value!!.id)
                         .collectLatest { pagingData: PagingData<Comments> ->
                             epoxyController.submitData(pagingData)
                         }
@@ -114,7 +115,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
             else -> {
                 val pictureId = viewModel.albumResponse.value?.pictureResponses?.get(position)!!.id
                 lifecycleScope.launch {
-                    viewModel.getPictureComments(token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxIiwicm9sZXMiOlsiUk9MRV9VU0VSIl0sImlhdCI6MTY0MTYyNzIyNywiZXhwIjoxNjQxNjMwODI3fQ.qT8yBAYnciGhJGREpJlJDnARO5RnbPstc2E2WoZSWpc",pictureId).collectLatest { pagingData: PagingData<Comments> ->
+                    viewModel.getPictureComments(token = Token.accessToken,pictureId).collectLatest { pagingData: PagingData<Comments> ->
                         epoxyController.submitData(pagingData)
                     }
                 }
