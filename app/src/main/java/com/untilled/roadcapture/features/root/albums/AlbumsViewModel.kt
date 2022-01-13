@@ -24,7 +24,7 @@ class AlbumsViewModel
     private var currentDateTimeTo: String? = null
     private var currentAlbumsResult: Flow<PagingData<Albums>>? = null
 
-    private fun getAlbumsResultStream(token: String,dateTimeFrom: String, dateTimeTo: String): Flow<PagingData<Albums>> {
+    private fun getAlbumsResultStream(token: String,dateTimeFrom: String?, dateTimeTo: String?): Flow<PagingData<Albums>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 10,
@@ -35,7 +35,7 @@ class AlbumsViewModel
         ).flow
     }
 
-    fun getAlbums(token: String,dateTimeFrom: String, dateTimeTo: String): Flow<PagingData<Albums>>{
+    fun getAlbums(token: String,dateTimeFrom: String?, dateTimeTo: String?): Flow<PagingData<Albums>>{
         val lastResult = currentAlbumsResult
         if(dateTimeFrom == currentDateTimeFrom && dateTimeTo == currentDateTimeTo && lastResult != null){
             return lastResult

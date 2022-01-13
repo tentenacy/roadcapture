@@ -131,11 +131,11 @@ class AlbumsFragment : Fragment() {
 
     fun initAdapter(){
         epoxyController.setOnClickListener(epoxyItemClickListener)
-        updateView("","")
+        updateView(null,null)
         binding.recycleAlbums.setController(epoxyController)
     }
 
-    fun updateView(dateTimeFrom: String, dateTimeTo: String) {
+    fun updateView(dateTimeFrom: String?, dateTimeTo: String?) {
         lifecycleScope.launch{
             viewModel.getAlbums(token = Token.accessToken,dateTimeFrom, dateTimeTo).collectLatest{ pagingData: PagingData<Albums> ->
                 epoxyController.submitData(pagingData)

@@ -28,7 +28,6 @@ class PictureViewerViewModel
     fun getAlbumDetail(token: String,id: String) {
         viewModelScope.launch {
             repository.getAlbumDetail(token,id).let { album ->
-                Log.d("testt", album.raw().request.url.toUrl().toString())
                 if (album.isSuccessful) {
                     _album.postValue(album.body())
                 } else {

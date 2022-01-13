@@ -44,9 +44,7 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     private fun expandFullHeight() {
-        val bottomSheet =
-            dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-        val behavior = BottomSheetBehavior.from<View>(bottomSheet!!)
+        val behavior = BottomSheetBehavior.from<View>(dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)!!)
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
@@ -143,6 +141,10 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
             cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)
         )
         // 날짜 선택 제한
+        limitDate(datePickerDialog)
+    }
+
+    private fun limitDate(datePickerDialog: DatePickerDialog) {
         datePickerDialog.apply {
             val now = Calendar.getInstance()
             datePicker.maxDate = now.timeInMillis

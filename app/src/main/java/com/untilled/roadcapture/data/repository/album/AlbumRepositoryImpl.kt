@@ -18,8 +18,8 @@ class AlbumRepositoryImpl
         @Header("X-AUTH-TOKEN") token: String,
         @Query(value = "page") page: Int?,
         @Query(value = "size") size: Int?,
-        @Query(value = "dateTimeFrom") dateTimeFrom: String,
-        @Query(value = "dateTimeTo") dateTimeTo: String
+        @Query(value = "dateTimeFrom") dateTimeFrom: String?,
+        @Query(value = "dateTimeTo") dateTimeTo: String?
     ): Response<AlbumsResponse> =
         api.getAlbumsList(token,page?.toString(), size?.toString(), dateTimeFrom, dateTimeTo)
 

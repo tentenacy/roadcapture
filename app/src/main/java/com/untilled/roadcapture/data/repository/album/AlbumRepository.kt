@@ -14,8 +14,8 @@ interface AlbumRepository {
         @Header("X-AUTH-TOKEN") token: String,
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
-        @Query("dateTimeFrom")dateTimeFrom: String,
-        @Query("dateTimeTo")dateTimeTo: String
+        @Query("dateTimeFrom")dateTimeFrom: String?,
+        @Query("dateTimeTo")dateTimeTo: String?
     ): Response<AlbumsResponse>
 
     suspend fun getAlbumCommentsList(

@@ -17,8 +17,8 @@ interface AlbumApi {
         @Header("X-AUTH-TOKEN") token: String,
         @Query("page") page: String? = null,
         @Query("size") size: String? = null,
-        @Query("dateTimeFrom") dateTimeFrom: String,
-        @Query("dateTimeTo") dateTimeTo: String
+        @Query("dateTimeFrom") dateTimeFrom: String?,
+        @Query("dateTimeTo") dateTimeTo: String?
     ): Response<AlbumsResponse>
 
     @GET("albums/{id}")

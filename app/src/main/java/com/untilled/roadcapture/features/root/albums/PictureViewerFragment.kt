@@ -28,25 +28,26 @@ class PictureViewerFragment : Fragment() {
 
     private val viewModel: PictureViewerViewModel by viewModels()
 
+    private val switchOnClickListener: (View?) -> Unit = {
+        childFragmentManager.beginTransaction().apply {
+            isMapScreen = if(isMapScreen) {
+                show(pictureSliderFragment)
+                hide(pictureMapFragment)
+                setIconWhite()
+                false
+            } else {
+                show(pictureMapFragment)
+                hide(pictureSliderFragment)
+                setIconBlack()
+                true
+            }
+        }.commit()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        pictureSliderFragment = PictureSliderFragment()
-        pictureMapFragment = PictureMapFragment()
-
-        childFragmentManager.beginTransaction().apply {
-            add(
-                R.id.frame_picture_viewer_container,
-                pictureMapFragment,
-                "PictureViewerMapFragment"
-            )
-            hide(pictureMapFragment)
-            add(
-                R.id.frame_picture_viewer_container,
-                pictureSliderFragment,
-                "PictureViewerFragment"
-            )
-        }.commit()
+        setChildFragmentTransaction()
     }
 
     override fun onCreateView(
@@ -61,38 +62,29 @@ class PictureViewerFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        updateView()
+        setStatusBarTransparent()
+        setIconWhite()
+        setOnClickListeners()
+    }
+
+    private fun updateView() {
         val args: PictureViewerFragmentArgs by navArgs()
-        viewModel.getAlbumDetail(token = Token.accessToken,args.id)
-//        viewModel.id = args.id
+        viewModel.getAlbumDetail(token = Token.accessToken, args.id)
+    }
+
+    private fun setStatusBarTransparent() {
         requireActivity().setStatusBarTransparent()
         binding.constraintPictureViewerContainer.setPadding(
             0, requireContext().statusBarHeight(), 0, requireContext().navigationHeight()
         )
-
-        setIconWhite()
-
-        setOnClickListeners()
     }
 
     private fun setOnClickListeners() {
         binding.imagePictureViewerBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        binding.fabPictureViewerSwitch.setOnClickListener {
-            childFragmentManager.beginTransaction().apply {
-                isMapScreen = if(isMapScreen) {
-                    show(pictureSliderFragment)
-                    hide(pictureMapFragment)
-                    setIconWhite()
-                    false
-                } else {
-                    show(pictureMapFragment)
-                    hide(pictureSliderFragment)
-                    setIconBlack()
-                    true
-                }
-            }.commit()
-        }
+        binding.fabPictureViewerSwitch.setOnClickListener(switchOnClickListener)
     }
 
     private fun setIconWhite() {
@@ -117,6 +109,25 @@ class PictureViewerFragment : Fragment() {
                 backgroundTintList = AppCompatResources.getColorStateList(requireContext(), R.color.secondaryColor)
             }
         }
+    }
+
+    private fun setChildFragmentTransaction() {
+        pictureSliderFragment = PictureSliderFragment()
+        pictureMapFragment = PictureMapFragment()
+
+        childFragmentManager.beginTransaction().apply {
+            add(
+                R.id.frame_picture_viewer_container,
+                pictureMapFragment,
+                "PictureViewerMapFragment"
+            )
+            hide(pictureMapFragment)
+            add(
+                R.id.frame_picture_viewer_container,
+                pictureSliderFragment,
+                "PictureViewerFragment"
+            )
+        }.commit()
     }
 
     override fun onDestroyView() {
