@@ -15,6 +15,6 @@ class GlobalApplication: Application() {
         super.onCreate()
         Logger.addLogAdapter(AndroidLogAdapter())
         Kotpref.init(this)
-        KakaoSdk.init(this, BuildConfig.SOCIAL_NAVER_CLIENT_ID)
+        KakaoSdk.init(this, BuildConfig.SOCIAL_KAKAO_CLIENT_ID)
     }
 }
