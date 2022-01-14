@@ -13,4 +13,5 @@
 .externalNativeBuild
 .cxx
 local.properties
+config.properties
 /.idea/deploymentTargetDropDown.xml
