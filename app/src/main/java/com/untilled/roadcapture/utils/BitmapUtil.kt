@@ -5,8 +5,6 @@ import android.graphics.*
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
-import com.untilled.roadcapture.utils.extension.getDpFromPx
-import com.untilled.roadcapture.utils.extension.getPxFromDp
 import java.io.IOException
 
 fun drawCircularBitmap(canvas: Canvas) {

@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.utils
+package com.untilled.roadcapture.utils.dummy
 
 import com.untilled.roadcapture.data.api.dto.address.Address
 import com.untilled.roadcapture.data.api.dto.album.AlbumResponse

@@ -14,9 +14,9 @@ import com.naver.maps.map.overlay.PathOverlay
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.api.dto.picture.PictureResponse
 import com.untilled.roadcapture.databinding.FragmentPictureMapBinding
-import com.untilled.roadcapture.utils.DummyDataSet
-import com.untilled.roadcapture.utils.extension.getPxFromDp
-import com.untilled.roadcapture.utils.extension.navigationHeight
+import com.untilled.roadcapture.utils.dummy.DummyDataSet
+import com.untilled.roadcapture.utils.getPxFromDp
+import com.untilled.roadcapture.utils.navigationHeight
 
 class PictureMapFragment : Fragment(), OnMapReadyCallback {
     private var _binding : FragmentPictureMapBinding? = null

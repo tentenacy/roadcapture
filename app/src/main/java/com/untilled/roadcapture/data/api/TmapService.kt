@@ -1,15 +1,11 @@
 package com.untilled.roadcapture.data.api
 
+import com.untilled.roadcapture.BuildConfig
 import com.untilled.roadcapture.data.api.dto.address.AddressInfoResponse
 import com.untilled.roadcapture.data.api.dto.place.SearchPlaceResponse
-import com.untilled.roadcapture.utils.Key
 import com.untilled.roadcapture.data.url.TmapUrl
-import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
-import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -19,7 +15,7 @@ interface TmapService {
 
     @GET(TmapUrl.GET_TMAP_LOCATION)
     suspend fun getSearchPlace(
-        @Header("appKey") appKey: String = Key.TMAP_API,
+        @Header("appKey") appKey: String = BuildConfig.API_EXT_TMAP_KEY,
         @Query("version") version: Int = 1,
         @Query("callback") callback: String? = null,
         @Query("count") count: Int = 20,
@@ -38,7 +34,7 @@ interface TmapService {
 
     @GET(TmapUrl.GET_TMAP_REVERSE_GEO_CODE)
     suspend fun getReverseGeoCode(
-        @Header("appKey") appKey: String = Key.TMAP_API,
+        @Header("appKey") appKey: String = BuildConfig.API_EXT_TMAP_KEY,
         @Query("version") version: Int = 1,
         @Query("callback") callback: String? = null,
         @Query("lat") lat: Double,

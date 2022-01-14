@@ -42,7 +42,7 @@ import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.util.FusedLocationSource
 import com.untilled.roadcapture.data.entity.Picture
-import com.untilled.roadcapture.utils.extension.*
+import com.untilled.roadcapture.utils.*
 
 
 @AndroidEntryPoint

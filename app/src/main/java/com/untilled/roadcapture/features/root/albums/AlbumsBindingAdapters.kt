@@ -10,11 +10,8 @@ import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.utils.dateToSnsFormat
-import com.untilled.roadcapture.utils.extension.getPxFromDp
-import dagger.*
-import dagger.multibindings.*
+import com.untilled.roadcapture.utils.getPxFromDp
 import de.hdodenhof.circleimageview.CircleImageView
-import java.util.*
 
 
 object AlbumsBindingAdapters {

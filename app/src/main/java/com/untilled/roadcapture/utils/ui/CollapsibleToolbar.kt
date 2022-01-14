@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.untilled.roadcapture.utils
+package com.untilled.roadcapture.utils.ui
 
 import android.content.Context
 import android.util.AttributeSet

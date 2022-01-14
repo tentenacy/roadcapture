@@ -12,7 +12,7 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.navigation.StackHostFragment
 import com.untilled.roadcapture.databinding.FragmentRootBinding
 import com.untilled.roadcapture.features.root.capture.AlbumCreationAskingBottomSheetDialog
-import com.untilled.roadcapture.utils.extension.setTint
+import com.untilled.roadcapture.utils.setTint
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

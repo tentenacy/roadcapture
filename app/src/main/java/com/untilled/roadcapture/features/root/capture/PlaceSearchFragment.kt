@@ -24,7 +24,7 @@ import com.untilled.roadcapture.data.entity.SearchResult
 import com.untilled.roadcapture.databinding.FragmentPlaceSearchBinding
 import com.untilled.roadcapture.features.base.CustomDivider
 import com.untilled.roadcapture.placeSearch
-import com.untilled.roadcapture.utils.extension.hideKeyboard
+import com.untilled.roadcapture.utils.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 

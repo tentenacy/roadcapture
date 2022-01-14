@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.*
 import com.untilled.roadcapture.databinding.FragmentStudioBinding
-import com.untilled.roadcapture.utils.DummyDataSet
+import com.untilled.roadcapture.utils.dummy.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

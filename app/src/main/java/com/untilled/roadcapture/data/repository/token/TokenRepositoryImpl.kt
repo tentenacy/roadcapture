@@ -4,8 +4,6 @@ import com.untilled.roadcapture.data.entity.token.NaverOAuthToken
 import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.data.repository.token.dto.NaverOAuthTokenArgs
 import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
-import com.untilled.roadcapture.utils.instances.OAuthLoginInstances
-import com.untilled.roadcapture.utils.type.SocialType
 import javax.inject.Inject
 
 class TokenRepositoryImpl @Inject constructor(): TokenRepository {

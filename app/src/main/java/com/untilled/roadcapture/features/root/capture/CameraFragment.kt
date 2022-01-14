@@ -20,8 +20,8 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.window.WindowManager
 import com.untilled.roadcapture.databinding.FragmentCameraBinding
-import com.untilled.roadcapture.utils.extension.ANIMATION_FAST_MILLIS
-import com.untilled.roadcapture.utils.extension.ANIMATION_SLOW_MILLIS
+import com.untilled.roadcapture.utils.ANIMATION_FAST_MILLIS
+import com.untilled.roadcapture.utils.ANIMATION_SLOW_MILLIS
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.nio.ByteBuffer
@@ -167,7 +167,8 @@ class CameraFragment : Fragment() {
                     binding.root.postDelayed({
                         binding.root.foreground = ColorDrawable(Color.WHITE)
                         binding.root.postDelayed(
-                            { binding.root.foreground = null }, ANIMATION_FAST_MILLIS)
+                            { binding.root.foreground = null }, ANIMATION_FAST_MILLIS
+                        )
                     }, ANIMATION_SLOW_MILLIS)
                 }
             }

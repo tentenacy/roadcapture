@@ -15,11 +15,11 @@ import com.untilled.roadcapture.BuildConfig
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.repository.token.dto.NaverOAuthTokenArgs
 import com.untilled.roadcapture.databinding.FragmentLoginBinding
-import com.untilled.roadcapture.utils.extension.navigationHeight
-import com.untilled.roadcapture.utils.extension.setStatusBarOrigin
-import com.untilled.roadcapture.utils.extension.setStatusBarTransparent
-import com.untilled.roadcapture.utils.extension.statusBarHeight
-import com.untilled.roadcapture.utils.instances.OAuthLoginInstances
+import com.untilled.roadcapture.utils.navigationHeight
+import com.untilled.roadcapture.utils.setStatusBarOrigin
+import com.untilled.roadcapture.utils.setStatusBarTransparent
+import com.untilled.roadcapture.utils.statusBarHeight
+import com.untilled.roadcapture.utils.instance.OAuthLoginInstances
 import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.AndroidEntryPoint
 

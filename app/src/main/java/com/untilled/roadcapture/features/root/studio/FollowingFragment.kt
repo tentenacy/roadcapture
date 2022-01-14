@@ -12,8 +12,8 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentFollowingBinding
 import com.untilled.roadcapture.features.base.CustomDivider
 import com.untilled.roadcapture.follow
-import com.untilled.roadcapture.utils.DummyDataSet
-import com.untilled.roadcapture.utils.extension.hideKeyboard
+import com.untilled.roadcapture.utils.dummy.DummyDataSet
+import com.untilled.roadcapture.utils.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

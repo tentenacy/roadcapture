@@ -15,7 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.untilled.roadcapture.databinding.FragmentMystudioModificationBinding
 import com.untilled.roadcapture.placeFilter
-import com.untilled.roadcapture.utils.DummyDataSet
+import com.untilled.roadcapture.utils.dummy.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

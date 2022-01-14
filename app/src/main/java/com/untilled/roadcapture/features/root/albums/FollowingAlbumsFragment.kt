@@ -25,7 +25,7 @@ import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
 import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
 import com.untilled.roadcapture.followingFilter
-import com.untilled.roadcapture.utils.DummyDataSet
+import com.untilled.roadcapture.utils.dummy.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

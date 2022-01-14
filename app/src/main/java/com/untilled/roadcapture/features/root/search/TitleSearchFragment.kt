@@ -11,7 +11,7 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentTitleSearchBinding
 import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.titleSearch
-import com.untilled.roadcapture.utils.DummyDataSet
+import com.untilled.roadcapture.utils.dummy.DummyDataSet
 
 class TitleSearchFragment : Fragment() {
 

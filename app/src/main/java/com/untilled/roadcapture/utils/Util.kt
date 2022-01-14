@@ -1,15 +1,10 @@
-package com.untilled.roadcapture.utils.extension
+package com.untilled.roadcapture.utils
 
-import android.R
 import android.app.Activity
 import android.content.Context
-import android.graphics.Color
 import android.graphics.drawable.Drawable
-import android.os.Build
-import android.util.Log
 import android.util.TypedValue
 import android.view.View
-import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView

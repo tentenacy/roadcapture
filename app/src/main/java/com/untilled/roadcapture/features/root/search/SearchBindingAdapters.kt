@@ -8,7 +8,7 @@ import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.utils.extension.getPxFromDp
+import com.untilled.roadcapture.utils.getPxFromDp
 
 object SearchBindingAdapters {
 

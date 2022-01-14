@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.utils.instances
+package com.untilled.roadcapture.utils.instance
 
 import com.nhn.android.naverlogin.OAuthLogin
 

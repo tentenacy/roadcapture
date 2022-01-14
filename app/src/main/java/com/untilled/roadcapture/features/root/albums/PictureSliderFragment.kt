@@ -18,8 +18,8 @@ import com.untilled.roadcapture.databinding.FragmentPictureSliderBinding
 import com.untilled.roadcapture.features.root.comment.CommentBottomSheetDialog
 import com.untilled.roadcapture.pictureSliderContent
 import com.untilled.roadcapture.pictureSliderThumbnail
-import com.untilled.roadcapture.utils.extension.navigationHeight
-import com.untilled.roadcapture.utils.extension.statusBarHeight
+import com.untilled.roadcapture.utils.navigationHeight
+import com.untilled.roadcapture.utils.statusBarHeight
 import dagger.hilt.android.AndroidEntryPoint
 
 
