@@ -3,7 +3,7 @@ package com.untilled.roadcapture.features.root.comment
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.paging3.PagingDataEpoxyController
 import com.untilled.roadcapture.CommentBindingModel_
-import com.untilled.roadcapture.data.api.dto.comment.Comments
+import com.untilled.roadcapture.data.datasource.api.dto.comment.Comments
 import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
 
 class CommentsEpoxyController : PagingDataEpoxyController<Comments>(){

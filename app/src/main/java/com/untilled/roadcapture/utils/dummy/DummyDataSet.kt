@@ -1,9 +1,9 @@
 package com.untilled.roadcapture.utils.dummy
 
-import com.untilled.roadcapture.data.api.dto.address.Address
-import com.untilled.roadcapture.data.api.dto.album.AlbumResponse
-import com.untilled.roadcapture.data.api.dto.picture.PictureResponse
-import com.untilled.roadcapture.data.api.dto.place.Place
+import com.untilled.roadcapture.data.datasource.api.dto.address.Address
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
+import com.untilled.roadcapture.data.datasource.api.dto.picture.PictureResponse
+import com.untilled.roadcapture.data.datasource.api.dto.place.Place
 import com.untilled.roadcapture.data.entity.*
 
 object DummyDataSet {

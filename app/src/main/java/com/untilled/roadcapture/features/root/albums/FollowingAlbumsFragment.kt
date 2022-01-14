@@ -18,7 +18,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.AlbumsBindingModel_
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
-import com.untilled.roadcapture.data.api.dto.album.Albums
+import com.untilled.roadcapture.data.datasource.api.dto.album.Albums
 import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.databinding.FragmentFollowingalbumsBinding
 import com.untilled.roadcapture.features.root.RootFragment

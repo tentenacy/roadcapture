@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.untilled.roadcapture.data.api.dto.place.SearchPlaceResponse
+import com.untilled.roadcapture.data.datasource.api.dto.place.SearchPlaceResponse
 import com.untilled.roadcapture.data.repository.place.SearchPlaceRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

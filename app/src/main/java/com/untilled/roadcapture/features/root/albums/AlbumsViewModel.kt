@@ -6,8 +6,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.untilled.roadcapture.data.api.dto.album.Albums
-import com.untilled.roadcapture.data.api.dto.comment.Comments
+import com.untilled.roadcapture.data.datasource.api.dto.album.Albums
+import com.untilled.roadcapture.data.datasource.api.dto.comment.Comments
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import com.untilled.roadcapture.data.repository.album.AlbumsPagingSource
 import com.untilled.roadcapture.data.repository.album.AlbumCommentsPagingSource

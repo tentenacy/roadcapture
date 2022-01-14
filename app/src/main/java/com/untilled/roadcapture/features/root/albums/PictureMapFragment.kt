@@ -12,7 +12,7 @@ import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.PathOverlay
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.data.api.dto.picture.PictureResponse
+import com.untilled.roadcapture.data.datasource.api.dto.picture.PictureResponse
 import com.untilled.roadcapture.databinding.FragmentPictureMapBinding
 import com.untilled.roadcapture.utils.dummy.DummyDataSet
 import com.untilled.roadcapture.utils.getPxFromDp

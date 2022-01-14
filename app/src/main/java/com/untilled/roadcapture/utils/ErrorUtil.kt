@@ -1,6 +1,6 @@
 package com.untilled.roadcapture.utils
 
-import com.untilled.roadcapture.data.api.dto.common.ErrorResponse
+import com.untilled.roadcapture.data.datasource.api.dto.common.ErrorResponse
 import retrofit2.Response
 import retrofit2.Retrofit
 

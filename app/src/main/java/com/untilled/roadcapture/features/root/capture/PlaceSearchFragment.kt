@@ -14,10 +14,10 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.data.api.dto.address.Address
-import com.untilled.roadcapture.data.api.dto.place.Place
-import com.untilled.roadcapture.data.api.dto.poi.Poi
-import com.untilled.roadcapture.data.api.dto.poi.Pois
+import com.untilled.roadcapture.data.datasource.api.dto.address.Address
+import com.untilled.roadcapture.data.datasource.api.dto.place.Place
+import com.untilled.roadcapture.data.datasource.api.dto.poi.Poi
+import com.untilled.roadcapture.data.datasource.api.dto.poi.Pois
 import com.untilled.roadcapture.data.entity.LocationLatLng
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.data.entity.SearchResult

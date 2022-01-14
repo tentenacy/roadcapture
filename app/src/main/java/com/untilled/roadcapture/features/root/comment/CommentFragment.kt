@@ -16,7 +16,7 @@ import androidx.navigation.fragment.navArgs
 import androidx.paging.PagingData
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
-import com.untilled.roadcapture.data.api.dto.comment.Comments
+import com.untilled.roadcapture.data.datasource.api.dto.comment.Comments
 import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.databinding.FragmentCommentBinding
 import com.untilled.roadcapture.features.base.CustomDivider

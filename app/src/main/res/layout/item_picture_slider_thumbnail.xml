@@ -9,7 +9,7 @@
 
         <variable
             name="album"
-            type="com.untilled.roadcapture.data.api.dto.album.AlbumResponse" />
+            type="com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse" />
 
         <variable
             name="onClickItem"

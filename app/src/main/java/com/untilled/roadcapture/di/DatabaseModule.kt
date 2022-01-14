@@ -1,8 +1,8 @@
 package com.untilled.roadcapture.di
 
 import android.content.Context
-import com.untilled.roadcapture.data.dao.PictureDao
-import com.untilled.roadcapture.data.database.AppDatabase
+import com.untilled.roadcapture.data.datasource.dao.PictureDao
+import com.untilled.roadcapture.data.datasource.database.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

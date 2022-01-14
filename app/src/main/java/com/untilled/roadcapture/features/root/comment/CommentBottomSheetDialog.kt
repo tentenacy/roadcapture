@@ -16,7 +16,7 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
-import com.untilled.roadcapture.data.api.dto.comment.Comments
+import com.untilled.roadcapture.data.datasource.api.dto.comment.Comments
 import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.databinding.BottomsheetCommentBinding
 import com.untilled.roadcapture.features.base.CustomDivider

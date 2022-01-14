@@ -1,9 +1,9 @@
 package com.untilled.roadcapture.data.repository.user
 
-import com.untilled.roadcapture.data.api.RoadCaptureApi
-import com.untilled.roadcapture.data.api.dto.common.ErrorCode
-import com.untilled.roadcapture.data.api.dto.user.SocialLoginResponse
-import com.untilled.roadcapture.data.api.dto.user.SocialRequest
+import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
+import com.untilled.roadcapture.data.datasource.api.dto.common.ErrorCode
+import com.untilled.roadcapture.data.datasource.api.dto.user.SocialLoginResponse
+import com.untilled.roadcapture.data.datasource.api.dto.user.SocialRequest
 import com.untilled.roadcapture.data.entity.token.NaverOAuthToken
 import com.untilled.roadcapture.utils.convertToErrorResponse
 import com.untilled.roadcapture.utils.type.SocialType

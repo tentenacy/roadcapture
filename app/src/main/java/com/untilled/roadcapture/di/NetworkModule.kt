@@ -1,8 +1,7 @@
 package com.untilled.roadcapture.di
 
-import com.untilled.roadcapture.data.api.RoadCaptureApi
-import com.untilled.roadcapture.data.api.TmapService
-import com.untilled.roadcapture.data.url.RoadCaptureUrl
+import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
+import com.untilled.roadcapture.data.datasource.api.TmapService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,20 +19,28 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofitBuilder(): Retrofit.Builder {
+    fun provideHttpLoggingInterceptor(): HttpLoggingInterceptor {
+        return HttpLoggingInterceptor().apply {
+            level = if (com.untilled.roadcapture.BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level.BODY
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
+        }
+    }
+
+    @Singleton
+    @Provides
+    fun provideRetrofitBuilder(httpLoggingInterceptor: HttpLoggingInterceptor): Retrofit.Builder {
+
+        val client = OkHttpClient.Builder()
+            .addInterceptor(httpLoggingInterceptor)
+            .build()
+
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
-            .client(
-                OkHttpClient.Builder()
-                .addInterceptor(HttpLoggingInterceptor().apply {
-                    level = if(com.untilled.roadcapture.BuildConfig.DEBUG) {
-                        HttpLoggingInterceptor.Level.BODY
-                    } else {
-                        HttpLoggingInterceptor.Level.NONE
-                    }
-                })
-                .build())
+            .client(client)
     }
 
     @Singleton

@@ -2,7 +2,7 @@ package com.untilled.roadcapture.data.repository.album
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.untilled.roadcapture.data.api.dto.comment.Comments
+import com.untilled.roadcapture.data.datasource.api.dto.comment.Comments
 import com.untilled.roadcapture.data.entity.token.Token
 import retrofit2.HttpException
 import java.io.IOException

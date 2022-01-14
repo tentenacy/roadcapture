@@ -1,9 +1,9 @@
 package com.untilled.roadcapture.data.repository.album
 
-import com.untilled.roadcapture.data.api.RoadCaptureApi
-import com.untilled.roadcapture.data.api.dto.album.AlbumResponse
-import com.untilled.roadcapture.data.api.dto.album.AlbumsResponse
-import com.untilled.roadcapture.data.api.dto.comment.CommentsResponse
+import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
+import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentsResponse
 import retrofit2.Response
 import retrofit2.http.Header
 import retrofit2.http.Query

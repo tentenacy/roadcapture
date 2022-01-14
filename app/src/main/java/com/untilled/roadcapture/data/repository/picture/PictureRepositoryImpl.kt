@@ -1,6 +1,6 @@
 package com.untilled.roadcapture.data.repository.picture
 
-import com.untilled.roadcapture.data.dao.PictureDao
+import com.untilled.roadcapture.data.datasource.dao.PictureDao
 import com.untilled.roadcapture.data.entity.Picture
 import javax.inject.Inject
 
