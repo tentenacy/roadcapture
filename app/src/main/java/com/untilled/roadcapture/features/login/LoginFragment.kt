@@ -13,7 +13,7 @@ import com.nhn.android.naverlogin.OAuthLoginHandler
 import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.BuildConfig
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.data.repository.token.dto.NaverOAuthTokenArgs
+import com.untilled.roadcapture.data.repository.token.dto.OAuthTokenArgs
 import com.untilled.roadcapture.databinding.FragmentLoginBinding
 import com.untilled.roadcapture.utils.navigationHeight
 import com.untilled.roadcapture.utils.setStatusBarOrigin
@@ -124,7 +124,7 @@ class LoginFragment : Fragment() {
     private inner class NonLeakNaverOAuthLoginHandler : OAuthLoginHandler() {
         override fun run(success: Boolean): Unit = requireContext().run {
             if (success) {
-                viewModel.saveNaverOAuthToken(NaverOAuthTokenArgs(
+                viewModel.saveOAuthToken(SocialType.NAVER, OAuthTokenArgs(
                     accessToken = OAuthLoginInstances.naverOAuthLoginInstance.getAccessToken(this),
                     expiresIn = OAuthLoginInstances.naverOAuthLoginInstance.getExpiresAt(this).toInt(),
                     refreshToken = OAuthLoginInstances.naverOAuthLoginInstance.getRefreshToken(this),

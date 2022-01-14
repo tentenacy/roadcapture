@@ -1,7 +1,8 @@
 package com.untilled.roadcapture.data.datasource.api
 
-import com.untilled.roadcapture.data.datasource.api.dto.user.SocialRequest
-import com.untilled.roadcapture.data.datasource.api.dto.user.SocialLoginResponse
+import com.untilled.roadcapture.data.datasource.api.dto.user.ReissueRequest
+import com.untilled.roadcapture.data.datasource.api.dto.user.TokenRequest
+import com.untilled.roadcapture.data.datasource.api.dto.user.TokenResponse
 import com.untilled.roadcapture.utils.constant.url.RoadCaptureUrl
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
@@ -13,12 +14,17 @@ interface UserApi {
     @POST(RoadCaptureUrl.POST_SOCIAL_LOGIN)
     fun socialLogin(
         @Path("socialType") socialType: String,
-        @Body socialRequest: SocialRequest,
-    ): Single<SocialLoginResponse>
+        @Body tokenRequest: TokenRequest,
+    ): Single<TokenResponse>
 
     @POST(RoadCaptureUrl.POST_SOCIAL_SIGNUP)
     fun socialSignup(
         @Path("socialType") socialType: String,
-        @Body socialRequest: SocialRequest,
+        @Body tokenRequest: TokenRequest,
     ): Single<Response<Unit>>
+
+    @POST(RoadCaptureUrl.POST_REISSUE)
+    fun reissue(
+        @Body reissueRequest: ReissueRequest
+    ): Single<TokenResponse>
 }

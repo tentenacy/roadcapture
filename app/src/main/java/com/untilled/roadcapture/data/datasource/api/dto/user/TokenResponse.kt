@@ -1,8 +1,8 @@
 package com.untilled.roadcapture.data.datasource.api.dto.user
 
-data class SocialLoginResponse(
+data class TokenResponse(
     var grantType: String,
     var accessToken: String,
     var refreshToken: String,
-    var accessTokenExpireDate: String,
+    var accessTokenExpireDate: Int,
 )

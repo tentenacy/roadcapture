@@ -10,4 +10,5 @@ object RoadCaptureUrl {
 
     const val POST_SOCIAL_LOGIN = "/users/social/{socialType}/token"
     const val POST_SOCIAL_SIGNUP = "/users/social/{socialType}"
+    const val POST_REISSUE = "/users/token/reissue"
 }

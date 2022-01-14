@@ -6,40 +6,41 @@ import com.untilled.roadcapture.data.repository.picture.PictureRepository
 import com.untilled.roadcapture.data.repository.picture.PictureRepositoryImpl
 import com.untilled.roadcapture.data.repository.place.SearchPlaceRepository
 import com.untilled.roadcapture.data.repository.place.SearchPlaceRepositoryImpl
-import com.untilled.roadcapture.data.repository.token.TokenRepository
-import com.untilled.roadcapture.data.repository.token.TokenRepositoryImpl
+import com.untilled.roadcapture.data.repository.token.KotPrefTokenRepository
+import com.untilled.roadcapture.data.repository.token.LocalTokenRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.data.repository.user.UserRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
 abstract class RepositoryModule {
     @Binds
     abstract fun provideAlbumRepository(
-        albumsRepositoryImpl: AlbumRepositoryImpl
+        repository: AlbumRepositoryImpl
     ) : AlbumRepository
 
     @Binds
     abstract fun providePictureRepository(
-        pictureRepositoryImpl: PictureRepositoryImpl
+        repository: PictureRepositoryImpl
     ) : PictureRepository
 
     @Binds
     abstract fun provideSearchPlaceRepository(
-        searchPlaceRepositoryImpl: SearchPlaceRepositoryImpl
+        repository: SearchPlaceRepositoryImpl
     ) : SearchPlaceRepository
 
     @Binds
     abstract fun provideUserRepository(
-        userRepositoryImpl: UserRepositoryImpl
+        repository: UserRepositoryImpl
     ): UserRepository
 
     @Binds
     abstract fun provideTokenRepository(
-        tokenRepositoryImpl: TokenRepositoryImpl
-    ): TokenRepository
+        repository: KotPrefTokenRepository
+    ): LocalTokenRepository
 }

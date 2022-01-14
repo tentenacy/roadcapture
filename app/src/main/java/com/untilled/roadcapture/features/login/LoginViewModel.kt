@@ -2,11 +2,8 @@ package com.untilled.roadcapture.features.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.orhanobut.logger.Logger
-import com.untilled.roadcapture.data.entity.token.Token
-import com.untilled.roadcapture.data.repository.token.TokenRepository
-import com.untilled.roadcapture.data.repository.token.dto.NaverOAuthTokenArgs
-import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
+import com.untilled.roadcapture.data.repository.token.LocalTokenRepository
+import com.untilled.roadcapture.data.repository.token.dto.OAuthTokenArgs
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
 import com.untilled.roadcapture.utils.type.SocialType
@@ -17,7 +14,10 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val userRepository: UserRepository, private val tokenRepository: TokenRepository): BaseViewModel() {
+class LoginViewModel @Inject constructor(
+    private val userRepository: UserRepository,
+    private val localTokenRepository: LocalTokenRepository
+) : BaseViewModel() {
 
     private var _isLoginComplete = MutableLiveData<Boolean>(false)
     val isLoginComplete: LiveData<Boolean> get() = _isLoginComplete
@@ -28,8 +28,8 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
         }
     }
 
-    fun saveNaverOAuthToken(args: NaverOAuthTokenArgs) {
-        tokenRepository.saveNaverOAuthToken(args)
+    fun saveOAuthToken(socialType: SocialType, args: OAuthTokenArgs) {
+        localTokenRepository.saveOAuthToken(socialType, args)
     }
 
     fun socialLogin(socialType: SocialType) {
@@ -43,12 +43,6 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
                 _isLoginComplete.value = true
             }
             .subscribe({ response ->
-                tokenRepository.saveToken(TokenArgs(
-                    grantType = response.grantType,
-                    accessToken = response.accessToken,
-                    refreshToken = response.refreshToken,
-                    accessTokenExpireDate = response.accessTokenExpireDate.toLong(),
-                ))
             }) { t ->
                 error.value = t.message
             }.addTo(compositeDisposable)
