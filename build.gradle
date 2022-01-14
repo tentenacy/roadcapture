@@ -1,36 +1,22 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    ext.kotlin_version = "1.5.10"
-    ext.navigation_version = '2.2.0-rc04'
-    ext.hilt_version = "2.38"
+    ext.kotlin_version = "1.5.20"
+    ext.navigation_version = '2.3.5'
+    ext.hilt_version = "2.38.1"
+    ext.secrets_gradle_plugin_version = "2.0.0"
     repositories {
         google()
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:4.2.2"
+        classpath 'com.android.tools.build:gradle:7.0.0'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hilt_version"
         classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigation_version"
-    }
-}
-
-allprojects {
-    repositories {
-        google()
-        mavenCentral()
-        jcenter() // Warning: this repository is going to shut down soon
-
-        // uCrop Library
-        maven { url "https://jitpack.io" }
-
-        // NaverMap API
-        maven {
-            url 'https://naver.jfrog.io/artifactory/maven/'
-        }
+        classpath "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin:${secrets_gradle_plugin_version}"
     }
 }
 
