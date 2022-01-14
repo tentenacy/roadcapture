@@ -13,7 +13,7 @@ interface AlbumApi {
 
     @GET(RoadCaptureUrl.GET_ALBUMS)
     // todo: query 추가해야 함
-    suspend fun getAlbumsList(
+    suspend fun getAlbums(
         @Header("X-AUTH-TOKEN") token: String,
         @Query("page") page: String? = null,
         @Query("size") size: String? = null,
@@ -21,8 +21,8 @@ interface AlbumApi {
         @Query("dateTimeTo") dateTimeTo: String?
     ): Response<AlbumsResponse>
 
-    @GET("albums/{id}")
-    suspend fun getAlbumDetail(
+    @GET(RoadCaptureUrl.GET_ALBUM)
+    suspend fun getAlbum(
         @Header("X-AUTH-TOKEN") token: String,
         @Path("id") id: String
     ): Response<AlbumResponse>

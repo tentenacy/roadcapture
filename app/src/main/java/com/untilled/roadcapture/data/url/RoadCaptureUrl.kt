@@ -1,7 +1,13 @@
 package com.untilled.roadcapture.data.url
 
 object RoadCaptureUrl {
-    const val ROAD_CAPTURE_BASE_URL = "http://ec2-54-180-81-29.ap-northeast-2.compute.amazonaws.com:8081/"
 
-    const val GET_ALBUMS = "albums/"
+    const val GET_ALBUMS = "/albums"
+    const val GET_ALBUM = "/albums/{id}"
+
+    const val GET_ALBUM_COMMENTS = "/albums/{albumId}/pictures/comments"
+    const val GET_PICTURE_COMMENTS = "/pictures/{pictureId}/comments"
+
+    const val POST_SOCIAL_LOGIN = "/users/social/{socialType}/token"
+    const val POST_SOCIAL_SIGNUP = "/users/social/{socialType}"
 }

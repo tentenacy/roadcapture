@@ -21,13 +21,13 @@ class AlbumRepositoryImpl
         @Query(value = "dateTimeFrom") dateTimeFrom: String?,
         @Query(value = "dateTimeTo") dateTimeTo: String?
     ): Response<AlbumsResponse> =
-        api.getAlbumsList(token,page?.toString(), size?.toString(), dateTimeFrom, dateTimeTo)
+        api.getAlbums(token,page?.toString(), size?.toString(), dateTimeFrom, dateTimeTo)
 
     override suspend fun getAlbumCommentsList(@Header("X-AUTH-TOKEN") token: String,albumsId: Int, page: Int?, size: Int?): Response<CommentsResponse> =
-        api.getAlbumCommentsList(token,albumsId, page, size)
+        api.getAlbumComments(token,albumsId, page, size)
 
     override suspend fun getAlbumDetail(@Header("X-AUTH-TOKEN") token: String,id: String): Response<AlbumResponse> =
-        api.getAlbumDetail(token,id)
+        api.getAlbum(token,id)
 
     override suspend fun getPictureCommentsList(
         @Header("X-AUTH-TOKEN") token: String,
@@ -35,5 +35,5 @@ class AlbumRepositoryImpl
         page: Int?,
         size: Int?
     ): Response<CommentsResponse> =
-        api.getPictureCommentsList(token,pictureId,page,size)
+        api.getPictureComments(token,pictureId,page,size)
 }

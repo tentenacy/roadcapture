@@ -37,10 +37,10 @@ class LoginViewModel @Inject constructor(private val userRepository: UserReposit
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
-                _isLoginComplete.value = true
+                _isLoginComplete.value = false
             }
             .doOnTerminate {
-                _isLoginComplete.value = false
+                _isLoginComplete.value = true
             }
             .subscribe({ response ->
                 tokenRepository.saveToken(TokenArgs(

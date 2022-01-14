@@ -23,6 +23,8 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        buildConfigField("String", "API_URL_BASE", properties.getProperty("api.url.base"))
+
         buildConfigField("String", "SOCIAL_NAVER_CLIENT_ID", properties.getProperty("social.naver.client-id"))
         buildConfigField("String", "SOCIAL_NAVER_CLIENT_SECRET", properties.getProperty("social.naver.client-secret"))
         buildConfigField("String", "SOCIAL_NAVER_CLIENT_NAME", properties.getProperty("social.naver.client-name"))
