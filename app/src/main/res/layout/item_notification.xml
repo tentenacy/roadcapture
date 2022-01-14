@@ -10,7 +10,7 @@
 
         <variable
             name="notification"
-            type="com.untilled.roadcapture.data.dto.album.AlbumResponse" />
+            type="com.untilled.roadcapture.data.api.dto.album.AlbumResponse" />
 
         <variable
             name="onClickItem"

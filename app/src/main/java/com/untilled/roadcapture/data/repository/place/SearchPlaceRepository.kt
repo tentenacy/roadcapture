@@ -1,6 +1,6 @@
 package com.untilled.roadcapture.data.repository.place
 
-import com.untilled.roadcapture.data.dto.place.SearchPlaceResponse
+import com.untilled.roadcapture.data.api.dto.place.SearchPlaceResponse
 import com.untilled.roadcapture.utils.Key
 import retrofit2.Response
 import retrofit2.http.Header

@@ -1,6 +1,6 @@
 package com.untilled.roadcapture.data.api
 
-import com.untilled.roadcapture.data.dto.comment.CommentsResponse
+import com.untilled.roadcapture.data.api.dto.comment.CommentsResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Header

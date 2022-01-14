@@ -18,14 +18,14 @@ import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.AlbumsBindingModel_
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
-import com.untilled.roadcapture.data.dto.album.Albums
+import com.untilled.roadcapture.data.api.dto.album.Albums
+import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.databinding.FragmentFollowingalbumsBinding
 import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
 import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
 import com.untilled.roadcapture.followingFilter
 import com.untilled.roadcapture.utils.DummyDataSet
-import com.untilled.roadcapture.utils.constants.Token
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -133,7 +133,7 @@ class FollowingAlbumsFragment : Fragment() {
 
     private fun updateView(dateTimeFrom: String?, dateTimeTo: String?) {
         lifecycleScope.launch{
-            viewModel.getAlbums(token = Token.accessToken,dateTimeFrom, dateTimeTo).collectLatest{ pagingData: PagingData<Albums> ->
+            viewModel.getAlbums(Token.accessToken,dateTimeFrom, dateTimeTo).collectLatest{ pagingData: PagingData<Albums> ->
                 epoxyController.submitData(pagingData)
             }
         }

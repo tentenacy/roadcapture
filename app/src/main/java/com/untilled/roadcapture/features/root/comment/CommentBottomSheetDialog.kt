@@ -16,12 +16,12 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
-import com.untilled.roadcapture.data.dto.comment.Comments
+import com.untilled.roadcapture.data.api.dto.comment.Comments
+import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.databinding.BottomsheetCommentBinding
 import com.untilled.roadcapture.features.base.CustomDivider
 import com.untilled.roadcapture.features.root.albums.PictureViewerViewModel
 import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
-import com.untilled.roadcapture.utils.constants.Token
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -106,7 +106,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
         when(position){
             -1 -> {
                 lifecycleScope.launch {
-                    viewModel.getAlbumComments(token = Token.accessToken,viewModel.albumResponse.value!!.id)
+                    viewModel.getAlbumComments(Token.accessToken,viewModel.albumResponse.value!!.id)
                         .collectLatest { pagingData: PagingData<Comments> ->
                             epoxyController.submitData(pagingData)
                         }
@@ -115,7 +115,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
             else -> {
                 val pictureId = viewModel.albumResponse.value?.pictureResponses?.get(position)!!.id
                 lifecycleScope.launch {
-                    viewModel.getPictureComments(token = Token.accessToken,pictureId).collectLatest { pagingData: PagingData<Comments> ->
+                    viewModel.getPictureComments(Token.accessToken,pictureId).collectLatest { pagingData: PagingData<Comments> ->
                         epoxyController.submitData(pagingData)
                     }
                 }

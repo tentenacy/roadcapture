@@ -1,41 +1,27 @@
 package com.untilled.roadcapture.data.api
 
 import com.untilled.roadcapture.BuildConfig
-import com.untilled.roadcapture.data.dto.album.AlbumResponse
-import com.untilled.roadcapture.data.dto.album.AlbumsResponse
-import com.untilled.roadcapture.data.dto.comment.CommentsResponse
-import com.untilled.roadcapture.data.url.RoadCaptureUrl.GET_ALBUMS
+import com.untilled.roadcapture.data.api.dto.user.SocialLoginResponse
+import com.untilled.roadcapture.data.api.dto.user.SocialRequest
 import com.untilled.roadcapture.data.url.RoadCaptureUrl.ROAD_CAPTURE_BASE_URL
+import io.reactivex.rxjava3.core.Single
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
-import retrofit2.http.GET
-import retrofit2.http.Header
+import retrofit2.http.Body
+import retrofit2.http.POST
 import retrofit2.http.Path
-import retrofit2.http.Query
 
-interface RoadCaptureApi: AlbumApi, CommentApi {
+interface RoadCaptureApi: AlbumApi, CommentApi, UserApi {
+
     companion object {
-        fun create(): RoadCaptureApi {
-            val logger = HttpLoggingInterceptor().apply {
-                level = if(BuildConfig.DEBUG) {
-                    HttpLoggingInterceptor.Level.BODY
-                } else {
-                    HttpLoggingInterceptor.Level.NONE
-                }
-            }
-
-            val client = OkHttpClient.Builder()
-                .addInterceptor(logger)
-                .build()
-
-            return Retrofit.Builder()
+        fun create(retrofitBuilder: Retrofit.Builder): RoadCaptureApi {
+            return retrofitBuilder
                 .baseUrl(ROAD_CAPTURE_BASE_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create()
         }

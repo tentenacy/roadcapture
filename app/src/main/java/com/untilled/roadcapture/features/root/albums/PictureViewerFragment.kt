@@ -9,8 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.databinding.FragmentPictureViewerBinding
-import com.untilled.roadcapture.utils.constants.Token
 import com.untilled.roadcapture.utils.extension.navigationHeight
 import com.untilled.roadcapture.utils.extension.setStatusBarOrigin
 import com.untilled.roadcapture.utils.extension.setStatusBarTransparent
@@ -70,7 +70,7 @@ class PictureViewerFragment : Fragment() {
 
     private fun updateView() {
         val args: PictureViewerFragmentArgs by navArgs()
-        viewModel.getAlbumDetail(token = Token.accessToken, args.id)
+        viewModel.getAlbumDetail(Token.accessToken, args.id)
     }
 
     private fun setStatusBarTransparent() {

@@ -10,7 +10,7 @@
 
         <variable
             name="picture"
-            type="com.untilled.roadcapture.data.dto.picture.PictureResponse" />
+            type="com.untilled.roadcapture.data.api.dto.picture.PictureResponse" />
 
         <variable
             name="onClickItem"

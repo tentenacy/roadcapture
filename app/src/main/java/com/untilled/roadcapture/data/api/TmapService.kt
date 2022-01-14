@@ -1,21 +1,19 @@
 package com.untilled.roadcapture.data.api
 
-import androidx.viewbinding.BuildConfig
-import com.untilled.roadcapture.data.dto.address.AddressInfoResponse
-import com.untilled.roadcapture.data.dto.place.SearchPlaceResponse
-import com.untilled.roadcapture.data.url.RoadCaptureUrl
+import com.untilled.roadcapture.data.api.dto.address.AddressInfoResponse
+import com.untilled.roadcapture.data.api.dto.place.SearchPlaceResponse
 import com.untilled.roadcapture.utils.Key
 import com.untilled.roadcapture.data.url.TmapUrl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Response
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.Query
-import java.util.concurrent.TimeUnit
 
 interface TmapService {
 
@@ -50,23 +48,9 @@ interface TmapService {
     ): Response<AddressInfoResponse>
 
     companion object {
-        fun create(): TmapService {
-            val logger = HttpLoggingInterceptor().apply {
-                level = if(com.untilled.roadcapture.BuildConfig.DEBUG) {
-                    HttpLoggingInterceptor.Level.BODY
-                } else {
-                    HttpLoggingInterceptor.Level.NONE
-                }
-            }
-
-            val client = OkHttpClient.Builder()
-                .addInterceptor(logger)
-                .build()
-
-            return Retrofit.Builder()
+        fun create(retrofitBuilder: Retrofit.Builder): TmapService {
+            return retrofitBuilder
                 .baseUrl(TmapUrl.TMAP_URL)
-                .client(client)
-                .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create()
         }

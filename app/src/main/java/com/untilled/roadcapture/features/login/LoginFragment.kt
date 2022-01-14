@@ -6,17 +6,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.nhn.android.naverlogin.OAuthLoginHandler
+import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.BuildConfig
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.data.entity.social.NaverOAuthToken
+import com.untilled.roadcapture.data.repository.token.dto.NaverOAuthTokenArgs
 import com.untilled.roadcapture.databinding.FragmentLoginBinding
 import com.untilled.roadcapture.utils.extension.navigationHeight
 import com.untilled.roadcapture.utils.extension.setStatusBarOrigin
 import com.untilled.roadcapture.utils.extension.setStatusBarTransparent
 import com.untilled.roadcapture.utils.extension.statusBarHeight
 import com.untilled.roadcapture.utils.instances.OAuthLoginInstances
+import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -34,43 +38,24 @@ class LoginFragment : Fragment() {
             .navigate(R.id.action_loginFragment_to_signupFragment)
     }
 
-    private val naverOAuthLoginHandler: OAuthLoginHandler = NonLeakOAuthLoginHandler()
+    private val viewModel: LoginViewModel by viewModels()
 
-    private inner class NonLeakOAuthLoginHandler : OAuthLoginHandler() {
-        override fun run(success: Boolean): Unit = requireContext().run {
-            if (success) {
-                //리소스 서버로부터 토큰을 받아 SharedPreferences에 저장하고,
-                NaverOAuthToken.accessToken = OAuthLoginInstances.naverOAuthLoginInstance.getAccessToken(this)
-                NaverOAuthToken.refreshToken = OAuthLoginInstances.naverOAuthLoginInstance.getRefreshToken(this)
-                NaverOAuthToken.expiresIn = OAuthLoginInstances.naverOAuthLoginInstance.getExpiresAt(this).toInt()
-                NaverOAuthToken.tokenType = OAuthLoginInstances.naverOAuthLoginInstance.getTokenType(this)
+    private val naverOAuthLoginHandler: OAuthLoginHandler = NonLeakNaverOAuthLoginHandler()
 
-                //액세스토큰으로 우리 서버에 회원가입 요청
-
-
-                //이어서 로그인 요청
-
-
-                //우리 서버로부터 액세스토큰을 받아 Room에 저장
-
-
-                //로그인 성공하면 홈으로 이동
-
-
-            } else {
-                Toast.makeText(
-                    this,
-                    "errorCode: ${
-                        OAuthLoginInstances.naverOAuthLoginInstance.getLastErrorCode(
-                            this
-                        )
-                    }, errorDesc: ${
-                        OAuthLoginInstances.naverOAuthLoginInstance.getLastErrorDesc(this)
-                    }",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+    private val isLoadingObserver = { isLoading: Boolean ->
+        if (isLoading) {
+            Logger.d("loading...")
         }
+    }
+
+    private val isLoginCompleteObserver = { isLoginComplete: Boolean ->
+        if (isLoginComplete) {
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRootFragment())
+        }
+    }
+
+    private val errorObserver = { error: String ->
+        if(error.isNotBlank()) Toast.makeText(requireContext(), "error: $error", Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateView(
@@ -87,7 +72,7 @@ class LoginFragment : Fragment() {
 
     private fun initData() {
         OAuthLoginInstances.naverOAuthLoginInstance.init(
-            requireContext(),
+            requireActivity(),
             BuildConfig.SOCIAL_NAVER_CLIENT_ID,
             BuildConfig.SOCIAL_NAVER_CLIENT_SECRET,
             BuildConfig.SOCIAL_NAVER_CLIENT_NAME
@@ -115,6 +100,13 @@ class LoginFragment : Fragment() {
 
         setOAuthLoginHandlers()
         setOnClickListeners()
+        observeData()
+    }
+
+    private fun observeData() {
+        viewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
+        viewModel.isLoginComplete.observe(viewLifecycleOwner, isLoginCompleteObserver)
+        viewModel.error.observe(viewLifecycleOwner, errorObserver)
     }
 
     private fun setOAuthLoginHandlers() {
@@ -124,5 +116,35 @@ class LoginFragment : Fragment() {
     private fun setOnClickListeners() {
         binding.constraintLoginBtnContainer.setOnClickListener(buttonContainerOnClickListener)
         binding.textLoginSignup.setOnClickListener(signupOnClickListener)
+        binding.btnLoginNaver.setOnClickListener {
+            OAuthLoginInstances.naverOAuthLoginInstance.startOauthLoginActivity(requireActivity(), naverOAuthLoginHandler)
+        }
+    }
+
+    private inner class NonLeakNaverOAuthLoginHandler : OAuthLoginHandler() {
+        override fun run(success: Boolean): Unit = requireContext().run {
+            if (success) {
+                viewModel.saveNaverOAuthToken(NaverOAuthTokenArgs(
+                    accessToken = OAuthLoginInstances.naverOAuthLoginInstance.getAccessToken(this),
+                    expiresIn = OAuthLoginInstances.naverOAuthLoginInstance.getExpiresAt(this).toInt(),
+                    refreshToken = OAuthLoginInstances.naverOAuthLoginInstance.getRefreshToken(this),
+                    tokenType = OAuthLoginInstances.naverOAuthLoginInstance.getTokenType(this),
+                ))
+
+                viewModel.socialLogin(SocialType.NAVER)
+            } else {
+                Toast.makeText(
+                    this,
+                    "errorCode: ${
+                        OAuthLoginInstances.naverOAuthLoginInstance.getLastErrorCode(
+                            this
+                        )
+                    }, errorDesc: ${
+                        OAuthLoginInstances.naverOAuthLoginInstance.getLastErrorDesc(this)
+                    }",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
     }
 }

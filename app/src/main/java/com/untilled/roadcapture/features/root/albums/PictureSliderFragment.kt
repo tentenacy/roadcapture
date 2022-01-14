@@ -13,7 +13,7 @@ import com.airbnb.epoxy.EpoxyController
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.data.dto.album.AlbumResponse
+import com.untilled.roadcapture.data.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.databinding.FragmentPictureSliderBinding
 import com.untilled.roadcapture.features.root.comment.CommentBottomSheetDialog
 import com.untilled.roadcapture.pictureSliderContent

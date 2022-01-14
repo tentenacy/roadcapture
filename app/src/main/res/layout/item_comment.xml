@@ -10,7 +10,7 @@
 
         <variable
             name="comments"
-            type="com.untilled.roadcapture.data.dto.comment.Comments" />
+            type="com.untilled.roadcapture.data.api.dto.comment.Comments" />
 
         <variable
             name="onClickItem"

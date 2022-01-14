@@ -2,8 +2,8 @@ package com.untilled.roadcapture.data.repository.album
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.untilled.roadcapture.data.dto.comment.Comments
-import com.untilled.roadcapture.utils.dateToSnsFormat
+import com.untilled.roadcapture.data.api.dto.comment.Comments
+import com.untilled.roadcapture.data.entity.token.Token
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -16,10 +16,10 @@ class AlbumCommentsPagingSource(
         return try{
             val position = params.key ?: AlbumsPagingSource.STARTING_PAGE_INDEX
             val response = repository.getAlbumCommentsList(
-                token = token,
+                token = Token.accessToken,
                 albumId = albumId,
                 page = position,
-                size = 10
+                size = 10,
             )
             val post = response.body()?.comments
 

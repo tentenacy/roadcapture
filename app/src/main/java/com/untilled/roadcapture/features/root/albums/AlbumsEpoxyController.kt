@@ -3,7 +3,7 @@ package com.untilled.roadcapture.features.root.albums
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.paging3.PagingDataEpoxyController
 import com.untilled.roadcapture.AlbumsBindingModel_
-import com.untilled.roadcapture.data.dto.album.Albums
+import com.untilled.roadcapture.data.api.dto.album.Albums
 import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
 
 class AlbumsEpoxyController : PagingDataEpoxyController<Albums>() {

@@ -1,7 +1,7 @@
 package com.untilled.roadcapture.data.api
 
-import com.untilled.roadcapture.data.dto.album.AlbumResponse
-import com.untilled.roadcapture.data.dto.album.AlbumsResponse
+import com.untilled.roadcapture.data.api.dto.album.AlbumResponse
+import com.untilled.roadcapture.data.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.url.RoadCaptureUrl
 import retrofit2.Response
 import retrofit2.http.GET
