@@ -77,7 +77,7 @@
 
         <meta-data
             android:name="com.naver.maps.map.CLIENT_ID"
-            android:value="qwpjxdji3c" />
+            android:value="${API_EXT_NAVERMAP_CLIENT_ID}" />
     </application>
 
 </manifest>
