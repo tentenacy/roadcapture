@@ -30,7 +30,7 @@ object StudiosBindingAdapters {
 
     @JvmStatic
     @BindingAdapter("studioProfileImage")
-    fun setStudioProfileImage(view: CircleImageView, url: String){
+    fun setStudioProfileImage(view: CircleImageView, url: String?){
         view.context.apply {
             Glide.with(this)
                 .asBitmap()
@@ -41,7 +41,7 @@ object StudiosBindingAdapters {
 
     @JvmStatic
     @BindingAdapter("studioBackgroundImage")
-    fun setStudioBackgroundImage(view: ImageView, url: String){
+    fun setStudioBackgroundImage(view: ImageView, url: String?){
         view.context.apply {
             Glide.with(this)
                 .asBitmap()

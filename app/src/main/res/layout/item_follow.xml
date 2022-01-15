@@ -33,7 +33,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:circleProfileImage="@{user.profileUrl}" />
+            bind:circleProfileImage="@{user.profileImageUrl}" />
 
         <TextView
             android:id="@+id/text_ifollow_username"

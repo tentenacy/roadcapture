@@ -106,11 +106,11 @@ class MyStudioModification : Fragment() {
 
     private fun saveUserInfo(){
         if(profileImageUri != null)
-            args.user?.profileUrl = profileImageUri.toString()
+            args.user?.profileImageUrl = profileImageUri.toString()
         if(backgroundImageUri != null)
             args.user?.backgroundUrl = backgroundImageUri.toString()
 
-        args.user?.description = binding.edtMystudioModifyDesc.text.toString()
+        args.user?.introduction = binding.edtMystudioModifyDesc.text.toString()
     }
 
     private fun initAdapter() {

@@ -1,12 +1,15 @@
 package com.untilled.roadcapture.features.root.studio
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.databinding.FragmentMystudioBinding
 import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
@@ -20,6 +23,7 @@ class MyStudioFragment : Fragment() {
     private var _binding: FragmentMystudioBinding? = null
     val binding get() = _binding!!
 
+    private val viewModel: StudioViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,7 +31,6 @@ class MyStudioFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentMystudioBinding.inflate(layoutInflater, container, false)
-        binding.user = DummyDataSet.myStudioUser
         initAdapter()
         return binding.root
     }
@@ -40,8 +43,21 @@ class MyStudioFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initUserProfile()
+        subscribeUi()
         setOnClickListeners()
     }
+
+    private fun initUserProfile() {
+        viewModel.getUserDetail(Token.accessToken)
+    }
+
+    private fun subscribeUi() {
+        viewModel.user.observe(viewLifecycleOwner){ user->
+            binding.user = user
+        }
+    }
+
 
     private fun setOnClickListeners() {
         binding.textMystudioFollower.setOnClickListener {

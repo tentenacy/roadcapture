@@ -42,7 +42,7 @@
             app:layout_constraintEnd_toEndOf="@+id/img_ifollowing_filter_border"
             app:layout_constraintStart_toStartOf="@+id/img_ifollowing_filter_border"
             app:layout_constraintTop_toTopOf="@+id/img_ifollowing_filter_border"
-            bind:FollowingAlbumProfileImage="@{user.profileUrl}"
+            bind:FollowingAlbumProfileImage="@{user.profileImageUrl}"
             tools:src="@drawable/img_sample_thumbnail" />
 
         <TextView

@@ -31,7 +31,7 @@
             android:onClick="@{onClickItem}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:circleProfileImage="@{user.profileUrl}" />
+            bind:circleProfileImage="@{user.profileImageUrl}" />
 
         <TextView
             android:id="@+id/text_iusernamesearch_username"

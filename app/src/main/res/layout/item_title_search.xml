@@ -55,7 +55,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginBottom="4dp"
             app:layout_constraintBottom_toTopOf="@+id/text_ititlesearch_title"
-            bind:titleSearchProfileImage="@{album.user.profileUrl}"
+            bind:titleSearchProfileImage="@{album.user.profileImageUrl}"
             tools:src="@drawable/img_sample_profile" />
 
         <TextView

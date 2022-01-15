@@ -43,7 +43,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/img_ipicture_slider_thumbnail_bg"
             app:layout_constraintVertical_bias="0.4"
-            bind:albumProfileImage="@{album.user.profileUrl}"
+            bind:albumProfileImage="@{album.user.profileImageUrl}"
             tools:src="@drawable/img_sample_profile" />
 
         <TextView

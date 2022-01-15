@@ -5,12 +5,17 @@ import com.untilled.roadcapture.data.datasource.api.dto.common.ErrorCode
 import com.untilled.roadcapture.data.datasource.api.dto.user.ReissueRequest
 import com.untilled.roadcapture.data.datasource.api.dto.user.TokenRequest
 import com.untilled.roadcapture.data.datasource.api.dto.user.TokenResponse
+import com.untilled.roadcapture.data.datasource.api.dto.user.Users
 import com.untilled.roadcapture.data.datasource.dao.LocalOAuthTokenDao
 import com.untilled.roadcapture.data.datasource.dao.LocalTokenDao
+import com.untilled.roadcapture.data.entity.User
 import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
 import com.untilled.roadcapture.utils.convertToErrorResponse
 import com.untilled.roadcapture.utils.type.SocialType
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Retrofit
 import javax.inject.Inject
 
@@ -54,4 +59,7 @@ class UserRepositoryImpl @Inject constructor(
             )
             response
         }
+
+    override fun getUserDetail(token: String): Single<User> =
+        roadCaptureApi.getUserDetail(token)
 }

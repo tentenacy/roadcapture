@@ -32,7 +32,7 @@
             android:onClick="@{onClickItem}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:notificationProfileImage="@{notification.user.profileUrl}" />
+            bind:notificationProfileImage="@{notification.user.profileImageUrl}" />
 
         <TextView
             android:id="@+id/text_inotification_username"
