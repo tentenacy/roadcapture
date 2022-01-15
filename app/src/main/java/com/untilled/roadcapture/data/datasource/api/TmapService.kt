@@ -3,7 +3,7 @@ package com.untilled.roadcapture.data.datasource.api
 import com.untilled.roadcapture.BuildConfig
 import com.untilled.roadcapture.data.datasource.api.dto.address.AddressInfoResponse
 import com.untilled.roadcapture.data.datasource.api.dto.place.SearchPlaceResponse
-import com.untilled.roadcapture.utils.constant.url.TmapUrl
+import com.untilled.roadcapture.utils.constant.url.TmapUrlConstant
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.create
@@ -13,7 +13,7 @@ import retrofit2.http.Query
 
 interface TmapService {
 
-    @GET(TmapUrl.GET_TMAP_LOCATION)
+    @GET(TmapUrlConstant.GET_TMAP_LOCATION)
     suspend fun getSearchPlace(
         @Header("appKey") appKey: String = BuildConfig.API_EXT_TMAP_KEY,
         @Query("version") version: Int = 1,
@@ -32,7 +32,7 @@ interface TmapService {
         @Query("centerLat") centerLat: String? = null
     ): Response<SearchPlaceResponse>
 
-    @GET(TmapUrl.GET_TMAP_REVERSE_GEO_CODE)
+    @GET(TmapUrlConstant.GET_TMAP_REVERSE_GEO_CODE)
     suspend fun getReverseGeoCode(
         @Header("appKey") appKey: String = BuildConfig.API_EXT_TMAP_KEY,
         @Query("version") version: Int = 1,
@@ -46,7 +46,7 @@ interface TmapService {
     companion object {
         fun create(retrofitBuilder: Retrofit.Builder): TmapService {
             return retrofitBuilder
-                .baseUrl(TmapUrl.TMAP_URL)
+                .baseUrl(TmapUrlConstant.TMAP_URL)
                 .build()
                 .create()
         }

@@ -1,10 +1,12 @@
 package com.untilled.roadcapture.application
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.ActivityMainBinding
+import com.untilled.roadcapture.features.login.LoginViewModel
 import com.untilled.roadcapture.features.root.capture.CropFragment
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropFragment

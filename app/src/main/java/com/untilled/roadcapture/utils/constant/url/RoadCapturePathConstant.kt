@@ -1,6 +1,6 @@
 package com.untilled.roadcapture.utils.constant.url
 
-object RoadCaptureUrl {
+object RoadCapturePathConstant {
 
     const val GET_ALBUMS = "/albums"
     const val GET_ALBUM = "/albums/{id}"

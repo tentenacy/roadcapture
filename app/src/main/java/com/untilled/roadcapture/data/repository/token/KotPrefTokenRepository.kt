@@ -7,10 +7,10 @@ import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
 import com.untilled.roadcapture.utils.type.SocialType
 import javax.inject.Inject
 
-class KotPrefTokenRepository @Inject constructor(private val map: Map<String, @JvmSuppressWildcards LocalOAuthTokenDao>, private val localTokenDao: LocalTokenDao): LocalTokenRepository {
+class KotPrefTokenRepository @Inject constructor(private val localOAuthTokenDao: LocalOAuthTokenDao, private val localTokenDao: LocalTokenDao): LocalTokenRepository {
 
     override fun saveOAuthToken(socialType: SocialType, args: OAuthTokenArgs) {
-        map[socialType.name]?.saveToken(args)
+        localOAuthTokenDao.saveToken(args)
     }
 
     override fun saveToken(socialType: SocialType, args: TokenArgs) {

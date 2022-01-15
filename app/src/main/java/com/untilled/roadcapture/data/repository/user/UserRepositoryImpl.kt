@@ -7,7 +7,6 @@ import com.untilled.roadcapture.data.datasource.api.dto.user.TokenRequest
 import com.untilled.roadcapture.data.datasource.api.dto.user.TokenResponse
 import com.untilled.roadcapture.data.datasource.dao.LocalOAuthTokenDao
 import com.untilled.roadcapture.data.datasource.dao.LocalTokenDao
-import com.untilled.roadcapture.data.entity.token.NaverOAuthToken
 import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
 import com.untilled.roadcapture.utils.convertToErrorResponse
 import com.untilled.roadcapture.utils.type.SocialType
@@ -18,20 +17,23 @@ import javax.inject.Inject
 class UserRepositoryImpl @Inject constructor(
     private val roadCaptureApi: RoadCaptureApi,
     private val localTokenDao: LocalTokenDao,
-    private val map: Map<String, @JvmSuppressWildcards LocalOAuthTokenDao>,
+    private val localOAuthTokenDao: LocalOAuthTokenDao,
     private val retrofit: Retrofit,
 ) :
     UserRepository {
 
-    override fun socialSignup(socialType: SocialType): Single<TokenResponse> =
-        roadCaptureApi.socialSignup(socialType.name, TokenRequest(NaverOAuthToken.accessToken))
+    override fun socialSignup(socialType: SocialType): Single<TokenResponse> {
+        val accessToken = localOAuthTokenDao.getToken().accessToken
+        return roadCaptureApi.socialSignup(socialType.name, TokenRequest(accessToken))
             .flatMap { response ->
                 if(!response.isSuccessful and (retrofit.convertToErrorResponse(response)?.code != ErrorCode.ALREADY_SIGNEDUP.code)) {
                     return@flatMap Single.error(IllegalStateException("Network error"))
                 }
 
-                return@flatMap socialLogin(socialType)
+                return@flatMap socialLogin(socialType, accessToken)
             }
+    }
+
 
 
     //TODO: 액세스 토큰이 만료되면 리프레시 토큰으로 토큰 재발행
@@ -39,10 +41,10 @@ class UserRepositoryImpl @Inject constructor(
         return Single.create {}
     }
 
-    private fun socialLogin(socialType: SocialType): Single<TokenResponse> =
+    private fun socialLogin(socialType: SocialType, accessToken: String): Single<TokenResponse> =
         roadCaptureApi.socialLogin(
             socialType.name,
-            TokenRequest(map[socialType.name]!!.getToken().accessToken)
+            TokenRequest(accessToken)
         ).map { response ->
             localTokenDao.saveToken(
                 TokenArgs(

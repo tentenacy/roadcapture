@@ -2,7 +2,7 @@ package com.untilled.roadcapture.data.entity.token
 
 import com.chibatching.kotpref.KotprefModel
 
-object GoogleOAuthToken: KotprefModel() {
+object OAuthToken: KotprefModel() {
     var accessToken by stringPref()
     var expiresIn by intPref()
     var refreshToken by nullableStringPref()

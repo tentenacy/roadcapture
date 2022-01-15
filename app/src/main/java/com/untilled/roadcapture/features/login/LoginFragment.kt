@@ -1,34 +1,58 @@
 package com.untilled.roadcapture.features.login
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.BuildConfig
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.data.repository.token.dto.OAuthTokenArgs
+import com.untilled.roadcapture.core.activityresult.ActivityResultFactory
 import com.untilled.roadcapture.databinding.FragmentLoginBinding
+import com.untilled.roadcapture.utils.instance.OAuthLoginInstances
 import com.untilled.roadcapture.utils.navigationHeight
 import com.untilled.roadcapture.utils.setStatusBarOrigin
 import com.untilled.roadcapture.utils.setStatusBarTransparent
 import com.untilled.roadcapture.utils.statusBarHeight
-import com.untilled.roadcapture.utils.instance.OAuthLoginInstances
-import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.tasks.Task
+
+import com.google.android.gms.common.api.ApiException
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
-    private val buttonContainerOnClickListener: (View?) -> Unit = {
+    @Inject
+    lateinit var activityResultFactory: ActivityResultFactory<Intent, ActivityResult>
+
+    @Inject
+    lateinit var googleSignInClient: GoogleSignInClient
+
+    @Inject
+    lateinit var naverOAuthLoginHandler: OAuthLoginHandler
+
+    private val viewModel by lazy {
+        ViewModelProvider(this).get(LoginViewModel::class.java)
+    }
+
+    private val btnContainerOnClickListener: (View?) -> Unit = {
         Navigation.findNavController(binding.root)
             .navigate(R.id.action_loginFragment_to_emailLoginFragment)
     }
@@ -38,24 +62,46 @@ class LoginFragment : Fragment() {
             .navigate(R.id.action_loginFragment_to_signupFragment)
     }
 
-    private val viewModel: LoginViewModel by viewModels()
+    private val naverLoginOnClickListener: (View?) -> Unit = {
+        OAuthLoginInstances.naverOAuthLoginInstance.startOauthLoginActivity(
+            requireActivity(),
+            naverOAuthLoginHandler
+        )
+    }
 
-    private val naverOAuthLoginHandler: OAuthLoginHandler = NonLeakNaverOAuthLoginHandler()
+    private val googleLoginOnClickListener: (View?) -> Unit = {
+        activityResultFactory.launch(googleSignInClient.signInIntent) { result: ActivityResult ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                handleGoogleLoginResult(GoogleSignIn.getSignedInAccountFromIntent(result.data))
+            }
+        }
+    }
+
+    private val imgGoogleLoginOnClickListener: (View?) -> Unit = {
+        binding.signinbtnLoginGoogle.performClick()
+    }
 
     private val isLoadingObserver = { isLoading: Boolean ->
         if (isLoading) {
             Logger.d("loading...")
+            viewModel.isLoggingIn.observe(viewLifecycleOwner, isLoggingInObserver)
+        } else {
+            viewModel.isLoggingIn.removeObserver(isLoggingInObserver)
         }
     }
 
-    private val isLoginCompleteObserver = { isLoginComplete: Boolean ->
-        if (isLoginComplete) {
+    private val isLoggingInObserver = { isLoggingIn: Boolean ->
+        if (!isLoggingIn) {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRootFragment())
         }
     }
 
     private val errorObserver = { error: String ->
-        if(error.isNotBlank()) Toast.makeText(requireContext(), "error: $error", Toast.LENGTH_SHORT).show()
+        if (error.isNotBlank()) Toast.makeText(
+            requireContext(),
+            "error: $error",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun onCreateView(
@@ -68,15 +114,6 @@ class LoginFragment : Fragment() {
         initData()
 
         return binding.root
-    }
-
-    private fun initData() {
-        OAuthLoginInstances.naverOAuthLoginInstance.init(
-            requireActivity(),
-            BuildConfig.SOCIAL_NAVER_CLIENT_ID,
-            BuildConfig.SOCIAL_NAVER_CLIENT_SECRET,
-            BuildConfig.SOCIAL_NAVER_CLIENT_NAME
-        )
     }
 
     override fun onDestroyView() {
@@ -103,9 +140,17 @@ class LoginFragment : Fragment() {
         observeData()
     }
 
+    private fun initData() {
+        OAuthLoginInstances.naverOAuthLoginInstance.init(
+            requireActivity(),
+            BuildConfig.SOCIAL_NAVER_CLIENT_ID,
+            BuildConfig.SOCIAL_NAVER_CLIENT_SECRET,
+            BuildConfig.SOCIAL_NAVER_CLIENT_NAME
+        )
+    }
+
     private fun observeData() {
         viewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
-        viewModel.isLoginComplete.observe(viewLifecycleOwner, isLoginCompleteObserver)
         viewModel.error.observe(viewLifecycleOwner, errorObserver)
     }
 
@@ -114,37 +159,24 @@ class LoginFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.constraintLoginBtnContainer.setOnClickListener(buttonContainerOnClickListener)
+        binding.constraintLoginBtnContainer.setOnClickListener(btnContainerOnClickListener)
         binding.textLoginSignup.setOnClickListener(signupOnClickListener)
-        binding.btnLoginNaver.setOnClickListener {
-            OAuthLoginInstances.naverOAuthLoginInstance.startOauthLoginActivity(requireActivity(), naverOAuthLoginHandler)
-        }
+        binding.btnLoginNaver.setOnClickListener(naverLoginOnClickListener)
+        binding.imgLoginGoogle.setOnClickListener(imgGoogleLoginOnClickListener)
+        binding.signinbtnLoginGoogle.setOnClickListener(googleLoginOnClickListener)
     }
 
-    private inner class NonLeakNaverOAuthLoginHandler : OAuthLoginHandler() {
-        override fun run(success: Boolean): Unit = requireContext().run {
-            if (success) {
-                viewModel.saveOAuthToken(SocialType.NAVER, OAuthTokenArgs(
-                    accessToken = OAuthLoginInstances.naverOAuthLoginInstance.getAccessToken(this),
-                    expiresIn = OAuthLoginInstances.naverOAuthLoginInstance.getExpiresAt(this).toInt(),
-                    refreshToken = OAuthLoginInstances.naverOAuthLoginInstance.getRefreshToken(this),
-                    tokenType = OAuthLoginInstances.naverOAuthLoginInstance.getTokenType(this),
-                ))
+    private fun handleGoogleLoginResult(completedTask: Task<GoogleSignInAccount>) {
+        try {
+            val account = completedTask.getResult(ApiException::class.java)
 
-                viewModel.socialLogin(SocialType.NAVER)
-            } else {
-                Toast.makeText(
-                    this,
-                    "errorCode: ${
-                        OAuthLoginInstances.naverOAuthLoginInstance.getLastErrorCode(
-                            this
-                        )
-                    }, errorDesc: ${
-                        OAuthLoginInstances.naverOAuthLoginInstance.getLastErrorDesc(this)
-                    }",
-                    Toast.LENGTH_SHORT
-                ).show()
-            }
+            // Signed in successfully, show authenticated UI.
+            account.serverAuthCode
+
+        } catch (e: ApiException) {
+            // The ApiException status code indicates the detailed failure reason.
+            // Please refer to the GoogleSignInStatusCodes class reference for more information.
+            Logger.w("signInResult:failed code=${e.statusCode}")
         }
     }
 }

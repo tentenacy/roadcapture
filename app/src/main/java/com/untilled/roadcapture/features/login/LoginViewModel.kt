@@ -19,14 +19,8 @@ class LoginViewModel @Inject constructor(
     private val localTokenRepository: LocalTokenRepository
 ) : BaseViewModel() {
 
-    private var _isLoginComplete = MutableLiveData<Boolean>(false)
-    val isLoginComplete: LiveData<Boolean> get() = _isLoginComplete
-
-    init {
-        isLoading.addSource(_isLoginComplete) {
-            isLoading.value = it
-        }
-    }
+    private var _isLoggingIn = MutableLiveData<Boolean>(false)
+    val isLoggingIn: LiveData<Boolean> get() = _isLoggingIn
 
     fun saveOAuthToken(socialType: SocialType, args: OAuthTokenArgs) {
         localTokenRepository.saveOAuthToken(socialType, args)
@@ -37,12 +31,15 @@ class LoginViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
-                _isLoginComplete.value = false
+                isLoading.addSource(_isLoggingIn.apply { value = true }) {
+                    isLoading.value = it
+                }
             }
             .doOnTerminate {
-                _isLoginComplete.value = true
+                isLoading.removeSource(_isLoggingIn.apply { value = false })
             }
             .subscribe({ response ->
+
             }) { t ->
                 error.value = t.message
             }.addTo(compositeDisposable)
