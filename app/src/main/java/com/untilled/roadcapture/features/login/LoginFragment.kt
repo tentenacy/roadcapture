@@ -17,6 +17,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Task
+import com.kakao.sdk.auth.model.OAuthToken
+import com.kakao.sdk.user.UserApiClient
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.BuildConfig
@@ -66,6 +68,26 @@ class LoginFragment : Fragment() {
             requireActivity(),
             naverOAuthLoginHandler
         )
+    }
+    private val kakaoCallBack: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+        if (error != null) {
+            Toast.makeText(activity,error.toString(),Toast.LENGTH_SHORT)
+        }
+        else if (token != null) {
+            viewModel.saveOAuthToken(OAuthTokenArgs(
+                accessToken = token.accessToken,
+                refreshToken = token.refreshToken,
+            ))
+            viewModel.socialLogin(SocialType.KAKAO)
+        }
+    }
+
+    private val kakaoLoginOnClickListener: (View?) -> Unit = {
+        if (UserApiClient.instance.isKakaoTalkLoginAvailable(requireContext())) {
+            UserApiClient.instance.loginWithKakaoTalk(requireContext(), callback = kakaoCallBack)
+        } else {
+            UserApiClient.instance.loginWithKakaoAccount(requireContext(), callback = kakaoCallBack)
+        }
     }
 
     private val googleLoginOnClickListener: (View?) -> Unit = {
@@ -157,6 +179,7 @@ class LoginFragment : Fragment() {
         binding.constraintLoginBtnContainer.setOnClickListener(btnContainerOnClickListener)
         binding.textLoginSignup.setOnClickListener(signupOnClickListener)
         binding.btnLoginNaver.setOnClickListener(naverLoginOnClickListener)
+        binding.imgLoginKakao.setOnClickListener(kakaoLoginOnClickListener)
 //        binding.frameLoginGoogle.setOnClickListener(imgGoogleLoginOnClickListener)
         binding.signinbtnLoginGoogle.setOnClickListener(googleLoginOnClickListener)
     }
