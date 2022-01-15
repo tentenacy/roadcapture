@@ -22,16 +22,13 @@ class NaverOAuthLoginHandler(private val fragment: Fragment) : OAuthLoginHandler
     override fun run(success: Boolean): Unit = fragment.requireContext().run {
         if (success) {
             viewModel.saveOAuthToken(
-                SocialType.NAVER, OAuthTokenArgs(
+                OAuthTokenArgs(
                     accessToken = OAuthLoginInstances.naverOAuthLoginInstance.getAccessToken(
                         this
                     ),
-                    expiresIn = OAuthLoginInstances.naverOAuthLoginInstance.getExpiresAt(this)
-                        .toInt(),
                     refreshToken = OAuthLoginInstances.naverOAuthLoginInstance.getRefreshToken(
                         this
                     ),
-                    tokenType = OAuthLoginInstances.naverOAuthLoginInstance.getTokenType(this),
                 )
             )
 

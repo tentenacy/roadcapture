@@ -20,7 +20,8 @@ class ClientModule {
         return GoogleSignIn.getClient(
             activity,
             GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(BuildConfig.SOCIAL_GOOGLE_CLIENT_ID).requestProfile().requestEmail()
+                .requestIdToken(BuildConfig.SOCIAL_GOOGLE_CLIENT_ID)
+                .requestEmail().requestProfile()
                 .build()
         )
     }

@@ -38,7 +38,6 @@ android {
         buildConfigField("String", "SOCIAL_NAVER_CLIENT_NAME", properties.getProperty("social.naver.client-name"))
         buildConfigField("String", "SOCIAL_KAKAO_CLIENT_ID", properties.getProperty("social.kakao.client-id"))
         buildConfigField("String", "SOCIAL_GOOGLE_CLIENT_ID", properties.getProperty("social.google.client-id"))
-        buildConfigField("String", "SOCIAL_GOOGLE_CLIENT_SECRET", properties.getProperty("social.google.client-secret"))
     }
 
     kapt {

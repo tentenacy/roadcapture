@@ -4,7 +4,5 @@ import com.chibatching.kotpref.KotprefModel
 
 object OAuthToken: KotprefModel() {
     var accessToken by stringPref()
-    var expiresIn by intPref()
     var refreshToken by nullableStringPref()
-    var tokenType by nullableStringPref()
 }

@@ -22,8 +22,8 @@ class LoginViewModel @Inject constructor(
     private var _isLoggingIn = MutableLiveData<Boolean>(false)
     val isLoggingIn: LiveData<Boolean> get() = _isLoggingIn
 
-    fun saveOAuthToken(socialType: SocialType, args: OAuthTokenArgs) {
-        localTokenRepository.saveOAuthToken(socialType, args)
+    fun saveOAuthToken(args: OAuthTokenArgs) {
+        localTokenRepository.saveOAuthToken(args)
     }
 
     fun socialLogin(socialType: SocialType) {

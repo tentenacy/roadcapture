@@ -12,27 +12,26 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.common.api.ApiException
+import com.google.android.gms.tasks.Task
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.BuildConfig
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.activityresult.ActivityResultFactory
+import com.untilled.roadcapture.data.repository.token.dto.OAuthTokenArgs
 import com.untilled.roadcapture.databinding.FragmentLoginBinding
 import com.untilled.roadcapture.utils.instance.OAuthLoginInstances
 import com.untilled.roadcapture.utils.navigationHeight
 import com.untilled.roadcapture.utils.setStatusBarOrigin
 import com.untilled.roadcapture.utils.setStatusBarTransparent
 import com.untilled.roadcapture.utils.statusBarHeight
+import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
-import com.google.android.gms.tasks.Task
-
-import com.google.android.gms.common.api.ApiException
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -75,10 +74,6 @@ class LoginFragment : Fragment() {
                 handleGoogleLoginResult(GoogleSignIn.getSignedInAccountFromIntent(result.data))
             }
         }
-    }
-
-    private val imgGoogleLoginOnClickListener: (View?) -> Unit = {
-        binding.signinbtnLoginGoogle.performClick()
     }
 
     private val isLoadingObserver = { isLoading: Boolean ->
@@ -162,7 +157,7 @@ class LoginFragment : Fragment() {
         binding.constraintLoginBtnContainer.setOnClickListener(btnContainerOnClickListener)
         binding.textLoginSignup.setOnClickListener(signupOnClickListener)
         binding.btnLoginNaver.setOnClickListener(naverLoginOnClickListener)
-        binding.imgLoginGoogle.setOnClickListener(imgGoogleLoginOnClickListener)
+//        binding.frameLoginGoogle.setOnClickListener(imgGoogleLoginOnClickListener)
         binding.signinbtnLoginGoogle.setOnClickListener(googleLoginOnClickListener)
     }
 
@@ -170,8 +165,14 @@ class LoginFragment : Fragment() {
         try {
             val account = completedTask.getResult(ApiException::class.java)
 
-            // Signed in successfully, show authenticated UI.
-            account.serverAuthCode
+            viewModel.saveOAuthToken(
+                OAuthTokenArgs(
+                    accessToken = account.idToken!!,
+                    refreshToken = null,
+                )
+            )
+
+            viewModel.socialLogin(SocialType.GOOGLE)
 
         } catch (e: ApiException) {
             // The ApiException status code indicates the detailed failure reason.

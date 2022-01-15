@@ -71,7 +71,6 @@
                 android:id="@+id/signinbtn_login_google"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/img_login_google"
                 app:layout_constraintEnd_toEndOf="@+id/img_login_google"
                 app:layout_constraintStart_toStartOf="@+id/img_login_google"
@@ -86,7 +85,6 @@
                 app:layout_constraintEnd_toStartOf="@+id/img_login_kakao"
                 app:layout_constraintStart_toEndOf="@+id/btn_login_naver"
                 app:layout_constraintTop_toTopOf="@+id/btn_login_naver" />
-
 
             <ImageView
                 android:id="@+id/img_login_kakao"

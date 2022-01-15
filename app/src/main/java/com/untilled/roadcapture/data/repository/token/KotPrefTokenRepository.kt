@@ -9,11 +9,11 @@ import javax.inject.Inject
 
 class KotPrefTokenRepository @Inject constructor(private val localOAuthTokenDao: LocalOAuthTokenDao, private val localTokenDao: LocalTokenDao): LocalTokenRepository {
 
-    override fun saveOAuthToken(socialType: SocialType, args: OAuthTokenArgs) {
+    override fun saveOAuthToken(args: OAuthTokenArgs) {
         localOAuthTokenDao.saveToken(args)
     }
 
-    override fun saveToken(socialType: SocialType, args: TokenArgs) {
+    override fun saveToken(args: TokenArgs) {
         localTokenDao.saveToken(args)
     }
 }

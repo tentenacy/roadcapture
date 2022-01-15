@@ -10,16 +10,12 @@ class KotPrefOAuthTokenDao @Inject constructor(): LocalOAuthTokenDao {
     override fun saveToken(args: OAuthTokenArgs) {
         OAuthToken.accessToken = args.accessToken
         OAuthToken.refreshToken = args.refreshToken
-        OAuthToken.expiresIn = args.expiresIn
-        OAuthToken.tokenType = args.tokenType
     }
 
     override fun getToken(): OAuthTokenDto {
         return OAuthTokenDto(
-            tokenType = OAuthToken.tokenType,
             accessToken = OAuthToken.accessToken,
             refreshToken = OAuthToken.refreshToken,
-            expiresIn = OAuthToken.expiresIn,
         )
     }
 }
