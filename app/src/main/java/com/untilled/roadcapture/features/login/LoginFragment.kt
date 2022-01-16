@@ -137,13 +137,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requireActivity().setStatusBarTransparent()
-        binding.constraintLoginInnerContainer.setPadding(
-            0,
-            requireContext().statusBarHeight(),
-            0,
-            requireContext().navigationHeight()
-        )
+        binding.constraintLoginInnerContainer.setStatusBarTransparent(requireActivity())
 
         setOAuthLoginHandlers()
         setOnClickListeners()

@@ -12,7 +12,9 @@
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_loginFragment_to_rootFragment"
-            app:destination="@id/rootFragment" />
+            app:destination="@id/rootFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
@@ -111,9 +113,9 @@
         tools:layout="@layout/fragment_signup">
         <action
             android:id="@+id/action_signupFragment_to_rootFragment"
-            app:popUpTo="@id/signupFragment"
-            app:popUpToInclusive="true"
-            app:destination="@id/rootFragment" />
+            app:destination="@id/rootFragment"
+            app:popUpTo="@id/loginFragment"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_signupFragment_to_termsOfServiceFragment"
             app:destination="@id/termsOfServiceFragment" />
@@ -223,7 +225,7 @@
         <action
             android:id="@+id/action_emailLoginFragment_to_rootFragment"
             app:destination="@id/rootFragment"
-            app:popUpTo="@id/emailLoginFragment"
+            app:popUpTo="@id/loginFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_emailLoginFragment_to_passwordFindFragment"
@@ -299,6 +301,6 @@
     <action
         android:id="@+id/action_global_loginFragment"
         app:destination="@id/loginFragment"
-        app:popUpTo="@id/loginFragment"
+        app:popUpTo="@id/rootFragment"
         app:popUpToInclusive="true" />
 </navigation>

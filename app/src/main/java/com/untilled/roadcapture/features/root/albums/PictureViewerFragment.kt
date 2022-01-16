@@ -11,10 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.databinding.FragmentPictureViewerBinding
-import com.untilled.roadcapture.utils.navigationHeight
-import com.untilled.roadcapture.utils.setStatusBarOrigin
-import com.untilled.roadcapture.utils.setStatusBarTransparent
-import com.untilled.roadcapture.utils.statusBarHeight
+import com.untilled.roadcapture.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -74,10 +71,7 @@ class PictureViewerFragment : Fragment() {
     }
 
     private fun setStatusBarTransparent() {
-        requireActivity().setStatusBarTransparent()
-        binding.constraintPictureViewerContainer.setPadding(
-            0, requireContext().statusBarHeight(), 0, requireContext().navigationHeight()
-        )
+        binding.constraintPictureViewerContainer.setStatusBarTransparent(requireActivity())
     }
 
     private fun setOnClickListeners() {

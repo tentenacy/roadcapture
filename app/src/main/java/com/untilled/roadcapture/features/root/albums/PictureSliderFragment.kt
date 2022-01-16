@@ -18,8 +18,7 @@ import com.untilled.roadcapture.databinding.FragmentPictureSliderBinding
 import com.untilled.roadcapture.features.root.comment.CommentBottomSheetDialog
 import com.untilled.roadcapture.pictureSliderContent
 import com.untilled.roadcapture.pictureSliderThumbnail
-import com.untilled.roadcapture.utils.navigationHeight
-import com.untilled.roadcapture.utils.statusBarHeight
+import com.untilled.roadcapture.utils.setPaddingWhenStatusBarTransparent
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -67,18 +66,16 @@ class PictureSliderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setStatusBarTransparent()
-        subscribeUi()
+        initViews()
+        observeData()
         setOnClickListeners()
     }
 
-    private fun setStatusBarTransparent() {
-        binding.pictureViewerContainer.setPadding(
-            0, requireContext().statusBarHeight(), 0, requireContext().navigationHeight()
-        )
+    private fun initViews() {
+        binding.pictureViewerContainer.setPaddingWhenStatusBarTransparent(requireContext())
     }
 
-    private fun subscribeUi() {
+    private fun observeData() {
         viewModel.albumResponse.observe(viewLifecycleOwner) { albumResponse ->
             setThumbnailToBackground(albumResponse)
             initAdapter(albumResponse)

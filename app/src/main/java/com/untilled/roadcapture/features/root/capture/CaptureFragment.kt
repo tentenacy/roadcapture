@@ -98,14 +98,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        requireActivity().setStatusBarTransparent()
-
-        binding.coordinatorCapture.setPadding(
-            0,
-            requireContext().statusBarHeight(),
-            0,
-            requireContext().navigationHeight()
-        )
+        binding.constraintCaptureContainer.setStatusBarTransparent(requireActivity())
 
         setOnClickListeners()
     }

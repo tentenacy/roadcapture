@@ -6,6 +6,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.WindowCompat
 
@@ -13,12 +14,17 @@ import androidx.core.view.WindowCompat
 const val ANIMATION_FAST_MILLIS = 50L
 const val ANIMATION_SLOW_MILLIS = 100L
 
-fun Activity.setStatusBarTransparent() {
+fun ConstraintLayout.setStatusBarTransparent(activity: Activity) = activity.run {
     WindowCompat.setDecorFitsSystemWindows(window, false)
+    setPaddingWhenStatusBarTransparent(this)
 }
 
 fun Activity.setStatusBarOrigin() {
     WindowCompat.setDecorFitsSystemWindows(window, true)
+}
+
+fun ConstraintLayout.setPaddingWhenStatusBarTransparent(context: Context) = context.run {
+    setPadding(0, this.statusBarHeight(), 0, this.navigationHeight())
 }
 
 fun Activity.hideKeyboard(editText: EditText) {

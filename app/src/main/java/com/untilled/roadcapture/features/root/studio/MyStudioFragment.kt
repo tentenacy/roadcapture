@@ -1,7 +1,6 @@
 package com.untilled.roadcapture.features.root.studio
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +30,9 @@ class MyStudioFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentMystudioBinding.inflate(layoutInflater, container, false)
+
         initAdapter()
+
         return binding.root
     }
 
@@ -43,16 +44,12 @@ class MyStudioFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initUserProfile()
-        subscribeUi()
+
+        observeData()
         setOnClickListeners()
     }
 
-    private fun initUserProfile() {
-        viewModel.getUserDetail(Token.accessToken)
-    }
-
-    private fun subscribeUi() {
+    private fun observeData() {
         viewModel.user.observe(viewLifecycleOwner){ user->
             binding.user = user
         }
