@@ -19,4 +19,8 @@ class KotPrefOAuthTokenDao @Inject constructor(): LocalOAuthTokenDao {
             socialType = OAuthToken.socialType,
         )
     }
+
+    override fun clearToken() {
+        OAuthToken.clear()
+    }
 }

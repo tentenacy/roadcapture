@@ -9,4 +9,5 @@ interface LocalTokenRepository {
     fun getOAuthToken(): OAuthTokenArgs
     fun saveToken(args: TokenArgs)
     fun getToken(): TokenArgs
+    fun clearToken()
 }

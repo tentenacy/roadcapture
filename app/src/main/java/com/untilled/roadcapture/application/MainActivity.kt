@@ -2,11 +2,13 @@ package com.untilled.roadcapture.application
 
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.result.ActivityResult
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.untilled.roadcapture.BuildConfig
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.core.activityresult.ActivityResultFactory
 import com.untilled.roadcapture.databinding.ActivityMainBinding
 import com.untilled.roadcapture.features.login.LoginViewModel
 import com.untilled.roadcapture.features.root.capture.CropFragment
@@ -15,12 +17,16 @@ import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropFragment
 import com.yalantis.ucrop.UCropFragmentCallback
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), UCropFragmentCallback {
     private lateinit var binding: ActivityMainBinding
 
     val viewModel: MainViewModel by viewModels()
+
+    @Inject
+    lateinit var activityResultFactory: ActivityResultFactory<Intent, ActivityResult>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_RoadCapture)

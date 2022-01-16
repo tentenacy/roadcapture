@@ -20,4 +20,9 @@ class KotPrefTokenRepository @Inject constructor(private val localOAuthTokenDao:
     override fun getOAuthToken(): OAuthTokenArgs = localOAuthTokenDao.getToken()
 
     override fun getToken(): TokenArgs = localTokenDao.getToken()
+
+    override fun clearToken() {
+        localTokenDao.clearToken()
+        localOAuthTokenDao.clearToken()
+    }
 }

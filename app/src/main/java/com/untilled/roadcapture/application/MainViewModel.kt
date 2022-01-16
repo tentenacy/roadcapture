@@ -40,4 +40,8 @@ class MainViewModel @Inject constructor(
                 error.postValue(t.message)
             }.addTo(compositeDisposable)
     }
+
+    fun logout() {
+        localTokenRepository.clearToken()
+    }
 }

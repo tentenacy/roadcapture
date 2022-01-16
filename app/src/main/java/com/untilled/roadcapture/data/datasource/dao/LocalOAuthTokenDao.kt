@@ -6,4 +6,5 @@ import com.untilled.roadcapture.utils.type.SocialType
 interface LocalOAuthTokenDao {
     fun saveToken(args: OAuthTokenArgs)
     fun getToken(): OAuthTokenArgs
+    fun clearToken()
 }

@@ -6,4 +6,5 @@ import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
 interface LocalTokenDao {
     fun saveToken(tokenArgs: TokenArgs)
     fun getToken(): TokenArgs
+    fun clearToken()
 }

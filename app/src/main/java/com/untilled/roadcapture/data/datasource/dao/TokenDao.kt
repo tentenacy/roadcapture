@@ -19,4 +19,8 @@ class TokenDao @Inject constructor(): LocalTokenDao {
         refreshToken = Token.refreshToken,
         accessTokenExpireDate = Token.accessTokenExpireDate,
     )
+
+    override fun clearToken() {
+        Token.clear()
+    }
 }

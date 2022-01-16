@@ -8,8 +8,11 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentSettingsAccountBinding
+import com.untilled.roadcapture.utils.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -67,7 +70,9 @@ class SettingsAccountFragment : Fragment() {
             .create()
 
         dialogView.findViewById<TextView>(R.id.text_dlglogout_confirm)?.setOnClickListener {
-            //logout
+            mainActivity().viewModel.logout()
+            findNavController().navigate(SettingsAccountFragmentDirections.actionGlobalLoginFragment())
+            dialog.dismiss()
         }
         dialogView.findViewById<TextView>(R.id.text_dlglogout_cancel)?.setOnClickListener {
             dialog.dismiss()

@@ -32,23 +32,17 @@ import com.untilled.roadcapture.core.activityresult.ActivityResultFactory
 import com.untilled.roadcapture.data.repository.token.dto.OAuthTokenArgs
 import com.untilled.roadcapture.databinding.FragmentLoginBinding
 import com.untilled.roadcapture.utils.instance.OAuthLoginInstances
-import com.untilled.roadcapture.utils.navigationHeight
-import com.untilled.roadcapture.utils.setStatusBarOrigin
-import com.untilled.roadcapture.utils.setStatusBarTransparent
-import com.untilled.roadcapture.utils.statusBarHeight
 import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import com.facebook.AccessToken
 import com.untilled.roadcapture.data.entity.token.Token
+import com.untilled.roadcapture.utils.*
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
-
-    @Inject
-    lateinit var activityResultFactory: ActivityResultFactory<Intent, ActivityResult>
 
     @Inject
     lateinit var googleSignInClient: GoogleSignInClient
@@ -98,7 +92,7 @@ class LoginFragment : Fragment() {
     }
 
     private val googleLoginOnClickListener: (View?) -> Unit = {
-        activityResultFactory.launch(googleSignInClient.signInIntent, googleOAuthLoginHandler)
+        mainActivity().activityResultFactory.launch(googleSignInClient.signInIntent, googleOAuthLoginHandler)
     }
 
     private val isLoadingObserver = { isLoading: Boolean ->
