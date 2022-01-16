@@ -1,9 +1,8 @@
 package com.untilled.roadcapture.features.root.studio
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.untilled.roadcapture.data.datasource.api.dto.user.Users
+import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.data.entity.User
 import com.untilled.roadcapture.data.repository.token.LocalTokenRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
@@ -26,14 +25,14 @@ class StudioViewModel @Inject constructor(
         getUserDetail(localTokenRepository.getToken().accessToken)
     }
 
-    private fun getUserDetail(token: String){
+    private fun getUserDetail(token: String) {
         userRepository.getUserDetail(token)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ user ->
                 _user.postValue(user)
-            },{ error ->
-                Log.d("Test",error.toString())
+            }, { error ->
+                Logger.d("test: $error")
             })
     }
 

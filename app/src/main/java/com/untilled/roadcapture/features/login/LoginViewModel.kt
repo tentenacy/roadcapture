@@ -53,16 +53,22 @@ class LoginViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
-                isLoading.addSource(_isLoggingIn.apply { value = true }) {
+                _isLoggingIn.value = true
+                isLoading.addSource(_isLoggingIn) {
                     isLoading.value = it
                 }
             }
-            .doOnTerminate {
-                isLoading.removeSource(_isLoggingIn.apply { value = false })
+            .doOnSuccess {
+                isLoading.removeSource(_isLoggingIn)
+                _isLoggingIn.value = false
             }
             .subscribe({ response ->
-
             }) { t ->
+                isLoading.run {
+                    removeSource(_isLoggingIn)
+                    value = false
+                }
+                localTokenRepository.clearToken()
                 error.value = t.message
             }.addTo(compositeDisposable)
     }

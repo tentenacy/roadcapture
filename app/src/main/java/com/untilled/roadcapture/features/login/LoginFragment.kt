@@ -100,7 +100,7 @@ class LoginFragment : Fragment() {
             Logger.d("loading...")
             viewModel.isLoggingIn.observe(viewLifecycleOwner, isLoggingInObserver)
         } else {
-            viewModel.isLoggingIn.removeObserver(isLoggingInObserver)
+            viewModel.isLoggingIn.removeObservers(viewLifecycleOwner)
         }
     }
 

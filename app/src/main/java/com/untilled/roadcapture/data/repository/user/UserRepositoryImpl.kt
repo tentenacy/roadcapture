@@ -24,14 +24,16 @@ class UserRepositoryImpl @Inject constructor(
     UserRepository {
 
     override fun socialSignup(socialType: SocialType): Single<TokenResponse> {
-        val accessToken = localOAuthTokenDao.getToken().accessToken
-        return roadCaptureApi.socialSignup(socialType.name, TokenRequest(accessToken))
+        val oauthToken = localOAuthTokenDao.getToken()
+        return roadCaptureApi.socialSignup(socialType.name, TokenRequest(oauthToken.accessToken))
             .flatMap { response ->
-                if (!response.isSuccessful and (retrofit.convertToErrorResponse(response)?.code != ErrorCode.ALREADY_SIGNEDUP.code)) {
-                    return@flatMap Single.error(IllegalStateException("Network error"))
+                response.errorBody()?.let {
+                    if (retrofit.convertToErrorResponse(it)?.code != ErrorCode.ALREADY_SIGNEDUP.code) {
+                        return@flatMap Single.error(IllegalStateException("Network error"))
+                    }
                 }
 
-                return@flatMap socialLogin(socialType, accessToken)
+                return@flatMap socialLogin(socialType, oauthToken.accessToken)
             }
     }
 
@@ -40,13 +42,13 @@ class UserRepositoryImpl @Inject constructor(
             .map { response ->
                 localTokenDao.saveToken(
                     TokenArgs(
-                        grantType = response.grantType,
-                        accessToken = response.accessToken,
-                        refreshToken = response.refreshToken,
-                        accessTokenExpireDate = response.accessTokenExpireDate.toLong(),
+                        grantType = response.body()!!.grantType,
+                        accessToken = response.body()!!.accessToken,
+                        refreshToken = response.body()!!.refreshToken,
+                        accessTokenExpireDate = response.body()!!.accessTokenExpireDate.toLong(),
                     )
                 )
-                response
+                response.body()!!
             }
     }
 
@@ -54,16 +56,30 @@ class UserRepositoryImpl @Inject constructor(
         roadCaptureApi.socialLogin(
             socialType.name,
             TokenRequest(accessToken)
-        ).map { response ->
-            localTokenDao.saveToken(
-                TokenArgs(
-                    grantType = response.grantType,
-                    accessToken = response.accessToken,
-                    refreshToken = response.refreshToken,
-                    accessTokenExpireDate = response.accessTokenExpireDate.toLong(),
+        ).flatMap { response ->
+            response.errorBody()?.let {
+                return@flatMap when(retrofit.convertToErrorResponse(it)?.code) {
+                    ErrorCode.USER_NOT_FOUND.code -> {
+                        Single.error(IllegalStateException(ErrorCode.USER_NOT_FOUND.message))
+                    }
+                    else -> Single.error(IllegalStateException("Network error"))
+                }
+            }
+
+            response.body()?.let {
+                localTokenDao.saveToken(
+                    TokenArgs(
+                        grantType = it.grantType,
+                        accessToken = it.accessToken,
+                        refreshToken = it.refreshToken,
+                        accessTokenExpireDate = it.accessTokenExpireDate.toLong(),
+                    )
                 )
-            )
-            response
+
+                return@flatMap Single.just(it)
+            }
+
+            return@flatMap Single.error(IllegalStateException("Network error"))
         }
 
     override fun getUserDetail(token: String): Single<User> =
