@@ -9,7 +9,7 @@
 
         <variable
             name="user"
-            type="com.untilled.roadcapture.data.entity.User" />
+            type="com.untilled.roadcapture.data.datasource.api.dto.user.Users" />
 
         <variable
             name="onClickItem"
@@ -22,26 +22,15 @@
         android:layout_height="92dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/img_ifollowing_filter_border"
-            android:layout_width="62dp"
-            android:layout_height="62dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            bind:FollowingAlbumUpdate="@{user.update}" />
-
-        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_ifollowing_filter_profile"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:onClick="@{onClickItem}"
             android:scaleType="centerCrop"
-            app:civ_border_color="@color/white"
-            app:civ_border_width="1dp"
-            app:layout_constraintBottom_toBottomOf="@+id/img_ifollowing_filter_border"
-            app:layout_constraintEnd_toEndOf="@+id/img_ifollowing_filter_border"
-            app:layout_constraintStart_toStartOf="@+id/img_ifollowing_filter_border"
-            app:layout_constraintTop_toTopOf="@+id/img_ifollowing_filter_border"
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             bind:FollowingAlbumProfileImage="@{user.profileImageUrl}"
             tools:src="@drawable/img_sample_thumbnail" />
 

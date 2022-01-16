@@ -73,7 +73,7 @@
             motion:layout_constraintTop_toBottomOf="@id/text_studio_name" />
 
         <Constraint
-            android:id="@+id/btn_studio_edit"
+            android:id="@+id/btn_studio_follow"
             android:layout_width="192dp"
             android:layout_height="48dp"
             android:layout_marginTop="32dp"
@@ -195,7 +195,7 @@
             motion:layout_constraintTop_toBottomOf="@id/text_studio_name" />
 
         <Constraint
-            android:id="@+id/btn_studio_edit"
+            android:id="@+id/btn_studio_follow"
             android:layout_width="192dp"
             android:layout_height="48dp"
             android:layout_marginTop="32dp"

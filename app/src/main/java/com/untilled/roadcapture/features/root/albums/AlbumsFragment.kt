@@ -41,7 +41,7 @@ class AlbumsFragment : Fragment() {
     private val epoxyItemClickListener: (EpoxyItemArgs) -> Unit =  { args ->
         when (args.clickedView.id) {
             R.id.img_ialbums_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(R.id.action_rootFragment_to_studioFragment)
+                .navigate(RootFragmentDirections.actionRootFragmentToStudioFragment((args.model as AlbumsBindingModel_).albums().users!!.id))
 
             R.id.img_ialbums_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                 .navigate(RootFragmentDirections.actionRootFragmentToCommentFragment((args.model as AlbumsBindingModel_).albums().id.toString()))

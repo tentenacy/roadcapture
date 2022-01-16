@@ -2,11 +2,10 @@ package com.untilled.roadcapture.data.repository.user
 
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.api.dto.common.ErrorCode
-import com.untilled.roadcapture.data.datasource.api.dto.user.ReissueRequest
-import com.untilled.roadcapture.data.datasource.api.dto.user.TokenRequest
-import com.untilled.roadcapture.data.datasource.api.dto.user.TokenResponse
+import com.untilled.roadcapture.data.datasource.api.dto.user.*
 import com.untilled.roadcapture.data.datasource.dao.LocalOAuthTokenDao
 import com.untilled.roadcapture.data.datasource.dao.LocalTokenDao
+import com.untilled.roadcapture.data.datasource.dao.LocalUserDao
 import com.untilled.roadcapture.data.entity.User
 import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
 import com.untilled.roadcapture.utils.convertToErrorResponse
@@ -19,6 +18,7 @@ class UserRepositoryImpl @Inject constructor(
     private val roadCaptureApi: RoadCaptureApi,
     private val localTokenDao: LocalTokenDao,
     private val localOAuthTokenDao: LocalOAuthTokenDao,
+    private val localUserDao: LocalUserDao,
     private val retrofit: Retrofit,
 ) :
     UserRepository {
@@ -84,4 +84,18 @@ class UserRepositoryImpl @Inject constructor(
 
     override fun getUserDetail(token: String): Single<User> =
         roadCaptureApi.getUserDetail(token)
+            .map { user ->
+                localUserDao.saveUserId(user.id)
+                user
+            }
+
+    override fun getUserInfo(id: Int, token: String): Single<Users> =
+        roadCaptureApi.getUserInfo(id,token)
+
+
+    override fun getUserFollower(id: Int, token: String, page: Int?, size: Int?, sort: String?,username: String?): Single<UserFollowResponse> =
+        roadCaptureApi.getUserFollower(id, token, page, size, sort, username)
+
+    override fun getUserFollowing(id: Int, token: String, page: Int?, size: Int?, sort: String?, username: String?): Single<UserFollowResponse> =
+        roadCaptureApi.getUserFollowing(id, token, page, size, sort, username)
 }

@@ -17,4 +17,7 @@ abstract class DaoModule {
 
     @Binds
     abstract fun provideLocalTokenDao(dao: TokenDao): LocalTokenDao
+
+    @Binds
+    abstract fun provideLocalUserDao(dao: UserDao): LocalUserDao
 }

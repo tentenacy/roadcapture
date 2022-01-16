@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
+import com.untilled.roadcapture.PictureSliderThumbnailBindingModel_
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.databinding.FragmentPictureSliderBinding
@@ -120,7 +121,7 @@ class PictureSliderFragment : Fragment() {
                     R.id.img_ipicture_slider_thumbnail_profile -> Navigation.findNavController(
                         (parentFragment as PictureViewerFragment).binding.root
                     )
-                        .navigate(R.id.action_pictureViewerContainerFragment_to_studioFragment)
+                        .navigate(PictureViewerFragmentDirections.actionPictureViewerContainerFragmentToStudioFragment((model as PictureSliderThumbnailBindingModel_).album().user.id))
                 }
             }
         }

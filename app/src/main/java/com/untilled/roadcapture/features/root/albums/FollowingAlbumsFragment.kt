@@ -3,6 +3,7 @@ package com.untilled.roadcapture.features.root.albums
 import android.animation.ValueAnimator
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,7 +20,9 @@ import com.untilled.roadcapture.AlbumsBindingModel_
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.datasource.api.dto.album.Albums
+import com.untilled.roadcapture.data.datasource.api.dto.user.UserFollowResponse
 import com.untilled.roadcapture.data.entity.token.Token
+import com.untilled.roadcapture.data.entity.user.User
 import com.untilled.roadcapture.databinding.FragmentFollowingalbumsBinding
 import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
@@ -110,8 +113,19 @@ class FollowingAlbumsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initAdapter()
+        initViews()
+        observeData()
         setOnClickListeners()
+    }
+
+    private fun initViews(){
+        viewModel.getUserFollowing(User.userId,Token.accessToken)
+    }
+
+    private fun observeData() {
+        viewModel.user.observe(viewLifecycleOwner) { user ->
+            initAdapter(user)
+        }
     }
 
     private fun setOnClickListeners() {
@@ -124,9 +138,9 @@ class FollowingAlbumsFragment : Fragment() {
         _binding = null
     }
 
-    private fun initAdapter() {
+    private fun initAdapter(user: UserFollowResponse) {
         epoxyController.setOnClickListener(epoxyItemClickListener)
-        binding.recyclerFollowingalbumsFilter.withModels { initFollowingAlbumsFilter() }
+        binding.recyclerFollowingalbumsFilter.withModels { initFollowingAlbumsFilter(user) }
         updateView(null,null)
         binding.recyclerFollowingalbums.setController(epoxyController)
     }
@@ -139,18 +153,14 @@ class FollowingAlbumsFragment : Fragment() {
         }
     }
 
-    private fun EpoxyController.initFollowingAlbumsFilter() {
-        DummyDataSet.user.forEachIndexed { index, user ->
+    private fun EpoxyController.initFollowingAlbumsFilter(user: UserFollowResponse) {
+        user.content.forEachIndexed { index, user ->
             followingFilter {
                 id(index)
                 user(user)
 
                 onClickItem { model, parentView, clickedView, position ->
                     when (clickedView.id) {
-                        R.id.img_ifollowing_filter_profile -> Navigation.findNavController(
-                            (parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root
-                        )
-                            .navigate(R.id.action_rootFragment_to_studioFragment)
                     }
                 }
             }

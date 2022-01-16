@@ -8,7 +8,7 @@
 
         <variable
             name="user"
-            type="com.untilled.roadcapture.data.entity.User" />
+            type="com.untilled.roadcapture.data.datasource.api.dto.user.Users" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -35,8 +35,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
-                    bind:studioBackgroundImage="@{user.backgroundUrl}"
                     tools:src="@drawable/img_sample_profilebg" />
+<!--                    bind:studioBackgroundImage="@{user.backgroundUrl}"-->
 
                 <View
                     android:id="@+id/view_studio_overlay"
@@ -134,7 +134,7 @@
                     android:text="100" />
 
                 <Button
-                    android:id="@+id/btn_studio_edit"
+                    android:id="@+id/btn_studio_follow"
                     style="@style/BodyWhite"
                     android:layout_width="192dp"
                     android:layout_height="48dp"

@@ -2,6 +2,8 @@ package com.untilled.roadcapture.di
 
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import com.untilled.roadcapture.data.repository.album.AlbumRepositoryImpl
+import com.untilled.roadcapture.data.repository.follow.FollowRepository
+import com.untilled.roadcapture.data.repository.follow.FollowRepositoryImpl
 import com.untilled.roadcapture.data.repository.picture.PictureRepository
 import com.untilled.roadcapture.data.repository.picture.PictureRepositoryImpl
 import com.untilled.roadcapture.data.repository.place.SearchPlaceRepository
@@ -38,6 +40,11 @@ abstract class RepositoryModule {
     abstract fun provideUserRepository(
         repository: UserRepositoryImpl
     ): UserRepository
+
+    @Binds
+    abstract fun provideFollowRepository(
+        repository: FollowRepositoryImpl
+    ): FollowRepository
 
     @Binds
     abstract fun provideTokenRepository(

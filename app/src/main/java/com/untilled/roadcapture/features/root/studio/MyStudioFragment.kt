@@ -1,6 +1,7 @@
 package com.untilled.roadcapture.features.root.studio
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -44,13 +45,13 @@ class MyStudioFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        Log.d("Test", Token.accessToken)
         observeData()
         setOnClickListeners()
     }
 
     private fun observeData() {
-        viewModel.user.observe(viewLifecycleOwner){ user->
+        viewModel.myUser.observe(viewLifecycleOwner){ user->
             binding.user = user
         }
     }
