@@ -1,17 +1,12 @@
 package com.untilled.roadcapture.features.login
 
-import android.content.Context
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import com.untilled.roadcapture.data.repository.token.dto.OAuthTokenArgs
 import com.untilled.roadcapture.utils.instance.OAuthLoginInstances
 import com.untilled.roadcapture.utils.type.SocialType
-import dagger.hilt.android.AndroidEntryPoint
 
 class NaverOAuthLoginHandler(private val fragment: Fragment) : OAuthLoginHandler() {
 
@@ -21,30 +16,43 @@ class NaverOAuthLoginHandler(private val fragment: Fragment) : OAuthLoginHandler
 
     override fun run(success: Boolean): Unit = fragment.requireContext().run {
         if (success) {
-            viewModel.saveOAuthToken(
-                OAuthTokenArgs(
-                    accessToken = OAuthLoginInstances.naverOAuthLoginInstance.getAccessToken(
-                        this
-                    ),
-                    refreshToken = OAuthLoginInstances.naverOAuthLoginInstance.getRefreshToken(
-                        this
-                    ),
-                )
-            )
-
-            viewModel.socialLogin(SocialType.NAVER)
+            onSuccess()
         } else {
-            Toast.makeText(
-                this,
-                "errorCode: ${
-                    OAuthLoginInstances.naverOAuthLoginInstance.getLastErrorCode(
-                        this
-                    )
-                }, errorDesc: ${
-                    OAuthLoginInstances.naverOAuthLoginInstance.getLastErrorDesc(this)
-                }",
-                Toast.LENGTH_SHORT
-            ).show()
+            onError()
         }
+        onCancel()
+    }
+
+    private fun onSuccess() = fragment.requireContext().run {
+        viewModel.saveOAuthToken(
+            OAuthTokenArgs(
+                accessToken = OAuthLoginInstances.naverOAuthLoginInstance.getAccessToken(
+                    this
+                ),
+                refreshToken = OAuthLoginInstances.naverOAuthLoginInstance.getRefreshToken(
+                    this
+                ),
+            )
+        )
+
+        viewModel.socialLogin(SocialType.NAVER)
+    }
+
+    private fun onError() = fragment.requireContext().run {
+        Toast.makeText(
+            this,
+            "errorCode: ${
+                OAuthLoginInstances.naverOAuthLoginInstance.getLastErrorCode(
+                    this
+                )
+            }, errorDesc: ${
+                OAuthLoginInstances.naverOAuthLoginInstance.getLastErrorDesc(this)
+            }",
+            Toast.LENGTH_SHORT
+        ).show()
+    }
+
+    private fun onCancel() {
+
     }
 }

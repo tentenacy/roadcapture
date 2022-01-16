@@ -88,18 +88,26 @@
 
             <ImageView
                 android:id="@+id/img_login_kakao"
-                style="@style/RippleEffect"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_kakao"
                 app:layout_constraintBottom_toBottomOf="@+id/btn_login_naver"
-                app:layout_constraintEnd_toStartOf="@+id/img_login_facebook"
+                app:layout_constraintEnd_toStartOf="@+id/image_login_facebook"
                 app:layout_constraintStart_toEndOf="@+id/img_login_google"
                 app:layout_constraintTop_toTopOf="@+id/btn_login_naver" />
 
+            <com.facebook.login.widget.LoginButton
+                android:id="@+id/loginbtn_login_facebook"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:src="@drawable/ic_facebook"
+                app:layout_constraintBottom_toBottomOf="@+id/image_login_facebook"
+                app:layout_constraintEnd_toEndOf="@+id/image_login_facebook"
+                app:layout_constraintStart_toStartOf="@+id/image_login_facebook"
+                app:layout_constraintTop_toTopOf="@+id/image_login_facebook" />
+
             <ImageView
-                android:id="@+id/img_login_facebook"
-                style="@style/RippleEffect"
+                android:id="@+id/image_login_facebook"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
                 android:src="@drawable/ic_facebook"

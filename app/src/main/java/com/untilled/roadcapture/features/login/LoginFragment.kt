@@ -12,6 +12,11 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -34,6 +39,10 @@ import com.untilled.roadcapture.utils.statusBarHeight
 import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import com.facebook.AccessToken
+
+
+
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -47,7 +56,19 @@ class LoginFragment : Fragment() {
     lateinit var googleSignInClient: GoogleSignInClient
 
     @Inject
-    lateinit var naverOAuthLoginHandler: OAuthLoginHandler
+    lateinit var naverOAuthLoginHandler: NaverOAuthLoginHandler
+
+    @Inject
+    lateinit var facebookOAuthLoginHandler: FacebookOAuthLoginHandler
+
+    @Inject
+    lateinit var kakaoOAuthLoginHandler: KakaoOAuthLoginHandler
+
+    @Inject
+    lateinit var googleOAuthLoginHandler: GoogleOAuthLoginHandler
+
+    @Inject
+    lateinit var callbackManager: CallbackManager
 
     private val viewModel by lazy {
         ViewModelProvider(this).get(LoginViewModel::class.java)
@@ -69,33 +90,17 @@ class LoginFragment : Fragment() {
             naverOAuthLoginHandler
         )
     }
-    private val kakaoCallBack: (OAuthToken?, Throwable?) -> Unit = { token, error ->
-        if (error != null) {
-            Toast.makeText(activity,error.toString(),Toast.LENGTH_SHORT)
-        }
-        else if (token != null) {
-            viewModel.saveOAuthToken(OAuthTokenArgs(
-                accessToken = token.accessToken,
-                refreshToken = token.refreshToken,
-            ))
-            viewModel.socialLogin(SocialType.KAKAO)
-        }
-    }
 
     private val kakaoLoginOnClickListener: (View?) -> Unit = {
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(requireContext())) {
-            UserApiClient.instance.loginWithKakaoTalk(requireContext(), callback = kakaoCallBack)
+            UserApiClient.instance.loginWithKakaoTalk(requireContext(), callback = kakaoOAuthLoginHandler)
         } else {
-            UserApiClient.instance.loginWithKakaoAccount(requireContext(), callback = kakaoCallBack)
+            UserApiClient.instance.loginWithKakaoAccount(requireContext(), callback = kakaoOAuthLoginHandler)
         }
     }
 
     private val googleLoginOnClickListener: (View?) -> Unit = {
-        activityResultFactory.launch(googleSignInClient.signInIntent) { result: ActivityResult ->
-            if (result.resultCode == Activity.RESULT_OK) {
-                handleGoogleLoginResult(GoogleSignIn.getSignedInAccountFromIntent(result.data))
-            }
-        }
+        activityResultFactory.launch(googleSignInClient.signInIntent, googleOAuthLoginHandler)
     }
 
     private val isLoadingObserver = { isLoading: Boolean ->
@@ -155,6 +160,12 @@ class LoginFragment : Fragment() {
         setOAuthLoginHandlers()
         setOnClickListeners()
         observeData()
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun initData() {
@@ -164,6 +175,11 @@ class LoginFragment : Fragment() {
             BuildConfig.SOCIAL_NAVER_CLIENT_SECRET,
             BuildConfig.SOCIAL_NAVER_CLIENT_NAME
         )
+        binding.loginbtnLoginFacebook.run {
+            setReadPermissions(listOf("email", "public_profile"))
+            fragment = this@LoginFragment
+            registerCallback(callbackManager, facebookOAuthLoginHandler)
+        }
     }
 
     private fun observeData() {
@@ -180,27 +196,6 @@ class LoginFragment : Fragment() {
         binding.textLoginSignup.setOnClickListener(signupOnClickListener)
         binding.btnLoginNaver.setOnClickListener(naverLoginOnClickListener)
         binding.imgLoginKakao.setOnClickListener(kakaoLoginOnClickListener)
-//        binding.frameLoginGoogle.setOnClickListener(imgGoogleLoginOnClickListener)
         binding.signinbtnLoginGoogle.setOnClickListener(googleLoginOnClickListener)
-    }
-
-    private fun handleGoogleLoginResult(completedTask: Task<GoogleSignInAccount>) {
-        try {
-            val account = completedTask.getResult(ApiException::class.java)
-
-            viewModel.saveOAuthToken(
-                OAuthTokenArgs(
-                    accessToken = account.idToken!!,
-                    refreshToken = null,
-                )
-            )
-
-            viewModel.socialLogin(SocialType.GOOGLE)
-
-        } catch (e: ApiException) {
-            // The ApiException status code indicates the detailed failure reason.
-            // Please refer to the GoogleSignInStatusCodes class reference for more information.
-            Logger.w("signInResult:failed code=${e.statusCode}")
-        }
     }
 }

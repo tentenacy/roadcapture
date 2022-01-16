@@ -15,7 +15,7 @@ import dagger.hilt.components.SingletonComponent
 
 @InstallIn(ActivityComponent::class)
 @Module
-class ActivityModule {
+class ResultApiModule {
 
     @Provides
     fun provideActivityResultFactory(activity: Activity): ActivityResultFactory<Intent, ActivityResult> {

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">로드캡처</string>
+    <string name="app_name_en">roadcapture</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login_btn">이메일로 로그인</string>
     <string name="login_signup_label">아직 계정이 없으신가요?</string>
@@ -163,4 +164,5 @@
     <string name="picture_editor_label_thumbnail">앨범 썸네일로 사용</string>
     <string name="search_input_hint">검색어를 입력하세요.</string>
     <string name="studio_edit">팔로우</string>
+
 </resources>
