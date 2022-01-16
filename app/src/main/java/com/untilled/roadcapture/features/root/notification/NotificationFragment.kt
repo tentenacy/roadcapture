@@ -10,7 +10,7 @@ import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentNotificationBinding
-import com.untilled.roadcapture.features.base.CustomDivider
+import com.untilled.roadcapture.features.common.CustomDivider
 import com.untilled.roadcapture.notification
 import com.untilled.roadcapture.utils.dummy.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint

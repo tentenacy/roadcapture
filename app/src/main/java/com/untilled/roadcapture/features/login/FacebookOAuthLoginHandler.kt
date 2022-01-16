@@ -22,7 +22,8 @@ class FacebookOAuthLoginHandler(private val fragment: Fragment) : FacebookCallba
             viewModel.saveOAuthToken(
                 OAuthTokenArgs(
                     accessToken = it.accessToken.token,
-                    refreshToken = null
+                    refreshToken = null,
+                    socialType = SocialType.FACEBOOK.name,
                 )
             )
 

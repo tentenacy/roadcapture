@@ -19,7 +19,7 @@ import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.datasource.api.dto.comment.Comments
 import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.databinding.BottomsheetCommentBinding
-import com.untilled.roadcapture.features.base.CustomDivider
+import com.untilled.roadcapture.features.common.CustomDivider
 import com.untilled.roadcapture.features.root.albums.PictureViewerViewModel
 import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
 import dagger.hilt.android.AndroidEntryPoint

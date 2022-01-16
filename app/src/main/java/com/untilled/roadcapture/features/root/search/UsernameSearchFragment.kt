@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentUsernameSearchBinding
-import com.untilled.roadcapture.features.base.CustomDivider
+import com.untilled.roadcapture.features.common.CustomDivider
 import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.usernameSearch
 import com.untilled.roadcapture.utils.dummy.DummyDataSet

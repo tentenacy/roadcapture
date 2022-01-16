@@ -3,6 +3,7 @@ package com.untilled.roadcapture.data.repository.album
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.untilled.roadcapture.data.datasource.api.dto.album.Albums
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.entity.token.Token
 import retrofit2.HttpException
 import java.io.IOException
@@ -19,7 +20,7 @@ class AlbumsPagingSource (
             val position = params.key ?: STARTING_PAGE_INDEX
 
             val response = repository.getAlbumsList(
-                Token.accessToken,
+                token,
                 page = position,
                 size = 10,
                 dateTimeFrom = dateTimeFrom,
@@ -29,9 +30,9 @@ class AlbumsPagingSource (
             val post = response.body()?.albums
 
             LoadResult.Page(
-                data = post!!,
+                data = post ?: listOf(),
                 prevKey = if (position == STARTING_PAGE_INDEX) null else position - 1,
-                nextKey = if (response.body()!!.albums.isNotEmpty()) position + 1 else null
+                nextKey = if (response.body()?.albums?.isNotEmpty() == true) position + 1 else null
             )
         } catch (exception: IOException) {
             LoadResult.Error(exception)

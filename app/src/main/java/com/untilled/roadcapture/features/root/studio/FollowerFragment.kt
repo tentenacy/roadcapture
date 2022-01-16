@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentFollowerBinding
-import com.untilled.roadcapture.features.base.CustomDivider
+import com.untilled.roadcapture.features.common.CustomDivider
 import com.untilled.roadcapture.follow
 import com.untilled.roadcapture.utils.dummy.DummyDataSet
 import com.untilled.roadcapture.utils.hideKeyboard

@@ -36,6 +36,7 @@ class GoogleOAuthLoginHandler(private val fragment: Fragment): (ActivityResult) 
             OAuthTokenArgs(
                 accessToken = account.idToken!!,
                 refreshToken = null,
+                socialType = SocialType.GOOGLE.name,
             )
         )
 

@@ -40,9 +40,7 @@ import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 import com.facebook.AccessToken
-
-
-
+import com.untilled.roadcapture.data.entity.token.Token
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -118,6 +116,10 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private val isLoggedInObserver: (Boolean) -> Unit = { isLoggedIn ->
+        if (isLoggedIn) findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRootFragment())
+    }
+
     private val errorObserver = { error: String ->
         if (error.isNotBlank()) Toast.makeText(
             requireContext(),
@@ -138,14 +140,6 @@ class LoginFragment : Fragment() {
         return binding.root
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        requireActivity().setStatusBarOrigin()
-
-        _binding = null
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -160,7 +154,14 @@ class LoginFragment : Fragment() {
         setOAuthLoginHandlers()
         setOnClickListeners()
         observeData()
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        requireActivity().setStatusBarOrigin()
+
+        _binding = null
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -169,22 +170,16 @@ class LoginFragment : Fragment() {
     }
 
     private fun initData() {
-        OAuthLoginInstances.naverOAuthLoginInstance.init(
-            requireActivity(),
-            BuildConfig.SOCIAL_NAVER_CLIENT_ID,
-            BuildConfig.SOCIAL_NAVER_CLIENT_SECRET,
-            BuildConfig.SOCIAL_NAVER_CLIENT_NAME
-        )
         binding.loginbtnLoginFacebook.run {
             setReadPermissions(listOf("email", "public_profile"))
             fragment = this@LoginFragment
             registerCallback(callbackManager, facebookOAuthLoginHandler)
         }
     }
-
     private fun observeData() {
         viewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
         viewModel.error.observe(viewLifecycleOwner, errorObserver)
+        viewModel.isLoggedIn.observe(viewLifecycleOwner, isLoggedInObserver)
     }
 
     private fun setOAuthLoginHandlers() {

@@ -2,13 +2,11 @@ package com.untilled.roadcapture.di
 
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.api.TmapService
-import com.untilled.roadcapture.data.repository.user.UserRepository
-import com.untilled.roadcapture.network.interceptor.TokenInterceptor
+import com.untilled.roadcapture.network.interceptor.AuthenticationInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -34,17 +32,17 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideTokenInterceptor(): TokenInterceptor {
-        return TokenInterceptor()
+    fun provideTokenInterceptor(): AuthenticationInterceptor {
+        return AuthenticationInterceptor()
     }
 
     @Singleton
     @Provides
-    fun provideRetrofitBuilder(httpLoggingInterceptor: HttpLoggingInterceptor, tokenInterceptor: TokenInterceptor): Retrofit.Builder {
+    fun provideRetrofitBuilder(httpLoggingInterceptor: HttpLoggingInterceptor, authenticationInterceptor: AuthenticationInterceptor): Retrofit.Builder {
 
         val client = OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
-            .addInterceptor(tokenInterceptor)
+            .addInterceptor(authenticationInterceptor)
             .build()
 
         return Retrofit.Builder()
@@ -61,7 +59,7 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRoadCaptureService(retrofitBuilder: Retrofit.Builder): RoadCaptureApi {
+    fun provideRoadCaptureApi(retrofitBuilder: Retrofit.Builder): RoadCaptureApi {
         return RoadCaptureApi.create(retrofitBuilder)
     }
 

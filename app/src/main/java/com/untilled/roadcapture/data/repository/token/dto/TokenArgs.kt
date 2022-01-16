@@ -5,4 +5,6 @@ data class TokenArgs(
     var accessToken: String,
     var refreshToken: String,
     var accessTokenExpireDate: Long,
-)
+) {
+    fun hasToken() = accessToken.isNotEmpty()
+}

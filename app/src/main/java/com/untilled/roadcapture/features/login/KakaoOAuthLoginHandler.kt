@@ -28,6 +28,7 @@ class KakaoOAuthLoginHandler(private val fragment: Fragment): (OAuthToken?, Thro
             OAuthTokenArgs(
                 accessToken = token.accessToken,
                 refreshToken = token.refreshToken,
+                socialType = SocialType.KAKAO.name,
             )
         )
         viewModel.socialLogin(SocialType.KAKAO)

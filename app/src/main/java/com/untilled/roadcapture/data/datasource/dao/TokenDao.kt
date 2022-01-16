@@ -12,4 +12,11 @@ class TokenDao @Inject constructor(): LocalTokenDao {
         Token.refreshToken = args.refreshToken
         Token.accessTokenExpireDate = args.accessTokenExpireDate
     }
+
+    override fun getToken() = TokenArgs(
+        grantType = Token.grantType,
+        accessToken = Token.accessToken,
+        refreshToken = Token.refreshToken,
+        accessTokenExpireDate = Token.accessTokenExpireDate,
+    )
 }

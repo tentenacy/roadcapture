@@ -32,6 +32,7 @@ class NaverOAuthLoginHandler(private val fragment: Fragment) : OAuthLoginHandler
                 refreshToken = OAuthLoginInstances.naverOAuthLoginInstance.getRefreshToken(
                     this
                 ),
+                socialType = SocialType.NAVER.name,
             )
         )
 

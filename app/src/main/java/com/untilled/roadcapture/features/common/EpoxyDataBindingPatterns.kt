@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.base
+package com.untilled.roadcapture.features.common
 
 import com.airbnb.epoxy.EpoxyDataBindingPattern
 import com.untilled.roadcapture.R
