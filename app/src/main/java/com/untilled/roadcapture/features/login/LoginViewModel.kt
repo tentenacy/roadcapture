@@ -19,16 +19,19 @@ class LoginViewModel @Inject constructor(
     private val localTokenRepository: LocalTokenRepository,
 ) : BaseViewModel() {
 
-    private var _isLoggingIn = MutableLiveData(false)
+    private var _isLoggingIn = MutableLiveData(true)
     val isLoggingIn: LiveData<Boolean> get() = _isLoggingIn
 
     init {
-        initData()
+        autoLogin()
     }
 
-    private fun initData() {
+    private fun autoLogin() {
         localTokenRepository.getOAuthToken().whenHasAccessToken {
             socialLogin(it)
+        }
+        localTokenRepository.getToken().whenHasAccessToken {
+//            login()
         }
     }
 
@@ -41,19 +44,14 @@ class LoginViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
-                _isLoggingIn.value = true
                 isLoading.addSource(_isLoggingIn) {
                     isLoading.value = it
                 }
             }
             .subscribe({ response ->
-                isLoading.removeSource(_isLoggingIn)
-                _isLoggingIn.value = false
+                isLoading.removeSource(_isLoggingIn.apply { value = false })
             }) { t ->
-                isLoading.run {
-                    removeSource(_isLoggingIn)
-                    value = false
-                }
+                isLoading.removeSource(_isLoggingIn)
                 localTokenRepository.clearToken()
                 error.value = t.message
             }.addTo(compositeDisposable)

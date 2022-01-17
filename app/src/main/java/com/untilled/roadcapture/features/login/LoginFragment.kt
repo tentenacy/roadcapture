@@ -87,16 +87,14 @@ class LoginFragment : Fragment() {
             Logger.d("loading...")
             Log.d("Test","???")
             loadingDialog.show()
-            viewModel.isLoggingIn.observe(viewLifecycleOwner, isLoggingInObserver)
         } else {
-            viewModel.isLoggingIn.removeObservers(viewLifecycleOwner)
+            loadingDialog.dismiss()
         }
     }
 
     private val isLoggingInObserver = { isLoggingIn: Boolean ->
         if (!isLoggingIn) {
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRootFragment())
-            loadingDialog.dismiss()
         }
     }
 
@@ -153,6 +151,7 @@ class LoginFragment : Fragment() {
     private fun observeData() {
         viewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
         viewModel.error.observe(viewLifecycleOwner, errorObserver)
+        viewModel.isLoggingIn.observe(viewLifecycleOwner, isLoggingInObserver)
     }
 
     private fun setOAuthLoginHandlers() {

@@ -5,15 +5,16 @@ import android.os.Bundle
 import androidx.activity.result.ActivityResult
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.untilled.roadcapture.BuildConfig
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.activityresult.ActivityResultFactory
 import com.untilled.roadcapture.databinding.ActivityMainBinding
-import com.untilled.roadcapture.features.login.LoginViewModel
 import com.untilled.roadcapture.features.root.capture.CropFragment
 import com.untilled.roadcapture.utils.instance.OAuthLoginInstances
-import com.untilled.roadcapture.utils.mainActivity
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropFragment
 import com.yalantis.ucrop.UCropFragmentCallback
@@ -29,6 +30,15 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
     @Inject
     lateinit var activityResultFactory: ActivityResultFactory<Intent, ActivityResult>
 
+    private val originToLoginFragmentObserver: (ConstraintLayout) -> Unit = { bindingRoot ->
+        if (bindingRoot.isNotEmpty()) {
+            Navigation.findNavController(bindingRoot).apply {
+                navigate(R.id.action_global_loginFragment)
+                Navigation.findNavController(bindingRoot).popBackStack()
+            }
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_RoadCapture)
         super.onCreate(savedInstanceState)
@@ -36,9 +46,8 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
         setContentView(binding.root)
 
         initData()
+        observeData()
     }
-
-
 
     private fun initData() {
         viewModel
@@ -48,6 +57,10 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
             BuildConfig.SOCIAL_NAVER_CLIENT_SECRET,
             BuildConfig.SOCIAL_NAVER_CLIENT_NAME
         )
+    }
+
+    private fun observeData() {
+        viewModel.originToLoginFragment.observe(this, originToLoginFragmentObserver)
     }
 
     override fun loadingProgress(showLoader: Boolean) {

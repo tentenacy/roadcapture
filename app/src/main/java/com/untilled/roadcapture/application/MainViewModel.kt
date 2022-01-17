@@ -1,6 +1,8 @@
 package com.untilled.roadcapture.application
 
-import androidx.lifecycle.ViewModel
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.untilled.roadcapture.data.datasource.api.dto.user.ReissueRequest
 import com.untilled.roadcapture.data.repository.token.LocalTokenRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
@@ -19,6 +21,9 @@ class MainViewModel @Inject constructor(
     private val localTokenRepository: LocalTokenRepository,
     private val tokenExpirationObservable: AuthenticationInterceptor,
 ): BaseViewModel(), TokenExpirationObserver {
+
+    private var _originToLoginFragment = MutableLiveData<ConstraintLayout>()
+    val originToLoginFragment: LiveData<ConstraintLayout> = _originToLoginFragment
 
     init {
         tokenExpirationObservable.registerObserver(this)
@@ -41,7 +46,9 @@ class MainViewModel @Inject constructor(
             }.addTo(compositeDisposable)
     }
 
-    fun logout() {
+    fun logout(bindingRoot: ConstraintLayout) {
+
+        _originToLoginFragment.value = bindingRoot
 
         localTokenRepository.clearToken()
     }

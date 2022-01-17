@@ -70,7 +70,7 @@ class SettingsAccountFragment : Fragment() {
             .create()
 
         dialogView.findViewById<TextView>(R.id.text_dlglogout_confirm)?.setOnClickListener {
-            mainActivity().viewModel.logout()
+            mainActivity().viewModel.logout(binding.root)
             findNavController().navigate(SettingsAccountFragmentDirections.actionGlobalLoginFragment())
             dialog.dismiss()
         }
