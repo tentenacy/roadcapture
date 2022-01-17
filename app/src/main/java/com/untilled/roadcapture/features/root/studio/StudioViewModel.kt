@@ -32,7 +32,7 @@ class StudioViewModel @Inject constructor(
 
 
     private fun getUserDetail(token: String){
-        userRepository.getUserDetail(token)
+        userRepository.getUserDetail()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ user ->
@@ -43,7 +43,7 @@ class StudioViewModel @Inject constructor(
     }
 
     fun getUserInfo(id: Int, token: String){
-        userRepository.getUserInfo(id,token)
+        userRepository.getUserInfo(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ userResponse ->
@@ -54,7 +54,7 @@ class StudioViewModel @Inject constructor(
     }
 
     fun follow(id: Int, token: String){
-        followRepository.follow(id,token)
+        followRepository.follow(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

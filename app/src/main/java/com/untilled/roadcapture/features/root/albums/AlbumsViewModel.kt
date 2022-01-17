@@ -76,8 +76,8 @@ class AlbumsViewModel
         ).flow
     }
 
-    fun getUserFollowing(id: Int, token: String, page: Int? = null, size: Int? = null, sort: String? = null,username: String? = null){
-        userRepository.getUserFollowing(id, token, page, size, sort, username)
+    fun getUserFollowing(id: Int, page: Int? = null, size: Int? = null, sort: String? = null,username: String? = null){
+        userRepository.getUserFollowing(id, page, size, sort, username)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ user ->

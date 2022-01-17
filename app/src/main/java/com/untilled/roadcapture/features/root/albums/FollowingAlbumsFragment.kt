@@ -119,7 +119,7 @@ class FollowingAlbumsFragment : Fragment() {
     }
 
     private fun initViews(){
-        viewModel.getUserFollowing(User.userId,Token.accessToken)
+        viewModel.getUserFollowing(User.userId)
     }
 
     private fun observeData() {

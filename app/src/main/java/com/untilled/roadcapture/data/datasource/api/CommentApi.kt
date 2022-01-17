@@ -11,7 +11,6 @@ import retrofit2.http.Query
 interface CommentApi {
     @GET(RoadCapturePathConstant.GET_ALBUM_COMMENTS)
     suspend fun getAlbumComments(
-        @Header("X-AUTH-TOKEN") token: String,
         @Path("albumId") albumId: Int,
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
@@ -19,7 +18,6 @@ interface CommentApi {
 
     @GET(RoadCapturePathConstant.GET_PICTURE_COMMENTS)
     suspend fun getPictureComments(
-        @Header("X-AUTH-TOKEN") token: String,
         @Path("pictureId") pictureId: Int,
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null

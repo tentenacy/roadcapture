@@ -20,7 +20,6 @@ class AlbumsPagingSource (
             val position = params.key ?: STARTING_PAGE_INDEX
 
             val response = repository.getAlbumsList(
-                token,
                 page = position,
                 size = 10,
                 dateTimeFrom = dateTimeFrom,

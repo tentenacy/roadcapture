@@ -67,7 +67,7 @@ class PictureViewerFragment : Fragment() {
 
     private fun updateView() {
         val args: PictureViewerFragmentArgs by navArgs()
-        viewModel.getAlbumDetail(Token.accessToken, args.id)
+        viewModel.getAlbumDetail(args.id)
     }
 
     private fun setStatusBarTransparent() {

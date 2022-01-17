@@ -32,12 +32,6 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideTokenInterceptor(): AuthenticationInterceptor {
-        return AuthenticationInterceptor()
-    }
-
-    @Singleton
-    @Provides
     fun provideRetrofitBuilder(httpLoggingInterceptor: HttpLoggingInterceptor, authenticationInterceptor: AuthenticationInterceptor): Retrofit.Builder {
 
         val client = OkHttpClient.Builder()

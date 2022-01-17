@@ -11,6 +11,5 @@ interface FollowApi {
     @POST(RoadCapturePathConstant.POST_FOLLOWERS_FOLLOW)
     fun follow(
         @Path("toUserId") id: Int,
-        @Header("X-AUTH-TOKEN") token: String
     ): Single<Unit>
 }

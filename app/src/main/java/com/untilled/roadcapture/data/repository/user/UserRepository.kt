@@ -11,8 +11,8 @@ import io.reactivex.rxjava3.core.Single
 interface UserRepository {
     fun socialSignup(socialType: SocialType): Single<TokenResponse>
     fun reissue(reissueRequest: ReissueRequest): Single<TokenResponse>
-    fun getUserDetail(token: String): Single<User>
-    fun getUserInfo(id: Int, token: String): Single<Users>
-    fun getUserFollower(id: Int, token: String, page: Int?, size: Int?, sort: String?, username: String?): Single<UserFollowResponse>
-    fun getUserFollowing(id: Int, token: String, page: Int?, size: Int?, sort: String?, username: String?): Single<UserFollowResponse>
+    fun getUserDetail(): Single<User>
+    fun getUserInfo(id: Int): Single<Users>
+    fun getUserFollower(id: Int, page: Int?, size: Int?, sort: String?, username: String?): Single<UserFollowResponse>
+    fun getUserFollowing(id: Int, page: Int?, size: Int?, sort: String?, username: String?): Single<UserFollowResponse>
 }

@@ -82,20 +82,20 @@ class UserRepositoryImpl @Inject constructor(
             return@flatMap Single.error(IllegalStateException("Network error"))
         }
 
-    override fun getUserDetail(token: String): Single<User> =
-        roadCaptureApi.getUserDetail(token)
+    override fun getUserDetail(): Single<User> =
+        roadCaptureApi.getUserDetail()
             .map { user ->
                 localUserDao.saveUserId(user.id)
                 user
             }
 
-    override fun getUserInfo(id: Int, token: String): Single<Users> =
-        roadCaptureApi.getUserInfo(id,token)
+    override fun getUserInfo(id: Int): Single<Users> =
+        roadCaptureApi.getUserInfo(id)
 
 
-    override fun getUserFollower(id: Int, token: String, page: Int?, size: Int?, sort: String?,username: String?): Single<UserFollowResponse> =
-        roadCaptureApi.getUserFollower(id, token, page, size, sort, username)
+    override fun getUserFollower(id: Int, page: Int?, size: Int?, sort: String?,username: String?): Single<UserFollowResponse> =
+        roadCaptureApi.getUserFollower(id, page, size, sort, username)
 
-    override fun getUserFollowing(id: Int, token: String, page: Int?, size: Int?, sort: String?, username: String?): Single<UserFollowResponse> =
-        roadCaptureApi.getUserFollowing(id, token, page, size, sort, username)
+    override fun getUserFollowing(id: Int, page: Int?, size: Int?, sort: String?, username: String?): Single<UserFollowResponse> =
+        roadCaptureApi.getUserFollowing(id, page, size, sort, username)
 }

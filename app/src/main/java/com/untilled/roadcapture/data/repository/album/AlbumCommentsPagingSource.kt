@@ -16,7 +16,6 @@ class AlbumCommentsPagingSource(
         return try{
             val position = params.key ?: AlbumsPagingSource.STARTING_PAGE_INDEX
             val response = repository.getAlbumCommentsList(
-                token = Token.accessToken,
                 albumId = albumId,
                 page = position,
                 size = 10,

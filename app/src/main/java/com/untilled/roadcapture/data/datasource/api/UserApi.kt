@@ -27,19 +27,16 @@ interface UserApi {
 
     @GET(RoadCapturePathConstant.GET_USER_DETAiL)
     fun getUserDetail(
-        @Header("X-AUTH-TOKEN") token: String
     ): Single<User>
 
     @GET(RoadCapturePathConstant.GET_USER_INFO)
     fun getUserInfo(
         @Path("id") id: Int,
-        @Header("X-AUTH-TOKEN") token: String
     ): Single<Users>
 
     @GET(RoadCapturePathConstant.GET_USER_FOLLOWER)
     fun getUserFollower(
         @Path("userId") id: Int,
-        @Header("X-AUTH-TOKEN") token: String,
         @Query("page") page: Int?,
         @Query("size") size: Int?,
         @Query("sort") sort: String?,
@@ -49,7 +46,6 @@ interface UserApi {
     @GET(RoadCapturePathConstant.GET_USER_FOLLOWING)
     fun getUserFollowing(
         @Path("userId") id: Int,
-        @Header("X-AUTH-TOKEN") token: String,
         @Query("page") page: Int?,
         @Query("size") size: Int?,
         @Query("sort") sort: String?,

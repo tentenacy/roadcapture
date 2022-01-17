@@ -7,6 +7,6 @@ import javax.inject.Inject
 class FollowRepositoryImpl @Inject constructor(
     private val roadCaptureApi: RoadCaptureApi
 ) : FollowRepository{
-    override fun follow(id: Int, token: String): Single<Unit> = roadCaptureApi.follow(id,token)
+    override fun follow(id: Int): Single<Unit> = roadCaptureApi.follow(id)
 
 }
