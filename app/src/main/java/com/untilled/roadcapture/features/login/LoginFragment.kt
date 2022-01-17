@@ -2,6 +2,7 @@ package com.untilled.roadcapture.features.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -84,6 +85,7 @@ class LoginFragment : Fragment() {
     private val isLoadingObserver = { isLoading: Boolean ->
         if (isLoading) {
             Logger.d("loading...")
+            Log.d("Test","???")
             loadingDialog.show()
             viewModel.isLoggingIn.observe(viewLifecycleOwner, isLoggingInObserver)
         } else {
@@ -93,14 +95,16 @@ class LoginFragment : Fragment() {
 
     private val isLoggingInObserver = { isLoggingIn: Boolean ->
         if (!isLoggingIn) {
-            loadingDialog.dismiss()
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRootFragment())
+            loadingDialog.dismiss()
         }
     }
 
     private val isLoggedInObserver: (Boolean) -> Unit = { isLoggedIn ->
-        loadingDialog.dismiss()
-        if (isLoggedIn) findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRootFragment())
+        if (isLoggedIn){
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRootFragment())
+            loadingDialog.dismiss()
+        }
     }
 
     private val errorObserver = { error: String ->
