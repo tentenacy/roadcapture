@@ -18,8 +18,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_ifollowing_filter_container"
-        android:layout_width="92dp"
-        android:layout_height="92dp">
+        android:layout_width="96dp"
+        android:layout_height="wrap_content">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_ifollowing_filter_profile"
@@ -27,12 +27,23 @@
             android:layout_height="56dp"
             android:onClick="@{onClickItem}"
             android:scaleType="centerCrop"
-
+            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             bind:FollowingAlbumProfileImage="@{user.profileImageUrl}"
             tools:src="@drawable/img_sample_thumbnail" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/img_ifollowing_filter_update"
+            android:layout_width="12dp"
+            android:layout_height="12dp"
+            android:src="@color/secondaryColor"
+            app:layout_constraintStart_toStartOf="@id/guideline_ifollowing_filter_h65p"
+            app:layout_constraintEnd_toEndOf="@id/img_ifollowing_filter_profile"
+            app:layout_constraintTop_toTopOf="@id/img_ifollowing_filter_profile"
+            app:civ_border_color="@color/white"
+            app:civ_border_width="1dp"/>
 
         <TextView
             android:id="@+id/text_ifollowing_filter_username"
@@ -40,12 +51,27 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="4dp"
-            android:layout_marginTop="8dp"
+            android:paddingVertical="8dp"
             android:text="@{user.username}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/img_ifollowing_filter_profile"
             tools:text="kwangddang11" />
+
+        <View
+            android:id="@+id/view_ifollowing_filter_overlay"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+<!--        android:background="@drawable/overlay_gradient_following_filter"-->
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_ifollowing_filter_h65p"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.65" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

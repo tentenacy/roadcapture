@@ -160,8 +160,6 @@ class FollowingAlbumsFragment : Fragment() {
                 user(user)
 
                 onClickItem { model, parentView, clickedView, position ->
-                    when (clickedView.id) {
-                    }
                 }
             }
         }
