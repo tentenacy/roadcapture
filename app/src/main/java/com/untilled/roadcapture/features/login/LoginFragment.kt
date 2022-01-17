@@ -1,43 +1,25 @@
 package com.untilled.roadcapture.features.login
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.ActivityResult
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.facebook.CallbackManager
-import com.facebook.FacebookCallback
-import com.facebook.FacebookException
-import com.facebook.login.LoginManager
-import com.facebook.login.LoginResult
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.common.api.ApiException
-import com.google.android.gms.tasks.Task
-import com.kakao.sdk.auth.model.OAuthToken
 import com.kakao.sdk.user.UserApiClient
-import com.nhn.android.naverlogin.OAuthLoginHandler
 import com.orhanobut.logger.Logger
-import com.untilled.roadcapture.BuildConfig
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.core.activityresult.ActivityResultFactory
-import com.untilled.roadcapture.data.repository.token.dto.OAuthTokenArgs
 import com.untilled.roadcapture.databinding.FragmentLoginBinding
+import com.untilled.roadcapture.utils.*
 import com.untilled.roadcapture.utils.instance.OAuthLoginInstances
-import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
-import com.facebook.AccessToken
-import com.untilled.roadcapture.data.entity.token.Token
-import com.untilled.roadcapture.utils.*
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -61,6 +43,10 @@ class LoginFragment : Fragment() {
 
     @Inject
     lateinit var callbackManager: CallbackManager
+
+    private val loadingDialog : LoadingDialog by lazy{
+        LoadingDialog(requireContext())
+    }
 
     private val viewModel by lazy {
         ViewModelProvider(this).get(LoginViewModel::class.java)
@@ -98,6 +84,7 @@ class LoginFragment : Fragment() {
     private val isLoadingObserver = { isLoading: Boolean ->
         if (isLoading) {
             Logger.d("loading...")
+            loadingDialog.show()
             viewModel.isLoggingIn.observe(viewLifecycleOwner, isLoggingInObserver)
         } else {
             viewModel.isLoggingIn.removeObservers(viewLifecycleOwner)
@@ -106,11 +93,13 @@ class LoginFragment : Fragment() {
 
     private val isLoggingInObserver = { isLoggingIn: Boolean ->
         if (!isLoggingIn) {
+            loadingDialog.dismiss()
             findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRootFragment())
         }
     }
 
     private val isLoggedInObserver: (Boolean) -> Unit = { isLoggedIn ->
+        loadingDialog.dismiss()
         if (isLoggedIn) findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRootFragment())
     }
 
