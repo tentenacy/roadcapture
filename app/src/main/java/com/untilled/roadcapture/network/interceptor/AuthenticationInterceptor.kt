@@ -22,13 +22,9 @@ class AuthenticationInterceptor @Inject constructor(
             .addHeader("X-AUTH-TOKEN", localTokenDao.getToken().accessToken).build()
         val response = chain.proceed(request)
 
-        Logger.d("response.isSuccessful: ${response.isSuccessful}")
-
         //소셜 액세스 토큰이 유효하지 않으면 로그아웃
         if (!response.isSuccessful) {
             val errorResponse: ErrorResponse? = response.peekBody(2048).toErrorResponse(gson)
-
-            Logger.d("errorResponse: ${errorResponse}")
 
             when (errorResponse?.code) {
                 ErrorCode.ACCESS_TOKEN_ERROR.code -> {

@@ -1,16 +1,11 @@
 package com.untilled.roadcapture.features.login
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.untilled.roadcapture.data.datasource.api.dto.user.ReissueRequest
 import com.untilled.roadcapture.data.repository.token.LocalTokenRepository
 import com.untilled.roadcapture.data.repository.token.dto.OAuthTokenArgs
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
-import com.untilled.roadcapture.network.interceptor.AuthenticationInterceptor
-import com.untilled.roadcapture.network.subject.TokenExpirationObserver
-import com.untilled.roadcapture.utils.getSocialType
 import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -27,22 +22,14 @@ class LoginViewModel @Inject constructor(
     private var _isLoggingIn = MutableLiveData(false)
     val isLoggingIn: LiveData<Boolean> get() = _isLoggingIn
 
-    private var _isLoggedIn = MutableLiveData(false)
-    val isLoggedIn: LiveData<Boolean> get() = _isLoggedIn
-
     init {
         initData()
     }
 
     private fun initData() {
-        _isLoggedIn.postValue(
-            localTokenRepository.getToken().hasToken() or localTokenRepository.getOAuthToken().hasToken()
-                .apply {
-                    if(this) {
-                        localTokenRepository.getOAuthToken().socialType.getSocialType()?.let { socialLogin(it) }
-                    }
-                }
-        )
+        localTokenRepository.getOAuthToken().whenHasAccessToken {
+            socialLogin(it)
+        }
     }
 
     fun saveOAuthToken(args: OAuthTokenArgs) {
@@ -59,11 +46,9 @@ class LoginViewModel @Inject constructor(
                     isLoading.value = it
                 }
             }
-            .doOnSuccess {
+            .subscribe({ response ->
                 isLoading.removeSource(_isLoggingIn)
                 _isLoggingIn.value = false
-            }
-            .subscribe({ response ->
             }) { t ->
                 isLoading.run {
                     removeSource(_isLoggingIn)

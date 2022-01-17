@@ -100,13 +100,6 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private val isLoggedInObserver: (Boolean) -> Unit = { isLoggedIn ->
-        if (isLoggedIn){
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRootFragment())
-            loadingDialog.dismiss()
-        }
-    }
-
     private val errorObserver = { error: String ->
         if (error.isNotBlank()) Toast.makeText(
             requireContext(),
@@ -160,7 +153,6 @@ class LoginFragment : Fragment() {
     private fun observeData() {
         viewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
         viewModel.error.observe(viewLifecycleOwner, errorObserver)
-        viewModel.isLoggedIn.observe(viewLifecycleOwner, isLoggedInObserver)
     }
 
     private fun setOAuthLoginHandlers() {
