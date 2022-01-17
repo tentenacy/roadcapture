@@ -1,5 +1,6 @@
 package com.untilled.roadcapture.data.datasource.api
 
+import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.*
 import com.untilled.roadcapture.data.entity.User
 import com.untilled.roadcapture.utils.constant.url.RoadCapturePathConstant
@@ -41,7 +42,7 @@ interface UserApi {
         @Query("size") size: Int?,
         @Query("sort") sort: String?,
         @Query("username") username: String?
-    ): Single<UserFollowResponse>
+    ): Single<PageResponse<Users>>
 
     @GET(RoadCapturePathConstant.GET_USER_FOLLOWING)
     fun getUserFollowing(
@@ -50,5 +51,5 @@ interface UserApi {
         @Query("size") size: Int?,
         @Query("sort") sort: String?,
         @Query("username") username: String?
-    ): Single<UserFollowResponse>
+    ): Single<PageResponse<Users>>
 }

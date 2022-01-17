@@ -1,14 +1,16 @@
 package com.untilled.roadcapture.data.repository.user
 
+import com.google.gson.Gson
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.api.dto.common.ErrorCode
+import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.*
 import com.untilled.roadcapture.data.datasource.dao.LocalOAuthTokenDao
 import com.untilled.roadcapture.data.datasource.dao.LocalTokenDao
 import com.untilled.roadcapture.data.datasource.dao.LocalUserDao
 import com.untilled.roadcapture.data.entity.User
 import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
-import com.untilled.roadcapture.utils.convertToErrorResponse
+import com.untilled.roadcapture.utils.toErrorResponse
 import com.untilled.roadcapture.utils.type.SocialType
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Retrofit
@@ -19,7 +21,7 @@ class UserRepositoryImpl @Inject constructor(
     private val localTokenDao: LocalTokenDao,
     private val localOAuthTokenDao: LocalOAuthTokenDao,
     private val localUserDao: LocalUserDao,
-    private val retrofit: Retrofit,
+    private val gson: Gson,
 ) :
     UserRepository {
 
@@ -28,7 +30,7 @@ class UserRepositoryImpl @Inject constructor(
         return roadCaptureApi.socialSignup(socialType.name, TokenRequest(oauthToken.accessToken))
             .flatMap { response ->
                 response.errorBody()?.let {
-                    if (retrofit.convertToErrorResponse(it)?.code != ErrorCode.ALREADY_SIGNEDUP.code) {
+                    if (it.toErrorResponse(gson)?.code != ErrorCode.ALREADY_SIGNEDUP.code) {
                         return@flatMap Single.error(IllegalStateException("Network error"))
                     }
                 }
@@ -58,7 +60,7 @@ class UserRepositoryImpl @Inject constructor(
             TokenRequest(accessToken)
         ).flatMap { response ->
             response.errorBody()?.let {
-                return@flatMap when(retrofit.convertToErrorResponse(it)?.code) {
+                return@flatMap when(it.toErrorResponse(gson)?.code) {
                     ErrorCode.USER_NOT_FOUND.code -> {
                         Single.error(IllegalStateException(ErrorCode.USER_NOT_FOUND.message))
                     }
@@ -93,9 +95,9 @@ class UserRepositoryImpl @Inject constructor(
         roadCaptureApi.getUserInfo(id)
 
 
-    override fun getUserFollower(id: Int, page: Int?, size: Int?, sort: String?,username: String?): Single<UserFollowResponse> =
+    override fun getUserFollower(id: Int, page: Int?, size: Int?, sort: String?,username: String?): Single<PageResponse<Users>> =
         roadCaptureApi.getUserFollower(id, page, size, sort, username)
 
-    override fun getUserFollowing(id: Int, page: Int?, size: Int?, sort: String?, username: String?): Single<UserFollowResponse> =
+    override fun getUserFollowing(id: Int, page: Int?, size: Int?, sort: String?, username: String?): Single<PageResponse<Users>> =
         roadCaptureApi.getUserFollowing(id, page, size, sort, username)
 }

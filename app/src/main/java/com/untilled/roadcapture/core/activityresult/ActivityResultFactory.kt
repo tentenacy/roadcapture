@@ -17,10 +17,12 @@ class ActivityResultFactory<Input, Result> private constructor(
     fun setOnActivityResult(onActivityResult: ((Result) -> Unit)?) {
         this.onActivityResult = onActivityResult
     }
+
     /**
      * Launch activity, same as [ActivityResultLauncher.launch] except that it allows a callback
      * executed after receiving a result from the target activity.
      */
+
     /**
      * Same as [.launch] with last parameter set to `null`.
      */
@@ -37,6 +39,7 @@ class ActivityResultFactory<Input, Result> private constructor(
     }
 
     companion object {
+
         /**
          * Register activity result using a [ActivityResultContract] and an in-place activity result callback like
          * the default approach. You can still customise callback using [.launch].

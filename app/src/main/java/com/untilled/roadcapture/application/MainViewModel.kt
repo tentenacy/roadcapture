@@ -42,6 +42,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun logout() {
+
         localTokenRepository.clearToken()
     }
 }

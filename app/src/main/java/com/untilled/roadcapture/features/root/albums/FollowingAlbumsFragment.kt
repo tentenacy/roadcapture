@@ -20,7 +20,8 @@ import com.untilled.roadcapture.AlbumsBindingModel_
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.datasource.api.dto.album.Albums
-import com.untilled.roadcapture.data.datasource.api.dto.user.UserFollowResponse
+import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
+import com.untilled.roadcapture.data.datasource.api.dto.user.Users
 import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.data.entity.user.User
 import com.untilled.roadcapture.databinding.FragmentFollowingalbumsBinding
@@ -138,7 +139,7 @@ class FollowingAlbumsFragment : Fragment() {
         _binding = null
     }
 
-    private fun initAdapter(user: UserFollowResponse) {
+    private fun initAdapter(user: PageResponse<Users>) {
         epoxyController.setOnClickListener(epoxyItemClickListener)
         binding.recyclerFollowingalbumsFilter.withModels { initFollowingAlbumsFilter(user) }
         updateView(null,null)
@@ -153,7 +154,7 @@ class FollowingAlbumsFragment : Fragment() {
         }
     }
 
-    private fun EpoxyController.initFollowingAlbumsFilter(user: UserFollowResponse) {
+    private fun EpoxyController.initFollowingAlbumsFilter(user: PageResponse<Users>) {
         user.content.forEachIndexed { index, user ->
             followingFilter {
                 id(index)

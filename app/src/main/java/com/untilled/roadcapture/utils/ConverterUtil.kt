@@ -1,11 +1,7 @@
 package com.untilled.roadcapture.utils
 
+import com.google.gson.Gson
 import com.untilled.roadcapture.data.datasource.api.dto.common.ErrorResponse
 import okhttp3.ResponseBody
-import retrofit2.Response
-import retrofit2.Retrofit
 
-fun Retrofit.convertToErrorResponse(responseBody: ResponseBody): ErrorResponse? =
-    responseBodyConverter<ErrorResponse>(
-        ErrorResponse::class.java, ErrorResponse::class.java.annotations
-    ).convert(responseBody)
+fun ResponseBody.toErrorResponse(gson: Gson): ErrorResponse? = gson.fromJson(charStream(), ErrorResponse::class.java)

@@ -13,6 +13,7 @@ import com.untilled.roadcapture.databinding.ActivityMainBinding
 import com.untilled.roadcapture.features.login.LoginViewModel
 import com.untilled.roadcapture.features.root.capture.CropFragment
 import com.untilled.roadcapture.utils.instance.OAuthLoginInstances
+import com.untilled.roadcapture.utils.mainActivity
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropFragment
 import com.yalantis.ucrop.UCropFragmentCallback
@@ -36,6 +37,8 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
 
         initData()
     }
+
+
 
     private fun initData() {
         viewModel

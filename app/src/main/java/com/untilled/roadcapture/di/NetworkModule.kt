@@ -35,20 +35,14 @@ class NetworkModule {
     fun provideRetrofitBuilder(httpLoggingInterceptor: HttpLoggingInterceptor, authenticationInterceptor: AuthenticationInterceptor): Retrofit.Builder {
 
         val client = OkHttpClient.Builder()
-            .addInterceptor(httpLoggingInterceptor)
             .addInterceptor(authenticationInterceptor)
+            .addInterceptor(httpLoggingInterceptor)
             .build()
 
         return Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .client(client)
-    }
-
-    @Singleton
-    @Provides
-    fun provideRetrofit(retrofitBuilder: Retrofit.Builder): Retrofit {
-        return retrofitBuilder.build()
     }
 
     @Singleton
