@@ -8,12 +8,21 @@ data class OAuthTokenArgs(
     var refreshToken: String?,
     var socialType: String,
 ) {
-    fun whenHasOAuthTokenOrNot(hasAccessTokenCallback: (SocialType) -> Unit, hasNotAccessTokenCallback: () -> Unit) {
-        if(accessToken.isNotBlank()) {
-            socialType.getSocialType()?.let { hasAccessTokenCallback(it) }
-        } else {
-            socialType.getSocialType()?.let { hasNotAccessTokenCallback() }
+
+    fun whenHasOAuthTokenOrNot(
+        hasAccessTokenCallback: (SocialType) -> Unit,
+        hasNotAccessTokenCallback: () -> Unit
+    ) {
+        if (!whenHasOAuthToken(hasAccessTokenCallback)) {
+            hasNotAccessTokenCallback()
         }
     }
 
+    fun whenHasOAuthToken(hasAccessTokenCallback: (SocialType) -> Unit): Boolean =
+        if (accessToken.isNotBlank()) {
+            socialType.getSocialType()?.let { hasAccessTokenCallback(it) }
+            true
+        } else {
+            false
+        }
 }

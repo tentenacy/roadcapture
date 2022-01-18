@@ -5,22 +5,26 @@ import android.os.Bundle
 import androidx.activity.result.ActivityResult
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isNotEmpty
-import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.nhn.android.naverlogin.OAuthLogin
+import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.BuildConfig
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.activityresult.ActivityResultFactory
+import com.untilled.roadcapture.core.worker.OAuthRefreshTokenWorker
 import com.untilled.roadcapture.databinding.ActivityMainBinding
 import com.untilled.roadcapture.features.root.capture.CropFragment
+import com.untilled.roadcapture.network.subject.OAuthLoginManagerSubject
+import com.untilled.roadcapture.utils.currentFragment
 import com.untilled.roadcapture.utils.manager.OAuthLoginManager
+import com.untilled.roadcapture.utils.navigateFromOriginToLoginFragment
 import com.untilled.roadcapture.utils.type.SocialType
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropFragment
 import com.yalantis.ucrop.UCropFragmentCallback
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -36,19 +40,12 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
     lateinit var naverLoginManager: OAuthLogin
 
     @Inject
-    lateinit var oauthLoginManagerMap: Map<String, @JvmSuppressWildcards OAuthLoginManager>
+    lateinit var oauthLoginManagerMap: Map<String, @JvmSuppressWildcards OAuthLoginManagerSubject>
 
-    private val originToLoginFragmentObserver: (ConstraintLayout) -> Unit = { bindingRoot ->
-        if (bindingRoot.isNotEmpty()) {
-            Navigation.findNavController(bindingRoot).apply {
-                navigate(R.id.action_global_loginFragment)
-                Navigation.findNavController(bindingRoot).popBackStack()
-            }
+    private val isLoggedOutObserver: (Boolean) -> Unit = { isLoggedOut ->
+        if(isLoggedOut) {
+            navigateFromOriginToLoginFragment(binding.root.id)
         }
-    }
-
-    private val logoutObserver: (SocialType) -> Unit = {
-        oauthLoginManagerMap[it.name]?.logout()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,23 +69,18 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
     }
 
     private fun observeData() {
-        viewModel.originToLoginFragment.observe(this, originToLoginFragmentObserver)
-        viewModel.logout.observe(this, logoutObserver)
+        viewModel.isLoggedOut.observe(this, isLoggedOutObserver)
     }
 
     override fun loadingProgress(showLoader: Boolean) {
-        val navHostFragment: Fragment? = supportFragmentManager.findFragmentById(binding.root.id)
-        val cropFragment: CropFragment =
-            navHostFragment?.childFragmentManager!!.fragments[0] as CropFragment
+        val cropFragment: CropFragment = currentFragment(binding.root.id) as CropFragment
 
         cropFragment.mShowLoader = showLoader
         cropFragment.invalidateOptionsMenu()
     }
 
     override fun onCropFinish(result: UCropFragment.UCropResult?) {
-        val navHostFragment: Fragment? = supportFragmentManager.findFragmentById(binding.root.id)
-        val cropFragment: CropFragment =
-            navHostFragment?.childFragmentManager!!.fragments[0] as CropFragment
+        val cropFragment: CropFragment = currentFragment(binding.root.id) as CropFragment
         when (result?.mResultCode) {
             RESULT_OK -> {
                 cropFragment.handleCropResult(result.mResultData)
@@ -99,4 +91,5 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
         }
         cropFragment.removeFragmentFromScreen()
     }
+
 }

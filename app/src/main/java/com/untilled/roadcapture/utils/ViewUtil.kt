@@ -6,9 +6,13 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.WindowCompat
+import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
+import com.untilled.roadcapture.R
 
 // Milliseconds used for UI animations in Camera
 const val ANIMATION_FAST_MILLIS = 50L
@@ -40,4 +44,15 @@ fun View.setRippleEffect() {
     isClickable = true
     isFocusable = true
     foreground = context.getDrawableFrom(android.R.attr.selectableItemBackground)
+}
+
+fun AppCompatActivity.currentFragment(id: Int): Fragment? = supportFragmentManager.findFragmentById(id)?.childFragmentManager?.fragments?.get(0)
+
+fun AppCompatActivity.navigateFromOriginToLoginFragment(id: Int): Unit {
+    currentFragment(id)?.let {
+        Navigation.findNavController(it.requireView()).apply {
+            navigate(R.id.action_global_loginFragment)
+            popBackStack()
+        }
+    }
 }

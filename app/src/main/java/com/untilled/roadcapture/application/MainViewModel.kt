@@ -1,14 +1,15 @@
 package com.untilled.roadcapture.application
 
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.untilled.roadcapture.data.repository.token.LocalTokenRepository
 import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
-import com.untilled.roadcapture.network.interceptor.AuthenticationInterceptor
-import com.untilled.roadcapture.network.subject.TokenExpirationObserver
+import com.untilled.roadcapture.network.interceptor.TokenInterceptor
+import com.untilled.roadcapture.network.observer.OAuthRefreshTokenExpirationObserver
+import com.untilled.roadcapture.network.observer.TokenExpirationObserver
+import com.untilled.roadcapture.network.subject.OAuthLoginManagerSubject
 import com.untilled.roadcapture.utils.manager.OAuthLoginManager
 import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,14 +22,12 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val userRepository: UserRepository,
     private val localTokenRepository: LocalTokenRepository,
-    private val tokenExpirationObservable: AuthenticationInterceptor,
-): BaseViewModel(), TokenExpirationObserver {
+    private val tokenExpirationObservable: TokenInterceptor,
+    private val oauthLoginManagerMap: Map<String, @JvmSuppressWildcards OAuthLoginManagerSubject>,
+) : BaseViewModel(), TokenExpirationObserver, OAuthRefreshTokenExpirationObserver {
 
-    private var _originToLoginFragment = MutableLiveData<ConstraintLayout>()
-    val originToLoginFragment: LiveData<ConstraintLayout> = _originToLoginFragment
-
-    private var _logout = MutableLiveData<SocialType>()
-    val logout: LiveData<SocialType> = _logout
+    private var _isLoggedOut = MutableLiveData<Boolean>(false)
+    val isLoggedOut: LiveData<Boolean> get() = _isLoggedOut
 
     init {
         tokenExpirationObservable.registerObserver(this)
@@ -36,6 +35,9 @@ class MainViewModel @Inject constructor(
 
     override fun onCleared() {
         tokenExpirationObservable.unregisterObserver(this)
+        localTokenRepository.getOAuthToken().whenHasOAuthToken {
+            oauthLoginManagerMap[it.name]?.unregisterObserver(this)
+        }
         super.onCleared()
     }
 
@@ -57,16 +59,20 @@ class MainViewModel @Inject constructor(
             }.addTo(compositeDisposable)
     }
 
-    fun logout(bindingRoot: ConstraintLayout) {
+    override fun onRefreshTokenExpired() {
+        logout()
+    }
 
-        _originToLoginFragment.value = bindingRoot
+    fun logout() {
+        _isLoggedOut.value = true
 
-        localTokenRepository.getOAuthToken().whenHasOAuthTokenOrNot({
-            _logout.value = it
-        }, {
-            //logout
-        })
-
+        localTokenRepository.getOAuthToken().whenHasOAuthToken {
+            oauthLoginManagerMap[it.name]?.logout()
+        }
         localTokenRepository.clearToken()
+    }
+
+    fun registerToOAuthLoginManagerSubject(socialType: SocialType) {
+        oauthLoginManagerMap[socialType.name]?.registerObserver(this)
     }
 }

@@ -10,14 +10,19 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.facebook.CallbackManager
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.kakao.sdk.user.UserApiClient
 import com.nhn.android.naverlogin.OAuthLogin
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.core.worker.OAuthRefreshTokenWorker
 import com.untilled.roadcapture.databinding.FragmentLoginBinding
 import com.untilled.roadcapture.utils.*
+import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -45,6 +50,9 @@ class LoginFragment : Fragment() {
     
     @Inject
     lateinit var naverLoginManager: OAuthLogin
+
+    @Inject
+    lateinit var workManager: WorkManager
 
     private val loadingDialog : LoadingDialog by lazy{
         LoadingDialog(requireContext())
@@ -91,10 +99,9 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private val isLoggingInObserver = { isLoggingIn: Boolean ->
-        if (!isLoggingIn) {
-            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRootFragment())
-        }
+    private val loginObserver: (SocialType) -> Unit = { socialType ->
+        mainActivity().viewModel.registerToOAuthLoginManagerSubject(socialType)
+        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRootFragment())
     }
 
     private val errorObserver = { error: String ->
@@ -154,7 +161,7 @@ class LoginFragment : Fragment() {
     }
     private fun observeData() {
         viewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
-        viewModel.isLoggingIn.observe(viewLifecycleOwner, isLoggingInObserver)
+        viewModel.login.observe(viewLifecycleOwner, loginObserver)
         viewModel.error.observe(viewLifecycleOwner, errorObserver)
     }
 

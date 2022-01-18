@@ -1,21 +1,20 @@
 package com.untilled.roadcapture.network.interceptor
 
 import com.google.gson.Gson
-import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.data.datasource.api.dto.common.ErrorCode
 import com.untilled.roadcapture.data.datasource.api.dto.common.ErrorResponse
 import com.untilled.roadcapture.data.datasource.dao.LocalTokenDao
-import com.untilled.roadcapture.network.subject.AuthenticationSubject
-import com.untilled.roadcapture.network.subject.TokenExpirationObserver
+import com.untilled.roadcapture.network.subject.Subject
+import com.untilled.roadcapture.network.observer.TokenExpirationObserver
 import com.untilled.roadcapture.utils.toErrorResponse
 import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 
-class AuthenticationInterceptor @Inject constructor(
+class TokenInterceptor @Inject constructor(
     private val localTokenDao: LocalTokenDao,
     private val gson: Gson,
-) : Interceptor, AuthenticationSubject<TokenExpirationObserver>() {
+) : Interceptor, Subject<TokenExpirationObserver>() {
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder()

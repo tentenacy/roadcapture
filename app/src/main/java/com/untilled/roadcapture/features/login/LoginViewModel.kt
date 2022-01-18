@@ -7,7 +7,7 @@ import com.untilled.roadcapture.data.repository.token.dto.OAuthTokenArgs
 import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
-import com.untilled.roadcapture.utils.manager.OAuthLoginManager
+import com.untilled.roadcapture.utils.getSocialType
 import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -21,15 +21,13 @@ class LoginViewModel @Inject constructor(
     private val localTokenRepository: LocalTokenRepository,
 ) : BaseViewModel() {
 
-    private var _isLoggingIn = MutableLiveData(true)
-    val isLoggingIn: LiveData<Boolean> get() = _isLoggingIn
+    private var _login = MutableLiveData<SocialType>()
+    val login: LiveData<SocialType> get() = _login
 
     fun autoLogin() {
-        localTokenRepository.getOAuthToken().whenHasOAuthTokenOrNot ({
-            socialLogin(it)
-        }, {
+        localTokenRepository.getOAuthToken().whenHasOAuthTokenOrNot (this::socialLogin) {
 //            login()
-        })
+        }
     }
 
     fun saveOAuthToken(args: OAuthTokenArgs) {
@@ -41,8 +39,11 @@ class LoginViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
-                isLoading.addSource(_isLoggingIn) {
-                    isLoading.value = it
+                isLoading.apply {
+                    addSource(_login) {
+                        isLoading.value = it.name.isBlank()
+                    }
+                    value = true
                 }
             }
             .subscribe({ response ->
@@ -54,9 +55,9 @@ class LoginViewModel @Inject constructor(
                         accessTokenExpireDate = response.accessTokenExpireDate.toLong(),
                     )
                 )
-                isLoading.removeSource(_isLoggingIn.apply { value = false })
+                isLoading.removeSource(_login.apply { value = localTokenRepository.getOAuthToken().socialType.getSocialType() })
             }) { t ->
-                isLoading.removeSource(_isLoggingIn)
+                isLoading.removeSource(_login)
                 localTokenRepository.clearToken()
                 error.value = t.message
             }.addTo(compositeDisposable)

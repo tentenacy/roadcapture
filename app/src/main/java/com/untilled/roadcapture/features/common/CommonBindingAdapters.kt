@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features
+package com.untilled.roadcapture.features.common
 
 import android.view.View
 import android.widget.ImageView
