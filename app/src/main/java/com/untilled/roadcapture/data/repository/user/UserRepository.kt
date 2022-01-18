@@ -10,7 +10,7 @@ import io.reactivex.rxjava3.core.Single
 
 interface UserRepository {
     fun socialSignup(socialType: SocialType): Single<TokenResponse>
-    fun reissue(reissueRequest: ReissueRequest): Single<TokenResponse>
+    fun reissue(): Single<TokenResponse>
     fun getUserDetail(): Single<User>
     fun getUserInfo(id: Int): Single<Users>
     fun getUserFollower(id: Int, page: Int?, size: Int?, sort: String?, username: String?): Single<PageResponse<Users>>

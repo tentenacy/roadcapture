@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import com.facebook.FacebookCallback
 import com.facebook.login.LoginResult
 import com.kakao.sdk.auth.model.OAuthToken
+import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import com.untilled.roadcapture.features.login.*
 import dagger.Module
@@ -21,8 +22,8 @@ import dagger.hilt.android.components.FragmentComponent
 class HandlerModule {
 
     @Provides
-    fun provideNaverOAuthLoginHandler(fragment: Fragment): NaverOAuthLoginHandler {
-        return NaverOAuthLoginHandler(fragment)
+    fun provideNaverOAuthLoginHandler(fragment: Fragment, naverLoginManager: OAuthLogin): NaverOAuthLoginHandler {
+        return NaverOAuthLoginHandler(fragment, naverLoginManager)
     }
 
     @Provides

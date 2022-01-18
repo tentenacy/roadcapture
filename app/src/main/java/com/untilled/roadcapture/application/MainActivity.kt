@@ -9,12 +9,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isNotEmpty
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.nhn.android.naverlogin.OAuthLogin
 import com.untilled.roadcapture.BuildConfig
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.activityresult.ActivityResultFactory
 import com.untilled.roadcapture.databinding.ActivityMainBinding
 import com.untilled.roadcapture.features.root.capture.CropFragment
-import com.untilled.roadcapture.utils.instance.OAuthLoginInstances
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropFragment
 import com.yalantis.ucrop.UCropFragmentCallback
@@ -29,6 +29,9 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
 
     @Inject
     lateinit var activityResultFactory: ActivityResultFactory<Intent, ActivityResult>
+
+    @Inject
+    lateinit var naverLoginManager: OAuthLogin
 
     private val originToLoginFragmentObserver: (ConstraintLayout) -> Unit = { bindingRoot ->
         if (bindingRoot.isNotEmpty()) {
@@ -51,7 +54,7 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
 
     private fun initData() {
         viewModel
-        OAuthLoginInstances.naverOAuthLoginInstance.init(
+        naverLoginManager.init(
             this,
             BuildConfig.SOCIAL_NAVER_CLIENT_ID,
             BuildConfig.SOCIAL_NAVER_CLIENT_SECRET,
@@ -64,17 +67,19 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
     }
 
     override fun loadingProgress(showLoader: Boolean) {
-        val navHostFragment : Fragment? = supportFragmentManager.findFragmentById(binding.root.id)
-        val cropFragment : CropFragment = navHostFragment?.childFragmentManager!!.fragments[0] as CropFragment
+        val navHostFragment: Fragment? = supportFragmentManager.findFragmentById(binding.root.id)
+        val cropFragment: CropFragment =
+            navHostFragment?.childFragmentManager!!.fragments[0] as CropFragment
 
         cropFragment.mShowLoader = showLoader
         cropFragment.invalidateOptionsMenu()
     }
 
     override fun onCropFinish(result: UCropFragment.UCropResult?) {
-        val navHostFragment : Fragment? = supportFragmentManager.findFragmentById(binding.root.id)
-        val cropFragment : CropFragment = navHostFragment?.childFragmentManager!!.fragments[0] as CropFragment
-        when(result?.mResultCode){
+        val navHostFragment: Fragment? = supportFragmentManager.findFragmentById(binding.root.id)
+        val cropFragment: CropFragment =
+            navHostFragment?.childFragmentManager!!.fragments[0] as CropFragment
+        when (result?.mResultCode) {
             RESULT_OK -> {
                 cropFragment.handleCropResult(result.mResultData)
             }

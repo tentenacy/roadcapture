@@ -19,7 +19,8 @@ class AuthenticationInterceptor @Inject constructor(
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder()
-            .addHeader("X-AUTH-TOKEN", localTokenDao.getToken().accessToken).build()
+            .addHeader("X-AUTH-TOKEN", localTokenDao.getToken().accessToken)
+            .build()
         val response = chain.proceed(request)
 
         //소셜 액세스 토큰이 유효하지 않으면 로그아웃

@@ -2,7 +2,6 @@ package com.untilled.roadcapture.features.login
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,11 +13,10 @@ import androidx.navigation.fragment.findNavController
 import com.facebook.CallbackManager
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.kakao.sdk.user.UserApiClient
-import com.orhanobut.logger.Logger
+import com.nhn.android.naverlogin.OAuthLogin
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentLoginBinding
 import com.untilled.roadcapture.utils.*
-import com.untilled.roadcapture.utils.instance.OAuthLoginInstances
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -44,6 +42,9 @@ class LoginFragment : Fragment() {
 
     @Inject
     lateinit var callbackManager: CallbackManager
+    
+    @Inject
+    lateinit var naverLoginManager: OAuthLogin
 
     private val loadingDialog : LoadingDialog by lazy{
         LoadingDialog(requireContext())
@@ -64,7 +65,7 @@ class LoginFragment : Fragment() {
     }
 
     private val naverLoginOnClickListener: (View?) -> Unit = {
-        OAuthLoginInstances.naverOAuthLoginInstance.startOauthLoginActivity(
+        naverLoginManager.startOauthLoginActivity(
             requireActivity(),
             naverOAuthLoginHandler
         )
@@ -84,8 +85,6 @@ class LoginFragment : Fragment() {
 
     private val isLoadingObserver = { isLoading: Boolean ->
         if (isLoading) {
-            Logger.d("loading...")
-            Log.d("Test","???")
             loadingDialog.show()
         } else {
             loadingDialog.dismiss()
@@ -104,6 +103,11 @@ class LoginFragment : Fragment() {
             "error: $error",
             Toast.LENGTH_SHORT
         ).show()
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        viewModel.autoLogin()
     }
 
     override fun onCreateView(
@@ -150,8 +154,8 @@ class LoginFragment : Fragment() {
     }
     private fun observeData() {
         viewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
-        viewModel.error.observe(viewLifecycleOwner, errorObserver)
         viewModel.isLoggingIn.observe(viewLifecycleOwner, isLoggingInObserver)
+        viewModel.error.observe(viewLifecycleOwner, errorObserver)
     }
 
     private fun setOAuthLoginHandlers() {

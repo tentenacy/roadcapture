@@ -3,12 +3,15 @@ package com.untilled.roadcapture.features.login
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import com.untilled.roadcapture.data.repository.token.dto.OAuthTokenArgs
-import com.untilled.roadcapture.utils.instance.OAuthLoginInstances
 import com.untilled.roadcapture.utils.type.SocialType
 
-class NaverOAuthLoginHandler(private val fragment: Fragment) : OAuthLoginHandler() {
+class NaverOAuthLoginHandler(
+    private val fragment: Fragment,
+    private val naverLoginManager: OAuthLogin
+) : OAuthLoginHandler() {
 
     private val viewModel by lazy {
         ViewModelProvider(fragment).get(LoginViewModel::class.java)
@@ -26,10 +29,10 @@ class NaverOAuthLoginHandler(private val fragment: Fragment) : OAuthLoginHandler
     private fun onSuccess() = fragment.requireContext().run {
         viewModel.saveOAuthToken(
             OAuthTokenArgs(
-                accessToken = OAuthLoginInstances.naverOAuthLoginInstance.getAccessToken(
+                accessToken = naverLoginManager.getAccessToken(
                     this
                 ),
-                refreshToken = OAuthLoginInstances.naverOAuthLoginInstance.getRefreshToken(
+                refreshToken = naverLoginManager.getRefreshToken(
                     this
                 ),
                 socialType = SocialType.NAVER.name,
@@ -43,11 +46,11 @@ class NaverOAuthLoginHandler(private val fragment: Fragment) : OAuthLoginHandler
         Toast.makeText(
             this,
             "errorCode: ${
-                OAuthLoginInstances.naverOAuthLoginInstance.getLastErrorCode(
+                naverLoginManager.getLastErrorCode(
                     this
                 )
             }, errorDesc: ${
-                OAuthLoginInstances.naverOAuthLoginInstance.getLastErrorDesc(this)
+                naverLoginManager.getLastErrorDesc(this)
             }",
             Toast.LENGTH_SHORT
         ).show()
