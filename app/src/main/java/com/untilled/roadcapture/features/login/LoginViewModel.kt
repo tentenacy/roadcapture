@@ -24,12 +24,11 @@ class LoginViewModel @Inject constructor(
     val isLoggingIn: LiveData<Boolean> get() = _isLoggingIn
 
     fun autoLogin() {
-        localTokenRepository.getOAuthToken().whenHasAccessToken {
+        localTokenRepository.getOAuthToken().whenHasOAuthTokenOrNot ({
             socialLogin(it)
-        }
-        localTokenRepository.getToken().whenHasAccessToken {
+        }, {
 //            login()
-        }
+        })
     }
 
     fun saveOAuthToken(args: OAuthTokenArgs) {

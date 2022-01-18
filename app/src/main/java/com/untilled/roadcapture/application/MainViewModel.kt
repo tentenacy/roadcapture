@@ -3,7 +3,6 @@ package com.untilled.roadcapture.application
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.untilled.roadcapture.data.datasource.api.dto.user.ReissueRequest
 import com.untilled.roadcapture.data.repository.token.LocalTokenRepository
 import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
 import com.untilled.roadcapture.data.repository.user.UserRepository
@@ -31,8 +30,8 @@ class MainViewModel @Inject constructor(
     }
 
     override fun onCleared() {
-        super.onCleared()
         tokenExpirationObservable.unregisterObserver(this)
+        super.onCleared()
     }
 
     override fun onTokenExpired() {
@@ -56,6 +55,12 @@ class MainViewModel @Inject constructor(
     fun logout(bindingRoot: ConstraintLayout) {
 
         _originToLoginFragment.value = bindingRoot
+
+        localTokenRepository.getOAuthToken().whenHasOAuthTokenOrNot({
+
+        }, {
+
+        })
 
         localTokenRepository.clearToken()
     }

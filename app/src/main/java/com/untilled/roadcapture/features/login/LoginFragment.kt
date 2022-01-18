@@ -147,7 +147,7 @@ class LoginFragment : Fragment() {
 
     private fun initData() {
         binding.loginbtnLoginFacebook.run {
-            setReadPermissions(listOf("email", "public_profile"))
+            setPermissions(listOf("email", "public_profile"))
             fragment = this@LoginFragment
             registerCallback(callbackManager, facebookOAuthLoginHandler)
         }
