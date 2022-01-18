@@ -7,6 +7,7 @@ import com.untilled.roadcapture.data.repository.token.dto.OAuthTokenArgs
 import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
+import com.untilled.roadcapture.utils.manager.OAuthLoginManager
 import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers

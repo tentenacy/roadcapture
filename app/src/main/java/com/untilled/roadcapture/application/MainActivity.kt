@@ -15,6 +15,8 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.activityresult.ActivityResultFactory
 import com.untilled.roadcapture.databinding.ActivityMainBinding
 import com.untilled.roadcapture.features.root.capture.CropFragment
+import com.untilled.roadcapture.utils.manager.OAuthLoginManager
+import com.untilled.roadcapture.utils.type.SocialType
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropFragment
 import com.yalantis.ucrop.UCropFragmentCallback
@@ -33,6 +35,9 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
     @Inject
     lateinit var naverLoginManager: OAuthLogin
 
+    @Inject
+    lateinit var oauthLoginManagerMap: Map<String, @JvmSuppressWildcards OAuthLoginManager>
+
     private val originToLoginFragmentObserver: (ConstraintLayout) -> Unit = { bindingRoot ->
         if (bindingRoot.isNotEmpty()) {
             Navigation.findNavController(bindingRoot).apply {
@@ -40,6 +45,10 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
                 Navigation.findNavController(bindingRoot).popBackStack()
             }
         }
+    }
+
+    private val logoutObserver: (SocialType) -> Unit = {
+        oauthLoginManagerMap[it.name]?.logout()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -64,6 +73,7 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
 
     private fun observeData() {
         viewModel.originToLoginFragment.observe(this, originToLoginFragmentObserver)
+        viewModel.logout.observe(this, logoutObserver)
     }
 
     override fun loadingProgress(showLoader: Boolean) {

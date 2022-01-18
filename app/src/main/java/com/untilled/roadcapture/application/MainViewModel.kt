@@ -9,6 +9,8 @@ import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
 import com.untilled.roadcapture.network.interceptor.AuthenticationInterceptor
 import com.untilled.roadcapture.network.subject.TokenExpirationObserver
+import com.untilled.roadcapture.utils.manager.OAuthLoginManager
+import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
@@ -24,6 +26,9 @@ class MainViewModel @Inject constructor(
 
     private var _originToLoginFragment = MutableLiveData<ConstraintLayout>()
     val originToLoginFragment: LiveData<ConstraintLayout> = _originToLoginFragment
+
+    private var _logout = MutableLiveData<SocialType>()
+    val logout: LiveData<SocialType> = _logout
 
     init {
         tokenExpirationObservable.registerObserver(this)
@@ -57,9 +62,9 @@ class MainViewModel @Inject constructor(
         _originToLoginFragment.value = bindingRoot
 
         localTokenRepository.getOAuthToken().whenHasOAuthTokenOrNot({
-
+            _logout.value = it
         }, {
-
+            //logout
         })
 
         localTokenRepository.clearToken()
