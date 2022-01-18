@@ -28,12 +28,12 @@ interface UserApi {
 
     @GET(RoadCapturePathConstant.GET_USER_DETAiL)
     fun getUserDetail(
-    ): Single<User>
+    ): Single<UserResponse>
 
     @GET(RoadCapturePathConstant.GET_USER_INFO)
     fun getUserInfo(
         @Path("id") id: Int,
-    ): Single<Users>
+    ): Single<UsersResponse>
 
     @GET(RoadCapturePathConstant.GET_USER_FOLLOWER)
     fun getUserFollower(
@@ -42,7 +42,7 @@ interface UserApi {
         @Query("size") size: Int?,
         @Query("sort") sort: String?,
         @Query("username") username: String?
-    ): Single<PageResponse<Users>>
+    ): Single<PageResponse<UsersResponse>>
 
     @GET(RoadCapturePathConstant.GET_USER_FOLLOWING)
     fun getUserFollowing(
@@ -51,5 +51,5 @@ interface UserApi {
         @Query("size") size: Int?,
         @Query("sort") sort: String?,
         @Query("username") username: String?
-    ): Single<PageResponse<Users>>
+    ): Single<PageResponse<UsersResponse>>
 }

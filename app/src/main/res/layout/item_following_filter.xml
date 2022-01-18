@@ -9,7 +9,7 @@
 
         <variable
             name="user"
-            type="com.untilled.roadcapture.data.datasource.api.dto.user.Users" />
+            type="com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse" />
 
         <variable
             name="onClickItem"

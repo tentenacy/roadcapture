@@ -10,6 +10,8 @@ import com.untilled.roadcapture.data.repository.place.SearchPlaceRepository
 import com.untilled.roadcapture.data.repository.place.SearchPlaceRepositoryImpl
 import com.untilled.roadcapture.data.repository.token.KotPrefTokenRepository
 import com.untilled.roadcapture.data.repository.token.LocalTokenRepository
+import com.untilled.roadcapture.data.repository.user.KotPrefUserRepository
+import com.untilled.roadcapture.data.repository.user.LocalUserRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.data.repository.user.UserRepositoryImpl
 import dagger.Binds
@@ -50,4 +52,9 @@ abstract class RepositoryModule {
     abstract fun provideTokenRepository(
         repository: KotPrefTokenRepository
     ): LocalTokenRepository
+
+    @Binds
+    abstract fun provideLocalUserRepository(
+        repository: KotPrefUserRepository
+    ): LocalUserRepository
 }

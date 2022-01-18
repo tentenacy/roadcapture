@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.untilled.roadcapture.data.repository.token.LocalTokenRepository
 import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
+import com.untilled.roadcapture.data.repository.user.LocalUserRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
 import com.untilled.roadcapture.network.interceptor.TokenInterceptor
@@ -22,6 +23,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val userRepository: UserRepository,
     private val localTokenRepository: LocalTokenRepository,
+    private val localUserRepository: LocalUserRepository,
     private val tokenExpirationObservable: TokenInterceptor,
     private val oauthLoginManagerMap: Map<String, @JvmSuppressWildcards OAuthLoginManagerSubject>,
 ) : BaseViewModel(), TokenExpirationObserver, OAuthRefreshTokenExpirationObserver {
@@ -69,6 +71,7 @@ class MainViewModel @Inject constructor(
         localTokenRepository.getOAuthToken().whenHasOAuthToken {
             oauthLoginManagerMap[it.name]?.logout()
         }
+        localUserRepository.clearUser()
         localTokenRepository.clearToken()
     }
 

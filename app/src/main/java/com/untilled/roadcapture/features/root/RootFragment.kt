@@ -70,11 +70,6 @@ class RootFragment : Fragment() {
     private fun FragmentTransaction.addFragments() = apply {
         add(
             R.id.frame_root_container_contents,
-            myStudioFragment,
-            this@RootFragment::myStudioFragment.name
-        )
-        add(
-            R.id.frame_root_container_contents,
             searchRootFragment,
             this@RootFragment::searchRootFragment.name
         )
@@ -87,6 +82,11 @@ class RootFragment : Fragment() {
             R.id.frame_root_container_contents,
             albumsFragment,
             this@RootFragment::albumsFragment.name
+        )
+        add(
+            R.id.frame_root_container_contents,
+            myStudioFragment,
+            this@RootFragment::myStudioFragment.name
         )
     }
 

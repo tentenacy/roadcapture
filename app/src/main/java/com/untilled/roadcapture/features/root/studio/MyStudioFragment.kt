@@ -51,7 +51,7 @@ class MyStudioFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.myUser.observe(viewLifecycleOwner){ user->
+        viewModel.user.observe(viewLifecycleOwner){ user->
             binding.user = user
         }
     }
@@ -67,8 +67,8 @@ class MyStudioFragment : Fragment() {
                 .navigate(R.id.action_rootFragment_to_followingFragment)
         }
         binding.btnMystudioEdit.setOnClickListener {
-            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(RootFragmentDirections.actionRootFragmentToMyStudioModification(binding.user))
+//            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+//                .navigate(RootFragmentDirections.actionRootFragmentToMyStudioModification(binding.user))
         }
         binding.imageMystudioSettingBefore.setOnClickListener {
             Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)

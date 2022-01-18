@@ -1,5 +1,6 @@
 package com.untilled.roadcapture.features.root.albums
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -11,7 +12,7 @@ import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.data.datasource.api.dto.album.Albums
 import com.untilled.roadcapture.data.datasource.api.dto.comment.Comments
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
-import com.untilled.roadcapture.data.datasource.api.dto.user.Users
+import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 
 import com.untilled.roadcapture.data.repository.album.AlbumCommentsPagingSource
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
@@ -36,8 +37,8 @@ class AlbumsViewModel
     private var currentDateTimeTo: String? = null
     private var currentAlbumsResult: Flow<PagingData<Albums>>? = null
 
-    private val _user =  MutableLiveData<PageResponse<Users>>()
-    val user: LiveData<PageResponse<Users>> get() = _user
+    private val _user =  MutableLiveData<PageResponse<UsersResponse>>()
+    val user: LiveData<PageResponse<UsersResponse>> get() = _user
 
     fun getAlbums(token: String,dateTimeFrom: String?, dateTimeTo: String?): Flow<PagingData<Albums>>{
         val lastResult = currentAlbumsResult

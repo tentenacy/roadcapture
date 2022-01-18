@@ -1,5 +1,6 @@
 package com.untilled.roadcapture.data.repository.user
 
+import android.util.Log
 import com.google.gson.Gson
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.api.dto.common.ErrorCode
@@ -12,11 +13,7 @@ import com.untilled.roadcapture.data.entity.User
 import com.untilled.roadcapture.utils.retryThreeTimes
 import com.untilled.roadcapture.utils.toErrorResponse
 import com.untilled.roadcapture.utils.type.SocialType
-import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.kotlin.Flowables
-import java.io.IOException
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class UserRepositoryImpl @Inject constructor(
@@ -77,14 +74,10 @@ class UserRepositoryImpl @Inject constructor(
         }
             .retryThreeTimes()
 
-    override fun getUserDetail(): Single<User> =
+    override fun getUserDetail(): Single<UserResponse> =
         roadCaptureApi.getUserDetail()
-            .map { user ->
-                localUserDao.saveUserId(user.id)
-                user
-            }
 
-    override fun getUserInfo(id: Int): Single<Users> =
+    override fun getUserInfo(id: Int): Single<UsersResponse> =
         roadCaptureApi.getUserInfo(id)
 
 
@@ -94,7 +87,7 @@ class UserRepositoryImpl @Inject constructor(
         size: Int?,
         sort: String?,
         username: String?
-    ): Single<PageResponse<Users>> =
+    ): Single<PageResponse<UsersResponse>> =
         roadCaptureApi.getUserFollower(id, page, size, sort, username)
 
     override fun getUserFollowing(
@@ -103,6 +96,6 @@ class UserRepositoryImpl @Inject constructor(
         size: Int?,
         sort: String?,
         username: String?
-    ): Single<PageResponse<Users>> =
+    ): Single<PageResponse<UsersResponse>> =
         roadCaptureApi.getUserFollowing(id, page, size, sort, username)
 }

@@ -3,7 +3,6 @@ package com.untilled.roadcapture.features.root.albums
 import android.animation.ValueAnimator
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,7 +20,7 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.datasource.api.dto.album.Albums
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
-import com.untilled.roadcapture.data.datasource.api.dto.user.Users
+import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.data.entity.user.User
 import com.untilled.roadcapture.databinding.FragmentFollowingalbumsBinding
@@ -29,7 +28,6 @@ import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
 import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
 import com.untilled.roadcapture.followingFilter
-import com.untilled.roadcapture.utils.dummy.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -120,7 +118,7 @@ class FollowingAlbumsFragment : Fragment() {
     }
 
     private fun initViews(){
-        viewModel.getUserFollowing(User.userId)
+        viewModel.getUserFollowing(User.id)
     }
 
     private fun observeData() {
@@ -139,7 +137,7 @@ class FollowingAlbumsFragment : Fragment() {
         _binding = null
     }
 
-    private fun initAdapter(user: PageResponse<Users>) {
+    private fun initAdapter(user: PageResponse<UsersResponse>) {
         epoxyController.setOnClickListener(epoxyItemClickListener)
         binding.recyclerFollowingalbumsFilter.withModels { initFollowingAlbumsFilter(user) }
         updateView(null,null)
@@ -154,7 +152,7 @@ class FollowingAlbumsFragment : Fragment() {
         }
     }
 
-    private fun EpoxyController.initFollowingAlbumsFilter(user: PageResponse<Users>) {
+    private fun EpoxyController.initFollowingAlbumsFilter(user: PageResponse<UsersResponse>) {
         user.content.forEachIndexed { index, user ->
             followingFilter {
                 id(index)

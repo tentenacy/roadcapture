@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.untilled.roadcapture.data.repository.token.LocalTokenRepository
 import com.untilled.roadcapture.data.repository.token.dto.OAuthTokenArgs
 import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
+import com.untilled.roadcapture.data.repository.user.LocalUserRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
 import com.untilled.roadcapture.utils.getSocialType
@@ -19,10 +20,14 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val userRepository: UserRepository,
     private val localTokenRepository: LocalTokenRepository,
+    private val localUserRepository: LocalUserRepository
 ) : BaseViewModel() {
 
     private var _login = MutableLiveData<SocialType>()
     val login: LiveData<SocialType> get() = _login
+
+    private var _userLoading = MutableLiveData<Boolean>()
+    val userLoading: LiveData<Boolean> get() = _userLoading
 
     fun autoLogin() {
         localTokenRepository.getOAuthToken().whenHasOAuthTokenOrNot (this::socialLogin) {
@@ -56,10 +61,23 @@ class LoginViewModel @Inject constructor(
                     )
                 )
                 isLoading.removeSource(_login.apply { value = localTokenRepository.getOAuthToken().socialType.getSocialType() })
+                getUserDetail()
             }) { t ->
                 isLoading.removeSource(_login)
                 localTokenRepository.clearToken()
                 error.value = t.message
             }.addTo(compositeDisposable)
+    }
+
+    private fun getUserDetail(){
+        userRepository.getUserDetail()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ response->
+                localUserRepository.saveUser(response.id)
+                _userLoading.postValue(true)
+            },{ t->
+
+            }).addTo(compositeDisposable)
     }
 }

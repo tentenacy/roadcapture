@@ -101,7 +101,6 @@ class LoginFragment : Fragment() {
 
     private val loginObserver: (SocialType) -> Unit = { socialType ->
         mainActivity().viewModel.registerToOAuthLoginManagerSubject(socialType)
-        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRootFragment())
     }
 
     private val errorObserver = { error: String ->
@@ -110,6 +109,11 @@ class LoginFragment : Fragment() {
             "error: $error",
             Toast.LENGTH_SHORT
         ).show()
+    }
+
+    private val userObserver = { userLoading: Boolean ->
+        if(userLoading)
+            findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRootFragment())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -163,6 +167,7 @@ class LoginFragment : Fragment() {
         viewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
         viewModel.login.observe(viewLifecycleOwner, loginObserver)
         viewModel.error.observe(viewLifecycleOwner, errorObserver)
+        viewModel.userLoading.observe(viewLifecycleOwner, userObserver)
     }
 
     private fun setOAuthLoginHandlers() {

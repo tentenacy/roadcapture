@@ -57,7 +57,7 @@
             android:padding="8dp"
             app:layout_constraintStart_toStartOf="@id/img_ialbums_thumbnail"
             app:layout_constraintTop_toTopOf="@id/img_ialbums_thumbnail"
-            bind:albumProfileImage="@{albums.users.profileImageUrl}"
+            bind:albumProfileImage="@{albums.usersResponse.profileImageUrl}"
             tools:src="@drawable/img_sample_profile" />
 
         <com.airbnb.lottie.LottieAnimationView
@@ -133,7 +133,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/img_ialbums_profile"
             app:layout_constraintStart_toEndOf="@id/img_ialbums_profile"
             app:layout_constraintTop_toTopOf="@+id/img_ialbums_profile"
-            bind:albumOverlayUsername="@{albums.users.username}"
+            bind:albumOverlayUsername="@{albums.usersResponse.username}"
             tools:text="tenutz ·" />
 
         <TextView
