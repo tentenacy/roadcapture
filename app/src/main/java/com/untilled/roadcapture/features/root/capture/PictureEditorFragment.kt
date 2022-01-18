@@ -74,10 +74,6 @@ class PictureEditorFragment : Fragment() {
                 )
         }
 
-        binding.textPictureEditorDate.setOnClickListener {
-            onCreateDatePicker()
-        }
-
         binding.imgPictureEditorCheck.setOnClickListener {
             // todo Room에 picture insert
             viewModel.insertPicture(picture!!)
@@ -91,25 +87,6 @@ class PictureEditorFragment : Fragment() {
                 // todo 사진 삭제 기능
             }
         }
-    }
-
-    private fun onCreateDatePicker() {
-        val cal = getCalendar(binding.textPictureEditorDate.text.toString())
-
-        val datePickerDialog = DatePickerDialog(
-            requireContext(),
-            R.style.DialogTheme,
-            { _, year, month, dayOfMonth ->
-                val date = dateToString(year, month + 1, dayOfMonth)
-                picture?.createdAt = date
-                binding.textPictureEditorDate.text = date
-            },
-            cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)
-        )
-        datePickerDialog.apply {
-            val cal = Calendar.getInstance()
-            datePicker.maxDate = cal.timeInMillis
-        }.show()
     }
 
     private fun makePicture(): Picture =

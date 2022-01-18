@@ -156,9 +156,9 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     }
 
     private fun initNaverMap() {
-        val mapFragment = childFragmentManager.findFragmentById(R.id.fragmentcontainer_picture_map) as? MapFragment
+        val mapFragment = childFragmentManager.findFragmentById(R.id.fragmentcontainer_capture) as? MapFragment
             ?: MapFragment.newInstance().also {
-                childFragmentManager.beginTransaction().add(R.id.fragmentcontainer_picture_map, it).commit()
+                childFragmentManager.beginTransaction().add(R.id.fragmentcontainer_capture, it).commit()
             }
         mapFragment.getMapAsync(this)
     }
