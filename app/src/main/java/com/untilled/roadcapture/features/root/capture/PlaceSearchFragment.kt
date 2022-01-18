@@ -15,12 +15,10 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.address.Address
-import com.untilled.roadcapture.data.datasource.api.dto.place.Place
+import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceRequest
 import com.untilled.roadcapture.data.datasource.api.dto.poi.Poi
 import com.untilled.roadcapture.data.datasource.api.dto.poi.Pois
-import com.untilled.roadcapture.data.entity.LocationLatLng
 import com.untilled.roadcapture.data.entity.Picture
-import com.untilled.roadcapture.data.entity.SearchResult
 import com.untilled.roadcapture.databinding.FragmentPlaceSearchBinding
 import com.untilled.roadcapture.features.common.CustomDivider
 import com.untilled.roadcapture.placeSearch
@@ -36,7 +34,8 @@ class PlaceSearchFragment : Fragment() {
     private val searchViewModel: PlaceSearchViewModel by viewModels()
 
     private lateinit var picture: Picture
-    private var resultList: List<SearchResult>? = listOf()
+
+    private var placeList: List<PlaceRequest>? = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,8 +50,9 @@ class PlaceSearchFragment : Fragment() {
 
             binding.progressbarPlaceSearchLoading.isVisible = false // 로딩 애니메이션 off
 
-            if(searchPlaceResponse != null) {
-                setData(searchPlaceResponse.searchPoiInfo.pois)
+            if (searchPlaceResponse != null) {
+                poisToPlace(searchPlaceResponse.searchPoiInfo.pois)
+                binding.recyclerPlaceSearch.requestModelBuild()
             } else {
                 displayNoResult()
             }
@@ -87,11 +87,12 @@ class PlaceSearchFragment : Fragment() {
         }
 
         binding.edtPlaceSearchInput.setOnEditorActionListener { v, actionId, event ->
-            when(actionId) {
+            when (actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> {
                     (v as EditText).text.toString().run {
                         if (isNullOrBlank()) {
-                            Toast.makeText(requireContext(), "검색어를 입력해 주세요.", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(requireContext(), "검색어를 입력해 주세요.", Toast.LENGTH_SHORT)
+                                .show()
                         } else {
                             displayLoadingAnimation()
                             searchViewModel.getSearchPlace(this)
@@ -106,19 +107,19 @@ class PlaceSearchFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        val customDivider = CustomDivider(2.5f,1f, Color.parseColor("#EFEFEF"))
+        val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
 
         binding.recyclerPlaceSearch.addItemDecoration(customDivider)
 
         binding.recyclerPlaceSearch.withModels {
-            resultList?.forEachIndexed { index, searchResult ->
+            placeList?.forEachIndexed { index, placeRequest ->
                 placeSearch {
                     id(index)
-                    searchResult(searchResult)
+                    place(placeRequest)
 
                     onClickItem { model, parentView, clickedView, position ->
                         if (clickedView.id == R.id.constraint_iplacesearch_container) {
-                            updatePicture(resultList!![position])
+                            picture.place = placeList!![position]
 
                             Navigation.findNavController(binding.root)
                                 .navigate(
@@ -132,49 +133,37 @@ class PlaceSearchFragment : Fragment() {
             }
         }
     }
-
-    private fun updatePicture(searchResult: SearchResult) {
-        picture.place = Place(
-            latitude = searchResult.locationLatLng.latitude.toString(),
-            longitude = searchResult.locationLatLng.longitude.toString(),
-            name = searchResult.name,
-            address = Address(
-                addressName = searchResult.addressName,
-                roadAddressName = searchResult.roadAddressName,
-                region1DepthName = searchResult.region1DepthName,
-                region2DepthName = searchResult.region2DepthName,
-                region3DepthName = searchResult.region3DepthName,
-                zoneNo = searchResult.zoneNo
-            ),
-            id = 0
-        )
+    
+    private fun poisToPlace(pois: Pois) {
+        placeList = pois.poi.map {
+            PlaceRequest(
+                // todo 생성날짜 표시
+                placeCreatedAt = "",
+                placeLastModifiedAt = "",
+                latitude = it.noorLat,
+                longitude = it.noorLon,
+                name = it.name ?: "",
+                Address(
+                    addressName = makeAddressNumber(it),
+                    roadAddressName = makeRoadName(it),
+                    region1DepthName = it.upperAddrName ?: "",
+                    region2DepthName = it.middleAddrName ?: "",
+                    region3DepthName = it.lowerAddrName ?: "",
+                    zoneNo = ""
+                )
+            )
+        }
     }
 
     private fun displayNoResult() {
         binding.textPlaceSearchNoresult.isVisible = true
-        resultList = null   // 결과 리스트 초기화
+        placeList = null   // 결과 리스트 초기화
         binding.recyclerPlaceSearch.requestModelBuild()
     }
 
     private fun displayLoadingAnimation() {
         binding.progressbarPlaceSearchLoading.isVisible = true  // 로딩 애니메이션 on
         binding.textPlaceSearchNoresult.isVisible = false
-    }
-
-    private fun setData(pois: Pois) {
-        resultList = pois.poi.map {
-            SearchResult(
-                name = it.name ?: "",
-                addressName = makeAddressNumber(it),
-                roadAddressName = makeRoadName(it),
-                locationLatLng = LocationLatLng(it.noorLat, it.noorLon),
-                region1DepthName = it.upperAddrName ?: "",
-                region2DepthName = it.middleAddrName ?: "",
-                region3DepthName = it.lowerAddrName ?: "",
-                zoneNo = ""
-            )
-        }
-        binding.recyclerPlaceSearch.requestModelBuild()
     }
 
     private fun makeAddressNumber(poi: Poi): String =

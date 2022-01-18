@@ -20,7 +20,6 @@ class PlaceSearchViewModel
     fun getSearchPlace(keyword: String) {
         viewModelScope.launch {
             repository.getSearchLocation(keyword= keyword).let { searchPlaceResponse ->
-                searchPlaceResponse
                 if(searchPlaceResponse.isSuccessful) {
                     _searchPlaceResponse.postValue(searchPlaceResponse.body())
                 } else {
