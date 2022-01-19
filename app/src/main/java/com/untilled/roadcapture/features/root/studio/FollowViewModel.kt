@@ -59,4 +59,5 @@ class FollowViewModel @Inject constructor(
                 Logger.d("test: $t")
             })
     }
+
 }

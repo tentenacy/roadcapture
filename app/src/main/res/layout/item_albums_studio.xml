@@ -30,8 +30,8 @@
             android:layout_height="0dp"
             android:onClick="@{onClickItem}"
             app:layout_constraintDimensionRatio="1:1"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             bind:studioThumbnailImage="@{studio.thumbnailUrl}"
             tools:src="@drawable/img_sample_thumbnail" />
@@ -41,25 +41,25 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/overlay_gradient_studio_thumbnail"
-            app:layout_constraintStart_toStartOf="@id/img_ialbums_studio_thumbnail"
+            app:layout_constraintBottom_toBottomOf="@id/img_ialbums_studio_thumbnail"
             app:layout_constraintEnd_toEndOf="@id/img_ialbums_studio_thumbnail"
-            app:layout_constraintTop_toTopOf="@id/img_ialbums_studio_thumbnail"
-            app:layout_constraintBottom_toBottomOf="@id/img_ialbums_studio_thumbnail"/>
+            app:layout_constraintStart_toStartOf="@id/img_ialbums_studio_thumbnail"
+            app:layout_constraintTop_toTopOf="@id/img_ialbums_studio_thumbnail" />
 
         <TextView
             android:id="@+id/text_ialbums_studio_title"
             style="@style/SubHeadBoldWhite"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="16dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="@{studio.title}"
-            android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            android:layout_marginEnd="64dp"
-            app:layout_constraintStart_toStartOf="@id/img_ialbums_studio_thumbnail"
-            app:layout_constraintEnd_toStartOf="@id/text_ialbums_studio_date"
             app:layout_constraintBottom_toBottomOf="@id/img_ialbums_studio_thumbnail"
+            app:layout_constraintEnd_toStartOf="@id/text_ialbums_studio_date"
+            app:layout_constraintStart_toStartOf="@id/img_ialbums_studio_thumbnail"
             tools:text="로드캡처 스터디" />
 
         <TextView
@@ -67,10 +67,10 @@
             style="@style/Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{studio.createdAt}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            bind:DateToSnsFormat="@{studio.createdAt}"
             tools:text="하루 전" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

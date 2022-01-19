@@ -9,7 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import com.airbnb.epoxy.EpoxyController
 import com.untilled.roadcapture.*
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
@@ -38,6 +40,9 @@ class StudioFragment : Fragment() {
     private val followingObserver = { following: PageResponse<UsersResponse> ->
         binding.following = following
     }
+    private val albumsObserver = { albumsResponse: PageResponse<AlbumResponse> ->
+        initAdapter(albumsResponse)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,7 +51,6 @@ class StudioFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentStudioBinding.inflate(layoutInflater, container, false)
 
-        initAdapter()
         return binding.root
     }
 
@@ -67,12 +71,14 @@ class StudioFragment : Fragment() {
         viewModel.user.observe(viewLifecycleOwner,userObserver)
         viewModel.follower.observe(viewLifecycleOwner,followerObserver)
         viewModel.following.observe(viewLifecycleOwner,followingObserver)
+        viewModel.albums.observe(viewLifecycleOwner,albumsObserver)
     }
 
     private fun initViews(){
         viewModel.getUserInfo(args.id)
         viewModel.getUserFollower(FollowingsCondition(args.id), PageRequest())
         viewModel.getUserFollowing(FollowingsCondition(args.id), PageRequest())
+        viewModel.getFollowingAlbums(args.id, PageRequest())
     }
 
     private fun setOnClickListeners() {
@@ -101,34 +107,33 @@ class StudioFragment : Fragment() {
         }
     }
 
-    private fun initAdapter() {
-//        binding.recyclerStudioAlbum.withModels {
-//            DummyDataSet.studios.forEachIndexed { index, album ->
-//                studioAlbum {
+    private fun initAdapter(albums: PageResponse<AlbumResponse>) {
+        binding.recyclerStudioAlbum.withModels { initStudioAlbumsItem(albums) }
+//        binding.recyclerStudioPlace.withModels {
+//            DummyDataSet.places.forEachIndexed { index, place ->
+//                placeFilter {
 //                    id(index)
-//                    studio(album)
+//                    place(place)
 //
 //                    onClickItem { model, parentView, clickedView, position ->
 //                        when(clickedView.id){
-//                            R.id.image_ialbums_studio_thumbnail ->
-//                                Navigation.findNavController(binding.root).
-//                                navigate(StudioFragmentDirections.actionStudioFragmentToPictureViewerContainerFragment(model.studio().id))
+//                            R.id.view_iplace_filter_overlay ->
+//                                clickedView.isSelected = !clickedView.isSelected
 //                        }
 //                    }
 //                }
 //            }
-//      }
-        binding.recyclerStudioPlace.withModels {
-            DummyDataSet.places.forEachIndexed { index, place ->
-                placeFilter {
-                    id(index)
-                    place(place)
+//        }
+    }
 
-                    onClickItem { model, parentView, clickedView, position ->
-                        when(clickedView.id){
-                            R.id.view_iplace_filter_overlay ->
-                                clickedView.isSelected = !clickedView.isSelected
-                        }
+    private fun EpoxyController.initStudioAlbumsItem(albums: PageResponse<AlbumResponse>) {
+        albums.content.forEachIndexed { index, album ->
+            albumsStudio {
+                id(index)
+                studio(album)
+                onClickItem { model, parentView, clickedView, position ->
+                    when(clickedView.id){
+
                     }
                 }
             }

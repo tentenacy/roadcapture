@@ -14,9 +14,9 @@ interface FollowApi {
 
     @GET(RoadCapturePathConstant.GET_FOLLOWERS_TO_ALBUMS)
     fun getFollowingAlbums(
+        @Query("followingId") id: Int?,
         @Query("page") page: Int?,
         @Query("size") size: Int?,
-        @Query("sort") sort: String?,
-        @Query("followingId") id: Int?,
+        @Query("sort") sort: String?
     ): Single<PageResponse<AlbumResponse>>
 }

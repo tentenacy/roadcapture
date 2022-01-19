@@ -1,18 +1,14 @@
 package com.untilled.roadcapture.features.root.studio
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
-import com.untilled.roadcapture.data.datasource.api.dto.user.UserResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
-import com.untilled.roadcapture.data.entity.User
 import com.untilled.roadcapture.data.repository.follow.FollowRepository
-import com.untilled.roadcapture.data.repository.token.LocalTokenRepository
-import com.untilled.roadcapture.data.repository.user.LocalUserRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -29,10 +25,15 @@ class StudioViewModel @Inject constructor(
 
     private val _user = MutableLiveData<UsersResponse>()
     val user: LiveData<UsersResponse> get() = _user
+
     private val _follower = MutableLiveData<PageResponse<UsersResponse>>()
     val follower : LiveData<PageResponse<UsersResponse>> get() = _follower
+
     private val _following = MutableLiveData<PageResponse<UsersResponse>>()
     val following : LiveData<PageResponse<UsersResponse>> get() = _following
+
+    private val _albums = MutableLiveData<PageResponse<AlbumResponse>>()
+    val albums: LiveData<PageResponse<AlbumResponse>> get() = _albums
 
     fun getUserInfo(id: Int){
         userRepository.getUserInfo(id)
@@ -64,6 +65,17 @@ class StudioViewModel @Inject constructor(
                 _follower.postValue(response)
             },{ t ->
                 Logger.d("test: $t")
+            }).addTo(compositeDisposable)
+    }
+
+    fun getFollowingAlbums(id: Int, pageRequest: PageRequest){
+        followRepository.getFollowingAlbums(id,pageRequest)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ response ->
+                _albums.postValue(response)
+            },{ t ->
+
             }).addTo(compositeDisposable)
     }
 
