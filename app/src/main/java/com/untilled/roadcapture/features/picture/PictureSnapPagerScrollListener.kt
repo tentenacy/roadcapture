@@ -1,15 +1,10 @@
-package com.untilled.roadcapture.features.root.albums
+package com.untilled.roadcapture.features.picture
 
 import androidx.recyclerview.widget.RecyclerView
-
-import android.view.View
-
-import androidx.annotation.NonNull
 
 import androidx.recyclerview.widget.PagerSnapHelper
 
 import androidx.annotation.IntDef
-import androidx.recyclerview.widget.RecyclerView.LayoutManager
 
 
 class PictureSnapPagerScrollListener(// Properties

@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.root.settings
+package com.untilled.roadcapture.features.settings
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentSettingsAccountBinding
 import com.untilled.roadcapture.utils.mainActivity
 import dagger.hilt.android.AndroidEntryPoint

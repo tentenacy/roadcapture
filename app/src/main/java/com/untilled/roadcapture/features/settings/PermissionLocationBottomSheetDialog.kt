@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.root.settings
+package com.untilled.roadcapture.features.settings
 
 import android.content.Intent
 import android.net.Uri

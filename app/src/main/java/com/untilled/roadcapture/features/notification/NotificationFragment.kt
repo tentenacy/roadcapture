@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.root.notification
+package com.untilled.roadcapture.features.notification
 
 import android.graphics.Color
 import android.os.Bundle

@@ -1,16 +1,16 @@
-package com.untilled.roadcapture.features.root.settings
+package com.untilled.roadcapture.features.settings
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.untilled.roadcapture.databinding.FragmentSettingsUsernameBinding
+import com.untilled.roadcapture.databinding.FragmentSettingsPasswordBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SettingsUsernameFragment: Fragment() {
-    private var _binding: FragmentSettingsUsernameBinding? = null
+class SettingsPasswordFragment: Fragment() {
+    private var _binding: FragmentSettingsPasswordBinding? = null
     val binding get() = _binding!!
 
     override fun onCreateView(
@@ -18,7 +18,7 @@ class SettingsUsernameFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentSettingsUsernameBinding.inflate(inflater,container,false)
+        _binding = FragmentSettingsPasswordBinding.inflate(inflater,container,false)
 
         return binding.root
     }
@@ -35,7 +35,7 @@ class SettingsUsernameFragment: Fragment() {
     }
 
     private fun setOnClickListeners(){
-        binding.imageSettingusernameBack.setOnClickListener {
+        binding.imageSettingpwdBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
     }

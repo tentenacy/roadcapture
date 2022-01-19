@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.root.comment
+package com.untilled.roadcapture.features.comment
 
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.paging3.PagingDataEpoxyController

@@ -75,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.untilled.roadcapture.features.root.settings.SettingsFragment"
+        android:name="com.untilled.roadcapture.features.settings.SettingsFragment"
         tools:layout="@layout/fragment_settings"
         android:label="SettingsFragment" >
         <action
@@ -84,7 +84,7 @@
     </fragment>
     <fragment
         android:id="@+id/accountSettingFragment"
-        android:name="com.untilled.roadcapture.features.root.settings.SettingsAccountFragment"
+        android:name="com.untilled.roadcapture.features.settings.SettingsAccountFragment"
         tools:layout="@layout/fragment_settings_account"
         android:label="AccountSettingFragment" >
         <action
@@ -135,7 +135,7 @@
     </fragment>
     <fragment
         android:id="@+id/commentFragment"
-        android:name="com.untilled.roadcapture.features.root.comment.CommentFragment"
+        android:name="com.untilled.roadcapture.features.comment.CommentFragment"
         android:label="CommentFragment"
         tools:layout="@layout/fragment_comment">
         <action
@@ -147,7 +147,7 @@
     </fragment>
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="com.untilled.roadcapture.features.root.notification.NotificationFragment"
+        android:name="com.untilled.roadcapture.features.notification.NotificationFragment"
         android:label="NotificationFragment"
         tools:layout="@layout/fragment_notification">
         <action
@@ -238,17 +238,17 @@
         tools:layout="@layout/fragment_forgotpwd"/>
     <fragment
         android:id="@+id/passwordSettingFragment"
-        android:name="com.untilled.roadcapture.features.root.settings.SettingsPasswordFragment"
+        android:name="com.untilled.roadcapture.features.settings.SettingsPasswordFragment"
         android:label="PasswordSettingFragment"
         tools:layout="@layout/fragment_settings_password"/>
     <fragment
         android:id="@+id/usernameSettingFragment"
-        android:name="com.untilled.roadcapture.features.root.settings.SettingsUsernameFragment"
+        android:name="com.untilled.roadcapture.features.settings.SettingsUsernameFragment"
         android:label="UsernameSettingFragment"
         tools:layout="@layout/fragment_settings_username"/>
     <fragment
         android:id="@+id/serviceWithdrawalFragment"
-        android:name="com.untilled.roadcapture.features.root.settings.WithdrawalFragment"
+        android:name="com.untilled.roadcapture.features.settings.WithdrawalFragment"
         android:label="ServiceWithdrawalFragment"
         tools:layout="@layout/fragment_withdrawal"/>
     <fragment
@@ -269,7 +269,7 @@
     </fragment>
     <fragment
         android:id="@+id/pictureViewerContainerFragment"
-        android:name="com.untilled.roadcapture.features.root.albums.PictureViewerFragment"
+        android:name="com.untilled.roadcapture.features.picture.PictureViewerFragment"
         tools:layout="@layout/fragment_picture_viewer"
         android:label="PictureViewerContainerFragment" >
         <argument

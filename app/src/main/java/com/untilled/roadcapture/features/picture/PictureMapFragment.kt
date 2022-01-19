@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.root.albums
+package com.untilled.roadcapture.features.picture
 
 import android.graphics.Color
 import android.os.Bundle

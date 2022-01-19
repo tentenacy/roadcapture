@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.root.albums
+package com.untilled.roadcapture.features.picture
 
 import android.animation.ValueAnimator
 import android.os.Bundle
@@ -16,7 +16,7 @@ import com.untilled.roadcapture.PictureSliderThumbnailBindingModel_
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.databinding.FragmentPictureSliderBinding
-import com.untilled.roadcapture.features.root.comment.CommentBottomSheetDialog
+import com.untilled.roadcapture.features.comment.CommentBottomSheetDialog
 import com.untilled.roadcapture.pictureSliderContent
 import com.untilled.roadcapture.pictureSliderThumbnail
 import com.untilled.roadcapture.utils.setPaddingWhenStatusBarTransparent

@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.root.comment
+package com.untilled.roadcapture.features.comment
 
 import android.app.AlertDialog
 import android.graphics.Color
@@ -17,10 +17,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.datasource.api.dto.comment.Comments
-import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.databinding.BottomsheetCommentBinding
 import com.untilled.roadcapture.features.common.CustomDivider
-import com.untilled.roadcapture.features.root.albums.PictureViewerViewModel
+import com.untilled.roadcapture.features.picture.PictureViewerViewModel
 import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest

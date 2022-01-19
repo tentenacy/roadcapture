@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.root.albums
+package com.untilled.roadcapture.features.picture
 
 import android.util.Log
 import androidx.lifecycle.LiveData

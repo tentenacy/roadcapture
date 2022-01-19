@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.root.notification
+package com.untilled.roadcapture.features.notification
 
 import android.text.Html
 import android.widget.ImageView

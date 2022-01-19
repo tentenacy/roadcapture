@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.root.albums
+package com.untilled.roadcapture.features.picture
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.databinding.FragmentPictureViewerBinding
 import com.untilled.roadcapture.utils.*
 import dagger.hilt.android.AndroidEntryPoint
