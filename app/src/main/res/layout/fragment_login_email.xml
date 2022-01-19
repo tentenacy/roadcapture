@@ -39,7 +39,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
         android:hint="@string/login_email_inputemail_hint"
-        android:inputType="textPassword"
+        android:inputType="textEmailAddress"
         app:boxBackgroundColor="@android:color/transparent"
         app:layout_constraintEnd_toStartOf="@+id/guideline_login_email_end_56dp"
         app:layout_constraintStart_toStartOf="@+id/text_login_email_label_email"

@@ -35,10 +35,7 @@ class MainViewModel @Inject constructor(
     }
 
     override fun onCleared() {
-        tokenExpirationObservable.unregisterObserver(this)
-        localTokenRepository.getOAuthToken().whenHasOAuthToken {
-            oauthLoginManagerMap[it.name]?.unregisterObserver(this)
-        }
+        unregisterObservers()
         super.onCleared()
     }
 
@@ -80,5 +77,12 @@ class MainViewModel @Inject constructor(
 
     fun registerToOAuthLoginManagerSubject(socialType: SocialType) {
         oauthLoginManagerMap[socialType.name]?.registerObserver(this)
+    }
+
+    private fun unregisterObservers() {
+        tokenExpirationObservable.unregisterObserver(this)
+        localTokenRepository.getOAuthToken().whenHasOAuthToken {
+            oauthLoginManagerMap[it.name]?.unregisterObserver(this)
+        }
     }
 }

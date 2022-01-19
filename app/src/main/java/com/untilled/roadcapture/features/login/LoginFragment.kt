@@ -10,20 +10,20 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import androidx.work.WorkManager
 import com.facebook.CallbackManager
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.kakao.sdk.user.UserApiClient
 import com.nhn.android.naverlogin.OAuthLogin
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentLoginBinding
+import com.untilled.roadcapture.features.base.BaseFragment
 import com.untilled.roadcapture.utils.*
 import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment() {
     private var _binding: FragmentLoginBinding? = null
     private val binding get() = _binding!!
 
@@ -48,13 +48,6 @@ class LoginFragment : Fragment() {
     @Inject
     lateinit var naverLoginManager: OAuthLogin
 
-    @Inject
-    lateinit var workManager: WorkManager
-
-    private val loadingDialog : LoadingDialog by lazy{
-        LoadingDialog(requireContext())
-    }
-
     private val viewModel by lazy {
         ViewModelProvider(this).get(LoginViewModel::class.java)
     }
@@ -78,35 +71,30 @@ class LoginFragment : Fragment() {
 
     private val kakaoLoginOnClickListener: (View?) -> Unit = {
         if (UserApiClient.instance.isKakaoTalkLoginAvailable(requireContext())) {
-            UserApiClient.instance.loginWithKakaoTalk(requireContext(), callback = kakaoOAuthLoginHandler)
+            UserApiClient.instance.loginWithKakaoTalk(
+                requireContext(),
+                callback = kakaoOAuthLoginHandler
+            )
         } else {
-            UserApiClient.instance.loginWithKakaoAccount(requireContext(), callback = kakaoOAuthLoginHandler)
+            UserApiClient.instance.loginWithKakaoAccount(
+                requireContext(),
+                callback = kakaoOAuthLoginHandler
+            )
         }
     }
 
     private val googleLoginOnClickListener: (View?) -> Unit = {
-        mainActivity().activityResultFactory.launch(googleSignInClient.signInIntent, googleOAuthLoginHandler)
+        mainActivity().activityResultFactory.launch(
+            googleSignInClient.signInIntent,
+            googleOAuthLoginHandler
+        )
     }
 
-    private val isLoadingObserver = { isLoading: Boolean ->
-        if (isLoading) {
-            loadingDialog.show()
-        } else {
-            loadingDialog.dismiss()
+    private val loginObserver: (SocialType?) -> Unit = { socialType ->
+        if(socialType != null) {
+            mainActivity().viewModel.registerToOAuthLoginManagerSubject(socialType)
         }
-    }
-
-    private val loginObserver: (SocialType) -> Unit = { socialType ->
-        mainActivity().viewModel.registerToOAuthLoginManagerSubject(socialType)
         findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRootFragment())
-    }
-
-    private val errorObserver = { error: String ->
-        if (error.isNotBlank()) Toast.makeText(
-            requireContext(),
-            "error: $error",
-            Toast.LENGTH_SHORT
-        ).show()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -156,9 +144,10 @@ class LoginFragment : Fragment() {
             registerCallback(callbackManager, facebookOAuthLoginHandler)
         }
     }
+
     private fun observeData() {
         viewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
-        viewModel.login.observe(viewLifecycleOwner, loginObserver)
+        viewModel.isLoggedIn.observe(viewLifecycleOwner, loginObserver)
         viewModel.error.observe(viewLifecycleOwner, errorObserver)
     }
 

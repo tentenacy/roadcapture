@@ -1,5 +1,7 @@
 package com.untilled.roadcapture.data.datasource.api.dto.user
 
+import com.untilled.roadcapture.data.datasource.api.dto.address.Address
+
 data class UserResponse(
     val id: Int,
     val email: String,
@@ -7,5 +9,5 @@ data class UserResponse(
     var profileImageUrl: String?,
     var introduction: String?,
     val provider: String?,
-    val address: String?
+    val address: Address?
 )

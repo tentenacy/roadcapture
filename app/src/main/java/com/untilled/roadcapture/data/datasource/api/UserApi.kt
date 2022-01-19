@@ -26,6 +26,11 @@ interface UserApi {
         @Body reissueRequest: ReissueRequest
     ): Single<Response<TokenResponse>>
 
+    @POST(RoadCapturePathConstant.POST_LOGIN)
+    fun login(
+        @Body loginRequest: LoginRequest
+    ): Single<Response<TokenResponse>>
+
     @GET(RoadCapturePathConstant.GET_USER_DETAiL)
     fun getUserDetail(
     ): Single<UserResponse>

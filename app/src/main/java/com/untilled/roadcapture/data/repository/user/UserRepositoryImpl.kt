@@ -19,7 +19,6 @@ class UserRepositoryImpl @Inject constructor(
     private val roadCaptureApi: RoadCaptureApi,
     private val localTokenDao: LocalTokenDao,
     private val localOAuthTokenDao: LocalOAuthTokenDao,
-    private val localUserDao: LocalUserDao,
     private val gson: Gson,
 ) :
     UserRepository {
@@ -43,13 +42,32 @@ class UserRepositoryImpl @Inject constructor(
         val token = localTokenDao.getToken()
         return roadCaptureApi.reissue(ReissueRequest(token.accessToken, token.refreshToken))
             .flatMap { response ->
+                response.errorBody()?.let {
+                    return@flatMap Single.error(IllegalStateException(it.toErrorResponse(gson)?.message))
+                }
+
                 response.body()?.let {
                     return@flatMap Single.just(it)
                 }
                 return@flatMap Single.error(IllegalStateException("Network error"))
             }
-            .retryThreeTimes()
+            .retry(3)
     }
+
+    override fun login(loginRequest: LoginRequest): Single<TokenResponse> =
+        roadCaptureApi.login(loginRequest)
+            .flatMap { response ->
+                response.errorBody()?.let {
+                    return@flatMap Single.error(IllegalStateException(it.toErrorResponse(gson)?.message))
+                }
+
+                response.body()?.let {
+                    return@flatMap Single.just(it)
+                }
+
+                return@flatMap Single.error(IllegalStateException("Network error"))
+            }
+            .retryThreeTimes()
 
     private fun socialLogin(socialType: SocialType, accessToken: String): Single<TokenResponse> =
         roadCaptureApi.socialLogin(
