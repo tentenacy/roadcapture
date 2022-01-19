@@ -28,10 +28,10 @@ class StudioViewModel @Inject constructor(
     val user: LiveData<UsersResponse> get() = _user
 
     init {
-        getUserInfo(localUserRepository.getUser(),localTokenRepository.getToken().accessToken)
+        getUserInfo(localUserRepository.getUser())
     }
 
-    fun getUserInfo(id: Int, token: String){
+    fun getUserInfo(id: Int){
         userRepository.getUserInfo(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -42,7 +42,7 @@ class StudioViewModel @Inject constructor(
             })
     }
 
-    fun follow(id: Int, token: String){
+    fun follow(id: Int){
         followRepository.follow(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

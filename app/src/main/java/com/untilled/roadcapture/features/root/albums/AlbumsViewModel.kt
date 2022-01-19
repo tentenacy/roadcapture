@@ -11,7 +11,9 @@ import androidx.paging.cachedIn
 import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.data.datasource.api.dto.album.Albums
 import com.untilled.roadcapture.data.datasource.api.dto.comment.Comments
+import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
+import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 
 import com.untilled.roadcapture.data.repository.album.AlbumCommentsPagingSource
@@ -40,47 +42,47 @@ class AlbumsViewModel
     private val _user =  MutableLiveData<PageResponse<UsersResponse>>()
     val user: LiveData<PageResponse<UsersResponse>> get() = _user
 
-    fun getAlbums(token: String,dateTimeFrom: String?, dateTimeTo: String?): Flow<PagingData<Albums>>{
+    fun getAlbums(dateTimeFrom: String?, dateTimeTo: String?): Flow<PagingData<Albums>>{
         val lastResult = currentAlbumsResult
         if(dateTimeFrom == currentDateTimeFrom && dateTimeTo == currentDateTimeTo && lastResult != null){
             return lastResult
         }
         currentDateTimeFrom = dateTimeFrom
         currentDateTimeTo = dateTimeTo
-        val newResult: Flow<PagingData<Albums>> = getAlbumsResultStream(token,dateTimeFrom,dateTimeTo).cachedIn(viewModelScope)
+        val newResult: Flow<PagingData<Albums>> = getAlbumsResultStream(dateTimeFrom,dateTimeTo).cachedIn(viewModelScope)
         currentAlbumsResult = newResult
         return newResult
     }
 
-    fun getAlbumComments(token: String,albumId: Int): Flow<PagingData<Comments>> {
-        return getAlbumCommentsResultStream(token,albumId).cachedIn(viewModelScope)
+    fun getAlbumComments(albumId: Int): Flow<PagingData<Comments>> {
+        return getAlbumCommentsResultStream(albumId).cachedIn(viewModelScope)
     }
 
-    private fun getAlbumsResultStream(token: String,dateTimeFrom: String?, dateTimeTo: String?): Flow<PagingData<Albums>> {
+    private fun getAlbumsResultStream(dateTimeFrom: String?, dateTimeTo: String?): Flow<PagingData<Albums>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 10,
                 prefetchDistance = 20,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { AlbumsPagingSource(albumRepository,token,dateTimeFrom,dateTimeTo) }
+            pagingSourceFactory = { AlbumsPagingSource(albumRepository,dateTimeFrom,dateTimeTo) }
         )
             .flow
     }
 
-    private fun getAlbumCommentsResultStream(token: String,albumId: Int): Flow<PagingData<Comments>> {
+    private fun getAlbumCommentsResultStream(albumId: Int): Flow<PagingData<Comments>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 10,
                 prefetchDistance = 20,
                 enablePlaceholders = false
             ),
-            pagingSourceFactory = { AlbumCommentsPagingSource(albumRepository,token,albumId) }
+            pagingSourceFactory = { AlbumCommentsPagingSource(albumRepository,albumId) }
         ).flow
     }
 
-    fun getUserFollowing(id: Int, page: Int? = null, size: Int? = null, sort: String? = null,username: String? = null){
-        userRepository.getUserFollowing(id, page, size, sort, username)
+    fun getUserFollowing(followingsCondition: FollowingsCondition, pageRequest: PageRequest){
+        userRepository.getUserFollowing(followingsCondition, pageRequest)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ user ->

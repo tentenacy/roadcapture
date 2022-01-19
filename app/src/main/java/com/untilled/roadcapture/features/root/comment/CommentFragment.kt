@@ -101,7 +101,7 @@ class CommentFragment : Fragment() {
 
     private fun updateView(albumId: Int) {
         lifecycleScope.launch {
-            viewModel.getAlbumComments(Token.accessToken,albumId).collectLatest { pagingData: PagingData<Comments> ->
+            viewModel.getAlbumComments(albumId).collectLatest { pagingData: PagingData<Comments> ->
                 epoxyController.submitData(pagingData)
             }
         }

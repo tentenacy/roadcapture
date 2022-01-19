@@ -1,15 +1,14 @@
 package com.untilled.roadcapture.data.repository.user
 
-import android.util.Log
 import com.google.gson.Gson
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.api.dto.common.ErrorCode
+import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.*
 import com.untilled.roadcapture.data.datasource.dao.LocalOAuthTokenDao
 import com.untilled.roadcapture.data.datasource.dao.LocalTokenDao
 import com.untilled.roadcapture.data.datasource.dao.LocalUserDao
-import com.untilled.roadcapture.data.entity.User
 import com.untilled.roadcapture.utils.retryThreeTimes
 import com.untilled.roadcapture.utils.toErrorResponse
 import com.untilled.roadcapture.utils.type.SocialType
@@ -82,20 +81,12 @@ class UserRepositoryImpl @Inject constructor(
 
 
     override fun getUserFollower(
-        id: Int,
-        page: Int?,
-        size: Int?,
-        sort: String?,
-        username: String?
+        followingsCondition: FollowingsCondition, pageRequest: PageRequest
     ): Single<PageResponse<UsersResponse>> =
-        roadCaptureApi.getUserFollower(id, page, size, sort, username)
+        roadCaptureApi.getUserFollower(followingsCondition.userId,pageRequest.page,pageRequest.size,pageRequest.sort,followingsCondition.username)
 
     override fun getUserFollowing(
-        id: Int,
-        page: Int?,
-        size: Int?,
-        sort: String?,
-        username: String?
+        followingsCondition: FollowingsCondition, pageRequest: PageRequest
     ): Single<PageResponse<UsersResponse>> =
-        roadCaptureApi.getUserFollowing(id, page, size, sort, username)
+        roadCaptureApi.getUserFollowing(followingsCondition.userId,pageRequest.page,pageRequest.size,pageRequest.sort,followingsCondition.username)
 }

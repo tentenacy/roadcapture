@@ -9,7 +9,6 @@ import java.io.IOException
 
 class AlbumCommentsPagingSource(
     private val repository: AlbumRepository,
-    private val token: String,
     private val albumId: Int
 ): PagingSource<Int,Comments>() {
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Comments> {

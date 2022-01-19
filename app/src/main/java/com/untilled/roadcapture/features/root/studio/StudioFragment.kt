@@ -49,7 +49,7 @@ class StudioFragment : Fragment() {
 
     }
     private fun initViews(){
-        viewModel.getUserInfo(args.id, Token.accessToken)
+        viewModel.getUserInfo(args.id)
     }
 
     private fun observeData() {
@@ -68,7 +68,7 @@ class StudioFragment : Fragment() {
                 .navigate(R.id.action_studioFragment_to_followingFragment)
         }
         binding.btnStudioFollow.setOnClickListener {
-            viewModel.follow(args.id,Token.accessToken)
+            viewModel.follow(args.id)
         }
         binding.imgStudioMoreBefore.setOnClickListener {
 

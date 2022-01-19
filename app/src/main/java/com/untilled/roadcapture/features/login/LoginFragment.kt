@@ -47,7 +47,7 @@ class LoginFragment : Fragment() {
 
     @Inject
     lateinit var callbackManager: CallbackManager
-    
+
     @Inject
     lateinit var naverLoginManager: OAuthLogin
 

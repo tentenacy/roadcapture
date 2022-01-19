@@ -10,7 +10,6 @@ import java.io.IOException
 
 class AlbumsPagingSource (
     private val repository: AlbumRepository,
-    private val token: String,
     private val dateTimeFrom: String?,
     private val dateTimeTo: String?)
     : PagingSource<Int, Albums>() {
