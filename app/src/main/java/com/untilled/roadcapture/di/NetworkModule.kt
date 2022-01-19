@@ -2,6 +2,7 @@ package com.untilled.roadcapture.di
 
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.api.TmapService
+import com.untilled.roadcapture.network.interceptor.OAuthTokenInterceptor
 import com.untilled.roadcapture.network.interceptor.TokenInterceptor
 import dagger.Module
 import dagger.Provides
@@ -32,10 +33,15 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideRetrofitBuilder(httpLoggingInterceptor: HttpLoggingInterceptor, authenticationInterceptor: TokenInterceptor): Retrofit.Builder {
+    fun provideRetrofitBuilder(
+        httpLoggingInterceptor: HttpLoggingInterceptor,
+        tokenInterceptor: TokenInterceptor,
+        oauthTokenInterceptor: OAuthTokenInterceptor,
+    ): Retrofit.Builder {
 
         val client = OkHttpClient.Builder()
-            .addInterceptor(authenticationInterceptor)
+            .addInterceptor(tokenInterceptor)
+            .addInterceptor(oauthTokenInterceptor)
             .addInterceptor(httpLoggingInterceptor)
             .build()
 

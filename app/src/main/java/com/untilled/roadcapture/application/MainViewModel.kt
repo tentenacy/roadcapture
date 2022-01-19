@@ -8,10 +8,9 @@ import com.untilled.roadcapture.data.repository.user.LocalUserRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
 import com.untilled.roadcapture.network.interceptor.TokenInterceptor
-import com.untilled.roadcapture.network.observer.OAuthRefreshTokenExpirationObserver
+import com.untilled.roadcapture.network.observer.OAuthTokenExpirationObserver
 import com.untilled.roadcapture.network.observer.TokenExpirationObserver
 import com.untilled.roadcapture.network.subject.OAuthLoginManagerSubject
-import com.untilled.roadcapture.utils.manager.OAuthLoginManager
 import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -26,7 +25,7 @@ class MainViewModel @Inject constructor(
     private val localUserRepository: LocalUserRepository,
     private val tokenExpirationObservable: TokenInterceptor,
     private val oauthLoginManagerMap: Map<String, @JvmSuppressWildcards OAuthLoginManagerSubject>,
-) : BaseViewModel(), TokenExpirationObserver, OAuthRefreshTokenExpirationObserver {
+) : BaseViewModel(), TokenExpirationObserver, OAuthTokenExpirationObserver {
 
     private var _isLoggedOut = MutableLiveData<Boolean>(false)
     val isLoggedOut: LiveData<Boolean> get() = _isLoggedOut
@@ -62,6 +61,10 @@ class MainViewModel @Inject constructor(
     }
 
     override fun onRefreshTokenExpired() {
+        logout()
+    }
+
+    override fun onOAuthTokenExpired() {
         logout()
     }
 

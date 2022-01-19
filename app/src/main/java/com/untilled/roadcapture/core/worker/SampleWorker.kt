@@ -11,11 +11,9 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedInject
 
 @HiltWorker
-class OAuthRefreshTokenWorker @AssistedInject constructor(
+class SampleWorker @AssistedInject constructor(
     @Assisted private val appContext: Context,
     @Assisted private val workerParams: WorkerParameters,
-    private val localOAuthTokenDao: LocalOAuthTokenDao,
-    private val oauthLoginManagerMap: Map<String, @JvmSuppressWildcards OAuthLoginManagerSubject>,
 ) :
     Worker(appContext, workerParams) {
 
@@ -24,8 +22,7 @@ class OAuthRefreshTokenWorker @AssistedInject constructor(
 
         return try {
             Logger.d("Worker Successful")
-            oauthLoginManagerMap[localOAuthTokenDao.getToken().socialType]?.validateToken()
-            Result.retry()
+            Result.success()
         } catch (e: Exception) {
             Logger.e("Worker Exception $e")
             Result.failure()

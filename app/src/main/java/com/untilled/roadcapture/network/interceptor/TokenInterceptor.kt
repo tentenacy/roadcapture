@@ -22,7 +22,6 @@ class TokenInterceptor @Inject constructor(
             .build()
         val response = chain.proceed(request)
 
-        //소셜 액세스 토큰이 유효하지 않으면 로그아웃
         if (!response.isSuccessful) {
             val errorResponse: ErrorResponse? = response.peekBody(2048).toErrorResponse(gson)
 
@@ -31,7 +30,7 @@ class TokenInterceptor @Inject constructor(
                     notifyTokenExpired()
                 }
                 ErrorCode.REFRESH_TOKEN_ERROR.code -> {
-
+                    notifyRefreshTokenExpired()
                 }
             }
         }
@@ -41,5 +40,9 @@ class TokenInterceptor @Inject constructor(
 
     private fun notifyTokenExpired() {
         observers.forEach(TokenExpirationObserver::onTokenExpired)
+    }
+
+    private fun notifyRefreshTokenExpired() {
+        observers.forEach(TokenExpirationObserver::onRefreshTokenExpired)
     }
 }

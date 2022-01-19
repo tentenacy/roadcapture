@@ -13,7 +13,7 @@ import dagger.multibindings.StringKey
 abstract class DaoModule {
 
     @Binds
-    abstract fun provideKotPrefOAuthTokenDao(dao: KotPrefOAuthTokenDao): LocalOAuthTokenDao
+    abstract fun provideLocalOAuthTokenDao(dao: KotPrefOAuthTokenDao): LocalOAuthTokenDao
 
     @Binds
     abstract fun provideLocalTokenDao(dao: TokenDao): LocalTokenDao

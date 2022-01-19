@@ -16,8 +16,6 @@ class NaverLoginManager @Inject constructor(
         Logger.d("logout")
     }
 
-
-
     override fun withdrawal() {
     }
 

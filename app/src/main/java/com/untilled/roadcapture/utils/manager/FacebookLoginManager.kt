@@ -12,8 +12,6 @@ class FacebookLoginManager @Inject constructor(private val loginManager: LoginMa
         Logger.d("logout")
     }
 
-
-
     override fun withdrawal() {
     }
 
