@@ -40,9 +40,7 @@ class StudioFragment : Fragment() {
     private val followingObserver = { following: PageResponse<UsersResponse> ->
         binding.following = following
     }
-    private val albumsObserver = { albumsResponse: PageResponse<AlbumResponse> ->
-        initAdapter(albumsResponse)
-    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,14 +69,12 @@ class StudioFragment : Fragment() {
         viewModel.user.observe(viewLifecycleOwner,userObserver)
         viewModel.follower.observe(viewLifecycleOwner,followerObserver)
         viewModel.following.observe(viewLifecycleOwner,followingObserver)
-        viewModel.albums.observe(viewLifecycleOwner,albumsObserver)
     }
 
     private fun initViews(){
         viewModel.getUserInfo(args.id)
         viewModel.getUserFollower(FollowingsCondition(args.id), PageRequest())
         viewModel.getUserFollowing(FollowingsCondition(args.id), PageRequest())
-        viewModel.getFollowingAlbums(args.id, PageRequest())
     }
 
     private fun setOnClickListeners() {

@@ -32,9 +32,6 @@ class StudioViewModel @Inject constructor(
     private val _following = MutableLiveData<PageResponse<UsersResponse>>()
     val following : LiveData<PageResponse<UsersResponse>> get() = _following
 
-    private val _albums = MutableLiveData<PageResponse<AlbumResponse>>()
-    val albums: LiveData<PageResponse<AlbumResponse>> get() = _albums
-
     fun getUserInfo(id: Int){
         userRepository.getUserInfo(id)
             .subscribeOn(Schedulers.io())
@@ -65,17 +62,6 @@ class StudioViewModel @Inject constructor(
                 _follower.postValue(response)
             },{ t ->
                 Logger.d("test: $t")
-            }).addTo(compositeDisposable)
-    }
-
-    fun getFollowingAlbums(id: Int, pageRequest: PageRequest){
-        followRepository.getFollowingAlbums(id,pageRequest)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ response ->
-                _albums.postValue(response)
-            },{ t ->
-
             }).addTo(compositeDisposable)
     }
 
