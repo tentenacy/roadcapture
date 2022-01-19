@@ -16,6 +16,11 @@ interface UserApi {
         @Body tokenRequest: TokenRequest,
     ): Single<Response<TokenResponse>>
 
+    @POST(RoadCapturePathConstant.POST_SIGNUP)
+    fun signup(
+        @Body signupRequest: SignupRequest,
+    ): Single<Response<Unit>>
+
     @POST(RoadCapturePathConstant.POST_SOCIAL_SIGNUP)
     fun socialSignup(
         @Path("socialType") socialType: String,

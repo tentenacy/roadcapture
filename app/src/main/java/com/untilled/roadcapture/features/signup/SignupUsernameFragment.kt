@@ -1,24 +1,63 @@
 package com.untilled.roadcapture.features.signup
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.data.datasource.api.dto.user.SignupRequest
 import com.untilled.roadcapture.databinding.FragmentSignupUsernameBinding
+import com.untilled.roadcapture.features.base.BaseFragment
+import com.untilled.roadcapture.utils.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignupUsernameFragment : Fragment() {
+class SignupUsernameFragment : BaseFragment() {
 
     private val viewModel: SignupViewModel by viewModels({ requireParentFragment() })
 
     private var _binding: FragmentSignupUsernameBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var callback: OnBackPressedCallback
+
+    private val usernameObserver: (String) -> Unit = {
+        if (it.length in 2..12)
+            binding.motionSignupUsernameContainer.transitionToEnd()
+        else
+            binding.motionSignupUsernameContainer.transitionToStart()
+    }
+
+    private val isLoggedInObserver: (Boolean) -> Unit = { isLoggedIn ->
+        if (isLoggedIn) {
+            Navigation.findNavController((parentFragment?.parentFragment as SignupFragment).binding.root)
+                .navigate(SignupFragmentDirections.actionSignupFragmentToRootFragment())
+        }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                binding.edtSignupUsernameInput.setText("")
+                findNavController().navigateUp()
+            }
+        }
+        mainActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,14 +80,13 @@ class SignupUsernameFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observeValidation()
+        observeData()
         setOnClickListeners()
     }
 
     private fun setOnClickListeners() {
         binding.btnSignupUsernameConfirm.setOnClickListener {
-            Navigation.findNavController((parentFragment?.parentFragment as SignupFragment).binding.root)
-                .navigate(R.id.action_signupFragment_to_rootFragment)
+            viewModel.signup()
         }
         binding.textSignupUsernameTermsofservice.setOnClickListener {
             Navigation.findNavController((parentFragment?.parentFragment as SignupFragment).binding.root)
@@ -56,18 +94,14 @@ class SignupUsernameFragment : Fragment() {
         }
 
         (parentFragment?.parentFragment as SignupFragment).binding.imgSignupBack.setOnClickListener {
-            viewModel.username.value = ""
             requireActivity().onBackPressed()
         }
     }
 
-    private fun observeValidation() {
-        viewModel.username.observe(viewLifecycleOwner, Observer {
-            if (it.length >= 2)
-                binding.motionSignupUsernameContainer.transitionToEnd()
-            else
-                binding.motionSignupUsernameContainer.transitionToStart()
-        })
-
+    private fun observeData() {
+        viewModel.username.observe(viewLifecycleOwner, usernameObserver)
+        viewModel.isLoggedIn.observe(viewLifecycleOwner, isLoggedInObserver)
+        viewModel.error.observe(viewLifecycleOwner, errorObserver)
+        viewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
     }
 }

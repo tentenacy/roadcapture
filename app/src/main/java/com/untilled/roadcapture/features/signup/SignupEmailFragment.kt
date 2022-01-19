@@ -1,12 +1,13 @@
 package com.untilled.roadcapture.features.signup
 
 import android.os.Bundle
+import android.util.Patterns
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentSignupEmailBinding
@@ -19,6 +20,14 @@ class SignupEmailFragment : Fragment() {
 
     private var _binding: FragmentSignupEmailBinding? = null
     private val binding get() = _binding!!
+
+    private val emailObserver: (String) -> Unit = { email ->
+        if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            binding.motionSignupEmailContainer.transitionToEnd()
+        } else {
+            binding.motionSignupEmailContainer.transitionToStart()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,15 +65,8 @@ class SignupEmailFragment : Fragment() {
         }
     }
 
-
     private fun observeValidation() {
-        viewModel.email.observe(viewLifecycleOwner, Observer {
-            if (android.util.Patterns.EMAIL_ADDRESS.matcher(it).matches()) {
-                binding.motionSignupEmailContainer.transitionToEnd()
-            } else {
-                binding.motionSignupEmailContainer.transitionToStart()
-            }
-        })
+        viewModel.email.observe(viewLifecycleOwner, emailObserver)
     }
 
 }

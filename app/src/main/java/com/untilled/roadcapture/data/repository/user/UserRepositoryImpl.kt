@@ -24,6 +24,21 @@ class UserRepositoryImpl @Inject constructor(
 ) :
     UserRepository {
 
+    override fun signup(signupRequest: SignupRequest): Single<TokenResponse> {
+        return roadCaptureApi.signup(signupRequest)
+            .flatMap { response ->
+                response.errorBody()?.let {
+                    return@flatMap Single.error(IllegalStateException(it.toErrorResponse(gson)?.message))
+                }
+
+                return@flatMap login(LoginRequest(
+                    email = signupRequest.email,
+                    password = signupRequest.password,
+                ))
+            }
+            .retryThreeTimes()
+    }
+
     override fun socialSignup(socialType: SocialType): Single<TokenResponse> {
         val oauthToken = localOAuthTokenDao.getToken()
         return roadCaptureApi.socialSignup(socialType.name, TokenRequest(oauthToken.accessToken))

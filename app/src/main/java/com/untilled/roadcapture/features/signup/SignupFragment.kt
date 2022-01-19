@@ -7,8 +7,11 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentSignupBinding
+import com.untilled.roadcapture.features.base.BaseFragment
+import com.untilled.roadcapture.features.login.LoginViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -19,6 +22,10 @@ class SignupFragment : Fragment() {
 
     val binding get() = _binding!!
 
+    private val viewModel by lazy {
+        ViewModelProvider(this).get(SignupViewModel::class.java)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -28,7 +35,9 @@ class SignupFragment : Fragment() {
         binding.apply{
             lifecycleOwner = lifecycleOwner
         }
+
         (requireActivity() as MainActivity).window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
         return binding.root
     }
 
@@ -37,10 +46,5 @@ class SignupFragment : Fragment() {
 
         _binding = null
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-    }
-
 
 }

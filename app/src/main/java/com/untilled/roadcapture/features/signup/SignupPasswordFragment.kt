@@ -1,16 +1,22 @@
 package com.untilled.roadcapture.features.signup
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
+import com.mobsandgeeks.saripaar.annotation.Password
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentSignupPwdBinding
+import com.untilled.roadcapture.utils.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import java.util.regex.Pattern
 
 @AndroidEntryPoint
 class SignupPasswordFragment : Fragment() {
@@ -19,6 +25,43 @@ class SignupPasswordFragment : Fragment() {
 
     private var _binding: FragmentSignupPwdBinding? = null
     private val binding get() = _binding!!
+
+    private val passwordVerificationObserver: (String) -> Unit = { passwordVerification ->
+        if (passwordVerification.length in 8..64 && Pattern.matches("(?=.*[a-zA-Z])(?=.*[\\d]).+", passwordVerification)) {
+            if (viewModel.password.value == passwordVerification)
+                binding.motionSignupPwdContainer.transitionToState(R.id.password_input_signup_button_end)
+            else
+                binding.motionSignupPwdContainer.transitionToState(R.id.password_input_signup_button_start)
+        } else if(passwordVerification.isNotBlank())
+            binding.motionSignupPwdContainer.transitionToState(R.id.password_input_signup_button_start)
+    }
+
+    private val passwordObserver: (String) -> Unit = { password ->
+        if (password.length in 8..64 && Pattern.matches("(?=.*[a-zA-Z])(?=.*[\\d]).+", password)) {
+            binding.motionSignupPwdContainer.transitionToState(R.id.password_input_signup_verification_end)
+        } else  {
+            binding.motionSignupPwdContainer.transitionToState(R.id.password_input_signup_verification_start)
+        }
+    }
+
+    private lateinit var callback: OnBackPressedCallback
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                binding.edtSignupPwdInput.setText("")
+                binding.edtSignupPwdConfirmInput.setText("")
+                findNavController().navigateUp()
+            }
+        }
+        mainActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+        callback.remove()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +84,7 @@ class SignupPasswordFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        observeValidation()
+        observeData()
         setOnClickListeners()
     }
 
@@ -51,28 +94,12 @@ class SignupPasswordFragment : Fragment() {
                 .navigate(R.id.action_signupPasswordFragment_to_signupUsernameFragment)
         }
         (parentFragment?.parentFragment as SignupFragment).binding.imgSignupBack.setOnClickListener {
-            viewModel.password.value = ""
-            viewModel.passwordVerification.value = ""
-            requireActivity().onBackPressed()
+            mainActivity().onBackPressed()
         }
     }
 
-    private fun observeValidation() {
-
-        viewModel.password.observe(viewLifecycleOwner, Observer {
-            if (it.length >= 6)
-                binding.motionSignupPwdContainer.transitionToState(R.id.password_input_signup_verification_end)
-            else
-                binding.motionSignupPwdContainer.transitionToState(R.id.password_input_signup_verification_start)
-        })
-
-        viewModel.passwordVerification.observe(viewLifecycleOwner, Observer {
-            if (viewModel.password.value!!.length >= 6) {
-                if (viewModel.password.value == it)
-                    binding.motionSignupPwdContainer.transitionToState(R.id.password_input_signup_button_end)
-                else
-                    binding.motionSignupPwdContainer.transitionToState(R.id.password_input_signup_button_start)
-            }
-        })
+    private fun observeData() {
+        viewModel.password.observe(viewLifecycleOwner, passwordObserver)
+        viewModel.passwordVerification.observe(viewLifecycleOwner, passwordVerificationObserver)
     }
 }

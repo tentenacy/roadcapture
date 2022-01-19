@@ -9,8 +9,9 @@ import com.untilled.roadcapture.utils.type.SocialType
 import io.reactivex.rxjava3.core.Single
 
 interface UserRepository {
+    fun signup(signupRequest: SignupRequest): Single<TokenResponse>
     fun socialSignup(socialType: SocialType): Single<TokenResponse>
-    fun login(request: LoginRequest): Single<TokenResponse>
+    fun login(loginRequest: LoginRequest): Single<TokenResponse>
     fun reissue(): Single<TokenResponse>
     fun getUserDetail(): Single<UserResponse>
     fun getUserInfo(id: Int): Single<UsersResponse>
