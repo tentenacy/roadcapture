@@ -8,6 +8,7 @@ import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
 import com.untilled.roadcapture.data.repository.user.LocalUserRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
+import com.untilled.roadcapture.network.subject.OAuthLoginManagerSubject
 import com.untilled.roadcapture.utils.getSocialType
 import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,14 +21,12 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val userRepository: UserRepository,
     private val localTokenRepository: LocalTokenRepository,
-    private val localUserRepository: LocalUserRepository
+    private val localUserRepository: LocalUserRepository,
+    private val oauthLoginManagerMap: Map<String, @JvmSuppressWildcards OAuthLoginManagerSubject>,
 ) : BaseViewModel() {
 
     private var _login = MutableLiveData<SocialType>()
     val login: LiveData<SocialType> get() = _login
-
-    private var _userLoading = MutableLiveData<Boolean>()
-    val userLoading: LiveData<Boolean> get() = _userLoading
 
     fun autoLogin() {
         localTokenRepository.getOAuthToken().whenHasOAuthTokenOrNot (this::socialLogin) {
@@ -60,11 +59,10 @@ class LoginViewModel @Inject constructor(
                         accessTokenExpireDate = response.accessTokenExpireDate.toLong(),
                     )
                 )
-                isLoading.removeSource(_login.apply { value = localTokenRepository.getOAuthToken().socialType.getSocialType() })
                 getUserDetail()
             }) { t ->
                 isLoading.removeSource(_login)
-                localTokenRepository.clearToken()
+                logout()
                 error.value = t.message
             }.addTo(compositeDisposable)
     }
@@ -73,11 +71,21 @@ class LoginViewModel @Inject constructor(
         userRepository.getUserDetail()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ response->
+            .subscribe({ response ->
                 localUserRepository.saveUser(response.id)
-                _userLoading.postValue(true)
+                isLoading.removeSource(_login.apply { value = localTokenRepository.getOAuthToken().socialType.getSocialType() })
             },{ t->
-
+                isLoading.removeSource(_login)
+                logout()
+                error.value = t.message
             }).addTo(compositeDisposable)
+    }
+
+    private fun logout() {
+        localTokenRepository.getOAuthToken().whenHasOAuthToken {
+            oauthLoginManagerMap[it.name]?.logout()
+        }
+        localUserRepository.clearUser()
+        localTokenRepository.clearToken()
     }
 }
