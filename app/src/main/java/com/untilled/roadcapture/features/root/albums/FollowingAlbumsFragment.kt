@@ -17,11 +17,13 @@ import com.airbnb.epoxy.EpoxyController
 import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.AlbumsBindingModel_
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.albums
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
+import com.untilled.roadcapture.data.datasource.api.dto.user.UserResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.data.entity.user.User
 import com.untilled.roadcapture.databinding.FragmentFollowingalbumsBinding
@@ -39,59 +41,13 @@ class FollowingAlbumsFragment : Fragment() {
     private var _binding: FragmentFollowingalbumsBinding? = null
     private val binding get() = _binding!!
     private val viewModel: AlbumsViewModel by viewModels()
-    private val epoxyController: AlbumsEpoxyController = AlbumsEpoxyController()
     private var flagLike: Boolean = false
 
-    private val epoxyItemClickListener: (EpoxyItemArgs) -> Unit = { args ->
-        when (args.clickedView.id) {
-            R.id.img_ialbums_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(R.id.action_rootFragment_to_studioFragment)
-
-            R.id.img_ialbums_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(RootFragmentDirections.actionRootFragmentToCommentFragment((args.model as AlbumsBindingModel_).albums().id.toString()))
-
-            R.id.img_ialbums_like -> if (!flagLike) {
-                val animator = ValueAnimator.ofFloat(0f, 0.5f).setDuration(800)
-                animator.addUpdateListener {
-                    (args.clickedView as LottieAnimationView).progress =
-                        it.animatedValue as Float
-                }
-                animator.start()
-                flagLike = true
-            } else {
-                val animator = ValueAnimator.ofFloat(0.5f, 1f).setDuration(800)
-                animator.addUpdateListener {
-                    (args.clickedView as LottieAnimationView).progress =
-                        it.animatedValue as Float
-                }
-                animator.start()
-                flagLike = false
-            }
-            //Todo: 네비게이션 args 변경해야 함
-            R.id.img_ialbums_thumbnail,
-            R.id.text_ialbums_title,
-            R.id.text_ialbums_desc->
-                Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
-                navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment((args.model as AlbumsBindingModel_).albums().id.toString()))
-            R.id.img_ialbums_more -> {
-                val popupMenu = PopupMenu(requireContext(), args.clickedView)
-                popupMenu.apply {
-                    menuInflater.inflate(R.menu.popupmenu_albums_more, popupMenu.menu)
-                    setOnMenuItemClickListener { item ->
-                        when (item.itemId) {
-                            R.id.popup_menu_albums_more_share -> {
-                            }
-                            R.id.popup_menu_albums_more_report -> {
-                                showReportDialog()
-                            }
-                            R.id.popup_menu_albums_more_hide -> {
-                            }
-                        }
-                        true
-                    }
-                }.show()
-            }
-        }
+    private val userObserver = { user: PageResponse<UsersResponse> ->
+        initFilterAdapter(user)
+    }
+    private val albumsObserver = { albums: PageResponse<AlbumResponse> ->
+        initAlbumAdapter(albums)
     }
 
     private val notificationOnClickListener: (View?) -> Unit = {
@@ -120,12 +76,12 @@ class FollowingAlbumsFragment : Fragment() {
 
     private fun initViews(){
         viewModel.getUserFollowing(FollowingsCondition(User.id), PageRequest())
+        viewModel.getFollowingAlbums(null, PageRequest())
     }
 
     private fun observeData() {
-        viewModel.user.observe(viewLifecycleOwner) { user ->
-            initAdapter(user)
-        }
+        viewModel.user.observe(viewLifecycleOwner,userObserver)
+        viewModel.albums.observe(viewLifecycleOwner,albumsObserver)
     }
 
     private fun setOnClickListeners() {
@@ -138,19 +94,11 @@ class FollowingAlbumsFragment : Fragment() {
         _binding = null
     }
 
-    private fun initAdapter(user: PageResponse<UsersResponse>) {
-        epoxyController.setOnClickListener(epoxyItemClickListener)
+    private fun initFilterAdapter(user: PageResponse<UsersResponse>) {
         binding.recyclerFollowingalbumsFilter.withModels { initFollowingAlbumsFilter(user) }
-        updateView(null,null)
-        binding.recyclerFollowingalbums.setController(epoxyController)
     }
-
-    private fun updateView(dateTimeFrom: String?, dateTimeTo: String?) {
-        lifecycleScope.launch{
-            viewModel.getAlbums(dateTimeFrom, dateTimeTo).collectLatest{ pagingData: PagingData<AlbumResponse> ->
-                epoxyController.submitData(pagingData)
-            }
-        }
+    private fun initAlbumAdapter(albums: PageResponse<AlbumResponse>){
+        binding.recyclerFollowingalbums.withModels { initFollowingAlbumsItem(albums) }
     }
 
     private fun EpoxyController.initFollowingAlbumsFilter(user: PageResponse<UsersResponse>) {
@@ -160,6 +108,71 @@ class FollowingAlbumsFragment : Fragment() {
                 user(user)
 
                 onClickItem { model, parentView, clickedView, position ->
+                }
+            }
+        }
+    }
+
+    private fun EpoxyController.initFollowingAlbumsItem(albums: PageResponse<AlbumResponse>) {
+        albums.content.forEachIndexed { index, albumResponse ->
+            albums {
+                id(index)
+                albums(albumResponse)
+
+                onClickItem { model, parentView, clickedView, position ->
+                    when (clickedView.id) {
+                        R.id.img_ialbums_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                            .navigate(R.id.action_rootFragment_to_studioFragment)
+
+                        R.id.img_ialbums_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                            .navigate(RootFragmentDirections.actionRootFragmentToCommentFragment((model as AlbumsBindingModel_).albums().id.toString()))
+
+                        R.id.img_ialbums_like -> if (!flagLike) {
+                            val animator = ValueAnimator.ofFloat(0f, 0.5f).setDuration(800)
+                            animator.addUpdateListener {
+                                (clickedView as LottieAnimationView).progress =
+                                    it.animatedValue as Float
+                            }
+                            animator.start()
+                            flagLike = true
+                        } else {
+                            val animator = ValueAnimator.ofFloat(0.5f, 1f).setDuration(800)
+                            animator.addUpdateListener {
+                                (clickedView as LottieAnimationView).progress =
+                                    it.animatedValue as Float
+                            }
+                            animator.start()
+                            flagLike = false
+                        }
+                        //Todo: 네비게이션 args 변경해야 함
+                        R.id.img_ialbums_thumbnail,
+                        R.id.text_ialbums_title,
+                        R.id.text_ialbums_desc ->
+                            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+                                .navigate(
+                                    RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(
+                                        (model as AlbumsBindingModel_).albums().id.toString()
+                                    )
+                                )
+                        R.id.img_ialbums_more -> {
+                            val popupMenu = PopupMenu(requireContext(), clickedView)
+                            popupMenu.apply {
+                                menuInflater.inflate(R.menu.popupmenu_albums_more, popupMenu.menu)
+                                setOnMenuItemClickListener { item ->
+                                    when (item.itemId) {
+                                        R.id.popup_menu_albums_more_share -> {
+                                        }
+                                        R.id.popup_menu_albums_more_report -> {
+                                            showReportDialog()
+                                        }
+                                        R.id.popup_menu_albums_more_hide -> {
+                                        }
+                                    }
+                                    true
+                                }
+                            }.show()
+                        }
+                    }
                 }
             }
         }

@@ -11,7 +11,7 @@ class FollowRepositoryImpl @Inject constructor(
     private val roadCaptureApi: RoadCaptureApi
 ) : FollowRepository{
     override fun follow(id: Int): Single<Unit> = roadCaptureApi.follow(id)
-    override fun getFollowingAlbums(id: Int, pageRequest: PageRequest): Single<PageResponse<AlbumResponse>> =
+    override fun getFollowingAlbums(id: Int?, pageRequest: PageRequest): Single<PageResponse<AlbumResponse>> =
         roadCaptureApi.getFollowingAlbums(id,pageRequest.page,pageRequest.size,pageRequest.sort)
 
 }

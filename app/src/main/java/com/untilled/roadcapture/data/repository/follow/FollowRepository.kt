@@ -7,5 +7,5 @@ import io.reactivex.rxjava3.core.Single
 
 interface FollowRepository {
     fun follow(id: Int): Single<Unit>
-    fun getFollowingAlbums(id: Int, pageRequest: PageRequest): Single<PageResponse<AlbumResponse>>
+    fun getFollowingAlbums(id: Int?, pageRequest: PageRequest): Single<PageResponse<AlbumResponse>>
 }
