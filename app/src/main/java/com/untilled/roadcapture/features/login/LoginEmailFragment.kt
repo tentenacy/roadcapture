@@ -5,20 +5,38 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
+import android.widget.EditText
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.mobsandgeeks.saripaar.ValidationError
+import com.mobsandgeeks.saripaar.Validator
+import com.mobsandgeeks.saripaar.annotation.*
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.datasource.api.dto.user.LoginRequest
 import com.untilled.roadcapture.databinding.FragmentLoginEmailBinding
 import com.untilled.roadcapture.features.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginEmailFragment : BaseFragment() {
+class LoginEmailFragment : BaseFragment(), Validator.ValidationListener {
     private var _binding: FragmentLoginEmailBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var validator: Validator
+
+    @Email
+    @NotEmpty
+    private lateinit var editEmail: EditText
+
+    @Password(min = 8, scheme = Password.Scheme.ALPHA_NUMERIC)
+    @Length(max = 64)
+    @NotEmpty
+    private lateinit var editPassword: EditText
 
     private val viewModel: LoginEmailViewModel by viewModels()
 
@@ -35,6 +53,9 @@ class LoginEmailFragment : BaseFragment() {
     ): View? {
         _binding = FragmentLoginEmailBinding.inflate(layoutInflater, container, false)
         (requireActivity() as MainActivity).window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+
+        validator.setValidationListener(this)
+
         return binding.root
     }
 
@@ -46,8 +67,36 @@ class LoginEmailFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViews()
         setOnClickListeners()
         observeData()
+    }
+
+    override fun onValidationSucceeded() {
+        viewModel.login(
+            LoginRequest(
+                email = binding.edtLoginEmailInputemail.text.toString(),
+                password = binding.edtLoginEmailPwdinput.text.toString(),
+            )
+        )
+    }
+
+    override fun onValidationFailed(errors: MutableList<ValidationError>?) {
+        errors?.forEach { error ->
+            val view = error.view
+            val message = error.getCollatedErrorMessage(requireContext())
+
+            if(view is EditText) {
+                view.error = message
+            } else {
+                Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    private fun initViews() {
+        editEmail = binding.edtLoginEmailInputemail
+        editPassword = binding.edtLoginEmailPwdinput
     }
 
     private fun setOnClickListeners() {
@@ -55,12 +104,7 @@ class LoginEmailFragment : BaseFragment() {
             requireActivity().onBackPressed()
         }
         binding.btnLoginEmailConfirm.setOnClickListener {
-            viewModel.login(
-                LoginRequest(
-                    email = binding.edtLoginEmailInputemail.text.toString(),
-                    password = binding.edtLoginEmailPwdinput.text.toString(),
-                )
-            )
+            validator.validate()
         }
         binding.textLoginEmailFind.setOnClickListener {
             Navigation.findNavController(binding.root)

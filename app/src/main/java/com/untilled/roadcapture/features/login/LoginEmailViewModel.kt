@@ -61,6 +61,7 @@ class LoginEmailViewModel @Inject constructor(
             }) { t ->
                 logout()
                 isLoading.removeSource(_isLoggedIn)
+                isLoading.value = false
                 error.value = t.message
             }.addTo(compositeDisposable)
     }

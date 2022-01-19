@@ -65,6 +65,7 @@ class LoginViewModel @Inject constructor(
                 saveUserId()
             }) { t ->
                 isLoading.removeSource(_isLoggedIn)
+                isLoading.value = false
                 localTokenRepository.clearToken()
                 error.value = t.message
             }.addTo(compositeDisposable)
@@ -77,11 +78,12 @@ class LoginViewModel @Inject constructor(
             .subscribe({ response ->
                 localUserRepository.saveUser(response.id)
                 isLoading.removeSource(_isLoggedIn.apply { value = localTokenRepository.getOAuthToken().socialType.getSocialType() })
-            },{ t->
+            }) { t->
                 logout()
                 isLoading.removeSource(_isLoggedIn)
+                isLoading.value = false
                 error.value = t.message
-            }).addTo(compositeDisposable)
+            }.addTo(compositeDisposable)
     }
 
     private fun logout() {
