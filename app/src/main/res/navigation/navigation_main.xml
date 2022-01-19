@@ -280,7 +280,7 @@
         android:label="PictureViewerContainerFragment" >
         <argument
             android:name="id"
-            app:argType="string" />
+            app:argType="integer" />
         <action
             android:id="@+id/action_pictureViewerContainerFragment_to_studioFragment"
             app:destination="@id/studioFragment" />

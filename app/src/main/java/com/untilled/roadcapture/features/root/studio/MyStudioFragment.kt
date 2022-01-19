@@ -9,6 +9,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.albumsStudio
+import com.untilled.roadcapture.data.datasource.api.dto.address.AddressRequest
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
@@ -41,14 +44,16 @@ class MyStudioFragment : Fragment() {
         binding.following = following
     }
 
+    private val albumsObserver = { albums: PageResponse<AlbumResponse> ->
+        initAdapter(albums)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentMystudioBinding.inflate(layoutInflater, container, false)
-
-        initAdapter()
 
         return binding.root
     }
@@ -61,7 +66,6 @@ class MyStudioFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("Test",Token.accessToken)
         observeData()
         initViews()
         setOnClickListeners()
@@ -71,12 +75,14 @@ class MyStudioFragment : Fragment() {
         viewModel.user.observe(viewLifecycleOwner,userObserver)
         viewModel.follower.observe(viewLifecycleOwner,followerObserver)
         viewModel.following.observe(viewLifecycleOwner,followingObserver)
+        viewModel.albums.observe(viewLifecycleOwner,albumsObserver)
     }
 
     private fun initViews(){
         viewModel.getUserInfo(User.id)
         viewModel.getUserFollower(FollowingsCondition(User.id), PageRequest())
         viewModel.getUserFollowing(FollowingsCondition(User.id), PageRequest())
+        viewModel.getUserAlbums(PageRequest(), AddressRequest())
     }
 
     private fun setOnClickListeners() {
@@ -102,33 +108,18 @@ class MyStudioFragment : Fragment() {
         }
     }
 
-    private fun initAdapter() {
-//        binding.recyclerMystudioAlbum.withModels {
-//            DummyDataSet.studios.forEachIndexed { index, album ->
-//                studioAlbum {
-//                    id(index)
-//                    studio(album)
-//
-//                    onClickItem { model, parentView, clickedView, position ->
-//                        when(clickedView.id){
-//                            R.id.image_ialbums_studio_thumbnail ->
-//                                Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
-//                                navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(model.studio().id))
-//                        }
-//                    }
-//                }
-//            }
-//        }
-        binding.recyclerMystudioPlace.withModels {
-            DummyDataSet.places.forEachIndexed { index, place ->
-                placeFilter {
+    private fun initAdapter(albums: PageResponse<AlbumResponse>) {
+        binding.recyclerMystudioAlbum.withModels {
+            albums.content.forEachIndexed { index, album ->
+                albumsStudio {
                     id(index)
-                    place(place)
+                    studio(album)
 
                     onClickItem { model, parentView, clickedView, position ->
                         when(clickedView.id){
-                            R.id.view_iplace_filter_overlay ->
-                                clickedView.isSelected = !clickedView.isSelected
+                            R.id.img_ialbums_studio_thumbnail ->
+                                Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
+                                navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(model.studio().user.id))
                         }
                     }
                 }

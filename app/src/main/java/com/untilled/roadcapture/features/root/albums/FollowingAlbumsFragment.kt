@@ -151,9 +151,9 @@ class FollowingAlbumsFragment : Fragment() {
                             Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                                 .navigate(
                                     RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(
-                                        (model as AlbumsBindingModel_).albums().id.toString()
+                                        (model as AlbumsBindingModel_).albums().id)
                                     )
-                                )
+
                         R.id.img_ialbums_more -> {
                             val popupMenu = PopupMenu(requireContext(), clickedView)
                             popupMenu.apply {

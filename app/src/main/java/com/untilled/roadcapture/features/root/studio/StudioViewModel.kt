@@ -6,6 +6,7 @@ import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
+import com.untilled.roadcapture.data.datasource.api.dto.address.AddressRequest
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.data.repository.follow.FollowRepository
@@ -25,6 +26,9 @@ class StudioViewModel @Inject constructor(
 
     private val _user = MutableLiveData<UsersResponse>()
     val user: LiveData<UsersResponse> get() = _user
+
+    private val _albums = MutableLiveData<PageResponse<AlbumResponse>>()
+    val albums : LiveData<PageResponse<AlbumResponse>> get() = _albums
 
     private val _follower = MutableLiveData<PageResponse<UsersResponse>>()
     val follower : LiveData<PageResponse<UsersResponse>> get() = _follower
@@ -51,6 +55,17 @@ class StudioViewModel @Inject constructor(
                 _following.postValue(response)
             },{ t ->
                 Logger.d("test: $t")
+            }).addTo(compositeDisposable)
+    }
+
+    fun getUserAlbums(pageRequest: PageRequest, addressRequest: AddressRequest){
+        userRepository.getUserAlbums(pageRequest,addressRequest)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ response->
+                _albums.postValue(response)
+            },{
+
             }).addTo(compositeDisposable)
     }
 

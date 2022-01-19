@@ -24,7 +24,7 @@ class AlbumRepositoryImpl
     override suspend fun getAlbumCommentsList(albumsId: Int, page: Int?, size: Int?): Response<CommentsResponse> =
         api.getAlbumComments(albumsId, page, size)
 
-    override suspend fun getAlbumDetail(id: String): Response<AlbumResponse> =
+    override suspend fun getAlbumDetail(id: Int): Response<AlbumResponse> =
         api.getAlbum(id)
 
     override suspend fun getPictureCommentsList(

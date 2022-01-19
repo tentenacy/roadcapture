@@ -25,7 +25,7 @@ class PictureViewerViewModel
     private val _album = MutableLiveData<AlbumResponse>()
     val albumResponse: LiveData<AlbumResponse> get() = _album
     var currentPosition: Int = 0
-    fun getAlbumDetail(id: String) {
+    fun getAlbumDetail(id: Int) {
         viewModelScope.launch {
             repository.getAlbumDetail(id).let { album ->
                 if (album.isSuccessful) {

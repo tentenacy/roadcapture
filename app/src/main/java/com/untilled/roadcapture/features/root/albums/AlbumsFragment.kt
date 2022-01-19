@@ -69,7 +69,7 @@ class AlbumsFragment : Fragment() {
             R.id.text_ialbums_title,
             R.id.text_ialbums_desc->
                 Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
-                navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment((args.model as AlbumsBindingModel_).albums().id.toString()))
+                navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment((args.model as AlbumsBindingModel_).albums().id))
             R.id.img_ialbums_more -> {
                 val popupMenu = PopupMenu(requireContext(), args.clickedView)
                 popupMenu.apply {

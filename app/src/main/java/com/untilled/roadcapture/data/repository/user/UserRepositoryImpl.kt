@@ -2,13 +2,14 @@ package com.untilled.roadcapture.data.repository.user
 
 import com.google.gson.Gson
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.ErrorCode
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
+import com.untilled.roadcapture.data.datasource.api.dto.address.AddressRequest
 import com.untilled.roadcapture.data.datasource.api.dto.user.*
 import com.untilled.roadcapture.data.datasource.dao.LocalOAuthTokenDao
 import com.untilled.roadcapture.data.datasource.dao.LocalTokenDao
-import com.untilled.roadcapture.data.datasource.dao.LocalUserDao
 import com.untilled.roadcapture.utils.retryThreeTimes
 import com.untilled.roadcapture.utils.toErrorResponse
 import com.untilled.roadcapture.utils.type.SocialType
@@ -96,6 +97,9 @@ class UserRepositoryImpl @Inject constructor(
 
     override fun getUserInfo(id: Int): Single<UsersResponse> =
         roadCaptureApi.getUserInfo(id)
+
+    override fun getUserAlbums(pageRequest: PageRequest, addressRequest: AddressRequest): Single<PageResponse<AlbumResponse>> =
+        roadCaptureApi.getUserAlbums(pageRequest.page,pageRequest.size,pageRequest.sort,addressRequest.address1,addressRequest.address2,addressRequest.address3)
 
 
     override fun getUserFollower(

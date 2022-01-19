@@ -21,6 +21,6 @@ interface AlbumApi {
 
     @GET(RoadCapturePathConstant.GET_ALBUM)
     suspend fun getAlbum(
-        @Path("id") id: String
+        @Path("id") id: Int
     ): Response<AlbumResponse>
 }

@@ -23,7 +23,7 @@ interface AlbumRepository {
     ): Response<CommentsResponse>
 
     suspend fun getAlbumDetail(
-        @Path("id") id: String
+        @Path("id") id: Int
     ): Response<AlbumResponse>
 
     suspend fun getPictureCommentsList(
