@@ -10,7 +10,12 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.*
+import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
+import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
+import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
+import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.data.entity.token.Token
+import com.untilled.roadcapture.data.entity.user.User
 import com.untilled.roadcapture.databinding.FragmentStudioBinding
 import com.untilled.roadcapture.utils.dummy.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
@@ -23,6 +28,16 @@ class StudioFragment : Fragment() {
 
     val args: StudioFragmentArgs by navArgs()
     private val viewModel: StudioViewModel by viewModels()
+
+    private val userObserver = { user: UsersResponse ->
+        binding.user = user
+    }
+    private val followerObserver = { follower: PageResponse<UsersResponse> ->
+        binding.follower = follower
+    }
+    private val followingObserver = { following: PageResponse<UsersResponse> ->
+        binding.following = following
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -43,29 +58,31 @@ class StudioFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setOnClickListeners()
         observeData()
         initViews()
-
-    }
-    private fun initViews(){
-        viewModel.getUserInfo(args.id)
+        setOnClickListeners()
     }
 
     private fun observeData() {
-        viewModel.user.observe(viewLifecycleOwner){ user->
-            binding.user = user
-        }
+        viewModel.user.observe(viewLifecycleOwner,userObserver)
+        viewModel.follower.observe(viewLifecycleOwner,followerObserver)
+        viewModel.following.observe(viewLifecycleOwner,followingObserver)
+    }
+
+    private fun initViews(){
+        viewModel.getUserInfo(args.id)
+        viewModel.getUserFollower(FollowingsCondition(args.id), PageRequest())
+        viewModel.getUserFollowing(FollowingsCondition(args.id), PageRequest())
     }
 
     private fun setOnClickListeners() {
         binding.textStudioFollower.setOnClickListener {
             Navigation.findNavController(binding.root)
-                .navigate(R.id.action_studioFragment_to_followerFragment)
+                .navigate(StudioFragmentDirections.actionStudioFragmentToFollowerFragment(args.id))
         }
         binding.textStudioFollowing.setOnClickListener {
             Navigation.findNavController(binding.root)
-                .navigate(R.id.action_studioFragment_to_followingFragment)
+                .navigate(StudioFragmentDirections.actionStudioFragmentToFollowingFragment(args.id))
         }
         binding.btnStudioFollow.setOnClickListener {
             viewModel.follow(args.id)

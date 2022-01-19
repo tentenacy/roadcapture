@@ -9,6 +9,14 @@
         <variable
             name="user"
             type="com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse" />
+
+        <variable
+            name="follower"
+            type="com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse" />
+
+        <variable
+            name="following"
+            type="com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -114,7 +122,7 @@
                     android:layout_height="56dp"
                     android:layout_marginTop="16dp"
                     android:gravity="top|center"
-                    android:text="81.9만" />
+                    android:text="@{Integer.toString(follower.totalElements)}" />
 
                 <TextView
                     android:id="@+id/text_studio_label_following"
@@ -131,7 +139,9 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:gravity="top|center"
-                    android:text="100" />
+                    android:text="@{Integer.toString(following.totalElements)}"
+                    tools:layout_editor_absoluteX="305dp"
+                    tools:layout_editor_absoluteY="325dp" />
 
                 <Button
                     android:id="@+id/btn_studio_follow"

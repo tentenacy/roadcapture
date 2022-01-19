@@ -92,4 +92,15 @@ class AlbumsViewModel
             })
     }
 
+    fun getUserFollower(followingsCondition: FollowingsCondition, pageRequest: PageRequest){
+        userRepository.getUserFollower(followingsCondition, pageRequest)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ user ->
+                _user.postValue(user)
+            },{ error ->
+                Logger.d("test: $error")
+            })
+    }
+
 }
