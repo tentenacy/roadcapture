@@ -9,7 +9,7 @@
 
         <variable
             name="album"
-            type="com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse" />
+            type="com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse" />
 
         <variable
             name="onClickItem"
@@ -77,12 +77,12 @@
             style="@style/Date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{album.createdAt}"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="@id/text_ititlesearch_username"
             app:layout_constraintStart_toEndOf="@id/text_ititlesearch_username"
             app:layout_constraintTop_toTopOf="@id/text_ititlesearch_username"
             tools:text="3분전" />
+<!--            android:text="@{album.createdAt}"-->
 
         <TextView
             android:id="@+id/text_ititlesearch_title"

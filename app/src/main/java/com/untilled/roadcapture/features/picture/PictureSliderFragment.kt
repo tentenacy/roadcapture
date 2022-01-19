@@ -14,7 +14,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.untilled.roadcapture.PictureSliderThumbnailBindingModel_
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.databinding.FragmentPictureSliderBinding
 import com.untilled.roadcapture.features.comment.CommentBottomSheetDialog
 import com.untilled.roadcapture.pictureSliderContent
@@ -95,7 +95,7 @@ class PictureSliderFragment : Fragment() {
         _binding = null
     }
 
-    private fun initAdapter(albumResponse: AlbumResponse) {
+    private fun initAdapter(albumResponse: AlbumsResponse) {
         addScrollListener()
         binding.recyclerPictureSlider.withModels {
             initPictureSliderThumbnail(albumResponse)
@@ -103,7 +103,7 @@ class PictureSliderFragment : Fragment() {
         }
     }
 
-    private fun EpoxyController.initPictureSliderContent(albumResponse: AlbumResponse) {
+    private fun EpoxyController.initPictureSliderContent(albumResponse: AlbumsResponse) {
         albumResponse.pictureResponses?.forEachIndexed { index, picture ->
             pictureSliderContent {
                 id(index)
@@ -112,7 +112,7 @@ class PictureSliderFragment : Fragment() {
         }
     }
 
-    private fun EpoxyController.initPictureSliderThumbnail(albumResponse: AlbumResponse) {
+    private fun EpoxyController.initPictureSliderThumbnail(albumResponse: AlbumsResponse) {
         pictureSliderThumbnail {
             id(1)
             album(albumResponse)
@@ -127,7 +127,7 @@ class PictureSliderFragment : Fragment() {
         }
     }
 
-    private fun setThumbnailToBackground(albumResponse: AlbumResponse) {
+    private fun setThumbnailToBackground(albumResponse: AlbumsResponse) {
         Glide.with(binding.imagePictureSliderBg.context)
             .load(albumResponse.thumbnailUrl)
             .centerCrop()

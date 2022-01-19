@@ -9,8 +9,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="studio"
-            type="com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse" />
+            name="albums"
+            type="com.untilled.roadcapture.data.datasource.api.dto.user.UserAlbumsResponse" />
 
         <variable
             name="onClickItem"
@@ -33,7 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:studioThumbnailImage="@{studio.thumbnailUrl}"
+            bind:studioThumbnailImage="@{albums.thumbnailPicture.imageUrl}"
             tools:src="@drawable/img_sample_thumbnail" />
 
         <View
@@ -56,7 +56,7 @@
             android:layout_marginBottom="16dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="@{studio.title}"
+            android:text="@{albums.title}"
             app:layout_constraintBottom_toBottomOf="@id/img_ialbums_studio_thumbnail"
             app:layout_constraintEnd_toStartOf="@id/text_ialbums_studio_date"
             app:layout_constraintStart_toStartOf="@id/img_ialbums_studio_thumbnail"
@@ -70,7 +70,7 @@
             android:layout_margin="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            bind:DateToSnsFormat="@{studio.createdAt}"
+            bind:DateToSnsFormat="@{albums.thumbnailPicture.createdAt}"
             tools:text="하루 전" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

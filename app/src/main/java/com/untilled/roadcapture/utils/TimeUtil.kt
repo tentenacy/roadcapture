@@ -1,8 +1,11 @@
 package com.untilled.roadcapture.utils
 
 import android.annotation.SuppressLint
-import android.util.Log
+import android.os.Build
+import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.temporal.ChronoUnit
 import java.util.*
 
 fun dateToString(year: Int, month: Int, dayOfMonth: Int): String =
@@ -12,29 +15,27 @@ fun dateToString(cal : Calendar): String {
     return dateToString(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH) + 1, cal.get(Calendar.DAY_OF_MONTH))
 }
 
+@RequiresApi(Build.VERSION_CODES.O)
 @SuppressLint("SimpleDateFormat")
-fun dateToSnsFormat(str: String): String{
-    val regString = str.substring(0, 19).replace('T', ' ')
-    val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss")
-    val regDate: Date = format.parse(regString)
+fun dateToSnsFormat(date: LocalDateTime): String{
 
-    val curTime = System.currentTimeMillis()
-    val regTime = regDate.time
-    var diffTime = (curTime - regTime) / 1000
+    val curDate = LocalDateTime.now()
+    var diffDate = date.until(curDate, ChronoUnit.SECONDS)
 
     var msg: String?
-    if (diffTime < TimeUtil.SEC) {
-        msg = "방금 전"
-    } else if (TimeUtil.SEC.let { diffTime /= it; diffTime } < TimeUtil.MIN) {
-        msg = diffTime.toString() + "분 전"
-    } else if (TimeUtil.MIN.let { diffTime /= it; diffTime } < TimeUtil.HOUR){
-        msg = diffTime.toString() + "시간 전"
-    } else if (TimeUtil.HOUR.let { diffTime /= it; diffTime } < TimeUtil.DAY) {
-        msg = diffTime.toString() + "일 전"
-    } else if (TimeUtil.DAY.let { diffTime /= it; diffTime } < TimeUtil.A_MONTH) {
-        msg = diffTime.toString() + "달 전"
+    if (diffDate < TimeUtil.SEC) {
+        msg = diffDate.toString() + "초 전"
+    } else if (TimeUtil.SEC.let { diffDate /= it; diffDate } < TimeUtil.MIN) {
+        msg = diffDate.toString() + "분 전"
+    } else if (TimeUtil.MIN.let { diffDate /= it; diffDate } < TimeUtil.HOUR){
+        msg = diffDate.toString() + "시간 전"
+    } else if (TimeUtil.HOUR.let { diffDate /= it; diffDate } < TimeUtil.DAY) {
+        msg = diffDate.toString() + "일 전"
+    } else if (TimeUtil.DAY.let { diffDate /= it; diffDate } < TimeUtil.A_MONTH) {
+        msg = diffDate.toString() + "달 전"
     } else {
-        msg = diffTime.toString() + "년 전"
+        TimeUtil.A_MONTH.let { diffDate /= it; diffDate }
+        msg = diffDate.toString() + "년 전"
     }
     return msg
 }

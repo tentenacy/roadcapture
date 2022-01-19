@@ -18,7 +18,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.AlbumsBindingModel_
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.databinding.FragmentAlbumsBinding
 import com.untilled.roadcapture.features.root.RootFragment
@@ -138,7 +138,7 @@ class AlbumsFragment : Fragment() {
 
     fun updateView(dateTimeFrom: String?, dateTimeTo: String?) {
         lifecycleScope.launch{
-            viewModel.getAlbums(dateTimeFrom, dateTimeTo).collectLatest{ pagingData: PagingData<AlbumResponse> ->
+            viewModel.getAlbums(dateTimeFrom, dateTimeTo).collectLatest{ pagingData: PagingData<AlbumsResponse> ->
                 epoxyController.submitData(pagingData)
             }
         }

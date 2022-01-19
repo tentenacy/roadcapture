@@ -1,6 +1,6 @@
 package com.untilled.roadcapture.data.datasource.api
 
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.*
 import com.untilled.roadcapture.data.entity.User
@@ -54,7 +54,7 @@ interface UserApi {
         @Query("placeCond.region1DepthName") place1: String?,
         @Query("placeCond.region2DepthName") place2: String?,
         @Query("placeCond.region3DepthName") place3: String?
-    ): Single<PageResponse<AlbumResponse>>
+    ): Single<PageResponse<UserAlbumsResponse>>
 
     @GET(RoadCapturePathConstant.GET_USER_FOLLOWER)
     fun getUserFollower(

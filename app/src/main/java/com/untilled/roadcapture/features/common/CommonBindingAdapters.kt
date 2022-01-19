@@ -14,7 +14,7 @@ object CommonBindingAdapters {
 
     @JvmStatic
     @BindingAdapter("circleProfileImage")
-    fun setCircleProfileImage(view: CircleImageView, url: String) {
+    fun setCircleProfileImage(view: CircleImageView, url: String?) {
         view.context.apply {
             Glide.with(this)
                 .asBitmap()

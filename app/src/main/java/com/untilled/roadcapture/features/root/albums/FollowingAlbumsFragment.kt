@@ -19,7 +19,7 @@ import com.untilled.roadcapture.AlbumsBindingModel_
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.albums
 import com.untilled.roadcapture.application.MainActivity
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
@@ -30,6 +30,7 @@ import com.untilled.roadcapture.databinding.FragmentFollowingalbumsBinding
 import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
 import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
+import com.untilled.roadcapture.features.root.albums.dto.FollowingFilterClicked
 import com.untilled.roadcapture.followingFilter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
@@ -46,7 +47,7 @@ class FollowingAlbumsFragment : Fragment() {
     private val userObserver = { user: PageResponse<UsersResponse> ->
         initFilterAdapter(user)
     }
-    private val albumsObserver = { albums: PageResponse<AlbumResponse> ->
+    private val albumsObserver = { albums: PageResponse<AlbumsResponse> ->
         initAlbumAdapter(albums)
     }
 
@@ -97,7 +98,7 @@ class FollowingAlbumsFragment : Fragment() {
     private fun initFilterAdapter(user: PageResponse<UsersResponse>) {
         binding.recyclerFollowingalbumsFilter.withModels { initFollowingAlbumsFilter(user) }
     }
-    private fun initAlbumAdapter(albums: PageResponse<AlbumResponse>){
+    private fun initAlbumAdapter(albums: PageResponse<AlbumsResponse>){
         binding.recyclerFollowingalbums.withModels { initFollowingAlbumsItem(albums) }
     }
 
@@ -106,14 +107,14 @@ class FollowingAlbumsFragment : Fragment() {
             followingFilter {
                 id(index)
                 user(user)
-
                 onClickItem { model, parentView, clickedView, position ->
+                    viewModel.getFollowingAlbums(model.user().id, PageRequest())
                 }
             }
         }
     }
 
-    private fun EpoxyController.initFollowingAlbumsItem(albums: PageResponse<AlbumResponse>) {
+    private fun EpoxyController.initFollowingAlbumsItem(albums: PageResponse<AlbumsResponse>) {
         albums.content.forEachIndexed { index, albumResponse ->
             albums {
                 id(index)

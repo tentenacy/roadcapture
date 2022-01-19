@@ -9,7 +9,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.comment.Comments
 import com.untilled.roadcapture.data.repository.album.AlbumCommentsPagingSource
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
@@ -22,16 +22,17 @@ import javax.inject.Inject
 @HiltViewModel
 class PictureViewerViewModel
 @Inject constructor(private val repository: AlbumRepository) : ViewModel() {
-    private val _album = MutableLiveData<AlbumResponse>()
-    val albumResponse: LiveData<AlbumResponse> get() = _album
+    private val _album = MutableLiveData<AlbumsResponse>()
+    val albumResponse: LiveData<AlbumsResponse> get() = _album
     var currentPosition: Int = 0
     fun getAlbumDetail(id: Int) {
         viewModelScope.launch {
             repository.getAlbumDetail(id).let { album ->
+
                 if (album.isSuccessful) {
                     _album.postValue(album.body())
                 } else {
-                    Log.d("Album", "error: ${album.code()}")
+
                 }
             }
         }

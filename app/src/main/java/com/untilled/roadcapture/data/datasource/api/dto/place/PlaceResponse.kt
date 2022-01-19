@@ -7,7 +7,7 @@ import com.untilled.roadcapture.data.datasource.api.dto.address.Address
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Place(
+data class PlaceResponse(
     @ColumnInfo(name = "place_id")
     var id: Int,
     var name: String,

@@ -1,6 +1,6 @@
 package com.untilled.roadcapture.data.datasource.api
 
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.utils.constant.url.RoadCapturePathConstant
 import io.reactivex.rxjava3.core.Single
@@ -18,5 +18,5 @@ interface FollowApi {
         @Query("page") page: Int?,
         @Query("size") size: Int?,
         @Query("sort") sort: String?
-    ): Single<PageResponse<AlbumResponse>>
+    ): Single<PageResponse<AlbumsResponse>>
 }

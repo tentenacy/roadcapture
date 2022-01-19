@@ -1,5 +1,8 @@
 package com.untilled.roadcapture.di
 
+import android.os.Build
+import androidx.annotation.RequiresApi
+import com.google.gson.GsonBuilder
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.api.TmapService
 import com.untilled.roadcapture.network.interceptor.OAuthTokenInterceptor
@@ -13,7 +16,12 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import java.time.LocalDate
+import java.time.LocalDateTime
 import javax.inject.Singleton
+import com.google.gson.Gson
+import com.untilled.roadcapture.utils.converter.GsonLocalDateTimeAdapter
+
 
 @InstallIn(SingletonComponent::class)
 @Module
@@ -31,6 +39,7 @@ class NetworkModule {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     @Singleton
     @Provides
     fun provideRetrofitBuilder(
@@ -45,8 +54,10 @@ class NetworkModule {
             .addInterceptor(httpLoggingInterceptor)
             .build()
 
+        val gson = GsonBuilder().registerTypeAdapter(LocalDateTime::class.java, GsonLocalDateTimeAdapter()).create()
+
         return Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .client(client)
     }

@@ -1,10 +1,8 @@
 package com.untilled.roadcapture.utils.dummy
 
 import com.untilled.roadcapture.data.datasource.api.dto.address.Address
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.picture.PictureResponse
-import com.untilled.roadcapture.data.datasource.api.dto.place.Place
-import com.untilled.roadcapture.data.datasource.api.dto.user.UserResponse
+import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceResponse
 import com.untilled.roadcapture.data.entity.*
 
 object DummyDataSet {
@@ -103,7 +101,7 @@ object DummyDataSet {
 //    )
 
     val places = listOf(
-        Place(
+        PlaceResponse(
             1,
             "강원도",
             latitude = "",
@@ -604,33 +602,33 @@ object DummyDataSet {
         )
     )
 
-    val picture = listOf(
-        PictureResponse(
-            1,
-            "3일전",
-            lastModifiedAt = "4일전",
-            imageUrl = "https://c.pxhere.com/photos/b7/71/cherry_spring_in_japan_cherry_tree_cherry_blossoms_cherry_blossom_japan_flower_pink_castle-1106737.jpg!s1",
-            description = "설명입니다.",
-            place =
-            Place(
-                1,
-                "강원도",
-                latitude = "",
-                longitude = "",
-                address =
-                Address(
-                    addressName = "addressName",
-                    roadAddressName = "roadAddress",
-                    region1DepthName = "region1",
-                    region2DepthName = "region2",
-                    region3DepthName = "region3",
-                    zoneNo = "3"
-
-                )
-
-            )
-        )
-    )
+//    val picture = listOf(
+//        PictureResponse(
+//            1,
+//            "3일전",
+//            lastModifiedAt = "4일전",
+//            imageUrl = "https://c.pxhere.com/photos/b7/71/cherry_spring_in_japan_cherry_tree_cherry_blossoms_cherry_blossom_japan_flower_pink_castle-1106737.jpg!s1",
+//            description = "설명입니다.",
+//            placeResponse =
+//            PlaceResponse(
+//                1,
+//                "강원도",
+//                latitude = "",
+//                longitude = "",
+//                address =
+//                Address(
+//                    addressName = "addressName",
+//                    roadAddressName = "roadAddress",
+//                    region1DepthName = "region1",
+//                    region2DepthName = "region2",
+//                    region3DepthName = "region3",
+//                    zoneNo = "3"
+//
+//                )
+//
+//            )
+//        )
+//    )
 //        Picture(
 //            imageUri = "https://mblogthumb-phinf.pstatic.net/MjAxOTAxMDJfMjcz/MDAxNTQ2NDM5MjA3NjM2.qZOKA4N7NWbBjNH-ZcWdSvDXDAqpFbPc1_WGoY_A9gsg.6Vd7g-wE1Mt0Afe9_JwdONfQ8w9qo5OSOpq_7hbJQOQg.PNG.comeinto_/SE-c6d9cab3-86b1-4cfa-a3a1-72db7764c20e.png?type=w800",
 //            date = "9월 24일",

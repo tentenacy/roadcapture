@@ -10,7 +10,7 @@
 
         <variable
             name="notification"
-            type="com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse" />
+            type="com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse" />
 
         <variable
             name="onClickItem"
@@ -52,12 +52,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@{notification.createdAt}"
             style="@style/Date"
             android:textColor="@color/gray"
             app:layout_constraintStart_toStartOf="@id/text_inotification_username"
             app:layout_constraintTop_toBottomOf="@id/text_inotification_username"
             tools:text="3분전" />
+<!--            android:text="@{notification.createdAt}"-->
 
         <ImageView
             android:id="@+id/img_inotification_thumbnail"

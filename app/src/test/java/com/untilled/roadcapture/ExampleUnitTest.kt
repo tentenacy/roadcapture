@@ -1,10 +1,12 @@
 package com.untilled.roadcapture
 
+import com.untilled.roadcapture.utils.dateToSnsFormat
 import com.untilled.roadcapture.utils.getFilterDate
 import org.junit.Test
 
 import org.junit.Assert.*
 import java.text.SimpleDateFormat
+import java.time.LocalDateTime
 import java.util.*
 
 /**
@@ -15,6 +17,6 @@ import java.util.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        assertEquals("",getFilterDate("2022년 01월 07일"))
+        assertEquals("", dateToSnsFormat(LocalDateTime.of(2011,1,20,3,34,0)))
     }
 }

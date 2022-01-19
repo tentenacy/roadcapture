@@ -7,14 +7,16 @@ import com.untilled.roadcapture.data.datasource.api.dto.user.UserResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.data.entity.User
 import kotlinx.android.parcel.Parcelize
+import java.time.LocalDate
+import java.time.LocalDateTime
 
 @Parcelize
-data class AlbumResponse(
+data class AlbumsResponse(
     val id: Int,
-    val createdAt: String?,
-    val lastModifiedAt: String,
+    var createdAt: LocalDateTime?,
+    val lastModifiedAt: LocalDateTime?,
     val title: String,
-    val description: String,
+    val description: String?,
     val thumbnailUrl: String?,
     val user: UsersResponse,
     val viewCount: Int,

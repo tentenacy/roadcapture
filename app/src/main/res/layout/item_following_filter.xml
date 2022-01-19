@@ -5,11 +5,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
             name="user"
             type="com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse" />
+
+        <variable
+            name="select"
+            type="com.untilled.roadcapture.features.root.albums.dto.FollowingFilterClicked" />
 
         <variable
             name="onClickItem"
@@ -25,9 +30,9 @@
             android:id="@+id/img_ifollowing_filter_profile"
             android:layout_width="56dp"
             android:layout_height="56dp"
+            android:layout_marginTop="16dp"
             android:onClick="@{onClickItem}"
             android:scaleType="centerCrop"
-            android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -39,11 +44,11 @@
             android:layout_width="12dp"
             android:layout_height="12dp"
             android:src="@color/secondaryColor"
-            app:layout_constraintStart_toStartOf="@id/guideline_ifollowing_filter_h60p"
-            app:layout_constraintEnd_toEndOf="@id/img_ifollowing_filter_profile"
-            app:layout_constraintBottom_toBottomOf="@id/img_ifollowing_filter_profile"
             app:civ_border_color="@color/white"
-            app:civ_border_width="2.2dp"/>
+            app:civ_border_width="2.2dp"
+            app:layout_constraintBottom_toBottomOf="@id/img_ifollowing_filter_profile"
+            app:layout_constraintEnd_toEndOf="@id/img_ifollowing_filter_profile"
+            app:layout_constraintStart_toStartOf="@id/guideline_ifollowing_filter_h60p" />
 
         <TextView
             android:id="@+id/text_ifollowing_filter_username"
@@ -64,10 +69,11 @@
             android:id="@+id/view_ifollowing_filter_overlay"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:background="@drawable/overlay_gradient_following_filter"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_editor_absoluteX="0dp" />
+            android:visibility="invisible"
+            bind:SelectedStatus="@{select.clicked}"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_ifollowing_filter_h60p"

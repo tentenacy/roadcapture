@@ -3,7 +3,7 @@ package com.untilled.roadcapture.data.repository.album
 import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -11,9 +11,9 @@ class AlbumsPagingSource (
     private val repository: AlbumRepository,
     private val dateTimeFrom: String?,
     private val dateTimeTo: String?)
-    : PagingSource<Int, AlbumResponse>() {
+    : PagingSource<Int, AlbumsResponse>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AlbumResponse> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AlbumsResponse> {
         return try{
             val position = params.key ?: STARTING_PAGE_INDEX
 
@@ -37,7 +37,7 @@ class AlbumsPagingSource (
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, AlbumResponse>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, AlbumsResponse>): Int? {
         TODO("Not yet implemented")
     }
 

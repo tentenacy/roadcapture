@@ -11,7 +11,7 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.airbnb.epoxy.EpoxyController
 import com.untilled.roadcapture.*
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
@@ -103,8 +103,8 @@ class StudioFragment : Fragment() {
         }
     }
 
-    private fun initAdapter(albums: PageResponse<AlbumResponse>) {
-        binding.recyclerStudioAlbum.withModels { initStudioAlbumsItem(albums) }
+    private fun initAdapter(albums: PageResponse<AlbumsResponse>) {
+//        binding.recyclerStudioAlbum.withModels { initStudioAlbumsItem(albums) }
 //        binding.recyclerStudioPlace.withModels {
 //            DummyDataSet.places.forEachIndexed { index, place ->
 //                placeFilter {
@@ -122,17 +122,17 @@ class StudioFragment : Fragment() {
 //        }
     }
 
-    private fun EpoxyController.initStudioAlbumsItem(albums: PageResponse<AlbumResponse>) {
-        albums.content.forEachIndexed { index, album ->
-            albumsStudio {
-                id(index)
-                studio(album)
-                onClickItem { model, parentView, clickedView, position ->
-                    when(clickedView.id){
-
-                    }
-                }
-            }
-        }
-    }
+//    private fun EpoxyController.initStudioAlbumsItem(albums: PageResponse<AlbumsResponse>) {
+//        albums.content.forEachIndexed { index, album ->
+//            albumsStudio {
+//                id(index)
+//                studio(album)
+//                onClickItem { model, parentView, clickedView, position ->
+//                    when(clickedView.id){
+//
+//                    }
+//                }
+//            }
+//        }
+//    }
 }

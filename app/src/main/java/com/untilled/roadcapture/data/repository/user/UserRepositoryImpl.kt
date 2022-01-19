@@ -2,7 +2,7 @@ package com.untilled.roadcapture.data.repository.user
 
 import com.google.gson.Gson
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.ErrorCode
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
@@ -113,9 +113,8 @@ class UserRepositoryImpl @Inject constructor(
     override fun getUserInfo(id: Int): Single<UsersResponse> =
         roadCaptureApi.getUserInfo(id)
 
-    override fun getUserAlbums(pageRequest: PageRequest, addressRequest: AddressRequest): Single<PageResponse<AlbumResponse>> =
+    override fun getUserAlbums(pageRequest: PageRequest, addressRequest: AddressRequest): Single<PageResponse<UserAlbumsResponse>> =
         roadCaptureApi.getUserAlbums(pageRequest.page,pageRequest.size,pageRequest.sort,addressRequest.address1,addressRequest.address2,addressRequest.address3)
-
 
     override fun getUserFollower(
         followingsCondition: FollowingsCondition, pageRequest: PageRequest

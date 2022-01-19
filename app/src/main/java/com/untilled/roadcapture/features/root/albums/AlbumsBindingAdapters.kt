@@ -1,7 +1,10 @@
 package com.untilled.roadcapture.features.root.albums
 
+import android.os.Build
+import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.databinding.BindingAdapter
@@ -12,6 +15,7 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.utils.dateToSnsFormat
 import com.untilled.roadcapture.utils.getPxFromDp
 import de.hdodenhof.circleimageview.CircleImageView
+import java.time.LocalDateTime
 
 
 object AlbumsBindingAdapters {
@@ -105,8 +109,16 @@ object AlbumsBindingAdapters {
     }
 
     @JvmStatic
+    @BindingAdapter("SelectedStatus")
+    fun setSelectedStatus(view: View, clicked: Boolean){
+        if(clicked) view.visibility = View.INVISIBLE
+        else view.visibility = View.VISIBLE
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    @JvmStatic
     @BindingAdapter("DateToSnsFormat")
-    fun setDateToSnsFormat(view: TextView, text: String){
-        view.text = dateToSnsFormat(text)
+    fun setDateToSnsFormat(view: TextView, date: LocalDateTime){
+        view.text = dateToSnsFormat(date)
     }
 }

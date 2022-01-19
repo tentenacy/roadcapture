@@ -41,7 +41,7 @@ class PictureMapFragment : Fragment(), OnMapReadyCallback {
     ): View? {
         _binding = FragmentPictureMapBinding.inflate(inflater, container, false)
 
-        pictureResponseList = DummyDataSet.picture
+       // pictureResponseList = DummyDataSet.picture
         initNaverMap()
 
         return binding.root
