@@ -104,7 +104,7 @@ class PictureSliderFragment : Fragment() {
     }
 
     private fun EpoxyController.initPictureSliderContent(albumResponse: AlbumResponse) {
-        albumResponse.pictureResponses.forEachIndexed { index, picture ->
+        albumResponse.pictureResponses?.forEachIndexed { index, picture ->
             pictureSliderContent {
                 id(index)
                 picture(picture)

@@ -1,10 +1,9 @@
 package com.untilled.roadcapture.data.repository.album
 
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentsResponse
+import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import retrofit2.Response
-import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -15,7 +14,7 @@ interface AlbumRepository {
         @Query("size") size: Int? = null,
         @Query("dateTimeFrom")dateTimeFrom: String?,
         @Query("dateTimeTo")dateTimeTo: String?
-    ): Response<AlbumsResponse>
+    ): Response<PageResponse<AlbumResponse>>
 
     suspend fun getAlbumCommentsList(
         @Path("albumId") albumId: Int,

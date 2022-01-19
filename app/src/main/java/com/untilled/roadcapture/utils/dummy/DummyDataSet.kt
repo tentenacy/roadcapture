@@ -4,53 +4,54 @@ import com.untilled.roadcapture.data.datasource.api.dto.address.Address
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.picture.PictureResponse
 import com.untilled.roadcapture.data.datasource.api.dto.place.Place
+import com.untilled.roadcapture.data.datasource.api.dto.user.UserResponse
 import com.untilled.roadcapture.data.entity.*
 
 object DummyDataSet {
-    val albums = listOf(
-        AlbumResponse(
-            id = 1,
-            createdAt = "3dlfwjs",
-            lastModifiedAt = "4일전",
-            title = "테스트",
-            description = "테스트중입니다.",
-            thumbnailUrl = "https://c.pxhere.com/photos/86/48/one_world_trade_center_manhattan_owtc_new_york_architecture_downtown_skyscraper_city-1239341.jpg!s1",
-            viewCount = "2천",
-            likeCount = "1천",
-            commentCount = "5천",
-            user = User(
-                username = "kvvangddang",
-                profileImageUrl = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
-                backgroundUrl = "https://c.pxhere.com/photos/86/48/one_world_trade_center_manhattan_owtc_new_york_architecture_downtown_skyscraper_city-1239341.jpg!s1",
-                introduction = "테스트중"
-            ),
-            pictureResponses = listOf(
-                PictureResponse(
-                    1,
-                    "3일전",
-                    lastModifiedAt = "4일전",
-                    imageUrl = "https://c.pxhere.com/photos/b7/71/cherry_spring_in_japan_cherry_tree_cherry_blossoms_cherry_blossom_japan_flower_pink_castle-1106737.jpg!s1",
-                    description = "설명입니다.",
-                    place =
-                    Place(
-                        1,
-                        "강원도",
-                        latitude = "",
-                        longitude = "",
-                        address =
-                        Address(
-                            addressName = "addressName",
-                            roadAddressName = "roadAddress",
-                            region1DepthName = "region1",
-                            region2DepthName = "region2",
-                            region3DepthName = "region3",
-                            zoneNo = "3"
-
-                        )
-                    )
-                )
-            )
-        )
+//    val albums = listOf(
+//        AlbumResponse(
+//            id = 1,
+//            createdAt = "3dlfwjs",
+//            lastModifiedAt = "4일전",
+//            title = "테스트",
+//            description = "테스트중입니다.",
+//            thumbnailUrl = "https://c.pxhere.com/photos/86/48/one_world_trade_center_manhattan_owtc_new_york_architecture_downtown_skyscraper_city-1239341.jpg!s1",
+//            viewCount = "2천",
+//            likeCount = "1천",
+//            commentCount = "5천",
+//            user = UserResponse(
+//                username = "kvvangddang",
+//                profileImageUrl = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+//                backgroundUrl = "https://c.pxhere.com/photos/86/48/one_world_trade_center_manhattan_owtc_new_york_architecture_downtown_skyscraper_city-1239341.jpg!s1",
+//                introduction = "테스트중"
+//            ),
+//            pictureResponses = listOf(
+//                PictureResponse(
+//                    1,
+//                    "3일전",
+//                    lastModifiedAt = "4일전",
+//                    imageUrl = "https://c.pxhere.com/photos/b7/71/cherry_spring_in_japan_cherry_tree_cherry_blossoms_cherry_blossom_japan_flower_pink_castle-1106737.jpg!s1",
+//                    description = "설명입니다.",
+//                    place =
+//                    Place(
+//                        1,
+//                        "강원도",
+//                        latitude = "",
+//                        longitude = "",
+//                        address =
+//                        Address(
+//                            addressName = "addressName",
+//                            roadAddressName = "roadAddress",
+//                            region1DepthName = "region1",
+//                            region2DepthName = "region2",
+//                            region3DepthName = "region3",
+//                            zoneNo = "3"
+//
+//                        )
+//                    )
+//                )
+//            )
+//        )
 //        Album(
 //            id = "1",
 //            username = "tenutz",
@@ -99,7 +100,7 @@ object DummyDataSet {
 //            modifiedDate = "",
 //            thumbnailUrl = "https://c.pxhere.com/photos/b3/58/night_view_night_seoul_modern_the_night_sky_water_sky_light_reflections-592081.jpg!s1"
 //        )
-    )
+//    )
 
     val places = listOf(
         Place(
@@ -302,51 +303,51 @@ object DummyDataSet {
 
     )
 
-    val notification = listOf(
-        AlbumResponse(
-            id = 1,
-            createdAt = "3dlfwjs",
-            lastModifiedAt = "4일전",
-            title = "테스트",
-            description = "테스트중입니다.",
-            thumbnailUrl = "https://c.pxhere.com/photos/86/48/one_world_trade_center_manhattan_owtc_new_york_architecture_downtown_skyscraper_city-1239341.jpg!s1",
-            viewCount = "2천",
-            likeCount = "1천",
-            commentCount = "5천",
-            user = User(
-                username = "kvvangddang",
-                profileImageUrl = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
-                backgroundUrl = "https://c.pxhere.com/photos/86/48/one_world_trade_center_manhattan_owtc_new_york_architecture_downtown_skyscraper_city-1239341.jpg!s1",
-                introduction = "테스트중"
-            ),
-            pictureResponses = listOf(
-                PictureResponse(
-                    1,
-                    "3일전",
-                    lastModifiedAt = "4일전",
-                    imageUrl = "https://c.pxhere.com/photos/b7/71/cherry_spring_in_japan_cherry_tree_cherry_blossoms_cherry_blossom_japan_flower_pink_castle-1106737.jpg!s1",
-                    description = "설명입니다.",
-                    place =
-                    Place(
-                        1,
-                        "강원도",
-                        latitude = "",
-                        longitude = "",
-                        address =
-                        Address(
-                            addressName = "addressName",
-                            roadAddressName = "roadAddress",
-                            region1DepthName = "region1",
-                            region2DepthName = "region2",
-                            region3DepthName = "region3",
-                            zoneNo = "3"
-
-                        )
-                    )
-
-                )
-            )
-        )
+//    val notification = listOf(
+//        AlbumResponse(
+//            id = 1,
+//            createdAt = "3dlfwjs",
+//            lastModifiedAt = "4일전",
+//            title = "테스트",
+//            description = "테스트중입니다.",
+//            thumbnailUrl = "https://c.pxhere.com/photos/86/48/one_world_trade_center_manhattan_owtc_new_york_architecture_downtown_skyscraper_city-1239341.jpg!s1",
+//            viewCount = "2천",
+//            likeCount = "1천",
+//            commentCount = "5천",
+//            user = User(
+//                username = "kvvangddang",
+//                profileImageUrl = "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80",
+//                backgroundUrl = "https://c.pxhere.com/photos/86/48/one_world_trade_center_manhattan_owtc_new_york_architecture_downtown_skyscraper_city-1239341.jpg!s1",
+//                introduction = "테스트중"
+//            ),
+//            pictureResponses = listOf(
+//                PictureResponse(
+//                    1,
+//                    "3일전",
+//                    lastModifiedAt = "4일전",
+//                    imageUrl = "https://c.pxhere.com/photos/b7/71/cherry_spring_in_japan_cherry_tree_cherry_blossoms_cherry_blossom_japan_flower_pink_castle-1106737.jpg!s1",
+//                    description = "설명입니다.",
+//                    place =
+//                    Place(
+//                        1,
+//                        "강원도",
+//                        latitude = "",
+//                        longitude = "",
+//                        address =
+//                        Address(
+//                            addressName = "addressName",
+//                            roadAddressName = "roadAddress",
+//                            region1DepthName = "region1",
+//                            region2DepthName = "region2",
+//                            region3DepthName = "region3",
+//                            zoneNo = "3"
+//
+//                        )
+//                    )
+//
+//                )
+//            )
+//        )
 //        Album(
 //            username = "hsw0715",
 //            id = "",
@@ -539,7 +540,7 @@ object DummyDataSet {
 //            modifiedDate = "",
 //            thumbnailUrl = "https://cdn.pixabay.com/photo/2021/10/17/02/29/blackish-oystercatcher-6716397_960_720.jpg",
 //        )
-    )
+//    )
 
     val user = listOf(
         User(

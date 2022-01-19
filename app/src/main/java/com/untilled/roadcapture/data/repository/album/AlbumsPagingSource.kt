@@ -1,10 +1,9 @@
 package com.untilled.roadcapture.data.repository.album
 
+import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.untilled.roadcapture.data.datasource.api.dto.album.Albums
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
-import com.untilled.roadcapture.data.entity.token.Token
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -12,9 +11,9 @@ class AlbumsPagingSource (
     private val repository: AlbumRepository,
     private val dateTimeFrom: String?,
     private val dateTimeTo: String?)
-    : PagingSource<Int, Albums>() {
+    : PagingSource<Int, AlbumResponse>() {
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Albums> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AlbumResponse> {
         return try{
             val position = params.key ?: STARTING_PAGE_INDEX
 
@@ -25,12 +24,11 @@ class AlbumsPagingSource (
                 dateTimeTo = dateTimeTo,
             )
 
-            val post = response.body()?.albums
-
+            val post = response.body()?.content
             LoadResult.Page(
                 data = post ?: listOf(),
                 prevKey = if (position == STARTING_PAGE_INDEX) null else position - 1,
-                nextKey = if (response.body()?.albums?.isNotEmpty() == true) position + 1 else null
+                nextKey = if (response.body()?.content?.isNotEmpty() == true) position + 1 else null
             )
         } catch (exception: IOException) {
             LoadResult.Error(exception)
@@ -39,7 +37,7 @@ class AlbumsPagingSource (
         }
     }
 
-    override fun getRefreshKey(state: PagingState<Int, Albums>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, AlbumResponse>): Int? {
         TODO("Not yet implemented")
     }
 

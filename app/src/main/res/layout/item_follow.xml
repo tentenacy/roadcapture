@@ -48,7 +48,7 @@
             tools:text="hsw0715" />
 
         <Button
-            android:id="@+id/btn_follow"
+            android:id="@+id/btn_ifollow"
             android:layout_width="96dp"
             android:layout_height="wrap_content"
             android:minWidth="0dp"
@@ -57,6 +57,7 @@
             android:text="@string/follow"
             android:textColor="@color/white"
             android:textSize="14sp"
+            android:onClick="@{onClickItem}"
             app:backgroundTint="@color/secondaryColor"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

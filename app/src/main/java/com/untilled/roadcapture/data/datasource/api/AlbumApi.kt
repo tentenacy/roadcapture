@@ -1,11 +1,10 @@
 package com.untilled.roadcapture.data.datasource.api
 
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
+import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.utils.constant.url.RoadCapturePathConstant
 import retrofit2.Response
 import retrofit2.http.GET
-import retrofit2.http.Header
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -18,7 +17,7 @@ interface AlbumApi {
         @Query("size") size: String? = null,
         @Query("dateTimeFrom") dateTimeFrom: String?,
         @Query("dateTimeTo") dateTimeTo: String?
-    ): Response<AlbumsResponse>
+    ): Response<PageResponse<AlbumResponse>>
 
     @GET(RoadCapturePathConstant.GET_ALBUM)
     suspend fun getAlbum(

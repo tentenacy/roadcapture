@@ -2,6 +2,7 @@ package com.untilled.roadcapture.features.root.studio
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -94,7 +95,8 @@ class FollowerFragment : Fragment(){
                 onClickItem { model, parentView, clickedView, position ->
                     when (clickedView.id) {
                         R.id.img_ifollow_profile -> Navigation.findNavController(binding.root)
-                            .navigate(R.id.action_followerFragment_to_studioFragment)
+                            .navigate(FollowerFragmentDirections.actionFollowerFragmentToStudioFragment(model.user().id))
+                        R.id.btn_ifollow -> viewModel.follow(model.user().id)
                     }
                 }
             }

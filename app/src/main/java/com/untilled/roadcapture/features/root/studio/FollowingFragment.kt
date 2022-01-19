@@ -93,7 +93,8 @@ class FollowingFragment : Fragment(){
                 onClickItem { model, parentView, clickedView, position ->
                     when (clickedView.id) {
                         R.id.img_ifollow_profile -> Navigation.findNavController(binding.root)
-                            .navigate(R.id.action_followingFragment_to_studioFragment)
+                            .navigate(FollowingFragmentDirections.actionFollowingFragmentToStudioFragment(model.user().id))
+                        R.id.btn_ifollow -> viewModel.follow(model.user().id)
                     }
                 }
             }

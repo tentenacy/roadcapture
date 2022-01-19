@@ -1,6 +1,5 @@
 package com.untilled.roadcapture.features.root.albums
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -9,7 +8,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.orhanobut.logger.Logger
-import com.untilled.roadcapture.data.datasource.api.dto.album.Albums
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.comment.Comments
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
@@ -37,19 +36,19 @@ class AlbumsViewModel
 
     private var currentDateTimeFrom: String? = null
     private var currentDateTimeTo: String? = null
-    private var currentAlbumsResult: Flow<PagingData<Albums>>? = null
+    private var currentAlbumsResult: Flow<PagingData<AlbumResponse>>? = null
 
     private val _user =  MutableLiveData<PageResponse<UsersResponse>>()
     val user: LiveData<PageResponse<UsersResponse>> get() = _user
 
-    fun getAlbums(dateTimeFrom: String?, dateTimeTo: String?): Flow<PagingData<Albums>>{
+    fun getAlbums(dateTimeFrom: String?, dateTimeTo: String?): Flow<PagingData<AlbumResponse>>{
         val lastResult = currentAlbumsResult
         if(dateTimeFrom == currentDateTimeFrom && dateTimeTo == currentDateTimeTo && lastResult != null){
             return lastResult
         }
         currentDateTimeFrom = dateTimeFrom
         currentDateTimeTo = dateTimeTo
-        val newResult: Flow<PagingData<Albums>> = getAlbumsResultStream(dateTimeFrom,dateTimeTo).cachedIn(viewModelScope)
+        val newResult: Flow<PagingData<AlbumResponse>> = getAlbumsResultStream(dateTimeFrom,dateTimeTo).cachedIn(viewModelScope)
         currentAlbumsResult = newResult
         return newResult
     }
@@ -58,7 +57,7 @@ class AlbumsViewModel
         return getAlbumCommentsResultStream(albumId).cachedIn(viewModelScope)
     }
 
-    private fun getAlbumsResultStream(dateTimeFrom: String?, dateTimeTo: String?): Flow<PagingData<Albums>> {
+    private fun getAlbumsResultStream(dateTimeFrom: String?, dateTimeTo: String?): Flow<PagingData<AlbumResponse>> {
         return Pager(
             config = PagingConfig(
                 pageSize = 10,

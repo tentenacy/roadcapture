@@ -60,20 +60,20 @@ class NotificationFragment : Fragment(){
         binding.recycleNotification.addItemDecoration(customDivider)
 
         binding.recycleNotification.withModels {
-            DummyDataSet.notification.forEachIndexed { index, album ->
-                notification {
-                    id(index)
-                    notification(album)
-
-                    onClickItem { model, parentView, clickedView, position ->
-                        when(clickedView.id){
-                            R.id.img_inotification_profile->
-                                Navigation.findNavController(binding.root)
-                                    .navigate(R.id.action_notificationFragment_to_studioFragment)
-                        }
-                    }
-                }
-            }
+//            DummyDataSet.notification.forEachIndexed { index, album ->
+//                notification {
+//                    id(index)
+//                    notification(album)
+//
+//                    onClickItem { model, parentView, clickedView, position ->
+//                        when(clickedView.id){
+//                            R.id.img_inotification_profile->
+//                                Navigation.findNavController(binding.root)
+//                                    .navigate(R.id.action_notificationFragment_to_studioFragment)
+//                        }
+//                    }
+//                }
+//            }
         }
     }
 

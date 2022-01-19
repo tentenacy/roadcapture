@@ -40,16 +40,16 @@ class TitleSearchFragment : Fragment() {
 
     private fun initAdapter() {
         binding.recyclerTitlesearch.withModels {
-            DummyDataSet.albums.forEachIndexed { index, album ->
-                titleSearch {
-                    id(index)
-                    album(album)
-
-                    onClickItem { model, parentView, clickedView, position ->
-                        when (clickedView.id) {
-                            R.id.img_ititlesearch_profile -> Navigation.findNavController(
-                                (parentFragment?.parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root
-                            ).navigate(R.id.action_rootFragment_to_studioFragment)
+//            DummyDataSet.albums.forEachIndexed { index, album ->
+//                titleSearch {
+//                    id(index)
+//                    album(album)
+//
+//                    onClickItem { model, parentView, clickedView, position ->
+//                        when (clickedView.id) {
+//                            R.id.img_ititlesearch_profile -> Navigation.findNavController(
+//                                (parentFragment?.parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root
+//                            ).navigate(R.id.action_rootFragment_to_studioFragment)
 //
 //                            R.id.imageview_item_title_search_thumbnail -> Navigation.findNavController(
 //                                (parentFragment?.parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root
@@ -58,10 +58,10 @@ class TitleSearchFragment : Fragment() {
 //                                    model.album()
 //                                )
 //                            )
-                        }
-                    }
-                }
-            }
+//                        }
+//                    }
+//                }
+//            }
         }
     }
 }

@@ -9,7 +9,7 @@
 
         <variable
             name="albums"
-            type="com.untilled.roadcapture.data.datasource.api.dto.album.Albums" />
+            type="com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse" />
 
         <variable
             name="onClickItem"
@@ -57,7 +57,7 @@
             android:padding="8dp"
             app:layout_constraintStart_toStartOf="@id/img_ialbums_thumbnail"
             app:layout_constraintTop_toTopOf="@id/img_ialbums_thumbnail"
-            bind:albumProfileImage="@{albums.usersResponse.profileImageUrl}"
+            bind:albumProfileImage="@{albums.user.profileImageUrl}"
             tools:src="@drawable/img_sample_profile" />
 
         <com.airbnb.lottie.LottieAnimationView
@@ -133,7 +133,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/img_ialbums_profile"
             app:layout_constraintStart_toEndOf="@id/img_ialbums_profile"
             app:layout_constraintTop_toTopOf="@+id/img_ialbums_profile"
-            bind:albumOverlayUsername="@{albums.usersResponse.username}"
+            bind:albumOverlayUsername="@{albums.user.username}"
             tools:text="tenutz ·" />
 
         <TextView

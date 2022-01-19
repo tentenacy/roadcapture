@@ -3,6 +3,7 @@ package com.untilled.roadcapture.features.root.albums
 import android.animation.ValueAnimator
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.AlbumsBindingModel_
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
-import com.untilled.roadcapture.data.datasource.api.dto.album.Albums
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.databinding.FragmentAlbumsBinding
 import com.untilled.roadcapture.features.root.RootFragment
@@ -41,7 +42,7 @@ class AlbumsFragment : Fragment() {
     private val epoxyItemClickListener: (EpoxyItemArgs) -> Unit =  { args ->
         when (args.clickedView.id) {
             R.id.img_ialbums_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(RootFragmentDirections.actionRootFragmentToStudioFragment((args.model as AlbumsBindingModel_).albums().usersResponse!!.id))
+                .navigate(RootFragmentDirections.actionRootFragmentToStudioFragment((args.model as AlbumsBindingModel_).albums().user!!.id))
 
             R.id.img_ialbums_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                 .navigate(RootFragmentDirections.actionRootFragmentToCommentFragment((args.model as AlbumsBindingModel_).albums().id.toString()))
@@ -137,7 +138,7 @@ class AlbumsFragment : Fragment() {
 
     fun updateView(dateTimeFrom: String?, dateTimeTo: String?) {
         lifecycleScope.launch{
-            viewModel.getAlbums(dateTimeFrom, dateTimeTo).collectLatest{ pagingData: PagingData<Albums> ->
+            viewModel.getAlbums(dateTimeFrom, dateTimeTo).collectLatest{ pagingData: PagingData<AlbumResponse> ->
                 epoxyController.submitData(pagingData)
             }
         }
