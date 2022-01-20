@@ -1,6 +1,7 @@
 package com.untilled.roadcapture.di
 
 import com.untilled.roadcapture.data.datasource.paging.album.AlbumsPagingSource
+import com.untilled.roadcapture.data.datasource.paging.album.UserAlbumsPagingSource
 import com.untilled.roadcapture.data.datasource.paging.comment.AlbumCommentsPagingSource
 import com.untilled.roadcapture.data.datasource.paging.comment.PictureCommentsPagingSource
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
@@ -35,8 +36,11 @@ abstract class RepositoryModule {
     companion object {
         @Singleton
         @Provides
-        fun provideAlbumsPagingRepository(pagingSource: AlbumsPagingSource): AlbumPagingRepository {
-            return AlbumPagingRepositoryImpl(pagingSource)
+        fun provideAlbumsPagingRepository(
+            albumsPagingSource: AlbumsPagingSource,
+            userAlbumsPagingSource: UserAlbumsPagingSource
+        ): AlbumPagingRepository {
+            return AlbumPagingRepositoryImpl(albumsPagingSource, userAlbumsPagingSource)
         }
 
         @Singleton
@@ -45,7 +49,10 @@ abstract class RepositoryModule {
             albumCommentsPagingSource: AlbumCommentsPagingSource,
             pictureCommentsPagingSource: PictureCommentsPagingSource
         ): CommentPagingRepository {
-            return CommentPagingRepositoryImpl(albumCommentsPagingSource, pictureCommentsPagingSource)
+            return CommentPagingRepositoryImpl(
+                albumCommentsPagingSource,
+                pictureCommentsPagingSource
+            )
         }
     }
 

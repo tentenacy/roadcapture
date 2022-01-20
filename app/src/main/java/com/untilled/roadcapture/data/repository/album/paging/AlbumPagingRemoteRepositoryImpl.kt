@@ -6,23 +6,29 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.flowable
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
+import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsCondition
 import com.untilled.roadcapture.data.datasource.dao.paging.album.AlbumsDao
+import com.untilled.roadcapture.data.datasource.dao.paging.album.UserAlbumsDao
 import com.untilled.roadcapture.data.datasource.paging.album.AlbumsRemoteMediator
+import com.untilled.roadcapture.data.datasource.paging.album.UserAlbumsRemoteMediator
 import com.untilled.roadcapture.data.entity.paging.Albums
+import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import io.reactivex.rxjava3.core.Flowable
 import javax.inject.Inject
 import javax.inject.Singleton
 
+@ExperimentalPagingApi
 class AlbumPagingRemoteRepositoryImpl(
     private val albumsDao: AlbumsDao,
-    private val remoteMediator: AlbumsRemoteMediator
+    private val userAlbumsDao: UserAlbumsDao,
+    private val albumsRemoteMediator: AlbumsRemoteMediator,
+    private val userAlbumsRemoteMediator: UserAlbumsRemoteMediator,
 ): AlbumPagingRepository {
 
-    @ExperimentalPagingApi
     override fun getAlbums(
         cond: AlbumsCondition
     ): Flowable<PagingData<Albums.Album>> {
-        remoteMediator.albumsCondition = cond
+        albumsRemoteMediator.albumsCondition = cond
         return Pager(
             config = PagingConfig(
                 pageSize = 20,
@@ -31,8 +37,23 @@ class AlbumPagingRemoteRepositoryImpl(
                 prefetchDistance = 5,
                 initialLoadSize = 40
             ),
-            remoteMediator = remoteMediator,
+            remoteMediator = albumsRemoteMediator,
             pagingSourceFactory = { albumsDao.selectAll() }
+        ).flowable
+    }
+
+    override fun getUserAlbums(cond: UserAlbumsCondition): Flowable<PagingData<UserAlbums.UserAlbum>> {
+        userAlbumsRemoteMediator.userAlbumsCondition = cond
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = true,
+                maxSize = 30,
+                prefetchDistance = 5,
+                initialLoadSize = 40
+            ),
+            remoteMediator = userAlbumsRemoteMediator,
+            pagingSourceFactory = { userAlbumsDao.selectAll() }
         ).flowable
     }
 }

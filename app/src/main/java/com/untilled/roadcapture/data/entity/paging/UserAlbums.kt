@@ -4,43 +4,38 @@ import android.os.Parcelable
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.untilled.roadcapture.data.datasource.api.dto.picture.ThumbnailPictureResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Albums(
+data class UserAlbums(
     val total: Int = 0,
     val page: Int = 0,
-    val albums: List<Album>
-): Parcelable {
+    val userAlbums: List<UserAlbum>
+) : Parcelable {
 
     @IgnoredOnParcel
     val endOfPage = total - 1 == page
 
     @Parcelize
-    @Entity(tableName = "albums")
-    data class Album(
+    @Entity(tableName = "user_albums")
+    data class UserAlbum(
         @PrimaryKey(autoGenerate = true) val id: Long = 0,
-        val albumsId: Long,
-        var createdAt: String,
+        val userAlbumsId: Long,
+        val createdAt: String,
         val lastModifiedAt: String,
         val title: String,
-        val description: String,
-        val thumbnailUrl: String,
         @Embedded
-        val user: UsersResponse,
-        val viewCount: Int,
-        val likeCount: Int,
-        val commentCount: Int,
-        val liked: Boolean
+        val thumbnailPicture: ThumbnailPictureResponse,
     ) : Parcelable
 
     @Parcelize
-    @Entity(tableName = "albums_remote_keys")
-    data class AlbumRemoteKeys(
-        @PrimaryKey val albumsId: Long,
+    @Entity(tableName = "user_albums_remote_keys")
+    data class UserAlbumRemoteKeys(
+        @PrimaryKey val userAlbumsId: Long,
         val prevKey: Int?,
         val nextKey: Int,
-    ): Parcelable
+    ) : Parcelable
 }

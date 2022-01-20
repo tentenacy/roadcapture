@@ -4,9 +4,9 @@ import com.untilled.roadcapture.data.datasource.api.dto.picture.ThumbnailPicture
 import java.time.LocalDateTime
 
 data class UserAlbumsResponse (
-    var id: Int,
-    var createdAt: LocalDateTime?,
-    var lastModifiedAt: LocalDateTime?,
-    var title: String? = null,
-    var thumbnailPicture: ThumbnailPictureResponse?
+    val id: Long,
+    val createdAt: String,
+    val lastModifiedAt: String,
+    val title: String,
+    val thumbnailPicture: ThumbnailPictureResponse
 )

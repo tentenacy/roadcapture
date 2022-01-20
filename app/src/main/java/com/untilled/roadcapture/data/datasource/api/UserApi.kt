@@ -49,10 +49,9 @@ interface UserApi {
     fun getUserAlbums(
         @Query("page") page: Int?,
         @Query("size") size: Int?,
-        @Query("sort") sort: String?,
-        @Query("placeCond.region1DepthName") place1: String?,
-        @Query("placeCond.region2DepthName") place2: String?,
-        @Query("placeCond.region3DepthName") place3: String?
+        @Query("placeCond.region1DepthName") region1DepthName: String?,
+        @Query("placeCond.region2DepthName") region2DepthName: String?,
+        @Query("placeCond.region3DepthName") region3DepthName: String?
     ): Single<PageResponse<UserAlbumsResponse>>
 
     @GET(RoadCapturePathConstant.GET_USER_FOLLOWER)

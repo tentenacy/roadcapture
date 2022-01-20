@@ -118,7 +118,7 @@ class UserRepositoryImpl @Inject constructor(
             .retryThreeTimes()
 
     override fun getUserAlbums(pageRequest: PageRequest, addressRequest: AddressRequest): Single<PageResponse<UserAlbumsResponse>> =
-        roadCaptureApi.getUserAlbums(pageRequest.page,pageRequest.size,pageRequest.sort,addressRequest.address1,addressRequest.address2,addressRequest.address3)
+        roadCaptureApi.getUserAlbums(pageRequest.page,pageRequest.size,addressRequest.address1,addressRequest.address2,addressRequest.address3)
             .retryThreeTimes()
 
     override fun getUserFollower(
