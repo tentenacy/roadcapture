@@ -9,21 +9,26 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.paging.PagingData
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
+import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.databinding.FragmentAlbumsBinding
 import com.untilled.roadcapture.features.root.RootFragment
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class AlbumsFragment : Fragment() {
 
     private var _binding: FragmentAlbumsBinding? = null
     private val binding get() = _binding!!
-    private var flagLike: Boolean = false
 
     private val viewModel: AlbumsViewModel by viewModels()
+
+    @Inject
+    lateinit var adapter: AlbumsAdapter
 
     private val notificationOnClickListener: (View?) -> Unit = {
         Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
@@ -35,6 +40,10 @@ class AlbumsFragment : Fragment() {
         filterBottomSheetDialog.show(childFragmentManager, "filterBottomSheet")
     }
 
+    private val albumObserver: (PagingData<Albums.Album>) -> Unit = { pagingData ->
+        adapter.submitData(lifecycle, pagingData)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,6 +53,8 @@ class AlbumsFragment : Fragment() {
 
         (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarAlbums)
 
+        binding.recycleAlbums.adapter = adapter
+
         return binding.root
     }
 
@@ -51,6 +62,11 @@ class AlbumsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
         setOnClickListeners()
+        observeData()
+    }
+
+    private fun observeData() {
+        viewModel.album.observe(viewLifecycleOwner, albumObserver)
     }
 
     private fun setOnClickListeners() {
@@ -71,7 +87,6 @@ class AlbumsFragment : Fragment() {
     fun updateView(dateTimeFrom: String?, dateTimeTo: String?) {
         viewModel.getAlbums(AlbumsCondition(dateTimeFrom ?: "", dateTimeTo ?: ""))
     }
-
 
     private fun showReportDialog() {
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dlg_report, null)

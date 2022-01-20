@@ -24,7 +24,6 @@ import java.lang.reflect.Type
 
 class GsonLocalDateTimeAdapter : JsonSerializer<LocalDateTime?>,
     JsonDeserializer<LocalDateTime?> {
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun serialize(
         localDateTime: LocalDateTime?,
         srcType: Type?,
@@ -33,7 +32,6 @@ class GsonLocalDateTimeAdapter : JsonSerializer<LocalDateTime?>,
         return JsonPrimitive(DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(localDateTime))
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     @Throws(JsonParseException::class)
     override fun deserialize(
         json: JsonElement,

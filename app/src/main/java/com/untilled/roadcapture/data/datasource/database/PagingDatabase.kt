@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.TypeConverters
 import com.untilled.roadcapture.data.datasource.dao.paging.album.AlbumsRemoteKeysDao
 import com.untilled.roadcapture.data.datasource.dao.paging.album.AlbumsDao
 import com.untilled.roadcapture.data.datasource.dao.paging.album.UserAlbumsDao
@@ -16,6 +17,7 @@ import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.data.entity.paging.PictureComments
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
+import com.untilled.roadcapture.utils.converter.RoomConverters
 
 @Database(
     entities = [
@@ -31,6 +33,7 @@ import com.untilled.roadcapture.data.entity.paging.UserAlbums
     version = 1,
     exportSchema = false
 )
+@TypeConverters(RoomConverters::class)
 abstract class PagingDatabase : RoomDatabase() {
     abstract fun albumsDao(): AlbumsDao
     abstract fun albumsRemoteKeysDao(): AlbumsRemoteKeysDao

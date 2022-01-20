@@ -41,8 +41,6 @@ class AlbumsViewModel
     private var _albums = MutableLiveData<PagingData<Albums.Album>>()
     val album: LiveData<PagingData<Albums.Album>> get() = _albums
 
-
-    //TODO 페이징으로 변경
     private val _user =  MutableLiveData<PageResponse<UsersResponse>>()
     val user: LiveData<PageResponse<UsersResponse>> get() = _user
 
@@ -53,8 +51,8 @@ class AlbumsViewModel
         albumPagingRepository.getAlbums(cond)
             .subscribeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
-            .subscribe({
-                _albums.value = it
+            .subscribe({ pagingData ->
+                _albums.value = pagingData
             }) { t ->
 
             }.addTo(compositeDisposable)

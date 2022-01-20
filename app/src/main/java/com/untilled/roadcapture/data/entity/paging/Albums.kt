@@ -7,6 +7,7 @@ import androidx.room.PrimaryKey
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
+import java.time.LocalDateTime
 
 @Parcelize
 data class Albums(
@@ -23,8 +24,8 @@ data class Albums(
     data class Album(
         @PrimaryKey(autoGenerate = true) val id: Long = 0,
         val albumsId: Long,
-        var createdAt: String,
-        val lastModifiedAt: String,
+        var createdAt: LocalDateTime,
+        val lastModifiedAt: LocalDateTime,
         val title: String,
         val description: String,
         val thumbnailUrl: String,

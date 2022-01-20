@@ -142,11 +142,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
+            bind:DateToSnsFormat="@{album.createdAt}"
             app:layout_constraintBottom_toBottomOf="@id/text_ialbums_username"
             app:layout_constraintStart_toEndOf="@id/text_ialbums_username"
             app:layout_constraintTop_toTopOf="@id/text_ialbums_username"
             tools:text="3분전" />
-            <!--bind:DateToSnsFormat="@{albums.createdAt}"-->
 
 
         <TextView
