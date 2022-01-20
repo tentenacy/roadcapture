@@ -52,6 +52,7 @@ class MainViewModel @Inject constructor(
                         accessTokenExpireDate = response.accessTokenExpireDate.toLong(),
                     )
                 )
+                tokenExpirationObservable.resetCount()
             }) { t ->
                 error.value = t.message
             }.addTo(compositeDisposable)
@@ -59,10 +60,12 @@ class MainViewModel @Inject constructor(
 
     override fun onRefreshTokenExpired() {
         logout()
+        tokenExpirationObservable.resetCount()
     }
 
     override fun onOAuthTokenExpired() {
         logout()
+        tokenExpirationObservable.resetCount()
     }
 
     fun logout() {

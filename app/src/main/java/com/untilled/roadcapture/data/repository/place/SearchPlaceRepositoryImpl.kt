@@ -4,7 +4,9 @@ import com.untilled.roadcapture.data.datasource.api.TmapService
 import com.untilled.roadcapture.data.datasource.api.dto.place.SearchPlaceResponse
 import retrofit2.Response
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class SearchPlaceRepositoryImpl
     @Inject constructor(
         private val service: TmapService

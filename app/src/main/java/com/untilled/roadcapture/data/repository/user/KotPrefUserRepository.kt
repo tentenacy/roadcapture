@@ -6,7 +6,9 @@ import com.untilled.roadcapture.data.datasource.dao.LocalTokenDao
 import com.untilled.roadcapture.data.datasource.dao.LocalUserDao
 import com.untilled.roadcapture.data.repository.token.LocalTokenRepository
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class KotPrefUserRepository @Inject constructor(private val localUserDao: LocalUserDao):
     LocalUserRepository {
     override fun saveUser(id: Int) {

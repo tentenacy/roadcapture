@@ -39,7 +39,9 @@ class KakaoLoginManager @Inject constructor(
             }
         } else {
             //로그인 필요
-            notifyOAuthRefreshTokenExpired()
+            if(++count == 1) {
+                notifyOAuthRefreshTokenExpired()
+            }
         }
     }
 

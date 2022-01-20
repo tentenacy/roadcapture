@@ -15,7 +15,9 @@ import com.untilled.roadcapture.utils.toErrorResponse
 import com.untilled.roadcapture.utils.type.SocialType
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class UserRepositoryImpl @Inject constructor(
     private val roadCaptureApi: RoadCaptureApi,
     private val localTokenDao: LocalTokenDao,
@@ -109,20 +111,25 @@ class UserRepositoryImpl @Inject constructor(
 
     override fun getUserDetail(): Single<UserResponse> =
         roadCaptureApi.getUserDetail()
+            .retryThreeTimes()
 
     override fun getUserInfo(id: Int): Single<UsersResponse> =
         roadCaptureApi.getUserInfo(id)
+            .retryThreeTimes()
 
     override fun getUserAlbums(pageRequest: PageRequest, addressRequest: AddressRequest): Single<PageResponse<UserAlbumsResponse>> =
         roadCaptureApi.getUserAlbums(pageRequest.page,pageRequest.size,pageRequest.sort,addressRequest.address1,addressRequest.address2,addressRequest.address3)
+            .retryThreeTimes()
 
     override fun getUserFollower(
         followingsCondition: FollowingsCondition, pageRequest: PageRequest
     ): Single<PageResponse<UsersResponse>> =
         roadCaptureApi.getUserFollower(followingsCondition.userId,pageRequest.page,pageRequest.size,pageRequest.sort,followingsCondition.username)
+            .retryThreeTimes()
 
     override fun getUserFollowing(
         followingsCondition: FollowingsCondition, pageRequest: PageRequest
     ): Single<PageResponse<UsersResponse>> =
         roadCaptureApi.getUserFollowing(followingsCondition.userId,pageRequest.page,pageRequest.size,pageRequest.sort,followingsCondition.username)
+            .retryThreeTimes()
 }

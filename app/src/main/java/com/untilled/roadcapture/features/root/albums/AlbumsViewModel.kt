@@ -104,7 +104,7 @@ class AlbumsViewModel
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
                 _albums.postValue(response)
-            },{ t ->
+            }, { t ->
 
             }).addTo(compositeDisposable)
     }

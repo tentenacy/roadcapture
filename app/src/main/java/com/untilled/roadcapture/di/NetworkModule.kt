@@ -20,6 +20,7 @@ import java.time.LocalDate
 import java.time.LocalDateTime
 import javax.inject.Singleton
 import com.google.gson.Gson
+import com.untilled.roadcapture.data.datasource.dao.LocalTokenDao
 import com.untilled.roadcapture.utils.converter.GsonLocalDateTimeAdapter
 
 
@@ -37,6 +38,12 @@ class NetworkModule {
                 HttpLoggingInterceptor.Level.NONE
             }
         }
+    }
+
+    @Singleton
+    @Provides
+    fun provideTokenInterceptor(localTokenDao: LocalTokenDao, gson: Gson): TokenInterceptor {
+        return TokenInterceptor(localTokenDao, gson)
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

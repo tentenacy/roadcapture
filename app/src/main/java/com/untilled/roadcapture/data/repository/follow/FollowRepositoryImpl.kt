@@ -6,7 +6,9 @@ import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class FollowRepositoryImpl @Inject constructor(
     private val roadCaptureApi: RoadCaptureApi
 ) : FollowRepository{

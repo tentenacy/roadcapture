@@ -8,7 +8,9 @@ import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import retrofit2.Response
 import retrofit2.http.Query
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class AlbumRepositoryImpl
 @Inject constructor(
     private val api: RoadCaptureApi

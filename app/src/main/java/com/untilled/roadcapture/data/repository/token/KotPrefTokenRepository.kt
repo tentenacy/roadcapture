@@ -6,7 +6,9 @@ import com.untilled.roadcapture.data.repository.token.dto.OAuthTokenArgs
 import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
 import com.untilled.roadcapture.utils.type.SocialType
 import javax.inject.Inject
+import javax.inject.Singleton
 
+@Singleton
 class KotPrefTokenRepository @Inject constructor(private val localOAuthTokenDao: LocalOAuthTokenDao, private val localTokenDao: LocalTokenDao): LocalTokenRepository {
 
     override fun saveOAuthToken(args: OAuthTokenArgs) {

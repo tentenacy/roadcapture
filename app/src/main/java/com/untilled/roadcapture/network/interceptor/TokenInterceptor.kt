@@ -11,7 +11,7 @@ import okhttp3.Interceptor
 import okhttp3.Response
 import javax.inject.Inject
 
-class TokenInterceptor @Inject constructor(
+class TokenInterceptor(
     private val localTokenDao: LocalTokenDao,
     private val gson: Gson,
 ) : Interceptor, Subject<TokenExpirationObserver>() {
@@ -27,10 +27,12 @@ class TokenInterceptor @Inject constructor(
 
             when (errorResponse?.code) {
                 ErrorCode.ACCESS_TOKEN_ERROR.code -> {
-                    notifyTokenExpired()
+                    if(++count == 1)
+                        notifyTokenExpired()
                 }
                 ErrorCode.REFRESH_TOKEN_ERROR.code -> {
-                    notifyRefreshTokenExpired()
+                    if(++count == 1)
+                        notifyRefreshTokenExpired()
                 }
             }
         }

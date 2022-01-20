@@ -21,6 +21,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import dagger.multibindings.IntoMap
 import dagger.multibindings.StringKey
+import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
@@ -29,21 +30,25 @@ abstract class ManagerModule {
     companion object {
 
         @Provides
+        @Singleton
         fun provideCallbackManager(): CallbackManager {
             return CallbackManager.Factory.create()
         }
 
         @Provides
+        @Singleton
         fun provideLoginManager(): LoginManager {
             return LoginManager.getInstance()
         }
 
         @Provides
+        @Singleton
         fun provideOAuthLogin(): OAuthLogin {
             return OAuthLogin.getInstance()
         }
 
         @Provides
+        @Singleton
         fun provideGoogleSignInClient(application: Application): GoogleSignInClient {
             return GoogleSignIn.getClient(
                 application.applicationContext,
@@ -55,16 +60,19 @@ abstract class ManagerModule {
         }
 
         @Provides
+        @Singleton
         fun provideUserApiClient(): UserApiClient {
             return UserApiClient.instance
         }
 
         @Provides
+        @Singleton
         fun provideAuthApiClient(): AuthApiClient {
             return AuthApiClient.instance
         }
 
         @Provides
+        @Singleton
         fun provideWorkManager(application: Application): WorkManager {
             return WorkManager.getInstance(application)
         }
