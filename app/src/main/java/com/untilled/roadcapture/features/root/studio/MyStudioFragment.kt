@@ -1,7 +1,6 @@
 package com.untilled.roadcapture.features.root.studio
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,20 +10,15 @@ import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.albumsStudio
 import com.untilled.roadcapture.data.datasource.api.dto.address.AddressRequest
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
-import com.untilled.roadcapture.data.datasource.api.dto.user.UserAlbumsResponse
-import com.untilled.roadcapture.data.datasource.api.dto.user.UserResponse
+import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
-import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.data.entity.user.User
 import com.untilled.roadcapture.databinding.FragmentMystudioBinding
 import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
-import com.untilled.roadcapture.placeFilter
-import com.untilled.roadcapture.utils.dummy.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

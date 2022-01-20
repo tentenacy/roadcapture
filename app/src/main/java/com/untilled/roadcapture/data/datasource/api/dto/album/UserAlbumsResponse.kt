@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.data.datasource.api.dto.user
+package com.untilled.roadcapture.data.datasource.api.dto.album
 
 import com.untilled.roadcapture.data.datasource.api.dto.picture.ThumbnailPictureResponse
 import java.time.LocalDateTime

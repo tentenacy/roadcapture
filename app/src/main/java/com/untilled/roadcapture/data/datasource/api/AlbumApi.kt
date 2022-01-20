@@ -1,5 +1,6 @@
 package com.untilled.roadcapture.data.datasource.api
 
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.utils.constant.url.RoadCapturePathConstant
@@ -20,7 +21,7 @@ interface AlbumApi {
     ): Response<PageResponse<AlbumsResponse>>
 
     @GET(RoadCapturePathConstant.GET_ALBUM)
-    suspend fun getAlbum(
+    suspend fun getAlbumDetail(
         @Path("id") id: Int
-    ): Response<AlbumsResponse>
+    ): Response<AlbumResponse>
 }

@@ -14,6 +14,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.untilled.roadcapture.PictureSliderThumbnailBindingModel_
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.databinding.FragmentPictureSliderBinding
 import com.untilled.roadcapture.features.comment.CommentBottomSheetDialog
@@ -95,7 +96,7 @@ class PictureSliderFragment : Fragment() {
         _binding = null
     }
 
-    private fun initAdapter(albumResponse: AlbumsResponse) {
+    private fun initAdapter(albumResponse: AlbumResponse) {
         addScrollListener()
         binding.recyclerPictureSlider.withModels {
             initPictureSliderThumbnail(albumResponse)
@@ -103,8 +104,8 @@ class PictureSliderFragment : Fragment() {
         }
     }
 
-    private fun EpoxyController.initPictureSliderContent(albumResponse: AlbumsResponse) {
-        albumResponse.pictureResponses?.forEachIndexed { index, picture ->
+    private fun EpoxyController.initPictureSliderContent(albumResponse: AlbumResponse) {
+        albumResponse.pictures?.forEachIndexed { index, picture ->
             pictureSliderContent {
                 id(index)
                 picture(picture)
@@ -112,7 +113,7 @@ class PictureSliderFragment : Fragment() {
         }
     }
 
-    private fun EpoxyController.initPictureSliderThumbnail(albumResponse: AlbumsResponse) {
+    private fun EpoxyController.initPictureSliderThumbnail(albumResponse: AlbumResponse) {
         pictureSliderThumbnail {
             id(1)
             album(albumResponse)
@@ -121,17 +122,18 @@ class PictureSliderFragment : Fragment() {
                     R.id.img_ipicture_slider_thumbnail_profile -> Navigation.findNavController(
                         (parentFragment as PictureViewerFragment).binding.root
                     )
-                        .navigate(PictureViewerFragmentDirections.actionPictureViewerContainerFragmentToStudioFragment((model as PictureSliderThumbnailBindingModel_).album().user.id))
+                        .navigate(PictureViewerFragmentDirections.actionPictureViewerContainerFragmentToStudioFragment(model.album().user.id))
                 }
             }
         }
     }
 
-    private fun setThumbnailToBackground(albumResponse: AlbumsResponse) {
-        Glide.with(binding.imagePictureSliderBg.context)
-            .load(albumResponse.thumbnailUrl)
-            .centerCrop()
-            .into(binding.imagePictureSliderBg)
+    private fun setThumbnailToBackground(albumResponse: AlbumResponse) {
+        //TODO null 대신 isThumbnail 있는 picture로
+//        Glide.with(binding.imagePictureSliderBg.context)
+//            .load(null)
+//            .centerCrop()
+//            .into(binding.imagePictureSliderBg)
     }
 
     private fun addScrollListener() {

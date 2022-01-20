@@ -3,6 +3,7 @@ package com.untilled.roadcapture.features.root.albums
 import android.animation.ValueAnimator
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.UserResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
+import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.data.entity.user.User
 import com.untilled.roadcapture.databinding.FragmentFollowingalbumsBinding
 import com.untilled.roadcapture.features.root.RootFragment
@@ -70,6 +72,7 @@ class FollowingAlbumsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.d("Test", Token.accessToken)
         initViews()
         observeData()
         setOnClickListeners()
@@ -107,6 +110,7 @@ class FollowingAlbumsFragment : Fragment() {
             followingFilter {
                 id(index)
                 user(user)
+                clicked(FollowingFilterClicked(false))
                 onClickItem { model, parentView, clickedView, position ->
                     viewModel.getFollowingAlbums(model.user().id, PageRequest())
                 }

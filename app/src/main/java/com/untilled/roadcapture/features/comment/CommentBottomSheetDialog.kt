@@ -112,7 +112,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
                 }
             }
             else -> {
-                val pictureId = viewModel.albumResponse.value?.pictureResponses?.get(position)!!.id
+                val pictureId = viewModel.albumResponse.value?.pictures?.get(position)!!.id
                 lifecycleScope.launch {
                     viewModel.getPictureComments(pictureId).collectLatest { pagingData: PagingData<Comments> ->
                         epoxyController.submitData(pagingData)

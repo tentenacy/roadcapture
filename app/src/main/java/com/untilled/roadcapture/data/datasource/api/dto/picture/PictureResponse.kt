@@ -12,5 +12,5 @@ data class PictureResponse(
     var lastModifiedAt: LocalDateTime?,
     var imageUrl: String,
     var description: String?,
-    var placeResponse: PlaceResponse?
+    var place: PlaceResponse?
 ) : Parcelable

@@ -1,15 +1,13 @@
 package com.untilled.roadcapture.features.root.studio
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.address.AddressRequest
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
-import com.untilled.roadcapture.data.datasource.api.dto.user.UserAlbumsResponse
+import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.data.repository.follow.FollowRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository

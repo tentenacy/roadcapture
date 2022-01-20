@@ -2,11 +2,11 @@ package com.untilled.roadcapture.data.repository.user
 
 import com.google.gson.Gson
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.ErrorCode
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.address.AddressRequest
+import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.*
 import com.untilled.roadcapture.data.datasource.dao.LocalOAuthTokenDao
 import com.untilled.roadcapture.data.datasource.dao.LocalTokenDao
