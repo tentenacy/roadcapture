@@ -8,12 +8,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.albumsStudio
 import com.untilled.roadcapture.data.datasource.api.dto.address.AddressRequest
+import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
-import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.data.entity.user.User
 import com.untilled.roadcapture.databinding.FragmentMystudioBinding
@@ -104,21 +103,5 @@ class MyStudioFragment : Fragment() {
     }
 
     private fun initAdapter(albums: PageResponse<UserAlbumsResponse>) {
-        binding.recyclerMystudioAlbum.withModels {
-            albums.content.forEachIndexed { index, album ->
-                albumsStudio {
-                    id(index)
-                    albums(album)
-
-                    onClickItem { model, parentView, clickedView, position ->
-                        when(clickedView.id){
-                            R.id.img_ialbums_studio_thumbnail ->
-                                Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root).
-                                navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(model.albums().id))
-                        }
-                    }
-                }
-            }
-        }
     }
 }

@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.address.Address
 import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceRequest
 import com.untilled.roadcapture.data.datasource.api.dto.poi.Poi
@@ -21,7 +20,6 @@ import com.untilled.roadcapture.data.datasource.api.dto.poi.Pois
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPlaceSearchBinding
 import com.untilled.roadcapture.features.common.CustomDivider
-import com.untilled.roadcapture.placeSearch
 import com.untilled.roadcapture.utils.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
@@ -52,7 +50,6 @@ class PlaceSearchFragment : Fragment() {
 
             if (searchPlaceResponse != null) {
                 poisToPlace(searchPlaceResponse.searchPoiInfo.pois)
-                binding.recyclerPlaceSearch.requestModelBuild()
             } else {
                 displayNoResult()
             }
@@ -110,28 +107,6 @@ class PlaceSearchFragment : Fragment() {
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
 
         binding.recyclerPlaceSearch.addItemDecoration(customDivider)
-
-        binding.recyclerPlaceSearch.withModels {
-            placeList?.forEachIndexed { index, placeRequest ->
-                placeSearch {
-                    id(index)
-                    place(placeRequest)
-
-                    onClickItem { model, parentView, clickedView, position ->
-                        if (clickedView.id == R.id.constraint_iplacesearch_container) {
-                            picture.place = placeList!![position]
-
-                            Navigation.findNavController(binding.root)
-                                .navigate(
-                                    PlaceSearchFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
-                                        picture = picture
-                                    )
-                                )
-                        }
-                    }
-                }
-            }
-        }
     }
     
     private fun poisToPlace(pois: Pois) {
@@ -158,7 +133,6 @@ class PlaceSearchFragment : Fragment() {
     private fun displayNoResult() {
         binding.textPlaceSearchNoresult.isVisible = true
         placeList = null   // 결과 리스트 초기화
-        binding.recyclerPlaceSearch.requestModelBuild()
     }
 
     private fun displayLoadingAnimation() {

@@ -8,19 +8,13 @@ import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import com.airbnb.epoxy.EpoxyController
-import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
-import com.untilled.roadcapture.data.entity.user.User
 import com.untilled.roadcapture.databinding.FragmentFollowingBinding
 import com.untilled.roadcapture.features.common.CustomDivider
-import com.untilled.roadcapture.follow
-import com.untilled.roadcapture.utils.dummy.DummyDataSet
 import com.untilled.roadcapture.utils.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -81,24 +75,6 @@ class FollowingFragment : Fragment(){
     }
 
     private fun initAdapter(user: PageResponse<UsersResponse>){
-        binding.recyclerFollowing.withModels { initFollowingItems(user) }
-    }
-
-    private fun EpoxyController.initFollowingItems(user: PageResponse<UsersResponse>) {
-        user.content.forEachIndexed { index, user ->
-            follow {
-                id(index)
-                user(user)
-
-                onClickItem { model, parentView, clickedView, position ->
-                    when (clickedView.id) {
-                        R.id.img_ifollow_profile -> Navigation.findNavController(binding.root)
-                            .navigate(FollowingFragmentDirections.actionFollowingFragmentToStudioFragment(model.user().id))
-                        R.id.btn_ifollow -> viewModel.follow(model.user().id)
-                    }
-                }
-            }
-        }
     }
 
     private fun initDivider() {

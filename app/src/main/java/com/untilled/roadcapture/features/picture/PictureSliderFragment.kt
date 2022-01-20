@@ -7,19 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.recyclerview.widget.PagerSnapHelper
-import com.airbnb.epoxy.EpoxyController
 import com.airbnb.lottie.LottieAnimationView
-import com.bumptech.glide.Glide
-import com.untilled.roadcapture.PictureSliderThumbnailBindingModel_
-import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.databinding.FragmentPictureSliderBinding
 import com.untilled.roadcapture.features.comment.CommentBottomSheetDialog
-import com.untilled.roadcapture.pictureSliderContent
-import com.untilled.roadcapture.pictureSliderThumbnail
 import com.untilled.roadcapture.utils.setPaddingWhenStatusBarTransparent
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -98,34 +90,6 @@ class PictureSliderFragment : Fragment() {
 
     private fun initAdapter(albumResponse: AlbumResponse) {
         addScrollListener()
-        binding.recyclerPictureSlider.withModels {
-            initPictureSliderThumbnail(albumResponse)
-            initPictureSliderContent(albumResponse)
-        }
-    }
-
-    private fun EpoxyController.initPictureSliderContent(albumResponse: AlbumResponse) {
-        albumResponse.pictures?.forEachIndexed { index, picture ->
-            pictureSliderContent {
-                id(index)
-                picture(picture)
-            }
-        }
-    }
-
-    private fun EpoxyController.initPictureSliderThumbnail(albumResponse: AlbumResponse) {
-        pictureSliderThumbnail {
-            id(1)
-            album(albumResponse)
-            onClickItem { model, parentView, clickedView, position ->
-                when (clickedView.id) {
-                    R.id.img_ipicture_slider_thumbnail_profile -> Navigation.findNavController(
-                        (parentFragment as PictureViewerFragment).binding.root
-                    )
-                        .navigate(PictureViewerFragmentDirections.actionPictureViewerContainerFragmentToStudioFragment(model.album().user.id))
-                }
-            }
-        }
     }
 
     private fun setThumbnailToBackground(albumResponse: AlbumResponse) {

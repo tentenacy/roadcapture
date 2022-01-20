@@ -70,8 +70,8 @@
             android:layout_margin="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            bind:DateToSnsFormat="@{albums.thumbnailPicture.createdAt}"
             tools:text="하루 전" />
+            <!--bind:DateToSnsFormat="@{albums.thumbnailPicture.createdAt}"-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

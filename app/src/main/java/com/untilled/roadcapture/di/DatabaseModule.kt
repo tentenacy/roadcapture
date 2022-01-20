@@ -1,8 +1,11 @@
 package com.untilled.roadcapture.di
 
 import android.content.Context
+import com.untilled.roadcapture.data.datasource.dao.AlbumsRemoteKeysDao
+import com.untilled.roadcapture.data.datasource.dao.AlbumsRxDao
 import com.untilled.roadcapture.data.datasource.dao.PictureDao
-import com.untilled.roadcapture.data.datasource.database.AppDatabase
+import com.untilled.roadcapture.data.datasource.database.PagingDatabase
+import com.untilled.roadcapture.data.datasource.database.PictureDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,10 +18,28 @@ import javax.inject.Singleton
 object DatabaseModule {
     @Singleton
     @Provides
-    fun provideAppDatabase(@ApplicationContext context: Context) :
-            AppDatabase = AppDatabase.getInstance(context)
+    fun providePictureDatabase(@ApplicationContext context: Context) :
+            PictureDatabase = PictureDatabase.getInstance(context)
 
     @Singleton
     @Provides
-    fun providePictureDao(appDatabase: AppDatabase): PictureDao = appDatabase.pictureDao()
+    fun providePictureDao(pictureDatabase: PictureDatabase): PictureDao = pictureDatabase.pictureDao()
+
+    @Singleton
+    @Provides
+    fun providePagingDatabase(@ApplicationContext context: Context): PagingDatabase {
+        return PagingDatabase.getInstance(context)
+    }
+
+    @Singleton
+    @Provides
+    fun provideAlbumsRxDao(pagingDatabase: PagingDatabase): AlbumsRxDao {
+        return pagingDatabase.albumsRxDao()
+    }
+
+    @Singleton
+    @Provides
+    fun provideAlbumsRemoteKeysDao(pagingDatabase: PagingDatabase): AlbumsRemoteKeysDao {
+        return pagingDatabase.albumsRemoteKeysRxDao()
+    }
 }

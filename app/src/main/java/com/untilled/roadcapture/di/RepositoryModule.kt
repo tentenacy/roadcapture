@@ -1,7 +1,10 @@
 package com.untilled.roadcapture.di
 
+import com.untilled.roadcapture.data.datasource.paging.GetAlbumsRxPagingSource
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import com.untilled.roadcapture.data.repository.album.AlbumRepositoryImpl
+import com.untilled.roadcapture.data.repository.album.AlbumPagingRepository
+import com.untilled.roadcapture.data.repository.album.AlbumPagingRepositoryImpl
 import com.untilled.roadcapture.data.repository.follow.FollowRepository
 import com.untilled.roadcapture.data.repository.follow.FollowRepositoryImpl
 import com.untilled.roadcapture.data.repository.picture.PictureRepository
@@ -16,6 +19,7 @@ import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.data.repository.user.UserRepositoryImpl
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
@@ -23,6 +27,15 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 abstract class RepositoryModule {
+
+    companion object {
+        @Singleton
+        @Provides
+        fun provideGetAlbumsRxRepository(pagingSource: GetAlbumsRxPagingSource): AlbumPagingRepository {
+            return AlbumPagingRepositoryImpl(pagingSource)
+        }
+    }
+
     @Binds
     abstract fun provideAlbumRepository(
         repository: AlbumRepositoryImpl

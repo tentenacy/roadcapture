@@ -12,9 +12,9 @@ import java.time.LocalDateTime
 
 @Parcelize
 data class AlbumsResponse(
-    val id: Int,
-    var createdAt: LocalDateTime?,
-    val lastModifiedAt: LocalDateTime?,
+    val id: Long,
+    var createdAt: String?,
+    val lastModifiedAt: String?,
     val title: String,
     val description: String?,
     val thumbnailUrl: String?,

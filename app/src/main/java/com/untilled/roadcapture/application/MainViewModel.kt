@@ -60,7 +60,7 @@ class MainViewModel @Inject constructor(
 
     override fun onRefreshTokenExpired() {
         logout()
-        tokenExpirationObservable.resetCount()
+        tokenExpirationObservable.resetRefreshCount()
     }
 
     override fun onOAuthTokenExpired() {
@@ -69,7 +69,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun logout() {
-        _isLoggedOut.value = true
+        _isLoggedOut.postValue(true)
 
         localTokenRepository.getOAuthToken().whenHasOAuthToken {
             oauthLoginManagerMap[it.name]?.logout()

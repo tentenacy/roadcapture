@@ -9,8 +9,8 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface AlbumRepository {
-    // todo: query 추가해야 함
-    suspend fun getAlbums(
+
+    suspend fun getAlbumsTemp(
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
         @Query("dateTimeFrom")dateTimeFrom: String?,

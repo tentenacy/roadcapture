@@ -78,14 +78,13 @@ def logger_version = '2.2.0'
 def retrofit_version = '2.9.0'
 def fragment_version = '1.2.0-rc04'
 def hilt_viewmodel_version = '1.0.0-alpha03'
-def coroutine_version =  '1.3.5'
+def coroutine_version =  '1.5.2'
 def glide_version = '4.12.0'
 def camerax_version = '1.0.1'
 def circle_imageview_version = '3.1.0'
 def recyclerview_helper_version = '3.0.4'
 def read_more_textview_version = '1.0.0'
 def lottie_version = "4.1.0"
-def epoxyVersion = "4.6.2"
 def okhttp_version = "4.6.0"
 def room_version = "2.3.0"
 def dexter_version = "6.2.3"
@@ -112,6 +111,8 @@ dependencies {
 
     //Paging
     implementation "androidx.paging:paging-runtime:$paging_version"
+    implementation "androidx.paging:paging-rxjava3:$paging_version"
+
 
     //Dexter Permission
     implementation "com.karumi:dexter:$dexter_version"
@@ -121,13 +122,6 @@ dependencies {
     implementation "androidx.room:room-ktx:$room_version"
     implementation 'com.google.android.gms:play-services-location:18.0.0'
     kapt "androidx.room:room-compiler:$room_version"
-
-    //Epoxy
-    implementation "com.airbnb.android:epoxy:$epoxyVersion"
-    implementation "com.airbnb.android:epoxy-databinding:$epoxyVersion"
-    implementation "com.airbnb.android:epoxy-paging:$epoxyVersion"
-    implementation "com.airbnb.android:epoxy-paging3:$epoxyVersion"
-    kapt "com.airbnb.android:epoxy-processor:$epoxyVersion"
 
     //Lottie Animation
     implementation "com.airbnb.android:lottie:$lottie_version"
@@ -168,6 +162,8 @@ dependencies {
 
     //coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-reactive:$coroutine_version"
 
     //glide
     implementation "com.github.bumptech.glide:glide:$glide_version"

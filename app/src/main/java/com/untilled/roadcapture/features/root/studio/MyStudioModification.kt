@@ -14,8 +14,6 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.untilled.roadcapture.databinding.FragmentMystudioModificationBinding
-import com.untilled.roadcapture.placeFilter
-import com.untilled.roadcapture.utils.dummy.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -114,19 +112,6 @@ class MyStudioModification : Fragment() {
     }
 
     private fun initAdapter() {
-        binding.recycleMystudioModifyPlace.withModels {
-            DummyDataSet.places.forEachIndexed { index, place ->
-                placeFilter {
-                    id(index)
-                    place(place)
-                    onClickItem { model, parentView, clickedView, position ->
-                        when(clickedView.id){
-
-                        }
-                    }
-                }
-            }
-        }
     }
 
     companion object{

@@ -31,7 +31,7 @@ class TokenInterceptor(
                         notifyTokenExpired()
                 }
                 ErrorCode.REFRESH_TOKEN_ERROR.code -> {
-                    if(++count == 1)
+                    if(++refreshCount == 1)
                         notifyRefreshTokenExpired()
                 }
             }

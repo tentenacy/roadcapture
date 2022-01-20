@@ -56,7 +56,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <com.airbnb.epoxy.EpoxyRecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_followingalbums_filter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -66,7 +66,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:listitem="@layout/item_following_filter" />
 
-                <com.airbnb.epoxy.EpoxyRecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_followingalbums"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

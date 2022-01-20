@@ -1,42 +1,26 @@
 package com.untilled.roadcapture.features.root.albums
 
-import android.animation.ValueAnimator
 import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
-import androidx.paging.PagingData
-import com.airbnb.epoxy.EpoxyController
-import com.airbnb.lottie.LottieAnimationView
-import com.untilled.roadcapture.AlbumsBindingModel_
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.albums
 import com.untilled.roadcapture.application.MainActivity
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
-import com.untilled.roadcapture.data.datasource.api.dto.user.UserResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.data.entity.token.Token
 import com.untilled.roadcapture.data.entity.user.User
 import com.untilled.roadcapture.databinding.FragmentFollowingalbumsBinding
 import com.untilled.roadcapture.features.root.RootFragment
-import com.untilled.roadcapture.features.root.RootFragmentDirections
-import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
-import com.untilled.roadcapture.features.root.albums.dto.FollowingFilterClicked
-import com.untilled.roadcapture.followingFilter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FollowingAlbumsFragment : Fragment() {
@@ -49,9 +33,11 @@ class FollowingAlbumsFragment : Fragment() {
     private val userObserver = { user: PageResponse<UsersResponse> ->
         initFilterAdapter(user)
     }
+/*
     private val albumsObserver = { albums: PageResponse<AlbumsResponse> ->
         initAlbumAdapter(albums)
     }
+*/
 
     private val notificationOnClickListener: (View?) -> Unit = {
         Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
@@ -85,7 +71,7 @@ class FollowingAlbumsFragment : Fragment() {
 
     private fun observeData() {
         viewModel.user.observe(viewLifecycleOwner,userObserver)
-        viewModel.albums.observe(viewLifecycleOwner,albumsObserver)
+//        viewModel.followingAlbums.observe(viewLifecycleOwner,albumsObserver)
     }
 
     private fun setOnClickListeners() {
@@ -99,25 +85,14 @@ class FollowingAlbumsFragment : Fragment() {
     }
 
     private fun initFilterAdapter(user: PageResponse<UsersResponse>) {
-        binding.recyclerFollowingalbumsFilter.withModels { initFollowingAlbumsFilter(user) }
     }
+/*
     private fun initAlbumAdapter(albums: PageResponse<AlbumsResponse>){
         binding.recyclerFollowingalbums.withModels { initFollowingAlbumsItem(albums) }
     }
+*/
 
-    private fun EpoxyController.initFollowingAlbumsFilter(user: PageResponse<UsersResponse>) {
-        user.content.forEachIndexed { index, user ->
-            followingFilter {
-                id(index)
-                user(user)
-                clicked(FollowingFilterClicked(false))
-                onClickItem { model, parentView, clickedView, position ->
-                    viewModel.getFollowingAlbums(model.user().id, PageRequest())
-                }
-            }
-        }
-    }
-
+/*
     private fun EpoxyController.initFollowingAlbumsItem(albums: PageResponse<AlbumsResponse>) {
         albums.content.forEachIndexed { index, albumResponse ->
             albums {
@@ -156,7 +131,7 @@ class FollowingAlbumsFragment : Fragment() {
                             Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                                 .navigate(
                                     RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(
-                                        (model as AlbumsBindingModel_).albums().id)
+                                        (model as AlbumsBindingModel_).albums().id.toInt())
                                     )
 
                         R.id.img_ialbums_more -> {
@@ -182,8 +157,7 @@ class FollowingAlbumsFragment : Fragment() {
             }
         }
     }
-
-
+*/
 
     private fun showReportDialog() {
         val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dlg_report, null)

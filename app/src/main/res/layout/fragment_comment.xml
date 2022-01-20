@@ -53,7 +53,7 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <com.airbnb.epoxy.EpoxyRecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

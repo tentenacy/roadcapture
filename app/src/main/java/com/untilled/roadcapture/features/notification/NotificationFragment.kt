@@ -6,13 +6,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
-import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentNotificationBinding
 import com.untilled.roadcapture.features.common.CustomDivider
-import com.untilled.roadcapture.notification
-import com.untilled.roadcapture.utils.dummy.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -58,23 +54,6 @@ class NotificationFragment : Fragment(){
         val customDivider = CustomDivider(2.5f,1f, Color.parseColor("#EFEFEF"))
 
         binding.recycleNotification.addItemDecoration(customDivider)
-
-        binding.recycleNotification.withModels {
-//            DummyDataSet.notification.forEachIndexed { index, album ->
-//                notification {
-//                    id(index)
-//                    notification(album)
-//
-//                    onClickItem { model, parentView, clickedView, position ->
-//                        when(clickedView.id){
-//                            R.id.img_inotification_profile->
-//                                Navigation.findNavController(binding.root)
-//                                    .navigate(R.id.action_notificationFragment_to_studioFragment)
-//                        }
-//                    }
-//                }
-//            }
-        }
     }
 
 }

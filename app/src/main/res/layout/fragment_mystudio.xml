@@ -184,7 +184,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <com.airbnb.epoxy.EpoxyRecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_mystudio_place"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -207,7 +207,7 @@
                     app:layout_constraintStart_toStartOf="@+id/text_mystudio_label_place"
                     app:layout_constraintTop_toBottomOf="@+id/recycler_mystudio_place" />
 
-                <com.airbnb.epoxy.EpoxyRecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_mystudio_album"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

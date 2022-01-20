@@ -1,7 +1,6 @@
 package com.untilled.roadcapture.features.root.studio
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,17 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import com.airbnb.epoxy.EpoxyController
-import com.untilled.roadcapture.*
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
-import com.untilled.roadcapture.data.entity.token.Token
-import com.untilled.roadcapture.data.entity.user.User
 import com.untilled.roadcapture.databinding.FragmentStudioBinding
-import com.untilled.roadcapture.utils.dummy.DummyDataSet
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

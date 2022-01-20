@@ -20,7 +20,6 @@ import com.untilled.roadcapture.data.datasource.api.dto.comment.Comments
 import com.untilled.roadcapture.databinding.FragmentCommentBinding
 import com.untilled.roadcapture.features.common.CustomDivider
 import com.untilled.roadcapture.features.root.albums.AlbumsViewModel
-import com.untilled.roadcapture.features.root.albums.dto.EpoxyItemArgs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -31,30 +30,6 @@ class CommentFragment : Fragment() {
     private var _binding: FragmentCommentBinding? = null
     private val binding get() = _binding!!
     private val viewModel: AlbumsViewModel by viewModels({requireParentFragment()})
-    private val epoxyController = CommentsEpoxyController()
-
-    private val epoxyItemClickListener: (EpoxyItemArgs) -> Unit = { args ->
-        when (args.clickedView.id) {
-            R.id.img_icomment_more -> {
-                val popupMenu = PopupMenu(requireContext(), args.clickedView)
-                popupMenu.apply {
-                    menuInflater.inflate(R.menu.popupmenu_comment_more, popupMenu.menu)
-                    setOnMenuItemClickListener { item ->
-                        when (item.itemId) {
-                            R.id.popup_menu_comment_more_report -> {
-                                showReportDialog()
-                            }
-                        }
-                        true
-                    }
-                }.show()
-            }
-            R.id.img_icomment_profile -> {
-                Navigation.findNavController(binding.root)
-                    .navigate(R.id.action_commentFragment_to_studioFragment)
-            }
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -92,16 +67,13 @@ class CommentFragment : Fragment() {
     private fun initAdapter(albumId: Int) {
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
         binding.recyclerComment.addItemDecoration(customDivider)
-        epoxyController.setOnClickListener(epoxyItemClickListener)
         updateView(albumId)
-        binding.recyclerComment.setController(epoxyController)
 
     }
 
     private fun updateView(albumId: Int) {
         lifecycleScope.launch {
             viewModel.getAlbumComments(albumId).collectLatest { pagingData: PagingData<Comments> ->
-                epoxyController.submitData(pagingData)
             }
         }
     }

@@ -3,21 +3,21 @@ package com.untilled.roadcapture.features.root.albums
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.cachedIn
+import androidx.paging.*
+import androidx.paging.rxjava3.cachedIn
 import com.orhanobut.logger.Logger
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.comment.Comments
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
+import com.untilled.roadcapture.data.entity.AlbumsPage
 
 import com.untilled.roadcapture.data.repository.album.AlbumCommentsPagingSource
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
-import com.untilled.roadcapture.data.repository.album.AlbumsPagingSource
+import com.untilled.roadcapture.data.repository.album.AlbumPagingRepository
 import com.untilled.roadcapture.data.repository.follow.FollowRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
@@ -34,46 +34,38 @@ class AlbumsViewModel
 @Inject constructor(
     private val albumRepository: AlbumRepository,
     private val userRepository: UserRepository,
-    private val followRepository: FollowRepository
+    private val followRepository: FollowRepository,
+    private val albumPagingRepository: AlbumPagingRepository,
 ) : BaseViewModel() {
 
     private var currentDateTimeFrom: String? = null
     private var currentDateTimeTo: String? = null
     private var currentAlbumsResult: Flow<PagingData<AlbumsResponse>>? = null
 
+    private var _albums = MutableLiveData<PagingData<AlbumsPage.Albums>>()
+    val albums: LiveData<PagingData<AlbumsPage.Albums>> get() = _albums
+
+
     //TODO 페이징으로 변경
     private val _user =  MutableLiveData<PageResponse<UsersResponse>>()
     val user: LiveData<PageResponse<UsersResponse>> get() = _user
 
-    private val _albums = MutableLiveData<PageResponse<AlbumsResponse>>()
-    val albums: LiveData<PageResponse<AlbumsResponse>> get() = _albums
+    private val _followingAlbums = MutableLiveData<PageResponse<AlbumsResponse>>()
+    val followingAlbums: LiveData<PageResponse<AlbumsResponse>> get() = _followingAlbums
 
-    fun getAlbums(dateTimeFrom: String?, dateTimeTo: String?): Flow<PagingData<AlbumsResponse>>{
-        val lastResult = currentAlbumsResult
-        if(dateTimeFrom == currentDateTimeFrom && dateTimeTo == currentDateTimeTo && lastResult != null){
-            return lastResult
-        }
-        currentDateTimeFrom = dateTimeFrom
-        currentDateTimeTo = dateTimeTo
-        val newResult: Flow<PagingData<AlbumsResponse>> = getAlbumsResultStream(dateTimeFrom,dateTimeTo).cachedIn(viewModelScope)
-        currentAlbumsResult = newResult
-        return newResult
+    fun getAlbums(cond: AlbumsCondition) {
+        albumPagingRepository.getAlbums(cond)
+            .subscribeOn(AndroidSchedulers.mainThread())
+            .cachedIn(viewModelScope)
+            .subscribe({
+                _albums.value = it
+            }) { t ->
+
+            }.addTo(compositeDisposable)
     }
 
     fun getAlbumComments(albumId: Int): Flow<PagingData<Comments>> {
         return getAlbumCommentsResultStream(albumId).cachedIn(viewModelScope)
-    }
-
-    private fun getAlbumsResultStream(dateTimeFrom: String?, dateTimeTo: String?): Flow<PagingData<AlbumsResponse>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = 10,
-                prefetchDistance = 20,
-                enablePlaceholders = false
-            ),
-            pagingSourceFactory = { AlbumsPagingSource(albumRepository,dateTimeFrom,dateTimeTo) }
-        )
-            .flow
     }
 
     private fun getAlbumCommentsResultStream(albumId: Int): Flow<PagingData<Comments>> {
@@ -103,7 +95,7 @@ class AlbumsViewModel
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
-                _albums.postValue(response)
+                _followingAlbums.postValue(response)
             }, { t ->
 
             }).addTo(compositeDisposable)

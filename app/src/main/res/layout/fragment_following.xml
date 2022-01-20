@@ -98,7 +98,7 @@
                 tools:minHeight="0dp"
                 tools:paddingVertical="12dp" />
 
-            <com.airbnb.epoxy.EpoxyRecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_following"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
