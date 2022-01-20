@@ -9,7 +9,7 @@ import com.untilled.roadcapture.data.datasource.api.dto.address.AddressRequest
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
-import com.untilled.roadcapture.data.repository.follow.FollowRepository
+import com.untilled.roadcapture.data.repository.follower.FollowRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

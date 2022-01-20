@@ -7,8 +7,8 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class UsersResponse(
     @ColumnInfo(name = "user_id")
-    var id: Int,
-    var profileImageUrl: String?,
+    var id: Long,
+    var profileImageUrl: String,
     var username: String,
-    var introduction: String?
+    var introduction: String
 ) : Parcelable

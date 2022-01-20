@@ -15,7 +15,7 @@ import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.data.entity.paging.Albums
 
 import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepository
-import com.untilled.roadcapture.data.repository.follow.FollowRepository
+import com.untilled.roadcapture.data.repository.follower.FollowRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

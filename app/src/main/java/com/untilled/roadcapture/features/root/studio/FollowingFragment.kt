@@ -24,7 +24,7 @@ class FollowingFragment : Fragment(){
     private var _binding: FragmentFollowingBinding? = null
     private val binding get() = _binding!!
     private val args: FollowerFragmentArgs by navArgs()
-    private val viewModel: FollowViewModel by viewModels()
+    private val viewModel: FollowerViewModel by viewModels()
     private val userObserver = { user: PageResponse<UsersResponse> ->
         initAdapter(user)
     }
@@ -53,10 +53,10 @@ class FollowingFragment : Fragment(){
         setOnClickListeners()
     }
     private fun initViews(){
-        viewModel.getUserFollowing(FollowingsCondition(args.id), PageRequest())
+//        viewModel.getUserFollowing(FollowingsCondition(args.id), PageRequest())
     }
     private fun observeData(){
-        viewModel.user.observe(viewLifecycleOwner,userObserver)
+//        viewModel.user.observe(viewLifecycleOwner,userObserver)
     }
 
     private fun setOnClickListeners(){

@@ -8,6 +8,8 @@ import com.untilled.roadcapture.data.datasource.dao.paging.album.UserAlbumsDao
 import com.untilled.roadcapture.data.datasource.dao.paging.album.UserAlbumsRemoteKeysDao
 import com.untilled.roadcapture.data.datasource.dao.paging.comment.AlbumCommentsDao
 import com.untilled.roadcapture.data.datasource.dao.paging.comment.AlbumCommentsRemoteKeysDao
+import com.untilled.roadcapture.data.datasource.dao.paging.follower.FollowersDao
+import com.untilled.roadcapture.data.datasource.dao.paging.follower.FollowersRemoteKeysDao
 import com.untilled.roadcapture.data.datasource.database.PagingDatabase
 import com.untilled.roadcapture.data.datasource.database.PictureDatabase
 import dagger.Binds
@@ -68,6 +70,18 @@ abstract class DaoModule {
         @Provides
         fun provideUserAlbumsRemoteKeysDao(pagingDatabase: PagingDatabase): UserAlbumsRemoteKeysDao {
             return pagingDatabase.userAlbumsKeysDao()
+        }
+
+        @Singleton
+        @Provides
+        fun provideFollowersDao(pagingDatabase: PagingDatabase): FollowersDao {
+            return pagingDatabase.followersDao()
+        }
+
+        @Singleton
+        @Provides
+        fun provideFollowersRemoteKeysDao(pagingDatabase: PagingDatabase): FollowersRemoteKeysDao {
+            return pagingDatabase.followersKeysDao()
         }
     }
 

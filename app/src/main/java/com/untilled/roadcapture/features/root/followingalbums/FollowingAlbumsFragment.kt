@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.root.albums
+package com.untilled.roadcapture.features.root.followingalbums
 
 import android.app.AlertDialog
 import android.os.Bundle
@@ -27,8 +27,6 @@ class FollowingAlbumsFragment : Fragment() {
 
     private var _binding: FragmentFollowingalbumsBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: AlbumsViewModel by viewModels()
-    private var flagLike: Boolean = false
 
     private val userObserver = { user: PageResponse<UsersResponse> ->
         initFilterAdapter(user)
@@ -65,13 +63,9 @@ class FollowingAlbumsFragment : Fragment() {
     }
 
     private fun initViews(){
-        viewModel.getUserFollowing(FollowingsCondition(User.id), PageRequest())
-        viewModel.getFollowingAlbums(null, PageRequest())
     }
 
     private fun observeData() {
-        viewModel.user.observe(viewLifecycleOwner,userObserver)
-//        viewModel.followingAlbums.observe(viewLifecycleOwner,albumsObserver)
     }
 
     private fun setOnClickListeners() {

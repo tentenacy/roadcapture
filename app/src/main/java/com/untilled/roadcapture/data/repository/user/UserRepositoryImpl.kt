@@ -124,7 +124,7 @@ class UserRepositoryImpl @Inject constructor(
     override fun getUserFollower(
         followingsCondition: FollowingsCondition, pageRequest: PageRequest
     ): Single<PageResponse<UsersResponse>> =
-        roadCaptureApi.getUserFollower(followingsCondition.userId,pageRequest.page,pageRequest.size,pageRequest.sort,followingsCondition.username)
+        roadCaptureApi.getUserFollower(followingsCondition.userId.toLong(),pageRequest.page,pageRequest.size,pageRequest.sort,followingsCondition.username)
             .retryThreeTimes()
 
     override fun getUserFollowing(

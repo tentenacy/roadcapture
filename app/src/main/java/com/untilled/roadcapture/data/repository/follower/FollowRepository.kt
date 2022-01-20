@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.data.repository.follow
+package com.untilled.roadcapture.data.repository.follower
 
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest

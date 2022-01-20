@@ -28,13 +28,14 @@ class StudioFragment : Fragment() {
     private val userObserver = { user: UsersResponse ->
         binding.user = user
     }
+
     private val followerObserver = { follower: PageResponse<UsersResponse> ->
         binding.follower = follower
     }
+
     private val followingObserver = { following: PageResponse<UsersResponse> ->
         binding.following = following
     }
-
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

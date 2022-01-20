@@ -44,31 +44,4 @@ interface UserApi {
     fun getUserInfo(
         @Path("id") id: Int,
     ): Single<UsersResponse>
-
-    @GET(RoadCapturePathConstant.GET_USER_ALBUMS)
-    fun getUserAlbums(
-        @Query("page") page: Int?,
-        @Query("size") size: Int?,
-        @Query("placeCond.region1DepthName") region1DepthName: String?,
-        @Query("placeCond.region2DepthName") region2DepthName: String?,
-        @Query("placeCond.region3DepthName") region3DepthName: String?
-    ): Single<PageResponse<UserAlbumsResponse>>
-
-    @GET(RoadCapturePathConstant.GET_USER_FOLLOWER)
-    fun getUserFollower(
-        @Path("userId") id: Int,
-        @Query("page") page: Int?,
-        @Query("size") size: Int?,
-        @Query("sort") sort: String?,
-        @Query("username") username: String?
-    ): Single<PageResponse<UsersResponse>>
-
-    @GET(RoadCapturePathConstant.GET_USER_FOLLOWING)
-    fun getUserFollowing(
-        @Path("userId") id: Int,
-        @Query("page") page: Int?,
-        @Query("size") size: Int?,
-        @Query("sort") sort: String?,
-        @Query("username") username: String?
-    ): Single<PageResponse<UsersResponse>>
 }

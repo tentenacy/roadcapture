@@ -9,10 +9,12 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.paging.PagingData
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
+import com.untilled.roadcapture.data.entity.paging.Followers
 import com.untilled.roadcapture.databinding.FragmentFollowerBinding
 import com.untilled.roadcapture.features.common.CustomDivider
 import com.untilled.roadcapture.utils.hideKeyboard
@@ -23,10 +25,10 @@ class FollowerFragment : Fragment(){
 
     private var _binding: FragmentFollowerBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: FollowViewModel by viewModels()
+    private val viewModel: FollowerViewModel by viewModels()
     private val args: FollowerFragmentArgs by navArgs()
-    private val userObserver = { user: PageResponse<UsersResponse> ->
-        initAdapter(user)
+    private val userObserver: (PagingData<Followers.Follower>) -> Unit = { pagingData ->
+
     }
 
     override fun onCreateView(
@@ -52,11 +54,13 @@ class FollowerFragment : Fragment(){
         observeData()
         setOnClickListeners()
     }
-    private fun initViews(){
-        viewModel.getUserFollower(FollowingsCondition(args.id), PageRequest())
+
+    private fun initViews() {
+        viewModel.getUserFollower(args.id.toLong())
     }
-    private fun observeData(){
-        viewModel.user.observe(viewLifecycleOwner,userObserver)
+
+    private fun observeData() {
+        viewModel.user.observe(viewLifecycleOwner, userObserver)
     }
 
     private fun setOnClickListeners(){

@@ -1,17 +1,22 @@
 package com.untilled.roadcapture.di
 
+import com.untilled.roadcapture.data.datasource.dao.paging.follower.FollowersDao
 import com.untilled.roadcapture.data.datasource.paging.album.AlbumsPagingSource
 import com.untilled.roadcapture.data.datasource.paging.album.UserAlbumsPagingSource
 import com.untilled.roadcapture.data.datasource.paging.comment.AlbumCommentsPagingSource
 import com.untilled.roadcapture.data.datasource.paging.comment.PictureCommentsPagingSource
+import com.untilled.roadcapture.data.datasource.paging.follower.FollowersPagingSource
+import com.untilled.roadcapture.data.datasource.paging.follower.FollowersRemoteMediator
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import com.untilled.roadcapture.data.repository.album.AlbumRepositoryImpl
 import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepository
 import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepositoryImpl
 import com.untilled.roadcapture.data.repository.comment.paging.CommentPagingRepository
 import com.untilled.roadcapture.data.repository.comment.paging.CommentPagingRepositoryImpl
-import com.untilled.roadcapture.data.repository.follow.FollowRepository
-import com.untilled.roadcapture.data.repository.follow.FollowRepositoryImpl
+import com.untilled.roadcapture.data.repository.follower.FollowRepository
+import com.untilled.roadcapture.data.repository.follower.FollowRepositoryImpl
+import com.untilled.roadcapture.data.repository.follower.paging.FollowerPagingRepository
+import com.untilled.roadcapture.data.repository.follower.paging.FollowerPagingRepositoryImpl
 import com.untilled.roadcapture.data.repository.picture.PictureRepository
 import com.untilled.roadcapture.data.repository.picture.PictureRepositoryImpl
 import com.untilled.roadcapture.data.repository.place.SearchPlaceRepository
@@ -54,6 +59,15 @@ abstract class RepositoryModule {
                 pictureCommentsPagingSource
             )
         }
+
+        @Singleton
+        @Provides
+        fun provideFollowersPagingRepository(
+            followersPagingSource: FollowersPagingSource,
+        ): FollowerPagingRepository {
+            return FollowerPagingRepositoryImpl(followersPagingSource)
+        }
+
     }
 
     @Binds
