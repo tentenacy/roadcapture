@@ -22,7 +22,7 @@ class MyStudioViewModel @Inject constructor(
     private var _userAlbums = MutableLiveData<PagingData<UserAlbums.UserAlbum>>()
     val userAlbums: LiveData<PagingData<UserAlbums.UserAlbum>> get() = _userAlbums
 
-    fun getUserAlbums(cond: UserAlbumsCondition) {
+    fun getUserAlbums(cond: UserAlbumsCondition? = null) {
         albumPagingRepository.getUserAlbums(cond)
             .subscribeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)

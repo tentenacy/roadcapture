@@ -7,18 +7,15 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.paging.PagingData
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.data.datasource.api.dto.address.AddressRequest
-import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
-import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
-import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
-import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
-import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.data.datasource.sharedpref.User
+import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.databinding.FragmentMystudioBinding
 import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class MyStudioFragment : Fragment() {
@@ -26,20 +23,13 @@ class MyStudioFragment : Fragment() {
     private var _binding: FragmentMystudioBinding? = null
     val binding get() = _binding!!
 
-    private val viewModel: StudioViewModel by viewModels()
+    private val viewModel: MyStudioViewModel by viewModels()
 
-    private val userObserver = { user: UsersResponse ->
-        binding.user = user
-    }
-    private val followerObserver = { follower: PageResponse<UsersResponse> ->
-        binding.follower = follower
-    }
-    private val followingObserver = { following: PageResponse<UsersResponse> ->
-        binding.following = following
-    }
+    @Inject
+    lateinit var userAlbumsAdapter: UserAlbumsAdapter
 
-    private val albumsObserver = { albums: PageResponse<UserAlbumsResponse> ->
-        initAdapter(albums)
+    private val userAlbumsObserver: (PagingData<UserAlbums.UserAlbum>) -> Unit = { pagingData ->
+        userAlbumsAdapter.submitData(lifecycle, pagingData)
     }
 
     override fun onCreateView(
@@ -48,6 +38,8 @@ class MyStudioFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentMystudioBinding.inflate(layoutInflater, container, false)
+
+        binding.recyclerMystudioAlbum.adapter = userAlbumsAdapter
 
         return binding.root
     }
@@ -62,21 +54,23 @@ class MyStudioFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeData()
         initViews()
+        initAdapter()
         setOnClickListeners()
     }
 
     private fun observeData() {
-        viewModel.user.observe(viewLifecycleOwner,userObserver)
-        viewModel.follower.observe(viewLifecycleOwner,followerObserver)
-        viewModel.following.observe(viewLifecycleOwner,followingObserver)
-        viewModel.albums.observe(viewLifecycleOwner,albumsObserver)
+        viewModel.userAlbums.observe(viewLifecycleOwner, userAlbumsObserver)
     }
 
     private fun initViews(){
-        viewModel.getUserInfo(User.id)
-        viewModel.getUserFollower(FollowingsCondition(User.id), PageRequest())
-        viewModel.getUserFollowing(FollowingsCondition(User.id), PageRequest())
-        viewModel.getUserAlbums(PageRequest(), AddressRequest())
+    }
+
+    private fun initAdapter() {
+        refresh()
+    }
+
+    fun refresh() {
+        viewModel.getUserAlbums()
     }
 
     private fun setOnClickListeners() {
@@ -100,8 +94,5 @@ class MyStudioFragment : Fragment() {
             Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
                 .navigate(R.id.action_rootFragment_to_settingsFragment)
         }
-    }
-
-    private fun initAdapter(albums: PageResponse<UserAlbumsResponse>) {
     }
 }

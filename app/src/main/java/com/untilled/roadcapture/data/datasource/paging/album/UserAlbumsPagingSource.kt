@@ -19,7 +19,7 @@ class UserAlbumsPagingSource @Inject constructor(
     private val roadCaptureApi: RoadCaptureApi,
 ): RxPagingSource<Int, UserAlbums.UserAlbum>() {
 
-    lateinit var userAlbumsCondition: UserAlbumsCondition
+    var userAlbumsCondition: UserAlbumsCondition? = null
 
     override fun getRefreshKey(state: PagingState<Int, UserAlbums.UserAlbum>): Int? {
         return null
@@ -31,9 +31,9 @@ class UserAlbumsPagingSource @Inject constructor(
         return roadCaptureApi.getUserAlbums(
             page = position,
             size = params.loadSize,
-            region1DepthName = userAlbumsCondition.region1DepthName,
-            region2DepthName = userAlbumsCondition.region2DepthName,
-            region3DepthName = userAlbumsCondition.region3DepthName,
+            region1DepthName = userAlbumsCondition?.region1DepthName,
+            region2DepthName = userAlbumsCondition?.region2DepthName,
+            region3DepthName = userAlbumsCondition?.region3DepthName,
         )
             .subscribeOn(Schedulers.io())
             .map { mapper.transform(it) }

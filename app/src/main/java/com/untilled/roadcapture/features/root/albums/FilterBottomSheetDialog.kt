@@ -82,25 +82,25 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
     private fun applyFilter() {
         when (binding.radiogroupDlgfilterDuration.checkedRadioButtonId) {
             binding.radiobtnDlgfilterWhole.id -> {
-                albumsFragment.updateView(" ", getFilterDate(TimeUtil.TODAY))
+                albumsFragment.refresh(" ", getFilterDate(TimeUtil.TODAY))
             }
 
             binding.radiobtnDlgfilterToday.id -> {
-                albumsFragment.updateView(getFilterDate(TimeUtil.TODAY), getFilterDate(TimeUtil.TODAY))
+                albumsFragment.refresh(getFilterDate(TimeUtil.TODAY), getFilterDate(TimeUtil.TODAY))
             }
             binding.radiobtnDlgfilterWeek.id -> {
-                albumsFragment.updateView(getFilterDate(TimeUtil.WEEK), getFilterDate(TimeUtil.TODAY))
+                albumsFragment.refresh(getFilterDate(TimeUtil.WEEK), getFilterDate(TimeUtil.TODAY))
             }
 
             binding.radiobtnDlgfilterMonth.id -> {
-                albumsFragment.updateView(getFilterDate(TimeUtil.MONTH), getFilterDate(TimeUtil.TODAY))
+                albumsFragment.refresh(getFilterDate(TimeUtil.MONTH), getFilterDate(TimeUtil.TODAY))
             }
 
             binding.radiobtnDlgfilterYear.id -> {
-                albumsFragment.updateView(getFilterDate(TimeUtil.YEAR), getFilterDate(TimeUtil.TODAY))
+                albumsFragment.refresh(getFilterDate(TimeUtil.YEAR), getFilterDate(TimeUtil.TODAY))
             }
             else -> {
-                albumsFragment.updateView(getFilterDate(binding.btnDlgfilterStartdate.text.toString()), getFilterDate(binding.btnDlgfilterEnddate.text.toString()))
+                albumsFragment.refresh(getFilterDate(binding.btnDlgfilterStartdate.text.toString()), getFilterDate(binding.btnDlgfilterEnddate.text.toString()))
             }
         }
         dismiss()

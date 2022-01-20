@@ -81,10 +81,10 @@ class AlbumsFragment : Fragment() {
     }
 
     fun initAdapter(){
-        updateView(null,null)
+        refresh(null,null)
     }
 
-    fun updateView(dateTimeFrom: String?, dateTimeTo: String?) {
+    fun refresh(dateTimeFrom: String?, dateTimeTo: String?) {
         viewModel.getAlbums(AlbumsCondition(dateTimeFrom ?: "", dateTimeTo ?: ""))
     }
 

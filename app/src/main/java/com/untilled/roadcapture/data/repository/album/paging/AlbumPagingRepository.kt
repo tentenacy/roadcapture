@@ -13,6 +13,6 @@ interface AlbumPagingRepository {
     ): Flowable<PagingData<Albums.Album>>
 
     fun getUserAlbums(
-        cond: UserAlbumsCondition,
+        cond: UserAlbumsCondition?,
     ): Flowable<PagingData<UserAlbums.UserAlbum>>
 }

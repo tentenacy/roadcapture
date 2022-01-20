@@ -12,9 +12,9 @@ data class ThumbnailPictureResponse (
     @ColumnInfo(name = "thumbnail_picture_id")
     var id: Long,
     @ColumnInfo(name = "thumbnail_picture_created_at")
-    var createdAt: String,
+    var createdAt: LocalDateTime,
     @ColumnInfo(name = "thumbnail_picture_last_modified_at")
-    var lastModifiedAt: String,
+    var lastModifiedAt: LocalDateTime,
     var imageUrl: String,
     @Embedded
     var place: PlaceResponse

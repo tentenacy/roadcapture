@@ -8,6 +8,7 @@ import com.untilled.roadcapture.data.datasource.api.dto.picture.ThumbnailPicture
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
+import java.time.LocalDateTime
 
 @Parcelize
 data class UserAlbums(
@@ -24,8 +25,8 @@ data class UserAlbums(
     data class UserAlbum(
         @PrimaryKey(autoGenerate = true) val id: Long = 0,
         val userAlbumsId: Long,
-        val createdAt: String,
-        val lastModifiedAt: String,
+        val createdAt: LocalDateTime,
+        val lastModifiedAt: LocalDateTime,
         val title: String,
         @Embedded
         val thumbnailPicture: ThumbnailPictureResponse,

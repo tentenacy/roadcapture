@@ -23,7 +23,7 @@ class UserAlbumsRemoteMediator @Inject constructor(
     private val database: PagingDatabase
 ): RxRemoteMediator<Int, UserAlbums.UserAlbum>() {
 
-    lateinit var userAlbumsCondition: UserAlbumsCondition
+    var userAlbumsCondition: UserAlbumsCondition? = null
 
     override fun loadSingle(
         loadType: LoadType,
@@ -59,9 +59,9 @@ class UserAlbumsRemoteMediator @Inject constructor(
                     roadCaptureApi.getUserAlbums(
                         page = page,
                         size = state.config.pageSize,
-                        region1DepthName = userAlbumsCondition.region1DepthName,
-                        region2DepthName = userAlbumsCondition.region2DepthName,
-                        region3DepthName = userAlbumsCondition.region3DepthName,
+                        region1DepthName = userAlbumsCondition?.region1DepthName,
+                        region2DepthName = userAlbumsCondition?.region2DepthName,
+                        region3DepthName = userAlbumsCondition?.region3DepthName,
                     )
                         .map { mapper.transform(it) }
                         .map { insertToDb(page, loadType, it) }

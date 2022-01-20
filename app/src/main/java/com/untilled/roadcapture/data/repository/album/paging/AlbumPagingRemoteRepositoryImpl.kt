@@ -42,7 +42,7 @@ class AlbumPagingRemoteRepositoryImpl(
         ).flowable
     }
 
-    override fun getUserAlbums(cond: UserAlbumsCondition): Flowable<PagingData<UserAlbums.UserAlbum>> {
+    override fun getUserAlbums(cond: UserAlbumsCondition?): Flowable<PagingData<UserAlbums.UserAlbum>> {
         userAlbumsRemoteMediator.userAlbumsCondition = cond
         return Pager(
             config = PagingConfig(

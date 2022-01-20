@@ -9,8 +9,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="albums"
-            type="com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse" />
+            name="album"
+            type="com.untilled.roadcapture.data.entity.paging.UserAlbums.UserAlbum" />
 
         <variable
             name="onClickItem"
@@ -33,7 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:studioThumbnailImage="@{albums.thumbnailPicture.imageUrl}"
+            bind:studioThumbnailImage="@{album.thumbnailPicture.imageUrl}"
             tools:src="@drawable/img_sample_thumbnail" />
 
         <View
@@ -56,7 +56,7 @@
             android:layout_marginBottom="16dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="@{albums.title}"
+            android:text="@{album.title}"
             app:layout_constraintBottom_toBottomOf="@id/img_ialbums_studio_thumbnail"
             app:layout_constraintEnd_toStartOf="@id/text_ialbums_studio_date"
             app:layout_constraintStart_toStartOf="@id/img_ialbums_studio_thumbnail"
@@ -68,10 +68,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            bind:DateToSnsFormat="@{album.thumbnailPicture.createdAt}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             tools:text="하루 전" />
-            <!--bind:DateToSnsFormat="@{albums.thumbnailPicture.createdAt}"-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

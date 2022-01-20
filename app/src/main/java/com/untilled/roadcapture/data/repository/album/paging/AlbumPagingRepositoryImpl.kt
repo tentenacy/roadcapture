@@ -35,7 +35,7 @@ class AlbumPagingRepositoryImpl(
         ).flowable
     }
 
-    override fun getUserAlbums(cond: UserAlbumsCondition): Flowable<PagingData<UserAlbums.UserAlbum>> {
+    override fun getUserAlbums(cond: UserAlbumsCondition?): Flowable<PagingData<UserAlbums.UserAlbum>> {
         userAlbumsPagingSource.userAlbumsCondition = cond
         return Pager(
             config = PagingConfig(

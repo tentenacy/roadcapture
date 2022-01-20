@@ -5,8 +5,8 @@ import java.time.LocalDateTime
 
 data class UserAlbumsResponse (
     val id: Long,
-    val createdAt: String,
-    val lastModifiedAt: String,
+    val createdAt: LocalDateTime,
+    val lastModifiedAt: LocalDateTime,
     val title: String,
     val thumbnailPicture: ThumbnailPictureResponse
 )
