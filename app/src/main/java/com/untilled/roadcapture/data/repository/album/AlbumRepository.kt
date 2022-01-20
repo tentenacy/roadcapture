@@ -4,6 +4,7 @@ import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
+import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.http.Path
 import retrofit2.http.Query
@@ -17,20 +18,20 @@ interface AlbumRepository {
         @Query("dateTimeTo")dateTimeTo: String?
     ): Response<PageResponse<AlbumsResponse>>
 
-    suspend fun getAlbumCommentsList(
-        @Path("albumId") albumId: Int,
+    fun getAlbumCommentsList(
+        @Path("albumId") albumId: Long,
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null
-    ): Response<CommentsResponse>
+    ): Single<PageResponse<CommentsResponse>>
 
     suspend fun getAlbumDetail(
         @Path("id") id: Int
     ): Response<AlbumResponse>
 
-    suspend fun getPictureCommentsList(
-        @Path("pictureId") pictureId: Int,
+    fun getPictureCommentsList(
+        @Path("pictureId") pictureId: Long,
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null
-    ): Response<CommentsResponse>
+    ): Single<PageResponse<CommentsResponse>>
 
 }

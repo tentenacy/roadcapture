@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.data.entity.user
+package com.untilled.roadcapture.data.datasource.sharedpref
 
 import com.chibatching.kotpref.KotprefModel
 

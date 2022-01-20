@@ -1,29 +1,26 @@
-package com.untilled.roadcapture.data.entity
+package com.untilled.roadcapture.data.entity.paging
 
 import android.os.Parcelable
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
-import com.untilled.roadcapture.data.datasource.api.dto.picture.PictureResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
-import java.time.LocalDateTime
 
 @Parcelize
-data class AlbumsPage(
+data class Albums(
     val total: Int = 0,
     val page: Int = 0,
-    val albums: List<Albums>
+    val albums: List<Album>
 ): Parcelable {
 
     @IgnoredOnParcel
-    val endOfPage = total == page
+    val endOfPage = total - 1 == page
 
     @Parcelize
     @Entity(tableName = "albums")
-    data class Albums(
+    data class Album(
         @PrimaryKey(autoGenerate = true) val id: Long = 0,
         val albumsId: Long,
         var createdAt: String?,

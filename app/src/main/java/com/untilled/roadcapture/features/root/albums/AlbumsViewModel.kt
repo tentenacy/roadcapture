@@ -13,11 +13,12 @@ import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
-import com.untilled.roadcapture.data.entity.AlbumsPage
+import com.untilled.roadcapture.data.entity.paging.Albums
 
-import com.untilled.roadcapture.data.repository.album.AlbumCommentsPagingSource
+import com.untilled.roadcapture.data.datasource.paging.comment.AlbumCommentsPagingSource
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
-import com.untilled.roadcapture.data.repository.album.AlbumPagingRepository
+import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepository
+import com.untilled.roadcapture.data.repository.comment.paging.AlbumCommentPagingRepository
 import com.untilled.roadcapture.data.repository.follow.FollowRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
@@ -32,7 +33,6 @@ import javax.inject.Inject
 @HiltViewModel
 class AlbumsViewModel
 @Inject constructor(
-    private val albumRepository: AlbumRepository,
     private val userRepository: UserRepository,
     private val followRepository: FollowRepository,
     private val albumPagingRepository: AlbumPagingRepository,
@@ -42,8 +42,8 @@ class AlbumsViewModel
     private var currentDateTimeTo: String? = null
     private var currentAlbumsResult: Flow<PagingData<AlbumsResponse>>? = null
 
-    private var _albums = MutableLiveData<PagingData<AlbumsPage.Albums>>()
-    val albums: LiveData<PagingData<AlbumsPage.Albums>> get() = _albums
+    private var _albums = MutableLiveData<PagingData<Albums.Album>>()
+    val album: LiveData<PagingData<Albums.Album>> get() = _albums
 
 
     //TODO 페이징으로 변경
@@ -62,21 +62,6 @@ class AlbumsViewModel
             }) { t ->
 
             }.addTo(compositeDisposable)
-    }
-
-    fun getAlbumComments(albumId: Int): Flow<PagingData<Comments>> {
-        return getAlbumCommentsResultStream(albumId).cachedIn(viewModelScope)
-    }
-
-    private fun getAlbumCommentsResultStream(albumId: Int): Flow<PagingData<Comments>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = 10,
-                prefetchDistance = 20,
-                enablePlaceholders = false
-            ),
-            pagingSourceFactory = { AlbumCommentsPagingSource(albumRepository,albumId) }
-        ).flow
     }
 
     fun getUserFollowing(followingsCondition: FollowingsCondition, pageRequest: PageRequest){

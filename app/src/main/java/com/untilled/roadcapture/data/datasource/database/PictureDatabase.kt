@@ -5,7 +5,6 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.untilled.roadcapture.data.datasource.dao.PictureDao
-import com.untilled.roadcapture.data.entity.AlbumsPage
 import com.untilled.roadcapture.data.entity.Picture
 
 @Database(

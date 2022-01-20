@@ -1,30 +1,26 @@
 package com.untilled.roadcapture.data.entity.mapper
 
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
+import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
+import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.data.entity.paging.Albums
 
-class AlbumsMapper {
+class CommentsMapper {
 
-    fun transform(response: PageResponse<AlbumsResponse>): Albums {
+    fun transform(response: PageResponse<CommentsResponse>): AlbumComments {
         return with(response) {
-            Albums(
+            AlbumComments(
                 total = totalPages,
                 page = number,
-                albums = content.map {
-                    Albums.Album(
+                albumComments = content.map {
+                    AlbumComments.AlbumComment(
                         0,
                         it.id,
+                        it.pictureId,
                         it.createdAt,
                         it.lastModifiedAt,
-                        it.title,
-                        it.description,
-                        it.thumbnailUrl,
+                        it.content,
                         it.user,
-                        it.viewCount,
-                        it.likeCount,
-                        it.commentCount,
-                        it.liked,
                     )
                 }
             )

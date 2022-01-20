@@ -1,6 +1,6 @@
 package com.untilled.roadcapture.data.datasource.dao
 
-import com.untilled.roadcapture.data.entity.token.Token
+import com.untilled.roadcapture.data.datasource.sharedpref.Token
 import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
 import javax.inject.Inject
 

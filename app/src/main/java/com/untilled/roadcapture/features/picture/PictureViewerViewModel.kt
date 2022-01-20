@@ -10,11 +10,10 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.comment.Comments
-import com.untilled.roadcapture.data.repository.album.AlbumCommentsPagingSource
+import com.untilled.roadcapture.data.datasource.paging.comment.AlbumCommentsPagingSource
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
-import com.untilled.roadcapture.data.repository.album.PictureCommentsPagingSource
+import com.untilled.roadcapture.data.datasource.paging.comment.PictureCommentsPagingSource
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
@@ -39,6 +38,7 @@ class PictureViewerViewModel
         }
     }
 
+/*
     private fun getPictureCommentsResultStream(pictureId: Int): Flow<PagingData<Comments>> {
         return Pager(
             config = PagingConfig(
@@ -49,11 +49,15 @@ class PictureViewerViewModel
             pagingSourceFactory = { PictureCommentsPagingSource(repository,pictureId) }
         ).flow
     }
+*/
 
+/*
     fun getPictureComments(pictureId: Int): Flow<PagingData<Comments>> {
         return getPictureCommentsResultStream(pictureId).cachedIn(viewModelScope)
     }
+*/
 
+/*
     private fun getAlbumCommentsResultStream(albumId: Int): Flow<PagingData<Comments>> {
         return Pager(
             config = PagingConfig(
@@ -64,9 +68,12 @@ class PictureViewerViewModel
             pagingSourceFactory = { AlbumCommentsPagingSource(repository,albumId) }
         ).flow
     }
+*/
 
+/*
     fun getAlbumComments(albumId: Int): Flow<PagingData<Comments>> {
         return getAlbumCommentsResultStream(albumId).cachedIn(viewModelScope)
     }
+*/
 }
 

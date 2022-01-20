@@ -1,9 +1,9 @@
-package com.untilled.roadcapture.data.repository.album
+package com.untilled.roadcapture.data.repository.album.paging
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
+import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import retrofit2.HttpException
 import java.io.IOException
 
@@ -14,7 +14,7 @@ class AlbumsPagingSource (
     : PagingSource<Int, AlbumsResponse>() {
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, AlbumsResponse> {
-        return try{
+        return try {
             val position = params.key ?: STARTING_PAGE_INDEX
 
             val response = repository.getAlbumsTemp(

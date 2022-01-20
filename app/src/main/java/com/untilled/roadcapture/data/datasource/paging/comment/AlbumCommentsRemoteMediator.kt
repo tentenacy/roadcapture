@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.data.datasource.paging
+package com.untilled.roadcapture.data.datasource.paging.comment
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
@@ -7,25 +7,27 @@ import androidx.paging.rxjava3.RxRemoteMediator
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.datasource.database.PagingDatabase
-import com.untilled.roadcapture.data.entity.AlbumsPage
-import com.untilled.roadcapture.data.entity.mapper.AlbumsMapper
+import com.untilled.roadcapture.data.entity.mapper.CommentsMapper
+import com.untilled.roadcapture.data.entity.paging.AlbumComments
+import com.untilled.roadcapture.data.entity.paging.Albums
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.InvalidObjectException
 import javax.inject.Inject
+import kotlin.properties.Delegates
 
 @OptIn(ExperimentalPagingApi::class)
-class GetAlbumsRxRemoteMediator @Inject constructor(
-    private val mapper: AlbumsMapper,
+class AlbumCommentsRemoteMediator @Inject constructor(
+    private val mapper: CommentsMapper,
     private val roadCaptureApi: RoadCaptureApi,
-    private val database: PagingDatabase,
-): RxRemoteMediator<Int, AlbumsPage.Albums>() {
+    private val database: PagingDatabase
+): RxRemoteMediator<Int, AlbumComments.AlbumComment>() {
 
-    lateinit var albumsCondition: AlbumsCondition
+    var albumId by Delegates.notNull<Long>()
 
     override fun loadSingle(
         loadType: LoadType,
-        state: PagingState<Int, AlbumsPage.Albums>
+        state: PagingState<Int, AlbumComments.AlbumComment>
     ): Single<MediatorResult> {
         return Single.just(loadType)
             .subscribeOn(Schedulers.io())
@@ -54,10 +56,10 @@ class GetAlbumsRxRemoteMediator @Inject constructor(
                 if(page == INVALID_PAGE) {
                     Single.just(MediatorResult.Success(endOfPaginationReached = true))
                 } else {
-                    roadCaptureApi.getAlbums(
+                    roadCaptureApi.getAlbumComments(
                         page = page,
-                        dateTimeFrom = albumsCondition.dateTimeFrom,
-                        dateTimeTo = albumsCondition.dateTimeTo,
+                        size = state.config.pageSize,
+                        albumId = albumId,
                     )
                         .map { mapper.transform(it) }
                         .map { insertToDb(page, loadType, it) }
@@ -68,22 +70,22 @@ class GetAlbumsRxRemoteMediator @Inject constructor(
     }
 
     @Suppress("DEPRECATION")
-    private fun insertToDb(page: Int, loadType: LoadType, data: AlbumsPage): AlbumsPage {
+    private fun insertToDb(page: Int, loadType: LoadType, data: AlbumComments): AlbumComments {
         database.beginTransaction()
 
         try {
             if (loadType == LoadType.REFRESH) {
-                database.albumsRemoteKeysRxDao().clearRemoteKeys()
-                database.albumsRxDao().clearAlbums()
+                database.albumCommentsKeysDao().clearRemoteKeys()
+                database.albumCommentsDao().clearAlbums()
             }
 
             val prevKey = if (page == 1) null else page - 1
             val nextKey = if (data.endOfPage) null else page + 1
-            val keys = data.albums.map {
-                AlbumsPage.AlbumRemoteKeys(albumsId = it.albumsId, prevKey = prevKey, nextKey = nextKey ?: INVALID_PAGE)
+            val keys = data.albumComments.map {
+                AlbumComments.AlbumCommentRemoteKeys(albumCommentsId = it.albumCommentsId, prevKey = prevKey, nextKey = nextKey ?: INVALID_PAGE)
             }
-            database.albumsRemoteKeysRxDao().insertAll(keys)
-            database.albumsRxDao().insertAll(data.albums)
+            database.albumCommentsKeysDao().insertAll(keys)
+            database.albumCommentsDao().insertAll(data.albumComments)
             database.setTransactionSuccessful()
 
         } finally {
@@ -98,9 +100,9 @@ class GetAlbumsRxRemoteMediator @Inject constructor(
      * This method will be called during APPEND event,
      * means that we should provide next key to load movie data before scroll to bottom ended
      */
-    private fun getRemoteKeyForLastItem(state: PagingState<Int, AlbumsPage.Albums>): AlbumsPage.AlbumRemoteKeys? {
+    private fun getRemoteKeyForLastItem(state: PagingState<Int, AlbumComments.AlbumComment>): Albums.AlbumRemoteKeys? {
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()?.let { albums ->
-            database.albumsRemoteKeysRxDao().remoteKeysByAlbumsId(albums.id)
+            database.albumsRemoteKeysDao().remoteKeysByAlbumsId(albums.id)
         }
     }
 
@@ -109,9 +111,9 @@ class GetAlbumsRxRemoteMediator @Inject constructor(
      * This method will be called during PREPEND event,
      * means that we should provide previous key to load movie data before scroll to top ended
      */
-    private fun getRemoteKeyForFirstItem(state: PagingState<Int, AlbumsPage.Albums>): AlbumsPage.AlbumRemoteKeys? {
+    private fun getRemoteKeyForFirstItem(state: PagingState<Int, AlbumComments.AlbumComment>): Albums.AlbumRemoteKeys? {
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()?.let { albums ->
-            database.albumsRemoteKeysRxDao().remoteKeysByAlbumsId(albums.id)
+            database.albumsRemoteKeysDao().remoteKeysByAlbumsId(albums.id)
         }
     }
 
@@ -119,10 +121,10 @@ class GetAlbumsRxRemoteMediator @Inject constructor(
      * will search for page closes to current scroll position,
      * if return null means this is the initial page load
      */
-    private fun getRemoteKeyClosetsToCurrentPosition(state: PagingState<Int, AlbumsPage.Albums>): AlbumsPage.AlbumRemoteKeys? {
+    private fun getRemoteKeyClosetsToCurrentPosition(state: PagingState<Int, AlbumComments.AlbumComment>): Albums.AlbumRemoteKeys? {
         return state.anchorPosition?.let { position ->
-            state.closestItemToPosition(position)?.albumsId?.let { id ->
-                database.albumsRemoteKeysRxDao().remoteKeysByAlbumsId(id)
+            state.closestItemToPosition(position)?.pictureId?.let { id ->
+                database.albumsRemoteKeysDao().remoteKeysByAlbumsId(id)
             }
         }
     }

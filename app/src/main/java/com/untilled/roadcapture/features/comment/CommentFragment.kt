@@ -29,7 +29,7 @@ class CommentFragment : Fragment() {
 
     private var _binding: FragmentCommentBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: AlbumsViewModel by viewModels({requireParentFragment()})
+    private val viewModel: CommentViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,10 +47,12 @@ class CommentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val args: CommentFragmentArgs by navArgs()
-        initAdapter(args.albumsId.toInt())
+        initAdapter(args.albumsId)
         setOnClickListeners()
+        viewModel.albumComments.observe(viewLifecycleOwner) { pagingData ->
+            //TODO: fetch
+        }
     }
-
 
     private fun setOnClickListeners() {
         binding.imgCommentBack.setOnClickListener {
@@ -64,18 +66,10 @@ class CommentFragment : Fragment() {
         _binding = null
     }
 
-    private fun initAdapter(albumId: Int) {
+    private fun initAdapter(albumId: Long) {
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
         binding.recyclerComment.addItemDecoration(customDivider)
-        updateView(albumId)
-
-    }
-
-    private fun updateView(albumId: Int) {
-        lifecycleScope.launch {
-            viewModel.getAlbumComments(albumId).collectLatest { pagingData: PagingData<Comments> ->
-            }
-        }
+        viewModel.getAlbumComments(albumId)
     }
 
     private fun showReportDialog() {

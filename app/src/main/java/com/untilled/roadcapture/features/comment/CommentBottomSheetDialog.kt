@@ -70,9 +70,10 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
     private fun initAdapter(position: Int) {
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
         binding.recycleBottomsheetComment.addItemDecoration(customDivider)
-        updateView(position - 1)
+//        updateView(position - 1)
     }
 
+/*
     private fun updateView(position: Int) {
         when(position){
             -1 -> {
@@ -91,6 +92,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
             }
         }
     }
+*/
 
     private fun showReportDialog() {
         val layoutInflater = LayoutInflater.from(requireContext())

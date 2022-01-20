@@ -14,7 +14,7 @@ import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
-import com.untilled.roadcapture.data.entity.user.User
+import com.untilled.roadcapture.data.datasource.sharedpref.User
 import com.untilled.roadcapture.databinding.FragmentMystudioBinding
 import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections

@@ -8,8 +8,8 @@
         <import type="android.view.View" />
 
         <variable
-            name="albums"
-            type="com.untilled.roadcapture.data.entity.AlbumsPage.Albums" />
+            name="album"
+            type="com.untilled.roadcapture.data.entity.paging.Albums.Album" />
 
         <variable
             name="onClickItem"
@@ -20,7 +20,7 @@
         android:id="@+id/constraint_ialbums_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        bind:adjustConstraintEmptyDesc="@{albums.description}">
+        bind:adjustConstraintEmptyDesc="@{album.description}">
 
         <com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/img_ialbums_thumbnail"
@@ -34,7 +34,7 @@
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:albumThumbnailImage="@{albums.thumbnailUrl}"
+            bind:albumThumbnailImage="@{album.thumbnailUrl}"
             tools:src="@drawable/img_sample_thumbnail" />
 
         <View
@@ -57,7 +57,7 @@
             android:padding="8dp"
             app:layout_constraintStart_toStartOf="@id/img_ialbums_thumbnail"
             app:layout_constraintTop_toTopOf="@id/img_ialbums_thumbnail"
-            bind:albumProfileImage="@{albums.user.profileImageUrl}"
+            bind:albumProfileImage="@{album.user.profileImageUrl}"
             tools:src="@drawable/img_sample_profile" />
 
         <com.airbnb.lottie.LottieAnimationView
@@ -80,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text='@{String.format("%d",albums.likeCount)}'
+            android:text='@{String.format("%d",album.likeCount)}'
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@id/img_ialbums_comment"
             app:layout_constraintEnd_toEndOf="@id/text_ialbums_comment"
@@ -105,7 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="4dp"
             android:layout_marginBottom="10dp"
-            android:text='@{String.format("%d",albums.commentCount)}'
+            android:text='@{String.format("%d",album.commentCount)}'
             android:textColor="@color/black"
             app:layout_constraintBottom_toBottomOf="@id/img_ialbums_thumbnail"
             app:layout_constraintEnd_toEndOf="parent"
@@ -133,7 +133,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/img_ialbums_profile"
             app:layout_constraintStart_toEndOf="@id/img_ialbums_profile"
             app:layout_constraintTop_toTopOf="@+id/img_ialbums_profile"
-            bind:albumOverlayUsername="@{albums.user.username}"
+            bind:albumOverlayUsername="@{album.user.username}"
             tools:text="tenutz ·" />
 
         <TextView
@@ -158,7 +158,7 @@
             android:layout_marginTop="16dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="@{albums.title}"
+            android:text="@{album.title}"
             android:onClick="@{onClickItem}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -172,8 +172,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="48dp"
-            android:text="@{albums.description}"
-            android:visibility='@{albums.description.equals("") ? View.GONE : View.VISIBLE}'
+            android:text="@{album.description}"
+            android:visibility='@{album.description.equals("") ? View.GONE : View.VISIBLE}'
             android:onClick="@{onClickItem}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/text_ialbums_title"

@@ -1,10 +1,13 @@
 package com.untilled.roadcapture.di
 
-import com.untilled.roadcapture.data.datasource.paging.GetAlbumsRxPagingSource
+import com.untilled.roadcapture.data.datasource.paging.album.AlbumsPagingSource
+import com.untilled.roadcapture.data.datasource.paging.comment.AlbumCommentsPagingSource
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import com.untilled.roadcapture.data.repository.album.AlbumRepositoryImpl
-import com.untilled.roadcapture.data.repository.album.AlbumPagingRepository
-import com.untilled.roadcapture.data.repository.album.AlbumPagingRepositoryImpl
+import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepository
+import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepositoryImpl
+import com.untilled.roadcapture.data.repository.comment.paging.AlbumCommentPagingRepository
+import com.untilled.roadcapture.data.repository.comment.paging.AlbumCommentPagingRepositoryImpl
 import com.untilled.roadcapture.data.repository.follow.FollowRepository
 import com.untilled.roadcapture.data.repository.follow.FollowRepositoryImpl
 import com.untilled.roadcapture.data.repository.picture.PictureRepository
@@ -31,8 +34,14 @@ abstract class RepositoryModule {
     companion object {
         @Singleton
         @Provides
-        fun provideGetAlbumsRxRepository(pagingSource: GetAlbumsRxPagingSource): AlbumPagingRepository {
+        fun provideAlbumsPagingRepository(pagingSource: AlbumsPagingSource): AlbumPagingRepository {
             return AlbumPagingRepositoryImpl(pagingSource)
+        }
+
+        @Singleton
+        @Provides
+        fun provideAlbumCommentsPagingRepository(pagingSource: AlbumCommentsPagingSource): AlbumCommentPagingRepository {
+            return AlbumCommentPagingRepositoryImpl(pagingSource)
         }
     }
 

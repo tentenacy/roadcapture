@@ -1,7 +1,6 @@
 package com.untilled.roadcapture.data.datasource.dao
 
-import com.untilled.roadcapture.data.datasource.api.dto.user.UserResponse
-import com.untilled.roadcapture.data.entity.user.User
+import com.untilled.roadcapture.data.datasource.sharedpref.User
 import javax.inject.Inject
 
 class UserDao @Inject constructor(): LocalUserDao{
