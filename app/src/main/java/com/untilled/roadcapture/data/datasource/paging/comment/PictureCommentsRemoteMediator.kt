@@ -7,8 +7,7 @@ import androidx.paging.rxjava3.RxRemoteMediator
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.database.PagingDatabase
 import com.untilled.roadcapture.data.entity.mapper.CommentsMapper
-import com.untilled.roadcapture.data.entity.paging.AlbumComments
-import com.untilled.roadcapture.data.entity.paging.Albums
+import com.untilled.roadcapture.data.entity.paging.PictureComments
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.InvalidObjectException
@@ -16,17 +15,17 @@ import javax.inject.Inject
 import kotlin.properties.Delegates
 
 @OptIn(ExperimentalPagingApi::class)
-class AlbumCommentsRemoteMediator @Inject constructor(
+class PictureCommentsRemoteMediator @Inject constructor(
     private val mapper: CommentsMapper,
     private val roadCaptureApi: RoadCaptureApi,
     private val database: PagingDatabase
-): RxRemoteMediator<Int, AlbumComments.AlbumComment>() {
+): RxRemoteMediator<Int, PictureComments.PictureComment>() {
 
-    var albumId by Delegates.notNull<Long>()
+    var pictureId by Delegates.notNull<Long>()
 
     override fun loadSingle(
         loadType: LoadType,
-        state: PagingState<Int, AlbumComments.AlbumComment>
+        state: PagingState<Int, PictureComments.PictureComment>
     ): Single<MediatorResult> {
         return Single.just(loadType)
             .subscribeOn(Schedulers.io())
@@ -55,12 +54,12 @@ class AlbumCommentsRemoteMediator @Inject constructor(
                 if(page == INVALID_PAGE) {
                     Single.just(MediatorResult.Success(endOfPaginationReached = true))
                 } else {
-                    roadCaptureApi.getAlbumComments(
+                    roadCaptureApi.getPictureComments(
                         page = page,
                         size = state.config.pageSize,
-                        albumId = albumId,
+                        pictureId = pictureId,
                     )
-                        .map { mapper.transformToAlbumComments(it) }
+                        .map { mapper.transformToPictureComments(it) }
                         .map { insertToDb(page, loadType, it) }
                         .map<MediatorResult> { MediatorResult.Success(endOfPaginationReached = it.endOfPage) }
                         .onErrorReturn{ MediatorResult.Error(it) }
@@ -69,22 +68,22 @@ class AlbumCommentsRemoteMediator @Inject constructor(
     }
 
     @Suppress("DEPRECATION")
-    private fun insertToDb(page: Int, loadType: LoadType, data: AlbumComments): AlbumComments {
+    private fun insertToDb(page: Int, loadType: LoadType, data: PictureComments): PictureComments {
         database.beginTransaction()
 
         try {
             if (loadType == LoadType.REFRESH) {
-                database.albumCommentsKeysDao().clearRemoteKeys()
-                database.albumCommentsDao().clearComments()
+                database.pictureCommentsKeysDao().clearRemoteKeys()
+                database.pictureCommentsDao().clearComments()
             }
 
             val prevKey = if (page == 1) null else page - 1
             val nextKey = if (data.endOfPage) null else page + 1
-            val keys = data.albumComments.map {
-                AlbumComments.AlbumCommentRemoteKeys(albumCommentsId = it.albumCommentsId, prevKey = prevKey, nextKey = nextKey ?: INVALID_PAGE)
+            val keys = data.pictureComments.map {
+                PictureComments.PictureCommentRemoteKeys(albumCommentsId = it.albumCommentsId, prevKey = prevKey, nextKey = nextKey ?: INVALID_PAGE)
             }
-            database.albumCommentsKeysDao().insertAll(keys)
-            database.albumCommentsDao().insertAll(data.albumComments)
+            database.pictureCommentsKeysDao().insertAll(keys)
+            database.pictureCommentsDao().insertAll(data.pictureComments)
             database.setTransactionSuccessful()
 
         } finally {
@@ -99,9 +98,9 @@ class AlbumCommentsRemoteMediator @Inject constructor(
      * This method will be called during APPEND event,
      * means that we should provide next key to load movie data before scroll to bottom ended
      */
-    private fun getRemoteKeyForLastItem(state: PagingState<Int, AlbumComments.AlbumComment>): AlbumComments.AlbumCommentRemoteKeys? {
+    private fun getRemoteKeyForLastItem(state: PagingState<Int, PictureComments.PictureComment>): PictureComments.PictureCommentRemoteKeys? {
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()?.let { albums ->
-            database.albumCommentsKeysDao().remoteKeysByAlbumCommentsId(albums.id)
+            database.pictureCommentsKeysDao().remoteKeysByAlbumCommentsId(albums.id)
         }
     }
 
@@ -110,9 +109,9 @@ class AlbumCommentsRemoteMediator @Inject constructor(
      * This method will be called during PREPEND event,
      * means that we should provide previous key to load movie data before scroll to top ended
      */
-    private fun getRemoteKeyForFirstItem(state: PagingState<Int, AlbumComments.AlbumComment>): AlbumComments.AlbumCommentRemoteKeys? {
+    private fun getRemoteKeyForFirstItem(state: PagingState<Int, PictureComments.PictureComment>): PictureComments.PictureCommentRemoteKeys? {
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()?.let { albums ->
-            database.albumCommentsKeysDao().remoteKeysByAlbumCommentsId(albums.id)
+            database.pictureCommentsKeysDao().remoteKeysByAlbumCommentsId(albums.id)
         }
     }
 
@@ -120,10 +119,10 @@ class AlbumCommentsRemoteMediator @Inject constructor(
      * will search for page closes to current scroll position,
      * if return null means this is the initial page load
      */
-    private fun getRemoteKeyClosetsToCurrentPosition(state: PagingState<Int, AlbumComments.AlbumComment>): AlbumComments.AlbumCommentRemoteKeys? {
+    private fun getRemoteKeyClosetsToCurrentPosition(state: PagingState<Int, PictureComments.PictureComment>): PictureComments.PictureCommentRemoteKeys? {
         return state.anchorPosition?.let { position ->
             state.closestItemToPosition(position)?.pictureId?.let { id ->
-                database.albumCommentsKeysDao().remoteKeysByAlbumCommentsId(id)
+                database.pictureCommentsKeysDao().remoteKeysByAlbumCommentsId(id)
             }
         }
     }

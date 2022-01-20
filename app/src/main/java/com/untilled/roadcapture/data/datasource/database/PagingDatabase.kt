@@ -8,8 +8,11 @@ import com.untilled.roadcapture.data.datasource.dao.paging.album.AlbumsRemoteKey
 import com.untilled.roadcapture.data.datasource.dao.paging.album.AlbumsDao
 import com.untilled.roadcapture.data.datasource.dao.paging.comment.AlbumCommentsDao
 import com.untilled.roadcapture.data.datasource.dao.paging.comment.AlbumCommentsRemoteKeysDao
+import com.untilled.roadcapture.data.datasource.dao.paging.comment.PictureCommentsDao
+import com.untilled.roadcapture.data.datasource.dao.paging.comment.PictureCommentsRemoteKeysDao
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.data.entity.paging.Albums
+import com.untilled.roadcapture.data.entity.paging.PictureComments
 
 @Database(
     entities = [
@@ -17,6 +20,8 @@ import com.untilled.roadcapture.data.entity.paging.Albums
         Albums.AlbumRemoteKeys::class,
         AlbumComments.AlbumComment::class,
         AlbumComments.AlbumCommentRemoteKeys::class,
+        PictureComments.PictureComment::class,
+        PictureComments.PictureCommentRemoteKeys::class,
     ],
     version = 1,
     exportSchema = false
@@ -26,6 +31,8 @@ abstract class PagingDatabase : RoomDatabase() {
     abstract fun albumsRemoteKeysDao(): AlbumsRemoteKeysDao
     abstract fun albumCommentsDao(): AlbumCommentsDao
     abstract fun albumCommentsKeysDao(): AlbumCommentsRemoteKeysDao
+    abstract fun pictureCommentsDao(): PictureCommentsDao
+    abstract fun pictureCommentsKeysDao(): PictureCommentsRemoteKeysDao
 
     companion object {
         fun getInstance(context: Context): PagingDatabase =

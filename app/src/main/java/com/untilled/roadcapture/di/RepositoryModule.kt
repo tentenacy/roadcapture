@@ -2,12 +2,13 @@ package com.untilled.roadcapture.di
 
 import com.untilled.roadcapture.data.datasource.paging.album.AlbumsPagingSource
 import com.untilled.roadcapture.data.datasource.paging.comment.AlbumCommentsPagingSource
+import com.untilled.roadcapture.data.datasource.paging.comment.PictureCommentsPagingSource
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import com.untilled.roadcapture.data.repository.album.AlbumRepositoryImpl
 import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepository
 import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepositoryImpl
-import com.untilled.roadcapture.data.repository.comment.paging.AlbumCommentPagingRepository
-import com.untilled.roadcapture.data.repository.comment.paging.AlbumCommentPagingRepositoryImpl
+import com.untilled.roadcapture.data.repository.comment.paging.CommentPagingRepository
+import com.untilled.roadcapture.data.repository.comment.paging.CommentPagingRepositoryImpl
 import com.untilled.roadcapture.data.repository.follow.FollowRepository
 import com.untilled.roadcapture.data.repository.follow.FollowRepositoryImpl
 import com.untilled.roadcapture.data.repository.picture.PictureRepository
@@ -40,25 +41,28 @@ abstract class RepositoryModule {
 
         @Singleton
         @Provides
-        fun provideAlbumCommentsPagingRepository(pagingSource: AlbumCommentsPagingSource): AlbumCommentPagingRepository {
-            return AlbumCommentPagingRepositoryImpl(pagingSource)
+        fun provideAlbumCommentsPagingRepository(
+            albumCommentsPagingSource: AlbumCommentsPagingSource,
+            pictureCommentsPagingSource: PictureCommentsPagingSource
+        ): CommentPagingRepository {
+            return CommentPagingRepositoryImpl(albumCommentsPagingSource, pictureCommentsPagingSource)
         }
     }
 
     @Binds
     abstract fun provideAlbumRepository(
         repository: AlbumRepositoryImpl
-    ) : AlbumRepository
+    ): AlbumRepository
 
     @Binds
     abstract fun providePictureRepository(
         repository: PictureRepositoryImpl
-    ) : PictureRepository
+    ): PictureRepository
 
     @Binds
     abstract fun provideSearchPlaceRepository(
         repository: SearchPlaceRepositoryImpl
-    ) : SearchPlaceRepository
+    ): SearchPlaceRepository
 
     @Binds
     abstract fun provideUserRepository(

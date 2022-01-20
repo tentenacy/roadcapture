@@ -7,16 +7,17 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.data.entity.paging.Albums
+import com.untilled.roadcapture.data.entity.paging.PictureComments
 
 @Dao
-interface AlbumCommentsDao {
+interface PictureCommentsDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAll(albums: List<AlbumComments.AlbumComment>)
+    fun insertAll(albums: List<PictureComments.PictureComment>)
 
-    @Query("SELECT * FROM album_comments ORDER BY id ASC")
-    fun selectAll(): PagingSource<Int, AlbumComments.AlbumComment>
+    @Query("SELECT * FROM picture_comments ORDER BY id ASC")
+    fun selectAll(): PagingSource<Int, PictureComments.PictureComment>
 
-    @Query("DELETE FROM album_comments")
+    @Query("DELETE FROM picture_comments")
     fun clearComments()
 }
