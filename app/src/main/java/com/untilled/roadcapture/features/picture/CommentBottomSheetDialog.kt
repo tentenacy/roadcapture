@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.comment
+package com.untilled.roadcapture.features.picture
 
 import android.app.AlertDialog
 import android.graphics.Color
@@ -17,18 +17,53 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.datasource.api.dto.comment.Comments
+import com.untilled.roadcapture.data.entity.paging.AlbumComments
+import com.untilled.roadcapture.data.entity.paging.PictureComments
 import com.untilled.roadcapture.databinding.BottomsheetCommentBinding
 import com.untilled.roadcapture.features.common.CustomDivider
 import com.untilled.roadcapture.features.picture.PictureViewerViewModel
+import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CommentBottomSheetDialog : BottomSheetDialogFragment(){
     private var _binding: BottomsheetCommentBinding? = null
     private val binding get() = _binding!!
     private val viewModel: PictureViewerViewModel by viewModels({requireParentFragment().requireParentFragment()})
+    @Inject lateinit var adapter: CommentBottomSheetAdapter
+
+    private val albumCommentsObserver: (PagingData<AlbumComments.AlbumComment>) -> Unit = { pagingData ->
+       // adapter.submitData(lifecycle, pagingData)
+    }
+    private val pictureCommentsObserver: (PagingData<PictureComments.PictureComment>) -> Unit = { pagingData ->
+        adapter.submitData(lifecycle, pagingData)
+    }
+
+    private val itemClickListener: (ItemClickArgs?) -> Unit = { args ->
+        when (args?.view?.id) {
+            R.id.img_icomment_more -> {
+                val popupMenu = PopupMenu(requireContext(), args.view)
+                popupMenu.apply {
+                    menuInflater.inflate(R.menu.popupmenu_comment_more, popupMenu.menu)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.popup_menu_comment_more_report -> {
+                                showReportDialog()
+                            }
+                        }
+                        true
+                    }
+                }.show()
+            }
+            R.id.img_icomment_profile -> {
+                Navigation.findNavController(binding.root)
+                    .navigate(R.id.action_commentFragment_to_studioFragment)
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -44,7 +79,9 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeData()
         initAdapter(viewModel.currentPosition)
+        addAdapter()
         expandFullHeight()
         setOnClickListeners()
     }
@@ -52,6 +89,16 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    private fun observeData() {
+        viewModel.albumComments.observe(viewLifecycleOwner, albumCommentsObserver)
+        viewModel.pictureComments.observe(viewLifecycleOwner, pictureCommentsObserver)
+    }
+
+    private fun addAdapter() {
+        adapter.setOnClickListener(itemClickListener)
+        binding.recycleBottomsheetComment.adapter = adapter
     }
 
     private fun expandFullHeight() {
@@ -70,29 +117,17 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
     private fun initAdapter(position: Int) {
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
         binding.recycleBottomsheetComment.addItemDecoration(customDivider)
-//        updateView(position - 1)
+        updateView(position - 1)
     }
 
-/*
+
     private fun updateView(position: Int) {
         when(position){
-            -1 -> {
-                lifecycleScope.launch {
-                    viewModel.getAlbumComments(viewModel.albumResponse.value!!.id)
-                        .collectLatest { pagingData: PagingData<Comments> ->
-                        }
-                }
-            }
-            else -> {
-                val pictureId = viewModel.albumResponse.value?.pictures?.get(position)!!.id
-                lifecycleScope.launch {
-                    viewModel.getPictureComments(pictureId).collectLatest { pagingData: PagingData<Comments> ->
-                    }
-                }
-            }
+            -1 -> viewModel.getAlbumComments(viewModel.album.value!!.id)
+            else -> viewModel.getPictureComments(viewModel.album.value!!.pictures?.get(position)!!.id)
         }
     }
-*/
+
 
     private fun showReportDialog() {
         val layoutInflater = LayoutInflater.from(requireContext())

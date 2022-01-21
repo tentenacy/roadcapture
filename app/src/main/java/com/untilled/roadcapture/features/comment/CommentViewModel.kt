@@ -31,15 +31,4 @@ class CommentViewModel @Inject constructor(
 
             }.addTo(compositeDisposable)
     }
-
-    fun getPictureComments(pictureId: Long) {
-        commentPagingRepository.getPictureComments(pictureId)
-            .subscribeOn(AndroidSchedulers.mainThread())
-            .cachedIn(viewModelScope)
-            .subscribe({
-            }) { t ->
-
-            }.addTo(compositeDisposable)
-    }
-
 }

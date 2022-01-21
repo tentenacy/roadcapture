@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.databinding.FragmentPictureSliderBinding
-import com.untilled.roadcapture.features.comment.CommentBottomSheetDialog
 import com.untilled.roadcapture.utils.setPaddingWhenStatusBarTransparent
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
