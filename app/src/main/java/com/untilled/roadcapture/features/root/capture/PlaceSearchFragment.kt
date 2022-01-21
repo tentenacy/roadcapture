@@ -2,27 +2,35 @@ package com.untilled.roadcapture.features.root.capture
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.address.Address
+import com.untilled.roadcapture.data.datasource.api.dto.picture.PictureResponse
 import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceRequest
+import com.untilled.roadcapture.data.datasource.api.dto.place.SearchPlaceResponse
 import com.untilled.roadcapture.data.datasource.api.dto.poi.Poi
 import com.untilled.roadcapture.data.datasource.api.dto.poi.Pois
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPlaceSearchBinding
 import com.untilled.roadcapture.features.common.CustomDivider
+import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PlaceSearchFragment : Fragment() {
@@ -33,7 +41,31 @@ class PlaceSearchFragment : Fragment() {
 
     private lateinit var picture: Picture
 
-    private var placeList: List<PlaceRequest>? = listOf()
+    @Inject
+    lateinit var adapter: PlaceSearchAdapter
+
+    private val itemClickListener: (PlaceRequest?) -> Unit = { placeRequest ->
+        picture.place = placeRequest
+        Navigation.findNavController(binding.root)
+            .navigate(
+                PlaceSearchFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
+                    picture = picture
+                )
+            )
+    }
+
+    private val placeSearchObserver: (SearchPlaceResponse?) -> Unit = { searchPlaceResponse ->
+        adapter.run {
+            binding.progressbarPlaceSearchLoading.isVisible = false // 로딩 애니메이션 off
+
+            if (searchPlaceResponse != null) {
+                setPlaceList(poisToPlace(searchPlaceResponse.searchPoiInfo.pois))
+                notifyDataSetChanged()
+            } else {
+                displayNoResult()
+            }
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,24 +74,34 @@ class PlaceSearchFragment : Fragment() {
     ): View? {
         _binding = FragmentPlaceSearchBinding.inflate(inflater, container, false)
 
-        initAdapter()
-
-        searchViewModel.searchPlaceResponse.observe(viewLifecycleOwner) { searchPlaceResponse ->
-
-            binding.progressbarPlaceSearchLoading.isVisible = false // 로딩 애니메이션 off
-
-            if (searchPlaceResponse != null) {
-                poisToPlace(searchPlaceResponse.searchPoiInfo.pois)
-            } else {
-                displayNoResult()
-            }
-        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initAdapter()
+        observeData()
+        addAdapter()
+        getNavArgs()
+        setOnClickListeners()
+    }
+
+    private fun initAdapter() {
+        val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
+        binding.recyclerPlaceSearch.addItemDecoration(customDivider)
+    }
+
+    private fun observeData() {
+        searchViewModel.searchPlaceResponse.observe(viewLifecycleOwner, placeSearchObserver)
+    }
+
+    private fun addAdapter() {
+        adapter.setOnClickListener(itemClickListener)
+        binding.recyclerPlaceSearch.adapter = adapter
+    }
+
+    private fun getNavArgs() {
         val args: PlaceSearchFragmentArgs by navArgs()
         if (args.picture != null) {
             picture = args.picture!!
@@ -70,7 +112,6 @@ class PlaceSearchFragment : Fragment() {
                 searchViewModel.getSearchPlace(it)
             }
         }
-        setOnClickListeners()
     }
 
     private fun setOnClickListeners() {
@@ -88,8 +129,7 @@ class PlaceSearchFragment : Fragment() {
                 EditorInfo.IME_ACTION_SEARCH -> {
                     (v as EditText).text.toString().run {
                         if (isNullOrBlank()) {
-                            Toast.makeText(requireContext(), "검색어를 입력해 주세요.", Toast.LENGTH_SHORT)
-                                .show()
+                            Toast.makeText(requireContext(), "검색어를 입력해 주세요.", Toast.LENGTH_SHORT).show()
                         } else {
                             displayLoadingAnimation()
                             searchViewModel.getSearchPlace(this)
@@ -103,14 +143,8 @@ class PlaceSearchFragment : Fragment() {
         }
     }
 
-    private fun initAdapter() {
-        val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
-
-        binding.recyclerPlaceSearch.addItemDecoration(customDivider)
-    }
-    
-    private fun poisToPlace(pois: Pois) {
-        placeList = pois.poi.map {
+    private fun poisToPlace(pois: Pois): List<PlaceRequest> =
+        pois.poi.map {
             PlaceRequest(
                 // todo 생성날짜 표시
                 placeCreatedAt = "",
@@ -128,11 +162,11 @@ class PlaceSearchFragment : Fragment() {
                 )
             )
         }
-    }
 
     private fun displayNoResult() {
         binding.textPlaceSearchNoresult.isVisible = true
-        placeList = null   // 결과 리스트 초기화
+        adapter.clear()
+        adapter.notifyDataSetChanged()
     }
 
     private fun displayLoadingAnimation() {
