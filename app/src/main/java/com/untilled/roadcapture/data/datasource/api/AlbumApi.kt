@@ -29,12 +29,12 @@ interface AlbumApi {
 
     @GET(RoadCapturePathConstant.GET_ALBUM)
     fun getAlbumDetail(
-        @Path("id") id: Int,
-    ): Response<AlbumResponse>
+        @Path("id") id: Long,
+    ): Single<AlbumResponse>
 
     @GET(RoadCapturePathConstant.GET_FOLLOWERS_TO_ALBUMS)
     fun getFollowingAlbums(
-        @Query("followingId") id: Int?,
+        @Query("followingId") id: Long?,
         @Query("page") page: Int?,
         @Query("size") size: Int?,
         @Query("sort") sort: String?,

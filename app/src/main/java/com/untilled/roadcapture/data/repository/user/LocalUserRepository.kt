@@ -5,7 +5,8 @@ import com.untilled.roadcapture.data.repository.token.dto.OAuthTokenArgs
 import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
 
 interface LocalUserRepository {
-    fun saveUser(id: Int)
-    fun getUser(): Int
+    fun saveUser(id: Long)
+    fun getUser(): Long
+
     fun clearUser()
 }

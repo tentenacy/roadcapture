@@ -6,7 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class UserResponse(
-    val id: Int,
+    val id: Long,
     val email: String,
     var username: String,
     var profileImageUrl: String?,

@@ -24,9 +24,9 @@ interface AlbumRepository {
         @Query("size") size: Int? = null
     ): Single<PageResponse<CommentsResponse>>
 
-    suspend fun getAlbumDetail(
-        @Path("id") id: Int
-    ): Response<AlbumResponse>
+    fun getAlbumDetail(
+        @Path("id") id: Long
+    ): Single<AlbumResponse>
 
     fun getPictureCommentsList(
         @Path("pictureId") pictureId: Long,

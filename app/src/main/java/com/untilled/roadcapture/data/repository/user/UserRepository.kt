@@ -14,7 +14,7 @@ interface UserRepository {
     fun login(loginRequest: LoginRequest): Single<TokenResponse>
     fun reissue(): Single<TokenResponse>
     fun getUserDetail(): Single<UserResponse>
-    fun getUserInfo(id: Int): Single<UsersResponse>
+    fun getUserInfo(id: Long): Single<UsersResponse>
     fun getUserAlbums(pageRequest: PageRequest, addressRequest: AddressRequest): Single<PageResponse<UserAlbumsResponse>>
     fun getUserFollower(followingsCondition: FollowingsCondition, pageRequest: PageRequest): Single<PageResponse<UsersResponse>>
     fun getUserFollowing(followingsCondition: FollowingsCondition, pageRequest: PageRequest): Single<PageResponse<UsersResponse>>

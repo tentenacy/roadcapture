@@ -8,8 +8,8 @@ import java.time.LocalDateTime
 
 @Parcelize
 data class Comments(
-    val id: Int,
-    val pictureId: Int,
+    val id: Long,
+    val pictureId: Long,
     var createdAt : LocalDateTime?,
     val lastModifiedAt: LocalDateTime?,
     val content: String?,

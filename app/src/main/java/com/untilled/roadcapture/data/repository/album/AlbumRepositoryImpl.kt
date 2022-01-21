@@ -1,5 +1,6 @@
 package com.untilled.roadcapture.data.repository.album
 
+import android.util.Log
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
@@ -37,6 +38,6 @@ class AlbumRepositoryImpl
     ): Single<PageResponse<CommentsResponse>> =
         api.getPictureComments(pictureId,page,size)
 
-    override suspend fun getAlbumDetail(id: Int): Response<AlbumResponse> =
+    override fun getAlbumDetail(id: Long): Single<AlbumResponse> =
         api.getAlbumDetail(id)
 }

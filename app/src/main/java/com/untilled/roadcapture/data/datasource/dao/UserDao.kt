@@ -4,11 +4,11 @@ import com.untilled.roadcapture.data.datasource.sharedpref.User
 import javax.inject.Inject
 
 class UserDao @Inject constructor(): LocalUserDao{
-    override fun saveUser(id: Int) {
+    override fun saveUser(id: Long) {
         User.id = id
     }
 
-    override fun getUser(): Int = User.id
+    override fun getUser(): Long = User.id
 
     override fun clearUser() {
         User.clear()

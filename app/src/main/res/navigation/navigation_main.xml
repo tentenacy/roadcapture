@@ -164,7 +164,7 @@
             app:destination="@id/studioFragment" />
         <argument
             android:name="id"
-            app:argType="integer" />
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/followingFragment"
@@ -176,7 +176,7 @@
             app:destination="@id/studioFragment" />
         <argument
             android:name="id"
-            app:argType="integer" />
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/pictureEditorFragment"
@@ -280,7 +280,7 @@
         android:label="PictureViewerContainerFragment" >
         <argument
             android:name="id"
-            app:argType="integer" />
+            app:argType="long" />
         <action
             android:id="@+id/action_pictureViewerContainerFragment_to_studioFragment"
             app:destination="@id/studioFragment" />
@@ -305,7 +305,7 @@
             app:destination="@id/pictureViewerContainerFragment" />
         <argument
             android:name="id"
-            app:argType="integer" />
+            app:argType="long" />
     </fragment>
     <action
         android:id="@+id/action_global_loginFragment"

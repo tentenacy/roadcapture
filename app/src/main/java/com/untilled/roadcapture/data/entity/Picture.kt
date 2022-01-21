@@ -11,7 +11,7 @@ import kotlinx.android.parcel.Parcelize
 @Entity
 @Parcelize
 data class Picture(
-    var order: Int = 0,
+    var order: Long = 0,
     var thumbnail: Boolean = false,
     var createdAt: String? = null,
     var lastModifiedAt: String? = null,

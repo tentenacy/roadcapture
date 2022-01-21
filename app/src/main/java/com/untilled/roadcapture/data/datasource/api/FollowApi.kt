@@ -10,7 +10,7 @@ import retrofit2.http.*
 interface FollowApi {
     @POST(RoadCapturePathConstant.POST_FOLLOWERS_FOLLOW)
     fun follow(
-        @Path("toUserId") id: Int,
+        @Path("toUserId") id: Long,
     ): Single<Unit>
 
     @GET(RoadCapturePathConstant.GET_USER_FOLLOWER)
@@ -24,7 +24,7 @@ interface FollowApi {
 
     @GET(RoadCapturePathConstant.GET_USER_FOLLOWING)
     fun getUserFollowing(
-        @Path("userId") id: Int,
+        @Path("userId") id: Long,
         @Query("page") page: Int?,
         @Query("size") size: Int?,
         @Query("sort") sort: String? = null,

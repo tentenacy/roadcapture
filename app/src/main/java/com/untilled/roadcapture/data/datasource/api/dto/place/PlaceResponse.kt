@@ -9,7 +9,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class PlaceResponse(
     @ColumnInfo(name = "place_id")
-    var id: Int,
+    var id: Long,
     var name: String,
     var latitude: String,
     var longitude: String,

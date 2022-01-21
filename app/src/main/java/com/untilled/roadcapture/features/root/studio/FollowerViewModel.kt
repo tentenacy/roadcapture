@@ -49,7 +49,7 @@ class FollowerViewModel @Inject constructor(
             }).addTo(compositeDisposable)
     }
 
-    fun follow(id: Int){
+    fun follow(id: Long){
         followRepository.follow(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

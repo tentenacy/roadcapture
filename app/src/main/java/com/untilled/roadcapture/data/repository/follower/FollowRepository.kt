@@ -6,6 +6,6 @@ import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import io.reactivex.rxjava3.core.Single
 
 interface FollowRepository {
-    fun follow(id: Int): Single<Unit>
-    fun getFollowingAlbums(id: Int?, pageRequest: PageRequest): Single<PageResponse<AlbumsResponse>>
+    fun follow(id: Long): Single<Unit>
+    fun getFollowingAlbums(id: Long?, pageRequest: PageRequest): Single<PageResponse<AlbumsResponse>>
 }

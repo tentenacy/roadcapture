@@ -7,7 +7,7 @@ import java.time.LocalDateTime
 
 @Parcelize
 data class PictureResponse(
-    val id: Int,
+    val id: Long,
     var createdAt: LocalDateTime?,
     var lastModifiedAt: LocalDateTime?,
     var imageUrl: String,

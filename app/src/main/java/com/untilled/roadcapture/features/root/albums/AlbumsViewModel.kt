@@ -69,7 +69,7 @@ class AlbumsViewModel
             })
     }
 
-    fun getFollowingAlbums(id: Int?, pageRequest: PageRequest){
+    fun getFollowingAlbums(id: Long?, pageRequest: PageRequest){
         followRepository.getFollowingAlbums(id,pageRequest)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -42,6 +42,6 @@ interface UserApi {
 
     @GET(RoadCapturePathConstant.GET_USER_INFO)
     fun getUserInfo(
-        @Path("id") id: Int,
+        @Path("id") id: Long,
     ): Single<UsersResponse>
 }

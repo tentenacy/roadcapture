@@ -11,11 +11,11 @@ import javax.inject.Singleton
 @Singleton
 class KotPrefUserRepository @Inject constructor(private val localUserDao: LocalUserDao):
     LocalUserRepository {
-    override fun saveUser(id: Int) {
+    override fun saveUser(id: Long) {
         localUserDao.saveUser(id)
     }
 
-    override fun getUser(): Int = localUserDao.getUser()
+    override fun getUser(): Long = localUserDao.getUser()
 
     override fun clearUser() {
         localUserDao.clearUser()

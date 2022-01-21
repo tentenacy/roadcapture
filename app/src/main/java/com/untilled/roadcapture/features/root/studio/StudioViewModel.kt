@@ -36,7 +36,7 @@ class StudioViewModel @Inject constructor(
     private val _following = MutableLiveData<PageResponse<UsersResponse>>()
     val following : LiveData<PageResponse<UsersResponse>> get() = _following
 
-    fun getUserInfo(id: Int){
+    fun getUserInfo(id: Long){
         userRepository.getUserInfo(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -80,7 +80,7 @@ class StudioViewModel @Inject constructor(
             }).addTo(compositeDisposable)
     }
 
-    fun follow(id: Int){
+    fun follow(id: Long){
         followRepository.follow(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
