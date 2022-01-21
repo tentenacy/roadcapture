@@ -21,5 +21,5 @@ data class Picture(
     var place: PlaceRequest? = null
 )  : Parcelable {
     @ColumnInfo(name = "picture_id")
-    @PrimaryKey(autoGenerate = true) var id: Int = 0
+    @PrimaryKey(autoGenerate = true) var id: Long = 0
 }

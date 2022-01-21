@@ -92,6 +92,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/text_picture_editor_label_thumbnail"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/text_picture_editor_label_thumbnail"
+                android:checked="@{picture.thumbnail}"
                 tools:checked="true" />
 
             <TextView

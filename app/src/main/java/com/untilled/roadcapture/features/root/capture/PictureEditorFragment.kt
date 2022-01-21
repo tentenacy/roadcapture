@@ -3,9 +3,11 @@ package com.untilled.roadcapture.features.root.capture
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -17,6 +19,7 @@ import com.untilled.roadcapture.databinding.FragmentPictureEditorBinding
 import com.untilled.roadcapture.utils.dateToString
 import com.untilled.roadcapture.utils.getCalendar
 import dagger.hilt.android.AndroidEntryPoint
+import retrofit2.http.POST
 import java.util.*
 
 @AndroidEntryPoint
@@ -24,6 +27,7 @@ class PictureEditorFragment : Fragment() {
     private var _binding: FragmentPictureEditorBinding? = null
     private val binding get() = _binding!!
     private var picture: Picture? = null
+    private var mode = POST
 
     private val viewModel: PictureEditorViewModel by viewModels()
 
@@ -45,18 +49,7 @@ class PictureEditorFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // todo: 어떤 Fragment에서 왔는지 알아야 함 (수정 인지, 새로 만드는 것인지 판단 위해)
-        val args: PictureEditorFragmentArgs by navArgs()
-        if (args.picture != null) {
-            picture = args.picture
-
-            if(picture?.createdAt.isNullOrBlank()){
-                picture?.createdAt = dateToString(Calendar.getInstance())
-            }
-
-            binding.picture = picture
-        }
-
+        getNavArgs()
         setOnClickListeners()
     }
 
@@ -75,9 +68,11 @@ class PictureEditorFragment : Fragment() {
         }
 
         binding.imgPictureEditorCheck.setOnClickListener {
-            // todo Room에 picture insert
-            viewModel.insertPicture(picture!!)
-
+            if(mode == POST) {
+                viewModel.insertPicture(makePicture())
+            } else if (mode == EDIT) {
+                viewModel.updatePicture(makePicture())
+            }
             Navigation.findNavController(binding.root)
                 .navigate(R.id.action_pictureEditorFragment_to_captureFragment)
         }
@@ -87,20 +82,30 @@ class PictureEditorFragment : Fragment() {
                 // todo 사진 삭제 기능
             }
         }
+
+        binding.checkboxPictureEditorThumbnail.setOnCheckedChangeListener { _, isChecked ->
+            picture?.thumbnail = isChecked
+        }
     }
 
-    private fun makePicture(): Picture =
-        Picture(
-            imageUrl = picture?.imageUrl,
-            createdAt = picture?.createdAt,
-            lastModifiedAt = picture?.lastModifiedAt,
-            description = binding.edtPictureEditorDesc.text.toString(),
-            place = picture?.place
-        )
+    private fun makePicture(): Picture = picture!!.apply {
+            description = binding.edtPictureEditorDesc.text.toString()
+    }
+
+    private fun getNavArgs() {
+        val args: PictureEditorFragmentArgs by navArgs()
+        if (args.picture != null) {
+            mode = when(args.picture!!.id) {
+                0L -> POST      // id가 0이면 새로 등록
+                else -> EDIT    // 아니면 기존 picture 수정
+            }
+            picture = args.picture
+            binding.picture = picture
+        }
+    }
 
     private fun showDeletePictureAskingDialog(logic: () -> Unit) {
-        val dialogView =
-            LayoutInflater.from(requireContext()).inflate(R.layout.dlg_picture_delete, null)
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dlg_picture_delete, null)
 
         val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
             .setView(dialogView)
@@ -115,5 +120,10 @@ class PictureEditorFragment : Fragment() {
         }
 
         dialog.show()
+    }
+
+    companion object {
+        private const val POST = 100
+        private const val EDIT = 101
     }
 }

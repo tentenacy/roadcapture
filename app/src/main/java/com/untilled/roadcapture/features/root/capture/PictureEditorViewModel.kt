@@ -1,5 +1,6 @@
 package com.untilled.roadcapture.features.root.capture
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.untilled.roadcapture.data.entity.Picture
@@ -15,6 +16,12 @@ class PictureEditorViewModel
     fun insertPicture(picture: Picture) {
         viewModelScope.launch {
             repository.insertPicture(picture)
+        }
+    }
+
+    fun updatePicture(picture: Picture) {
+        viewModelScope.launch {
+            repository.updatePicture(picture)
         }
     }
 }
