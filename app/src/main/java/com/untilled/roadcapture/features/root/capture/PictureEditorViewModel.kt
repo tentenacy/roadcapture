@@ -1,33 +1,39 @@
 package com.untilled.roadcapture.features.root.capture
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.data.repository.picture.PictureRepository
+import com.untilled.roadcapture.features.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.launch
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.kotlin.addTo
+import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
 class PictureEditorViewModel
-@Inject constructor(private val repository: PictureRepository) : ViewModel() {
+@Inject constructor(private val repository: PictureRepository) : BaseViewModel() {
 
     fun insertPicture(picture: Picture) {
-        viewModelScope.launch {
-            repository.insertPicture(picture)
-        }
+        repository.insertPicture(picture)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
+            .addTo(compositeDisposable)
     }
 
     fun updatePicture(picture: Picture) {
-        viewModelScope.launch {
-            repository.updatePicture(picture)
-        }
+        repository.updatePicture(picture)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
+            .addTo(compositeDisposable)
     }
 
     fun deletePicture(picture: Picture) {
-        viewModelScope.launch {
-            repository.deletePicture(picture)
-        }
+        repository.deletePicture(picture)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
+            .addTo(compositeDisposable)
     }
 }

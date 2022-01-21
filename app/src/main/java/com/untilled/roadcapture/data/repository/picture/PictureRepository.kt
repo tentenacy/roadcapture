@@ -1,15 +1,17 @@
 package com.untilled.roadcapture.data.repository.picture
 
 import com.untilled.roadcapture.data.entity.Picture
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Flowable
 
 interface PictureRepository {
-    suspend fun insertPicture(picture: Picture)
+    fun insertPicture(picture: Picture) : Completable
 
-    suspend fun updatePicture(picture: Picture)
+    fun updatePicture(picture: Picture) : Completable
 
-    suspend fun deletePicture(picture: Picture)
+    fun deletePicture(picture: Picture) : Completable
 
-    suspend fun getPictures() : List<Picture>
+    fun getPictures() : Flowable<List<Picture>>
 
-    suspend fun deleteAll()
+    fun deleteAll() : Completable
 }

@@ -2,6 +2,8 @@ package com.untilled.roadcapture.data.repository.picture
 
 import com.untilled.roadcapture.data.datasource.dao.PictureDao
 import com.untilled.roadcapture.data.entity.Picture
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Flowable
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -9,23 +11,23 @@ import javax.inject.Singleton
 class PictureRepositoryImpl
 @Inject
 constructor(
-        private val pictureDao: PictureDao
-    ): PictureRepository {
-    override suspend fun insertPicture(picture: Picture) {
+    private val pictureDao: PictureDao
+) : PictureRepository {
+    override fun insertPicture(picture: Picture): Completable =
         pictureDao.insertPicture(picture)
-    }
 
-    override suspend fun updatePicture(picture: Picture) {
+
+    override fun updatePicture(picture: Picture): Completable =
         pictureDao.updatePicture(picture)
-    }
 
-    override suspend fun deletePicture(picture: Picture) {
+
+    override fun deletePicture(picture: Picture): Completable =
         pictureDao.deletePicture(picture)
-    }
 
-    override suspend fun getPictures() : List<Picture> = pictureDao.getPictures()
 
-    override suspend fun deleteAll() {
+    override fun getPictures(): Flowable<List<Picture>> = pictureDao.getPictures()
+
+    override fun deleteAll(): Completable =
         pictureDao.deleteAll()
-    }
+
 }

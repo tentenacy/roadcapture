@@ -2,21 +2,23 @@ package com.untilled.roadcapture.data.datasource.dao
 
 import androidx.room.*
 import com.untilled.roadcapture.data.entity.Picture
+import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Flowable
 
 @Dao
 interface PictureDao {
     @Insert
-    suspend fun insertPicture(picture: Picture)
+    fun insertPicture(picture: Picture): Completable
 
     @Update
-    suspend fun updatePicture(picture: Picture)
+    fun updatePicture(picture: Picture): Completable
 
     @Delete
-    suspend fun deletePicture(picture: Picture)
+    fun deletePicture(picture: Picture): Completable
 
     @Query("select * from picture")
-    suspend fun getPictures(): List<Picture>
+    fun getPictures(): Flowable<List<Picture>>
 
     @Query("delete from picture")
-    suspend fun deleteAll()
+    fun deleteAll() : Completable
 }
