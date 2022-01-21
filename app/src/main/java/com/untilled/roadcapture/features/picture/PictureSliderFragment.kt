@@ -14,6 +14,7 @@ import com.untilled.roadcapture.databinding.FragmentPictureSliderBinding
 import com.untilled.roadcapture.features.comment.CommentBottomSheetDialog
 import com.untilled.roadcapture.utils.setPaddingWhenStatusBarTransparent
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -22,6 +23,14 @@ class PictureSliderFragment : Fragment() {
     private var _binding: FragmentPictureSliderBinding? = null
     private val binding get() = _binding!!
     private val viewModel: PictureViewerViewModel by viewModels({ requireParentFragment() })
+    @Inject lateinit var adapter: PictureViewerAdapter
+
+    private val albumObserver: (AlbumResponse) -> Unit = { albumResponse ->
+        adapter.run {
+            setItem(albumResponse)
+            notifyDataSetChanged()
+        }
+    }
 
     private val commentOnClickListener: (View?) -> Unit = {
         CommentBottomSheetDialog().show(childFragmentManager, "commentBottomSheet")
@@ -60,20 +69,23 @@ class PictureSliderFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initViews()
+        setStatusBarTransparent()
         observeData()
+        addScrollListener()
+        addAdapter()
         setOnClickListeners()
     }
 
-    private fun initViews() {
+    private fun addAdapter() {
+        binding.recyclerPictureSlider.adapter = adapter
+    }
+
+    private fun setStatusBarTransparent() {
         binding.pictureViewerContainer.setPaddingWhenStatusBarTransparent(requireContext())
     }
 
     private fun observeData() {
-        viewModel.albumResponse.observe(viewLifecycleOwner) { albumResponse ->
-            setThumbnailToBackground(albumResponse)
-            initAdapter(albumResponse)
-        }
+        viewModel.album.observe(viewLifecycleOwner,albumObserver)
     }
 
 

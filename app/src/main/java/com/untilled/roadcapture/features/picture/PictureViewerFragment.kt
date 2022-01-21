@@ -23,6 +23,7 @@ class PictureViewerFragment : Fragment() {
     private lateinit var pictureMapFragment: PictureMapFragment
 
     private val viewModel: PictureViewerViewModel by viewModels()
+    private val args: PictureViewerFragmentArgs by navArgs()
 
     private val switchOnClickListener: (View?) -> Unit = {
         childFragmentManager.beginTransaction().apply {
@@ -52,20 +53,20 @@ class PictureViewerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentPictureViewerBinding.inflate(inflater, container, false)
+        updateView()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        updateView()
         setStatusBarTransparent()
         setIconWhite()
         setOnClickListeners()
     }
 
     private fun updateView() {
-        val args: PictureViewerFragmentArgs by navArgs()
         viewModel.getAlbumDetail(args.id)
     }
 
@@ -111,15 +112,15 @@ class PictureViewerFragment : Fragment() {
         childFragmentManager.beginTransaction().apply {
             add(
                 R.id.frame_picture_viewer_container,
+                pictureSliderFragment,
+                "PictureViewerFragment"
+            )
+            add(
+                R.id.frame_picture_viewer_container,
                 pictureMapFragment,
                 "PictureViewerMapFragment"
             )
             hide(pictureMapFragment)
-            add(
-                R.id.frame_picture_viewer_container,
-                pictureSliderFragment,
-                "PictureViewerFragment"
-            )
         }.commit()
     }
 

@@ -10,22 +10,16 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.paging.PagingData
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
-import com.untilled.roadcapture.data.datasource.api.dto.comment.Comments
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
-import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.databinding.FragmentCommentBinding
 import com.untilled.roadcapture.features.common.CustomDivider
-import com.untilled.roadcapture.features.root.albums.AlbumsViewModel
 import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -35,6 +29,7 @@ class CommentFragment : Fragment() {
     private val binding get() = _binding!!
     private val viewModel: CommentViewModel by viewModels()
     private val args: CommentFragmentArgs by navArgs()
+    @Inject lateinit var adapter: CommentsAdapter
 
     private val commentObserver: (PagingData<AlbumComments.AlbumComment>) -> Unit = { pagingData ->
         adapter.submitData(lifecycle, pagingData)
@@ -62,8 +57,6 @@ class CommentFragment : Fragment() {
         }
     }
 
-    @Inject
-    lateinit var adapter: CommentsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -79,10 +72,10 @@ class CommentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observeData()
         initAdapter(args.albumsId)
         addAdapter()
         setOnClickListeners()
-        observeData()
     }
 
     private fun observeData() {
