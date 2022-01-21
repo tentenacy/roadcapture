@@ -79,7 +79,11 @@ class PictureEditorFragment : Fragment() {
 
         binding.imgPictureEditorDelete.setOnClickListener {
             showDeletePictureAskingDialog {
-                // todo 사진 삭제 기능
+                if(mode == EDIT) {
+                    viewModel.deletePicture(makePicture())
+                }
+                Navigation.findNavController(binding.root)
+                    .navigate(R.id.action_pictureEditorFragment_to_captureFragment)
             }
         }
 

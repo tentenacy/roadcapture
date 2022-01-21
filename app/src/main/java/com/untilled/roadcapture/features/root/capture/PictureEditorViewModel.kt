@@ -24,4 +24,10 @@ class PictureEditorViewModel
             repository.updatePicture(picture)
         }
     }
+
+    fun deletePicture(picture: Picture) {
+        viewModelScope.launch {
+            repository.deletePicture(picture)
+        }
+    }
 }
