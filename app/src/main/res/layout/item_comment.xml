@@ -10,7 +10,7 @@
 
         <variable
             name="comments"
-            type="com.untilled.roadcapture.data.datasource.api.dto.comment.Comments" />
+            type="com.untilled.roadcapture.data.entity.paging.AlbumComments.AlbumComment" />
 
         <variable
             name="onClickItem"
@@ -81,8 +81,8 @@
             app:layout_constraintTop_toBottomOf="@+id/text_icomment_content"
             app:layout_constraintStart_toStartOf="@+id/text_icomment_content"
             android:layout_marginTop="8dp"
+            bind:DateToSnsFormat="@{comments.createdAt}"
             tools:text="3분전" />
-            <!--bind:DateToSnsFormat="@{comments.createdAt}"-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

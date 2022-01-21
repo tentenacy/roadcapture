@@ -82,7 +82,7 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
     private fun applyFilter() {
         when (binding.radiogroupDlgfilterDuration.checkedRadioButtonId) {
             binding.radiobtnDlgfilterWhole.id -> {
-                albumsFragment.refresh(" ", getFilterDate(TimeUtil.TODAY))
+                albumsFragment.refresh(null, null)
             }
 
             binding.radiobtnDlgfilterToday.id -> {

@@ -7,13 +7,14 @@ import com.untilled.roadcapture.data.datasource.api.dto.common.Pageable
 import com.untilled.roadcapture.data.datasource.api.dto.common.Sort
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import kotlinx.android.parcel.Parcelize
+import java.time.LocalDateTime
 
 @Parcelize
 data class CommentsResponse(
     val id: Long,
     val pictureId: Long,
-    val createdAt: String,
-    val lastModifiedAt: String,
+    val createdAt: LocalDateTime,
+    val lastModifiedAt: LocalDateTime,
     val content: String,
     @Embedded
     val user: UsersResponse

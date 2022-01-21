@@ -17,12 +17,16 @@ import androidx.paging.PagingData
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.datasource.api.dto.comment.Comments
+import com.untilled.roadcapture.data.entity.paging.AlbumComments
+import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.databinding.FragmentCommentBinding
 import com.untilled.roadcapture.features.common.CustomDivider
 import com.untilled.roadcapture.features.root.albums.AlbumsViewModel
+import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CommentFragment : Fragment() {
@@ -30,6 +34,36 @@ class CommentFragment : Fragment() {
     private var _binding: FragmentCommentBinding? = null
     private val binding get() = _binding!!
     private val viewModel: CommentViewModel by viewModels()
+    private val args: CommentFragmentArgs by navArgs()
+
+    private val commentObserver: (PagingData<AlbumComments.AlbumComment>) -> Unit = { pagingData ->
+        adapter.submitData(lifecycle, pagingData)
+    }
+    private val itemClickListener: (ItemClickArgs?) -> Unit = { args ->
+        when (args?.view?.id) {
+            R.id.img_icomment_more -> {
+                val popupMenu = PopupMenu(requireContext(), args.view)
+                popupMenu.apply {
+                    menuInflater.inflate(R.menu.popupmenu_comment_more, popupMenu.menu)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.popup_menu_comment_more_report -> {
+                                showReportDialog()
+                            }
+                        }
+                        true
+                    }
+                }.show()
+            }
+            R.id.img_icomment_profile -> {
+                Navigation.findNavController(binding.root)
+                    .navigate(R.id.action_commentFragment_to_studioFragment)
+            }
+        }
+    }
+
+    @Inject
+    lateinit var adapter: CommentsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,22 +76,26 @@ class CommentFragment : Fragment() {
 
         return binding.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val args: CommentFragmentArgs by navArgs()
         initAdapter(args.albumsId)
+        addAdapter()
         setOnClickListeners()
-        viewModel.albumComments.observe(viewLifecycleOwner) { pagingData ->
-            //TODO: fetch
-        }
+        observeData()
+    }
+
+    private fun observeData() {
+        viewModel.albumComments.observe(viewLifecycleOwner, commentObserver)
+    }
+
+    private fun addAdapter() {
+        adapter.setOnClickListener(itemClickListener)
+        binding.recyclerComment.adapter = adapter
     }
 
     private fun setOnClickListeners() {
-        binding.imgCommentBack.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
+        binding.imgCommentBack.setOnClickListener { requireActivity().onBackPressed() }
     }
 
     override fun onDestroyView() {
@@ -69,6 +107,10 @@ class CommentFragment : Fragment() {
     private fun initAdapter(albumId: Long) {
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
         binding.recyclerComment.addItemDecoration(customDivider)
+        refresh(albumId)
+    }
+
+    private fun refresh(albumId: Long){
         viewModel.getAlbumComments(albumId)
     }
 

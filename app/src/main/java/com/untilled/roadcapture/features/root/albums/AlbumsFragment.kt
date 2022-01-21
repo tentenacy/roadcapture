@@ -107,16 +107,20 @@ class AlbumsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentAlbumsBinding.inflate(layoutInflater, container, false)
-
         (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarAlbums)
+
+        return binding.root
+    }
+
+    private fun addAdapter() {
         adapter.setOnClickListener(itemClickListener)
         binding.recycleAlbums.adapter = adapter
-        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
+        addAdapter()
         setOnClickListeners()
         observeData()
     }
@@ -141,7 +145,7 @@ class AlbumsFragment : Fragment() {
     }
 
     fun refresh(dateTimeFrom: String?, dateTimeTo: String?) {
-        viewModel.getAlbums(AlbumsCondition(dateTimeFrom ?: "", dateTimeTo ?: ""))
+        viewModel.getAlbums(AlbumsCondition(dateTimeFrom, dateTimeTo))
     }
 
     private fun showReportDialog() {
