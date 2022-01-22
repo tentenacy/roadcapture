@@ -8,11 +8,11 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
-class PictureRepositoryImpl
+class PictureRemoteRepositoryImpl
 @Inject
 constructor(
     private val pictureDao: PictureDao
-) : PictureRepository {
+) : PictureRemoteRepository {
     override fun insertPicture(picture: Picture): Completable =
         pictureDao.insertPicture(picture)
 

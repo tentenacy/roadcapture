@@ -15,7 +15,7 @@
             android:layout_height="match_parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/coordinator_capture"
+            android:id="@+id/constraint_capture_innercontainer"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 

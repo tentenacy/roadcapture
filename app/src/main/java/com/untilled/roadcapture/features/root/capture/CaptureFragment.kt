@@ -97,11 +97,10 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         return binding.root
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.constraintCaptureContainer.setStatusBarTransparent(requireActivity())
+        binding.constraintCaptureInnercontainer.setStatusBarTransparent(requireActivity())
 
         setOnClickListeners()
     }
@@ -114,7 +113,6 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         _binding = null
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     private fun setOnClickListeners() {
         binding.imageCaptureBack.setOnClickListener {
             requireActivity().onBackPressed()
@@ -132,16 +130,23 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
             pickFromGallery()
         }
         binding.imageCaptureRegistration.setOnClickListener {
-            // Todo 앨범을 등록하시겠습니까 bottomsheet 띄우기, 썸네일 여부 체크하여 알려주기
-            if (markerList.isEmpty()) {
-                showThumbnailSettingDialog()
-            } else {
-                Navigation.findNavController(binding.root)
-                    .navigate(
-                        CaptureFragmentDirections.actionCaptureFragmentToAlbumRegestrationFragment(
-                            //picture = pictureResponse
+            if (!viewModel.pictureList.value.isNullOrEmpty()) {
+                var picture : Picture? = null
+                for(p in viewModel.pictureList.value!!) {
+                    if(p.thumbnail) {
+                        picture = p
+                    }
+                }
+                if(picture == null) {
+                    showThumbnailSettingDialog()
+                } else {
+                    Navigation.findNavController(binding.root)
+                        .navigate(
+                            CaptureFragmentDirections.actionCaptureFragmentToAlbumRegestrationFragment(
+                                picture = picture
+                            )
                         )
-                    )
+                }
             }
         }
         binding.imageCaptureCancel.setOnClickListener {

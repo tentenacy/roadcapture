@@ -4,7 +4,7 @@ import com.untilled.roadcapture.data.entity.Picture
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Flowable
 
-interface PictureRepository {
+interface PictureRemoteRepository {
     fun insertPicture(picture: Picture) : Completable
 
     fun updatePicture(picture: Picture) : Completable

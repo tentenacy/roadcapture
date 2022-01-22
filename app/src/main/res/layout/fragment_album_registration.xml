@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:bind="http://schemas.android.com/apk/res-auto">
+    xmlns:bind="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
         <variable
             name="picture"
-            type="com.untilled.roadcapture.data.datasource.api.dto.picture.PictureResponse" />
+            type="com.untilled.roadcapture.data.entity.Picture" />
     </data>
 
     <ScrollView
@@ -67,10 +68,11 @@
                 style="@style/Body"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="김포시 장기동"
                 app:layout_constraintBottom_toBottomOf="@+id/text_albumreg_label_thumbnail"
                 app:layout_constraintEnd_toEndOf="@id/guideline_albumreg_end"
-                app:layout_constraintTop_toTopOf="@+id/text_albumreg_label_thumbnail" />
+                app:layout_constraintTop_toTopOf="@+id/text_albumreg_label_thumbnail"
+                android:text="@{picture.place.address.region1DepthName + ' ' + picture.place.address.region2DepthName + ' ' +picture.place.address.region3DepthName}"
+                tools:text="김포시 장기동" />
 
             <ImageView
                 android:id="@+id/image_albumreg_placeicon"

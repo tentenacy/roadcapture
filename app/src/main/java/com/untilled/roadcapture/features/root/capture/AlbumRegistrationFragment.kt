@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
-import com.untilled.roadcapture.data.datasource.api.dto.picture.PictureResponse
+import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentAlbumRegistrationBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,7 +15,15 @@ import dagger.hilt.android.AndroidEntryPoint
 class AlbumRegistrationFragment : Fragment() {
     private var _binding: FragmentAlbumRegistrationBinding? = null
     private val binding get() = _binding!!
-    private var pictureResponse: PictureResponse? = null
+    private var picture: Picture? = null
+
+    private val checkOnClickListener: (View?) -> Unit = {
+        if(binding.edtAlbumregTitle.text.isNullOrEmpty()) {
+            Toast.makeText(requireContext(), "앨범 제목을 작성해주세요", Toast.LENGTH_SHORT).show()
+        } else {
+            // todo: 앨범 등록 로직
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,23 +43,26 @@ class AlbumRegistrationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val args: AlbumRegistrationFragmentArgs by navArgs()
-//        if (args.picture != null) {
-//            picture = args.picture
-//
-//            if(picture?.date.isNullOrBlank()){
-//                picture?.date = dateToString(Calendar.getInstance())
-//            }
-//
-//            binding.picture = picture
-//        }
-
+        getNavArgs()
+        initViews()
         setOnClickListeners()
     }
 
-    private fun setOnClickListeners() {
-        binding.imageAlbumregBack.setOnClickListener {
-            requireActivity().onBackPressed()
+    private fun initViews() {
+        if(picture != null) {
+            binding.picture = picture!!
         }
+    }
+
+    private fun getNavArgs() {
+        val args: AlbumRegistrationFragmentArgs by navArgs()
+        if (args.picture != null) {
+            picture = args.picture
+        }
+    }
+
+    private fun setOnClickListeners() {
+        binding.imageAlbumregBack.setOnClickListener { requireActivity().onBackPressed() }
+        binding.imageAlbumregCheck.setOnClickListener(checkOnClickListener)
     }
 }

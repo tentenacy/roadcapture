@@ -1,14 +1,12 @@
 package com.untilled.roadcapture.features.root.capture
 
 import android.app.AlertDialog
-import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
@@ -16,11 +14,7 @@ import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPictureEditorBinding
-import com.untilled.roadcapture.utils.dateToString
-import com.untilled.roadcapture.utils.getCalendar
 import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.http.POST
-import java.util.*
 
 @AndroidEntryPoint
 class PictureEditorFragment : Fragment() {
@@ -30,6 +24,37 @@ class PictureEditorFragment : Fragment() {
     private var mode = POST
 
     private val viewModel: PictureEditorViewModel by viewModels()
+
+    private val placeOnClickListener : (View?) -> Unit = {
+        Navigation.findNavController(binding.root).navigate(
+                PictureEditorFragmentDirections.actionPictureEditorFragmentToSearchPlaceFragment(
+                    picture = makePicture()
+                )
+            )
+    }
+
+    private val checkOnClickListener : (View?) -> Unit = {
+        if(picture?.place == null) {
+            Toast.makeText(requireContext(), "장소를 등록해주세요", Toast.LENGTH_SHORT).show()
+        } else {
+            if (mode == POST) {
+                viewModel.insertPicture(makePicture())
+            } else if (mode == EDIT) {
+                viewModel.updatePicture(makePicture())
+            }
+            Navigation.findNavController(binding.root)
+                .navigate(PictureEditorFragmentDirections.actionPictureEditorFragmentToCaptureFragment())
+        }
+    }
+
+    private val deleteOnClickListener : (View?) -> Unit = {
+        showDeletePictureAskingDialog {
+            if (mode == EDIT) {
+                viewModel.deletePicture(makePicture())
+            }
+            Navigation.findNavController(binding.root).navigate(PictureEditorFragmentDirections.actionPictureEditorFragmentToCaptureFragment())
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -54,52 +79,21 @@ class PictureEditorFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imgPictureEditorBack.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
-
-        binding.textPictureEditorPlace.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(
-                    PictureEditorFragmentDirections.actionPictureEditorFragmentToSearchPlaceFragment(
-                        picture = makePicture()
-                    )
-                )
-        }
-
-        binding.imgPictureEditorCheck.setOnClickListener {
-            if(mode == POST) {
-                viewModel.insertPicture(makePicture())
-            } else if (mode == EDIT) {
-                viewModel.updatePicture(makePicture())
-            }
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_pictureEditorFragment_to_captureFragment)
-        }
-
-        binding.imgPictureEditorDelete.setOnClickListener {
-            showDeletePictureAskingDialog {
-                if(mode == EDIT) {
-                    viewModel.deletePicture(makePicture())
-                }
-                Navigation.findNavController(binding.root)
-                    .navigate(R.id.action_pictureEditorFragment_to_captureFragment)
-            }
-        }
-
-        binding.checkboxPictureEditorThumbnail.setOnCheckedChangeListener { _, isChecked ->
-            picture?.thumbnail = isChecked
-        }
+        binding.imgPictureEditorBack.setOnClickListener { requireActivity().onBackPressed() }
+        binding.textPictureEditorPlace.setOnClickListener(placeOnClickListener)
+        binding.imgPictureEditorCheck.setOnClickListener(checkOnClickListener)
+        binding.imgPictureEditorDelete.setOnClickListener(deleteOnClickListener)
+        binding.checkboxPictureEditorThumbnail.setOnCheckedChangeListener { _, isChecked -> picture?.thumbnail = isChecked }
     }
 
     private fun makePicture(): Picture = picture!!.apply {
-            description = binding.edtPictureEditorDesc.text.toString()
+        description = binding.edtPictureEditorDesc.text.toString()
     }
 
     private fun getNavArgs() {
         val args: PictureEditorFragmentArgs by navArgs()
         if (args.picture != null) {
-            mode = when(args.picture!!.id) {
+            mode = when (args.picture!!.id) {
                 0L -> POST      // id가 0이면 새로 등록
                 else -> EDIT    // 아니면 기존 picture 수정
             }
@@ -109,7 +103,8 @@ class PictureEditorFragment : Fragment() {
     }
 
     private fun showDeletePictureAskingDialog(logic: () -> Unit) {
-        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dlg_picture_delete, null)
+        val dialogView =
+            LayoutInflater.from(requireContext()).inflate(R.layout.dlg_picture_delete, null)
 
         val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
             .setView(dialogView)
