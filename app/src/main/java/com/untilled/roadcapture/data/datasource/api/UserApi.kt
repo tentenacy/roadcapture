@@ -1,7 +1,5 @@
 package com.untilled.roadcapture.data.datasource.api
 
-import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
-import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.*
 import com.untilled.roadcapture.utils.constant.url.RoadCapturePathConstant
 import io.reactivex.rxjava3.core.Single
@@ -36,7 +34,7 @@ interface UserApi {
         @Body loginRequest: LoginRequest
     ): Single<Response<TokenResponse>>
 
-    @GET(RoadCapturePathConstant.GET_USER_DETAiL)
+    @GET(RoadCapturePathConstant.GET_USER_DETAIL)
     fun getUserDetail(
     ): Single<UserResponse>
 

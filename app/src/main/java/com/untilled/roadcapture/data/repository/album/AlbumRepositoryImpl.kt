@@ -36,9 +36,9 @@ class AlbumRepositoryImpl
     ): Single<PageResponse<CommentsResponse>> =
         roadCaptureApi.getPictureComments(pictureId,page,size)
 
-    override fun likesAlbum(albumId: Long): Single<Unit> = roadCaptureApi.likesAlbum(albumId)
+    override fun likesAlbum(albumId: Long): Single<Unit> = roadCaptureApi.likeAlbum(albumId)
 
-    override fun unlikesAlbum(albumId: Long): Single<Unit> = roadCaptureApi.unlikesAlbum(albumId)
+    override fun unlikesAlbum(albumId: Long): Single<Unit> = roadCaptureApi.unlikeAlbum(albumId)
 
     override fun getAlbumDetail(id: Long): Single<AlbumResponse> =
         roadCaptureApi.getAlbumDetail(id)

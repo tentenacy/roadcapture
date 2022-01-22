@@ -5,13 +5,13 @@ object RoadCapturePathConstant {
     const val GET_ALBUMS = "/albums"
     const val GET_ALBUM = "/albums/{id}"
 
-    const val POST_ALBUMS_LIKES = "/albums/{albumId}/likes"
-    const val DELETE_ALBUMS_LIKES = "/albums/{albumId}/likes"
+    const val POST_ALBUM_LIKE = "/albums/{albumId}/likes"
+    const val DELETE_ALBUM_LIKE = "/albums/{albumId}/likes"
 
     const val GET_ALBUM_COMMENTS = "/albums/{albumId}/pictures/comments"
     const val GET_PICTURE_COMMENTS = "/pictures/{pictureId}/comments"
 
-    const val GET_USER_DETAiL = "/users/details"
+    const val GET_USER_DETAIL = "/users/details"
     const val GET_USER_INFO = "/users/{id}"
     const val GET_USER_FOLLOWER = "/users/{userId}/followers/from"
     const val GET_USER_FOLLOWING = "/users/{userId}/followers/to"
