@@ -9,6 +9,7 @@ import com.untilled.roadcapture.data.datasource.api.dto.album.FollowersCondition
 import com.untilled.roadcapture.data.datasource.database.PagingDatabase
 import com.untilled.roadcapture.data.entity.mapper.FollowersMapper
 import com.untilled.roadcapture.data.entity.paging.Followers
+import com.untilled.roadcapture.data.entity.paging.Followings
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.InvalidObjectException
@@ -16,18 +17,18 @@ import javax.inject.Inject
 import kotlin.properties.Delegates
 
 @OptIn(ExperimentalPagingApi::class)
-class FollowersRemoteMediator @Inject constructor(
+class FollowingsRemoteMediator @Inject constructor(
     private val mapper: FollowersMapper,
     private val roadCaptureApi: RoadCaptureApi,
     private val database: PagingDatabase,
-): RxRemoteMediator<Int, Followers.Follower>() {
+): RxRemoteMediator<Int, Followings.Following>() {
 
     var userId by Delegates.notNull<Long>()
-    var followersCondition: FollowersCondition? = null
+    var followingsCondition: FollowersCondition? = null
 
     override fun loadSingle(
         loadType: LoadType,
-        state: PagingState<Int, Followers.Follower>
+        state: PagingState<Int, Followings.Following>
     ): Single<MediatorResult> {
         return Single.just(loadType)
             .subscribeOn(Schedulers.io())
@@ -56,13 +57,13 @@ class FollowersRemoteMediator @Inject constructor(
                 if(page == INVALID_PAGE) {
                     Single.just(MediatorResult.Success(endOfPaginationReached = true))
                 } else {
-                    roadCaptureApi.getUserFollowers(
+                    roadCaptureApi.getUserFollowings(
                         page = page,
                         size = state.config.pageSize,
                         id = userId,
-                        username = followersCondition?.username,
+                        username = followingsCondition?.username,
                     )
-                        .map { mapper.transformToFollowers(it) }
+                        .map { mapper.transformToFollowings(it) }
                         .map { insertToDb(page, loadType, it) }
                         .map<MediatorResult> { MediatorResult.Success(endOfPaginationReached = it.endOfPage) }
                         .onErrorReturn{ MediatorResult.Error(it) }
@@ -71,22 +72,22 @@ class FollowersRemoteMediator @Inject constructor(
     }
 
     @Suppress("DEPRECATION")
-    private fun insertToDb(page: Int, loadType: LoadType, data: Followers): Followers {
+    private fun insertToDb(page: Int, loadType: LoadType, data: Followings): Followings {
         database.beginTransaction()
 
         try {
             if (loadType == LoadType.REFRESH) {
-                database.followersDao().clearFollowers()
-                database.followersKeysDao().clearRemoteKeys()
+                database.followingsDao().clearFollowings()
+                database.followingsKeysDao().clearRemoteKeys()
             }
 
             val prevKey = if (page == 1) null else page - 1
             val nextKey = if (data.endOfPage) null else page + 1
-            val keys = data.followers.map {
-                Followers.FollowerRemoteKeys(followersId = it.followerId, prevKey = prevKey, nextKey = nextKey ?: INVALID_PAGE)
+            val keys = data.followings.map {
+                Followings.FollowingRemoteKeys(followingsId = it.followingId, prevKey = prevKey, nextKey = nextKey ?: INVALID_PAGE)
             }
-            database.followersKeysDao().insertAll(keys)
-            database.followersDao().insertAll(data.followers)
+            database.followingsKeysDao().insertAll(keys)
+            database.followingsDao().insertAll(data.followings)
             database.setTransactionSuccessful()
 
         } finally {
@@ -101,9 +102,9 @@ class FollowersRemoteMediator @Inject constructor(
      * This method will be called during APPEND event,
      * means that we should provide next key to load movie data before scroll to bottom ended
      */
-    private fun getRemoteKeyForLastItem(state: PagingState<Int, Followers.Follower>): Followers.FollowerRemoteKeys? {
+    private fun getRemoteKeyForLastItem(state: PagingState<Int, Followings.Following>): Followings.FollowingRemoteKeys? {
         return state.pages.lastOrNull { it.data.isNotEmpty() }?.data?.lastOrNull()?.let { albums ->
-            database.followersKeysDao().remoteKeysByFollowersId(albums.id)
+            database.followingsKeysDao().remoteKeysByFollowingsId(albums.id)
         }
     }
 
@@ -112,9 +113,9 @@ class FollowersRemoteMediator @Inject constructor(
      * This method will be called during PREPEND event,
      * means that we should provide previous key to load movie data before scroll to top ended
      */
-    private fun getRemoteKeyForFirstItem(state: PagingState<Int, Followers.Follower>): Followers.FollowerRemoteKeys? {
+    private fun getRemoteKeyForFirstItem(state: PagingState<Int, Followings.Following>): Followings.FollowingRemoteKeys? {
         return state.pages.firstOrNull { it.data.isNotEmpty() }?.data?.firstOrNull()?.let { albums ->
-            database.followersKeysDao().remoteKeysByFollowersId(albums.id)
+            database.followingsKeysDao().remoteKeysByFollowingsId(albums.id)
         }
     }
 
@@ -122,10 +123,10 @@ class FollowersRemoteMediator @Inject constructor(
      * will search for page closes to current scroll position,
      * if return null means this is the initial page load
      */
-    private fun getRemoteKeyClosetsToCurrentPosition(state: PagingState<Int, Followers.Follower>): Followers.FollowerRemoteKeys? {
+    private fun getRemoteKeyClosetsToCurrentPosition(state: PagingState<Int, Followings.Following>): Followings.FollowingRemoteKeys? {
         return state.anchorPosition?.let { position ->
-            state.closestItemToPosition(position)?.followerId?.let { id ->
-                database.followersKeysDao().remoteKeysByFollowersId(id)
+            state.closestItemToPosition(position)?.followingId?.let { id ->
+                database.followingsKeysDao().remoteKeysByFollowingsId(id)
             }
         }
     }

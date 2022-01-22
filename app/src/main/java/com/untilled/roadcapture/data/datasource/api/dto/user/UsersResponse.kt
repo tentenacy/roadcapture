@@ -9,9 +9,9 @@ data class UsersResponse(
     @ColumnInfo(name = "user_id")
     var id: Long,
     var username: String,
-    var profileImageUrl: String?,
-    var backgroundImageUrl: String?,
-    var introduction: String?,
+    var profileImageUrl: String,
+    var backgroundImageUrl: String,
+    var introduction: String,
     var followerCount: Int,
     var followingCount: Int,
     var followed: Boolean

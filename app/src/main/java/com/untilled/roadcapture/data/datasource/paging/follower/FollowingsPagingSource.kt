@@ -6,6 +6,7 @@ import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.api.dto.album.FollowersCondition
 import com.untilled.roadcapture.data.entity.mapper.FollowersMapper
 import com.untilled.roadcapture.data.entity.paging.Followers
+import com.untilled.roadcapture.data.entity.paging.Followings
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
@@ -13,36 +14,36 @@ import javax.inject.Singleton
 import kotlin.properties.Delegates
 
 @Singleton
-class FollowersPagingSource @Inject constructor(
+class FollowingsPagingSource @Inject constructor(
     private val mapper: FollowersMapper,
     private val roadCaptureApi: RoadCaptureApi,
-): RxPagingSource<Int, Followers.Follower>() {
+): RxPagingSource<Int, Followings.Following>() {
 
     var userId by Delegates.notNull<Long>()
-    var followersCondition: FollowersCondition? = null
+    var followingsCondition: FollowersCondition? = null
 
-    override fun getRefreshKey(state: PagingState<Int, Followers.Follower>): Int? {
+    override fun getRefreshKey(state: PagingState<Int, Followings.Following>): Int? {
         return null
     }
 
-    override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Followers.Follower>> {
+    override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Followings.Following>> {
         val position = params.key ?: 0
 
-        return roadCaptureApi.getUserFollowers(
+        return roadCaptureApi.getUserFollowings(
             page = position,
             size = params.loadSize,
             id = userId,
-            username = followersCondition?.username,
+            username = followingsCondition?.username,
         )
             .subscribeOn(Schedulers.io())
-            .map { mapper.transformToFollowers(it) }
+            .map { mapper.transformToFollowings(it) }
             .map { toLoadResult(it, position) }
             .onErrorReturn { LoadResult.Error(it) }
     }
 
-    private fun toLoadResult(data: Followers, position: Int): LoadResult<Int, Followers.Follower> {
+    private fun toLoadResult(data: Followings, position: Int): LoadResult<Int, Followings.Following> {
         return LoadResult.Page(
-            data = data.followers,
+            data = data.followings,
             prevKey = if(position == 0) null else position - 1,
             nextKey = if(position == data.total - 1) null else position + 1,
         )

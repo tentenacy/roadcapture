@@ -14,7 +14,7 @@ interface FollowApi {
     ): Single<Unit>
 
     @GET(RoadCapturePathConstant.GET_USER_FOLLOWER)
-    fun getUserFollower(
+    fun getUserFollowers(
         @Path("userId") id: Long,
         @Query("page") page: Int?,
         @Query("size") size: Int?,
@@ -23,7 +23,7 @@ interface FollowApi {
     ): Single<PageResponse<UsersResponse>>
 
     @GET(RoadCapturePathConstant.GET_USER_FOLLOWING)
-    fun getUserFollowing(
+    fun getUserFollowings(
         @Path("userId") id: Long,
         @Query("page") page: Int?,
         @Query("size") size: Int?,

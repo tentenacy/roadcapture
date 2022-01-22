@@ -15,6 +15,8 @@ import com.untilled.roadcapture.data.datasource.dao.paging.comment.PictureCommen
 import com.untilled.roadcapture.data.datasource.dao.paging.comment.PictureCommentsRemoteKeysDao
 import com.untilled.roadcapture.data.datasource.dao.paging.follower.FollowersDao
 import com.untilled.roadcapture.data.datasource.dao.paging.follower.FollowersRemoteKeysDao
+import com.untilled.roadcapture.data.datasource.dao.paging.follower.FollowingsDao
+import com.untilled.roadcapture.data.datasource.dao.paging.follower.FollowingsRemoteKeysDao
 import com.untilled.roadcapture.data.entity.paging.*
 import com.untilled.roadcapture.utils.converter.RoomConverters
 
@@ -30,6 +32,8 @@ import com.untilled.roadcapture.utils.converter.RoomConverters
         UserAlbums.UserAlbumRemoteKeys::class,
         Followers.Follower::class,
         Followers.FollowerRemoteKeys::class,
+        Followings.Following::class,
+        Followings.FollowingRemoteKeys::class,
     ],
     version = 1,
     exportSchema = false
@@ -46,6 +50,8 @@ abstract class PagingDatabase : RoomDatabase() {
     abstract fun userAlbumsKeysDao(): UserAlbumsRemoteKeysDao
     abstract fun followersDao(): FollowersDao
     abstract fun followersKeysDao(): FollowersRemoteKeysDao
+    abstract fun followingsDao(): FollowingsDao
+    abstract fun followingsKeysDao(): FollowingsRemoteKeysDao
 
     companion object {
         fun getInstance(context: Context): PagingDatabase =
