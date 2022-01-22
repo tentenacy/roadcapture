@@ -75,18 +75,12 @@ class CommentFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observeData()
-        initAdapter(args.albumsId)
-        addAdapter()
+        initAdapter()
         setOnClickListeners()
     }
 
     private fun observeData() {
         viewModel.albumComments.observe(viewLifecycleOwner, commentObserver)
-    }
-
-    private fun addAdapter() {
-        adapter.setOnClickListener(itemClickListener)
-        binding.recyclerComment.adapter = adapter
     }
 
     private fun setOnClickListeners() {
@@ -99,10 +93,12 @@ class CommentFragment : Fragment() {
         _binding = null
     }
 
-    private fun initAdapter(albumId: Long) {
+    private fun initAdapter() {
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
         binding.recyclerComment.addItemDecoration(customDivider)
-        refresh(albumId)
+        adapter.setOnClickListener(itemClickListener)
+        binding.recyclerComment.adapter = adapter
+        refresh(args.albumsId)
     }
 
     private fun refresh(albumId: Long){

@@ -120,15 +120,9 @@ class AlbumsFragment : Fragment() {
         return binding.root
     }
 
-    private fun addAdapter() {
-        adapter.setOnClickListener(itemClickListener)
-        binding.recycleAlbums.adapter = adapter
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initAdapter()
-        addAdapter()
         setOnClickListeners()
         observeData()
     }
@@ -149,6 +143,8 @@ class AlbumsFragment : Fragment() {
     }
 
     fun initAdapter() {
+        adapter.itemClickListener = itemClickListener
+        binding.recycleAlbums.adapter = adapter
         refresh(null, null)
     }
 

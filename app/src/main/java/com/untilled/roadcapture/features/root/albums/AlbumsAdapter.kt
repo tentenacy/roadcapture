@@ -16,11 +16,7 @@ import javax.inject.Inject
 class AlbumsAdapter @Inject constructor(): PagingDataAdapter<Albums.Album, AlbumsAdapter.AlbumViewHolder>(
     COMPARATOR
 ) {
-    private lateinit var itemClickListener: (ItemClickArgs?) -> Unit
-
-    fun setOnClickListener(itemClickListener: (ItemClickArgs?) -> Unit) {
-        this.itemClickListener = itemClickListener
-    }
+    lateinit var itemClickListener: (ItemClickArgs?) -> Unit
 
     class AlbumViewHolder(private val binding: ItemAlbumsBinding): RecyclerView.ViewHolder(binding.root) {
 

@@ -71,11 +71,11 @@ class PictureSliderFragment : Fragment() {
         setStatusBarTransparent()
         observeData()
         addScrollListener()
-        addAdapter()
+        initAdapter()
         setOnClickListeners()
     }
 
-    private fun addAdapter() {
+    private fun initAdapter() {
         binding.recyclerPictureSlider.adapter = adapter
     }
 

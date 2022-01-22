@@ -72,7 +72,6 @@ class PlaceSearchFragment : Fragment() {
 
         initAdapter()
         observeData()
-        addAdapter()
         getNavArgs()
         setOnClickListeners()
     }
@@ -80,15 +79,12 @@ class PlaceSearchFragment : Fragment() {
     private fun initAdapter() {
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
         binding.recyclerPlaceSearch.addItemDecoration(customDivider)
+        adapter.setOnClickListener(itemClickListener)
+        binding.recyclerPlaceSearch.adapter = adapter
     }
 
     private fun observeData() {
         searchViewModel.searchPlaceResponse.observe(viewLifecycleOwner, placeSearchObserver)
-    }
-
-    private fun addAdapter() {
-        adapter.setOnClickListener(itemClickListener)
-        binding.recyclerPlaceSearch.adapter = adapter
     }
 
     private fun getNavArgs() {

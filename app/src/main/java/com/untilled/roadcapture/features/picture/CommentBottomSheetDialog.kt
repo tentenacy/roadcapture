@@ -80,8 +80,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
         super.onViewCreated(view, savedInstanceState)
 
         observeData()
-        initAdapter(viewModel.currentPosition)
-        addAdapter()
+        initAdapter()
         expandFullHeight()
         setOnClickListeners()
     }
@@ -94,11 +93,6 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
     private fun observeData() {
         viewModel.albumComments.observe(viewLifecycleOwner, albumCommentsObserver)
         viewModel.pictureComments.observe(viewLifecycleOwner, pictureCommentsObserver)
-    }
-
-    private fun addAdapter() {
-        adapter.setOnClickListener(itemClickListener)
-        binding.recycleBottomsheetComment.adapter = adapter
     }
 
     private fun expandFullHeight() {
@@ -114,10 +108,12 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
         }
     }
 
-    private fun initAdapter(position: Int) {
+    private fun initAdapter() {
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
         binding.recycleBottomsheetComment.addItemDecoration(customDivider)
-        updateView(position - 1)
+        adapter.setOnClickListener(itemClickListener)
+        binding.recycleBottomsheetComment.adapter = adapter
+        updateView(viewModel.currentPosition - 1)
     }
 
 
