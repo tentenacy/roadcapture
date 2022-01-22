@@ -2,7 +2,7 @@ package com.untilled.roadcapture.data.repository.user
 
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
-import com.untilled.roadcapture.data.datasource.api.dto.address.AddressRequest
+import com.untilled.roadcapture.data.datasource.api.dto.address.PlaceCondition
 import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.*
 import com.untilled.roadcapture.utils.type.SocialType
@@ -15,7 +15,5 @@ interface UserRepository {
     fun reissue(): Single<TokenResponse>
     fun getUserDetail(): Single<UserResponse>
     fun getUserInfo(userId: Long): Single<UsersResponse>
-    fun getUserAlbums(pageRequest: PageRequest, addressRequest: AddressRequest): Single<PageResponse<UserAlbumsResponse>>
-    fun getUserFollower(followingsCondition: FollowingsCondition, pageRequest: PageRequest): Single<PageResponse<UsersResponse>>
-    fun getUserFollowing(followingsCondition: FollowingsCondition, pageRequest: PageRequest): Single<PageResponse<UsersResponse>>
+    fun getUserAlbums(pageRequest: PageRequest, placeCondition: PlaceCondition): Single<PageResponse<UserAlbumsResponse>>
 }

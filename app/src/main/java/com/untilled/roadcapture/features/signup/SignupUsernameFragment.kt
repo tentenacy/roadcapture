@@ -6,14 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.data.datasource.api.dto.user.SignupRequest
 import com.untilled.roadcapture.databinding.FragmentSignupUsernameBinding
 import com.untilled.roadcapture.features.base.BaseFragment
 import com.untilled.roadcapture.utils.mainActivity

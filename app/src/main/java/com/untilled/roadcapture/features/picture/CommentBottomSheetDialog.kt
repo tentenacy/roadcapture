@@ -9,38 +9,36 @@ import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.paging.PagingData
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
-import com.untilled.roadcapture.data.datasource.api.dto.comment.Comments
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.data.entity.paging.PictureComments
 import com.untilled.roadcapture.databinding.BottomsheetCommentBinding
 import com.untilled.roadcapture.features.common.CustomDivider
-import com.untilled.roadcapture.features.picture.PictureViewerViewModel
 import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CommentBottomSheetDialog : BottomSheetDialogFragment(){
+class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     private var _binding: BottomsheetCommentBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: PictureViewerViewModel by viewModels({requireParentFragment().requireParentFragment()})
-    @Inject lateinit var adapter: CommentBottomSheetAdapter
+    private val viewModel: PictureViewerViewModel by viewModels({ requireParentFragment().requireParentFragment() })
+    @Inject
+    lateinit var adapter: CommentBottomSheetAdapter
 
-    private val albumCommentsObserver: (PagingData<AlbumComments.AlbumComment>) -> Unit = { pagingData ->
-       // adapter.submitData(lifecycle, pagingData)
-    }
-    private val pictureCommentsObserver: (PagingData<PictureComments.PictureComment>) -> Unit = { pagingData ->
-        adapter.submitData(lifecycle, pagingData)
-    }
+    private val albumCommentsObserver: (PagingData<AlbumComments.AlbumComment>) -> Unit =
+        { pagingData ->
+            // adapter.submitData(lifecycle, pagingData)
+        }
+    private val pictureCommentsObserver: (PagingData<PictureComments.PictureComment>) -> Unit =
+        { pagingData ->
+            adapter.submitData(lifecycle, pagingData)
+        }
 
     private val itemClickListener: (ItemClickArgs?) -> Unit = { args ->
         when (args?.view?.id) {
@@ -70,7 +68,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = BottomsheetCommentBinding.inflate(inflater,container,false)
+        _binding = BottomsheetCommentBinding.inflate(inflater, container, false)
         (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarBottomsheetComment)
 
         return binding.root
@@ -118,7 +116,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment(){
 
 
     private fun updateView(position: Int) {
-        when(position){
+        when (position) {
             -1 -> viewModel.getAlbumComments(viewModel.album.value!!.id)
             else -> viewModel.getPictureComments(viewModel.album.value!!.pictures?.get(position)!!.id)
         }

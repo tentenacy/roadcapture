@@ -5,7 +5,7 @@ import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.api.dto.common.ErrorCode
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
-import com.untilled.roadcapture.data.datasource.api.dto.address.AddressRequest
+import com.untilled.roadcapture.data.datasource.api.dto.address.PlaceCondition
 import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.*
 import com.untilled.roadcapture.data.datasource.dao.LocalOAuthTokenDao
@@ -117,19 +117,7 @@ class UserRepositoryImpl @Inject constructor(
         roadCaptureApi.getUserInfo(userId)
             .retryThreeTimes()
 
-    override fun getUserAlbums(pageRequest: PageRequest, addressRequest: AddressRequest): Single<PageResponse<UserAlbumsResponse>> =
-        roadCaptureApi.getUserAlbums(pageRequest.page,pageRequest.size,addressRequest.address1,addressRequest.address2,addressRequest.address3)
-            .retryThreeTimes()
-
-    override fun getUserFollower(
-        followingsCondition: FollowingsCondition, pageRequest: PageRequest
-    ): Single<PageResponse<UsersResponse>> =
-        roadCaptureApi.getUserFollowers(followingsCondition.userId,pageRequest.page,pageRequest.size,pageRequest.sort,followingsCondition.username)
-            .retryThreeTimes()
-
-    override fun getUserFollowing(
-        followingsCondition: FollowingsCondition, pageRequest: PageRequest
-    ): Single<PageResponse<UsersResponse>> =
-        roadCaptureApi.getUserFollowings(followingsCondition.userId,pageRequest.page,pageRequest.size,pageRequest.sort,followingsCondition.username)
+    override fun getUserAlbums(pageRequest: PageRequest, placeCondition: PlaceCondition): Single<PageResponse<UserAlbumsResponse>> =
+        roadCaptureApi.getUserAlbums(pageRequest.page,pageRequest.size,placeCondition.address1,placeCondition.address2,placeCondition.address3)
             .retryThreeTimes()
 }

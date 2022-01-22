@@ -10,12 +10,12 @@ import java.time.LocalDateTime
 @Parcelize
 data class ThumbnailPictureResponse (
     @ColumnInfo(name = "thumbnail_picture_id")
-    var id: Long,
+    val id: Long,
     @ColumnInfo(name = "thumbnail_picture_created_at")
-    var createdAt: LocalDateTime,
+    val createdAt: LocalDateTime,
     @ColumnInfo(name = "thumbnail_picture_last_modified_at")
-    var lastModifiedAt: LocalDateTime,
-    var imageUrl: String,
+    val lastModifiedAt: LocalDateTime,
+    val imageUrl: String,
     @Embedded
-    var place: PlaceResponse
+    val place: PlaceResponse
 ): Parcelable

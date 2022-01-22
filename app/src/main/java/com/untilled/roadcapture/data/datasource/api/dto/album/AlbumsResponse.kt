@@ -16,7 +16,7 @@ data class AlbumsResponse(
     val createdAt: LocalDateTime,
     val lastModifiedAt: LocalDateTime,
     val title: String,
-    val description: String,
+    val description: String = "",
     val thumbnailUrl: String,
     val user: UsersResponse,
     val viewCount: Int,

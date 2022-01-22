@@ -1,8 +1,8 @@
 package com.untilled.roadcapture.data.datasource.api.dto.common
 
 data class PageResponse<T>(
-    var content: List<T>,
-    var pageable: Pageable,
+    val content: List<T>,
+    val pageable: Pageable,
     val totalPages: Int,
     val totalElements: Int,
     val last: Boolean,

@@ -3,18 +3,14 @@ package com.untilled.roadcapture.features.root.albums
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import androidx.paging.*
+import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
-import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
-import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
-import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
-
 import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepository
 import com.untilled.roadcapture.data.repository.follower.FollowRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
@@ -43,7 +39,7 @@ class AlbumsViewModel
     private var _albums = MutableLiveData<PagingData<Albums.Album>>()
     val album: LiveData<PagingData<Albums.Album>> get() = _albums
 
-    private val _user =  MutableLiveData<PageResponse<UsersResponse>>()
+    private val _user = MutableLiveData<PageResponse<UsersResponse>>()
     val user: LiveData<PageResponse<UsersResponse>> get() = _user
 
     private val _followingAlbums = MutableLiveData<PageResponse<AlbumsResponse>>()
@@ -60,48 +56,25 @@ class AlbumsViewModel
             }.addTo(compositeDisposable)
     }
 
-    fun likesAlbum(albumsId: Long){
+    fun likesAlbum(albumsId: Long) {
         albumRepository.likesAlbum(albumsId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
 
-            },{
+            }, {
 
             })
     }
 
-    fun unlikesAlbum(albumsId: Long){
+    fun unlikesAlbum(albumsId: Long) {
         albumRepository.unlikesAlbum(albumsId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
 
-            },{
+            }, {
 
             })
     }
-
-    fun getUserFollowing(followingsCondition: FollowingsCondition, pageRequest: PageRequest){
-        userRepository.getUserFollowing(followingsCondition, pageRequest)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ user ->
-                _user.postValue(user)
-            },{ error ->
-                Logger.d("test: $error")
-            })
-    }
-
-    fun getFollowingAlbums(id: Long?, pageRequest: PageRequest){
-        followRepository.getFollowingAlbums(id,pageRequest)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ response ->
-                _followingAlbums.postValue(response)
-            }, { t ->
-
-            }).addTo(compositeDisposable)
-    }
-
 }

@@ -3,7 +3,7 @@ package com.untilled.roadcapture.features.root.studio
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
-import com.untilled.roadcapture.data.datasource.api.dto.album.FollowersCondition
+import com.untilled.roadcapture.data.datasource.api.dto.user.FollowersCondition
 import com.untilled.roadcapture.data.entity.paging.Followings
 import com.untilled.roadcapture.data.repository.follower.paging.FollowerPagingRepository
 import com.untilled.roadcapture.features.base.BaseViewModel

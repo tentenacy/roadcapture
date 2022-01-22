@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
-import com.untilled.roadcapture.data.datasource.api.dto.address.AddressRequest
+import com.untilled.roadcapture.data.datasource.api.dto.address.PlaceCondition
 import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.data.repository.follower.FollowRepository
@@ -41,8 +41,8 @@ class StudioViewModel @Inject constructor(
     }
 
 
-    fun getUserAlbums(pageRequest: PageRequest, addressRequest: AddressRequest){
-        userRepository.getUserAlbums(pageRequest,addressRequest)
+    fun getUserAlbums(pageRequest: PageRequest, placeCondition: PlaceCondition){
+        userRepository.getUserAlbums(pageRequest,placeCondition)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response->

@@ -9,10 +9,11 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class PlaceResponse(
     @ColumnInfo(name = "place_id")
-    var id: Long,
-    var name: String,
-    var latitude: String,
-    var longitude: String,
+    val id: Long,
+    val name: String,
+    //TODO: Double로 받기
+    val latitude: String,
+    val longitude: String,
     @Embedded
-    var address: Address
+    val address: Address
 ): Parcelable

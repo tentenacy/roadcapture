@@ -4,9 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
 import com.orhanobut.logger.Logger
-import com.untilled.roadcapture.data.datasource.api.dto.album.FollowersCondition
-import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
-import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
+import com.untilled.roadcapture.data.datasource.api.dto.user.FollowersCondition
 import com.untilled.roadcapture.data.entity.paging.Followers
 import com.untilled.roadcapture.data.repository.follower.FollowRepository
 import com.untilled.roadcapture.data.repository.follower.paging.FollowerPagingRepository

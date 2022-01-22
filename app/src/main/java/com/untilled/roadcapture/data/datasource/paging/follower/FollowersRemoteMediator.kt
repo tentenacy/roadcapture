@@ -5,7 +5,7 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.rxjava3.RxRemoteMediator
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
-import com.untilled.roadcapture.data.datasource.api.dto.album.FollowersCondition
+import com.untilled.roadcapture.data.datasource.api.dto.user.FollowersCondition
 import com.untilled.roadcapture.data.datasource.database.PagingDatabase
 import com.untilled.roadcapture.data.entity.mapper.FollowersMapper
 import com.untilled.roadcapture.data.entity.paging.Followers

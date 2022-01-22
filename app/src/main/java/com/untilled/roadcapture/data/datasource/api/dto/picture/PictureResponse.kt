@@ -8,9 +8,9 @@ import java.time.LocalDateTime
 @Parcelize
 data class PictureResponse(
     val id: Long,
-    var createdAt: LocalDateTime?,
-    var lastModifiedAt: LocalDateTime?,
-    var imageUrl: String,
-    var description: String?,
-    var place: PlaceResponse?
+    val createdAt: LocalDateTime,
+    val lastModifiedAt: LocalDateTime,
+    val imageUrl: String,
+    val description: String = "",
+    val place: PlaceResponse
 ) : Parcelable

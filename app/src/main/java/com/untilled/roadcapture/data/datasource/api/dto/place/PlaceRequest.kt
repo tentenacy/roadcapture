@@ -9,12 +9,12 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 data class PlaceRequest(
     @SerializedName("createdAt")
-    var placeCreatedAt: String,
+    val placeCreatedAt: String,
     @SerializedName("lastModifiedAt")
-    var placeLastModifiedAt: String,
-    var latitude: Float,
-    var longitude: Float,
-    var name: String,
+    val placeLastModifiedAt: String,
+    val latitude: Float,
+    val longitude: Float,
+    val name: String,
     @Embedded
-    var address: Address
+    val address: Address
 ): Parcelable

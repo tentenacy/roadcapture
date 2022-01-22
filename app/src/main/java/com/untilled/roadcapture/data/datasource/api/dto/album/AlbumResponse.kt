@@ -10,14 +10,14 @@ import java.time.LocalDateTime
 @Parcelize
 data class AlbumResponse(
     val id: Long,
-    var createdAt: LocalDateTime?,
-    val lastModifiedAt: LocalDateTime?,
+    val createdAt: LocalDateTime,
+    val lastModifiedAt: LocalDateTime,
     val title: String,
-    val description: String?,
+    val description: String = "",
     val user: UsersResponse,
     val viewCount: Int,
     val likeCount: Int,
     val commentCount: Int,
     val liked: Boolean,
-    val pictures: List<PictureResponse>? = null
+    val pictures: List<PictureResponse>
 ) : Parcelable

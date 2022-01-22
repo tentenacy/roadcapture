@@ -8,9 +8,9 @@ import kotlinx.parcelize.Parcelize
 data class UserResponse(
     val id: Long,
     val email: String,
-    var username: String,
-    var profileImageUrl: String?,
-    var introduction: String?,
-    val provider: String?,
+    val username: String,
+    val profileImageUrl: String,
+    val introduction: String = "",
+    val provider: String = "",
     val address: Address?
 ): Parcelable
