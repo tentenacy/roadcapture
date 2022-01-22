@@ -5,6 +5,7 @@ import android.app.Activity.RESULT_OK
 import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
@@ -40,6 +41,7 @@ import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
 import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.OverlayImage
+import com.naver.maps.map.overlay.PathOverlay
 import com.naver.maps.map.util.FusedLocationSource
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.utils.*
@@ -58,6 +60,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     private var uiSettings: UiSettings? = null
     private lateinit var locationSource: FusedLocationSource
     private var markerList: MutableList<Marker> = mutableListOf()
+    private var path = PathOverlay()
 
     // 갤러리 사진 가져오는 intent 콜백 등록
     private val getContent = registerForActivityResult(
@@ -148,6 +151,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                         i.map = null    // 지도에서 마커 제거
                     }
                     markerList.clear()  // 마커 리스트 클리어
+                    path.map = null     // 지도에서 경로 제거
                     deleteCache(requireContext())   // 캐시 디렉토리에 있는 사진들 제거
                     viewModel.deleteAll()   // Room에 저장된 picture 모두 제거
                 }
@@ -181,44 +185,63 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         )
     }
 
-    private fun drawMarker(picture: Picture) {
-        val marker = Marker()
-        marker.apply {
-            position = LatLng(
-                picture.place?.latitude?.toDouble() ?: 37.5670135,
-                picture.place?.longitude?.toDouble() ?: 126.9783740,
-            )
-            isHideCollidedMarkers = true    // 마커 겹치면 사라지기
-            //zIndex = 0    //  zIndex로 마커들 겹쳤을때 우선순위 정할 수 있음 (썸네일
-            onClickListener = Overlay.OnClickListener {     // 마커
-                Navigation.findNavController(binding.root)
-                    .navigate(
-                        CaptureFragmentDirections.actionCaptureFragmentToPictureEditorFragment(
-                            picture = picture
-                        )
-                    )
-                return@OnClickListener true
-            }
+    private fun drawPolyline() {
+        val _coords = mutableListOf<LatLng>()
+        for(i in markerList) {
+            _coords.add(i.position)
         }
-        Glide.with(requireContext()).asBitmap().load(picture.imageUrl!!.toUri())
-            .apply(RequestOptions().centerCrop().circleCrop())
-            .into(object : SimpleTarget<Bitmap>() {
-                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                    val bitmap = Bitmap.createScaledBitmap(
-                        resource,
-                        requireContext().getPxFromDp(64f),
-                        requireContext().getPxFromDp(64f),
-                        true
-                    )
-                    marker.apply {
-                        icon = OverlayImage.fromBitmap(bitmap)
-                    }.map = naverMap
-                }
-            })
-        markerList.add(marker)
-        naverMap?.moveCamera(CameraUpdate.scrollTo(marker.position))
+
+        if(_coords.size >= 2) {
+            path.apply {
+                color = Color.parseColor("#3d86c7")
+                outlineColor = Color.parseColor("#3d86c7")
+                outlineWidth = requireContext().getPxFromDp(3f)
+                coords = _coords
+            }.map = naverMap
+        }
     }
 
+    private fun drawMarker() {
+        if (!viewModel.pictureList.value.isNullOrEmpty()) {
+            for (picture in viewModel.pictureList.value!!) {
+                val marker = Marker()
+                marker.apply {
+                    position = LatLng(
+                        picture.place?.latitude?.toDouble() ?: 37.5670135,
+                        picture.place?.longitude?.toDouble() ?: 126.9783740,
+                    )
+                    isHideCollidedMarkers = true    // 마커 겹치면 사라지기
+                    zIndex = if (picture.thumbnail) 100 else 0  // 썸네일 마커가 가장 위에 표시
+                    onClickListener = Overlay.OnClickListener {     // 마커
+                        Navigation.findNavController(binding.root)
+                            .navigate(
+                                CaptureFragmentDirections.actionCaptureFragmentToPictureEditorFragment(
+                                    picture = picture
+                                )
+                            )
+                        return@OnClickListener true
+                    }
+                }
+                Glide.with(requireContext()).asBitmap().load(picture.imageUrl!!.toUri())
+                    .apply(RequestOptions().centerCrop().circleCrop())
+                    .into(object : SimpleTarget<Bitmap>() {
+                        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                            val bitmap = Bitmap.createScaledBitmap(
+                                resource,
+                                requireContext().getPxFromDp(64f),
+                                requireContext().getPxFromDp(64f),
+                                true
+                            )
+                            marker.apply {
+                                icon = OverlayImage.fromBitmap(bitmap)
+                            }.map = naverMap
+                        }
+                    })
+                markerList.add(marker)
+            }
+            naverMap?.moveCamera(CameraUpdate.scrollTo(markerList.last().position))
+        }
+    }
 
     override fun onMapReady(_naverMap: NaverMap) {
         _naverMap.isLiteModeEnabled = true
@@ -230,15 +253,10 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         requestSinglePermission(
             Manifest.permission.ACCESS_FINE_LOCATION,
             "지도에 현재 위치를 표시하기 위해서는 위치권한이 필요합니다. 설정으로 이동합니다."
-        ) {
+        ) { }
 
-        }
-
-        if (viewModel.pictureList.value!!.isNotEmpty()) {
-            for (i in viewModel.pictureList.value!!) {
-                drawMarker(i)
-            }
-        }
+        drawMarker()
+        drawPolyline()
     }
 
     override fun onRequestPermissionsResult(
