@@ -2,23 +2,17 @@ package com.untilled.roadcapture.features.root.capture
 
 import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.address.Address
-import com.untilled.roadcapture.data.datasource.api.dto.picture.PictureResponse
 import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceRequest
 import com.untilled.roadcapture.data.datasource.api.dto.place.SearchPlaceResponse
 import com.untilled.roadcapture.data.datasource.api.dto.poi.Poi
@@ -26,8 +20,9 @@ import com.untilled.roadcapture.data.datasource.api.dto.poi.Pois
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPlaceSearchBinding
 import com.untilled.roadcapture.features.common.CustomDivider
-import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.hideKeyboard
+import com.untilled.roadcapture.utils.navigateToCapture
+import com.untilled.roadcapture.utils.navigateToPictureEditor
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
 import javax.inject.Inject
@@ -35,7 +30,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class PlaceSearchFragment : Fragment() {
     private var _binding: FragmentPlaceSearchBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     private val searchViewModel: PlaceSearchViewModel by viewModels()
 
@@ -46,12 +41,7 @@ class PlaceSearchFragment : Fragment() {
 
     private val itemClickListener: (PlaceRequest?) -> Unit = { placeRequest ->
         picture.place = placeRequest
-        Navigation.findNavController(binding.root)
-            .navigate(
-                PlaceSearchFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
-                    picture = picture
-                )
-            )
+        navigateToCapture(picture)
     }
 
     private val placeSearchObserver: (SearchPlaceResponse?) -> Unit = { searchPlaceResponse ->
@@ -116,12 +106,7 @@ class PlaceSearchFragment : Fragment() {
 
     private fun setOnClickListeners() {
         binding.imagePlaceSearchBack.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(
-                    PlaceSearchFragmentDirections.actionSearchPlaceFragmentToPictureEditorFragment(
-                        picture = picture
-                    )
-                )
+            navigateToPictureEditor(picture)
         }
 
         binding.edtPlaceSearchInput.setOnEditorActionListener { v, actionId, event ->

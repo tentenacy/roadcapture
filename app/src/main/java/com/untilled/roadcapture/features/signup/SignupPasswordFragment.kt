@@ -15,6 +15,8 @@ import com.mobsandgeeks.saripaar.annotation.Password
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentSignupPwdBinding
 import com.untilled.roadcapture.utils.mainActivity
+import com.untilled.roadcapture.utils.navigateToSignupUsername
+import com.untilled.roadcapture.utils.signupFromChild
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
 
@@ -24,7 +26,7 @@ class SignupPasswordFragment : Fragment() {
     private val viewModel: SignupViewModel by viewModels({ requireParentFragment() })
 
     private var _binding: FragmentSignupPwdBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     private val passwordVerificationObserver: (String) -> Unit = { passwordVerification ->
         if (passwordVerification.length in 8..64 && Pattern.matches("(?=.*[a-zA-Z])(?=.*[\\d]).+", passwordVerification)) {
@@ -90,10 +92,9 @@ class SignupPasswordFragment : Fragment() {
 
     private fun setOnClickListeners() {
         binding.btnSignupPwdConfirm.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_signupPasswordFragment_to_signupUsernameFragment)
+            navigateToSignupUsername()
         }
-        (parentFragment?.parentFragment as SignupFragment).binding.imgSignupBack.setOnClickListener {
+        signupFromChild().binding.imgSignupBack.setOnClickListener {
             mainActivity().onBackPressed()
         }
     }

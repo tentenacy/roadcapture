@@ -6,15 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.paging.PagingData
-import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.data.datasource.sharedpref.User
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.databinding.FragmentMystudioBinding
-import com.untilled.roadcapture.features.root.RootFragment
-import com.untilled.roadcapture.features.root.RootFragmentDirections
+import com.untilled.roadcapture.utils.rootFromChild
+import com.untilled.roadcapture.utils.navigateToFollower
+import com.untilled.roadcapture.utils.navigateToFollowing
+import com.untilled.roadcapture.utils.navigateToSettings
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -81,24 +81,20 @@ class MyStudioFragment : Fragment() {
 
     private fun setOnClickListeners() {
         binding.textMystudioFollower.setOnClickListener {
-            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(RootFragmentDirections.actionRootFragmentToFollowerFragment(User.id))
+            rootFromChild().navigateToFollower(User.id)
         }
         binding.textMystudioFollowing.setOnClickListener {
-            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(RootFragmentDirections.actionRootFragmentToFollowingFragment(User.id))
+            rootFromChild().navigateToFollowing(User.id)
         }
         binding.btnMystudioEdit.setOnClickListener {
-//            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
+//            Navigation.findNavController(rootFragmentFrom3Depth().binding.root)
 //                .navigate(RootFragmentDirections.actionRootFragmentToMyStudioModification(binding.user))
         }
         binding.imageMystudioSettingBefore.setOnClickListener {
-            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(R.id.action_rootFragment_to_settingsFragment)
+            rootFromChild().navigateToSettings()
         }
         binding.imageMystudioSettingAfter.setOnClickListener {
-            Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(R.id.action_rootFragment_to_settingsFragment)
+            rootFromChild().navigateToSettings()
         }
     }
 }

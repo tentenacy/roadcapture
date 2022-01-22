@@ -11,6 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentSignupEmailBinding
+import com.untilled.roadcapture.utils.navigateToSignupPassword
+import com.untilled.roadcapture.utils.signupFromChild
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -19,7 +21,7 @@ class SignupEmailFragment : Fragment() {
     private val viewModel: SignupViewModel by viewModels({ requireParentFragment() })
 
     private var _binding: FragmentSignupEmailBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     private val emailObserver: (String) -> Unit = { email ->
         if (Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
@@ -55,12 +57,8 @@ class SignupEmailFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-
-        binding.btnSignupEmailConfirm.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_signupEmailFragment_to_signupPasswordFragment)
-        }
-        (parentFragment?.parentFragment as SignupFragment).binding.imgSignupBack.setOnClickListener {
+        navigateToSignupPassword()
+        signupFromChild().binding.imgSignupBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
     }

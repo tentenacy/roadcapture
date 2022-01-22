@@ -50,7 +50,7 @@ import com.untilled.roadcapture.utils.*
 @AndroidEntryPoint
 class CaptureFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentCaptureBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     private val viewModel: CaptureViewModel by viewModels()
 
@@ -68,8 +68,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     ) {
         if (it.resultCode == RESULT_OK) {
             imageUri = it.data?.data
-            Navigation.findNavController(binding.root)
-                .navigate(CaptureFragmentDirections.actionCaptureFragmentToCropFragment(imageUri.toString()))
+            navigateToCrop(imageUri.toString())
         }
     }
 
@@ -122,8 +121,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                 Manifest.permission.CAMERA,
                 "사진을 찍기위해서는 카메라 권한이 필요합니다. 설정으로 이동합니다.",
             ) {
-                Navigation.findNavController(binding.root)
-                    .navigate(R.id.action_captureFragment_to_cameraFragment)
+                navigateToCamera()
             }
         }
         binding.imageCaptureGallery.setOnClickListener {
@@ -140,12 +138,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                 if(picture == null) {
                     showThumbnailSettingDialog()
                 } else {
-                    Navigation.findNavController(binding.root)
-                        .navigate(
-                            CaptureFragmentDirections.actionCaptureFragmentToAlbumRegestrationFragment(
-                                picture = picture
-                            )
-                        )
+                    navigateToAlbumRegistration(picture)
                 }
             }
         }
@@ -218,12 +211,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                     isHideCollidedMarkers = true    // 마커 겹치면 사라지기
                     zIndex = if (picture.thumbnail) 100 else 0  // 썸네일 마커가 가장 위에 표시
                     onClickListener = Overlay.OnClickListener {     // 마커
-                        Navigation.findNavController(binding.root)
-                            .navigate(
-                                CaptureFragmentDirections.actionCaptureFragmentToPictureEditorFragment(
-                                    picture = picture
-                                )
-                            )
+                        navigateToPictureEditor(picture)
                         return@OnClickListener true
                     }
                 }

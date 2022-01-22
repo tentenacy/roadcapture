@@ -27,7 +27,7 @@ class MainViewModel @Inject constructor(
     private val oauthLoginManagerMap: Map<String, @JvmSuppressWildcards OAuthLoginManagerSubject>,
 ) : BaseViewModel(), TokenExpirationObserver, OAuthTokenExpirationObserver {
 
-    private var _isLoggedOut = MutableLiveData<Boolean>(false)
+    private var _isLoggedOut = MutableLiveData(false)
     val isLoggedOut: LiveData<Boolean> get() = _isLoggedOut
 
     init {

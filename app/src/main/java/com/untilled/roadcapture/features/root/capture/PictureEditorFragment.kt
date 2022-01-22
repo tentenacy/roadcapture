@@ -10,19 +10,20 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.paging.PagingData
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPictureEditorBinding
+import com.untilled.roadcapture.utils.navigateToCapture
+import com.untilled.roadcapture.utils.navigateToSearchPlace
 import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.http.POST
 
 @AndroidEntryPoint
 class PictureEditorFragment : Fragment() {
     private var _binding: FragmentPictureEditorBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
     private var picture: Picture? = null
     private var mode = POST
 
@@ -33,11 +34,7 @@ class PictureEditorFragment : Fragment() {
     }
 
     private val placeOnClickListener : (View?) -> Unit = {
-        Navigation.findNavController(binding.root).navigate(
-                PictureEditorFragmentDirections.actionPictureEditorFragmentToSearchPlaceFragment(
-                    picture = makePicture()
-                )
-            )
+        navigateToSearchPlace(makePicture())
     }
 
     private val checkOnClickListener : (View?) -> Unit = {
@@ -49,8 +46,7 @@ class PictureEditorFragment : Fragment() {
             } else if (mode == EDIT) {
                 viewModel.updatePicture(makePicture())
             }
-            Navigation.findNavController(binding.root)
-                .navigate(PictureEditorFragmentDirections.actionPictureEditorFragmentToCaptureFragment())
+            navigateToCapture()
         }
     }
 
@@ -59,7 +55,7 @@ class PictureEditorFragment : Fragment() {
             if (mode == EDIT) {
                 viewModel.deletePicture(makePicture())
             }
-            Navigation.findNavController(binding.root).navigate(PictureEditorFragmentDirections.actionPictureEditorFragmentToCaptureFragment())
+            navigateToCapture()
         }
     }
 

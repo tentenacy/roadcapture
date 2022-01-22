@@ -3,7 +3,6 @@ package com.untilled.roadcapture.features.root.albums
 import android.animation.ValueAnimator
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +10,6 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.paging.PagingData
 import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.R
@@ -20,9 +18,8 @@ import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.databinding.FragmentAlbumsBinding
 import com.untilled.roadcapture.databinding.ItemAlbumsBinding
-import com.untilled.roadcapture.features.root.RootFragment
-import com.untilled.roadcapture.features.root.RootFragmentDirections
 import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
+import com.untilled.roadcapture.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -38,8 +35,7 @@ class AlbumsFragment : Fragment() {
     lateinit var adapter: AlbumsAdapter
 
     private val notificationOnClickListener: (View?) -> Unit = {
-        Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-            .navigate(R.id.action_rootFragment_to_notificationFragment)
+        rootFromChild().navigateToNotification()
     }
 
     private val filterOnClickListener: (View?) -> Unit = {
@@ -52,25 +48,20 @@ class AlbumsFragment : Fragment() {
     }
 
     private val itemClickListener: (ItemClickArgs?) -> Unit = { args ->
-        when (args?.view?.id) {
-            R.id.img_ialbums_profile -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(RootFragmentDirections.actionRootFragmentToStudioFragment((args.item as ItemAlbumsBinding).album?.user!!.id))
 
-            R.id.img_ialbums_comment -> Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                .navigate(RootFragmentDirections.actionRootFragmentToCommentFragment((args.item as ItemAlbumsBinding).album!!.albumsId))
+        val albumUserId = (args?.item as ItemAlbumsBinding).album?.user!!.id
+        val albumId = args.item.album!!.albumsId
 
+        when (args.view?.id) {
+            R.id.img_ialbums_profile -> rootFromChild().navigateToStudio(albumUserId)
+            R.id.img_ialbums_comment -> rootFromChild().navigateToComment(albumId)
             R.id.img_ialbums_like -> {
-                setLikeStatus(args.view as LottieAnimationView, args.item as ItemAlbumsBinding)
+                setLikeStatus(args.view as LottieAnimationView, args.item)
             }
-
             //Todo: 네비게이션 args 변경해야 함
             R.id.img_ialbums_thumbnail,
             R.id.text_ialbums_title,
-            R.id.text_ialbums_desc ->
-                Navigation.findNavController((parentFragment?.parentFragment?.parentFragment as RootFragment).binding.root)
-                    .navigate(
-                        RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment((args.item as ItemAlbumsBinding).album!!.albumsId)
-                    )
+            R.id.text_ialbums_desc -> rootFromChild().navigateToPictureViewerContainer(albumId)
             R.id.img_ialbums_more -> {
                 val popupMenu = PopupMenu(requireContext(), args.view)
                 popupMenu.apply {

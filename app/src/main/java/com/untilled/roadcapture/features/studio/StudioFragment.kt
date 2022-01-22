@@ -12,6 +12,8 @@ import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.databinding.FragmentStudioBinding
+import com.untilled.roadcapture.utils.navigateToFollower
+import com.untilled.roadcapture.utils.navigateToFollowing
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -78,12 +80,10 @@ class StudioFragment : Fragment() {
 
     private fun setOnClickListeners() {
         binding.textStudioFollower.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(StudioFragmentDirections.actionStudioFragmentToFollowerFragment(args.id))
+            navigateToFollower(args.id)
         }
         binding.textStudioFollowing.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(StudioFragmentDirections.actionStudioFragmentToFollowingFragment(args.id))
+            navigateToFollowing(args.id)
         }
         binding.btnStudioFollow.setOnClickListener(btnStudioFollowObserver)
         binding.imgStudioMoreBefore.setOnClickListener {

@@ -13,23 +13,22 @@ import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentCropBinding
+import com.untilled.roadcapture.utils.navigateToPictureEditor
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
-import java.util.*
 
 @AndroidEntryPoint
 class CropFragment : Fragment() {
     private var _binding: FragmentCropBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
     private lateinit var imageUri: Uri
 
     private var uCropFragment: UCropFragment? = null
@@ -211,10 +210,7 @@ class CropFragment : Fragment() {
         val resultUri = UCrop.getOutput(result)
         if (resultUri != null) {
             // crop 성공하였으므로 crop한 이미지 uri 전달
-            Navigation.findNavController(binding.root)
-                .navigate(CropFragmentDirections.actionCropFragmentToPictureEditorFragment(
-                    picture = Picture(imageUrl = resultUri.toString())
-                ))
+            navigateToPictureEditor(Picture(imageUrl = resultUri.toString()))
         } else {
             Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
         }

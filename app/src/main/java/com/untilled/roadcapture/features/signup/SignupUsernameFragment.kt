@@ -17,6 +17,8 @@ import com.untilled.roadcapture.data.datasource.api.dto.user.SignupRequest
 import com.untilled.roadcapture.databinding.FragmentSignupUsernameBinding
 import com.untilled.roadcapture.features.base.BaseFragment
 import com.untilled.roadcapture.utils.mainActivity
+import com.untilled.roadcapture.utils.navigateToRoot
+import com.untilled.roadcapture.utils.signupFromChild
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,8 +40,7 @@ class SignupUsernameFragment : BaseFragment() {
 
     private val isLoggedInObserver: (Boolean) -> Unit = { isLoggedIn ->
         if (isLoggedIn) {
-            Navigation.findNavController((parentFragment?.parentFragment as SignupFragment).binding.root)
-                .navigate(SignupFragmentDirections.actionSignupFragmentToRootFragment())
+            signupFromChild().navigateToRoot()
         }
     }
 

@@ -25,7 +25,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class LoginFragment : BaseFragment() {
     private var _binding: FragmentLoginBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     @Inject
     lateinit var googleSignInClient: GoogleSignInClient
@@ -53,13 +53,11 @@ class LoginFragment : BaseFragment() {
     }
 
     private val btnContainerOnClickListener: (View?) -> Unit = {
-        Navigation.findNavController(binding.root)
-            .navigate(R.id.action_loginFragment_to_emailLoginFragment)
+        navigateToEmailLogin()
     }
 
     private val signupOnClickListener: (View?) -> Unit = {
-        Navigation.findNavController(binding.root)
-            .navigate(R.id.action_loginFragment_to_signupFragment)
+        navigateToSignup()
     }
 
     private val naverLoginOnClickListener: (View?) -> Unit = {
@@ -94,7 +92,7 @@ class LoginFragment : BaseFragment() {
         if(socialType != null) {
             mainActivity().viewModel.registerToOAuthLoginManagerSubject(socialType)
         }
-        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRootFragment())
+        navigateToRoot()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

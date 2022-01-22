@@ -10,15 +10,16 @@ import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.paging.PagingData
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.databinding.FragmentCommentBinding
+import com.untilled.roadcapture.databinding.ItemCommentBinding
 import com.untilled.roadcapture.features.common.CustomDivider
 import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
+import com.untilled.roadcapture.utils.navigateToStudio
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -26,7 +27,7 @@ import javax.inject.Inject
 class CommentFragment : Fragment() {
 
     private var _binding: FragmentCommentBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
     private val viewModel: CommentViewModel by viewModels()
     private val args: CommentFragmentArgs by navArgs()
     @Inject lateinit var adapter: CommentsAdapter
@@ -35,7 +36,9 @@ class CommentFragment : Fragment() {
         adapter.submitData(lifecycle, pagingData)
     }
     private val itemClickListener: (ItemClickArgs?) -> Unit = { args ->
-        when (args?.view?.id) {
+        val userId = (args?.item as ItemCommentBinding).comments!!.user.id
+
+        when (args.view?.id) {
             R.id.img_icomment_more -> {
                 val popupMenu = PopupMenu(requireContext(), args.view)
                 popupMenu.apply {
@@ -51,8 +54,7 @@ class CommentFragment : Fragment() {
                 }.show()
             }
             R.id.img_icomment_profile -> {
-                Navigation.findNavController(binding.root)
-                    .navigate(R.id.action_commentFragment_to_studioFragment)
+                navigateToStudio(userId)
             }
         }
     }

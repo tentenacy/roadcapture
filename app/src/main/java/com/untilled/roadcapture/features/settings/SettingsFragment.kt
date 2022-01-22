@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentSettingsBinding
+import com.untilled.roadcapture.utils.navigateToAccountSetting
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -57,8 +58,7 @@ class SettingsFragment : Fragment() {
 
     private fun setOnClickListeners(){
         binding.textSettingsLabelAccount.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_settingsFragment_to_accountSettingFragment)
+            navigateToAccountSetting()
         }
         binding.imgSettingsBack.setOnClickListener {
             requireActivity().onBackPressed()
