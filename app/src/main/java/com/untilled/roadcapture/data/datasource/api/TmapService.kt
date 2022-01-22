@@ -1,9 +1,10 @@
 package com.untilled.roadcapture.data.datasource.api
 
 import com.untilled.roadcapture.BuildConfig
-import com.untilled.roadcapture.data.datasource.api.dto.address.AddressInfoResponse
+import com.untilled.roadcapture.data.datasource.api.dto.address.TmapAddressInfoResponse
 import com.untilled.roadcapture.data.datasource.api.dto.place.SearchPlaceResponse
 import com.untilled.roadcapture.utils.constant.url.TmapUrlConstant
+import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.create
@@ -33,15 +34,14 @@ interface TmapService {
     ): Response<SearchPlaceResponse>
 
     @GET(TmapUrlConstant.GET_TMAP_REVERSE_GEO_CODE)
-    suspend fun getReverseGeoCode(
+    fun getReverseGeoCode(
         @Header("appKey") appKey: String = BuildConfig.API_EXT_TMAP_KEY,
         @Query("version") version: Int = 1,
-        @Query("callback") callback: String? = null,
-        @Query("lat") lat: Double,
-        @Query("lon") lon: Double,
+        @Query("lat") lat: String,
+        @Query("lon") lon: String,
         @Query("coordType") coordType: String? = null,
-        @Query("addressType") addressType: String? = null
-    ): Response<AddressInfoResponse>
+        @Query("addressType") addressType: String? = "A10"
+    ): Single<TmapAddressInfoResponse>
 
     companion object {
         fun create(retrofitBuilder: Retrofit.Builder): TmapService {

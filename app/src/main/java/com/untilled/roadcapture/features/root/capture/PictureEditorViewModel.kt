@@ -1,9 +1,10 @@
 package com.untilled.roadcapture.features.root.capture
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
+import com.untilled.roadcapture.data.datasource.api.dto.address.TmapAddressInfoResponse
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.data.repository.picture.PictureRemoteRepository
+import com.untilled.roadcapture.data.repository.place.SearchPlaceRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
@@ -14,8 +15,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PictureEditorViewModel
-@Inject constructor(private val remoteRepository: PictureRemoteRepository) : BaseViewModel() {
+@Inject constructor(
+    private val remoteRepository: PictureRemoteRepository,
+    private val searchPlaceRepository: SearchPlaceRepository
+    ) : BaseViewModel() {
     val order = MutableLiveData<Long>()
+    val addressInfoResponse = MutableLiveData<TmapAddressInfoResponse>()
 
     fun insertPicture(picture: Picture) {
         val completableList = mutableListOf<Completable>()
@@ -63,5 +68,16 @@ class PictureEditorViewModel
             .subscribe { _order ->
                 order.postValue(_order)
             }
+    }
+
+    fun getReverseGeoCode(lat: Float, lon: Float) {
+        searchPlaceRepository.getReverseGeoCode(lat.toString(), lon.toString())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe( { _addressInfoResponse ->
+                addressInfoResponse.postValue(_addressInfoResponse)
+            }, {t->
+
+            })
     }
 }

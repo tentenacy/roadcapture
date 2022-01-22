@@ -1,7 +1,9 @@
 package com.untilled.roadcapture.data.repository.place
 
 import com.untilled.roadcapture.BuildConfig
+import com.untilled.roadcapture.data.datasource.api.dto.address.TmapAddressInfoResponse
 import com.untilled.roadcapture.data.datasource.api.dto.place.SearchPlaceResponse
+import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.http.Header
 import retrofit2.http.Query
@@ -24,4 +26,9 @@ interface SearchPlaceRepository {
         @Query("centerLon") centerLon: String? = null,
         @Query("centerLat") centerLat: String? = null
     ): Response<SearchPlaceResponse>
+
+    fun getReverseGeoCode(
+        lat: String,
+        lon: String,
+    ) : Single<TmapAddressInfoResponse>
 }

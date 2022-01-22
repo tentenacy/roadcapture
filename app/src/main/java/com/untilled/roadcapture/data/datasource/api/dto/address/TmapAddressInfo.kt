@@ -3,7 +3,7 @@ package com.untilled.roadcapture.data.datasource.api.dto.address
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
 
-data class AddressInfo(
+data class TmapAddressInfo(
     @SerializedName("fullAddress")
     @Expose
     val fullAddress: String?,
