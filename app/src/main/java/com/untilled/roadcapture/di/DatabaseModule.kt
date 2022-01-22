@@ -19,6 +19,11 @@ object DatabaseModule {
 
     @Singleton
     @Provides
+    fun providePictureDatabase(@ApplicationContext context: Context) :
+            PictureDatabase = PictureDatabase.getInstance(context)
+
+    @Singleton
+    @Provides
     fun providePagingDatabase(@ApplicationContext context: Context): PagingDatabase {
         return PagingDatabase.getInstance(context)
     }

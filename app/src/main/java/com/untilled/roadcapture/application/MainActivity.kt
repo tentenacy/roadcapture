@@ -30,9 +30,6 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
     lateinit var activityResultFactory: ActivityResultFactory<Intent, ActivityResult>
 
     @Inject
-    lateinit var naverLoginManager: OAuthLogin
-
-    @Inject
     lateinit var oauthLoginManagerMap: Map<String, @JvmSuppressWildcards OAuthLoginManagerSubject>
 
     private val isLoggedOutObserver: (Boolean) -> Unit = { isLoggedOut ->
@@ -53,12 +50,6 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
 
     private fun initData() {
         viewModel
-        naverLoginManager.init(
-            this,
-            BuildConfig.SOCIAL_NAVER_CLIENT_ID,
-            BuildConfig.SOCIAL_NAVER_CLIENT_SECRET,
-            BuildConfig.SOCIAL_NAVER_CLIENT_NAME
-        )
     }
 
     private fun observeData() {

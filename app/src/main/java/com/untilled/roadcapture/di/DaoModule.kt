@@ -29,10 +29,6 @@ import javax.inject.Singleton
 abstract class DaoModule {
 
     companion object {
-        @Singleton
-        @Provides
-        fun providePictureDatabase(@ApplicationContext context: Context) :
-                PictureDatabase = PictureDatabase.getInstance(context)
 
         @Singleton
         @Provides

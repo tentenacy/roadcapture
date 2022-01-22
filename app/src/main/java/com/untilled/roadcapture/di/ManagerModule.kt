@@ -1,6 +1,7 @@
 package com.untilled.roadcapture.di
 
 import android.app.Application
+import android.content.Context
 import androidx.work.WorkManager
 import com.facebook.CallbackManager
 import com.facebook.login.LoginManager
@@ -43,7 +44,13 @@ abstract class ManagerModule {
 
         @Provides
         @Singleton
-        fun provideOAuthLogin(): OAuthLogin {
+        fun provideOAuthLogin(application: Application): OAuthLogin {
+            OAuthLogin.getInstance().init(
+                application.applicationContext,
+                BuildConfig.SOCIAL_NAVER_CLIENT_ID,
+                BuildConfig.SOCIAL_NAVER_CLIENT_SECRET,
+                BuildConfig.SOCIAL_NAVER_CLIENT_NAME
+            )
             return OAuthLogin.getInstance()
         }
 
