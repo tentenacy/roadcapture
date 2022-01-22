@@ -145,8 +145,9 @@
                     android:layout_width="192dp"
                     android:layout_height="48dp"
                     android:layout_marginTop="32dp"
-                    android:text="@string/studio_edit"
-                    app:backgroundTint="@color/secondaryColor" />
+                    bind:FollowedStatus="@{user.followed}"
+                    app:backgroundTint="@color/secondaryColor"
+                    tools:text="팔로우"/>
 
                 <ImageView
                     android:id="@+id/img_studio_more_before"

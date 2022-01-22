@@ -47,12 +47,12 @@ interface AlbumApi {
         @Query("placeCond.region3DepthName") region3DepthName: String?,
     ): Single<PageResponse<UserAlbumsResponse>>
 
-    @POST(RoadCapturePathConstant.POST_LIKES)
+    @POST(RoadCapturePathConstant.POST_ALBUMS_LIKES)
     fun likesAlbum(
         @Path("albumId") albumId: Long
     ): Single<Unit>
 
-    @DELETE(RoadCapturePathConstant.DELETE_LIKES)
+    @DELETE(RoadCapturePathConstant.DELETE_ALBUMS_LIKES)
     fun unlikesAlbum(
         @Path("albumId") albumId: Long
     ): Single<Unit>

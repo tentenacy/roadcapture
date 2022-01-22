@@ -1,5 +1,6 @@
 package com.untilled.roadcapture.features.root.studio
 
+import android.widget.Button
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
@@ -47,6 +48,16 @@ object StudiosBindingAdapters {
                 .asBitmap()
                 .load(url)
                 .into(view)
+        }
+    }
+
+    @JvmStatic
+    @BindingAdapter("FollowedStatus")
+    fun setFollowedStatus(view: Button, followed: Boolean){
+        if(followed){
+            view.text = "언팔로우"
+        } else{
+            view.text = "팔로우"
         }
     }
 

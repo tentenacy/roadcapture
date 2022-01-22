@@ -52,8 +52,19 @@ class StudioViewModel @Inject constructor(
             }).addTo(compositeDisposable)
     }
 
-    fun follow(id: Long){
-        followRepository.follow(id)
+    fun follow(toUserId: Long){
+        followRepository.follow(toUserId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+
+            },{ t ->
+                Logger.d("test: $t")
+            })
+    }
+
+    fun unfollow(toUserId: Long){
+        followRepository.unfollow(toUserId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

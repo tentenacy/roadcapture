@@ -10,7 +10,12 @@ import retrofit2.http.*
 interface FollowApi {
     @POST(RoadCapturePathConstant.POST_FOLLOWERS_FOLLOW)
     fun follow(
-        @Path("toUserId") id: Long,
+        @Path("toUserId") toUserId: Long,
+    ): Single<Unit>
+
+    @DELETE(RoadCapturePathConstant.DELETE_FOLLOWERS_FOLLOW)
+    fun unfollow(
+        @Path("toUserId") toUserId: Long,
     ): Single<Unit>
 
     @GET(RoadCapturePathConstant.GET_USER_FOLLOWER)

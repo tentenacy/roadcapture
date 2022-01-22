@@ -58,6 +58,24 @@ class StudioFragment : Fragment() {
         viewModel.getUserInfo(args.id)
     }
 
+    private val btnStudioFollowObserver: (View?) -> Unit = {
+        if(binding.user?.followed!!){
+            viewModel.unfollow(args.id)
+            binding.btnStudioFollow.text = "팔로우"
+            binding.user?.followed = false
+            binding.textStudioFollower.text = (binding.user?.followerCount!! - 1).toString()
+            val temp = binding.user?.followerCount!!
+            binding.user?.followerCount = temp - 1
+        } else{
+            viewModel.follow(args.id)
+            binding.btnStudioFollow.text = "언팔로우"
+            binding.user?.followed = true
+            binding.textStudioFollower.text = (binding.user?.followerCount!! + 1).toString()
+            val temp = binding.user?.followerCount!!
+            binding.user?.followerCount = temp + 1
+        }
+    }
+
     private fun setOnClickListeners() {
         binding.textStudioFollower.setOnClickListener {
             Navigation.findNavController(binding.root)
@@ -67,9 +85,7 @@ class StudioFragment : Fragment() {
             Navigation.findNavController(binding.root)
                 .navigate(StudioFragmentDirections.actionStudioFragmentToFollowingFragment(args.id))
         }
-        binding.btnStudioFollow.setOnClickListener {
-            viewModel.follow(args.id)
-        }
+        binding.btnStudioFollow.setOnClickListener(btnStudioFollowObserver)
         binding.imgStudioMoreBefore.setOnClickListener {
 
         }
