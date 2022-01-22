@@ -13,6 +13,7 @@ import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.data.entity.paging.Albums
+import com.untilled.roadcapture.data.repository.album.AlbumRepository
 
 import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepository
 import com.untilled.roadcapture.data.repository.follower.FollowRepository
@@ -32,6 +33,7 @@ class AlbumsViewModel
     private val userRepository: UserRepository,
     private val followRepository: FollowRepository,
     private val albumPagingRepository: AlbumPagingRepository,
+    private val albumRepository: AlbumRepository
 ) : BaseViewModel() {
 
     private var currentDateTimeFrom: String? = null
@@ -56,6 +58,28 @@ class AlbumsViewModel
             }) { t ->
 
             }.addTo(compositeDisposable)
+    }
+
+    fun likesAlbum(albumsId: Long){
+        albumRepository.likesAlbum(albumsId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+
+            },{
+
+            })
+    }
+
+    fun unlikesAlbum(albumsId: Long){
+        albumRepository.unlikesAlbum(albumsId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+
+            },{
+
+            })
     }
 
     fun getUserFollowing(followingsCondition: FollowingsCondition, pageRequest: PageRequest){

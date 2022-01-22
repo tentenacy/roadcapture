@@ -8,12 +8,11 @@ import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.databinding.BindingAdapter
-import androidx.databinding.ViewDataBinding
+import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
 import com.google.android.material.shape.CornerFamily
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.databinding.ItemAlbumsBinding
 import com.untilled.roadcapture.utils.dateToSnsFormat
 import com.untilled.roadcapture.utils.getPxFromDp
 import de.hdodenhof.circleimageview.CircleImageView
@@ -115,6 +114,13 @@ object AlbumsBindingAdapters {
     fun setSelectedStatus(view: View, clicked: Boolean){
         if(clicked) view.visibility = View.INVISIBLE
         else view.visibility = View.VISIBLE
+    }
+
+    @JvmStatic
+    @BindingAdapter("LikeStatus")
+    fun setLikeStatus(view: LottieAnimationView, like: Boolean){
+        if(like) view.progress = 0.5f
+        else view.progress = 0f
     }
 
     @RequiresApi(Build.VERSION_CODES.O)

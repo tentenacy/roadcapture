@@ -1,12 +1,10 @@
 package com.untilled.roadcapture.data.repository.album
 
-import android.util.Log
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
-import com.untilled.roadcapture.data.datasource.paging.album.AlbumsPagingSource
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import javax.inject.Inject
@@ -15,7 +13,7 @@ import javax.inject.Singleton
 @Singleton
 class AlbumRepositoryImpl
 @Inject constructor(
-    private val api: RoadCaptureApi,
+    private val roadCaptureApi: RoadCaptureApi,
 ) : AlbumRepository {
     override suspend fun getAlbumsTemp(
         page: Int?,
@@ -23,21 +21,25 @@ class AlbumRepositoryImpl
         dateTimeFrom: String?,
         dateTimeTo: String?
     ): Response<PageResponse<AlbumsResponse>> =
-        api.getAlbumsTemp(page, dateTimeFrom, dateTimeTo)
+        roadCaptureApi.getAlbumsTemp(page, dateTimeFrom, dateTimeTo)
 
     override fun getAlbumCommentsList(
         albumId: Long,
         page: Int?,
         size: Int?
-    ): Single<PageResponse<CommentsResponse>> = api.getAlbumComments(albumId, page, size)
+    ): Single<PageResponse<CommentsResponse>> = roadCaptureApi.getAlbumComments(albumId, page, size)
 
     override fun getPictureCommentsList(
         pictureId: Long,
         page: Int?,
         size: Int?
     ): Single<PageResponse<CommentsResponse>> =
-        api.getPictureComments(pictureId,page,size)
+        roadCaptureApi.getPictureComments(pictureId,page,size)
+
+    override fun likesAlbum(albumId: Long): Single<Unit> = roadCaptureApi.likesAlbum(albumId)
+
+    override fun unlikesAlbum(albumId: Long): Single<Unit> = roadCaptureApi.unlikesAlbum(albumId)
 
     override fun getAlbumDetail(id: Long): Single<AlbumResponse> =
-        api.getAlbumDetail(id)
+        roadCaptureApi.getAlbumDetail(id)
 }

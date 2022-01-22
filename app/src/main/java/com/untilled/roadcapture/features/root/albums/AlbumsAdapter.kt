@@ -10,6 +10,7 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.databinding.ItemAlbumsBinding
 import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
+import com.untilled.roadcapture.features.root.albums.dto.LikeStatus
 import javax.inject.Inject
 
 class AlbumsAdapter @Inject constructor(): PagingDataAdapter<Albums.Album, AlbumsAdapter.AlbumViewHolder>(
@@ -25,6 +26,7 @@ class AlbumsAdapter @Inject constructor(): PagingDataAdapter<Albums.Album, Album
 
         fun bind(album: Albums.Album, itemClickListener: (ItemClickArgs?) -> Unit) {
             binding.album = album
+            binding.like = LikeStatus(album.liked,album.likeCount)
             binding.setOnClickItem{ view ->
                 itemClickListener(ItemClickArgs(binding,view))
             }

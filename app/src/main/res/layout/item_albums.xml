@@ -12,6 +12,10 @@
             type="com.untilled.roadcapture.data.entity.paging.Albums.Album" />
 
         <variable
+            name="like"
+            type="com.untilled.roadcapture.features.root.albums.dto.LikeStatus" />
+
+        <variable
             name="onClickItem"
             type="android.view.View.OnClickListener" />
     </data>
@@ -72,6 +76,7 @@
             app:lottie_autoPlay="false"
             app:lottie_loop="false"
             app:lottie_rawRes="@raw/like"
+            bind:LikeStatus="@{like.liked}"
             tools:src="@drawable/ic_like" />
 
         <TextView
@@ -80,7 +85,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:text='@{String.format("%d",album.likeCount)}'
+            android:text='@{String.format("%d",like.likeCount)}'
             android:textColor="@color/black"
             app:layout_constraintBottom_toTopOf="@id/img_ialbums_comment"
             app:layout_constraintEnd_toEndOf="@id/text_ialbums_comment"
