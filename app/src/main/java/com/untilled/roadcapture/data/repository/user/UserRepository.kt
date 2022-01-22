@@ -16,4 +16,6 @@ interface UserRepository {
     fun getUserDetail(): Single<UserResponse>
     fun getUserInfo(userId: Long): Single<UsersResponse>
     fun getUserAlbums(pageRequest: PageRequest, placeCondition: PlaceCondition): Single<PageResponse<UserAlbumsResponse>>
+    fun getUserFollower(userId: Long, followingsCondition: FollowingsCondition, pageRequest: PageRequest): Single<PageResponse<UsersResponse>>
+    fun getUserFollowing(userId: Long, followingsCondition: FollowingsCondition, pageRequest: PageRequest): Single<PageResponse<UsersResponse>>
 }

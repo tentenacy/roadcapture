@@ -40,11 +40,11 @@
             android:id="@+id/action_rootFragment_to_notificationFragment"
             app:destination="@id/notificationFragment" />
         <action
-            android:id="@+id/action_rootFragment_to_followerFragment"
-            app:destination="@id/followerFragment" />
+            android:id="@+id/action_rootFragment_to_followersFragment"
+            app:destination="@id/followersFragment" />
         <action
-            android:id="@+id/action_rootFragment_to_followingFragment"
-            app:destination="@id/followingFragment" />
+            android:id="@+id/action_rootFragment_to_followingsFragment"
+            app:destination="@id/followingsFragment" />
         <action
             android:id="@+id/action_rootFragment_to_myStudioModification"
             app:destination="@id/myStudioModification" />
@@ -155,24 +155,24 @@
             app:destination="@id/studioFragment" />
     </fragment>
     <fragment
-        android:id="@+id/followerFragment"
-        android:name="com.untilled.roadcapture.features.follower.FollowerFragment"
-        android:label="FollowerFragment"
+        android:id="@+id/followersFragment"
+        android:name="com.untilled.roadcapture.features.follower.FollowersFragment"
+        android:label="FollowersFragment"
         tools:layout="@layout/fragment_follower">
         <action
-            android:id="@+id/action_followerFragment_to_studioFragment"
+            android:id="@+id/action_followersFragment_to_studioFragment"
             app:destination="@id/studioFragment" />
         <argument
             android:name="id"
             app:argType="long" />
     </fragment>
     <fragment
-        android:id="@+id/followingFragment"
-        android:name="com.untilled.roadcapture.features.following.FollowingFragment"
-        android:label="FollowingFragment"
+        android:id="@+id/followingsFragment"
+        android:name="com.untilled.roadcapture.features.following.FollowingsFragment"
+        android:label="FollowingsFragment"
         tools:layout="@layout/fragment_following">
         <action
-            android:id="@+id/action_followingFragment_to_studioFragment"
+            android:id="@+id/action_followingsFragment_to_studioFragment"
             app:destination="@id/studioFragment" />
         <argument
             android:name="id"
@@ -295,11 +295,11 @@
         android:label="StudioFragment"
         tools:layout="@layout/fragment_studio">
         <action
-            android:id="@+id/action_studioFragment_to_followerFragment"
-            app:destination="@id/followerFragment" />
+            android:id="@+id/action_studioFragment_to_followersFragment"
+            app:destination="@id/followersFragment" />
         <action
-            android:id="@+id/action_studioFragment_to_followingFragment"
-            app:destination="@id/followingFragment" />
+            android:id="@+id/action_studioFragment_to_followingsFragment"
+            app:destination="@id/followingsFragment" />
         <action
             android:id="@+id/action_studioFragment_to_pictureViewerContainerFragment"
             app:destination="@id/pictureViewerContainerFragment" />

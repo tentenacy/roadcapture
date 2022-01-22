@@ -119,5 +119,16 @@ class UserRepositoryImpl @Inject constructor(
 
     override fun getUserAlbums(pageRequest: PageRequest, placeCondition: PlaceCondition): Single<PageResponse<UserAlbumsResponse>> =
         roadCaptureApi.getUserAlbums(pageRequest.page,pageRequest.size,placeCondition.address1,placeCondition.address2,placeCondition.address3)
+
+    override fun getUserFollower(
+        userId: Long, followingsCondition: FollowingsCondition, pageRequest: PageRequest
+    ): Single<PageResponse<UsersResponse>> =
+        roadCaptureApi.getUserFollowers(userId,pageRequest.page,pageRequest.size,pageRequest.sort,followingsCondition.username)
+            .retryThreeTimes()
+
+    override fun getUserFollowing(
+        userId: Long, followingsCondition: FollowingsCondition, pageRequest: PageRequest
+    ): Single<PageResponse<UsersResponse>> =
+        roadCaptureApi.getUserFollowings(userId,pageRequest.page,pageRequest.size,pageRequest.sort,followingsCondition.username)
             .retryThreeTimes()
 }

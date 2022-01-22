@@ -4,6 +4,7 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.flowable
+import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowersCondition
 import com.untilled.roadcapture.data.datasource.paging.follower.FollowersPagingSource
 import com.untilled.roadcapture.data.datasource.paging.follower.FollowingsPagingSource
@@ -34,15 +35,15 @@ class FollowerPagingRepositoryImpl(
 
     override fun getFollowings(
         userId: Long,
-        followingsCondition: FollowersCondition?
+        followingsCondition: FollowingsCondition?
     ): Flowable<PagingData<Followings.Following>> {
 
-        followersPagingSource.userId = userId
-        followersPagingSource.followersCondition = followingsCondition
+        followingsPagingSource.userId = userId
+        followingsPagingSource.followingsCondition = followingsCondition
         return Pager(
             config = PagingConfig(
                 pageSize = 20,
-                enablePlaceholders = true,
+                enablePlaceholders = false,
                 maxSize = 30,
                 prefetchDistance = 5,
                 initialLoadSize = 40

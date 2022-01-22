@@ -3,7 +3,7 @@ package com.untilled.roadcapture.data.datasource.paging.follower
 import androidx.paging.PagingState
 import androidx.paging.rxjava3.RxPagingSource
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
-import com.untilled.roadcapture.data.datasource.api.dto.user.FollowersCondition
+import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.entity.mapper.FollowersMapper
 import com.untilled.roadcapture.data.entity.paging.Followings
 import io.reactivex.rxjava3.core.Single
@@ -19,7 +19,7 @@ class FollowingsPagingSource @Inject constructor(
 ): RxPagingSource<Int, Followings.Following>() {
 
     var userId by Delegates.notNull<Long>()
-    var followingsCondition: FollowersCondition? = null
+    var followingsCondition: FollowingsCondition? = null
 
     override fun getRefreshKey(state: PagingState<Int, Followings.Following>): Int? {
         return null

@@ -77,4 +77,27 @@ class AlbumsViewModel
 
             })
     }
+
+//    fun getUserFollowing(followingsCondition: FollowingsCondition, pageRequest: PageRequest){
+//        userRepository.getUserFollowing(followingsCondition, pageRequest)
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe({ user ->
+//                _user.postValue(user)
+//            },{ error ->
+//                Logger.d("test: $error")
+//            })
+//    }
+//
+//    fun getFollowingAlbums(id: Long?, pageRequest: PageRequest){
+//        followRepository.getFollowingAlbums(id,pageRequest)
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe({ response ->
+//                _followingAlbums.postValue(response)
+//            }, { t ->
+//
+//            }).addTo(compositeDisposable)
+//    }
+
 }

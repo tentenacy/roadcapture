@@ -19,13 +19,13 @@ class FollowingsViewModel @Inject constructor(
     private var _followings = MutableLiveData<PagingData<Followings.Following>>()
     val followings: LiveData<PagingData<Followings.Following>> get() = _followings
 
-    fun getFollowings(userId: Long, cond: FollowersCondition? = null) {
-        followersPagingRepository.getFollowings(userId, cond)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ pagingData ->
-
-            }) { t ->
-
-            }
-    }
+//    fun getFollowings(userId: Long, cond: FollowersCondition? = null) {
+//        followersPagingRepository.getFollowings(userId, cond)
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe({ pagingData ->
+//
+//            }) { t ->
+//
+//            }
+//    }
 }

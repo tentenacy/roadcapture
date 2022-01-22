@@ -92,7 +92,7 @@ class AlbumsFragment : Fragment() {
             item.textIalbumsLike.text = (item.like!!.likeCount).toString()
             viewModel.likesAlbum(item.album!!.albumsId)
         } else {
-            val animator = getValueAnimator(0.5f,1f, view)
+            val animator = getValueAnimator(0.5f,0.0f, view)
             animator.start()
             item.like!!.likeCount--
             item.like!!.liked = false

@@ -16,26 +16,13 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
-class FollowerViewModel @Inject constructor(
+class FollowersViewModel @Inject constructor(
     private val followerPagingRepository: FollowerPagingRepository,
     private val followRepository: FollowRepository,
 ) : BaseViewModel() {
 
     private val _user = MutableLiveData<PagingData<Followers.Follower>>()
     val user: LiveData<PagingData<Followers.Follower>> get() = _user
-
-/*
-    fun getUserFollowing(followingsCondition: FollowingsCondition, pageRequest: PageRequest){
-        userRepository.getUserFollowing(followingsCondition,pageRequest)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ response->
-                _user.postValue(response)
-            },{ t ->
-                Logger.d("test: $t")
-            }).addTo(compositeDisposable)
-    }
-*/
 
     fun getUserFollower(userId: Long, followersCondition: FollowersCondition? = null){
         followerPagingRepository.getFollowers(userId, followersCondition)

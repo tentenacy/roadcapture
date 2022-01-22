@@ -43,11 +43,11 @@ fun RootFragment.navigateToPictureViewerContainer(id: Long) {
 }
 
 fun RootFragment.navigateToFollower(id: Long) {
-    binding.root.navigate(RootFragmentDirections.actionRootFragmentToFollowerFragment(id))
+    binding.root.navigate(RootFragmentDirections.actionRootFragmentToFollowersFragment(id))
 }
 
 fun RootFragment.navigateToFollowing(id: Long) {
-    binding.root.navigate(RootFragmentDirections.actionRootFragmentToFollowingFragment(id))
+    binding.root.navigate(RootFragmentDirections.actionRootFragmentToFollowingsFragment(id))
 }
 
 fun RootFragment.navigateToSettings() {
@@ -119,11 +119,11 @@ fun SignupFragment.navigateToRoot() {
 }
 
 fun StudioFragment.navigateToFollower(id: Long) {
-    binding.root.navigate(StudioFragmentDirections.actionStudioFragmentToFollowerFragment(id))
+    binding.root.navigate(StudioFragmentDirections.actionStudioFragmentToFollowersFragment(id))
 }
 
 fun StudioFragment.navigateToFollowing(id: Long) {
-    binding.root.navigate(StudioFragmentDirections.actionStudioFragmentToFollowingFragment(id))
+    binding.root.navigate(StudioFragmentDirections.actionStudioFragmentToFollowingsFragment(id))
 }
 
 fun LoginFragment.navigateToEmailLogin() {
