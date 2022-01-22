@@ -21,4 +21,7 @@ interface PictureDao {
 
     @Query("delete from picture")
     fun deleteAll() : Completable
+
+    @Query("update picture set thumbnail = 0 where thumbnail = 1")
+    fun initThumbnail() : Completable
 }

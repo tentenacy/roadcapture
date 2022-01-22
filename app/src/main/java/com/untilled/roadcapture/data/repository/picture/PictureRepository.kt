@@ -14,4 +14,6 @@ interface PictureRepository {
     fun getPictures() : Flowable<List<Picture>>
 
     fun deleteAll() : Completable
+
+    fun initThumbnail() : Completable
 }

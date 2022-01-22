@@ -30,4 +30,6 @@ constructor(
     override fun deleteAll(): Completable =
         pictureDao.deleteAll()
 
+    override fun initThumbnail() : Completable =
+        pictureDao.initThumbnail()
 }
