@@ -1,5 +1,7 @@
 package com.untilled.roadcapture.features.root.capture
 
+import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.data.repository.picture.PictureRemoteRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
@@ -13,11 +15,12 @@ import javax.inject.Inject
 @HiltViewModel
 class PictureEditorViewModel
 @Inject constructor(private val remoteRepository: PictureRemoteRepository) : BaseViewModel() {
+    val order = MutableLiveData<Long>()
 
     fun insertPicture(picture: Picture) {
         val completableList = mutableListOf<Completable>()
 
-        if(picture.thumbnail) {     // 썸네일 체크 되어있다면 기존 썸네일 초기화 진행 후 삽입
+        if (picture.thumbnail) {     // 썸네일 체크 되어있다면 기존 썸네일 초기화 진행 후 삽입
             completableList.add(remoteRepository.initThumbnail())
         }
         completableList.add(remoteRepository.insertPicture(picture))
@@ -32,7 +35,7 @@ class PictureEditorViewModel
     fun updatePicture(picture: Picture) {
         val completableList = mutableListOf<Completable>()
 
-        if(picture.thumbnail) {     // 썸네일 체크 되어있다면 기존 썸네일 초기화 진행 후 삽입
+        if (picture.thumbnail) {     // 썸네일 체크 되어있다면 기존 썸네일 초기화 진행 후 삽입
             completableList.add(remoteRepository.initThumbnail())
         }
         completableList.add(remoteRepository.updatePicture(picture))
@@ -50,5 +53,15 @@ class PictureEditorViewModel
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe()
             .addTo(compositeDisposable)
+    }
+
+    fun getNextOrder() {
+        remoteRepository.getNextOrder()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { order -> order + 1 }
+            .subscribe { _order ->
+                order.postValue(_order)
+            }
     }
 }

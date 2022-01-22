@@ -4,6 +4,7 @@ import com.untilled.roadcapture.data.datasource.dao.PictureDao
 import com.untilled.roadcapture.data.entity.Picture
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -32,4 +33,7 @@ constructor(
 
     override fun initThumbnail() : Completable =
         pictureDao.initThumbnail()
+
+    override fun getNextOrder() : Single<Long> =
+        pictureDao.getNextOrder()
 }

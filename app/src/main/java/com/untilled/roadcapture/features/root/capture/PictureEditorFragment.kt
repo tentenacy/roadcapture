@@ -2,6 +2,7 @@ package com.untilled.roadcapture.features.root.capture
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +12,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import androidx.paging.PagingData
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPictureEditorBinding
 import dagger.hilt.android.AndroidEntryPoint
+import retrofit2.http.POST
 
 @AndroidEntryPoint
 class PictureEditorFragment : Fragment() {
@@ -24,6 +27,10 @@ class PictureEditorFragment : Fragment() {
     private var mode = POST
 
     private val viewModel: PictureEditorViewModel by viewModels()
+
+    private val orderObserver: (Long) -> Unit = { order ->
+        picture?.order = order
+    }
 
     private val placeOnClickListener : (View?) -> Unit = {
         Navigation.findNavController(binding.root).navigate(
@@ -75,7 +82,12 @@ class PictureEditorFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         getNavArgs()
+        observeData()
         setOnClickListeners()
+    }
+
+    private fun observeData() {
+        viewModel.order.observe(viewLifecycleOwner, orderObserver)
     }
 
     private fun setOnClickListeners() {
@@ -93,10 +105,11 @@ class PictureEditorFragment : Fragment() {
     private fun getNavArgs() {
         val args: PictureEditorFragmentArgs by navArgs()
         if (args.picture != null) {
-            mode = when (args.picture!!.id) {
-                0L -> POST      // id가 0이면 새로 등록
-                else -> EDIT    // 아니면 기존 picture 수정
+            mode = if (args.picture!!.id == 0L) POST else EDIT
+            if(args.picture!!.order == 0L) {
+                viewModel.getNextOrder()
             }
+
             picture = args.picture
             binding.picture = picture
         }

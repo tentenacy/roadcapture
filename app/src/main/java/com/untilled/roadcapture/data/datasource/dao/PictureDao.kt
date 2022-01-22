@@ -4,6 +4,7 @@ import androidx.room.*
 import com.untilled.roadcapture.data.entity.Picture
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.Single
 
 @Dao
 interface PictureDao {
@@ -16,12 +17,15 @@ interface PictureDao {
     @Delete
     fun deletePicture(picture: Picture): Completable
 
-    @Query("select * from picture")
+    @Query("SELECT * FROM picture")
     fun getPictures(): Flowable<List<Picture>>
 
-    @Query("delete from picture")
+    @Query("DELETE FROM picture")
     fun deleteAll() : Completable
 
-    @Query("update picture set thumbnail = 0 where thumbnail = 1")
+    @Query("UPDATE picture SET thumbnail = 0 WHERE thumbnail = 1")
     fun initThumbnail() : Completable
+
+    @Query("SELECT IFNULL(MAX(`order`), 0) FROM picture")
+    fun getNextOrder(): Single<Long>
 }
