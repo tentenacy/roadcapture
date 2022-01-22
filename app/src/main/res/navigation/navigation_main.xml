@@ -156,7 +156,7 @@
     </fragment>
     <fragment
         android:id="@+id/followerFragment"
-        android:name="com.untilled.roadcapture.features.root.studio.FollowerFragment"
+        android:name="com.untilled.roadcapture.features.follower.FollowerFragment"
         android:label="FollowerFragment"
         tools:layout="@layout/fragment_follower">
         <action
@@ -168,7 +168,7 @@
     </fragment>
     <fragment
         android:id="@+id/followingFragment"
-        android:name="com.untilled.roadcapture.features.root.studio.FollowingFragment"
+        android:name="com.untilled.roadcapture.features.following.FollowingFragment"
         android:label="FollowingFragment"
         tools:layout="@layout/fragment_following">
         <action
@@ -291,7 +291,7 @@
     </fragment>
     <fragment
         android:id="@+id/studioFragment"
-        android:name="com.untilled.roadcapture.features.root.studio.StudioFragment"
+        android:name="com.untilled.roadcapture.features.studio.StudioFragment"
         android:label="StudioFragment"
         tools:layout="@layout/fragment_studio">
         <action

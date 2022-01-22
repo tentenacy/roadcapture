@@ -23,9 +23,9 @@ data class Followers(
     data class Follower(
         @PrimaryKey(autoGenerate = true) val id: Long = 0,
         var followerId: Long,
-        var profileImageUrl: String,
+        var profileImageUrl: String?,
         var username: String,
-        var introduction: String,
+        var introduction: String?,
     ): Parcelable
 
     @Parcelize

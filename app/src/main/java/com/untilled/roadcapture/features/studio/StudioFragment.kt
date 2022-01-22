@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.root.studio
+package com.untilled.roadcapture.features.studio
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,9 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
-import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
-import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.databinding.FragmentStudioBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,14 +25,6 @@ class StudioFragment : Fragment() {
 
     private val userObserver = { user: UsersResponse ->
         binding.user = user
-    }
-
-    private val followerObserver = { follower: PageResponse<UsersResponse> ->
-        binding.follower = follower
-    }
-
-    private val followingObserver = { following: PageResponse<UsersResponse> ->
-        binding.following = following
     }
 
     override fun onCreateView(
@@ -61,15 +51,11 @@ class StudioFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.user.observe(viewLifecycleOwner,userObserver)
-        viewModel.follower.observe(viewLifecycleOwner,followerObserver)
-        viewModel.following.observe(viewLifecycleOwner,followingObserver)
+        viewModel.userInfo.observe(viewLifecycleOwner,userObserver)
     }
 
     private fun initViews(){
         viewModel.getUserInfo(args.id)
-        viewModel.getUserFollower(FollowingsCondition(args.id), PageRequest())
-        viewModel.getUserFollowing(FollowingsCondition(args.id), PageRequest())
     }
 
     private fun setOnClickListeners() {

@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.root.studio
+package com.untilled.roadcapture.features.follower
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

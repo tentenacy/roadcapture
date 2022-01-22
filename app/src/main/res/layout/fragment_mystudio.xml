@@ -11,10 +11,6 @@
             type="com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse" />
 
         <variable
-            name="follower"
-            type="com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse" />
-
-        <variable
             name="following"
             type="com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse" />
     </data>
@@ -43,8 +39,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:scaleType="centerCrop"
+                    bind:studioBackgroundImage="@{user.backgroundImageUrl}"
                     tools:src="@drawable/img_sample_profilebg" />
-<!--                    bind:studioBackgroundImage="@{user.backgroundUrl}"-->
 
                 <View
                     android:id="@+id/view_mystudio_overlay"
@@ -113,7 +109,7 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:gravity="top|center"
-                    android:text="@{Integer.toString(follower.totalElements)}"
+                    android:text="@{Integer.toString(user.followerCount)}"
                     tools:layout_editor_absoluteX="51dp"
                     tools:layout_editor_absoluteY="325dp" />
 
@@ -132,7 +128,7 @@
                     android:layout_width="56dp"
                     android:layout_height="56dp"
                     android:gravity="top|center"
-                    android:text="@{Integer.toString(following.totalElements)}" />
+                    android:text="@{Integer.toString(user.followingCount)}" />
 
                 <Button
                     android:id="@+id/btn_mystudio_edit"

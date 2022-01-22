@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.paging.PagingData
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.data.datasource.sharedpref.User
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.databinding.FragmentMystudioBinding
@@ -30,6 +31,9 @@ class MyStudioFragment : Fragment() {
 
     private val userAlbumsObserver: (PagingData<UserAlbums.UserAlbum>) -> Unit = { pagingData ->
         userAlbumsAdapter.submitData(lifecycle, pagingData)
+    }
+    private val userInfoObserver: (UsersResponse) -> Unit = { user ->
+        binding.user = user
     }
 
     override fun onCreateView(
@@ -60,16 +64,18 @@ class MyStudioFragment : Fragment() {
 
     private fun observeData() {
         viewModel.userAlbums.observe(viewLifecycleOwner, userAlbumsObserver)
+        viewModel.userInfo.observe(viewLifecycleOwner,userInfoObserver)
     }
 
     private fun initViews(){
+        viewModel.getUserInfo(User.id)
     }
 
     private fun initAdapter() {
         refresh()
     }
 
-    fun refresh() {
+    private fun refresh() {
         viewModel.getUserAlbums()
     }
 

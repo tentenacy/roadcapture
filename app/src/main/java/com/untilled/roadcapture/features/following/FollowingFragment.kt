@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.root.studio
+package com.untilled.roadcapture.features.following
 
 import android.graphics.Color
 import android.os.Bundle
@@ -9,26 +9,23 @@ import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import androidx.paging.PagingData
-import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
-import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
-import com.untilled.roadcapture.data.entity.paging.Followers
-import com.untilled.roadcapture.databinding.FragmentFollowerBinding
+import com.untilled.roadcapture.databinding.FragmentFollowingBinding
 import com.untilled.roadcapture.features.common.CustomDivider
+import com.untilled.roadcapture.features.follower.FollowerViewModel
 import com.untilled.roadcapture.utils.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FollowerFragment : Fragment(){
+class FollowingFragment : Fragment(){
 
-    private var _binding: FragmentFollowerBinding? = null
+    private var _binding: FragmentFollowingBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: FollowerViewModel by viewModels()
-    private val args: FollowerFragmentArgs by navArgs()
-    private val userObserver: (PagingData<Followers.Follower>) -> Unit = { pagingData ->
-
+    private val args: FollowingFragmentArgs by navArgs()
+    //private val viewModel: FollowerViewModel by viewModels()
+    private val userObserver = { user: PageResponse<UsersResponse> ->
+        initAdapter(user)
     }
 
     override fun onCreateView(
@@ -36,7 +33,7 @@ class FollowerFragment : Fragment(){
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentFollowerBinding.inflate(layoutInflater,container,false)
+        _binding = FragmentFollowingBinding.inflate(layoutInflater,container,false)
 
         return binding.root
     }
@@ -54,24 +51,21 @@ class FollowerFragment : Fragment(){
         observeData()
         setOnClickListeners()
     }
-
-    private fun initViews() {
-        viewModel.getUserFollower(args.id.toLong())
+    private fun initViews(){
+//        viewModel.getUserFollowing(FollowingsCondition(args.id), PageRequest())
     }
-
-    private fun observeData() {
-        viewModel.user.observe(viewLifecycleOwner, userObserver)
+    private fun observeData(){
+//        viewModel.user.observe(viewLifecycleOwner,userObserver)
     }
 
     private fun setOnClickListeners(){
-        binding.imageFollowerBack.setOnClickListener {
+        binding.imageFollowingBack.setOnClickListener {
             requireActivity().onBackPressed()
         }
-        binding.edtFollowerInput.setOnEditorActionListener { v, actionId, event ->
+        binding.edtFollowingInput.setOnEditorActionListener { v, actionId, event ->
             when(actionId) {
                 EditorInfo.IME_ACTION_SEARCH -> {
-
-                    requireActivity().hideKeyboard(binding.edtFollowerInput)
+                    requireActivity().hideKeyboard(binding.edtFollowingInput)
                     return@setOnEditorActionListener true
                 }
                 else -> return@setOnEditorActionListener false
@@ -84,7 +78,7 @@ class FollowerFragment : Fragment(){
 
     private fun initDivider() {
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
-        binding.recyclerFollower.addItemDecoration(customDivider)
+        binding.recyclerFollowing.addItemDecoration(customDivider)
     }
 
 }
