@@ -17,7 +17,7 @@ data class PictureComments(
 ): Parcelable {
 
     @IgnoredOnParcel
-    val endOfPage = total - 1 == page
+    val endOfPage = total == page
 
     @Parcelize
     @Entity(tableName = "picture_comments")

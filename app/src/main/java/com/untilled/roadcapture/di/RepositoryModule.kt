@@ -46,7 +46,7 @@ abstract class RepositoryModule {
             followingAlbumsPagingSource: FollowingAlbumsPagingSource,
             userAlbumsPagingSource: UserAlbumsPagingSource
         ): AlbumPagingRepository {
-            return AlbumPagingRepositoryImpl(albumsPagingSource, followingAlbumsPagingSource,userAlbumsPagingSource)
+            return AlbumPagingRepositoryImpl(albumsPagingSource, followingAlbumsPagingSource, userAlbumsPagingSource)
         }
 
         @Singleton

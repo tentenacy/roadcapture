@@ -42,7 +42,7 @@ class FollowingAlbumsPagingSource @Inject constructor(
         return LoadResult.Page(
             data = data.albums,
             prevKey = if(position == 0) null else position - 1,
-            nextKey = if(position == data.total - 1) null else position + 1,
+            nextKey = if(position == data.total) null else position + 1,
         )
     }
 }

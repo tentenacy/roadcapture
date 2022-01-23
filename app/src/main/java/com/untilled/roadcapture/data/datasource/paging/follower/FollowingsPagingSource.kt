@@ -58,7 +58,7 @@ class FollowingsPagingSource @Inject constructor(
         return PagingSource.LoadResult.Page(
             data = data.followings,
             prevKey = if(position == 0) null else position - 1,
-            nextKey = if(position == data.total - 1) null else position + 1,
+            nextKey = if(position == data.total) null else position + 1,
         )
     }
 }

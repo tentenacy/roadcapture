@@ -51,7 +51,7 @@ class WithdrawalFragment : Fragment(){
 
             override fun onTextChanged(text: CharSequence?, start: Int, before: Int, count: Int) {
                 Log.d("Tag",text.toString())
-                if(text.toString() == "kwangddang11@naver.com"){
+                if(text.toString() == "kwangddang11@naver.com") {
                     binding.btnWithdrawalConfirm.isClickable = true
                     binding.btnWithdrawalConfirm.setBackgroundColor(Color.parseColor("#3d86c7"))
                     binding.btnWithdrawalConfirm.setTextColor(Color.WHITE)

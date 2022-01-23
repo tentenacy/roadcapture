@@ -17,7 +17,7 @@ data class AlbumComments(
 ): Parcelable {
 
     @IgnoredOnParcel
-    val endOfPage = total - 1 == page
+    val endOfPage = total == page
 
     @Parcelize
     @Entity(tableName = "album_comments")

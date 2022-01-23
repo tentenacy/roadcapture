@@ -27,7 +27,7 @@ class FollowingAlbumsViewModel @Inject constructor(
 
     fun getFollowingAlbums(cond: FollowingAlbumsCondition) {
         albumPagingRepository.getFollowingAlbums(cond)
-            .subscribeOn(AndroidSchedulers.mainThread())
+            .observeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
             .subscribe({ pagingData ->
                 _followingAlbums.value = pagingData
