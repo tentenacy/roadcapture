@@ -89,9 +89,6 @@ class LoginFragment : BaseFragment() {
     }
 
     private val loginObserver: (SocialType?) -> Unit = { socialType ->
-        if(socialType != null) {
-            mainActivity().viewModel.registerToOAuthLoginManagerSubject(socialType)
-        }
         navigateToRoot()
     }
 

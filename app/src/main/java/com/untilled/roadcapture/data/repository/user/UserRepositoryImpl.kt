@@ -13,7 +13,11 @@ import com.untilled.roadcapture.data.datasource.dao.LocalTokenDao
 import com.untilled.roadcapture.utils.retryThreeTimes
 import com.untilled.roadcapture.utils.toErrorResponseOrNull
 import com.untilled.roadcapture.utils.type.SocialType
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.kotlin.Flowables
+import java.io.IOException
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -69,10 +73,10 @@ class UserRepositoryImpl @Inject constructor(
                 }
                 return@flatMap Single.error(IllegalStateException("Network error"))
             }
-            .retry(3)
     }
 
-    override fun getMyInfo(): Single<UsersResponse> = roadCaptureApi.getMyInfo().retryThreeTimes()
+    override fun getMyInfo(): Single<UsersResponse> = roadCaptureApi.getMyInfo()
+
 
     override fun login(loginRequest: LoginRequest): Single<TokenResponse> =
         roadCaptureApi.login(loginRequest)

@@ -45,10 +45,10 @@ class MyStudioViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
-                _userInfo.postValue(response)
-            },{
+                _userInfo.value = response
+            }) {
 
-            })
+            }
     }
 
 }

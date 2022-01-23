@@ -33,7 +33,6 @@ class PictureCommentsPagingSource @Inject constructor(
             pictureId = pictureId,
         )
             .subscribeOn(Schedulers.io())
-            .retry(3)
             .map { mapper.transformToPictureComments(it) }
             .map { toLoadResult(it, position) }
             .onErrorReturn { LoadResult.Error(it) }

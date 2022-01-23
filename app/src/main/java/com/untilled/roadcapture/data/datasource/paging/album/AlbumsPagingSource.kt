@@ -33,7 +33,6 @@ class AlbumsPagingSource @Inject constructor(
             dateTimeTo = albumsCondition.dateTimeTo,
         )
             .subscribeOn(Schedulers.io())
-            .retry(3)
             .map { mapper.transform(it) }
             .map { toLoadResult(it, position) }
             .onErrorReturn { LoadResult.Error(it) }

@@ -34,7 +34,6 @@ class AlbumCommentsPagingSource @Inject constructor(
             albumId = albumId,
         )
             .subscribeOn(Schedulers.io())
-            .retry(3)
             .map { mapper.transformToAlbumComments(it) }
             .map { toLoadResult(it, position) }
             .onErrorReturn { LoadResult.Error(it) }

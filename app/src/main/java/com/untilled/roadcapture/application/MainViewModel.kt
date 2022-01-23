@@ -4,12 +4,10 @@ import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.untilled.roadcapture.data.repository.token.LocalTokenRepository
-import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
 import com.untilled.roadcapture.data.repository.user.LocalUserRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
 import com.untilled.roadcapture.network.interceptor.TokenInterceptor
-import com.untilled.roadcapture.network.observer.OAuthTokenExpirationObserver
 import com.untilled.roadcapture.network.observer.TokenExpirationObserver
 import com.untilled.roadcapture.network.subject.OAuthLoginManagerSubject
 import com.untilled.roadcapture.utils.type.SocialType
@@ -26,7 +24,7 @@ class MainViewModel @Inject constructor(
     private val localUserRepository: LocalUserRepository,
     private val tokenExpirationObservable: TokenInterceptor,
     private val oauthLoginManagerMap: Map<String, @JvmSuppressWildcards OAuthLoginManagerSubject>,
-) : BaseViewModel(), TokenExpirationObserver, OAuthTokenExpirationObserver {
+) : BaseViewModel(), TokenExpirationObserver {
 
     private var _logout = MutableLiveData<View>()
     val logout: LiveData<View> get() = _logout
@@ -56,10 +54,6 @@ class MainViewModel @Inject constructor(
         logout()
     }
 
-    override fun onOAuthTokenExpired() {
-        logout()
-    }
-
     fun setBindingRoot(bindingRoot: View) {
         _bindingRoot.value = bindingRoot
     }
@@ -74,14 +68,7 @@ class MainViewModel @Inject constructor(
         localTokenRepository.clearToken()
     }
 
-    fun registerToOAuthLoginManagerSubject(socialType: SocialType) {
-        oauthLoginManagerMap[socialType.name]?.registerObserver(this)
-    }
-
     private fun unregisterObservers() {
         tokenExpirationObservable.unregisterObserver(this)
-        localTokenRepository.getOAuthToken().whenHasOAuthToken {
-            oauthLoginManagerMap[it.name]?.unregisterObserver(this)
-        }
     }
 }

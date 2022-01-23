@@ -5,7 +5,6 @@ import androidx.annotation.RequiresApi
 import com.google.gson.GsonBuilder
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.api.TmapService
-import com.untilled.roadcapture.network.interceptor.OAuthTokenInterceptor
 import com.untilled.roadcapture.network.interceptor.TokenInterceptor
 import dagger.Module
 import dagger.Provides
@@ -52,12 +51,10 @@ class NetworkModule {
     fun provideRetrofitBuilder(
         httpLoggingInterceptor: HttpLoggingInterceptor,
         tokenInterceptor: TokenInterceptor,
-        oauthTokenInterceptor: OAuthTokenInterceptor,
     ): Retrofit.Builder {
 
         val client = OkHttpClient.Builder()
             .addInterceptor(tokenInterceptor)
-            .addInterceptor(oauthTokenInterceptor)
             .addInterceptor(httpLoggingInterceptor)
             .build()
 

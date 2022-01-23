@@ -34,7 +34,6 @@ class FollowingAlbumsPagingSource @Inject constructor(
             sort = null
         )
             .subscribeOn(Schedulers.io())
-            .retry(3)
             .map { mapper.transform(it) }
             .map { toLoadResult(it,position) }
             .onErrorReturn{ LoadResult.Error(it) }

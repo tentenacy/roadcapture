@@ -35,7 +35,6 @@ class FollowersPagingSource @Inject constructor(
             username = followersCondition?.username,
         )
             .subscribeOn(Schedulers.io())
-            .retry(3)
             .map { mapper.transformToFollowers(it) }
             .map { toLoadResult(it, position) }
             .onErrorReturn { LoadResult.Error(it) }
