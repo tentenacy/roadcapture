@@ -16,6 +16,8 @@ object RoadCapturePathConstant {
     const val GET_USER_FOLLOWER = "/users/{userId}/followers/from"
     const val GET_USER_FOLLOWING = "/users/{userId}/followers/to"
     const val GET_USER_ALBUMS = "/users/albums"
+    const val GET_MY_FOLLOWER = "/followers/from"
+    const val GET_MY_FOLLOWING = "/followers/to"
 
     const val GET_FOLLOWERS_TO_ALBUMS = "/followers/to/albums"
 

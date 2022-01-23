@@ -1,5 +1,6 @@
 package com.untilled.roadcapture.data.datasource.paging.follower
 
+import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import androidx.paging.rxjava3.RxPagingSource
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
@@ -18,7 +19,7 @@ class FollowingsPagingSource @Inject constructor(
     private val roadCaptureApi: RoadCaptureApi,
 ): RxPagingSource<Int, Followings.Following>() {
 
-    var userId by Delegates.notNull<Long>()
+    var userId: Long? = null
     var followingsCondition: FollowingsCondition? = null
 
     override fun getRefreshKey(state: PagingState<Int, Followings.Following>): Int? {
@@ -28,20 +29,33 @@ class FollowingsPagingSource @Inject constructor(
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Followings.Following>> {
         val position = params.key ?: 0
 
-        return roadCaptureApi.getUserFollowings(
-            page = position,
-            size = params.loadSize,
-            id = userId,
-            username = followingsCondition?.username,
-        )
-            .subscribeOn(Schedulers.io())
-            .map { mapper.transformToFollowings(it) }
-            .map { toLoadResult(it, position) }
-            .onErrorReturn { LoadResult.Error(it) }
+        if(userId == null) {
+            return roadCaptureApi.getFollowings(
+                page = position,
+                size = params.loadSize,
+                username = followingsCondition?.username,
+            )
+                .subscribeOn(Schedulers.io())
+                .map { mapper.transformToFollowings(it) }
+                .map { toLoadResult(it, position) }
+                .onErrorReturn { LoadResult.Error(it) }
+        }
+        else {
+            return roadCaptureApi.getUserFollowings(
+                page = position,
+                size = params.loadSize,
+                id = userId,
+                username = followingsCondition?.username,
+            )
+                .subscribeOn(Schedulers.io())
+                .map { mapper.transformToFollowings(it) }
+                .map { toLoadResult(it, position) }
+                .onErrorReturn { LoadResult.Error(it) }
+        }
     }
 
-    private fun toLoadResult(data: Followings, position: Int): LoadResult<Int, Followings.Following> {
-        return LoadResult.Page(
+    private fun toLoadResult(data: Followings, position: Int): PagingSource.LoadResult<Int, Followings.Following> {
+        return PagingSource.LoadResult.Page(
             data = data.followings,
             prevKey = if(position == 0) null else position - 1,
             nextKey = if(position == data.total - 1) null else position + 1,

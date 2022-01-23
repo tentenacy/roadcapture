@@ -17,7 +17,7 @@ class FollowerPagingRepositoryImpl(
     private val followingsPagingSource: FollowingsPagingSource,
 ): FollowerPagingRepository {
 
-    override fun getFollowers(userId: Long, followersCondition: FollowersCondition?): Flowable<PagingData<Followers.Follower>> {
+    override fun getUserFollowers(userId: Long, followersCondition: FollowersCondition?): Flowable<PagingData<Followers.Follower>> {
 
         followersPagingSource.userId = userId
         followersPagingSource.followersCondition = followersCondition
@@ -33,12 +33,42 @@ class FollowerPagingRepositoryImpl(
         ).flowable
     }
 
-    override fun getFollowings(
+    override fun getUserFollowings(
         userId: Long,
         followingsCondition: FollowingsCondition?
     ): Flowable<PagingData<Followings.Following>> {
 
         followingsPagingSource.userId = userId
+        followingsPagingSource.followingsCondition = followingsCondition
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = false,
+                maxSize = 30,
+                prefetchDistance = 5,
+                initialLoadSize = 40
+            ),
+            pagingSourceFactory = { followingsPagingSource }
+        ).flowable
+    }
+
+    override fun getFollowers(followersCondition: FollowersCondition?): Flowable<PagingData<Followers.Follower>> {
+        followersPagingSource.userId = null
+        followersPagingSource.followersCondition = followersCondition
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = true,
+                maxSize = 30,
+                prefetchDistance = 5,
+                initialLoadSize = 40
+            ),
+            pagingSourceFactory = { followersPagingSource }
+        ).flowable
+    }
+
+    override fun getFollowings(followingsCondition: FollowingsCondition?): Flowable<PagingData<Followings.Following>> {
+        followingsPagingSource.userId = null
         followingsPagingSource.followingsCondition = followingsCondition
         return Pager(
             config = PagingConfig(

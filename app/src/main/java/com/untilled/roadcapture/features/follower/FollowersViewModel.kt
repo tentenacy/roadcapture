@@ -27,7 +27,7 @@ class FollowersViewModel @Inject constructor(
     val user: LiveData<PagingData<Followers.Follower>> get() = _user
 
     fun getUserFollower(userId: Long, followersCondition: FollowersCondition? = null){
-        followerPagingRepository.getFollowers(userId, followersCondition)
+        followerPagingRepository.getUserFollowers(userId, followersCondition)
             .observeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
             .subscribe({ response->

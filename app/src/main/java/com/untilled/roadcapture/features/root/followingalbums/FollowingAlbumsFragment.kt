@@ -13,8 +13,10 @@ import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.album.FollowingAlbumsCondition
 import com.untilled.roadcapture.data.entity.paging.Albums
+import com.untilled.roadcapture.data.entity.paging.Followings
 import com.untilled.roadcapture.databinding.FragmentFollowingalbumsBinding
 import com.untilled.roadcapture.databinding.ItemAlbumsBinding
+import com.untilled.roadcapture.databinding.ItemFollowingFilterBinding
 import com.untilled.roadcapture.features.common.ReportDialogFragment
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.*
@@ -27,20 +29,37 @@ class FollowingAlbumsFragment : Fragment() {
     private var _binding: FragmentFollowingalbumsBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: FollowingAlbumsViewModel by viewModels()
-    private val adapter: FollowingAlbumsAdapter by lazy {
-        FollowingAlbumsAdapter(itemOnClickListener)
+    private val albumViewModel: FollowingAlbumsViewModel by viewModels()
+    private val filterViewModel: FollowingAlbumsFilterViewModel by viewModels()
+
+    private val albumAdapter: FollowingAlbumsAdapter by lazy {
+        FollowingAlbumsAdapter(albumItemOnClickListener)
+    }
+    private val filterAdapter: FollowingAlbumsFilterAdapter by lazy{
+        FollowingAlbumsFilterAdapter(filterItemOnClickListener)
     }
 
     private val followingAlbumObserver: (PagingData<Albums.Album>) -> Unit = { pagingData ->
-        adapter.submitData(lifecycle, pagingData)
+        albumAdapter.submitData(lifecycle, pagingData)
+    }
+
+    private val followingFilterObserver: (PagingData<Followings.Following>) -> Unit = { pagingData ->
+        filterAdapter.submitData(lifecycle,pagingData)
     }
 
     private val notificationOnClickListener: (View?) -> Unit = {
         rootFrom3Depth().navigateToNotification()
     }
 
-    private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
+    private val filterItemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
+        //w(args?.item as ItemFollowingFilterBinding).select = true
+    }
+
+    private val selectedStatusObserver: (Boolean?) -> Unit = {
+
+    }
+
+    private val albumItemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
 
         val albumUserId = (args?.item as ItemAlbumsBinding).album?.user!!.id
         val albumId = args.item.album!!.albumsId
@@ -96,16 +115,23 @@ class FollowingAlbumsFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.followingAlbums.observe(viewLifecycleOwner, followingAlbumObserver)
+        albumViewModel.followingAlbums.observe(viewLifecycleOwner, followingAlbumObserver)
+        filterViewModel.user.observe(viewLifecycleOwner,followingFilterObserver)
     }
 
     fun initAdapter() {
-        binding.recyclerFollowingalbums.adapter = adapter
-        refresh(null)
+        binding.recyclerFollowingalbums.adapter = albumAdapter
+        binding.recyclerFollowingalbumsFilter.adapter = filterAdapter
+        refreshAlbums(null)
+        refreshFilters()
     }
 
-    fun refresh(followingId: Long?) {
-        viewModel.getFollowingAlbums(FollowingAlbumsCondition(followingId))
+    private fun refreshAlbums(followingId: Long?) {
+        albumViewModel.getFollowingAlbums(FollowingAlbumsCondition(followingId))
+    }
+
+    private fun refreshFilters(){
+        filterViewModel.getMyFollowings()
     }
 
     private fun setOnClickListeners() {
@@ -129,14 +155,14 @@ class FollowingAlbumsFragment : Fragment() {
             item.like!!.likeCount++
             item.like!!.liked = true
             item.textIalbumsLike.text = (item.like!!.likeCount).toString()
-            viewModel.likesAlbum(item.album!!.albumsId)
+            albumViewModel.likesAlbum(item.album!!.albumsId)
         } else {
             val animator = getValueAnimator(0.5f,0.0f, view)
             animator.start()
             item.like!!.likeCount--
             item.like!!.liked = false
             item.textIalbumsLike.text = (item.like!!.likeCount).toString()
-            viewModel.unlikesAlbum(item.album!!.albumsId)
+            albumViewModel.unlikesAlbum(item.album!!.albumsId)
         }
     }
 

@@ -23,7 +23,7 @@ class FollowerPagingRemoteRepositoryImpl(
     private val followingsRemoteMediator: FollowingsRemoteMediator,
 ): FollowerPagingRepository {
 
-    override fun getFollowers(
+    override fun getUserFollowers(
         userId: Long,
         followersCondition: FollowersCondition?
     ): Flowable<PagingData<Followers.Follower>> {
@@ -42,11 +42,43 @@ class FollowerPagingRemoteRepositoryImpl(
         ).flowable
     }
 
-    override fun getFollowings(
+    override fun getUserFollowings(
         userId: Long,
         followingsCondition: FollowingsCondition?
     ): Flowable<PagingData<Followings.Following>> {
         followingsRemoteMediator.userId = userId
+        followingsRemoteMediator.followingsCondition = followingsCondition
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = true,
+                maxSize = 30,
+                prefetchDistance = 5,
+                initialLoadSize = 40
+            ),
+            remoteMediator = followingsRemoteMediator,
+            pagingSourceFactory = { followingsDao.selectAll() }
+        ).flowable
+    }
+
+    override fun getFollowers(followersCondition: FollowersCondition?): Flowable<PagingData<Followers.Follower>> {
+
+        followersRemoteMediator.followersCondition = followersCondition
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = true,
+                maxSize = 30,
+                prefetchDistance = 5,
+                initialLoadSize = 40
+            ),
+            remoteMediator = followersRemoteMediator,
+            pagingSourceFactory = { followersDao.selectAll() }
+        ).flowable
+    }
+
+    override fun getFollowings(followingsCondition: FollowingsCondition?): Flowable<PagingData<Followings.Following>> {
+
         followingsRemoteMediator.followingsCondition = followingsCondition
         return Pager(
             config = PagingConfig(

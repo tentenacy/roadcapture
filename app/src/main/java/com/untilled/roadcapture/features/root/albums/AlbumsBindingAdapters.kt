@@ -8,6 +8,8 @@ import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
@@ -111,8 +113,8 @@ object AlbumsBindingAdapters {
 
     @JvmStatic
     @BindingAdapter("SelectedStatus")
-    fun setSelectedStatus(view: View, clicked: Boolean){
-        if(clicked) view.visibility = View.INVISIBLE
+    fun setSelectedStatus(view: View, clicked: LiveData<Boolean>){
+        if(clicked.value!!) view.visibility = View.INVISIBLE
         else view.visibility = View.VISIBLE
     }
 

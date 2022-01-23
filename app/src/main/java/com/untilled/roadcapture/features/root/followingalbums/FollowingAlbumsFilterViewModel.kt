@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.following
+package com.untilled.roadcapture.features.root.followingalbums
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,19 +14,20 @@ import com.untilled.roadcapture.features.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
-import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
-class FollowingsViewModel @Inject constructor(
+class FollowingAlbumsFilterViewModel @Inject constructor(
     private val followingPagingRepository: FollowerPagingRepository,
     private val followRepository: FollowRepository,
 ): BaseViewModel(){
     private val _user = MutableLiveData<PagingData<Followings.Following>>()
     val user: LiveData<PagingData<Followings.Following>> get() = _user
 
-    fun getUserFollowing(userId: Long, followingsCondition: FollowingsCondition? = null){
-        followingPagingRepository.getUserFollowings(userId, followingsCondition)
+    var select = MutableLiveData<Boolean>()
+
+    fun getMyFollowings(followingsCondition: FollowingsCondition? = null){
+        followingPagingRepository.getFollowings(followingsCondition)
             .observeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
             .subscribe({ response->
@@ -34,16 +35,5 @@ class FollowingsViewModel @Inject constructor(
             },{ t ->
                 Logger.d("test: $t")
             }).addTo(compositeDisposable)
-    }
-
-    fun follow(toUserId: Long){
-        followRepository.follow(toUserId)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-
-            },{ t ->
-                Logger.d("test: $t")
-            })
     }
 }

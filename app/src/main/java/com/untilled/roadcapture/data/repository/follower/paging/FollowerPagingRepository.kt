@@ -8,14 +8,22 @@ import io.reactivex.rxjava3.core.Flowable
 
 interface FollowerPagingRepository {
 
-    fun getFollowers(
+    fun getUserFollowers(
         userId: Long,
         followersCondition: FollowersCondition?,
     ): Flowable<PagingData<Followers.Follower>>
 
-    fun getFollowings(
+    fun getUserFollowings(
         userId: Long,
         followingsCondition: FollowingsCondition?,
+    ): Flowable<PagingData<Followings.Following>>
+
+    fun getFollowers(
+        followersCondition: FollowersCondition?
+    ): Flowable<PagingData<Followers.Follower>>
+
+    fun getFollowings(
+        followingsCondition: FollowingsCondition?
     ): Flowable<PagingData<Followings.Following>>
 
 }

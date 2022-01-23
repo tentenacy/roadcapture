@@ -20,7 +20,7 @@ interface FollowApi {
 
     @GET(RoadCapturePathConstant.GET_USER_FOLLOWER)
     fun getUserFollowers(
-        @Path("userId") id: Long,
+        @Path("userId") id: Long?,
         @Query("page") page: Int?,
         @Query("size") size: Int?,
         @Query("sort") sort: String? = null,
@@ -29,10 +29,26 @@ interface FollowApi {
 
     @GET(RoadCapturePathConstant.GET_USER_FOLLOWING)
     fun getUserFollowings(
-        @Path("userId") id: Long,
+        @Path("userId") id: Long?,
         @Query("page") page: Int?,
         @Query("size") size: Int?,
         @Query("sort") sort: String? = null,
         @Query("username") username: String?
+    ): Single<PageResponse<UsersResponse>>
+
+    @GET(RoadCapturePathConstant.GET_MY_FOLLOWER)
+    fun getFollowers(
+        @Query("username") username: String?,
+        @Query("page") page: Int?,
+        @Query("size") size: Int?,
+        @Query("sort") sort: String? = null,
+    ): Single<PageResponse<UsersResponse>>
+
+    @GET(RoadCapturePathConstant.GET_MY_FOLLOWING)
+    fun getFollowings(
+        @Query("username") username: String?,
+        @Query("page") page: Int?,
+        @Query("size") size: Int?,
+        @Query("sort") sort: String? = null,
     ): Single<PageResponse<UsersResponse>>
 }

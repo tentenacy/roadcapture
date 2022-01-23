@@ -18,7 +18,7 @@ class FollowersPagingSource @Inject constructor(
     private val roadCaptureApi: RoadCaptureApi,
 ): RxPagingSource<Int, Followers.Follower>() {
 
-    var userId by Delegates.notNull<Long>()
+    var userId: Long? = null
     var followersCondition: FollowersCondition? = null
 
     override fun getRefreshKey(state: PagingState<Int, Followers.Follower>): Int? {
