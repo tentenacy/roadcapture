@@ -2,6 +2,7 @@ package com.untilled.roadcapture.features.following
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -12,14 +13,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.paging.PagingData
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
+import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.paging.Followings
 import com.untilled.roadcapture.databinding.FragmentFollowingBinding
+import com.untilled.roadcapture.databinding.ItemFollowBinding
 import com.untilled.roadcapture.features.common.CustomDivider
 import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.hideKeyboard
+import com.untilled.roadcapture.utils.navigateToStudio
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -27,10 +28,17 @@ import javax.inject.Inject
 class FollowingsFragment : Fragment(){
 
     private var _binding: FragmentFollowingBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
     private val viewModel: FollowingsViewModel by viewModels()
     private val args: FollowingsFragmentArgs by navArgs()
     @Inject lateinit var adapter: FollowingsAdapter
+
+    private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
+        when(args?.view?.id){
+            R.id.btn_ifollow -> viewModel.follow((args.item as ItemFollowBinding).user!!.followingId)
+            R.id.img_ifollow_profile -> navigateToStudio((args.item as ItemFollowBinding).user!!.followingId)
+        }
+    }
 
     private val userObserver: (PagingData<Followings.Following>) -> Unit = { pagingData ->
         adapter.submitData(lifecycle, pagingData)
@@ -81,6 +89,7 @@ class FollowingsFragment : Fragment(){
     private fun initAdapter(){
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
         binding.recyclerFollowing.addItemDecoration(customDivider)
+        adapter.itemOnClickListener = itemOnClickListener
         binding.recyclerFollowing.adapter = adapter
     }
 

@@ -10,16 +10,19 @@ import com.untilled.roadcapture.data.datasource.api.dto.album.FollowersCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.entity.paging.Followers
 import com.untilled.roadcapture.data.entity.paging.Followings
+import com.untilled.roadcapture.data.repository.follower.FollowRepository
 import com.untilled.roadcapture.data.repository.follower.paging.FollowerPagingRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
+import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
 class FollowingsViewModel @Inject constructor(
-    private val followingPagingRepository: FollowerPagingRepository
+    private val followingPagingRepository: FollowerPagingRepository,
+    private val followRepository: FollowRepository,
 ): BaseViewModel(){
     private val _user = MutableLiveData<PagingData<Followings.Following>>()
     val user: LiveData<PagingData<Followings.Following>> get() = _user
@@ -33,5 +36,16 @@ class FollowingsViewModel @Inject constructor(
             },{ t ->
                 Logger.d("test: $t")
             }).addTo(compositeDisposable)
+    }
+
+    fun follow(toUserId: Long){
+        followRepository.follow(toUserId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+
+            },{ t ->
+                Logger.d("test: $t")
+            })
     }
 }

@@ -1,7 +1,6 @@
 package com.untilled.roadcapture.features.root.albums
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -16,15 +15,15 @@ import javax.inject.Inject
 class AlbumsAdapter @Inject constructor(): PagingDataAdapter<Albums.Album, AlbumsAdapter.AlbumViewHolder>(
     COMPARATOR
 ) {
-    lateinit var itemClickListener: (ItemClickArgs?) -> Unit
+    lateinit var itemOnClickListener: (ItemClickArgs?) -> Unit
 
     class AlbumViewHolder(private val binding: ItemAlbumsBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(album: Albums.Album, itemClickListener: (ItemClickArgs?) -> Unit) {
+        fun bind(album: Albums.Album, itemOnClickListener: (ItemClickArgs?) -> Unit) {
             binding.album = album
             binding.like = LikeStatus(album.liked,album.likeCount)
             binding.setOnClickItem{ view ->
-                itemClickListener(ItemClickArgs(binding,view))
+                itemOnClickListener(ItemClickArgs(binding,view))
             }
         }
 
@@ -48,7 +47,7 @@ class AlbumsAdapter @Inject constructor(): PagingDataAdapter<Albums.Album, Album
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         getItem(position)?.let {
-            holder.bind(it,itemClickListener)
+            holder.bind(it,itemOnClickListener)
         }
     }
 

@@ -2,7 +2,9 @@ package com.untilled.roadcapture.features.follower
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.rxjava3.cachedIn
 import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowersCondition
 import com.untilled.roadcapture.data.entity.paging.Followers
@@ -27,6 +29,7 @@ class FollowersViewModel @Inject constructor(
     fun getUserFollower(userId: Long, followersCondition: FollowersCondition? = null){
         followerPagingRepository.getFollowers(userId, followersCondition)
             .observeOn(AndroidSchedulers.mainThread())
+            .cachedIn(viewModelScope)
             .subscribe({ response->
                 _user.postValue(response)
             },{ t ->
@@ -34,8 +37,8 @@ class FollowersViewModel @Inject constructor(
             }).addTo(compositeDisposable)
     }
 
-    fun follow(id: Long){
-        followRepository.follow(id)
+    fun follow(toUserId: Long){
+        followRepository.follow(toUserId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

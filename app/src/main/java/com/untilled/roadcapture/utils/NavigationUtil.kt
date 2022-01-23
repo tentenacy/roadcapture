@@ -9,6 +9,10 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.features.comment.CommentFragment
 import com.untilled.roadcapture.features.comment.CommentFragmentDirections
+import com.untilled.roadcapture.features.follower.FollowersFragment
+import com.untilled.roadcapture.features.follower.FollowersFragmentDirections
+import com.untilled.roadcapture.features.following.FollowingsFragment
+import com.untilled.roadcapture.features.following.FollowingsFragmentDirections
 import com.untilled.roadcapture.features.login.LoginFragment
 import com.untilled.roadcapture.features.login.LoginFragmentDirections
 import com.untilled.roadcapture.features.root.RootFragment
@@ -140,6 +144,14 @@ fun LoginFragment.navigateToRoot() {
 
 fun CommentFragment.navigateToStudio(id: Long) {
     binding.root.navigate(CommentFragmentDirections.actionCommentFragmentToStudioFragment(id))
+}
+
+fun FollowersFragment.navigateToStudio(id: Long){
+    binding.root.navigate(FollowersFragmentDirections.actionFollowersFragmentToStudioFragment(id))
+}
+
+fun FollowingsFragment.navigateToStudio(id: Long){
+    binding.root.navigate(FollowingsFragmentDirections.actionFollowingsFragmentToStudioFragment(id))
 }
 
 fun Fragment.navigateToLogin() {

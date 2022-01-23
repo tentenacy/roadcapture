@@ -1,7 +1,6 @@
 package com.untilled.roadcapture.features.following
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -16,10 +15,15 @@ class FollowingsAdapter @Inject constructor(): PagingDataAdapter<Followings.Foll
     COMPARATOR
 ) {
 
+    lateinit var itemOnClickListener: (ItemClickArgs?) -> Unit
+
     class FollowingsViewHolder(private val binding: ItemFollowBinding): RecyclerView.ViewHolder(binding.root){
 
-        fun bind(user: Followings.Following){
+        fun bind(user: Followings.Following, itemOnClickListener: (ItemClickArgs?) -> Unit){
             binding.user = user
+            binding.setOnClickItem { view ->
+                itemOnClickListener(ItemClickArgs(binding,view))
+            }
         }
 
         companion object{
@@ -42,7 +46,7 @@ class FollowingsAdapter @Inject constructor(): PagingDataAdapter<Followings.Foll
 
     override fun onBindViewHolder(holder: FollowingsViewHolder, position: Int) {
         getItem(position)?.let{
-            holder.bind(it)
+            holder.bind(it,itemOnClickListener)
         }
     }
 

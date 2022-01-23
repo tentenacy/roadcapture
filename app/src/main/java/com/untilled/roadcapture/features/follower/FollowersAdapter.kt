@@ -9,21 +9,27 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.paging.Followers
 import com.untilled.roadcapture.data.entity.paging.Followings
 import com.untilled.roadcapture.databinding.ItemFollowBinding
+import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import javax.inject.Inject
 
 class FollowersAdapter @Inject constructor(): PagingDataAdapter<Followers.Follower, FollowersAdapter.FollowersViewHolder>(
     COMPARATOR
 ) {
 
+    lateinit var itemOnClickListener: (ItemClickArgs?) -> Unit
+
     class FollowersViewHolder(private val binding: ItemFollowBinding): RecyclerView.ViewHolder(binding.root){
 
-        fun bind(user: Followers.Follower){
+        fun bind(user: Followers.Follower, itemOnClickListener: (ItemClickArgs?) -> Unit){
             binding.user = Followings.Following(
                 followingId = user.followerId,
                 profileImageUrl = user.profileImageUrl,
                 username = user.username,
                 introduction = user.introduction
             )
+            binding.setOnClickItem { view ->
+                itemOnClickListener(ItemClickArgs(binding,view))
+            }
         }
 
         companion object{
@@ -40,13 +46,13 @@ class FollowersAdapter @Inject constructor(): PagingDataAdapter<Followers.Follow
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowersViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowersAdapter.FollowersViewHolder {
         return FollowersViewHolder.create(parent)
     }
 
     override fun onBindViewHolder(holder: FollowersViewHolder, position: Int) {
         getItem(position)?.let{
-            holder.bind(it)
+            holder.bind(it,itemOnClickListener)
         }
     }
 

@@ -47,7 +47,7 @@ class AlbumsFragment : Fragment() {
         adapter.submitData(lifecycle, pagingData)
     }
 
-    private val itemClickListener: (ItemClickArgs?) -> Unit = { args ->
+    private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
 
         val albumUserId = (args?.item as ItemAlbumsBinding).album?.user!!.id
         val albumId = args.item.album!!.albumsId
@@ -143,7 +143,7 @@ class AlbumsFragment : Fragment() {
     }
 
     fun initAdapter() {
-        adapter.itemClickListener = itemClickListener
+        adapter.itemOnClickListener = itemOnClickListener
         binding.recycleAlbums.adapter = adapter
         refresh(null, null)
     }
