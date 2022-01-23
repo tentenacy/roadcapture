@@ -2,22 +2,17 @@ package com.untilled.roadcapture.features.root.capture
 
 import android.Manifest
 import android.app.Activity.RESULT_OK
-import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.*
 import android.view.Gravity.END
 import android.view.Gravity.TOP
-import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import com.naver.maps.map.overlay.Marker
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentCaptureBinding
@@ -45,6 +40,7 @@ import com.naver.maps.map.overlay.PathOverlay
 import com.naver.maps.map.util.FusedLocationSource
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.utils.*
+import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
 
 
 @AndroidEntryPoint
@@ -306,41 +302,12 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
             ).check()
     }
 
-    private fun showCancelAlbumCreationAskingDialog(logic: () -> Unit) {
-        val dialogView =
-            LayoutInflater.from(requireContext()).inflate(R.layout.dlg_albumcreation_cancel, null)
-
-        val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
-            .setView(dialogView)
-            .create()
-
-        dialogView.findViewById<TextView>(R.id.text_dlgalbumcreationcancel_confirm)
-            ?.setOnClickListener {
-                logic()
-                dialog.dismiss()
-            }
-        dialogView.findViewById<TextView>(R.id.text_dlgalbumcreationcancel_cancel)
-            ?.setOnClickListener {
-                dialog.dismiss()
-            }
-
-        dialog.show()
+    private fun showCancelAlbumCreationAskingDialog(listener: () -> Unit) {
+        AlbumCreationCancelDialogFragment(listener).show(childFragmentManager, DialogTagConstant.ALBUM_CREATION_CANCEL)
     }
 
     private fun showThumbnailSettingDialog() {
-        val dialogView =
-            LayoutInflater.from(requireContext()).inflate(R.layout.dlg_thumbnail_setting, null)
-
-        val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
-            .setView(dialogView)
-            .create()
-
-        dialogView.findViewById<TextView>(R.id.text_dlgthumbnailsetting_confirm)
-            ?.setOnClickListener {
-                dialog.dismiss()
-            }
-
-        dialog.show()
+        ThumbnailSettingDialogFragment().show(childFragmentManager, DialogTagConstant.THUMBNAIL_SETTING)
     }
 
     companion object {

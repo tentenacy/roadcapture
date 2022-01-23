@@ -1,24 +1,22 @@
 package com.untilled.roadcapture.features.root.albums
 
 import android.animation.ValueAnimator
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.paging.PagingData
 import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.databinding.FragmentAlbumsBinding
 import com.untilled.roadcapture.databinding.ItemAlbumsBinding
-import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
+import com.untilled.roadcapture.features.common.ReportDialogFragment
+import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.*
 import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
 import dagger.hilt.android.AndroidEntryPoint
@@ -126,20 +124,7 @@ class AlbumsFragment : Fragment() {
     }
 
     private fun showReportDialog() {
-        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dlg_report, null)
-
-        val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
-            .setView(dialogView)
-            .create()
-
-        dialogView.findViewById<TextView>(R.id.text_dlgreport_confirm)?.setOnClickListener {
-            dialog.dismiss()
-        }
-        dialogView.findViewById<TextView>(R.id.dlgreport_cancel)?.setOnClickListener {
-            dialog.dismiss()
-        }
-
-        dialog.show()
+        ReportDialogFragment({}).show(childFragmentManager, DialogTagConstant.REPORT_DIALOG)
     }
 
     private fun setLikeStatus(view: LottieAnimationView, item: ItemAlbumsBinding) {

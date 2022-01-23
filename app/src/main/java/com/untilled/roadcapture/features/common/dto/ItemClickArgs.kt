@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.root.albums.dto
+package com.untilled.roadcapture.features.common.dto
 
 import android.view.View
 import androidx.databinding.ViewDataBinding

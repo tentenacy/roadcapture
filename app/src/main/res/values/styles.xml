@@ -286,7 +286,7 @@
         <item name="colorAccent">@color/secondaryColor</item>
     </style>
 
-    <style name="CustomAlertDialog">
+    <style name="CustomDialogFragment">
         <!-- 꽉 채운 화면에 배경 없이 (custom view 영역만 보임) -->
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowMinWidthMajor">60%</item>

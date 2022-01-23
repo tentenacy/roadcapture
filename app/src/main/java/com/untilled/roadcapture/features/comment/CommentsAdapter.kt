@@ -5,15 +5,9 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
-import com.untilled.roadcapture.data.entity.paging.Albums
-import com.untilled.roadcapture.databinding.ItemAlbumsBinding
 import com.untilled.roadcapture.databinding.ItemCommentBinding
-import com.untilled.roadcapture.databinding.ItemPictureSliderThumbnailBinding
-import com.untilled.roadcapture.features.root.albums.AlbumsAdapter
-import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
-import javax.inject.Inject
+import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 
 class CommentsAdapter(private val itemClickListener: (ItemClickArgs?) -> Unit): PagingDataAdapter<AlbumComments.AlbumComment, CommentsAdapter.CommentViewHolder>(
     COMPARATOR

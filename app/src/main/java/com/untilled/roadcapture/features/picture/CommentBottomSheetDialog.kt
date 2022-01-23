@@ -1,24 +1,23 @@
 package com.untilled.roadcapture.features.picture
 
-import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
-import android.widget.TextView
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.paging.PagingData
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.data.entity.paging.PictureComments
 import com.untilled.roadcapture.databinding.BottomsheetCommentBinding
+import com.untilled.roadcapture.features.common.ReportDialogFragment
 import com.untilled.roadcapture.utils.ui.CustomDivider
-import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
+import com.untilled.roadcapture.features.common.dto.ItemClickArgs
+import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
 import com.untilled.roadcapture.utils.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -131,23 +130,6 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
 
 
     private fun showReportDialog() {
-        val layoutInflater = LayoutInflater.from(requireContext())
-        val dialogView = layoutInflater.inflate(R.layout.dlg_report, null)
-
-        val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
-            .setView(dialogView)
-            .create()
-
-        val textViewReport = dialogView.findViewById<TextView>(R.id.text_dlgreport_confirm)
-        val textViewCancel = dialogView.findViewById<TextView>(R.id.dlgreport_cancel)
-
-        textViewReport?.setOnClickListener {
-            dialog.dismiss()
-        }
-        textViewCancel?.setOnClickListener {
-            dialog.dismiss()
-        }
-
-        dialog.show()
+        ReportDialogFragment({}).show(childFragmentManager, DialogTagConstant.REPORT_DIALOG)
     }
 }

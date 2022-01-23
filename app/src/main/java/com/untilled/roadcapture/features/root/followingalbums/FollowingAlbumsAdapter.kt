@@ -5,14 +5,10 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.databinding.ItemAlbumsBinding
-import com.untilled.roadcapture.databinding.ItemPlaceSearchBinding
-import com.untilled.roadcapture.features.root.albums.AlbumsAdapter
-import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
+import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.features.root.albums.dto.LikeStatus
-import javax.inject.Inject
 
 class FollowingAlbumsAdapter(private val itemOnClickListener: (ItemClickArgs?) -> Unit): PagingDataAdapter<Albums.Album, FollowingAlbumsAdapter.FollowingAlbumsViewHolder>(
     COMPARATOR

@@ -1,6 +1,5 @@
 package com.untilled.roadcapture.features.root.capture
 
-import android.app.AlertDialog
 import android.content.Context
 import android.content.pm.PackageManager
 import android.location.LocationListener
@@ -9,19 +8,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.address.Address
 import com.untilled.roadcapture.data.datasource.api.dto.address.TmapAddressInfoResponse
 import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceRequest
 import com.untilled.roadcapture.data.entity.LocationLatLng
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPictureEditorBinding
+import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
 import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToCapture
 import com.untilled.roadcapture.utils.navigateToSearchPlace
@@ -74,7 +72,7 @@ class PictureEditorFragment : Fragment() {
     }
 
     private val deleteOnClickListener: (View?) -> Unit = {
-        showDeletePictureAskingDialog {
+        showPictureDeleteAskingDialog {
             if (mode == EDIT) {
                 viewModel.deletePicture(makePicture())
             }
@@ -192,23 +190,8 @@ class PictureEditorFragment : Fragment() {
         }
     }
 
-    private fun showDeletePictureAskingDialog(logic: () -> Unit) {
-        val dialogView =
-            LayoutInflater.from(requireContext()).inflate(R.layout.dlg_picture_delete, null)
-
-        val dialog = AlertDialog.Builder(requireContext(), R.style.CustomAlertDialog)
-            .setView(dialogView)
-            .create()
-
-        dialogView.findViewById<TextView>(R.id.text_dlgpicturedelete_confirm)?.setOnClickListener {
-            logic()
-            dialog.dismiss()
-        }
-        dialogView.findViewById<TextView>(R.id.text_dlgpicturedelete_cancel)?.setOnClickListener {
-            dialog.dismiss()
-        }
-
-        dialog.show()
+    private fun showPictureDeleteAskingDialog(listener: () -> Unit) {
+        PictureDeleteDialogFragment(listener).show(childFragmentManager, DialogTagConstant.PICTURE_DELETE_DIALOG)
     }
 
     companion object {

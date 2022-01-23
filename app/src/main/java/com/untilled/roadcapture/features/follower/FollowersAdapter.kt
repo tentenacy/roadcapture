@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.untilled.roadcapture.data.entity.paging.Followers
 import com.untilled.roadcapture.data.entity.paging.Followings
 import com.untilled.roadcapture.databinding.ItemFollowBinding
-import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
-import javax.inject.Inject
+import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 
 class FollowersAdapter(private val itemOnClickListener: (ItemClickArgs?) -> Unit) :
     PagingDataAdapter<Followers.Follower, FollowersAdapter.FollowersViewHolder>(
