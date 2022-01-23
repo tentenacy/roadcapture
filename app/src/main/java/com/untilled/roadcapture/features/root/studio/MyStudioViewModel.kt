@@ -23,25 +23,25 @@ class MyStudioViewModel @Inject constructor(
     private val userRepository: UserRepository
 ): BaseViewModel() {
 
-    private var _userAlbums = MutableLiveData<PagingData<UserAlbums.UserAlbum>>()
-    val userAlbums: LiveData<PagingData<UserAlbums.UserAlbum>> get() = _userAlbums
+    private var _myAlbums = MutableLiveData<PagingData<UserAlbums.UserAlbum>>()
+    val myAlbums: LiveData<PagingData<UserAlbums.UserAlbum>> get() = _myAlbums
 
     private var _userInfo = MutableLiveData<UsersResponse>()
     val userInfo: LiveData<UsersResponse> get() = _userInfo
 
-    fun getUserAlbums(cond: UserAlbumsCondition? = null) {
-        albumPagingRepository.getUserAlbums(cond)
+    fun getMyStudioAlbums(cond: UserAlbumsCondition?) {
+        albumPagingRepository.getMyStudioAlbums(cond)
             .subscribeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
             .subscribe({
-                _userAlbums.value = it
+                _myAlbums.value = it
             }) { t ->
 
             }.addTo(compositeDisposable)
     }
 
-    fun getUserInfo(userId: Long){
-        userRepository.getUserInfo(userId)
+    fun getMyInfo(){
+        userRepository.getMyInfo()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->

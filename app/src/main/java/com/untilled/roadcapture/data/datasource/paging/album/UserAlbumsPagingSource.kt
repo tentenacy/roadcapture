@@ -3,9 +3,7 @@ package com.untilled.roadcapture.data.datasource.paging.album
 import androidx.paging.PagingState
 import androidx.paging.rxjava3.RxPagingSource
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsCondition
-import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.data.entity.mapper.AlbumsMapper
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import io.reactivex.rxjava3.core.Single
@@ -21,6 +19,8 @@ class UserAlbumsPagingSource @Inject constructor(
 
     var userAlbumsCondition: UserAlbumsCondition? = null
 
+    var userId: Long? = null
+
     override fun getRefreshKey(state: PagingState<Int, UserAlbums.UserAlbum>): Int? {
         return null
     }
@@ -28,17 +28,32 @@ class UserAlbumsPagingSource @Inject constructor(
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, UserAlbums.UserAlbum>> {
         val position = params.key ?: 0
 
-        return roadCaptureApi.getUserAlbums(
-            page = position,
-            size = params.loadSize,
-            region1DepthName = userAlbumsCondition?.region1DepthName,
-            region2DepthName = userAlbumsCondition?.region2DepthName,
-            region3DepthName = userAlbumsCondition?.region3DepthName,
-        )
-            .subscribeOn(Schedulers.io())
-            .map { mapper.transform(it) }
-            .map { toLoadResult(it, position) }
-            .onErrorReturn { LoadResult.Error(it) }
+        if(userId == null) {
+            return roadCaptureApi.getMyStudioAlbums(
+                page = position,
+                size = params.loadSize,
+                region1DepthName = userAlbumsCondition?.region1DepthName,
+                region2DepthName = userAlbumsCondition?.region2DepthName,
+                region3DepthName = userAlbumsCondition?.region3DepthName,
+            )
+                .subscribeOn(Schedulers.io())
+                .map { mapper.transform(it) }
+                .map { toLoadResult(it, position) }
+                .onErrorReturn { LoadResult.Error(it) }
+        } else{
+            return roadCaptureApi.getStudioAlbums(
+                userId = userId,
+                page = position,
+                size = params.loadSize,
+                region1DepthName = userAlbumsCondition?.region1DepthName,
+                region2DepthName = userAlbumsCondition?.region2DepthName,
+                region3DepthName = userAlbumsCondition?.region3DepthName,
+            )
+                .subscribeOn(Schedulers.io())
+                .map { mapper.transform(it) }
+                .map { toLoadResult(it, position) }
+                .onErrorReturn { LoadResult.Error(it) }
+        }
     }
 
     private fun toLoadResult(data: UserAlbums, position: Int): LoadResult<Int, UserAlbums.UserAlbum> {

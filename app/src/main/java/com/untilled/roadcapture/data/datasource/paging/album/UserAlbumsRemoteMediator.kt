@@ -5,10 +5,8 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.rxjava3.RxRemoteMediator
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsCondition
 import com.untilled.roadcapture.data.datasource.database.PagingDatabase
-import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.data.entity.mapper.AlbumsMapper
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import io.reactivex.rxjava3.core.Single
@@ -24,7 +22,7 @@ class UserAlbumsRemoteMediator @Inject constructor(
 ): RxRemoteMediator<Int, UserAlbums.UserAlbum>() {
 
     var userAlbumsCondition: UserAlbumsCondition? = null
-
+    var userId: Long? = null
     override fun loadSingle(
         loadType: LoadType,
         state: PagingState<Int, UserAlbums.UserAlbum>
@@ -56,7 +54,8 @@ class UserAlbumsRemoteMediator @Inject constructor(
                 if(page == INVALID_PAGE) {
                     Single.just(MediatorResult.Success(endOfPaginationReached = true))
                 } else {
-                    roadCaptureApi.getUserAlbums(
+                    roadCaptureApi.getStudioAlbums(
+                        userId = userId,
                         page = page,
                         size = state.config.pageSize,
                         region1DepthName = userAlbumsCondition?.region1DepthName,

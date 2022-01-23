@@ -1,7 +1,9 @@
 package com.untilled.roadcapture.data.repository.album
 
+import com.untilled.roadcapture.data.datasource.api.dto.address.PlaceCondition
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
+import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse

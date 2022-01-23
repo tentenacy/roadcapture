@@ -72,6 +72,8 @@ class UserRepositoryImpl @Inject constructor(
             .retry(3)
     }
 
+    override fun getMyInfo(): Single<UsersResponse> = roadCaptureApi.getMyInfo().retryThreeTimes()
+
     override fun login(loginRequest: LoginRequest): Single<TokenResponse> =
         roadCaptureApi.login(loginRequest)
             .flatMap { response ->
@@ -117,8 +119,8 @@ class UserRepositoryImpl @Inject constructor(
         roadCaptureApi.getUserInfo(userId)
             .retryThreeTimes()
 
-    override fun getUserAlbums(pageRequest: PageRequest, placeCondition: PlaceCondition): Single<PageResponse<UserAlbumsResponse>> =
-        roadCaptureApi.getUserAlbums(pageRequest.page,pageRequest.size,placeCondition.address1,placeCondition.address2,placeCondition.address3)
+    override fun getUserAlbums(userId: Long?,pageRequest: PageRequest, placeCondition: PlaceCondition): Single<PageResponse<UserAlbumsResponse>> =
+        roadCaptureApi.getStudioAlbums(userId, pageRequest.page,pageRequest.size,placeCondition.address1,placeCondition.address2,placeCondition.address3)
 
     override fun getUserFollower(
         userId: Long, followingsCondition: FollowingsCondition, pageRequest: PageRequest

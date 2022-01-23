@@ -42,4 +42,7 @@ interface UserApi {
     fun getUserInfo(
         @Path("id") userId: Long,
     ): Single<UsersResponse>
+
+    @GET(RoadCapturePathConstant.GET_MY_INFO)
+    fun getMyInfo(): Single<UsersResponse>
 }

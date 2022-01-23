@@ -1,10 +1,8 @@
 package com.untilled.roadcapture.data.repository.album.paging
 
 import androidx.paging.PagingData
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
-import com.untilled.roadcapture.data.datasource.api.dto.album.FollowingAlbumsCondition
-import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsCondition
+import com.untilled.roadcapture.data.datasource.api.dto.address.PlaceCondition
+import com.untilled.roadcapture.data.datasource.api.dto.album.*
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.entity.paging.Albums
@@ -17,7 +15,12 @@ interface AlbumPagingRepository {
         cond: AlbumsCondition,
     ): Flowable<PagingData<Albums.Album>>
 
-    fun getUserAlbums(
+    fun getMyStudioAlbums(
+        cond: UserAlbumsCondition?
+    ): Flowable<PagingData<UserAlbums.UserAlbum>>
+
+    fun getStudioAlbums(
+        userId: Long?,
         cond: UserAlbumsCondition?,
     ): Flowable<PagingData<UserAlbums.UserAlbum>>
 

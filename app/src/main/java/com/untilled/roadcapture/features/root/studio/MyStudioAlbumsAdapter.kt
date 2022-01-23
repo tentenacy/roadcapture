@@ -5,30 +5,32 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
-import com.untilled.roadcapture.databinding.ItemAlbumsBinding
 import com.untilled.roadcapture.databinding.ItemAlbumsStudioBinding
-import com.untilled.roadcapture.databinding.ItemPlaceSearchBinding
-import javax.inject.Inject
+import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 
-class UserAlbumsAdapter: PagingDataAdapter<UserAlbums.UserAlbum, UserAlbumsAdapter.UserAlbumViewHolder>(
+
+class MyStudioAlbumsAdapter(private val itemOnClickListener: (ItemClickArgs?) -> Unit): PagingDataAdapter<UserAlbums.UserAlbum, MyStudioAlbumsAdapter.MyStudioAlbumsViewHolder>(
     COMPARATOR
 ) {
 
-    inner class UserAlbumViewHolder(private val binding: ItemAlbumsStudioBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(album: UserAlbums.UserAlbum) {
+    inner class MyStudioAlbumsViewHolder(private val binding: ItemAlbumsStudioBinding): RecyclerView.ViewHolder(binding.root){
+        fun bind(album: UserAlbums.UserAlbum){
             binding.album = album
+            binding.setOnClickItem { view ->
+                itemOnClickListener(ItemClickArgs(binding,view))
+            }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserAlbumViewHolder {
-        return UserAlbumViewHolder(ItemAlbumsStudioBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyStudioAlbumsViewHolder {
+        return MyStudioAlbumsViewHolder(ItemAlbumsStudioBinding.inflate(LayoutInflater.from(parent.context),parent,false))
     }
 
-    override fun onBindViewHolder(holder: UserAlbumViewHolder, position: Int) {
-        getItem(position)?.let {
+    override fun onBindViewHolder(holder: MyStudioAlbumsViewHolder, position: Int) {
+        getItem(position)?.let{
             holder.bind(it)
         }
     }

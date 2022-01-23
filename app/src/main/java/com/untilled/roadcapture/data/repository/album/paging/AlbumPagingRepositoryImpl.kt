@@ -38,7 +38,23 @@ class AlbumPagingRepositoryImpl(
         ).flowable
     }
 
-    override fun getUserAlbums(cond: UserAlbumsCondition?): Flowable<PagingData<UserAlbums.UserAlbum>> {
+    override fun getMyStudioAlbums(cond: UserAlbumsCondition?): Flowable<PagingData<UserAlbums.UserAlbum>> {
+        userAlbumsPagingSource.userId = null
+        userAlbumsPagingSource.userAlbumsCondition = cond
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = true,
+                maxSize = 30,
+                prefetchDistance = 5,
+                initialLoadSize = 40
+            ),
+            pagingSourceFactory = { userAlbumsPagingSource }
+        ).flowable
+    }
+
+    override fun getStudioAlbums(userId: Long?,cond: UserAlbumsCondition?): Flowable<PagingData<UserAlbums.UserAlbum>> {
+        userAlbumsPagingSource.userId = userId
         userAlbumsPagingSource.userAlbumsCondition = cond
         return Pager(
             config = PagingConfig(

@@ -2,12 +2,15 @@ package com.untilled.roadcapture.features.studio
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.paging.PagingData
 import com.orhanobut.logger.Logger
-import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.address.PlaceCondition
+import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
+import com.untilled.roadcapture.data.entity.paging.UserAlbums
+import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepository
 import com.untilled.roadcapture.data.repository.follower.FollowRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
@@ -20,14 +23,16 @@ import javax.inject.Inject
 @HiltViewModel
 class StudioViewModel @Inject constructor(
     private val userRepository: UserRepository,
+    private val albumPagingRepository: AlbumPagingRepository,
     private val followRepository: FollowRepository
 ) : BaseViewModel() {
 
     private val _userInfo = MutableLiveData<UsersResponse>()
     val userInfo: LiveData<UsersResponse> get() = _userInfo
 
-    private val _userAlbums = MutableLiveData<PageResponse<UserAlbumsResponse>>()
-    val userAlbums : LiveData<PageResponse<UserAlbumsResponse>> get() = _userAlbums
+    private var _albums = MutableLiveData<PagingData<UserAlbums.UserAlbum>>()
+    val albums: LiveData<PagingData<UserAlbums.UserAlbum>> get() = _albums
+
 
     fun getUserInfo(id: Long){
         userRepository.getUserInfo(id)
@@ -41,12 +46,12 @@ class StudioViewModel @Inject constructor(
     }
 
 
-    fun getUserAlbums(pageRequest: PageRequest, placeCondition: PlaceCondition){
-        userRepository.getUserAlbums(pageRequest,placeCondition)
+    fun getStudioAlbums(userId: Long?, cond: UserAlbumsCondition?){
+        albumPagingRepository.getStudioAlbums(userId,cond)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response->
-                _userAlbums.postValue(response)
+                _albums.postValue(response)
             },{
 
             }).addTo(compositeDisposable)

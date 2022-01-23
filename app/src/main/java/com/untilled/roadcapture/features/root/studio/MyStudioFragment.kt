@@ -11,12 +11,12 @@ import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.data.datasource.sharedpref.User
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.databinding.FragmentMystudioBinding
+import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.rootFrom3Depth
 import com.untilled.roadcapture.utils.navigateToFollower
 import com.untilled.roadcapture.utils.navigateToFollowing
 import com.untilled.roadcapture.utils.navigateToSettings
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MyStudioFragment : Fragment() {
@@ -26,12 +26,15 @@ class MyStudioFragment : Fragment() {
 
     private val viewModel: MyStudioViewModel by viewModels()
 
-    private val userAlbumsAdapter: UserAlbumsAdapter by lazy {
-        UserAlbumsAdapter()
+    private val myStudioAlbumsAdapter: MyStudioAlbumsAdapter by lazy{
+        MyStudioAlbumsAdapter(itemOnClickListener)
+    }
+    private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
+
     }
 
-    private val userAlbumsObserver: (PagingData<UserAlbums.UserAlbum>) -> Unit = { pagingData ->
-        userAlbumsAdapter.submitData(lifecycle, pagingData)
+    private val albumsObserver: (PagingData<UserAlbums.UserAlbum>) -> Unit = { pagingData ->
+        myStudioAlbumsAdapter.submitData(lifecycle, pagingData)
     }
     private val userInfoObserver: (UsersResponse) -> Unit = { user ->
         binding.user = user
@@ -43,8 +46,6 @@ class MyStudioFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentMystudioBinding.inflate(layoutInflater, container, false)
-
-        binding.recyclerMystudioAlbum.adapter = userAlbumsAdapter
 
         return binding.root
     }
@@ -64,20 +65,21 @@ class MyStudioFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.userAlbums.observe(viewLifecycleOwner, userAlbumsObserver)
+        viewModel.myAlbums.observe(viewLifecycleOwner, albumsObserver)
         viewModel.userInfo.observe(viewLifecycleOwner,userInfoObserver)
     }
 
     private fun initViews(){
-        viewModel.getUserInfo(User.id)
+        viewModel.getMyInfo()
     }
 
     private fun initAdapter() {
+        binding.recyclerMystudioAlbum.adapter = myStudioAlbumsAdapter
         refresh()
     }
 
     private fun refresh() {
-        viewModel.getUserAlbums()
+        viewModel.getMyStudioAlbums(null)
     }
 
     private fun setOnClickListeners() {

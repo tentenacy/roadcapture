@@ -25,6 +25,27 @@ interface AlbumApi {
         @Query("dateTimeTo") dateTimeTo: String? = null,
     ): Single<PageResponse<AlbumsResponse>>
 
+    @GET(RoadCapturePathConstant.GET_MY_ALBUMS)
+    fun getMyStudioAlbums(
+        @Query("page") page: Int? = null,
+        @Query("size") size: Int? = null,
+        @Query("sort") sort: String? = null,
+        @Query("placeCond.region1DepthName") region1DepthName: String? = null,
+        @Query("placeCond.region2DepthName") region2DepthName: String? = null,
+        @Query("placeCond.region3DepthName") region3DepthName: String? = null,
+    ): Single<PageResponse<UserAlbumsResponse>>
+
+    @GET(RoadCapturePathConstant.GET_USER_ALBUMS)
+    fun getStudioAlbums(
+        @Path("userId") userId: Long?,
+        @Query("page") page: Int? = null,
+        @Query("size") size: Int? = null,
+        @Query("sort") sort: String? = null,
+        @Query("placeCond.region1DepthName") region1DepthName: String? = null,
+        @Query("placeCond.region2DepthName") region2DepthName: String? = null,
+        @Query("placeCond.region3DepthName") region3DepthName: String? = null,
+    ): Single<PageResponse<UserAlbumsResponse>>
+
     @GET(RoadCapturePathConstant.GET_ALBUM)
     fun getAlbumDetail(
         @Path("id") id: Long,
@@ -38,12 +59,4 @@ interface AlbumApi {
         @Query("sort") sort: String? = null,
     ): Single<PageResponse<AlbumsResponse>>
 
-    @GET(RoadCapturePathConstant.GET_USER_ALBUMS)
-    fun getUserAlbums(
-        @Query("page") page: Int?,
-        @Query("size") size: Int?,
-        @Query("placeCond.region1DepthName") region1DepthName: String?,
-        @Query("placeCond.region2DepthName") region2DepthName: String?,
-        @Query("placeCond.region3DepthName") region3DepthName: String?,
-    ): Single<PageResponse<UserAlbumsResponse>>
 }

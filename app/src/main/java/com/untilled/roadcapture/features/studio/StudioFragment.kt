@@ -8,10 +8,14 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import androidx.paging.PagingData
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
+import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.databinding.FragmentStudioBinding
+import com.untilled.roadcapture.features.common.dto.ItemClickArgs
+import com.untilled.roadcapture.features.root.studio.MyStudioAlbumsAdapter
 import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToFollower
 import com.untilled.roadcapture.utils.navigateToFollowing
@@ -26,8 +30,20 @@ class StudioFragment : Fragment() {
     val args: StudioFragmentArgs by navArgs()
     private val viewModel: StudioViewModel by viewModels()
 
+    private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
+
+    }
+
+    private val studioAlbumsAdapter: StudioAlbumsAdapter by lazy{
+        StudioAlbumsAdapter(itemOnClickListener)
+    }
+
     private val userObserver = { user: UsersResponse ->
         binding.user = user
+    }
+
+    private val albumsObserver: (PagingData<UserAlbums.UserAlbum>) -> Unit = { pagingData ->
+        studioAlbumsAdapter.submitData(lifecycle, pagingData)
     }
 
     override fun onCreateView(
@@ -50,16 +66,27 @@ class StudioFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeData()
         initViews()
+        initAdapter()
         setOnClickListeners()
     }
 
     private fun observeData() {
         viewModel.userInfo.observe(viewLifecycleOwner,userObserver)
+        viewModel.albums.observe(viewLifecycleOwner,albumsObserver)
     }
 
     private fun initViews(){
         viewModel.getUserInfo(args.id)
     }
+
+    private fun initAdapter() {
+        binding.recyclerStudioAlbum.adapter = studioAlbumsAdapter
+        refresh()
+    }
+    private fun refresh() {
+        viewModel.getStudioAlbums(args.id,null)
+    }
+
 
     private val btnStudioFollowObserver: (View?) -> Unit = {
         if(binding.user?.followed!!){
@@ -100,37 +127,4 @@ class StudioFragment : Fragment() {
             mainActivity().onBackPressed()
         }
     }
-
-    private fun initAdapter(albums: PageResponse<AlbumsResponse>) {
-//        binding.recyclerStudioAlbum.withModels { initStudioAlbumsItem(albums) }
-//        binding.recyclerStudioPlace.withModels {
-//            DummyDataSet.places.forEachIndexed { index, place ->
-//                placeFilter {
-//                    id(index)
-//                    place(place)
-//
-//                    onClickItem { model, parentView, clickedView, position ->
-//                        when(clickedView.id){
-//                            R.id.view_iplace_filter_overlay ->
-//                                clickedView.isSelected = !clickedView.isSelected
-//                        }
-//                    }
-//                }
-//            }
-//        }
-    }
-
-//    private fun EpoxyController.initStudioAlbumsItem(albums: PageResponse<AlbumsResponse>) {
-//        albums.content.forEachIndexed { index, album ->
-//            albumsStudio {
-//                id(index)
-//                studio(album)
-//                onClickItem { model, parentView, clickedView, position ->
-//                    when(clickedView.id){
-//
-//                    }
-//                }
-//            }
-//        }
-//    }
 }

@@ -43,7 +43,24 @@ class AlbumPagingRemoteRepositoryImpl(
         ).flowable
     }
 
-    override fun getUserAlbums(cond: UserAlbumsCondition?): Flowable<PagingData<UserAlbums.UserAlbum>> {
+    override fun getMyStudioAlbums(cond: UserAlbumsCondition?): Flowable<PagingData<UserAlbums.UserAlbum>> {
+        userAlbumsRemoteMediator.userId = null
+        userAlbumsRemoteMediator.userAlbumsCondition = cond
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = true,
+                maxSize = 30,
+                prefetchDistance = 5,
+                initialLoadSize = 40
+            ),
+            remoteMediator = userAlbumsRemoteMediator,
+            pagingSourceFactory = { userAlbumsDao.selectAll() }
+        ).flowable
+    }
+
+    override fun getStudioAlbums(userId: Long?,cond: UserAlbumsCondition?): Flowable<PagingData<UserAlbums.UserAlbum>> {
+        userAlbumsRemoteMediator.userId = userId
         userAlbumsRemoteMediator.userAlbumsCondition = cond
         return Pager(
             config = PagingConfig(
