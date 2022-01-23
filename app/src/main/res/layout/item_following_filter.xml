@@ -13,6 +13,10 @@
             type="com.untilled.roadcapture.data.entity.paging.Followings.Following" />
 
         <variable
+            name="position"
+            type="Integer" />
+
+        <variable
             name="onClickItem"
             type="android.view.View.OnClickListener" />
     </data>
@@ -20,14 +24,14 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraint_ifollowing_filter_container"
         android:layout_width="80dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:onClick="@{onClickItem}">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_ifollowing_filter_profile"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_marginTop="16dp"
-            android:onClick="@{onClickItem}"
             android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

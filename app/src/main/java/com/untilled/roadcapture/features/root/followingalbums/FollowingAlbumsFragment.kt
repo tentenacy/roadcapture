@@ -29,8 +29,9 @@ class FollowingAlbumsFragment : Fragment() {
     private var _binding: FragmentFollowingalbumsBinding? = null
     private val binding get() = _binding!!
 
-    private val albumViewModel: FollowingAlbumsViewModel by viewModels()
-    private val filterViewModel: FollowingAlbumsFilterViewModel by viewModels()
+    private val viewModel: FollowingAlbumsViewModel by viewModels()
+
+    private var followingId: Long? = null
 
     private val albumAdapter: FollowingAlbumsAdapter by lazy {
         FollowingAlbumsAdapter(albumItemOnClickListener)
@@ -52,11 +53,9 @@ class FollowingAlbumsFragment : Fragment() {
     }
 
     private val filterItemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
-        //w(args?.item as ItemFollowingFilterBinding).select = true
-    }
-
-    private val selectedStatusObserver: (Boolean?) -> Unit = {
-
+        val position = (args?.item as ItemFollowingFilterBinding).position
+        followingId = (args.item).user?.followingId
+        getSelectedAlbums(position, followingId)
     }
 
     private val albumItemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
@@ -115,23 +114,19 @@ class FollowingAlbumsFragment : Fragment() {
     }
 
     private fun observeData() {
-        albumViewModel.followingAlbums.observe(viewLifecycleOwner, followingAlbumObserver)
-        filterViewModel.user.observe(viewLifecycleOwner,followingFilterObserver)
+        viewModel.followingAlbums.observe(viewLifecycleOwner, followingAlbumObserver)
+        viewModel.user.observe(viewLifecycleOwner,followingFilterObserver)
     }
 
     fun initAdapter() {
         binding.recyclerFollowingalbums.adapter = albumAdapter
         binding.recyclerFollowingalbumsFilter.adapter = filterAdapter
-        refreshAlbums(null)
-        refreshFilters()
+        refresh(followingId)
     }
 
-    private fun refreshAlbums(followingId: Long?) {
-        albumViewModel.getFollowingAlbums(FollowingAlbumsCondition(followingId))
-    }
-
-    private fun refreshFilters(){
-        filterViewModel.getMyFollowings()
+    private fun refresh(followingId: Long?) {
+        viewModel.getFollowingAlbums(FollowingAlbumsCondition(followingId))
+        viewModel.getMyFollowings()
     }
 
     private fun setOnClickListeners() {
@@ -155,14 +150,14 @@ class FollowingAlbumsFragment : Fragment() {
             item.like!!.likeCount++
             item.like!!.liked = true
             item.textIalbumsLike.text = (item.like!!.likeCount).toString()
-            albumViewModel.likesAlbum(item.album!!.albumsId)
+            viewModel.likesAlbum(item.album!!.albumsId)
         } else {
             val animator = getValueAnimator(0.5f,0.0f, view)
             animator.start()
             item.like!!.likeCount--
             item.like!!.liked = false
             item.textIalbumsLike.text = (item.like!!.likeCount).toString()
-            albumViewModel.unlikesAlbum(item.album!!.albumsId)
+            viewModel.unlikesAlbum(item.album!!.albumsId)
         }
     }
 
@@ -172,5 +167,16 @@ class FollowingAlbumsFragment : Fragment() {
             view.progress = it.animatedValue as Float
         }
         return animator
+    }
+
+    private fun getSelectedAlbums(position: Int?, followingId: Long?) {
+        if (filterAdapter.index == position) {
+            filterAdapter.index = null
+            refresh(null)
+        } else {
+            filterAdapter.index = position
+            refresh(followingId)
+        }
+        filterAdapter.notifyDataSetChanged()
     }
 }
