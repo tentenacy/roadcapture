@@ -11,4 +11,7 @@ data class ErrorResponse(
         val value: String,
         val reason: String,
     )
+
+    fun isEmpty() = code.isBlank() || status == 0 || message.isBlank()
+    fun isNotEmpty() = !isEmpty()
 }

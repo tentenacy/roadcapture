@@ -9,6 +9,7 @@ import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsConditio
 import com.untilled.roadcapture.data.datasource.database.PagingDatabase
 import com.untilled.roadcapture.data.entity.mapper.AlbumsMapper
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
+import com.untilled.roadcapture.utils.retryThreeTimes
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.InvalidObjectException
@@ -62,6 +63,8 @@ class UserAlbumsRemoteMediator @Inject constructor(
                         region2DepthName = userAlbumsCondition?.region2DepthName,
                         region3DepthName = userAlbumsCondition?.region3DepthName,
                     )
+                        .subscribeOn(Schedulers.io())
+                        .retry(3)
                         .map { mapper.transform(it) }
                         .map { insertToDb(page, loadType, it) }
                         .map<MediatorResult> { MediatorResult.Success(endOfPaginationReached = it.endOfPage) }

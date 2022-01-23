@@ -5,6 +5,7 @@ import androidx.paging.rxjava3.RxPagingSource
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.entity.mapper.CommentsMapper
 import com.untilled.roadcapture.data.entity.paging.PictureComments
+import com.untilled.roadcapture.utils.retryThreeTimes
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
@@ -32,6 +33,7 @@ class PictureCommentsPagingSource @Inject constructor(
             pictureId = pictureId,
         )
             .subscribeOn(Schedulers.io())
+            .retry(3)
             .map { mapper.transformToPictureComments(it) }
             .map { toLoadResult(it, position) }
             .onErrorReturn { LoadResult.Error(it) }

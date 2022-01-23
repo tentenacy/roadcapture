@@ -48,13 +48,14 @@ class FollowingsPagingSource @Inject constructor(
                 username = followingsCondition?.username,
             )
                 .subscribeOn(Schedulers.io())
+                .retry(3)
                 .map { mapper.transformToFollowings(it) }
                 .map { toLoadResult(it, position) }
                 .onErrorReturn { LoadResult.Error(it) }
         }
     }
 
-    private fun toLoadResult(data: Followings, position: Int): PagingSource.LoadResult<Int, Followings.Following> {
+    private fun toLoadResult(data: Followings, position: Int): LoadResult<Int, Followings.Following> {
         return PagingSource.LoadResult.Page(
             data = data.followings,
             prevKey = if(position == 0) null else position - 1,

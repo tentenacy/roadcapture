@@ -5,4 +5,7 @@ data class TokenResponse(
     val accessToken: String,
     val refreshToken: String,
     val accessTokenExpireDate: Int,
-)
+) {
+    fun isEmpty() = grantType.isBlank() || accessToken.isBlank() || refreshToken.isBlank() || accessTokenExpireDate == 0
+    fun isNotEmpty() = !isEmpty()
+}

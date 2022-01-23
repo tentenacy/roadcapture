@@ -9,6 +9,7 @@ import com.untilled.roadcapture.data.datasource.database.PagingDatabase
 import com.untilled.roadcapture.data.entity.mapper.CommentsMapper
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.data.entity.paging.Albums
+import com.untilled.roadcapture.utils.retryThreeTimes
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.InvalidObjectException
@@ -60,6 +61,8 @@ class AlbumCommentsRemoteMediator @Inject constructor(
                         size = state.config.pageSize,
                         albumId = albumId,
                     )
+                        .subscribeOn(Schedulers.io())
+                        .retry(3)
                         .map { mapper.transformToAlbumComments(it) }
                         .map { insertToDb(page, loadType, it) }
                         .map<MediatorResult> { MediatorResult.Success(endOfPaginationReached = it.endOfPage) }

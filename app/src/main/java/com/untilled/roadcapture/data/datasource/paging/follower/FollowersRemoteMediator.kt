@@ -9,6 +9,7 @@ import com.untilled.roadcapture.data.datasource.api.dto.user.FollowersCondition
 import com.untilled.roadcapture.data.datasource.database.PagingDatabase
 import com.untilled.roadcapture.data.entity.mapper.FollowersMapper
 import com.untilled.roadcapture.data.entity.paging.Followers
+import com.untilled.roadcapture.utils.retryThreeTimes
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.InvalidObjectException
@@ -62,6 +63,8 @@ class FollowersRemoteMediator @Inject constructor(
                         id = userId,
                         username = followersCondition?.username,
                     )
+                        .subscribeOn(Schedulers.io())
+                        .retry(3)
                         .map { mapper.transformToFollowers(it) }
                         .map { insertToDb(page, loadType, it) }
                         .map<MediatorResult> { MediatorResult.Success(endOfPaginationReached = it.endOfPage) }

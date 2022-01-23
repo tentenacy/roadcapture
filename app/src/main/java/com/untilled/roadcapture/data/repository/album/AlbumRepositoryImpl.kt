@@ -31,19 +31,19 @@ class AlbumRepositoryImpl
         albumId: Long,
         page: Int?,
         size: Int?
-    ): Single<PageResponse<CommentsResponse>> = roadCaptureApi.getAlbumComments(albumId, page, size)
+    ): Single<PageResponse<CommentsResponse>> = roadCaptureApi.getAlbumComments(albumId, page, size).retryThreeTimes()
 
     override fun getPictureCommentsList(
         pictureId: Long,
         page: Int?,
         size: Int?
     ): Single<PageResponse<CommentsResponse>> =
-        roadCaptureApi.getPictureComments(pictureId,page,size)
+        roadCaptureApi.getPictureComments(pictureId,page,size).retryThreeTimes()
 
-    override fun likesAlbum(albumId: Long): Single<Unit> = roadCaptureApi.likeAlbum(albumId)
+    override fun likesAlbum(albumId: Long): Single<Unit> = roadCaptureApi.likeAlbum(albumId).retryThreeTimes()
 
-    override fun unlikesAlbum(albumId: Long): Single<Unit> = roadCaptureApi.unlikeAlbum(albumId)
+    override fun unlikesAlbum(albumId: Long): Single<Unit> = roadCaptureApi.unlikeAlbum(albumId).retryThreeTimes()
 
     override fun getAlbumDetail(id: Long): Single<AlbumResponse> =
-        roadCaptureApi.getAlbumDetail(id)
+        roadCaptureApi.getAlbumDetail(id).retryThreeTimes()
 }

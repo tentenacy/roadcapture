@@ -6,6 +6,7 @@ import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.api.dto.album.FollowingAlbumsCondition
 import com.untilled.roadcapture.data.entity.mapper.AlbumsMapper
 import com.untilled.roadcapture.data.entity.paging.Albums
+import com.untilled.roadcapture.utils.retryThreeTimes
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
@@ -33,6 +34,7 @@ class FollowingAlbumsPagingSource @Inject constructor(
             sort = null
         )
             .subscribeOn(Schedulers.io())
+            .retry(3)
             .map { mapper.transform(it) }
             .map { toLoadResult(it,position) }
             .onErrorReturn{ LoadResult.Error(it) }
