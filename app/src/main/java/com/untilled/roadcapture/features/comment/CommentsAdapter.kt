@@ -10,6 +10,7 @@ import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.databinding.ItemAlbumsBinding
 import com.untilled.roadcapture.databinding.ItemCommentBinding
+import com.untilled.roadcapture.databinding.ItemPictureSliderThumbnailBinding
 import com.untilled.roadcapture.features.root.albums.AlbumsAdapter
 import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import javax.inject.Inject
@@ -17,13 +18,9 @@ import javax.inject.Inject
 class CommentsAdapter @Inject constructor(): PagingDataAdapter<AlbumComments.AlbumComment, CommentsAdapter.CommentViewHolder>(
     COMPARATOR
 ) {
-    private lateinit var itemClickListener: (ItemClickArgs?) -> Unit
+    lateinit var itemClickListener: (ItemClickArgs?) -> Unit
 
-    fun setOnClickListener(itemClickListener: (ItemClickArgs?) -> Unit) {
-        this.itemClickListener = itemClickListener
-    }
-
-    class CommentViewHolder(private val binding: ItemCommentBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class CommentViewHolder(private val binding: ItemCommentBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(comments: AlbumComments.AlbumComment, itemClickListener: (ItemClickArgs?) -> Unit) {
             binding.comments = comments
@@ -31,23 +28,10 @@ class CommentsAdapter @Inject constructor(): PagingDataAdapter<AlbumComments.Alb
                 itemClickListener(ItemClickArgs(binding,view))
             }
         }
-
-        companion object {
-            fun create(parent: ViewGroup): CommentViewHolder {
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_comment, parent, false)
-
-                val binding = ItemCommentBinding.bind(view)
-
-                return CommentViewHolder(
-                    binding
-                )
-            }
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
-        return CommentViewHolder.create(parent)
+        return CommentViewHolder(ItemCommentBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
@@ -67,6 +51,4 @@ class CommentsAdapter @Inject constructor(): PagingDataAdapter<AlbumComments.Alb
             }
         }
     }
-
-
 }

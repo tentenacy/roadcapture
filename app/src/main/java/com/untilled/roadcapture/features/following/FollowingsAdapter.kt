@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.paging.Followings
 import com.untilled.roadcapture.databinding.ItemFollowBinding
+import com.untilled.roadcapture.databinding.ItemPictureSliderThumbnailBinding
 import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import javax.inject.Inject
 
@@ -17,7 +18,7 @@ class FollowingsAdapter @Inject constructor(): PagingDataAdapter<Followings.Foll
 
     lateinit var itemOnClickListener: (ItemClickArgs?) -> Unit
 
-    class FollowingsViewHolder(private val binding: ItemFollowBinding): RecyclerView.ViewHolder(binding.root){
+    inner class FollowingsViewHolder(private val binding: ItemFollowBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(user: Followings.Following, itemOnClickListener: (ItemClickArgs?) -> Unit){
             binding.user = user
@@ -25,28 +26,15 @@ class FollowingsAdapter @Inject constructor(): PagingDataAdapter<Followings.Foll
                 itemOnClickListener(ItemClickArgs(binding,view))
             }
         }
-
-        companion object{
-            fun create(parent: ViewGroup): FollowingsViewHolder{
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_follow,parent,false)
-
-                val binding = ItemFollowBinding.bind(view)
-
-                return FollowingsViewHolder(
-                    binding
-                )
-            }
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowingsViewHolder {
-        return FollowingsViewHolder.create(parent)
+        return FollowingsViewHolder(ItemFollowBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: FollowingsViewHolder, position: Int) {
         getItem(position)?.let{
-            holder.bind(it,itemOnClickListener)
+            holder.bind(it, itemOnClickListener)
         }
     }
 

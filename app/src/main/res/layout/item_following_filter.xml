@@ -13,10 +13,6 @@
             type="com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse" />
 
         <variable
-            name="clicked"
-            type="com.untilled.roadcapture.features.root.albums.dto.FollowingFilterClicked" />
-
-        <variable
             name="onClickItem"
             type="android.view.View.OnClickListener" />
     </data>
@@ -71,8 +67,7 @@
             android:layout_height="0dp"
             android:background="@drawable/overlay_gradient_following_filter"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            bind:SelectedStatus="@{clicked.clicked}"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline_ifollowing_filter_h60p"

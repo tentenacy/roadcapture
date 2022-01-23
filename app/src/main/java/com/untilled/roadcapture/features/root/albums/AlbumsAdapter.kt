@@ -17,37 +17,24 @@ class AlbumsAdapter @Inject constructor(): PagingDataAdapter<Albums.Album, Album
 ) {
     lateinit var itemOnClickListener: (ItemClickArgs?) -> Unit
 
-    class AlbumViewHolder(private val binding: ItemAlbumsBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class AlbumViewHolder(private val binding: ItemAlbumsBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(album: Albums.Album, itemOnClickListener: (ItemClickArgs?) -> Unit) {
+        fun bind(album: Albums.Album) {
             binding.album = album
             binding.like = LikeStatus(album.liked,album.likeCount)
             binding.setOnClickItem{ view ->
                 itemOnClickListener(ItemClickArgs(binding,view))
             }
         }
-
-        companion object {
-            fun create(parent: ViewGroup): AlbumViewHolder {
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_albums, parent, false)
-
-                val binding = ItemAlbumsBinding.bind(view)
-
-                return AlbumViewHolder(
-                    binding
-                )
-            }
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
-        return AlbumViewHolder.create(parent)
+        return AlbumViewHolder(ItemAlbumsBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
         getItem(position)?.let {
-            holder.bind(it,itemOnClickListener)
+            holder.bind(it)
         }
     }
 

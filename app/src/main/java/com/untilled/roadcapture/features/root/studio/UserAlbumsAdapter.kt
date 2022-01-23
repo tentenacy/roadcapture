@@ -10,33 +10,21 @@ import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.databinding.ItemAlbumsBinding
 import com.untilled.roadcapture.databinding.ItemAlbumsStudioBinding
+import com.untilled.roadcapture.databinding.ItemPlaceSearchBinding
 import javax.inject.Inject
 
 class UserAlbumsAdapter @Inject constructor(): PagingDataAdapter<UserAlbums.UserAlbum, UserAlbumsAdapter.UserAlbumViewHolder>(
     COMPARATOR
 ) {
 
-    class UserAlbumViewHolder(private val binding: ItemAlbumsStudioBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class UserAlbumViewHolder(private val binding: ItemAlbumsStudioBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(album: UserAlbums.UserAlbum) {
             binding.album = album
-        }
-
-        companion object {
-            fun create(parent: ViewGroup): UserAlbumViewHolder {
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_albums_studio, parent, false)
-
-                val binding = ItemAlbumsStudioBinding.bind(view)
-
-                return UserAlbumViewHolder(
-                    binding
-                )
-            }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserAlbumViewHolder {
-        return UserAlbumViewHolder.create(parent)
+        return UserAlbumViewHolder(ItemAlbumsStudioBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: UserAlbumViewHolder, position: Int) {

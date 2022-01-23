@@ -47,9 +47,8 @@ class PlaceSearchFragment : Fragment() {
     private val placeSearchObserver: (SearchPlaceResponse?) -> Unit = { searchPlaceResponse ->
         adapter.run {
             binding.progressbarPlaceSearchLoading.isVisible = false // 로딩 애니메이션 off
-
             if (searchPlaceResponse != null) {
-                setPlaceList(poisToPlace(searchPlaceResponse.searchPoiInfo.pois))
+                placeList = poisToPlace(searchPlaceResponse.searchPoiInfo.pois)
                 notifyDataSetChanged()
             } else {
                 displayNoResult()
@@ -79,7 +78,7 @@ class PlaceSearchFragment : Fragment() {
     private fun initAdapter() {
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
         binding.recyclerPlaceSearch.addItemDecoration(customDivider)
-        adapter.setOnClickListener(itemClickListener)
+        adapter.itemClickListener = itemClickListener
         binding.recyclerPlaceSearch.adapter = adapter
     }
 

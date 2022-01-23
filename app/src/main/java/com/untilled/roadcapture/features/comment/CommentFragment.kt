@@ -96,7 +96,7 @@ class CommentFragment : Fragment() {
     private fun initAdapter() {
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
         binding.recyclerComment.addItemDecoration(customDivider)
-        adapter.setOnClickListener(itemClickListener)
+        adapter.itemClickListener = itemClickListener
         binding.recyclerComment.adapter = adapter
         refresh(args.albumsId)
     }
