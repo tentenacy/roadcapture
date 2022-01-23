@@ -26,7 +26,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     private var _binding: BottomsheetCommentBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
     private val viewModel: PictureViewerViewModel by viewModels({ requireParentFragment().requireParentFragment() })
     @Inject
     lateinit var adapter: CommentBottomSheetAdapter
@@ -57,6 +57,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
                 }.show()
             }
             R.id.img_icomment_profile -> {
+                //TODO: parent의 parent인 pictureViewerFragment에서 studioFragment로 이동
                 Navigation.findNavController(binding.root)
                     .navigate(R.id.action_commentFragment_to_studioFragment)
             }

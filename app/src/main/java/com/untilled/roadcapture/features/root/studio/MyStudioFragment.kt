@@ -11,7 +11,7 @@ import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.data.datasource.sharedpref.User
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.databinding.FragmentMystudioBinding
-import com.untilled.roadcapture.utils.rootFromChild
+import com.untilled.roadcapture.utils.rootFrom3Depth
 import com.untilled.roadcapture.utils.navigateToFollower
 import com.untilled.roadcapture.utils.navigateToFollowing
 import com.untilled.roadcapture.utils.navigateToSettings
@@ -81,20 +81,20 @@ class MyStudioFragment : Fragment() {
 
     private fun setOnClickListeners() {
         binding.textMystudioFollower.setOnClickListener {
-            rootFromChild().navigateToFollower(User.id)
+            rootFrom3Depth().navigateToFollower(User.id)
         }
         binding.textMystudioFollowing.setOnClickListener {
-            rootFromChild().navigateToFollowing(User.id)
+            rootFrom3Depth().navigateToFollowing(User.id)
         }
         binding.btnMystudioEdit.setOnClickListener {
 //            Navigation.findNavController(rootFragmentFrom3Depth().binding.root)
 //                .navigate(RootFragmentDirections.actionRootFragmentToMyStudioModification(binding.user))
         }
         binding.imageMystudioSettingBefore.setOnClickListener {
-            rootFromChild().navigateToSettings()
+            rootFrom3Depth().navigateToSettings()
         }
         binding.imageMystudioSettingAfter.setOnClickListener {
-            rootFromChild().navigateToSettings()
+            rootFrom3Depth().navigateToSettings()
         }
     }
 }

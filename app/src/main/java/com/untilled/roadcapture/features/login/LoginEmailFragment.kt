@@ -18,13 +18,16 @@ import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.datasource.api.dto.user.LoginRequest
 import com.untilled.roadcapture.databinding.FragmentLoginEmailBinding
 import com.untilled.roadcapture.features.base.BaseFragment
+import com.untilled.roadcapture.utils.navigateToPasswordFind
+import com.untilled.roadcapture.utils.navigateToRoot
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class LoginEmailFragment : BaseFragment(), Validator.ValidationListener {
+
     private var _binding: FragmentLoginEmailBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     @Inject
     lateinit var validator: Validator
@@ -42,7 +45,7 @@ class LoginEmailFragment : BaseFragment(), Validator.ValidationListener {
 
     private val isLoggedInObserver: (Boolean) -> Unit = { isLoggedIn ->
         if (isLoggedIn) {
-            findNavController().navigate(LoginEmailFragmentDirections.actionEmailLoginFragmentToRootFragment())
+            navigateToRoot()
         }
     }
 
@@ -99,6 +102,12 @@ class LoginEmailFragment : BaseFragment(), Validator.ValidationListener {
         editPassword = binding.edtLoginEmailPwdinput
     }
 
+    private fun observeData() {
+        viewModel.isLoggedIn.observe(viewLifecycleOwner, isLoggedInObserver)
+        viewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
+        viewModel.error.observe(viewLifecycleOwner, errorObserver)
+    }
+
     private fun setOnClickListeners() {
         binding.imgLoginEmailBack.setOnClickListener {
             requireActivity().onBackPressed()
@@ -107,14 +116,7 @@ class LoginEmailFragment : BaseFragment(), Validator.ValidationListener {
             validator.validate()
         }
         binding.textLoginEmailFind.setOnClickListener {
-            Navigation.findNavController(binding.root)
-                .navigate(R.id.action_emailLoginFragment_to_passwordFindFragment)
+            navigateToPasswordFind()
         }
-    }
-
-    private fun observeData() {
-        viewModel.isLoggedIn.observe(viewLifecycleOwner, isLoggedInObserver)
-        viewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
-        viewModel.error.observe(viewLifecycleOwner, errorObserver)
     }
 }

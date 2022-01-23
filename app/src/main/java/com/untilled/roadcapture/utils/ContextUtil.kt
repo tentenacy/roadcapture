@@ -11,6 +11,8 @@ import com.untilled.roadcapture.features.signup.SignupFragment
 
 fun Fragment.mainActivity() = (requireActivity() as MainActivity)
 
-fun Fragment.rootFromChild(): RootFragment = (parentFragment?.parentFragment?.parentFragment as RootFragment)
+fun Fragment.rootFrom1Depth(): RootFragment = (parentFragment as RootFragment)
 
-fun Fragment.signupFromChild(): SignupFragment = (parentFragment?.parentFragment as SignupFragment)
+fun Fragment.rootFrom3Depth(): RootFragment = (parentFragment?.parentFragment?.parentFragment as RootFragment)
+
+fun Fragment.signupFrom2Depth(): SignupFragment = (parentFragment?.parentFragment as SignupFragment)

@@ -48,7 +48,7 @@ fun View.setRippleEffect() {
 
 fun AppCompatActivity.currentFragment(id: Int): Fragment? = supportFragmentManager.findFragmentById(id)?.childFragmentManager?.fragments?.get(0)
 
-fun AppCompatActivity.navigateFromOriginToLoginFragment(id: Int): Unit {
+fun AppCompatActivity.navigateFromOriginToLogin(id: Int): Unit {
     currentFragment(id)?.let {
         Navigation.findNavController(it.requireView()).apply {
             navigate(R.id.action_global_loginFragment)

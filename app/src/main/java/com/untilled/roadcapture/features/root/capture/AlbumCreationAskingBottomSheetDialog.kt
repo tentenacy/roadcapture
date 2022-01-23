@@ -10,6 +10,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.BottomsheetAlbumcreationBinding
 import com.untilled.roadcapture.features.root.RootFragment
+import com.untilled.roadcapture.utils.navigateToCapture
+import com.untilled.roadcapture.utils.rootFrom1Depth
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -43,8 +45,7 @@ class AlbumCreationAskingBottomSheetDialog : BottomSheetDialogFragment() {
 
     private fun setOnClickListeners(){
         binding.btnDlgalbumcreationConfirm.setOnClickListener {
-            Navigation.findNavController((parentFragment as RootFragment).binding.root)
-                .navigate(R.id.action_rootFragment_to_captureFragment)
+            rootFrom1Depth().navigateToCapture()
             dismiss()
         }
         binding.btnDlgalbumcreationCancel.setOnClickListener {

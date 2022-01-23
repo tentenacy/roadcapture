@@ -8,15 +8,12 @@ import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import com.mobsandgeeks.saripaar.annotation.Password
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentSignupPwdBinding
 import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToSignupUsername
-import com.untilled.roadcapture.utils.signupFromChild
+import com.untilled.roadcapture.utils.signupFrom2Depth
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.regex.Pattern
 
@@ -94,7 +91,7 @@ class SignupPasswordFragment : Fragment() {
         binding.btnSignupPwdConfirm.setOnClickListener {
             navigateToSignupUsername()
         }
-        signupFromChild().binding.imgSignupBack.setOnClickListener {
+        signupFrom2Depth().binding.imgSignupBack.setOnClickListener {
             mainActivity().onBackPressed()
         }
     }

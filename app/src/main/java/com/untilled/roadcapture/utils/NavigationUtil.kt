@@ -13,8 +13,11 @@ import com.untilled.roadcapture.features.follower.FollowersFragment
 import com.untilled.roadcapture.features.follower.FollowersFragmentDirections
 import com.untilled.roadcapture.features.following.FollowingsFragment
 import com.untilled.roadcapture.features.following.FollowingsFragmentDirections
+import com.untilled.roadcapture.features.login.LoginEmailFragment
+import com.untilled.roadcapture.features.login.LoginEmailFragmentDirections
 import com.untilled.roadcapture.features.login.LoginFragment
 import com.untilled.roadcapture.features.login.LoginFragmentDirections
+import com.untilled.roadcapture.features.picture.CommentBottomSheetDialog
 import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
 import com.untilled.roadcapture.features.root.capture.*
@@ -30,6 +33,10 @@ fun View.navigate(navDirections: NavDirections) {
     Navigation.findNavController(this).navigate(navDirections)
 }
 
+fun RootFragment.navigateToCapture() {
+    binding.root.navigate(RootFragmentDirections.actionRootFragmentToCaptureFragment())
+}
+
 fun RootFragment.navigateToNotification() {
     binding.root.navigate(RootFragmentDirections.actionRootFragmentToNotificationFragment())
 }
@@ -42,7 +49,7 @@ fun RootFragment.navigateToComment(id: Long) {
     binding.root.navigate(RootFragmentDirections.actionRootFragmentToCommentFragment(id))
 }
 
-fun RootFragment.navigateToPictureViewerContainer(id: Long) {
+fun RootFragment.navigateToPictureViewer(id: Long) {
     binding.root.navigate(RootFragmentDirections.actionRootFragmentToPictureViewerContainerFragment(id))
 }
 
@@ -118,6 +125,10 @@ fun SignupPasswordFragment.navigateToSignupUsername() {
     binding.root.navigate(SignupPasswordFragmentDirections.actionSignupPasswordFragmentToSignupUsernameFragment())
 }
 
+fun SignupFragment.navigateToTermsOfService() {
+    binding.root.navigate(SignupFragmentDirections.actionSignupFragmentToTermsOfServiceFragment())
+}
+
 fun SignupFragment.navigateToRoot() {
     binding.root.navigate(SignupFragmentDirections.actionSignupFragmentToRootFragment())
 }
@@ -142,16 +153,28 @@ fun LoginFragment.navigateToRoot() {
     binding.root.navigate(LoginFragmentDirections.actionLoginFragmentToRootFragment())
 }
 
+fun LoginEmailFragment.navigateToRoot() {
+    binding.root.navigate(LoginEmailFragmentDirections.actionEmailLoginFragmentToRootFragment())
+}
+
+fun LoginEmailFragment.navigateToPasswordFind() {
+    binding.root.navigate(LoginEmailFragmentDirections.actionEmailLoginFragmentToPasswordFindFragment())
+}
+
 fun CommentFragment.navigateToStudio(id: Long) {
     binding.root.navigate(CommentFragmentDirections.actionCommentFragmentToStudioFragment(id))
 }
 
-fun FollowersFragment.navigateToStudio(id: Long){
+fun FollowersFragment.navigateToStudio(id: Long) {
     binding.root.navigate(FollowersFragmentDirections.actionFollowersFragmentToStudioFragment(id))
 }
 
-fun FollowingsFragment.navigateToStudio(id: Long){
+fun FollowingsFragment.navigateToStudio(id: Long) {
     binding.root.navigate(FollowingsFragmentDirections.actionFollowingsFragmentToStudioFragment(id))
+}
+
+fun CameraFragment.navigateToCropFragment(imageUri: String) {
+    binding.root.navigate(CameraFragmentDirections.actionCameraFragmentToCropFragment(imageUri))
 }
 
 fun Fragment.navigateToLogin() {

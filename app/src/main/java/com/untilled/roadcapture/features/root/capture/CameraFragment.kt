@@ -22,6 +22,7 @@ import androidx.window.WindowManager
 import com.untilled.roadcapture.databinding.FragmentCameraBinding
 import com.untilled.roadcapture.utils.ANIMATION_FAST_MILLIS
 import com.untilled.roadcapture.utils.ANIMATION_SLOW_MILLIS
+import com.untilled.roadcapture.utils.navigateToCropFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import java.nio.ByteBuffer
@@ -39,7 +40,7 @@ typealias LumaListener = (luma: Double) -> Unit
 @AndroidEntryPoint
 class CameraFragment : Fragment() {
     private var _binding : FragmentCameraBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     // Blocking camera operations are performed using this executor
     private lateinit var cameraExecutor: ExecutorService
@@ -153,8 +154,7 @@ class CameraFragment : Fragment() {
 
                             // MainThread(UI Thread) 에서 Navigation 이용해서 cropFragment 로 이동
                             ContextCompat.getMainExecutor(requireContext()).execute {
-                                Navigation.findNavController(binding.root)
-                                    .navigate(CameraFragmentDirections.actionCameraFragmentToCropFragment(savedUri.toString()))
+                                navigateToCropFragment(savedUri.toString())
                             }
                         }
                     })

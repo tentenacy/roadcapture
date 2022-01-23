@@ -20,7 +20,6 @@ import com.untilled.roadcapture.features.common.CustomDivider
 import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.hideKeyboard
 import com.untilled.roadcapture.utils.navigateToStudio
-import com.untilled.roadcapture.utils.rootFromChild
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

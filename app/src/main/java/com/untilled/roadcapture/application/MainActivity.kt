@@ -5,15 +5,13 @@ import android.os.Bundle
 import androidx.activity.result.ActivityResult
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.nhn.android.naverlogin.OAuthLogin
-import com.untilled.roadcapture.BuildConfig
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.activityresult.ActivityResultFactory
 import com.untilled.roadcapture.databinding.ActivityMainBinding
 import com.untilled.roadcapture.features.root.capture.CropFragment
 import com.untilled.roadcapture.network.subject.OAuthLoginManagerSubject
 import com.untilled.roadcapture.utils.currentFragment
-import com.untilled.roadcapture.utils.navigateFromOriginToLoginFragment
+import com.untilled.roadcapture.utils.navigateFromOriginToLogin
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropFragment
 import com.yalantis.ucrop.UCropFragmentCallback
@@ -34,7 +32,7 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
 
     private val isLoggedOutObserver: (Boolean) -> Unit = { isLoggedOut ->
         if(isLoggedOut) {
-            navigateFromOriginToLoginFragment(binding.root.id)
+            navigateFromOriginToLogin(binding.root.id)
         }
     }
 

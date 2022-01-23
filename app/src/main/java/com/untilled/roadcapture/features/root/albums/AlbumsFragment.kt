@@ -35,7 +35,7 @@ class AlbumsFragment : Fragment() {
     lateinit var adapter: AlbumsAdapter
 
     private val notificationOnClickListener: (View?) -> Unit = {
-        rootFromChild().navigateToNotification()
+        rootFrom3Depth().navigateToNotification()
     }
 
     private val filterOnClickListener: (View?) -> Unit = {
@@ -53,15 +53,15 @@ class AlbumsFragment : Fragment() {
         val albumId = args.item.album!!.albumsId
 
         when (args.view?.id) {
-            R.id.img_ialbums_profile -> rootFromChild().navigateToStudio(albumUserId)
-            R.id.img_ialbums_comment -> rootFromChild().navigateToComment(albumId)
+            R.id.img_ialbums_profile -> rootFrom3Depth().navigateToStudio(albumUserId)
+            R.id.img_ialbums_comment -> rootFrom3Depth().navigateToComment(albumId)
             R.id.img_ialbums_like -> {
                 setLikeStatus(args.view as LottieAnimationView, args.item)
             }
             //Todo: 네비게이션 args 변경해야 함
             R.id.img_ialbums_thumbnail,
             R.id.text_ialbums_title,
-            R.id.text_ialbums_desc -> rootFromChild().navigateToPictureViewerContainer(albumId)
+            R.id.text_ialbums_desc -> rootFrom3Depth().navigateToPictureViewer(albumId)
             R.id.img_ialbums_more -> {
                 val popupMenu = PopupMenu(requireContext(), args.view)
                 popupMenu.apply {
