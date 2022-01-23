@@ -8,23 +8,18 @@ import androidx.recyclerview.widget.RecyclerView
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.data.entity.paging.PictureComments
+import com.untilled.roadcapture.databinding.ItemAlbumsBinding
 import com.untilled.roadcapture.databinding.ItemCommentBinding
 import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import javax.inject.Inject
 
-class CommentBottomSheetAdapter @Inject constructor() :
+class CommentBottomSheetAdapter(private val itemClickListener: (ItemClickArgs?) -> Unit) :
     PagingDataAdapter<PictureComments.PictureComment, CommentBottomSheetAdapter.CommentBottomSheetViewHolder>(
         COMPARATOR
     ) {
-    private lateinit var itemClickListener: (ItemClickArgs?) -> Unit
+    inner class CommentBottomSheetViewHolder(private val binding: ItemCommentBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun setOnClickListener(itemClickListener: (ItemClickArgs?) -> Unit) {
-        this.itemClickListener = itemClickListener
-    }
-
-    class CommentBottomSheetViewHolder(private val binding: ItemCommentBinding) : RecyclerView.ViewHolder(binding.root) {
-
-        fun bind(comments: PictureComments.PictureComment, itemClickListener: (ItemClickArgs?) -> Unit) {
+        fun bind(comments: PictureComments.PictureComment) {
             //TODO 회의 후 수정
             binding.comments = AlbumComments.AlbumComment(
                 id = comments.id,
@@ -39,28 +34,15 @@ class CommentBottomSheetAdapter @Inject constructor() :
                 itemClickListener(ItemClickArgs(binding, view))
             }
         }
-
-        companion object {
-            fun create(parent: ViewGroup): CommentBottomSheetViewHolder {
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_comment, parent, false)
-
-                val binding = ItemCommentBinding.bind(view)
-
-                return CommentBottomSheetViewHolder(
-                    binding
-                )
-            }
-        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentBottomSheetViewHolder {
-        return CommentBottomSheetViewHolder.create(parent)
+        return CommentBottomSheetViewHolder(ItemCommentBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: CommentBottomSheetViewHolder, position: Int) {
         getItem(position)?.let {
-            holder.bind(it, itemClickListener)
+            holder.bind(it)
         }
     }
 

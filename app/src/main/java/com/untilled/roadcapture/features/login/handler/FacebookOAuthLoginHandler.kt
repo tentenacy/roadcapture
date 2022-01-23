@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.login
+package com.untilled.roadcapture.features.login.handler
 
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginResult
 import com.untilled.roadcapture.data.repository.token.dto.OAuthTokenArgs
+import com.untilled.roadcapture.features.login.LoginViewModel
 import com.untilled.roadcapture.utils.type.SocialType
 
 class FacebookOAuthLoginHandler(private val fragment: Fragment) : FacebookCallback<LoginResult> {

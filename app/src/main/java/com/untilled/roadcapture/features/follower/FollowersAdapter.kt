@@ -11,12 +11,10 @@ import com.untilled.roadcapture.databinding.ItemFollowBinding
 import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import javax.inject.Inject
 
-class FollowersAdapter @Inject constructor() :
+class FollowersAdapter(private val itemOnClickListener: (ItemClickArgs?) -> Unit) :
     PagingDataAdapter<Followers.Follower, FollowersAdapter.FollowersViewHolder>(
         COMPARATOR
     ) {
-
-    lateinit var itemOnClickListener: (ItemClickArgs?) -> Unit
 
     inner class FollowersViewHolder(private val binding: ItemFollowBinding) :
         RecyclerView.ViewHolder(binding.root) {

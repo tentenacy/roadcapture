@@ -1,22 +1,15 @@
 package com.untilled.roadcapture.di
 
-import android.app.Activity
-import android.content.Context
-import androidx.activity.result.ActivityResult
 import androidx.fragment.app.Fragment
-import com.facebook.FacebookCallback
-import com.facebook.login.LoginResult
-import com.kakao.sdk.auth.model.OAuthToken
 import com.nhn.android.naverlogin.OAuthLogin
-import com.nhn.android.naverlogin.OAuthLoginHandler
-import com.untilled.roadcapture.features.login.*
+import com.untilled.roadcapture.features.login.handler.FacebookOAuthLoginHandler
+import com.untilled.roadcapture.features.login.handler.GoogleOAuthLoginHandler
+import com.untilled.roadcapture.features.login.handler.KakaoOAuthLoginHandler
+import com.untilled.roadcapture.features.login.handler.NaverOAuthLoginHandler
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
-import dagger.hilt.android.components.ActivityRetainedComponent
 import dagger.hilt.android.components.FragmentComponent
-import javax.inject.Singleton
 
 @InstallIn(FragmentComponent::class)
 @Module

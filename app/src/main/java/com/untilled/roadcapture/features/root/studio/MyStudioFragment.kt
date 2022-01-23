@@ -26,8 +26,9 @@ class MyStudioFragment : Fragment() {
 
     private val viewModel: MyStudioViewModel by viewModels()
 
-    @Inject
-    lateinit var userAlbumsAdapter: UserAlbumsAdapter
+    private val userAlbumsAdapter: UserAlbumsAdapter by lazy {
+        UserAlbumsAdapter()
+    }
 
     private val userAlbumsObserver: (PagingData<UserAlbums.UserAlbum>) -> Unit = { pagingData ->
         userAlbumsAdapter.submitData(lifecycle, pagingData)

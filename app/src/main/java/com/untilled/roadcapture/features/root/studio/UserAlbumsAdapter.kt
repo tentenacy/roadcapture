@@ -13,7 +13,7 @@ import com.untilled.roadcapture.databinding.ItemAlbumsStudioBinding
 import com.untilled.roadcapture.databinding.ItemPlaceSearchBinding
 import javax.inject.Inject
 
-class UserAlbumsAdapter @Inject constructor(): PagingDataAdapter<UserAlbums.UserAlbum, UserAlbumsAdapter.UserAlbumViewHolder>(
+class UserAlbumsAdapter: PagingDataAdapter<UserAlbums.UserAlbum, UserAlbumsAdapter.UserAlbumViewHolder>(
     COMPARATOR
 ) {
 
@@ -44,6 +44,4 @@ class UserAlbumsAdapter @Inject constructor(): PagingDataAdapter<UserAlbums.User
             }
         }
     }
-
-
 }

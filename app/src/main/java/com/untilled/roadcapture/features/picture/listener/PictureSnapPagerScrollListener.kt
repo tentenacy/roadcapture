@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.picture
+package com.untilled.roadcapture.features.picture.listener
 
 import androidx.recyclerview.widget.RecyclerView
 

@@ -21,15 +21,16 @@ import com.untilled.roadcapture.databinding.BottomsheetCommentBinding
 import com.untilled.roadcapture.features.common.CustomDivider
 import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     private var _binding: BottomsheetCommentBinding? = null
     val binding get() = _binding!!
     private val viewModel: PictureViewerViewModel by viewModels({ requireParentFragment().requireParentFragment() })
-    @Inject
-    lateinit var adapter: CommentBottomSheetAdapter
+
+    private val adapter: CommentBottomSheetAdapter by lazy {
+        CommentBottomSheetAdapter(itemOnClickListener)
+    }
 
     private val albumCommentsObserver: (PagingData<AlbumComments.AlbumComment>) -> Unit =
         { pagingData ->
@@ -40,7 +41,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
             adapter.submitData(lifecycle, pagingData)
         }
 
-    private val itemClickListener: (ItemClickArgs?) -> Unit = { args ->
+    private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
         when (args?.view?.id) {
             R.id.img_icomment_more -> {
                 val popupMenu = PopupMenu(requireContext(), args.view)
@@ -110,7 +111,6 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     private fun initAdapter() {
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
         binding.recycleBottomsheetComment.addItemDecoration(customDivider)
-        adapter.setOnClickListener(itemClickListener)
         binding.recycleBottomsheetComment.adapter = adapter
         updateView(viewModel.currentPosition - 1)
     }

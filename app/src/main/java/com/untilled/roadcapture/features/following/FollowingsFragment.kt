@@ -31,7 +31,9 @@ class FollowingsFragment : Fragment(){
     val binding get() = _binding!!
     private val viewModel: FollowingsViewModel by viewModels()
     private val args: FollowingsFragmentArgs by navArgs()
-    @Inject lateinit var adapter: FollowingsAdapter
+    private val adapter: FollowingsAdapter by lazy {
+        FollowingsAdapter(itemOnClickListener)
+    }
 
     private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
         when(args?.view?.id){
@@ -89,7 +91,6 @@ class FollowingsFragment : Fragment(){
     private fun initAdapter(){
         val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
         binding.recyclerFollowing.addItemDecoration(customDivider)
-        adapter.itemOnClickListener = itemOnClickListener
         binding.recyclerFollowing.adapter = adapter
     }
 

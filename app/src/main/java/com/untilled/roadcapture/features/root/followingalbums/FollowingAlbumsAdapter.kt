@@ -8,47 +8,33 @@ import androidx.recyclerview.widget.RecyclerView
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.databinding.ItemAlbumsBinding
+import com.untilled.roadcapture.databinding.ItemPlaceSearchBinding
 import com.untilled.roadcapture.features.root.albums.AlbumsAdapter
 import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import com.untilled.roadcapture.features.root.albums.dto.LikeStatus
 import javax.inject.Inject
 
-class FollowingAlbumsAdapter @Inject constructor(): PagingDataAdapter<Albums.Album, FollowingAlbumsAdapter.FollowingAlbumsViewHolder>(
+class FollowingAlbumsAdapter(private val itemOnClickListener: (ItemClickArgs?) -> Unit): PagingDataAdapter<Albums.Album, FollowingAlbumsAdapter.FollowingAlbumsViewHolder>(
     COMPARATOR
 ){
-    lateinit var itemOnClickListener: (ItemClickArgs?) -> Unit
 
-    class FollowingAlbumsViewHolder(private val binding: ItemAlbumsBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(album: Albums.Album, itemOnClickListener: (ItemClickArgs?) -> Unit) {
+    inner class FollowingAlbumsViewHolder(private val binding: ItemAlbumsBinding): RecyclerView.ViewHolder(binding.root){
+        fun bind(album: Albums.Album) {
             binding.album = album
             binding.like = LikeStatus(album.liked,album.likeCount)
             binding.setOnClickItem{ view ->
-                itemOnClickListener(ItemClickArgs(binding,view))
-            }
-        }
-
-        companion object {
-            fun create(parent: ViewGroup): FollowingAlbumsViewHolder {
-                val view = LayoutInflater.from(parent.context)
-                    .inflate(R.layout.item_albums, parent, false)
-
-                val binding = ItemAlbumsBinding.bind(view)
-
-                return FollowingAlbumsViewHolder(
-                    binding
-                )
+                itemOnClickListener(ItemClickArgs(binding, view))
             }
         }
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowingAlbumsViewHolder {
-        return FollowingAlbumsViewHolder.create(parent)
+        return FollowingAlbumsViewHolder(ItemAlbumsBinding.inflate(LayoutInflater.from(parent.context), parent, false))
     }
 
     override fun onBindViewHolder(holder: FollowingAlbumsViewHolder, position: Int) {
         getItem(position)?.let {
-            holder.bind(it,itemOnClickListener)
+            holder.bind(it)
         }
     }
 

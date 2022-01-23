@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.login
+package com.untilled.roadcapture.features.login.handler
 
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.nhn.android.naverlogin.OAuthLogin
 import com.nhn.android.naverlogin.OAuthLoginHandler
 import com.untilled.roadcapture.data.repository.token.dto.OAuthTokenArgs
+import com.untilled.roadcapture.features.login.LoginViewModel
 import com.untilled.roadcapture.utils.type.SocialType
 
 class NaverOAuthLoginHandler(

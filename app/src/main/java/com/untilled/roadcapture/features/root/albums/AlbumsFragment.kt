@@ -31,8 +31,9 @@ class AlbumsFragment : Fragment() {
 
     private val viewModel: AlbumsViewModel by viewModels()
 
-    @Inject
-    lateinit var adapter: AlbumsAdapter
+    private val adapter: AlbumsAdapter by lazy {
+        AlbumsAdapter(itemOnClickListener)
+    }
 
     private val notificationOnClickListener: (View?) -> Unit = {
         rootFrom3Depth().navigateToNotification()
@@ -117,7 +118,6 @@ class AlbumsFragment : Fragment() {
     }
 
     fun initAdapter() {
-        adapter.itemOnClickListener = itemOnClickListener
         binding.recycleAlbums.adapter = adapter
         refresh(null, null)
     }

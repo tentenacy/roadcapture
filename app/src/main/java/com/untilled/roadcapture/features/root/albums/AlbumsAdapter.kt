@@ -12,11 +12,9 @@ import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import com.untilled.roadcapture.features.root.albums.dto.LikeStatus
 import javax.inject.Inject
 
-class AlbumsAdapter @Inject constructor(): PagingDataAdapter<Albums.Album, AlbumsAdapter.AlbumViewHolder>(
+class AlbumsAdapter(private val itemOnClickListener: (ItemClickArgs?) -> Unit): PagingDataAdapter<Albums.Album, AlbumsAdapter.AlbumViewHolder>(
     COMPARATOR
 ) {
-    lateinit var itemOnClickListener: (ItemClickArgs?) -> Unit
-
     inner class AlbumViewHolder(private val binding: ItemAlbumsBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(album: Albums.Album) {

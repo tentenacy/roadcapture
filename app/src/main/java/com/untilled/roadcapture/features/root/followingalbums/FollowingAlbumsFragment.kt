@@ -30,7 +30,9 @@ class FollowingAlbumsFragment : Fragment() {
     private val binding get() = _binding!!
 
     private val viewModel: FollowingAlbumsViewModel by viewModels()
-    @Inject lateinit var  adapter: FollowingAlbumsAdapter
+    private val adapter: FollowingAlbumsAdapter by lazy {
+        FollowingAlbumsAdapter(itemOnClickListener)
+    }
 
     private val followingAlbumObserver: (PagingData<Albums.Album>) -> Unit = { pagingData ->
         adapter.submitData(lifecycle, pagingData)
@@ -100,7 +102,6 @@ class FollowingAlbumsFragment : Fragment() {
     }
 
     fun initAdapter() {
-        adapter.itemOnClickListener = itemOnClickListener
         binding.recyclerFollowingalbums.adapter = adapter
         refresh(null)
     }

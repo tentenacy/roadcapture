@@ -3,16 +3,12 @@ package com.untilled.roadcapture.features.root.capture
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceRequest
-import com.untilled.roadcapture.databinding.ItemAlbumsBinding
 import com.untilled.roadcapture.databinding.ItemPlaceSearchBinding
-import javax.inject.Inject
 
-class PlaceSearchAdapter @Inject constructor() :
+class PlaceSearchAdapter(private val itemOnClickListener: (PlaceRequest?) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     lateinit var placeList: List<PlaceRequest>
-    lateinit var itemClickListener: (PlaceRequest?) -> Unit
 
     fun clear() {
         placeList = emptyList()
@@ -23,7 +19,7 @@ class PlaceSearchAdapter @Inject constructor() :
         fun bind(place: PlaceRequest) {
             binding.place = place
             binding.setOnClickItem {
-                itemClickListener(binding.place)
+                itemOnClickListener(binding.place)
             }
         }
     }

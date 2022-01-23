@@ -15,11 +15,9 @@ import com.untilled.roadcapture.features.root.albums.AlbumsAdapter
 import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import javax.inject.Inject
 
-class CommentsAdapter @Inject constructor(): PagingDataAdapter<AlbumComments.AlbumComment, CommentsAdapter.CommentViewHolder>(
+class CommentsAdapter(private val itemClickListener: (ItemClickArgs?) -> Unit): PagingDataAdapter<AlbumComments.AlbumComment, CommentsAdapter.CommentViewHolder>(
     COMPARATOR
 ) {
-    lateinit var itemClickListener: (ItemClickArgs?) -> Unit
-
     inner class CommentViewHolder(private val binding: ItemCommentBinding): RecyclerView.ViewHolder(binding.root) {
 
         fun bind(comments: AlbumComments.AlbumComment, itemClickListener: (ItemClickArgs?) -> Unit) {

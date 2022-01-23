@@ -12,7 +12,7 @@ import com.untilled.roadcapture.databinding.ItemPictureSliderContentBinding
 import com.untilled.roadcapture.databinding.ItemPictureSliderThumbnailBinding
 import javax.inject.Inject
 
-class PictureViewerAdapter @Inject constructor():
+class PictureViewerAdapter:
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var content = emptyList<PictureResponse>()

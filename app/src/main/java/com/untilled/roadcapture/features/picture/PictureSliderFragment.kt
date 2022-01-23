@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.databinding.FragmentPictureSliderBinding
+import com.untilled.roadcapture.features.picture.listener.PictureSnapPagerScrollListener
 import com.untilled.roadcapture.utils.setPaddingWhenStatusBarTransparent
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -22,7 +22,9 @@ class PictureSliderFragment : Fragment() {
     private var _binding: FragmentPictureSliderBinding? = null
     private val binding get() = _binding!!
     private val viewModel: PictureViewerViewModel by viewModels({ requireParentFragment() })
-    @Inject lateinit var adapter: PictureViewerAdapter
+    private val adapter: PictureViewerAdapter by lazy {
+        PictureViewerAdapter()
+    }
 
     private val albumObserver: (AlbumResponse) -> Unit = { albumResponse ->
         adapter.run {
