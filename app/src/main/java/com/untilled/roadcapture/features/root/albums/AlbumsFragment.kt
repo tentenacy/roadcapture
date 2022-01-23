@@ -83,32 +83,6 @@ class AlbumsFragment : Fragment() {
         }
     }
 
-    private fun setLikeStatus(view: LottieAnimationView, item: ItemAlbumsBinding) {
-        if (!(item.like?.liked)!!) {
-            val animator = getValueAnimator(0f,0.5f, view)
-            animator.start()
-            item.like!!.likeCount++
-            item.like!!.liked = true
-            item.textIalbumsLike.text = (item.like!!.likeCount).toString()
-            viewModel.likesAlbum(item.album!!.albumsId)
-        } else {
-            val animator = getValueAnimator(0.5f,0.0f, view)
-            animator.start()
-            item.like!!.likeCount--
-            item.like!!.liked = false
-            item.textIalbumsLike.text = (item.like!!.likeCount).toString()
-            viewModel.unlikesAlbum(item.album!!.albumsId)
-        }
-    }
-
-    private fun getValueAnimator(start: Float, end: Float, view: LottieAnimationView): ValueAnimator {
-        val animator = ValueAnimator.ofFloat(start, end).setDuration(500)
-        animator.addUpdateListener {
-            view.progress = it.animatedValue as Float
-        }
-        return animator
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -122,9 +96,9 @@ class AlbumsFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        observeData()
         initAdapter()
         setOnClickListeners()
-        observeData()
     }
 
     private fun observeData() {
@@ -167,5 +141,31 @@ class AlbumsFragment : Fragment() {
         }
 
         dialog.show()
+    }
+
+    private fun setLikeStatus(view: LottieAnimationView, item: ItemAlbumsBinding) {
+        if (!(item.like?.liked)!!) {
+            val animator = getValueAnimator(0f,0.5f, view)
+            animator.start()
+            item.like!!.likeCount++
+            item.like!!.liked = true
+            item.textIalbumsLike.text = (item.like!!.likeCount).toString()
+            viewModel.likesAlbum(item.album!!.albumsId)
+        } else {
+            val animator = getValueAnimator(0.5f,0.0f, view)
+            animator.start()
+            item.like!!.likeCount--
+            item.like!!.liked = false
+            item.textIalbumsLike.text = (item.like!!.likeCount).toString()
+            viewModel.unlikesAlbum(item.album!!.albumsId)
+        }
+    }
+
+    private fun getValueAnimator(start: Float, end: Float, view: LottieAnimationView): ValueAnimator {
+        val animator = ValueAnimator.ofFloat(start, end).setDuration(500)
+        animator.addUpdateListener {
+            view.progress = it.animatedValue as Float
+        }
+        return animator
     }
 }

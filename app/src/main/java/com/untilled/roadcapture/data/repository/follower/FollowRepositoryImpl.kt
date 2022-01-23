@@ -14,7 +14,4 @@ class FollowRepositoryImpl @Inject constructor(
 ) : FollowRepository{
     override fun follow(toUserId: Long): Single<Unit> = roadCaptureApi.follow(toUserId)
     override fun unfollow(toUserId: Long): Single<Unit> = roadCaptureApi.unfollow(toUserId)
-    override fun getFollowingAlbums(id: Long?, pageRequest: PageRequest): Single<PageResponse<AlbumsResponse>> =
-        roadCaptureApi.getFollowingAlbums(id,pageRequest.page,pageRequest.size,pageRequest.sort)
-
 }

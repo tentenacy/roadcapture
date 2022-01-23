@@ -3,6 +3,7 @@ package com.untilled.roadcapture.data.repository.album
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentsResponse
+import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.utils.constant.url.RoadCapturePathConstant
 import io.reactivex.rxjava3.core.Single

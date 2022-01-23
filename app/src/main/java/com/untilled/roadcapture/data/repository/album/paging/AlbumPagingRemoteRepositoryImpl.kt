@@ -6,6 +6,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.flowable
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
+import com.untilled.roadcapture.data.datasource.api.dto.album.FollowingAlbumsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsCondition
 import com.untilled.roadcapture.data.datasource.dao.paging.album.AlbumsDao
 import com.untilled.roadcapture.data.datasource.dao.paging.album.UserAlbumsDao
@@ -55,5 +56,9 @@ class AlbumPagingRemoteRepositoryImpl(
             remoteMediator = userAlbumsRemoteMediator,
             pagingSourceFactory = { userAlbumsDao.selectAll() }
         ).flowable
+    }
+
+    override fun getFollowingAlbums(cond: FollowingAlbumsCondition?): Flowable<PagingData<Albums.Album>> {
+        TODO("Not yet implemented")
     }
 }

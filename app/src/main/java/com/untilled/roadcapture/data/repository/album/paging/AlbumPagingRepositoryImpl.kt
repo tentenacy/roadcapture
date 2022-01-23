@@ -5,8 +5,10 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.flowable
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
+import com.untilled.roadcapture.data.datasource.api.dto.album.FollowingAlbumsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsCondition
 import com.untilled.roadcapture.data.datasource.paging.album.AlbumsPagingSource
+import com.untilled.roadcapture.data.datasource.paging.album.FollowingAlbumsPagingSource
 import com.untilled.roadcapture.data.datasource.paging.album.UserAlbumsPagingSource
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
@@ -16,6 +18,7 @@ import javax.inject.Singleton
 
 class AlbumPagingRepositoryImpl(
     private val albumsPagingSource: AlbumsPagingSource,
+    private val followingAlbumsPagingSource: FollowingAlbumsPagingSource,
     private val userAlbumsPagingSource: UserAlbumsPagingSource,
 ): AlbumPagingRepository {
 
@@ -46,6 +49,20 @@ class AlbumPagingRepositoryImpl(
                 initialLoadSize = 40
             ),
             pagingSourceFactory = { userAlbumsPagingSource }
+        ).flowable
+    }
+
+    override fun getFollowingAlbums(cond: FollowingAlbumsCondition?): Flowable<PagingData<Albums.Album>> {
+        followingAlbumsPagingSource.followingAlbumsCondition = cond
+        return Pager(
+            config = PagingConfig(
+                pageSize = 20,
+                enablePlaceholders = true,
+                maxSize = 30,
+                prefetchDistance = 5,
+                initialLoadSize = 40
+            ),
+            pagingSourceFactory = { followingAlbumsPagingSource }
         ).flowable
     }
 }
