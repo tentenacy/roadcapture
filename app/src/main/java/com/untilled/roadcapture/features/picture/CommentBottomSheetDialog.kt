@@ -1,7 +1,6 @@
 package com.untilled.roadcapture.features.picture
 
 import android.app.AlertDialog
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,8 +17,9 @@ import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.data.entity.paging.PictureComments
 import com.untilled.roadcapture.databinding.BottomsheetCommentBinding
-import com.untilled.roadcapture.features.common.CustomDivider
+import com.untilled.roadcapture.utils.ui.CustomDivider
 import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
+import com.untilled.roadcapture.utils.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -78,7 +78,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = BottomsheetCommentBinding.inflate(inflater, container, false)
-        (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarBottomsheetComment)
+        mainActivity().setSupportActionBar(binding.toolbarBottomsheetComment)
 
         return binding.root
     }
@@ -111,7 +111,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
 
     private fun setOnClickListeners() {
         binding.imgBottomsheetCommentBack.setOnClickListener {
-            requireActivity().onBackPressed()
+            mainActivity().onBackPressed()
         }
     }
 

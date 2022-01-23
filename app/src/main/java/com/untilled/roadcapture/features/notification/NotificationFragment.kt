@@ -1,6 +1,5 @@
 package com.untilled.roadcapture.features.notification
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentNotificationBinding
-import com.untilled.roadcapture.features.common.CustomDivider
+import com.untilled.roadcapture.utils.mainActivity
+import com.untilled.roadcapture.utils.ui.CustomDivider
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -29,7 +29,7 @@ class NotificationFragment : Fragment(){
     ): View? {
         _binding = FragmentNotificationBinding.inflate(layoutInflater,container,false)
 
-        (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarNotification)
+        mainActivity().setSupportActionBar(binding.toolbarNotification)
 
         initAdapter()
 
@@ -44,7 +44,7 @@ class NotificationFragment : Fragment(){
 
     private fun setOnClickListeners() {
         binding.imgNotificationBack.setOnClickListener {
-            requireActivity().onBackPressed()
+            mainActivity().onBackPressed()
         }
     }
 

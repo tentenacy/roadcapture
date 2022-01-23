@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentAlbumRegistrationBinding
+import com.untilled.roadcapture.utils.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -62,7 +63,7 @@ class AlbumRegistrationFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imageAlbumregBack.setOnClickListener { requireActivity().onBackPressed() }
+        binding.imageAlbumregBack.setOnClickListener { mainActivity().onBackPressed() }
         binding.imageAlbumregCheck.setOnClickListener(checkOnClickListener)
     }
 }

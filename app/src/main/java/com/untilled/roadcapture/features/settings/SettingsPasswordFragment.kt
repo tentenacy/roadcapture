@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.untilled.roadcapture.databinding.FragmentSettingsPasswordBinding
+import com.untilled.roadcapture.utils.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -36,7 +37,7 @@ class SettingsPasswordFragment: Fragment() {
 
     private fun setOnClickListeners(){
         binding.imageSettingpwdBack.setOnClickListener {
-            requireActivity().onBackPressed()
+            mainActivity().onBackPressed()
         }
     }
 }

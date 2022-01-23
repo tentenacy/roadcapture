@@ -9,9 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
-import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentSettingsBinding
+import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
+import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToAccountSetting
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -61,7 +61,7 @@ class SettingsFragment : Fragment() {
             navigateToAccountSetting()
         }
         binding.imgSettingsBack.setOnClickListener {
-            requireActivity().onBackPressed()
+            mainActivity().onBackPressed()
         }
         binding.textSettingsLabelOpinion.setOnClickListener {
             val email = Intent(Intent.ACTION_SEND)
@@ -73,8 +73,10 @@ class SettingsFragment : Fragment() {
             startActivity(email)
         }
         binding.textSettingsLabelLocation.setOnClickListener {
-            val locationPermissionBottomSheetDialog = PermissionLocationBottomSheetDialog()
-            locationPermissionBottomSheetDialog.show(childFragmentManager, "locationPermissionBottomSheet")
+            PermissionLocationBottomSheetDialog().show(
+                childFragmentManager,
+                DialogTagConstant.PERMISSION_LOCATION_BOTTOM_SHEET
+            )
         }
     }
 }

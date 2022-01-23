@@ -91,7 +91,7 @@ class SignupUsernameFragment : BaseFragment() {
         }
 
         (parentFragment?.parentFragment as SignupFragment).binding.imgSignupBack.setOnClickListener {
-            requireActivity().onBackPressed()
+            mainActivity().onBackPressed()
         }
     }
 

@@ -11,6 +11,7 @@ import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentPictureViewerBinding
 import com.untilled.roadcapture.utils.*
+import com.untilled.roadcapture.utils.constant.tag.FragmentTagConstant
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -71,12 +72,12 @@ class PictureViewerFragment : Fragment() {
     }
 
     private fun setStatusBarTransparent() {
-        binding.constraintPictureViewerContainer.setStatusBarTransparent(requireActivity())
+        binding.constraintPictureViewerContainer.setStatusBarTransparent(mainActivity())
     }
 
     private fun setOnClickListeners() {
         binding.imagePictureViewerBack.setOnClickListener {
-            requireActivity().onBackPressed()
+            mainActivity().onBackPressed()
         }
         binding.fabPictureViewerSwitch.setOnClickListener(switchOnClickListener)
     }
@@ -113,12 +114,12 @@ class PictureViewerFragment : Fragment() {
             add(
                 R.id.frame_picture_viewer_container,
                 pictureSliderFragment,
-                "PictureViewerFragment"
+                FragmentTagConstant.PICTURE_VIEWER_SLIDER
             )
             add(
                 R.id.frame_picture_viewer_container,
                 pictureMapFragment,
-                "PictureViewerMapFragment"
+                FragmentTagConstant.PICTURE_VIEWER_MAP
             )
             hide(pictureMapFragment)
         }.commit()
@@ -127,7 +128,7 @@ class PictureViewerFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
 
-        requireActivity().setStatusBarOrigin()
+        mainActivity().setStatusBarOrigin()
 
         _binding = null
     }

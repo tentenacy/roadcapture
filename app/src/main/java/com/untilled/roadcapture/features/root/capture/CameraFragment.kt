@@ -22,6 +22,7 @@ import androidx.window.WindowManager
 import com.untilled.roadcapture.databinding.FragmentCameraBinding
 import com.untilled.roadcapture.utils.ANIMATION_FAST_MILLIS
 import com.untilled.roadcapture.utils.ANIMATION_SLOW_MILLIS
+import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToCropFragment
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
@@ -134,7 +135,7 @@ class CameraFragment : Fragment() {
                             // Implicit broadcasts will be ignored for devices running API level >= 24
                             // so if you only target API level 24+ you can remove this statement
                             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.N) {
-                                requireActivity().sendBroadcast(
+                                mainActivity().sendBroadcast(
                                     Intent(Camera.ACTION_NEW_PICTURE, savedUri)
                                 )
                             }

@@ -18,6 +18,7 @@ import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.datasource.api.dto.user.LoginRequest
 import com.untilled.roadcapture.databinding.FragmentLoginEmailBinding
 import com.untilled.roadcapture.features.base.BaseFragment
+import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToPasswordFind
 import com.untilled.roadcapture.utils.navigateToRoot
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,7 +56,7 @@ class LoginEmailFragment : BaseFragment(), Validator.ValidationListener {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLoginEmailBinding.inflate(layoutInflater, container, false)
-        (requireActivity() as MainActivity).window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        mainActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         validator.setValidationListener(this)
 
@@ -110,7 +111,7 @@ class LoginEmailFragment : BaseFragment(), Validator.ValidationListener {
 
     private fun setOnClickListeners() {
         binding.imgLoginEmailBack.setOnClickListener {
-            requireActivity().onBackPressed()
+            mainActivity().onBackPressed()
         }
         binding.btnLoginEmailConfirm.setOnClickListener {
             validator.validate()

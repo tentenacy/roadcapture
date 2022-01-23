@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.features.common
+package com.untilled.roadcapture.utils.ui
 
 import android.graphics.Canvas
 import android.graphics.Paint

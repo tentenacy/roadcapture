@@ -34,7 +34,7 @@ class CommentsAdapter(private val itemClickListener: (ItemClickArgs?) -> Unit): 
 
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
         getItem(position)?.let {
-            holder.bind(it,itemClickListener)
+            holder.bind(it, itemClickListener)
         }
     }
 

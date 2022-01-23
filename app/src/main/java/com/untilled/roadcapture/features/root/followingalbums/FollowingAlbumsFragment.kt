@@ -85,7 +85,7 @@ class FollowingAlbumsFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentFollowingalbumsBinding.inflate(layoutInflater, container, false)
 
-        (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarFollowingalbums)
+        mainActivity().setSupportActionBar(binding.toolbarFollowingalbums)
 
         return binding.root
     }

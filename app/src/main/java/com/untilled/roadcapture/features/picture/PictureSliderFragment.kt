@@ -12,6 +12,7 @@ import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.databinding.FragmentPictureSliderBinding
 import com.untilled.roadcapture.features.picture.listener.PictureSnapPagerScrollListener
+import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
 import com.untilled.roadcapture.utils.setPaddingWhenStatusBarTransparent
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,7 +35,7 @@ class PictureSliderFragment : Fragment() {
     }
 
     private val commentOnClickListener: (View?) -> Unit = {
-        CommentBottomSheetDialog().show(childFragmentManager, "commentBottomSheet")
+        CommentBottomSheetDialog().show(childFragmentManager, DialogTagConstant.COMMENT_BOTTOM_SHEET)
     }
     private val likeOnClickListener: (View?) -> Unit = { lottie ->
         if (!flagLike) {

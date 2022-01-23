@@ -42,7 +42,7 @@ class SettingsAccountFragment : Fragment() {
 
     private fun setOnClickListeners() {
         binding.imageSettingaccountBack.setOnClickListener {
-            requireActivity().onBackPressed()
+            mainActivity().onBackPressed()
         }
         binding.textSettingaccountLabelUsername.setOnClickListener {
             navigateToUsernameSetting()

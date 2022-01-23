@@ -20,8 +20,8 @@ import com.untilled.roadcapture.databinding.FragmentAlbumsBinding
 import com.untilled.roadcapture.databinding.ItemAlbumsBinding
 import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.*
+import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class AlbumsFragment : Fragment() {
@@ -40,8 +40,7 @@ class AlbumsFragment : Fragment() {
     }
 
     private val filterOnClickListener: (View?) -> Unit = {
-        val filterBottomSheetDialog = FilterBottomSheetDialog()
-        filterBottomSheetDialog.show(childFragmentManager, "filterBottomSheet")
+        FilterBottomSheetDialog().show(childFragmentManager, DialogTagConstant.FILTER_BOTTOM_SHEET)
     }
 
     private val albumObserver: (PagingData<Albums.Album>) -> Unit = { pagingData ->
@@ -90,7 +89,7 @@ class AlbumsFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentAlbumsBinding.inflate(layoutInflater, container, false)
-        (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarAlbums)
+        mainActivity().setSupportActionBar(binding.toolbarAlbums)
 
         return binding.root
     }

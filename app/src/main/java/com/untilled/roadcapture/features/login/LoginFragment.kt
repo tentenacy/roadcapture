@@ -17,6 +17,7 @@ import com.untilled.roadcapture.features.login.handler.GoogleOAuthLoginHandler
 import com.untilled.roadcapture.features.login.handler.KakaoOAuthLoginHandler
 import com.untilled.roadcapture.features.login.handler.NaverOAuthLoginHandler
 import com.untilled.roadcapture.utils.*
+import com.untilled.roadcapture.utils.constant.scope.SocialScopeConstant
 import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -61,7 +62,7 @@ class LoginFragment : BaseFragment() {
 
     private val naverLoginOnClickListener: (View?) -> Unit = {
         naverLoginManager.startOauthLoginActivity(
-            requireActivity(),
+            mainActivity(),
             naverOAuthLoginHandler
         )
     }
@@ -106,7 +107,7 @@ class LoginFragment : BaseFragment() {
         // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
 
-        initData()
+        observeData()
 
         return binding.root
     }
@@ -114,17 +115,17 @@ class LoginFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.constraintLoginInnerContainer.setStatusBarTransparent(requireActivity())
+        binding.constraintLoginInnerContainer.setStatusBarTransparent(mainActivity())
 
         setOAuthLoginHandlers()
         setOnClickListeners()
-        observeData()
+        initViews()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
 
-        requireActivity().setStatusBarOrigin()
+        mainActivity().setStatusBarOrigin()
 
         _binding = null
     }
@@ -134,9 +135,9 @@ class LoginFragment : BaseFragment() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 
-    private fun initData() {
+    private fun initViews() {
         binding.loginbtnLoginFacebook.run {
-            setPermissions(listOf("email", "public_profile"))
+            setPermissions(listOf(SocialScopeConstant.FACEBOOK_SCOPE_EMAIL, SocialScopeConstant.FACEBOOK_SCOPE_PUBLIC_PROFILE))
             fragment = this@LoginFragment
             registerCallback(callbackManager, facebookOAuthLoginHandler)
         }

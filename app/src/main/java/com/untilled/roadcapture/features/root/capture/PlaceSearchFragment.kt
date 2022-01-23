@@ -1,6 +1,5 @@
 package com.untilled.roadcapture.features.root.capture
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -19,8 +18,9 @@ import com.untilled.roadcapture.data.datasource.api.dto.poi.Poi
 import com.untilled.roadcapture.data.datasource.api.dto.poi.Pois
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPlaceSearchBinding
-import com.untilled.roadcapture.features.common.CustomDivider
+import com.untilled.roadcapture.utils.ui.CustomDivider
 import com.untilled.roadcapture.utils.hideKeyboard
+import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToCapture
 import com.untilled.roadcapture.utils.navigateToPictureEditor
 import dagger.hilt.android.AndroidEntryPoint
@@ -117,7 +117,7 @@ class PlaceSearchFragment : Fragment() {
                             searchViewModel.getSearchPlace(this)
                         }
                     }
-                    requireActivity().hideKeyboard(binding.edtPlaceSearchInput)
+                    mainActivity().hideKeyboard(binding.edtPlaceSearchInput)
                     return@setOnEditorActionListener true
                 }
                 else -> return@setOnEditorActionListener false

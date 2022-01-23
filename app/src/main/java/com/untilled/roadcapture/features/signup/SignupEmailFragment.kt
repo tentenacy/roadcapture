@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.untilled.roadcapture.databinding.FragmentSignupEmailBinding
+import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToSignupPassword
 import com.untilled.roadcapture.utils.signupFrom2Depth
 import dagger.hilt.android.AndroidEntryPoint
@@ -56,7 +57,7 @@ class SignupEmailFragment : Fragment() {
     private fun setOnClickListeners() {
         navigateToSignupPassword()
         signupFrom2Depth().binding.imgSignupBack.setOnClickListener {
-            requireActivity().onBackPressed()
+            mainActivity().onBackPressed()
         }
     }
 

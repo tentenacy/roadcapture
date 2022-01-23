@@ -12,6 +12,7 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentSearchBinding
 import com.untilled.roadcapture.utils.hideKeyboard
+import com.untilled.roadcapture.utils.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -46,15 +47,15 @@ class SearchFragment : Fragment() {
         binding.edtSearchInput.apply {
             setOnFocusChangeListener { v, hasFocus ->
                 if(hasFocus) {
-                    (requireActivity() as MainActivity).window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
+                    mainActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
                 } else {
-                    (requireActivity() as MainActivity).window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+                    mainActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
                 }
             }
             setOnEditorActionListener { v, actionId, event ->
                 when(actionId) {
                     EditorInfo.IME_ACTION_SEARCH -> {
-                        requireActivity().hideKeyboard(this)
+                        mainActivity().hideKeyboard(this)
                         return@setOnEditorActionListener true
                     }
                     else -> return@setOnEditorActionListener false

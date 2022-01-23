@@ -1,7 +1,7 @@
 package com.untilled.roadcapture.di
 
 import android.graphics.Color
-import com.untilled.roadcapture.features.common.CustomDivider
+import com.untilled.roadcapture.utils.ui.CustomDivider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

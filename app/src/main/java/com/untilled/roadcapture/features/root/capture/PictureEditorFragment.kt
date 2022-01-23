@@ -22,6 +22,7 @@ import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceRequest
 import com.untilled.roadcapture.data.entity.LocationLatLng
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPictureEditorBinding
+import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToCapture
 import com.untilled.roadcapture.utils.navigateToSearchPlace
 import dagger.hilt.android.AndroidEntryPoint
@@ -118,7 +119,7 @@ class PictureEditorFragment : Fragment() {
     private fun initLocationManager() {
         if (::locationManager.isInitialized.not()) {
             locationManager =
-                requireActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
+                mainActivity().getSystemService(Context.LOCATION_SERVICE) as LocationManager
         }
     }
 
@@ -165,7 +166,7 @@ class PictureEditorFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imgPictureEditorBack.setOnClickListener { requireActivity().onBackPressed() }
+        binding.imgPictureEditorBack.setOnClickListener { mainActivity().onBackPressed() }
         binding.textPictureEditorPlace.setOnClickListener(placeOnClickListener)
         binding.imgPictureEditorCheck.setOnClickListener(checkOnClickListener)
         binding.imgPictureEditorDelete.setOnClickListener(deleteOnClickListener)

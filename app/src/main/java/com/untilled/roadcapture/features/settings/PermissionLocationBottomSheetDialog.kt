@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.databinding.BottomsheetPermissionLocationBinding
+import com.untilled.roadcapture.utils.mainActivity
 
 class PermissionLocationBottomSheetDialog : BottomSheetDialogFragment() {
 
@@ -48,7 +49,7 @@ class PermissionLocationBottomSheetDialog : BottomSheetDialogFragment() {
         binding.btnDlgpermissionlocationConfirm.setOnClickListener {
             val intent = Intent()
             intent.action = Settings.ACTION_APPLICATION_DETAILS_SETTINGS
-            val uri = Uri.fromParts("package", requireActivity().packageName, null)
+            val uri = Uri.fromParts("package", mainActivity().packageName, null)
             intent.data = uri
             startActivity(intent)
             dismiss()

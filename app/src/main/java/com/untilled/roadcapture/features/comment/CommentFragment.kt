@@ -1,7 +1,6 @@
 package com.untilled.roadcapture.features.comment
 
 import android.app.AlertDialog
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -17,8 +16,9 @@ import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.databinding.FragmentCommentBinding
 import com.untilled.roadcapture.databinding.ItemCommentBinding
-import com.untilled.roadcapture.features.common.CustomDivider
+import com.untilled.roadcapture.utils.ui.CustomDivider
 import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
+import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToStudio
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -28,8 +28,10 @@ class CommentFragment : Fragment() {
 
     private var _binding: FragmentCommentBinding? = null
     val binding get() = _binding!!
+
     private val viewModel: CommentViewModel by viewModels()
     private val args: CommentFragmentArgs by navArgs()
+
     private val adapter: CommentsAdapter by lazy {
         CommentsAdapter(itemClickListener)
     }
@@ -72,7 +74,7 @@ class CommentFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentCommentBinding.inflate(layoutInflater, container, false)
 
-        (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarComment)
+        mainActivity().setSupportActionBar(binding.toolbarComment)
 
         return binding.root
     }
@@ -89,7 +91,7 @@ class CommentFragment : Fragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imgCommentBack.setOnClickListener { requireActivity().onBackPressed() }
+        binding.imgCommentBack.setOnClickListener { mainActivity().onBackPressed() }
     }
 
     override fun onDestroyView() {

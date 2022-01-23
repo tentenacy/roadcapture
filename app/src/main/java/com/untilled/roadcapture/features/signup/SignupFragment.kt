@@ -12,6 +12,7 @@ import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentSignupBinding
 import com.untilled.roadcapture.features.base.BaseFragment
 import com.untilled.roadcapture.features.login.LoginViewModel
+import com.untilled.roadcapture.utils.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -36,7 +37,7 @@ class SignupFragment : Fragment() {
             lifecycleOwner = lifecycleOwner
         }
 
-        (requireActivity() as MainActivity).window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+        mainActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         return binding.root
     }

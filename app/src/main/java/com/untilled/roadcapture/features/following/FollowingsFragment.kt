@@ -1,8 +1,6 @@
 package com.untilled.roadcapture.features.following
 
-import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -17,9 +15,10 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.paging.Followings
 import com.untilled.roadcapture.databinding.FragmentFollowingBinding
 import com.untilled.roadcapture.databinding.ItemFollowBinding
-import com.untilled.roadcapture.features.common.CustomDivider
+import com.untilled.roadcapture.utils.ui.CustomDivider
 import com.untilled.roadcapture.features.root.albums.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.hideKeyboard
+import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToStudio
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -52,7 +51,7 @@ class FollowingsFragment : Fragment(){
     private val editorActionListener: (TextView?, Int?, KeyEvent) -> Boolean = { v: TextView?, actionId: Int?, event: KeyEvent ->
         when(actionId) {
             EditorInfo.IME_ACTION_SEARCH -> {
-                requireActivity().hideKeyboard(binding.edtFollowingInput)
+                mainActivity().hideKeyboard(binding.edtFollowingInput)
                 true
             }
             else ->  false
@@ -97,7 +96,7 @@ class FollowingsFragment : Fragment(){
     }
 
     private fun setOnClickListeners(){
-        binding.imageFollowingBack.setOnClickListener { requireActivity().onBackPressed() }
+        binding.imageFollowingBack.setOnClickListener { mainActivity().onBackPressed() }
         binding.edtFollowingInput.setOnEditorActionListener (editorActionListener)
     }
 

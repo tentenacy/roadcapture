@@ -19,6 +19,7 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentCropBinding
+import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToPictureEditor
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropFragment
@@ -93,7 +94,7 @@ class CropFragment : Fragment() {
 
     private fun setupFragment(uCrop: UCrop) {
         uCropFragment = uCrop.getFragment(uCrop.getIntent(requireContext()).extras)
-        requireActivity().supportFragmentManager.beginTransaction()
+        mainActivity().supportFragmentManager.beginTransaction()
             .add(R.id.frame_crop_container_content, uCropFragment!!, UCropFragment.TAG)
             .commitAllowingStateLoss()
 
@@ -141,14 +142,14 @@ class CropFragment : Fragment() {
             binding.toolbarCrop.navigationIcon = stateButtonDrawable
         }
 
-        (requireActivity() as MainActivity).setSupportActionBar(binding.toolbarCrop)
-        (requireActivity() as MainActivity).supportActionBar?.setDisplayShowTitleEnabled(false)
+        mainActivity().setSupportActionBar(binding.toolbarCrop)
+        mainActivity().supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
 
-        requireActivity().menuInflater.inflate(R.menu.ucrop_menu_activity, menu)
+        mainActivity().menuInflater.inflate(R.menu.ucrop_menu_activity, menu)
 
         // Change crop & loader menu icons color to match the rest of the UI colors
         val menuItemLoader = menu.findItem(R.id.menu_loader)
@@ -200,7 +201,7 @@ class CropFragment : Fragment() {
     }
 
     fun removeFragmentFromScreen() {
-        requireActivity().supportFragmentManager.beginTransaction()
+        mainActivity().supportFragmentManager.beginTransaction()
             .remove(uCropFragment!!)
             .commit()
         binding.toolbarCrop.visibility = View.GONE
@@ -226,6 +227,6 @@ class CropFragment : Fragment() {
         }
     }
     fun invalidateOptionsMenu(){
-        requireActivity().supportInvalidateOptionsMenu()
+        mainActivity().supportInvalidateOptionsMenu()
     }
 }

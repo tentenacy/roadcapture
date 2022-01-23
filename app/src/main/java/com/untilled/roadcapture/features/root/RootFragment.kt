@@ -7,11 +7,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.navigation.StackHostFragment
 import com.untilled.roadcapture.databinding.FragmentRootBinding
 import com.untilled.roadcapture.features.root.capture.AlbumCreationAskingBottomSheetDialog
+import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
 import com.untilled.roadcapture.utils.setTint
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -111,8 +111,6 @@ class RootFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
 
-        Logger.d("RootFragment onDestroyView")
-
         _binding = null
     }
 
@@ -171,10 +169,9 @@ class RootFragment : Fragment() {
 
     private fun setOnClickListeners() {
         binding.imgRootCaptureTab.setOnClickListener {
-            val askMakeAlbumBottomSheetDialog = AlbumCreationAskingBottomSheetDialog()
-            askMakeAlbumBottomSheetDialog.show(
+            AlbumCreationAskingBottomSheetDialog().show(
                 childFragmentManager,
-                "askMakeAlbumBottomSheetDialog"
+                DialogTagConstant.ALBUM_CREATION_ASKING_BOTTOM_SHEET
             )
         }
     }

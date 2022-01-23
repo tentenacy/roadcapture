@@ -99,7 +99,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.constraintCaptureInnercontainer.setStatusBarTransparent(requireActivity())
+        binding.constraintCaptureInnercontainer.setStatusBarTransparent(mainActivity())
 
         setOnClickListeners()
     }
@@ -107,14 +107,14 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     override fun onDestroyView() {
         super.onDestroyView()
 
-        requireActivity().setStatusBarOrigin()
+        mainActivity().setStatusBarOrigin()
 
         _binding = null
     }
 
     private fun setOnClickListeners() {
         binding.imageCaptureBack.setOnClickListener {
-            requireActivity().onBackPressed()
+            mainActivity().onBackPressed()
         }
         binding.imageCaptureCamera.setOnClickListener {
             requestSinglePermission(
