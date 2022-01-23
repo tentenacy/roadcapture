@@ -17,7 +17,7 @@ class SettingsAccountFragment : Fragment() {
 
     private val logoutConfirmListener: () -> Unit = {
         mainActivity().viewModel.logout()
-        navigateToLogin()
+//        navigateToLogin()
     }
 
     override fun onCreateView(
@@ -26,6 +26,8 @@ class SettingsAccountFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentSettingsAccountBinding.inflate(inflater, container, false)
+
+        mainActivity().viewModel.setBindingRoot(binding.root)
 
         return binding.root
 

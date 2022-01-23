@@ -107,6 +107,8 @@ class PictureEditorFragment : Fragment() {
     ): View? {
         _binding = FragmentPictureEditorBinding.inflate(inflater, container, false)
 
+        mainActivity().viewModel.setBindingRoot(binding.root)
+
         getNavArgs()
         initLocationManager()
         getLocation()

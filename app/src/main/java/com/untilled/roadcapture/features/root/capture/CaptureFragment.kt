@@ -83,10 +83,10 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     ): View? {
         _binding = FragmentCaptureBinding.inflate(inflater, container, false)
 
+        mainActivity().viewModel.setBindingRoot(binding.root)
+
         locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
-
         viewModel.pictureList.observe(viewLifecycleOwner) { }
-
         initNaverMap()
 
         return binding.root

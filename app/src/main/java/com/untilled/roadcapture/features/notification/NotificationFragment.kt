@@ -29,6 +29,7 @@ class NotificationFragment : Fragment(){
     ): View? {
         _binding = FragmentNotificationBinding.inflate(layoutInflater,container,false)
 
+        mainActivity().viewModel.setBindingRoot(binding.root)
         mainActivity().setSupportActionBar(binding.toolbarNotification)
 
         initAdapter()

@@ -56,6 +56,8 @@ class LoginEmailFragment : BaseFragment(), Validator.ValidationListener {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentLoginEmailBinding.inflate(layoutInflater, container, false)
+
+        mainActivity().viewModel.setBindingRoot(binding.root)
         mainActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         validator.setValidationListener(this)

@@ -12,6 +12,7 @@ import com.untilled.roadcapture.core.navigation.StackHostFragment
 import com.untilled.roadcapture.databinding.FragmentRootBinding
 import com.untilled.roadcapture.features.root.capture.AlbumCreationAskingBottomSheetDialog
 import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
+import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.setTint
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -104,6 +105,8 @@ class RootFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentRootBinding.inflate(layoutInflater, container, false)
+
+        mainActivity().viewModel.setBindingRoot(binding.root)
 
         return binding.root
     }

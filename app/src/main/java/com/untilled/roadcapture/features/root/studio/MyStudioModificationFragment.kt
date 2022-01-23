@@ -16,6 +16,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.untilled.roadcapture.core.activityresult.ActivityResultFactory
 import com.untilled.roadcapture.databinding.FragmentMystudioModificationBinding
+import com.untilled.roadcapture.utils.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -64,14 +65,17 @@ class MyStudioModificationFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentMystudioModificationBinding.inflate(inflater,container,false)
-        binding.user = args.user
+
+        mainActivity().viewModel.setBindingRoot(binding.root)
         initAdapter()
+
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.user = args.user
         setOnClickListeners()
     }
 

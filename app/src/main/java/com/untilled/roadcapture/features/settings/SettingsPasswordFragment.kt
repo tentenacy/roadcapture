@@ -21,6 +21,8 @@ class SettingsPasswordFragment: Fragment() {
     ): View? {
         _binding = FragmentSettingsPasswordBinding.inflate(inflater,container,false)
 
+        mainActivity().viewModel.setBindingRoot(binding.root)
+
         return binding.root
     }
 

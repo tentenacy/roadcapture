@@ -16,6 +16,9 @@ class TokenInterceptor(
     private val gson: Gson,
 ) : Interceptor, Subject<TokenExpirationObserver>() {
 
+    private var accessTokenErrorOccurred = false
+    private var refreshTokenErrorOccurred = false
+
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder()
             .addHeader("X-AUTH-TOKEN", localTokenDao.getToken().accessToken)
@@ -27,14 +30,21 @@ class TokenInterceptor(
 
             when (errorResponse?.code) {
                 ErrorCode.ACCESS_TOKEN_ERROR.code -> {
-                    if(++count == 1)
+                    if(!accessTokenErrorOccurred) {
                         notifyTokenExpired()
+                        accessTokenErrorOccurred = true
+                    }
                 }
                 ErrorCode.REFRESH_TOKEN_ERROR.code -> {
-                    if(++refreshCount == 1)
+                    if(!refreshTokenErrorOccurred) {
                         notifyRefreshTokenExpired()
+                        refreshTokenErrorOccurred = true
+                    }
                 }
             }
+        } else {
+            accessTokenErrorOccurred = false
+            refreshTokenErrorOccurred = false
         }
 
         return response

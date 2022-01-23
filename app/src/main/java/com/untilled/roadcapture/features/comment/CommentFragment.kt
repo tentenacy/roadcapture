@@ -73,6 +73,7 @@ class CommentFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentCommentBinding.inflate(layoutInflater, container, false)
 
+        mainActivity().viewModel.setBindingRoot(binding.root)
         mainActivity().setSupportActionBar(binding.toolbarComment)
 
         return binding.root

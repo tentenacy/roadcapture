@@ -13,6 +13,14 @@ import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.application.MainActivity
+import com.untilled.roadcapture.features.root.albums.AlbumsFragment
+import com.untilled.roadcapture.features.root.capture.AlbumCreationAskingBottomSheetDialog
+import com.untilled.roadcapture.features.root.followingalbums.FollowingAlbumsFragment
+import com.untilled.roadcapture.features.root.studio.MyStudioFragment
+import com.untilled.roadcapture.features.signup.SignupEmailFragment
+import com.untilled.roadcapture.features.signup.SignupPasswordFragment
+import com.untilled.roadcapture.features.signup.SignupUsernameFragment
 
 // Milliseconds used for UI animations in Camera
 const val ANIMATION_FAST_MILLIS = 50L
@@ -46,13 +54,4 @@ fun View.setRippleEffect() {
     foreground = context.getDrawableFrom(android.R.attr.selectableItemBackground)
 }
 
-fun AppCompatActivity.currentFragment(id: Int): Fragment? = supportFragmentManager.findFragmentById(id)?.childFragmentManager?.fragments?.get(0)
-
-fun AppCompatActivity.navigateFromOriginToLogin(id: Int): Unit {
-    currentFragment(id)?.let {
-        Navigation.findNavController(it.requireView()).apply {
-            navigate(R.id.action_global_loginFragment)
-            popBackStack()
-        }
-    }
-}
+fun MainActivity.currentFragment(): Fragment? = supportFragmentManager.findFragmentById(binding.root.id)?.childFragmentManager?.fragments?.get(0)

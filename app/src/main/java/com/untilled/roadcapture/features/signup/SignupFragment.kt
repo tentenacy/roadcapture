@@ -37,6 +37,7 @@ class SignupFragment : Fragment() {
             lifecycleOwner = lifecycleOwner
         }
 
+        mainActivity().viewModel.setBindingRoot(binding.root)
         mainActivity().window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
         return binding.root

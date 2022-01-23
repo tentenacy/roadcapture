@@ -54,6 +54,8 @@ class PictureViewerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentPictureViewerBinding.inflate(inflater, container, false)
+
+        mainActivity().viewModel.setBindingRoot(binding.root)
         updateView()
 
         return binding.root

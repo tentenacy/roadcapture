@@ -53,6 +53,8 @@ class StudioFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentStudioBinding.inflate(layoutInflater, container, false)
 
+        mainActivity().viewModel.setBindingRoot(binding.root)
+
         return binding.root
     }
 

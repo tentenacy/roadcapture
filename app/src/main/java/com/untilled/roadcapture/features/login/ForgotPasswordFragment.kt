@@ -20,6 +20,9 @@ class  ForgotPasswordFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentForgotpwdBinding.inflate(layoutInflater,container,false)
+
+        mainActivity().viewModel.setBindingRoot(binding.root)
+
         return binding.root
     }
 

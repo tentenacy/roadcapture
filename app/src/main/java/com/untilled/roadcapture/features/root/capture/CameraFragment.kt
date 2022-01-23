@@ -62,6 +62,8 @@ class CameraFragment : Fragment() {
     ): View {
         _binding = FragmentCameraBinding.inflate(inflater, container, false)
 
+        mainActivity().viewModel.setBindingRoot(binding.root)
+
         return binding.root
     }
 

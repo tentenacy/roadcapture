@@ -1,5 +1,6 @@
 package com.untilled.roadcapture.application
 
+import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.untilled.roadcapture.data.repository.token.LocalTokenRepository
@@ -27,8 +28,10 @@ class MainViewModel @Inject constructor(
     private val oauthLoginManagerMap: Map<String, @JvmSuppressWildcards OAuthLoginManagerSubject>,
 ) : BaseViewModel(), TokenExpirationObserver, OAuthTokenExpirationObserver {
 
-    private var _isLoggedOut = MutableLiveData(false)
-    val isLoggedOut: LiveData<Boolean> get() = _isLoggedOut
+    private var _logout = MutableLiveData<View>()
+    val logout: LiveData<View> get() = _logout
+
+    private var _bindingRoot = MutableLiveData<View>()
 
     init {
         tokenExpirationObservable.registerObserver(this)
@@ -52,7 +55,6 @@ class MainViewModel @Inject constructor(
                         accessTokenExpireDate = response.accessTokenExpireDate.toLong(),
                     )
                 )
-                tokenExpirationObservable.resetCount()
             }) { t ->
                 error.value = t.message
             }.addTo(compositeDisposable)
@@ -60,16 +62,18 @@ class MainViewModel @Inject constructor(
 
     override fun onRefreshTokenExpired() {
         logout()
-        tokenExpirationObservable.resetRefreshCount()
     }
 
     override fun onOAuthTokenExpired() {
         logout()
-        tokenExpirationObservable.resetCount()
+    }
+
+    fun setBindingRoot(bindingRoot: View) {
+        _bindingRoot.value = bindingRoot
     }
 
     fun logout() {
-        _isLoggedOut.postValue(true)
+        _logout.postValue(_bindingRoot.value)
 
         localTokenRepository.getOAuthToken().whenHasOAuthToken {
             oauthLoginManagerMap[it.name]?.logout()
