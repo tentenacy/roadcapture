@@ -8,10 +8,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.untilled.roadcapture.databinding.FragmentUsernameSearchBinding
 import com.untilled.roadcapture.features.common.CustomDivider
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class UsernameSearchFragment : Fragment() {
     private var _binding: FragmentUsernameSearchBinding? = null
     private val binding get() = _binding!!
+
+    @Inject
+    lateinit var customDivider: CustomDivider
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,9 +37,6 @@ class UsernameSearchFragment : Fragment() {
     }
 
     private fun initAdapter() {
-
-        val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
-
         binding.recyclerUsernamesearch.addItemDecoration(customDivider)
     }
 }

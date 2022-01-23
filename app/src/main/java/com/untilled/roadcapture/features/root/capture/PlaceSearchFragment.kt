@@ -25,6 +25,7 @@ import com.untilled.roadcapture.utils.navigateToCapture
 import com.untilled.roadcapture.utils.navigateToPictureEditor
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class PlaceSearchFragment : Fragment() {
@@ -38,6 +39,9 @@ class PlaceSearchFragment : Fragment() {
     private val adapter: PlaceSearchAdapter by lazy {
         PlaceSearchAdapter(itemOnClickListener)
     }
+
+    @Inject
+    lateinit var customDivider: CustomDivider
 
     private val itemOnClickListener: (PlaceRequest?) -> Unit = { placeRequest ->
         picture.place = placeRequest
@@ -76,7 +80,6 @@ class PlaceSearchFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
         binding.recyclerPlaceSearch.addItemDecoration(customDivider)
         binding.recyclerPlaceSearch.adapter = adapter
     }

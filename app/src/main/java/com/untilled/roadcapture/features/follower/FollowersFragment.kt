@@ -34,6 +34,9 @@ class FollowersFragment : Fragment(){
         FollowersAdapter(itemOnClickListener)
     }
 
+    @Inject
+    lateinit var customDivider: CustomDivider
+
     private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
         when(args?.view?.id){
             R.id.btn_ifollow -> viewModel.follow((args.item as ItemFollowBinding).user!!.followingId)
@@ -89,7 +92,6 @@ class FollowersFragment : Fragment(){
     }
 
     private fun initAdapter(){
-        val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
         binding.recyclerFollower.addItemDecoration(customDivider)
         binding.recyclerFollower.adapter = adapter
     }

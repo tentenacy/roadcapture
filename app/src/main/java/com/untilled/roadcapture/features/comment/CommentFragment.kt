@@ -34,6 +34,9 @@ class CommentFragment : Fragment() {
         CommentsAdapter(itemClickListener)
     }
 
+    @Inject
+    lateinit var customDivider: CustomDivider
+
     private val commentObserver: (PagingData<AlbumComments.AlbumComment>) -> Unit = { pagingData ->
         adapter.submitData(lifecycle, pagingData)
     }
@@ -96,7 +99,6 @@ class CommentFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        val customDivider = CustomDivider(2.5f, 1f, Color.parseColor("#EFEFEF"))
         binding.recyclerComment.addItemDecoration(customDivider)
         binding.recyclerComment.adapter = adapter
         refresh(args.albumsId)

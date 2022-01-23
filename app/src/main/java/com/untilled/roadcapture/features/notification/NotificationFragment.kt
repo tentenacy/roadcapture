@@ -10,11 +10,16 @@ import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.databinding.FragmentNotificationBinding
 import com.untilled.roadcapture.features.common.CustomDivider
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class NotificationFragment : Fragment(){
 
     private var _binding: FragmentNotificationBinding? = null
+
+    @Inject
+    lateinit var customDivider: CustomDivider
+
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -50,9 +55,6 @@ class NotificationFragment : Fragment(){
     }
 
     private fun initAdapter(){
-
-        val customDivider = CustomDivider(2.5f,1f, Color.parseColor("#EFEFEF"))
-
         binding.recycleNotification.addItemDecoration(customDivider)
     }
 
