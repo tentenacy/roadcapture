@@ -215,7 +215,7 @@
     </fragment>
     <fragment
         android:id="@+id/myStudioModification"
-        android:name="com.untilled.roadcapture.features.root.studio.MyStudioModification"
+        android:name="com.untilled.roadcapture.features.root.studio.MyStudioModificationFragment"
         android:label="MyStudioModification"
         tools:layout="@layout/fragment_mystudio_modification">
         <argument

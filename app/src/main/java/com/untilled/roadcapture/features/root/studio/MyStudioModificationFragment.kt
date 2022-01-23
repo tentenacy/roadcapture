@@ -8,28 +8,32 @@ import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
+import com.untilled.roadcapture.core.activityresult.ActivityResultFactory
 import com.untilled.roadcapture.databinding.FragmentMystudioModificationBinding
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class MyStudioModification : Fragment() {
+class MyStudioModificationFragment : Fragment() {
     private var _binding: FragmentMystudioModificationBinding? = null
     private val binding get() = _binding!!
     private var profileImageUri: Uri? = null
     private var backgroundImageUri: Uri? = null
-    private val args: MyStudioModificationArgs by navArgs()
+    private val args: MyStudioModificationFragmentArgs by navArgs()
 
-    private val getProfileContent = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
+    @Inject
+    lateinit var activityResultFactory: ActivityResultFactory<Intent, ActivityResult>
+
+    private val profileContentOnActivityResult: (ActivityResult) -> Unit = {
         if (it.resultCode == Activity.RESULT_OK) {
             profileImageUri = it.data?.data
-            binding.imageMystudioModifyProfile.context.apply{
+            binding.imageMystudioModifyProfile.context.apply {
                 Glide.with(this)
                     .asBitmap()
                     .load(profileImageUri)
@@ -38,6 +42,7 @@ class MyStudioModification : Fragment() {
             }
         }
     }
+
     private val getBackgroundContent = registerForActivityResult(
         ActivityResultContracts.StartActivityForResult()
     ) {
@@ -97,7 +102,7 @@ class MyStudioModification : Fragment() {
             .setType("image/*")
 
         when(type){
-            PROFILE -> getProfileContent.launch(intent)
+            PROFILE -> activityResultFactory.launch(intent, profileContentOnActivityResult)
             BACKGROUND -> getBackgroundContent.launch(intent)
         }
     }
