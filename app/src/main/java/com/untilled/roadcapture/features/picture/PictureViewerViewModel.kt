@@ -1,6 +1,7 @@
 package com.untilled.roadcapture.features.picture
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -28,11 +29,11 @@ class PictureViewerViewModel @Inject constructor(
     private val _currentPosition = MutableLiveData<Int>()
     val currentPosition: LiveData<Int> get() = _currentPosition
 
-    private var _albumComments = MutableLiveData<PagingData<AlbumComments.AlbumComment>>()
-    val albumComments: LiveData<PagingData<AlbumComments.AlbumComment>> get() = _albumComments
+    private var _albumComments = MutableLiveData<PagingData<AlbumComments.AlbumComment>?>()
+    val albumComments: LiveData<PagingData<AlbumComments.AlbumComment>?> get() = _albumComments
 
-    private var _pictureComments = MutableLiveData<PagingData<PictureComments.PictureComment>>()
-    val pictureComments: LiveData<PagingData<PictureComments.PictureComment>> get() = _pictureComments
+    private var _pictureComments = MutableLiveData<PagingData<PictureComments.PictureComment>?>()
+    val pictureComments: LiveData<PagingData<PictureComments.PictureComment>?> get() = _pictureComments
 
     fun setCurrentPosition(position: Int) {
         _currentPosition.value = position
@@ -49,9 +50,9 @@ class PictureViewerViewModel @Inject constructor(
             }).addTo(compositeDisposable)
     }
 
-    fun getAlbumComments() {
-        commentPagingRepository.getAlbumComments(album.value!!.id)
-            .subscribeOn(AndroidSchedulers.mainThread())
+    fun getAlbumComments() = album.value?.apply {
+        commentPagingRepository.getAlbumComments(id)
+            .observeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
             .subscribe({
                 _albumComments.value = it
@@ -60,8 +61,8 @@ class PictureViewerViewModel @Inject constructor(
             }.addTo(compositeDisposable)
     }
 
-    fun getPictureComments(position: Int) {
-        commentPagingRepository.getPictureComments(album.value!!.pictures[position].id)
+    fun getPictureComments(position: Int) = album.value?.apply {
+        commentPagingRepository.getPictureComments(pictures[position].id)
             .subscribeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
             .subscribe({
@@ -69,5 +70,10 @@ class PictureViewerViewModel @Inject constructor(
             }) { t ->
 
             }.addTo(compositeDisposable)
+    }
+
+    fun clearComments() {
+        _pictureComments.value = null
+        _albumComments.value = null
     }
 }

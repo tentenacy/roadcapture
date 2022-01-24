@@ -23,7 +23,7 @@ class CommentPagingRepositoryImpl(
                 enablePlaceholders = true,
                 maxSize = 30,
                 prefetchDistance = 5,
-                initialLoadSize = 40
+                initialLoadSize = 20
             ),
             pagingSourceFactory = { albumCommentsPagingSource }
         ).flowable
@@ -37,7 +37,7 @@ class CommentPagingRepositoryImpl(
                 enablePlaceholders = true,
                 maxSize = 30,
                 prefetchDistance = 5,
-                initialLoadSize = 40
+                initialLoadSize = 20
             ),
             pagingSourceFactory = { pictureCommentsPagingSource }
         ).flowable

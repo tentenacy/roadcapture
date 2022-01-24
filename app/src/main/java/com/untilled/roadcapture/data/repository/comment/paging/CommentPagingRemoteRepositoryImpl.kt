@@ -29,7 +29,7 @@ class CommentPagingRemoteRepositoryImpl(
                 enablePlaceholders = true,
                 maxSize = 30,
                 prefetchDistance = 5,
-                initialLoadSize = 40
+                initialLoadSize = 20
             ),
             remoteMediator = albumCommentsRemoteMediator,
             pagingSourceFactory = { albumCommentsDao.selectAll() }
@@ -44,7 +44,7 @@ class CommentPagingRemoteRepositoryImpl(
                 enablePlaceholders = true,
                 maxSize = 30,
                 prefetchDistance = 5,
-                initialLoadSize = 40
+                initialLoadSize = 20
             ),
             remoteMediator = pictureCommentsRemoteMediator,
             pagingSourceFactory = { pictureCommentsDao.selectAll() }

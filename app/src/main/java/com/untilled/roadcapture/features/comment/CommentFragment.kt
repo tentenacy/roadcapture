@@ -31,16 +31,17 @@ class CommentFragment : Fragment() {
     private val viewModel: CommentViewModel by viewModels()
     private val args: CommentFragmentArgs by navArgs()
 
-    private val adapter: CommentsAdapter by lazy {
-        CommentsAdapter(itemClickListener)
+    private val adapterAlbum: AlbumCommentsAdapter by lazy {
+        AlbumCommentsAdapter(itemClickListener)
     }
 
     @Inject
     lateinit var customDivider: CustomDivider
 
     private val commentObserver: (PagingData<AlbumComments.AlbumComment>) -> Unit = { pagingData ->
-        adapter.submitData(lifecycle, pagingData)
+        adapterAlbum.submitData(lifecycle, pagingData)
     }
+
     private val itemClickListener: (ItemClickArgs?) -> Unit = { args ->
         val userId = (args?.item as ItemCommentBinding).comments!!.user.id
 
@@ -107,7 +108,7 @@ class CommentFragment : Fragment() {
 
     private fun initAdapter() {
         binding.recyclerComment.addItemDecoration(customDivider)
-        binding.recyclerComment.adapter = adapter
+        binding.recyclerComment.adapter = adapterAlbum
     }
 
     private fun refresh(albumId: Long){

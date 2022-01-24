@@ -10,7 +10,7 @@
 
         <variable
             name="comments"
-            type="com.untilled.roadcapture.data.entity.paging.AlbumComments.AlbumComment" />
+            type="com.untilled.roadcapture.data.datasource.api.dto.comment.CommentsResponse" />
 
         <variable
             name="onClickItem"
@@ -21,8 +21,7 @@
         android:id="@+id/constraint_icomment_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingVertical="10dp"
->
+        android:paddingVertical="10dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/img_icomment_profile"

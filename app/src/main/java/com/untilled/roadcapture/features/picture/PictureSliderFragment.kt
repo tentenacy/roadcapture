@@ -28,7 +28,7 @@ class PictureSliderFragment : Fragment() {
     }
 
     private val albumObserver: (AlbumResponse) -> Unit = { albumResponse ->
-        adapter.run {
+        adapter.apply {
             item = albumResponse
             notifyDataSetChanged()
         }

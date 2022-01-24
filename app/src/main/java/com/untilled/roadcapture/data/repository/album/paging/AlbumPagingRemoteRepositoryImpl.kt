@@ -36,7 +36,7 @@ class AlbumPagingRemoteRepositoryImpl(
                 enablePlaceholders = true,
                 maxSize = 30,
                 prefetchDistance = 5,
-                initialLoadSize = 40
+                initialLoadSize = 20
             ),
             remoteMediator = albumsRemoteMediator,
             pagingSourceFactory = { albumsDao.selectAll() }
@@ -52,7 +52,7 @@ class AlbumPagingRemoteRepositoryImpl(
                 enablePlaceholders = true,
                 maxSize = 30,
                 prefetchDistance = 5,
-                initialLoadSize = 40
+                initialLoadSize = 20
             ),
             remoteMediator = userAlbumsRemoteMediator,
             pagingSourceFactory = { userAlbumsDao.selectAll() }

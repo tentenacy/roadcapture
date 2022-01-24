@@ -14,6 +14,7 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.data.entity.paging.PictureComments
 import com.untilled.roadcapture.databinding.BottomsheetCommentBinding
+import com.untilled.roadcapture.features.comment.AlbumCommentsAdapter
 import com.untilled.roadcapture.features.common.ReportDialogFragment
 import com.untilled.roadcapture.utils.ui.CustomDivider
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
@@ -33,19 +34,27 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     @Inject
     lateinit var customDivider: CustomDivider
 
-    private val adapter: CommentBottomSheetAdapter by lazy {
-        CommentBottomSheetAdapter(itemOnClickListener)
+    private val pictureCommentsAdapter: PictureCommentsAdapter by lazy {
+        PictureCommentsAdapter(itemOnClickListener)
     }
 
-    private val albumCommentsObserver: (PagingData<AlbumComments.AlbumComment>) -> Unit =
+    private val albumCommentsAdapter: AlbumCommentsAdapter by lazy {
+        AlbumCommentsAdapter(itemOnClickListener)
+    }
+
+    private val albumCommentsObserver: (PagingData<AlbumComments.AlbumComment>?) -> Unit =
         { pagingData ->
-            // adapter.submitData(lifecycle, pagingData)
-        }
-    private val pictureCommentsObserver: (PagingData<PictureComments.PictureComment>) -> Unit =
-        { pagingData ->
-            adapter.submitData(lifecycle, pagingData)
+            pagingData?.let { albumCommentsAdapter.submitData(lifecycle, it) }
         }
 
+    private val pictureCommentsObserver: (PagingData<PictureComments.PictureComment>?) -> Unit =
+        { pagingData ->
+            pagingData?.let { pictureCommentsAdapter.submitData(lifecycle, it) }
+        }
+
+    private val currentPositionObserver: (Int) -> Unit = { position ->
+        refresh(position)
+    }
 
     private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
         when (args?.view?.id) {
@@ -77,6 +86,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = BottomsheetCommentBinding.inflate(inflater, container, false)
+
         mainActivity().setSupportActionBar(binding.toolbarBottomsheetComment)
 
         return binding.root
@@ -86,25 +96,33 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observeData()
-        initAdapter()
+        initRecyclerView()
         expandFullHeight()
         setOnClickListeners()
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+
+        viewModel.clearComments()
+
         _binding = null
     }
 
     private fun observeData() {
         viewModel.albumComments.observe(viewLifecycleOwner, albumCommentsObserver)
         viewModel.pictureComments.observe(viewLifecycleOwner, pictureCommentsObserver)
-        viewModel.currentPosition.observe(viewLifecycleOwner) { position ->
-            if (position == -1) {
-                viewModel.getAlbumComments()
-            } else {
-                viewModel.getPictureComments(position)
-            }
+        viewModel.currentPosition.observe(viewLifecycleOwner, currentPositionObserver)
+    }
+
+    fun refresh(position: Int) {
+        if (position == 0) {
+            binding.recycleBottomsheetComment.adapter = albumCommentsAdapter
+            viewModel.getAlbumComments()
+        }
+        else {
+            binding.recycleBottomsheetComment.adapter = pictureCommentsAdapter
+            viewModel.getPictureComments(position - 1)
         }
     }
 
@@ -121,9 +139,8 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
         }
     }
 
-    private fun initAdapter() {
+    private fun initRecyclerView() {
         binding.recycleBottomsheetComment.addItemDecoration(customDivider)
-        binding.recycleBottomsheetComment.adapter = adapter
     }
 
     private fun showReportDialog() {

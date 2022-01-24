@@ -22,7 +22,10 @@ class AlbumCommentsPagingSource @Inject constructor(
     var albumId by Delegates.notNull<Long>()
 
     override fun getRefreshKey(state: PagingState<Int, AlbumComments.AlbumComment>): Int? {
-        return null
+        return state.anchorPosition?.let { anchorPosition ->
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
+        }
     }
 
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, AlbumComments.AlbumComment>> {
@@ -52,7 +55,7 @@ class AlbumCommentsPagingSource @Inject constructor(
         return LoadResult.Page(
             data = data.albumComments,
             prevKey = if (position == 0) null else position - 1,
-            nextKey = if (position == data.total - 1) null else position + 1,
+            nextKey = if(data.endOfPage) null else position + 1,
         )
     }
 }

@@ -26,7 +26,10 @@ class FollowingsPagingSource @Inject constructor(
     var followingsCondition: FollowingsCondition? = null
 
     override fun getRefreshKey(state: PagingState<Int, Followings.Following>): Int? {
-        return null
+        return state.anchorPosition?.let { anchorPosition ->
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
+        }
     }
 
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Followings.Following>> {
@@ -70,10 +73,10 @@ class FollowingsPagingSource @Inject constructor(
     }
 
     private fun toLoadResult(data: Followings, position: Int): LoadResult<Int, Followings.Following> {
-        return PagingSource.LoadResult.Page(
+        return LoadResult.Page(
             data = data.followings,
             prevKey = if(position == 0) null else position - 1,
-            nextKey = if(position == data.total - 1) null else position + 1,
+            nextKey = if(data.endOfPage) null else position + 1,
         )
     }
 }

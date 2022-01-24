@@ -39,7 +39,7 @@ class FollowingsRemoteMediator @Inject constructor(
                     LoadType.REFRESH -> {
                         val remoteKeys = getRemoteKeyClosetsToCurrentPosition(state)
 
-                        remoteKeys?.nextKey?.minus(1) ?: 1
+                        remoteKeys?.nextKey?.minus(1) ?: 0
                     }
                     LoadType.PREPEND -> {
                         val remoteKeys = getRemoteKeyForFirstItem(state)
@@ -90,7 +90,7 @@ class FollowingsRemoteMediator @Inject constructor(
                 database.followingsKeysDao().clearRemoteKeys()
             }
 
-            val prevKey = if (page == 1) null else page - 1
+            val prevKey = if (page == 0) null else page - 1
             val nextKey = if (data.endOfPage) null else page + 1
             val keys = data.followings.map {
                 Followings.FollowingRemoteKeys(followingsId = it.followingId, prevKey = prevKey, nextKey = nextKey ?: INVALID_PAGE)

@@ -32,7 +32,7 @@ class AlbumPagingRepositoryImpl(
                 enablePlaceholders = true,
                 maxSize = 30,
                 prefetchDistance = 5,
-                initialLoadSize = 40
+                initialLoadSize = 20
             ),
             pagingSourceFactory = { albumsPagingSource }
         ).flowable
@@ -47,7 +47,7 @@ class AlbumPagingRepositoryImpl(
                 enablePlaceholders = true,
                 maxSize = 30,
                 prefetchDistance = 5,
-                initialLoadSize = 40
+                initialLoadSize = 20
             ),
             pagingSourceFactory = { userAlbumsPagingSource }
         ).flowable
@@ -62,7 +62,7 @@ class AlbumPagingRepositoryImpl(
                 enablePlaceholders = true,
                 maxSize = 30,
                 prefetchDistance = 5,
-                initialLoadSize = 40
+                initialLoadSize = 20
             ),
             pagingSourceFactory = { userAlbumsPagingSource }
         ).flowable
@@ -76,7 +76,7 @@ class AlbumPagingRepositoryImpl(
                 enablePlaceholders = true,
                 maxSize = 30,
                 prefetchDistance = 5,
-                initialLoadSize = 40
+                initialLoadSize = 20
             ),
             pagingSourceFactory = { followingAlbumsPagingSource }
         ).flowable

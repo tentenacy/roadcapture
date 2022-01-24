@@ -25,7 +25,10 @@ class UserAlbumsPagingSource @Inject constructor(
     var userId: Long? = null
 
     override fun getRefreshKey(state: PagingState<Int, UserAlbums.UserAlbum>): Int? {
-        return null
+        return state.anchorPosition?.let { anchorPosition ->
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
+        }
     }
 
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, UserAlbums.UserAlbum>> {
@@ -47,7 +50,7 @@ class UserAlbumsPagingSource @Inject constructor(
         } else{
             return roadCaptureApi.getStudioAlbums(
                 userId = userId,
-                page = position,
+                page = position - 1,
                 size = params.loadSize,
                 region1DepthName = userAlbumsCondition?.region1DepthName,
                 region2DepthName = userAlbumsCondition?.region2DepthName,
@@ -70,7 +73,7 @@ class UserAlbumsPagingSource @Inject constructor(
         return LoadResult.Page(
             data = data.userAlbums,
             prevKey = if(position == 0) null else position - 1,
-            nextKey = if(position == data.total - 1) null else position + 1,
+            nextKey = if(data.endOfPage) null else position + 1,
         )
     }
 }

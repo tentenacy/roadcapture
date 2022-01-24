@@ -38,7 +38,7 @@ class AlbumCommentsRemoteMediator @Inject constructor(
                     LoadType.REFRESH -> {
                         val remoteKeys = getRemoteKeyClosetsToCurrentPosition(state)
 
-                        remoteKeys?.nextKey?.minus(1) ?: 1
+                        remoteKeys?.nextKey?.minus(1) ?: 0
                     }
                     LoadType.PREPEND -> {
                         val remoteKeys = getRemoteKeyForFirstItem(state)
@@ -88,7 +88,7 @@ class AlbumCommentsRemoteMediator @Inject constructor(
                 database.albumCommentsDao().clearComments()
             }
 
-            val prevKey = if (page == 1) null else page - 1
+            val prevKey = if (page == 0) null else page - 1
             val nextKey = if (data.endOfPage) null else page + 1
             val keys = data.albumComments.map {
                 AlbumComments.AlbumCommentRemoteKeys(albumCommentsId = it.albumCommentsId, prevKey = prevKey, nextKey = nextKey ?: INVALID_PAGE)

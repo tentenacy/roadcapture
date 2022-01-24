@@ -23,7 +23,10 @@ class AlbumsPagingSource @Inject constructor(
     lateinit var albumsCondition: AlbumsCondition
 
     override fun getRefreshKey(state: PagingState<Int, Albums.Album>): Int? {
-        return null
+        return state.anchorPosition?.let { anchorPosition ->
+            state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
+                ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
+        }
     }
 
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Albums.Album>> {
@@ -51,7 +54,7 @@ class AlbumsPagingSource @Inject constructor(
         return LoadResult.Page(
             data = data.albums,
             prevKey = if(position == 0) null else position - 1,
-            nextKey = if(position == data.total - 1) null else position + 1,
+            nextKey = if(data.endOfPage) null else position + 1,
         )
     }
 }

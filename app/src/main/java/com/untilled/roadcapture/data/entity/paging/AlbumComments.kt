@@ -4,6 +4,7 @@ import android.os.Parcelable
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
@@ -17,7 +18,7 @@ data class AlbumComments(
 ): Parcelable {
 
     @IgnoredOnParcel
-    val endOfPage = total - 1 == page
+    val endOfPage = total - 1 <= page
 
     @Parcelize
     @Entity(tableName = "album_comments")
@@ -30,7 +31,16 @@ data class AlbumComments(
         val content: String,
         @Embedded
         val user: UsersResponse
-    ): Parcelable
+    ): Parcelable {
+        fun toCommentsResponse() = CommentsResponse(
+            id = albumCommentsId,
+            pictureId = pictureId,
+            createdAt = createdAt,
+            lastModifiedAt = lastModifiedAt,
+            content = content,
+            user = user,
+        )
+    }
 
     @Parcelize
     @Entity(tableName = "album_comments_remote_keys")
