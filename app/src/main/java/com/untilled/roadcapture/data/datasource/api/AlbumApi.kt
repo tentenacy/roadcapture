@@ -12,15 +12,9 @@ import retrofit2.http.*
 interface AlbumApi {
 
     @GET(RoadCapturePathConstant.GET_ALBUMS)
-    fun getAlbumsTemp(
-        @Query("page") page: Int? = null,
-        @Query("dateTimeFrom") dateTimeFrom: String? = null,
-        @Query("dateTimeTo") dateTimeTo: String? = null,
-    ): Response<PageResponse<AlbumsResponse>>
-
-    @GET(RoadCapturePathConstant.GET_ALBUMS)
     fun getAlbums(
         @Query("page") page: Int? = null,
+        @Query("size") size: Int? = null,
         @Query("dateTimeFrom") dateTimeFrom: String? = null,
         @Query("dateTimeTo") dateTimeTo: String? = null,
     ): Single<PageResponse<AlbumsResponse>>

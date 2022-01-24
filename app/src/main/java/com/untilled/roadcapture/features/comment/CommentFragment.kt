@@ -65,6 +65,11 @@ class CommentFragment : Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        refresh(args.albumsId)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -103,7 +108,6 @@ class CommentFragment : Fragment() {
     private fun initAdapter() {
         binding.recyclerComment.addItemDecoration(customDivider)
         binding.recyclerComment.adapter = adapter
-        refresh(args.albumsId)
     }
 
     private fun refresh(albumId: Long){

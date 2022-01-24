@@ -37,6 +37,7 @@ class PictureSliderFragment : Fragment() {
     private val commentOnClickListener: (View?) -> Unit = {
         CommentBottomSheetDialog().show(childFragmentManager, DialogTagConstant.COMMENT_BOTTOM_SHEET)
     }
+
     private val likeOnClickListener: (View?) -> Unit = { lottie ->
         if (!flagLike) {
             val animator = ValueAnimator.ofFloat(0f, 0.5f).setDuration(800)
@@ -125,7 +126,7 @@ class PictureSliderFragment : Fragment() {
                     true,
                     object : PictureSnapPagerScrollListener.OnChangeListener {
                         override fun onSnapped(position: Int) {
-                            viewModel.currentPosition = position
+                            viewModel.setCurrentPosition(position)
                         }
                     }
                 )

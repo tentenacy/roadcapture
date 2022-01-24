@@ -99,6 +99,13 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     private fun observeData() {
         viewModel.albumComments.observe(viewLifecycleOwner, albumCommentsObserver)
         viewModel.pictureComments.observe(viewLifecycleOwner, pictureCommentsObserver)
+        viewModel.currentPosition.observe(viewLifecycleOwner) { position ->
+            if (position == -1) {
+                viewModel.getAlbumComments()
+            } else {
+                viewModel.getPictureComments(position)
+            }
+        }
     }
 
     private fun expandFullHeight() {
@@ -117,17 +124,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     private fun initAdapter() {
         binding.recycleBottomsheetComment.addItemDecoration(customDivider)
         binding.recycleBottomsheetComment.adapter = adapter
-        updateView(viewModel.currentPosition - 1)
     }
-
-
-    private fun updateView(position: Int) {
-        when (position) {
-            -1 -> viewModel.getAlbumComments(viewModel.album.value!!.id)
-            else -> viewModel.getPictureComments(viewModel.album.value!!.pictures?.get(position)!!.id)
-        }
-    }
-
 
     private fun showReportDialog() {
         ReportDialogFragment({}).show(childFragmentManager, DialogTagConstant.REPORT_DIALOG)

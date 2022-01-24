@@ -17,7 +17,6 @@ class CommentBottomSheetAdapter(private val itemClickListener: (ItemClickArgs?) 
     inner class CommentBottomSheetViewHolder(private val binding: ItemCommentBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(comments: PictureComments.PictureComment) {
-            //TODO 회의 후 수정
             binding.comments = AlbumComments.AlbumComment(
                 id = comments.id,
                 albumCommentsId = comments.albumCommentsId,

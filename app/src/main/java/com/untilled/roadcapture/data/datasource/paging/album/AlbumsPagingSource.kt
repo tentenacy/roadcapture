@@ -31,6 +31,7 @@ class AlbumsPagingSource @Inject constructor(
 
         return roadCaptureApi.getAlbums(
             page = position,
+            size = params.loadSize,
             dateTimeFrom = albumsCondition.dateTimeFrom,
             dateTimeTo = albumsCondition.dateTimeTo,
         )

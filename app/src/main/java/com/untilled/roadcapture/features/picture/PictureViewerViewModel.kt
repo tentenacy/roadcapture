@@ -24,7 +24,9 @@ class PictureViewerViewModel @Inject constructor(
 
     private val _album = MutableLiveData<AlbumResponse>()
     val album: LiveData<AlbumResponse> get() = _album
-    var currentPosition: Int = 0
+
+    private val _currentPosition = MutableLiveData<Int>()
+    val currentPosition: LiveData<Int> get() = _currentPosition
 
     private var _albumComments = MutableLiveData<PagingData<AlbumComments.AlbumComment>>()
     val albumComments: LiveData<PagingData<AlbumComments.AlbumComment>> get() = _albumComments
@@ -32,19 +34,23 @@ class PictureViewerViewModel @Inject constructor(
     private var _pictureComments = MutableLiveData<PagingData<PictureComments.PictureComment>>()
     val pictureComments: LiveData<PagingData<PictureComments.PictureComment>> get() = _pictureComments
 
+    fun setCurrentPosition(position: Int) {
+        _currentPosition.value = position
+    }
+
     fun getAlbumDetail(id: Long) {
         albumRepository.getAlbumDetail(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
                 _album.postValue(response)
-            },{
+            }, {
 
             }).addTo(compositeDisposable)
     }
 
-    fun getAlbumComments(albumId: Long) {
-        commentPagingRepository.getAlbumComments(albumId)
+    fun getAlbumComments() {
+        commentPagingRepository.getAlbumComments(album.value!!.id)
             .subscribeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
             .subscribe({
@@ -54,8 +60,8 @@ class PictureViewerViewModel @Inject constructor(
             }.addTo(compositeDisposable)
     }
 
-    fun getPictureComments(pictureId: Long) {
-        commentPagingRepository.getPictureComments(pictureId)
+    fun getPictureComments(position: Int) {
+        commentPagingRepository.getPictureComments(album.value!!.pictures[position].id)
             .subscribeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
             .subscribe({
@@ -64,44 +70,4 @@ class PictureViewerViewModel @Inject constructor(
 
             }.addTo(compositeDisposable)
     }
-
-
-/*
-    private fun getPictureCommentsResultStream(pictureId: Int): Flow<PagingData<Comments>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = 10,
-                prefetchDistance = 20,
-                enablePlaceholders = false
-            ),
-            pagingSourceFactory = { PictureCommentsPagingSource(repository,pictureId) }
-        ).flow
-    }
-*/
-
-/*
-    fun getPictureComments(pictureId: Int): Flow<PagingData<Comments>> {
-        return getPictureCommentsResultStream(pictureId).cachedIn(viewModelScope)
-    }
-*/
-
-/*
-    private fun getAlbumCommentsResultStream(albumId: Int): Flow<PagingData<Comments>> {
-        return Pager(
-            config = PagingConfig(
-                pageSize = 10,
-                prefetchDistance = 20,
-                enablePlaceholders = false
-            ),
-            pagingSourceFactory = { AlbumCommentsPagingSource(repository,albumId) }
-        ).flow
-    }
-*/
-
-/*
-    fun getAlbumComments(albumId: Int): Flow<PagingData<Comments>> {
-        return getAlbumCommentsResultStream(albumId).cachedIn(viewModelScope)
-    }
-*/
 }
-
