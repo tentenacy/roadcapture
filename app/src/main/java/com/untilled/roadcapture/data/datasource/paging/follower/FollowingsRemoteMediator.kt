@@ -64,10 +64,10 @@ class FollowingsRemoteMediator @Inject constructor(
                         username = followingsCondition?.username,
                     )
                         .subscribeOn(Schedulers.io())
-                        .retry(3)
                         .map { mapper.transformToFollowings(it) }
                         .map { insertToDb(page, loadType, it) }
                         .map<MediatorResult> { MediatorResult.Success(endOfPaginationReached = it.endOfPage) }
+                        .retryThreeTimes()
                         .onErrorReturn{ MediatorResult.Error(it) }
                 }
             }

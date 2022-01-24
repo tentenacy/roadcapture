@@ -62,10 +62,10 @@ class AlbumCommentsRemoteMediator @Inject constructor(
                         albumId = albumId,
                     )
                         .subscribeOn(Schedulers.io())
-                        .retry(3)
                         .map { mapper.transformToAlbumComments(it) }
                         .map { insertToDb(page, loadType, it) }
                         .map<MediatorResult> { MediatorResult.Success(endOfPaginationReached = it.endOfPage) }
+                        .retryThreeTimes()
                         .onErrorReturn{ MediatorResult.Error(it) }
                 }
             }

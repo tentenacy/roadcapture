@@ -6,6 +6,7 @@ import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowersCondition
 import com.untilled.roadcapture.data.entity.mapper.FollowersMapper
 import com.untilled.roadcapture.data.entity.paging.Followers
+import com.untilled.roadcapture.utils.retryThreeTimes
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
@@ -37,6 +38,7 @@ class FollowersPagingSource @Inject constructor(
             .subscribeOn(Schedulers.io())
             .map { mapper.transformToFollowers(it) }
             .map { toLoadResult(it, position) }
+            .retryThreeTimes()
             .onErrorReturn { LoadResult.Error(it) }
     }
 

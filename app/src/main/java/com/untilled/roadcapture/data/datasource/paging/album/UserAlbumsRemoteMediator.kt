@@ -64,10 +64,10 @@ class UserAlbumsRemoteMediator @Inject constructor(
                         region3DepthName = userAlbumsCondition?.region3DepthName,
                     )
                         .subscribeOn(Schedulers.io())
-                        .retry(3)
                         .map { mapper.transform(it) }
                         .map { insertToDb(page, loadType, it) }
                         .map<MediatorResult> { MediatorResult.Success(endOfPaginationReached = it.endOfPage) }
+                        .retryThreeTimes()
                         .onErrorReturn{ MediatorResult.Error(it) }
                 }
             }

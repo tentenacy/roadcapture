@@ -45,7 +45,6 @@ class NetworkModule {
         return TokenInterceptor(localTokenDao, gson)
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     @Singleton
     @Provides
     fun provideRetrofitBuilder(

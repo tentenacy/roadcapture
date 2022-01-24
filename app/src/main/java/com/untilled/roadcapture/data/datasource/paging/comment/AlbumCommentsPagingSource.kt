@@ -1,14 +1,17 @@
 package com.untilled.roadcapture.data.datasource.paging.comment
 
-import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import androidx.paging.rxjava3.RxPagingSource
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.entity.mapper.CommentsMapper
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.utils.retryThreeTimes
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
+import io.reactivex.rxjava3.kotlin.Flowables
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.io.IOException
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.properties.Delegates
@@ -36,6 +39,7 @@ class AlbumCommentsPagingSource @Inject constructor(
             .subscribeOn(Schedulers.io())
             .map { mapper.transformToAlbumComments(it) }
             .map { toLoadResult(it, position) }
+            .retryThreeTimes()
             .onErrorReturn { LoadResult.Error(it) }
     }
 

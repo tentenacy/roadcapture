@@ -65,6 +65,7 @@ class PictureCommentsRemoteMediator @Inject constructor(
                         .map { mapper.transformToPictureComments(it) }
                         .map { insertToDb(page, loadType, it) }
                         .map<MediatorResult> { MediatorResult.Success(endOfPaginationReached = it.endOfPage) }
+                        .retryThreeTimes()
                         .onErrorReturn{ MediatorResult.Error(it) }
                 }
             }
