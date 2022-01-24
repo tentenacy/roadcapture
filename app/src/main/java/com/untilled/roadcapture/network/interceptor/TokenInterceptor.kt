@@ -14,7 +14,6 @@ import okhttp3.Response
 
 class TokenInterceptor(
     private val localTokenDao: LocalTokenDao,
-    private val gson: Gson,
 ) : Interceptor, Subject<TokenExpirationObserver>() {
 
     private var accessTokenErrorOccurred = false
@@ -24,27 +23,29 @@ class TokenInterceptor(
         val request = chain.request().newBuilder()
             .addHeader("X-AUTH-TOKEN", localTokenDao.getToken().accessToken)
             .build()
-        val response = chain.proceed(request)
+        var response = chain.proceed(request)
 
         if (!response.isSuccessful) {
-            response.peekBody(2048).toErrorResponseOrNull(gson)?.apply {
+            response.peekBody(2048).toErrorResponseOrNull()?.apply {
                 when (code) {
                     ErrorCode.ACCESS_TOKEN_ERROR.code -> {
                         if(!accessTokenErrorOccurred) {
                             notifyTokenExpired()
                             accessTokenErrorOccurred = true
                         }
+                        response = response.newBuilder().message(ErrorCode.ACCESS_TOKEN_ERROR.code).build()
                     }
                     ErrorCode.REFRESH_TOKEN_ERROR.code -> {
                         if(!refreshTokenErrorOccurred) {
                             notifyRefreshTokenExpired()
                             refreshTokenErrorOccurred = true
                         }
+                        response = response.newBuilder().message(ErrorCode.REFRESH_TOKEN_ERROR.code).build()
                     }
                 }
             }
         } else {
-            response.peekBody(2048).toTokenResponseOrNull(gson)?.apply {
+            response.peekBody(2048).toTokenResponseOrNull()?.apply {
                 localTokenDao.saveToken(
                     TokenArgs(
                         grantType = grantType,

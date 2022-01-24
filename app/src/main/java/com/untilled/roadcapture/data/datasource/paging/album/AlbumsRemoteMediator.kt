@@ -2,6 +2,7 @@ package com.untilled.roadcapture.data.datasource.paging.album
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
+import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import androidx.paging.rxjava3.RxRemoteMediator
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
@@ -9,6 +10,8 @@ import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.datasource.database.PagingDatabase
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.data.entity.mapper.AlbumsMapper
+import com.untilled.roadcapture.utils.applyRetryPolicy
+import com.untilled.roadcapture.utils.constant.policy.RetryPolicyConstant
 import com.untilled.roadcapture.utils.retryThreeTimes
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -64,8 +67,13 @@ class AlbumsRemoteMediator @Inject constructor(
                         .map { mapper.transform(it) }
                         .map { insertToDb(page, loadType, it) }
                         .map<MediatorResult> { MediatorResult.Success(endOfPaginationReached = it.endOfPage) }
-                        .retryThreeTimes()
-                        .onErrorReturn{ MediatorResult.Error(it) }
+                        .compose(
+                            applyRetryPolicy(
+                                RetryPolicyConstant.TIMEOUT,
+                                RetryPolicyConstant.NETWORK,
+                                RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                                RetryPolicyConstant.ACCESS_TOKEN_EXPIRED
+                            ) { MediatorResult.Error(it) })
                 }
             }
     }

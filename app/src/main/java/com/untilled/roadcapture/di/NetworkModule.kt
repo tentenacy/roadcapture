@@ -41,8 +41,8 @@ class NetworkModule {
 
     @Singleton
     @Provides
-    fun provideTokenInterceptor(localTokenDao: LocalTokenDao, gson: Gson): TokenInterceptor {
-        return TokenInterceptor(localTokenDao, gson)
+    fun provideTokenInterceptor(localTokenDao: LocalTokenDao): TokenInterceptor {
+        return TokenInterceptor(localTokenDao)
     }
 
     @Singleton

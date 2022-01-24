@@ -15,10 +15,7 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface AlbumRepository {
-    suspend fun getAlbumsTemp( page: Int? = null, size: Int? = null, dateTimeFrom: String?, dateTimeTo: String?): Response<PageResponse<AlbumsResponse>>
-    fun getAlbumCommentsList(albumId: Long, page: Int? = null, size: Int? = null): Single<PageResponse<CommentsResponse>>
     fun getAlbumDetail(id: Long): Single<AlbumResponse>
-    fun getPictureCommentsList(pictureId: Long, page: Int? = null, size: Int? = null): Single<PageResponse<CommentsResponse>>
-    fun likesAlbum(albumId: Long): Single<Unit>
-    fun unlikesAlbum(albumId: Long): Single<Unit>
+    fun likeAlbum(albumId: Long): Single<Unit>
+    fun unlikeAlbum(albumId: Long): Single<Unit>
 }

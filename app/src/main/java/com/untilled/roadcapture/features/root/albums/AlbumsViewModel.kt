@@ -57,7 +57,7 @@ class AlbumsViewModel
     }
 
     fun likesAlbum(albumsId: Long) {
-        albumRepository.likesAlbum(albumsId)
+        albumRepository.likeAlbum(albumsId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -68,7 +68,7 @@ class AlbumsViewModel
     }
 
     fun unlikesAlbum(albumsId: Long) {
-        albumRepository.unlikesAlbum(albumsId)
+        albumRepository.unlikeAlbum(albumsId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

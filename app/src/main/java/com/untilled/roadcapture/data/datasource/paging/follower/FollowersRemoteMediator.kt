@@ -9,6 +9,8 @@ import com.untilled.roadcapture.data.datasource.api.dto.user.FollowersCondition
 import com.untilled.roadcapture.data.datasource.database.PagingDatabase
 import com.untilled.roadcapture.data.entity.mapper.FollowersMapper
 import com.untilled.roadcapture.data.entity.paging.Followers
+import com.untilled.roadcapture.utils.applyRetryPolicy
+import com.untilled.roadcapture.utils.constant.policy.RetryPolicyConstant
 import com.untilled.roadcapture.utils.retryThreeTimes
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -67,8 +69,13 @@ class FollowersRemoteMediator @Inject constructor(
                         .map { mapper.transformToFollowers(it) }
                         .map { insertToDb(page, loadType, it) }
                         .map<MediatorResult> { MediatorResult.Success(endOfPaginationReached = it.endOfPage) }
-                        .retryThreeTimes()
-                        .onErrorReturn{ MediatorResult.Error(it) }
+                        .compose(
+                            applyRetryPolicy(
+                                RetryPolicyConstant.TIMEOUT,
+                                RetryPolicyConstant.NETWORK,
+                                RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                                RetryPolicyConstant.ACCESS_TOKEN_EXPIRED
+                            ) { MediatorResult.Error(it) })
                 }
             }
     }

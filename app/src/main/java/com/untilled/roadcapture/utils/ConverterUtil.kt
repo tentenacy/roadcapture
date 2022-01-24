@@ -6,17 +6,17 @@ import com.untilled.roadcapture.data.datasource.api.dto.user.TokenResponse
 import okhttp3.ResponseBody
 import java.lang.Exception
 
-fun ResponseBody.toErrorResponseOrNull(gson: Gson): ErrorResponse? {
+fun ResponseBody.toErrorResponseOrNull(): ErrorResponse? {
     return try {
-        gson.fromJson(charStream(), ErrorResponse::class.java).run { if(isNotEmpty()) this else null }
+        Gson().fromJson(charStream(), ErrorResponse::class.java).run { if(isNotEmpty()) this else null }
     } catch (e: Exception) {
         null
     }
 }
 
-fun ResponseBody.toTokenResponseOrNull(gson: Gson): TokenResponse? {
+fun ResponseBody.toTokenResponseOrNull(): TokenResponse? {
     return try {
-        gson.fromJson(charStream(), TokenResponse::class.java).run { if(isNotEmpty()) this else null }
+        Gson().fromJson(charStream(), TokenResponse::class.java).run { if(isNotEmpty()) this else null }
     } catch (e: Exception) {
         null
     }

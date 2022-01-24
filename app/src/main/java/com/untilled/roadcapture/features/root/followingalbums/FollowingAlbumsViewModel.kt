@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
 import com.orhanobut.logger.Logger
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.album.FollowingAlbumsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.entity.paging.Albums
@@ -58,7 +57,7 @@ class FollowingAlbumsViewModel @Inject constructor(
     }
 
     fun likesAlbum(albumsId: Long) {
-        albumRepository.likesAlbum(albumsId)
+        albumRepository.likeAlbum(albumsId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -69,7 +68,7 @@ class FollowingAlbumsViewModel @Inject constructor(
     }
 
     fun unlikesAlbum(albumsId: Long) {
-        albumRepository.unlikesAlbum(albumsId)
+        albumRepository.unlikeAlbum(albumsId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({

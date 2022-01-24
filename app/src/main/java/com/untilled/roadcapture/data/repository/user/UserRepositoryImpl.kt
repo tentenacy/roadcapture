@@ -1,6 +1,5 @@
 package com.untilled.roadcapture.data.repository.user
 
-import com.google.gson.Gson
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.api.dto.common.ErrorCode
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
@@ -13,11 +12,7 @@ import com.untilled.roadcapture.data.datasource.dao.LocalTokenDao
 import com.untilled.roadcapture.utils.retryThreeTimes
 import com.untilled.roadcapture.utils.toErrorResponseOrNull
 import com.untilled.roadcapture.utils.type.SocialType
-import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.kotlin.Flowables
-import java.io.IOException
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -26,7 +21,6 @@ class UserRepositoryImpl @Inject constructor(
     private val roadCaptureApi: RoadCaptureApi,
     private val localTokenDao: LocalTokenDao,
     private val localOAuthTokenDao: LocalOAuthTokenDao,
-    private val gson: Gson,
 ) :
     UserRepository {
 
@@ -34,7 +28,7 @@ class UserRepositoryImpl @Inject constructor(
         return roadCaptureApi.signup(signupRequest)
             .flatMap { response ->
                 response.errorBody()?.let {
-                    return@flatMap Single.error(IllegalStateException(it.toErrorResponseOrNull(gson)?.message))
+                    return@flatMap Single.error(IllegalStateException(it.toErrorResponseOrNull()?.message))
                 }
 
                 return@flatMap login(LoginRequest(
@@ -50,7 +44,7 @@ class UserRepositoryImpl @Inject constructor(
         return roadCaptureApi.socialSignup(socialType.name, TokenRequest(oauthToken.accessToken))
             .flatMap { response ->
                 response.errorBody()?.let {
-                    if (it.toErrorResponseOrNull(gson)?.code != ErrorCode.ALREADY_SIGNEDUP.code) {
+                    if (it.toErrorResponseOrNull()?.code != ErrorCode.ALREADY_SIGNEDUP.code) {
                         return@flatMap Single.error(IllegalStateException("Network error"))
                     }
                 }
@@ -65,7 +59,7 @@ class UserRepositoryImpl @Inject constructor(
         return roadCaptureApi.reissue(ReissueRequest(token.accessToken, token.refreshToken))
             .flatMap { response ->
                 response.errorBody()?.let {
-                    return@flatMap Single.error(IllegalStateException(it.toErrorResponseOrNull(gson)?.message))
+                    return@flatMap Single.error(IllegalStateException(it.toErrorResponseOrNull()?.message))
                 }
 
                 response.body()?.let {
@@ -82,7 +76,7 @@ class UserRepositoryImpl @Inject constructor(
         roadCaptureApi.login(loginRequest)
             .flatMap { response ->
                 response.errorBody()?.let {
-                    return@flatMap Single.error(IllegalStateException(it.toErrorResponseOrNull(gson)?.message))
+                    return@flatMap Single.error(IllegalStateException(it.toErrorResponseOrNull()?.message))
                 }
 
                 response.body()?.let {
@@ -99,7 +93,7 @@ class UserRepositoryImpl @Inject constructor(
             TokenRequest(accessToken)
         ).flatMap { response ->
             response.errorBody()?.let {
-                return@flatMap when (it.toErrorResponseOrNull(gson)?.code) {
+                return@flatMap when (it.toErrorResponseOrNull()?.code) {
                     ErrorCode.USER_NOT_FOUND.code -> {
                         Single.error(IllegalStateException(ErrorCode.USER_NOT_FOUND.message))
                     }

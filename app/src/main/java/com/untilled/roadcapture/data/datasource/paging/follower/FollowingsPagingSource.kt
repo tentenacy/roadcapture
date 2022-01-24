@@ -7,6 +7,8 @@ import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
 import com.untilled.roadcapture.data.entity.mapper.FollowersMapper
 import com.untilled.roadcapture.data.entity.paging.Followings
+import com.untilled.roadcapture.utils.applyRetryPolicy
+import com.untilled.roadcapture.utils.constant.policy.RetryPolicyConstant
 import com.untilled.roadcapture.utils.retryThreeTimes
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -39,8 +41,13 @@ class FollowingsPagingSource @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .map { mapper.transformToFollowings(it) }
                 .map { toLoadResult(it, position) }
-                .retryThreeTimes()
-                .onErrorReturn { LoadResult.Error(it) }
+                .compose(
+                    applyRetryPolicy(
+                        RetryPolicyConstant.TIMEOUT,
+                        RetryPolicyConstant.NETWORK,
+                        RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                        RetryPolicyConstant.ACCESS_TOKEN_EXPIRED
+                    ) { LoadResult.Error(it) })
         }
         else {
             return roadCaptureApi.getUserFollowings(
@@ -52,8 +59,13 @@ class FollowingsPagingSource @Inject constructor(
                 .subscribeOn(Schedulers.io())
                 .map { mapper.transformToFollowings(it) }
                 .map { toLoadResult(it, position) }
-                .retryThreeTimes()
-                .onErrorReturn { LoadResult.Error(it) }
+                .compose(
+                    applyRetryPolicy(
+                        RetryPolicyConstant.TIMEOUT,
+                        RetryPolicyConstant.NETWORK,
+                        RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                        RetryPolicyConstant.ACCESS_TOKEN_EXPIRED
+                    ) { LoadResult.Error(it) })
         }
     }
 
