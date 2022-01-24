@@ -25,7 +25,7 @@ object AlbumsBindingAdapters {
 
     @JvmStatic
     @BindingAdapter("albumThumbnailImage")
-    fun setAlbumThumbnailImage(view: ShapeableImageView, url: String) {
+    fun setAlbumThumbnailImage(view: ShapeableImageView, url: String?) {
         view.context.apply {
             val radius = resources.getDimension(R.dimen.album_corner_radius)
             val shapeAppearanceModel = view.shapeAppearanceModel.toBuilder()
@@ -71,8 +71,8 @@ object AlbumsBindingAdapters {
 
     @JvmStatic
     @BindingAdapter("adjustConstraintEmptyDesc")
-    fun adjustConstraint(view: ConstraintLayout, description: String) {
-        if (description.isBlank()) {
+    fun adjustConstraint(view: ConstraintLayout, description: String?) {
+        if (description.isNullOrBlank()) {
             val constraints = ConstraintSet()
             constraints.clone(view)
             constraints.connect(
@@ -125,11 +125,10 @@ object AlbumsBindingAdapters {
         else view.progress = 0f
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
     @JvmStatic
     @BindingAdapter("DateToSnsFormat")
-    fun setDateToSnsFormat(view: TextView, date: LocalDateTime){
-        view.text = dateToSnsFormat(date)
+    fun setDateToSnsFormat(view: TextView, date: LocalDateTime?){
+        date?.let { view.text = dateToSnsFormat(it) }
     }
 
 }

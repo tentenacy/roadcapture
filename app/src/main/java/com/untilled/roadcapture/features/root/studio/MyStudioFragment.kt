@@ -36,8 +36,14 @@ class MyStudioFragment : Fragment() {
     private val albumsObserver: (PagingData<UserAlbums.UserAlbum>) -> Unit = { pagingData ->
         myStudioAlbumsAdapter.submitData(lifecycle, pagingData)
     }
+
     private val userInfoObserver: (UsersResponse) -> Unit = { user ->
         binding.user = user
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        refresh()
     }
 
     override fun onCreateView(
@@ -75,7 +81,6 @@ class MyStudioFragment : Fragment() {
 
     private fun initAdapter() {
         binding.recyclerMystudioAlbum.adapter = myStudioAlbumsAdapter
-        refresh()
     }
 
     private fun refresh() {

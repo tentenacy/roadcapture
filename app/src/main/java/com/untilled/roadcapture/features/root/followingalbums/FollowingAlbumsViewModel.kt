@@ -26,26 +26,24 @@ class FollowingAlbumsViewModel @Inject constructor(
     private val albumRepository: AlbumRepository,
     private val followingPagingRepository: FollowerPagingRepository
 ): BaseViewModel() {
-    private var _followingAlbums = MutableLiveData<PagingData<Albums.Album>>()
+    private val _followingAlbums = MutableLiveData<PagingData<Albums.Album>>()
     val followingAlbums: LiveData<PagingData<Albums.Album>> get() = _followingAlbums
 
-    private val _user = MutableLiveData<PagingData<Followings.Following>>()
-    val user: LiveData<PagingData<Followings.Following>> get() = _user
+    private val _followings = MutableLiveData<PagingData<Followings.Following>>()
+    val followings: LiveData<PagingData<Followings.Following>> get() = _followings
 
-    var select = MutableLiveData<Boolean>()
-
-    fun getMyFollowings(followingsCondition: FollowingsCondition? = null){
+    fun getFollowings(followingsCondition: FollowingsCondition? = null){
         followingPagingRepository.getFollowings(followingsCondition)
             .observeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
             .subscribe({ response->
-                _user.value = response
+                _followings.value = response
             },{ t ->
                 Logger.d("test: $t")
             }).addTo(compositeDisposable)
     }
 
-    fun getFollowingAlbums(cond: FollowingAlbumsCondition) {
+    fun getFollowingAlbums(cond: FollowingAlbumsCondition? = null) {
         albumPagingRepository.getFollowingAlbums(cond)
             .observeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
@@ -56,7 +54,7 @@ class FollowingAlbumsViewModel @Inject constructor(
             }.addTo(compositeDisposable)
     }
 
-    fun likesAlbum(albumsId: Long) {
+    fun likeAlbum(albumsId: Long) {
         albumRepository.likeAlbum(albumsId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -67,7 +65,7 @@ class FollowingAlbumsViewModel @Inject constructor(
             })
     }
 
-    fun unlikesAlbum(albumsId: Long) {
+    fun unlikeAlbum(albumsId: Long) {
         albumRepository.unlikeAlbum(albumsId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

@@ -16,7 +16,7 @@ data class Followings(
 ): Parcelable {
 
     @IgnoredOnParcel
-    val endOfPage = total == page
+    val endOfPage = total - 1 == page
 
     @Parcelize
     @Entity(tableName = "followings")

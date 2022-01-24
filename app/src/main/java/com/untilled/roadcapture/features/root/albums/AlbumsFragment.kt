@@ -81,6 +81,12 @@ class AlbumsFragment : Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        refresh(null, null)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -116,7 +122,6 @@ class AlbumsFragment : Fragment() {
 
     fun initAdapter() {
         binding.recycleAlbums.adapter = adapter
-        refresh(null, null)
     }
 
     fun refresh(dateTimeFrom: String?, dateTimeTo: String?) {

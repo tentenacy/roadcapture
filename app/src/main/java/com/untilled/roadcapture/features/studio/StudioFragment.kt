@@ -46,6 +46,11 @@ class StudioFragment : Fragment() {
         studioAlbumsAdapter.submitData(lifecycle, pagingData)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        refresh()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -83,7 +88,6 @@ class StudioFragment : Fragment() {
 
     private fun initAdapter() {
         binding.recyclerStudioAlbum.adapter = studioAlbumsAdapter
-        refresh()
     }
     private fun refresh() {
         viewModel.getStudioAlbums(args.id,null)

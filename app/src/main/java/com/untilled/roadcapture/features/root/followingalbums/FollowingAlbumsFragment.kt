@@ -45,7 +45,7 @@ class FollowingAlbumsFragment : Fragment() {
     }
 
     private val followingFilterObserver: (PagingData<Followings.Following>) -> Unit = { pagingData ->
-        filterAdapter.submitData(lifecycle,pagingData)
+        filterAdapter.submitData(lifecycle, pagingData)
     }
 
     private val notificationOnClickListener: (View?) -> Unit = {
@@ -94,6 +94,11 @@ class FollowingAlbumsFragment : Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        refresh(followingId)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -115,18 +120,17 @@ class FollowingAlbumsFragment : Fragment() {
 
     private fun observeData() {
         viewModel.followingAlbums.observe(viewLifecycleOwner, followingAlbumObserver)
-        viewModel.user.observe(viewLifecycleOwner,followingFilterObserver)
+        viewModel.followings.observe(viewLifecycleOwner,followingFilterObserver)
     }
 
     fun initAdapter() {
         binding.recyclerFollowingalbums.adapter = albumAdapter
         binding.recyclerFollowingalbumsFilter.adapter = filterAdapter
-        refresh(followingId)
     }
 
     private fun refresh(followingId: Long?) {
         viewModel.getFollowingAlbums(FollowingAlbumsCondition(followingId))
-        viewModel.getMyFollowings()
+        viewModel.getFollowings()
     }
 
     private fun setOnClickListeners() {
@@ -150,14 +154,14 @@ class FollowingAlbumsFragment : Fragment() {
             item.like!!.likeCount++
             item.like!!.liked = true
             item.textIalbumsLike.text = (item.like!!.likeCount).toString()
-            viewModel.likesAlbum(item.album!!.albumsId)
+            viewModel.likeAlbum(item.album!!.albumsId)
         } else {
             val animator = getValueAnimator(0.5f,0.0f, view)
             animator.start()
             item.like!!.likeCount--
             item.like!!.liked = false
             item.textIalbumsLike.text = (item.like!!.likeCount).toString()
-            viewModel.unlikesAlbum(item.album!!.albumsId)
+            viewModel.unlikeAlbum(item.album!!.albumsId)
         }
     }
 

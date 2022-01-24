@@ -14,11 +14,11 @@ class FollowingAlbumsAdapter(private val itemOnClickListener: (ItemClickArgs?) -
     COMPARATOR
 ){
 
-    inner class FollowingAlbumsViewHolder(private val binding: ItemAlbumsBinding): RecyclerView.ViewHolder(binding.root){
+    inner class FollowingAlbumsViewHolder(private val binding: ItemAlbumsBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(album: Albums.Album) {
             binding.album = album
-            binding.like = LikeStatus(album.liked,album.likeCount)
-            binding.setOnClickItem{ view ->
+            binding.like = LikeStatus(album.liked, album.likeCount)
+            binding.setOnClickItem { view ->
                 itemOnClickListener(ItemClickArgs(binding, view))
             }
         }
