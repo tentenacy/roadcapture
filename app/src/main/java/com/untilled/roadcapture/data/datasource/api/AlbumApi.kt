@@ -15,7 +15,7 @@ interface AlbumApi {
     fun getAlbums(
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
-        @Query("sort") sort: String? = null,
+        @Query("sort") sort: String? = "createdAt,desc",
         @Query("dateTimeFrom") dateTimeFrom: String? = null,
         @Query("dateTimeTo") dateTimeTo: String? = null,
         @Query("title") title: String? = null
@@ -25,7 +25,7 @@ interface AlbumApi {
     fun getMyStudioAlbums(
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
-        @Query("sort") sort: String? = null,
+        @Query("sort") sort: String? = "createdAt,desc",
         @Query("placeCond.region1DepthName") region1DepthName: String? = null,
         @Query("placeCond.region2DepthName") region2DepthName: String? = null,
         @Query("placeCond.region3DepthName") region3DepthName: String? = null,
@@ -36,7 +36,7 @@ interface AlbumApi {
         @Path("userId") userId: Long?,
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
-        @Query("sort") sort: String? = null,
+        @Query("sort") sort: String? = "createdAt,desc",
         @Query("placeCond.region1DepthName") region1DepthName: String? = null,
         @Query("placeCond.region2DepthName") region2DepthName: String? = null,
         @Query("placeCond.region3DepthName") region3DepthName: String? = null,
@@ -52,7 +52,7 @@ interface AlbumApi {
         @Query("followingId") id: Long? = null,
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
-        @Query("sort") sort: String? = null,
+        @Query("sort") sort: String? = "createdAt,desc",
     ): Single<PageResponse<AlbumsResponse>>
 
 }
