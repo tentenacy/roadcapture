@@ -11,6 +11,8 @@ import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import com.untilled.roadcapture.data.repository.album.AlbumRepositoryImpl
 import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepository
 import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepositoryImpl
+import com.untilled.roadcapture.data.repository.comment.CommentRepository
+import com.untilled.roadcapture.data.repository.comment.CommentRepositoryImpl
 import com.untilled.roadcapture.data.repository.comment.paging.CommentPagingRepository
 import com.untilled.roadcapture.data.repository.comment.paging.CommentPagingRepositoryImpl
 import com.untilled.roadcapture.data.repository.follower.FollowRepository
@@ -98,7 +100,12 @@ abstract class RepositoryModule {
     ): FollowRepository
 
     @Binds
-    abstract fun provideTokenRepository(
+    abstract fun provideCommentRepository(
+        repository: CommentRepositoryImpl
+    ): CommentRepository
+
+    @Binds
+    abstract fun provideLocalTokenRepository(
         repository: KotPrefTokenRepository
     ): LocalTokenRepository
 

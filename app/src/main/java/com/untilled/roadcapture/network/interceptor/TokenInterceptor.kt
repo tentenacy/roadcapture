@@ -23,7 +23,7 @@ class TokenInterceptor(
         val request = chain.request().newBuilder()
             .addHeader("X-AUTH-TOKEN", localTokenDao.getToken().accessToken)
             .build()
-        var response = chain.proceed(request)
+        val response = chain.proceed(request)
 
         if (!response.isSuccessful) {
             response.peekBody(2048).toErrorResponseOrNull()?.apply {
@@ -33,14 +33,12 @@ class TokenInterceptor(
                             notifyTokenExpired()
                             accessTokenErrorOccurred = true
                         }
-                        response = response.newBuilder().message(ErrorCode.ACCESS_TOKEN_ERROR.code).build()
                     }
                     ErrorCode.REFRESH_TOKEN_ERROR.code -> {
                         if(!refreshTokenErrorOccurred) {
                             notifyRefreshTokenExpired()
                             refreshTokenErrorOccurred = true
                         }
-                        response = response.newBuilder().message(ErrorCode.REFRESH_TOKEN_ERROR.code).build()
                     }
                 }
             }

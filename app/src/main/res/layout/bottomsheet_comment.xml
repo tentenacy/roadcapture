@@ -10,53 +10,58 @@
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator_bottomsheet_comment"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white">
-
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appbar_bottomsheet_comment"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
+        android:background="@color/white"
+        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/ctoolbar_bottomsheet_comment"
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appbar_bottomsheet_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_scrollFlags="noScroll">
+            android:fitsSystemWindows="true"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar_bottomsheet_comment"
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/ctoolbar_bottomsheet_comment"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                app:contentInsetStart="0dp"
-                app:layout_collapseMode="parallax" />
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="noScroll">
 
-            <ImageView
-                android:id="@+id/img_bottomsheet_comment_back"
-                style="@style/BackArrow" />
+                <com.google.android.material.appbar.MaterialToolbar
+                    android:id="@+id/toolbar_bottomsheet_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    app:contentInsetStart="0dp"
+                    app:layout_collapseMode="parallax" />
 
-            <TextView
-                android:id="@+id/text_bottomsheet_comment_title"
-                style="@style/ActionBarTitle"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:layout_marginStart="64dp"
-                android:text="@string/bottomsheet_comment_title" />
+                <ImageView
+                    android:id="@+id/img_bottomsheet_comment_back"
+                    style="@style/BackArrow" />
+
+                <TextView
+                    android:id="@+id/text_bottomsheet_comment_title"
+                    style="@style/ActionBarTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginStart="64dp"
+                    android:text="@string/bottomsheet_comment_title" />
 
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
 
-    </com.google.android.material.appbar.AppBarLayout>
+        </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycle_bottomsheet_comment"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             tools:listitem="@layout/item_comment" />

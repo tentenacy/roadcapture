@@ -11,6 +11,7 @@ import androidx.paging.PagingData
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentCreateRequest
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.data.entity.paging.PictureComments
 import com.untilled.roadcapture.databinding.BottomsheetCommentBinding
@@ -53,7 +54,13 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
         }
 
     private val currentPositionObserver: (Int) -> Unit = { position ->
-        refresh(position)
+        if (position == 0) {
+            binding.recycleBottomsheetComment.adapter = albumCommentsAdapter
+        }
+        else {
+            binding.recycleBottomsheetComment.adapter = pictureCommentsAdapter
+        }
+        viewModel.getComments()
     }
 
     private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
@@ -78,6 +85,10 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
                     .navigate(R.id.action_commentFragment_to_studioFragment)
             }
         }
+    }
+
+    private val postOnClickListener: (View?) -> Unit = {
+        viewModel.postComment(CommentCreateRequest(binding.edtBottomsheetCommentInput.text.toString()))
     }
 
     override fun onCreateView(
@@ -115,17 +126,6 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
         viewModel.currentPosition.observe(viewLifecycleOwner, currentPositionObserver)
     }
 
-    fun refresh(position: Int) {
-        if (position == 0) {
-            binding.recycleBottomsheetComment.adapter = albumCommentsAdapter
-            viewModel.getAlbumComments()
-        }
-        else {
-            binding.recycleBottomsheetComment.adapter = pictureCommentsAdapter
-            viewModel.getPictureComments(position - 1)
-        }
-    }
-
     private fun expandFullHeight() {
         val bottomSheet =
             dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
@@ -134,9 +134,8 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imgBottomsheetCommentBack.setOnClickListener {
-            mainActivity().onBackPressed()
-        }
+        binding.imgBottomsheetCommentBack.setOnClickListener { mainActivity().onBackPressed() }
+        binding.imgBottomsheetCommentInput.setOnClickListener(postOnClickListener)
     }
 
     private fun initRecyclerView() {

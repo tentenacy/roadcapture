@@ -11,6 +11,7 @@ object RoadCapturePathConstant {
 
     const val GET_ALBUM_COMMENTS = "/albums/{albumId}/pictures/comments"
     const val GET_PICTURE_COMMENTS = "/pictures/{pictureId}/comments"
+    const val POST_PICTURE_COMMENTS = "/pictures/{pictureId}/comments"
 
     const val GET_MY_INFO = "/users/me"
     const val GET_USER_DETAIL = "/users/details"

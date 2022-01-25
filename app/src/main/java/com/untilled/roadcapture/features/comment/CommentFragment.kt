@@ -69,7 +69,7 @@ class CommentFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        refresh(args.albumsId)
+        refresh()
     }
 
     override fun onCreateView(
@@ -98,6 +98,9 @@ class CommentFragment : Fragment() {
 
     private fun setOnClickListeners() {
         binding.imgCommentBack.setOnClickListener { mainActivity().onBackPressed() }
+        binding.imgCommentInput.setOnClickListener {
+
+        }
     }
 
     override fun onDestroyView() {
@@ -111,8 +114,8 @@ class CommentFragment : Fragment() {
         binding.recyclerComment.adapter = adapterAlbum
     }
 
-    private fun refresh(albumId: Long){
-        viewModel.getAlbumComments(albumId)
+    private fun refresh() {
+        viewModel.getAlbumComments(args.albumsId)
     }
 
     private fun showReportDialog() {
