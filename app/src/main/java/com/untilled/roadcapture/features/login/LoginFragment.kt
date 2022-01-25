@@ -88,10 +88,6 @@ class LoginFragment : BaseFragment() {
         )
     }
 
-    private val loginObserver: (SocialType?) -> Unit = { socialType ->
-        navigateToRoot()
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         viewModel.autoLogin()
@@ -143,7 +139,7 @@ class LoginFragment : BaseFragment() {
 
     private fun observeData() {
         viewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
-        viewModel.isLoggedIn.observe(viewLifecycleOwner, loginObserver)
+        viewModel.isLoggedIn.observe(viewLifecycleOwner) { navigateToRoot() }
         viewModel.error.observe(viewLifecycleOwner, errorObserver)
     }
 

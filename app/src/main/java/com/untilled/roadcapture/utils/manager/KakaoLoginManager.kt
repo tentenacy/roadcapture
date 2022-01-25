@@ -9,7 +9,6 @@ import javax.inject.Inject
 
 class KakaoLoginManager @Inject constructor(
     private val userApiClient: UserApiClient,
-    private val authApiClient: AuthApiClient,
 ) :
     OAuthLoginManagerSubject() {
     override fun logout() {
@@ -19,24 +18,6 @@ class KakaoLoginManager @Inject constructor(
             } else {
                 Logger.e("error: ${error?.message}")
             }
-        }
-    }
-
-    override fun validateToken() {
-        if(authApiClient.hasToken()) {
-            userApiClient.accessTokenInfo { _, error ->
-                if (error != null) {
-                    if (error is KakaoSdkError && error.isInvalidTokenError()) {
-                        //로그인 필요
-                    } else {
-                        Logger.e("error: ${error.message}")
-                    }
-                }/* else {
-                    //토큰 유효성 체크 성공(필요 시 토큰 갱신됨)
-                }*/
-            }
-        } else {
-            //로그인 필요
         }
     }
 

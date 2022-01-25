@@ -19,8 +19,4 @@ class NaverLoginManager @Inject constructor(
 
     override fun withdrawal() {
     }
-
-    override fun validateToken() {
-
-    }
 }

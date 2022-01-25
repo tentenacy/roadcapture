@@ -14,7 +14,4 @@ class FacebookLoginManager @Inject constructor(private val loginManager: LoginMa
 
     override fun withdrawal() {
     }
-
-    override fun validateToken() {
-    }
 }

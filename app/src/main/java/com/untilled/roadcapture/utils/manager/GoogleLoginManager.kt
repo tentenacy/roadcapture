@@ -14,7 +14,4 @@ class GoogleLoginManager @Inject constructor(private val googleSignInClient: Goo
 
     override fun withdrawal() {
     }
-
-    override fun validateToken() {
-    }
 }

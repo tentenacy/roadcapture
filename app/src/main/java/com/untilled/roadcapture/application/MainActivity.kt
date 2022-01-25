@@ -28,9 +28,6 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
     @Inject
     lateinit var activityResultFactory: ActivityResultFactory<Intent, ActivityResult>
 
-    @Inject
-    lateinit var oauthLoginManagerMap: Map<String, @JvmSuppressWildcards OAuthLoginManagerSubject>
-
     private val logoutObserver: (View) -> Unit = { bindingRoot ->
         Navigation.findNavController(bindingRoot).apply {
             navigate(R.id.action_global_loginFragment)
