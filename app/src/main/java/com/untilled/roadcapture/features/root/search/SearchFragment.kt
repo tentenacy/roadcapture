@@ -1,12 +1,15 @@
 package com.untilled.roadcapture.features.root.search
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.EditorInfo
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayoutMediator
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
@@ -19,14 +22,17 @@ import dagger.hilt.android.AndroidEntryPoint
 class SearchFragment : Fragment() {
     private var _binding: FragmentSearchBinding? = null
     val binding get() = _binding!!
-
+    private val viewModel: SearchViewModel by viewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentSearchBinding.inflate(layoutInflater, container, false)
-
+        binding.apply {
+            lifecycleOwner = lifecycleOwner
+            vm = viewModel
+        }
         binding.viewpagerSearch.adapter = SearchPagerAdapter(this)
 
         TabLayoutMediator(binding.tabSearch, binding.viewpagerSearch) { tab, position ->
@@ -40,7 +46,6 @@ class SearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         setOnClickListeners()
-
     }
 
     private fun setOnClickListeners() {

@@ -15,8 +15,10 @@ interface AlbumApi {
     fun getAlbums(
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
+        @Query("sort") sort: String? = null,
         @Query("dateTimeFrom") dateTimeFrom: String? = null,
         @Query("dateTimeTo") dateTimeTo: String? = null,
+        @Query("title") title: String? = null
     ): Single<PageResponse<AlbumsResponse>>
 
     @GET(RoadCapturePathConstant.GET_MY_ALBUMS)

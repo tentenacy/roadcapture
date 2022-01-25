@@ -9,7 +9,7 @@
 
         <variable
             name="album"
-            type="com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse" />
+            type="com.untilled.roadcapture.data.entity.paging.Albums.Album" />
 
         <variable
             name="onClickItem"
@@ -81,8 +81,8 @@
             app:layout_constraintBottom_toBottomOf="@id/text_ititlesearch_username"
             app:layout_constraintStart_toEndOf="@id/text_ititlesearch_username"
             app:layout_constraintTop_toTopOf="@id/text_ititlesearch_username"
+            bind:DateToSnsFormat="@{album.createdAt}"
             tools:text="3분전" />
-<!--            android:text="@{album.createdAt}"-->
 
         <TextView
             android:id="@+id/text_ititlesearch_title"

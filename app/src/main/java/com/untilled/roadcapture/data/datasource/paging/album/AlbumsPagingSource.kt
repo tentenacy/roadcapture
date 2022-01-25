@@ -37,6 +37,7 @@ class AlbumsPagingSource @Inject constructor(
             size = params.loadSize,
             dateTimeFrom = albumsCondition.dateTimeFrom,
             dateTimeTo = albumsCondition.dateTimeTo,
+            title = albumsCondition.title
         )
             .subscribeOn(Schedulers.io())
             .map { mapper.transform(it) }
