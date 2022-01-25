@@ -10,12 +10,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentPictureViewerBinding
+import com.untilled.roadcapture.features.base.BaseFragment
 import com.untilled.roadcapture.utils.*
 import com.untilled.roadcapture.utils.constant.tag.FragmentTagConstant
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PictureViewerFragment : Fragment() {
+class PictureViewerFragment : BaseFragment() {
     private var _binding: FragmentPictureViewerBinding? = null
     val binding get() = _binding!!
     private var isMapScreen = false

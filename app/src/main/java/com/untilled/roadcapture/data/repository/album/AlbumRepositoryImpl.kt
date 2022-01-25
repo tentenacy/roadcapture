@@ -23,9 +23,9 @@ class AlbumRepositoryImpl
     private val roadCaptureApi: RoadCaptureApi,
 ) : AlbumRepository {
 
-    override fun likeAlbum(albumId: Long): Single<Unit> = roadCaptureApi.likeAlbum(albumId).retryThreeTimes()
+    override fun likeAlbum(albumId: Long): Single<Unit> = roadCaptureApi.likeAlbum(albumId)
 
-    override fun unlikeAlbum(albumId: Long): Single<Unit> = roadCaptureApi.unlikeAlbum(albumId).retryThreeTimes()
+    override fun unlikeAlbum(albumId: Long): Single<Unit> = roadCaptureApi.unlikeAlbum(albumId)
 
     override fun getAlbumDetail(id: Long): Single<AlbumResponse> =
         roadCaptureApi.getAlbumDetail(id).retryThreeTimes()

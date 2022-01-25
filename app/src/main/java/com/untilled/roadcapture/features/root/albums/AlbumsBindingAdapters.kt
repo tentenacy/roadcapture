@@ -1,15 +1,12 @@
 package com.untilled.roadcapture.features.root.albums
 
-import android.os.Build
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.databinding.BindingAdapter
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.airbnb.lottie.LottieAnimationView
 import com.bumptech.glide.Glide
 import com.google.android.material.imageview.ShapeableImageView
@@ -120,8 +117,8 @@ object AlbumsBindingAdapters {
 
     @JvmStatic
     @BindingAdapter("LikeStatus")
-    fun setLikeStatus(view: LottieAnimationView, like: Boolean){
-        if(like) view.progress = 0.5f
+    fun setLikeStatus(view: LottieAnimationView, liked: Boolean){
+        if(liked) view.progress = 0.5f
         else view.progress = 0f
     }
 

@@ -139,22 +139,22 @@ class AlbumsFragment : Fragment() {
             item.like!!.likeCount++
             item.like!!.liked = true
             item.textIalbumsLike.text = (item.like!!.likeCount).toString()
-            viewModel.likesAlbum(item.album!!.albumsId)
+            viewModel.likeAlbum(item.album!!.albumsId)
         } else {
             val animator = getValueAnimator(0.5f,0.0f, view)
             animator.start()
             item.like!!.likeCount--
             item.like!!.liked = false
             item.textIalbumsLike.text = (item.like!!.likeCount).toString()
-            viewModel.unlikesAlbum(item.album!!.albumsId)
+            viewModel.unlikeAlbum(item.album!!.albumsId)
         }
     }
 
     private fun getValueAnimator(start: Float, end: Float, view: LottieAnimationView): ValueAnimator {
-        val animator = ValueAnimator.ofFloat(start, end).setDuration(500)
-        animator.addUpdateListener {
-            view.progress = it.animatedValue as Float
+        return ValueAnimator.ofFloat(start, end).setDuration(500).apply {
+            addUpdateListener {
+                view.progress = it.animatedValue as Float
+            }
         }
-        return animator
     }
 }

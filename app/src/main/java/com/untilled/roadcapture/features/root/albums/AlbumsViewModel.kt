@@ -56,7 +56,7 @@ class AlbumsViewModel
             }.addTo(compositeDisposable)
     }
 
-    fun likesAlbum(albumsId: Long) {
+    fun likeAlbum(albumsId: Long) {
         albumRepository.likeAlbum(albumsId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -67,7 +67,7 @@ class AlbumsViewModel
             })
     }
 
-    fun unlikesAlbum(albumsId: Long) {
+    fun unlikeAlbum(albumsId: Long) {
         albumRepository.unlikeAlbum(albumsId)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

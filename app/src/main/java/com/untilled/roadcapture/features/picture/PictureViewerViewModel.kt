@@ -39,8 +39,52 @@ class PictureViewerViewModel @Inject constructor(
     private val _pictureComments = MutableLiveData<PagingData<PictureComments.PictureComment>?>()
     val pictureComments: LiveData<PagingData<PictureComments.PictureComment>?> get() = _pictureComments
 
+    private val _likeCount = MutableLiveData<Int>()
+    val likeCount: LiveData<Int> get() = _likeCount
+
+    private val _commentCount = MutableLiveData<Int>()
+    val commentCount: LiveData<Int> get() = _commentCount
+
+    private val _liked = MutableLiveData<Boolean>()
+    val liked: LiveData<Boolean> get() = _liked
+
     fun setCurrentPosition(position: Int) {
         _currentPosition.value = position
+    }
+
+    fun likeOrUnlike() {
+        liked.value?.let { liked ->
+            if (liked) {
+                _likeCount.value = _likeCount.value?.minus(1)
+                unlike()
+            } else {
+                _likeCount.value = _likeCount.value?.plus(1)
+                like()
+            }
+        }
+        _liked.value = _liked.value?.not()
+    }
+
+    private fun like() = album.value?.apply {
+        albumRepository.likeAlbum(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+
+            }, { t ->
+                error.value = t.message
+            })
+    }
+
+    private fun unlike() = album.value?.apply {
+        albumRepository.unlikeAlbum(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+
+            }, { t ->
+                error.value = t.message
+            })
     }
 
     fun getAlbumDetail(id: Long) {
@@ -49,8 +93,13 @@ class PictureViewerViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
                 _album.postValue(response)
-            }, {
-
+                response.apply {
+                    _likeCount.postValue(likeCount)
+                    _commentCount.postValue(commentCount)
+                    _liked.postValue(liked)
+                }
+            }, { t ->
+                error.value = t.message
             }).addTo(compositeDisposable)
     }
 
@@ -72,7 +121,7 @@ class PictureViewerViewModel @Inject constructor(
             .subscribe({
                 _albumComments.postValue(it)
             }) { t ->
-
+                error.value = t.message
             }.addTo(compositeDisposable)
     }
 
@@ -83,7 +132,7 @@ class PictureViewerViewModel @Inject constructor(
             .subscribe({
                 _pictureComments.postValue(it)
             }) { t ->
-
+                error.value = t.message
             }.addTo(compositeDisposable)
     }
 
