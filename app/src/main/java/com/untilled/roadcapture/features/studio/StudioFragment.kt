@@ -6,16 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.paging.PagingData
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
-import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
-import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
+import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.databinding.FragmentStudioBinding
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
-import com.untilled.roadcapture.features.root.studio.MyStudioAlbumsAdapter
 import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToFollower
 import com.untilled.roadcapture.utils.navigateToFollowing
@@ -38,7 +34,7 @@ class StudioFragment : Fragment() {
         StudioAlbumsAdapter(itemOnClickListener)
     }
 
-    private val userObserver = { user: UsersResponse ->
+    private val userObserver = { user: StudioUserResponse ->
         binding.user = user
     }
 

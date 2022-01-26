@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.data.datasource.api.dto
+package com.untilled.roadcapture.data.datasource.api
 
 import com.untilled.roadcapture.utils.constant.url.RoadCapturePathConstant
 import io.reactivex.rxjava3.core.Single

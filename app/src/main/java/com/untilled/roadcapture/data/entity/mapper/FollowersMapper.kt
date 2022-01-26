@@ -1,14 +1,14 @@
 package com.untilled.roadcapture.data.entity.mapper
 
-import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
+import com.untilled.roadcapture.data.datasource.api.dto.follower.FollowersResponse
+import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
-import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.data.entity.paging.Followers
 import com.untilled.roadcapture.data.entity.paging.Followings
 
 class FollowersMapper {
-    fun transformToFollowers(response: PageResponse<UsersResponse>): Followers {
+    fun transformToFollowers(response: PageResponse<FollowersResponse>): Followers {
         return with(response) {
             Followers(
                 total = totalPages,
@@ -19,7 +19,7 @@ class FollowersMapper {
                         it.id,
                         it.profileImageUrl,
                         it.username,
-                        it.introduction,
+                        it.followed,
                     )
                 }
             )
@@ -37,7 +37,6 @@ class FollowersMapper {
                         it.id,
                         it.profileImageUrl,
                         it.username,
-                        it.introduction,
                     )
                 }
             )

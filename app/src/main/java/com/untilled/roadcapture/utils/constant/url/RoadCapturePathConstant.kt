@@ -13,19 +13,19 @@ object RoadCapturePathConstant {
     const val GET_PICTURE_COMMENTS = "/pictures/{pictureId}/comments"
     const val POST_PICTURE_COMMENTS = "/pictures/{pictureId}/comments"
 
-    const val GET_MY_INFO = "/users/me"
+    const val GET_MY_STUDIO_USER = "/users/me"
     const val GET_USER_DETAIL = "/users/details"
-    const val GET_USER_INFO = "/users/{id}"
-    const val GET_USER_FOLLOWER = "/users/{userId}/followers/from"
-    const val GET_USER_FOLLOWING = "/users/{userId}/followers/to"
+    const val GET_STUDIO_USER = "/users/{id}"
+    const val GET_USER_FOLLOWERS = "/users/{userId}/followers/from"
+    const val GET_USER_FOLLOWINGS = "/users/{userId}/followers/to"
     const val GET_USER_ALBUMS = "/users/{userId}/albums"
-    const val GET_MY_FOLLOWER = "/followers/from"
-    const val GET_MY_FOLLOWING = "/followers/to"
+    const val GET_FOLLOWERS = "/followers/from"
+    const val GET_FOLLOWINGS = "/followers/to"
 
     const val GET_FOLLOWERS_TO_ALBUMS = "/followers/to/albums"
 
-    const val POST_FOLLOWERS_FOLLOW = "/followers/{toUserId}"
-    const val DELETE_FOLLOWERS_FOLLOW = "/followers/{toUserId}"
+    const val POST_FOLLOWERS = "/followers/{toUserId}"
+    const val DELETE_FOLLOWERS = "/followers/{toUserId}"
 
     const val POST_LOGIN = "/users/token"
     const val POST_SIGNUP = "/users"

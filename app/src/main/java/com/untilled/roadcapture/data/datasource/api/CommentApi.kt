@@ -14,13 +14,15 @@ interface CommentApi {
         @Path("albumId") albumId: Long,
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
+        @Query("sort") sort: String? = "createdAt,desc",
     ): Single<PageResponse<CommentsResponse>>
 
     @GET(RoadCapturePathConstant.GET_PICTURE_COMMENTS)
     fun getPictureComments(
         @Path("pictureId") pictureId: Long,
         @Query("page") page: Int? = null,
-        @Query("size") size: Int? = null
+        @Query("size") size: Int? = null,
+        @Query("sort") sort: String? = "createdAt,desc",
     ) : Single<PageResponse<CommentsResponse>>
 
     @POST(RoadCapturePathConstant.POST_PICTURE_COMMENTS)

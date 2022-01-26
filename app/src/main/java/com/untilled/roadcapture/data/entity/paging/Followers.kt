@@ -1,10 +1,8 @@
 package com.untilled.roadcapture.data.entity.paging
 
 import android.os.Parcelable
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
 
@@ -22,10 +20,10 @@ data class Followers(
     @Entity(tableName = "followers")
     data class Follower(
         @PrimaryKey(autoGenerate = true) val id: Long = 0,
-        var followerId: Long,
-        var profileImageUrl: String?,
-        var username: String,
-        var introduction: String?,
+        val followerId: Long,
+        val profileImageUrl: String?,
+        val username: String,
+        val followed: Boolean,
     ): Parcelable
 
     @Parcelize

@@ -4,11 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.paging.PagingData
 import com.orhanobut.logger.Logger
-import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
-import com.untilled.roadcapture.data.datasource.api.dto.address.PlaceCondition
 import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsCondition
-import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
-import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
+import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepository
 import com.untilled.roadcapture.data.repository.follower.FollowRepository
@@ -27,8 +24,8 @@ class StudioViewModel @Inject constructor(
     private val followRepository: FollowRepository
 ) : BaseViewModel() {
 
-    private val _userInfo = MutableLiveData<UsersResponse>()
-    val userInfo: LiveData<UsersResponse> get() = _userInfo
+    private val _userInfo = MutableLiveData<StudioUserResponse>()
+    val userInfo: LiveData<StudioUserResponse> get() = _userInfo
 
     private var _albums = MutableLiveData<PagingData<UserAlbums.UserAlbum>>()
     val albums: LiveData<PagingData<UserAlbums.UserAlbum>> get() = _albums

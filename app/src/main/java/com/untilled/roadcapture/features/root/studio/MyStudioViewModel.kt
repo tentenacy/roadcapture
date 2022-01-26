@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
 import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsCondition
-import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
+import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
@@ -26,8 +26,8 @@ class MyStudioViewModel @Inject constructor(
     private var _myAlbums = MutableLiveData<PagingData<UserAlbums.UserAlbum>>()
     val myAlbums: LiveData<PagingData<UserAlbums.UserAlbum>> get() = _myAlbums
 
-    private var _userInfo = MutableLiveData<UsersResponse>()
-    val userInfo: LiveData<UsersResponse> get() = _userInfo
+    private var _userInfo = MutableLiveData<StudioUserResponse>()
+    val userInfo: LiveData<StudioUserResponse> get() = _userInfo
 
     fun getMyStudioAlbums(cond: UserAlbumsCondition?) {
         albumPagingRepository.getMyStudioAlbums(cond)

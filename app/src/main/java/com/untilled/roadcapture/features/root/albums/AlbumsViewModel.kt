@@ -8,7 +8,7 @@ import androidx.paging.rxjava3.cachedIn
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
-import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
+import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepository
@@ -39,8 +39,8 @@ class AlbumsViewModel
     private var _albums = MutableLiveData<PagingData<Albums.Album>>()
     val album: LiveData<PagingData<Albums.Album>> get() = _albums
 
-    private val _user = MutableLiveData<PageResponse<UsersResponse>>()
-    val user: LiveData<PageResponse<UsersResponse>> get() = _user
+    private val _user = MutableLiveData<PageResponse<StudioUserResponse>>()
+    val user: LiveData<PageResponse<StudioUserResponse>> get() = _user
 
     private val _followingAlbums = MutableLiveData<PageResponse<AlbumsResponse>>()
     val followingAlbums: LiveData<PageResponse<AlbumsResponse>> get() = _followingAlbums

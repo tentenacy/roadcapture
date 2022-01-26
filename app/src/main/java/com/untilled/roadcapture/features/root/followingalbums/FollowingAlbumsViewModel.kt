@@ -7,7 +7,7 @@ import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
 import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.data.datasource.api.dto.album.FollowingAlbumsCondition
-import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
+import com.untilled.roadcapture.data.datasource.api.dto.follower.FollowingsCondition
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.data.entity.paging.Followings
 import com.untilled.roadcapture.data.repository.album.AlbumRepository

@@ -2,6 +2,7 @@ package com.untilled.roadcapture.data.datasource.api.dto.comment
 
 import android.os.Parcelable
 import androidx.room.Embedded
+import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import kotlinx.android.parcel.Parcelize
 import java.time.LocalDateTime

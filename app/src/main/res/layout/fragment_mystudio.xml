@@ -8,7 +8,7 @@
 
         <variable
             name="user"
-            type="com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse" />
+            type="com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse" />
 
         <variable
             name="following"

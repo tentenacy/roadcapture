@@ -5,8 +5,8 @@ import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.flowable
-import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
-import com.untilled.roadcapture.data.datasource.api.dto.user.FollowersCondition
+import com.untilled.roadcapture.data.datasource.api.dto.follower.FollowingsCondition
+import com.untilled.roadcapture.data.datasource.api.dto.follower.FollowersCondition
 import com.untilled.roadcapture.data.datasource.dao.paging.follower.FollowersDao
 import com.untilled.roadcapture.data.datasource.dao.paging.follower.FollowingsDao
 import com.untilled.roadcapture.data.datasource.paging.follower.FollowersRemoteMediator

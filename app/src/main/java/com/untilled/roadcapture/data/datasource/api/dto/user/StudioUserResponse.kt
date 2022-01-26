@@ -2,12 +2,17 @@ package com.untilled.roadcapture.data.datasource.api.dto.user
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
-import kotlinx.parcelize.Parcelize
+import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class UsersResponse(
+data class StudioUserResponse(
     @ColumnInfo(name = "user_id")
     val id: Long,
     val username: String,
     val profileImageUrl: String,
-): Parcelable
+    val backgroundImageUrl: String,
+    val introduction: String = "",
+    var followerCount: Int,
+    val followingCount: Int,
+    var followed: Boolean
+) : Parcelable

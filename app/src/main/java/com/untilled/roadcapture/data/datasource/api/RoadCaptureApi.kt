@@ -1,11 +1,10 @@
 package com.untilled.roadcapture.data.datasource.api
 
 import com.untilled.roadcapture.BuildConfig
-import com.untilled.roadcapture.data.datasource.api.dto.LikeApi
 import retrofit2.Retrofit
 import retrofit2.create
 
-interface RoadCaptureApi: AlbumApi, CommentApi, UserApi, FollowApi, LikeApi {
+interface RoadCaptureApi: AlbumApi, CommentApi, UserApi, FollowerApi, LikeApi {
 
     companion object {
         fun create(retrofitBuilder: Retrofit.Builder): RoadCaptureApi {

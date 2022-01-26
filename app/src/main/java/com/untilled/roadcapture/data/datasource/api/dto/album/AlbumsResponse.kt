@@ -1,13 +1,9 @@
 package com.untilled.roadcapture.data.datasource.api.dto.album
 
 import android.os.Parcelable
-import com.google.gson.annotations.SerializedName
-import com.untilled.roadcapture.data.datasource.api.dto.picture.PictureResponse
-import com.untilled.roadcapture.data.datasource.api.dto.user.UserResponse
+import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
-import com.untilled.roadcapture.data.entity.User
 import kotlinx.android.parcel.Parcelize
-import java.time.LocalDate
 import java.time.LocalDateTime
 
 @Parcelize

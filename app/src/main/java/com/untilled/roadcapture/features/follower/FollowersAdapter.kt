@@ -23,7 +23,6 @@ class FollowersAdapter(private val itemOnClickListener: (ItemClickArgs?) -> Unit
                 followingId = user.followerId,
                 profileImageUrl = user.profileImageUrl,
                 username = user.username,
-                introduction = user.introduction
             )
             binding.setOnClickItem { view ->
                 itemOnClickListener(ItemClickArgs(binding, view))

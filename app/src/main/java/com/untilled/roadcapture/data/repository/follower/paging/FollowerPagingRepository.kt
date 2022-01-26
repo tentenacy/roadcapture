@@ -1,8 +1,8 @@
 package com.untilled.roadcapture.data.repository.follower.paging
 
 import androidx.paging.PagingData
-import com.untilled.roadcapture.data.datasource.api.dto.user.FollowingsCondition
-import com.untilled.roadcapture.data.datasource.api.dto.user.FollowersCondition
+import com.untilled.roadcapture.data.datasource.api.dto.follower.FollowingsCondition
+import com.untilled.roadcapture.data.datasource.api.dto.follower.FollowersCondition
 import com.untilled.roadcapture.data.entity.paging.*
 import io.reactivex.rxjava3.core.Flowable
 

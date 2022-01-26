@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.paging.PagingData
-import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
+import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.datasource.sharedpref.User
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.databinding.FragmentMystudioBinding
@@ -37,7 +37,7 @@ class MyStudioFragment : Fragment() {
         myStudioAlbumsAdapter.submitData(lifecycle, pagingData)
     }
 
-    private val userInfoObserver: (UsersResponse) -> Unit = { user ->
+    private val userInfoObserver: (StudioUserResponse) -> Unit = { user ->
         binding.user = user
     }
 

@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.data.datasource.api.dto.user
+package com.untilled.roadcapture.data.datasource.api.dto.follower
 
 import java.time.LocalDateTime
 

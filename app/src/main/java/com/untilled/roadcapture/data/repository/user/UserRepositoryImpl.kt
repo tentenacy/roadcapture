@@ -6,6 +6,8 @@ import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.address.PlaceCondition
 import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
+import com.untilled.roadcapture.data.datasource.api.dto.follower.FollowersResponse
+import com.untilled.roadcapture.data.datasource.api.dto.follower.FollowingsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.*
 import com.untilled.roadcapture.data.datasource.dao.LocalOAuthTokenDao
 import com.untilled.roadcapture.data.datasource.dao.LocalTokenDao
@@ -69,7 +71,7 @@ class UserRepositoryImpl @Inject constructor(
             }
     }
 
-    override fun getMyInfo(): Single<UsersResponse> = roadCaptureApi.getMyInfo().retryThreeTimes()
+    override fun getMyInfo(): Single<StudioUserResponse> = roadCaptureApi.getMyStudioUser().retryThreeTimes()
 
 
     override fun login(loginRequest: LoginRequest): Single<TokenResponse> =
@@ -109,26 +111,15 @@ class UserRepositoryImpl @Inject constructor(
         }
             .retryThreeTimes()
 
-    override fun getUserDetail(): Single<UserResponse> =
+    override fun getUserDetail(): Single<UserDetailResponse> =
         roadCaptureApi.getUserDetail()
             .retryThreeTimes()
 
-    override fun getUserInfo(userId: Long): Single<UsersResponse> =
-        roadCaptureApi.getUserInfo(userId)
+    override fun getUserInfo(userId: Long): Single<StudioUserResponse> =
+        roadCaptureApi.getStudioUser(userId)
             .retryThreeTimes()
 
     override fun getUserAlbums(userId: Long?,pageRequest: PageRequest, placeCondition: PlaceCondition): Single<PageResponse<UserAlbumsResponse>> =
         roadCaptureApi.getStudioAlbums(userId, pageRequest.page,pageRequest.size,placeCondition.address1,placeCondition.address2,placeCondition.address3).retryThreeTimes()
 
-    override fun getUserFollower(
-        userId: Long, followingsCondition: FollowingsCondition, pageRequest: PageRequest
-    ): Single<PageResponse<UsersResponse>> =
-        roadCaptureApi.getUserFollowers(userId,pageRequest.page,pageRequest.size,pageRequest.sort,followingsCondition.username)
-            .retryThreeTimes()
-
-    override fun getUserFollowing(
-        userId: Long, followingsCondition: FollowingsCondition, pageRequest: PageRequest
-    ): Single<PageResponse<UsersResponse>> =
-        roadCaptureApi.getUserFollowings(userId,pageRequest.page,pageRequest.size,pageRequest.sort,followingsCondition.username)
-            .retryThreeTimes()
 }

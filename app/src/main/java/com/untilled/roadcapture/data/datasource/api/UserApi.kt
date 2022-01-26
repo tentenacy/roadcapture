@@ -36,13 +36,13 @@ interface UserApi {
 
     @GET(RoadCapturePathConstant.GET_USER_DETAIL)
     fun getUserDetail(
-    ): Single<UserResponse>
+    ): Single<UserDetailResponse>
 
-    @GET(RoadCapturePathConstant.GET_USER_INFO)
-    fun getUserInfo(
+    @GET(RoadCapturePathConstant.GET_STUDIO_USER)
+    fun getStudioUser(
         @Path("id") userId: Long,
-    ): Single<UsersResponse>
+    ): Single<StudioUserResponse>
 
-    @GET(RoadCapturePathConstant.GET_MY_INFO)
-    fun getMyInfo(): Single<UsersResponse>
+    @GET(RoadCapturePathConstant.GET_MY_STUDIO_USER)
+    fun getMyStudioUser(): Single<StudioUserResponse>
 }
