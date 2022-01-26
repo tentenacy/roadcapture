@@ -14,8 +14,8 @@ interface FollowingsRemoteKeysDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(remoteKey: List<Followings.FollowingRemoteKeys>)
 
-    @Query("SELECT * FROM followings_remote_keys WHERE followingsId = :followingsId")
-    fun remoteKeysByFollowingsId(followingsId: Long): Followings.FollowingRemoteKeys
+    @Query("SELECT * FROM followings_remote_keys WHERE followingId = :followingId")
+    fun remoteKeysByFollowingsId(followingId: Long): Followings.FollowingRemoteKeys
 
     @Query("DELETE FROM followings_remote_keys")
     fun clearRemoteKeys()

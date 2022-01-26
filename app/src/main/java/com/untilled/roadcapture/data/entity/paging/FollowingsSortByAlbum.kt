@@ -5,30 +5,33 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
+import java.time.LocalDateTime
 
 @Parcelize
-data class Followings(
+data class FollowingsSortByAlbum(
     val total: Int = 0,
     val page: Int = 0,
-    val followings: List<Following>
+    val followingsSortByAlbum: List<FollowingSortByAlbum>
 ): Parcelable {
 
     @IgnoredOnParcel
     val endOfPage = total - 1 <= page
 
     @Parcelize
-    @Entity(tableName = "followings")
-    data class Following(
+    @Entity(tableName = "followings_sort_by_album")
+    data class FollowingSortByAlbum(
         @PrimaryKey(autoGenerate = true) val id: Long = 0,
-        val followingId: Long,
+        val followingSortByAlbumId: Long,
         val profileImageUrl: String,
         val username: String,
+        val latestAlbumCreatedAt: LocalDateTime,
+        val latestAlbumLastModifiedAt: LocalDateTime,
     ): Parcelable
 
     @Parcelize
-    @Entity(tableName = "followings_remote_keys")
-    data class FollowingRemoteKeys(
-        @PrimaryKey val followingId: Long,
+    @Entity(tableName = "followings_sort_by_album_remote_keys")
+    data class FollowingSortByAlbumRemoteKeys(
+        @PrimaryKey val followingSortByAlbumId: Long,
         val prevKey: Int?,
         val nextKey: Int,
     ): Parcelable

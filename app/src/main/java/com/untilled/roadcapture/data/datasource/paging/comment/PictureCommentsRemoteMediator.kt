@@ -10,7 +10,6 @@ import com.untilled.roadcapture.data.entity.mapper.CommentsMapper
 import com.untilled.roadcapture.data.entity.paging.PictureComments
 import com.untilled.roadcapture.utils.applyRetryPolicy
 import com.untilled.roadcapture.utils.constant.policy.RetryPolicyConstant
-import com.untilled.roadcapture.utils.retryThreeTimes
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.InvalidObjectException
@@ -91,7 +90,7 @@ class PictureCommentsRemoteMediator @Inject constructor(
             val prevKey = if (page == 0) null else page - 1
             val nextKey = if (data.endOfPage) null else page + 1
             val keys = data.pictureComments.map {
-                PictureComments.PictureCommentRemoteKeys(albumCommentsId = it.albumCommentsId, prevKey = prevKey, nextKey = nextKey ?: INVALID_PAGE)
+                PictureComments.PictureCommentRemoteKeys(albumCommentId = it.albumCommentId, prevKey = prevKey, nextKey = nextKey ?: INVALID_PAGE)
             }
             database.pictureCommentsKeysDao().insertAll(keys)
             database.pictureCommentsDao().insertAll(data.pictureComments)

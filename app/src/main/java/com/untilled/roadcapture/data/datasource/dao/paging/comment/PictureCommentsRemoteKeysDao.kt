@@ -14,7 +14,7 @@ interface PictureCommentsRemoteKeysDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(remoteKey: List<PictureComments.PictureCommentRemoteKeys>)
 
-    @Query("SELECT * FROM picture_comments_remote_keys WHERE albumCommentsId = :albumCommentsId")
+    @Query("SELECT * FROM picture_comments_remote_keys WHERE albumCommentId = :albumCommentsId")
     fun remoteKeysByAlbumCommentsId(albumCommentsId: Long): PictureComments.PictureCommentRemoteKeys
 
     @Query("DELETE FROM picture_comments_remote_keys")

@@ -2,6 +2,7 @@ package com.untilled.roadcapture.data.datasource.api
 
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.data.datasource.api.dto.follower.FollowersResponse
+import com.untilled.roadcapture.data.datasource.api.dto.follower.FollowingsSortByAlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import com.untilled.roadcapture.utils.constant.url.RoadCapturePathConstant
@@ -52,4 +53,12 @@ interface FollowerApi {
         @Query("size") size: Int? = null,
         @Query("sort") sort: String? = "createdAt,desc",
     ): Single<PageResponse<UsersResponse>>
+
+    @GET(RoadCapturePathConstant.GET_FOLLOWINGS_SORT_BY_ALBUM)
+    fun getFollowingsSortByAlbum(
+        @Query("page") page: Int? = null,
+        @Query("size") size: Int? = null,
+        @Query("sort") sort: String? = "createdAt,desdc"
+    ): Single<PageResponse<FollowingsSortByAlbumResponse>>
+
 }

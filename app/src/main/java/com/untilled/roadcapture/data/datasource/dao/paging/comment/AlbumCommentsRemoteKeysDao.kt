@@ -13,7 +13,7 @@ interface AlbumCommentsRemoteKeysDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(remoteKey: List<AlbumComments.AlbumCommentRemoteKeys>)
 
-    @Query("SELECT * FROM album_comments_remote_keys WHERE albumCommentsId = :albumCommentsId")
+    @Query("SELECT * FROM album_comments_remote_keys WHERE albumCommentId = :albumCommentsId")
     fun remoteKeysByAlbumCommentsId(albumCommentsId: Long): AlbumComments.AlbumCommentRemoteKeys
 
     @Query("DELETE FROM album_comments_remote_keys")

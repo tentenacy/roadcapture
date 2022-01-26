@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentsResponse
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.databinding.ItemCommentBinding
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
@@ -36,7 +35,7 @@ class AlbumCommentsAdapter(private val itemClickListener: (ItemClickArgs?) -> Un
     companion object {
         private val COMPARATOR = object : DiffUtil.ItemCallback<AlbumComments.AlbumComment>() {
             override fun areItemsTheSame(oldItem:AlbumComments.AlbumComment, newItem: AlbumComments.AlbumComment): Boolean {
-                return oldItem.albumCommentsId == newItem.albumCommentsId
+                return oldItem.albumCommentId == newItem.albumCommentId
             }
 
             override fun areContentsTheSame(oldItem: AlbumComments.AlbumComment, newItem: AlbumComments.AlbumComment): Boolean {

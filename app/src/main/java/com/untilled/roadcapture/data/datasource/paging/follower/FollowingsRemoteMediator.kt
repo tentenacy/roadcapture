@@ -92,7 +92,7 @@ class FollowingsRemoteMediator @Inject constructor(
             val prevKey = if (page == 0) null else page - 1
             val nextKey = if (data.endOfPage) null else page + 1
             val keys = data.followings.map {
-                Followings.FollowingRemoteKeys(followingsId = it.followingId, prevKey = prevKey, nextKey = nextKey ?: INVALID_PAGE)
+                Followings.FollowingRemoteKeys(followingId = it.followingId, prevKey = prevKey, nextKey = nextKey ?: INVALID_PAGE)
             }
             database.followingsKeysDao().insertAll(keys)
             database.followingsDao().insertAll(data.followings)

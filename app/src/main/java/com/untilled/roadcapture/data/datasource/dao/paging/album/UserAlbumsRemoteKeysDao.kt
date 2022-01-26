@@ -13,7 +13,7 @@ interface UserAlbumsRemoteKeysDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(remoteKey: List<UserAlbums.UserAlbumRemoteKeys>)
 
-    @Query("SELECT * FROM user_albums_remote_keys WHERE userAlbumsId = :userAlbumsId")
+    @Query("SELECT * FROM user_albums_remote_keys WHERE userAlbumId = :userAlbumsId")
     fun remoteKeysByUserAlbumsId(userAlbumsId: Long): UserAlbums.UserAlbumRemoteKeys
 
     @Query("DELETE FROM user_albums_remote_keys")

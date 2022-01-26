@@ -5,7 +5,6 @@ import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentsResponse
-import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import kotlinx.android.parcel.IgnoredOnParcel
 import kotlinx.android.parcel.Parcelize
@@ -25,7 +24,7 @@ data class AlbumComments(
     @Entity(tableName = "album_comments")
     data class AlbumComment(
         @PrimaryKey(autoGenerate = true) val id: Long = 0,
-        val albumCommentsId: Long,
+        val albumCommentId: Long,
         val pictureId: Long,
         val createdAt: LocalDateTime,
         val lastModifiedAt: LocalDateTime,
@@ -34,7 +33,7 @@ data class AlbumComments(
         val user: UsersResponse
     ): Parcelable {
         fun toCommentsResponse() = CommentsResponse(
-            id = albumCommentsId,
+            id = albumCommentId,
             pictureId = pictureId,
             createdAt = createdAt,
             lastModifiedAt = lastModifiedAt,
@@ -46,7 +45,7 @@ data class AlbumComments(
     @Parcelize
     @Entity(tableName = "album_comments_remote_keys")
     data class AlbumCommentRemoteKeys(
-        @PrimaryKey val albumCommentsId: Long,
+        @PrimaryKey val albumCommentId: Long,
         val prevKey: Int?,
         val nextKey: Int,
     ): Parcelable

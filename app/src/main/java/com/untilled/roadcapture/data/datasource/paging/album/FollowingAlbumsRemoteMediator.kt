@@ -11,7 +11,6 @@ import com.untilled.roadcapture.data.entity.mapper.AlbumsMapper
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.utils.applyRetryPolicy
 import com.untilled.roadcapture.utils.constant.policy.RetryPolicyConstant
-import com.untilled.roadcapture.utils.retryThreeTimes
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.io.InvalidObjectException
@@ -88,7 +87,7 @@ class FollowingAlbumsRemoteMediator @Inject constructor(
             val prevKey = if (page == 0) null else page - 1
             val nextKey = if (data.endOfPage) null else page + 1
             val keys = data.albums.map {
-                Albums.AlbumRemoteKeys(albumsId = it.albumsId, prevKey = prevKey, nextKey = nextKey ?: AlbumsRemoteMediator.INVALID_PAGE)
+                Albums.AlbumRemoteKeys(albumId = it.albumId, prevKey = prevKey, nextKey = nextKey ?: AlbumsRemoteMediator.INVALID_PAGE)
             }
             database.albumsRemoteKeysDao().insertAll(keys)
             database.albumsDao().insertAll(data.albums)
@@ -129,7 +128,7 @@ class FollowingAlbumsRemoteMediator @Inject constructor(
      */
     private fun getRemoteKeyClosetsToCurrentPosition(state: PagingState<Int, Albums.Album>): Albums.AlbumRemoteKeys? {
         return state.anchorPosition?.let { position ->
-            state.closestItemToPosition(position)?.albumsId?.let { id ->
+            state.closestItemToPosition(position)?.albumId?.let { id ->
                 database.albumsRemoteKeysDao().remoteKeysByAlbumsId(id)
             }
         }

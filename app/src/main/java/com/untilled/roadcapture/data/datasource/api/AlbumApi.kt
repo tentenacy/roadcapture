@@ -6,7 +6,6 @@ import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.utils.constant.url.RoadCapturePathConstant
 import io.reactivex.rxjava3.core.Single
-import retrofit2.Response
 import retrofit2.http.*
 
 interface AlbumApi {
@@ -47,7 +46,7 @@ interface AlbumApi {
         @Path("id") id: Long,
     ): Single<AlbumResponse>
 
-    @GET(RoadCapturePathConstant.GET_FOLLOWERS_TO_ALBUMS)
+    @GET(RoadCapturePathConstant.GET_FOLLOWINGS_ALBUMS)
     fun getFollowingAlbums(
         @Query("followingId") id: Long? = null,
         @Query("page") page: Int? = null,

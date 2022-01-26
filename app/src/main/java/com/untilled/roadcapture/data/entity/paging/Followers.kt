@@ -21,7 +21,7 @@ data class Followers(
     data class Follower(
         @PrimaryKey(autoGenerate = true) val id: Long = 0,
         val followerId: Long,
-        val profileImageUrl: String?,
+        val profileImageUrl: String,
         val username: String,
         val followed: Boolean,
     ): Parcelable
@@ -29,7 +29,7 @@ data class Followers(
     @Parcelize
     @Entity(tableName = "followers_remote_keys")
     data class FollowerRemoteKeys(
-        @PrimaryKey val followersId: Long,
+        @PrimaryKey val followerId: Long,
         val prevKey: Int?,
         val nextKey: Int,
     ): Parcelable

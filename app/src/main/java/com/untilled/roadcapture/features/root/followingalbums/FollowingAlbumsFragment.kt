@@ -61,7 +61,7 @@ class FollowingAlbumsFragment : Fragment() {
     private val albumItemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
 
         val albumUserId = (args?.item as ItemAlbumsBinding).album?.user!!.id
-        val albumId = args.item.album!!.albumsId
+        val albumId = args.item.album!!.albumId
 
         when (args.view?.id) {
             R.id.img_ialbums_profile -> rootFrom3Depth().navigateToStudio(albumUserId)
@@ -154,14 +154,14 @@ class FollowingAlbumsFragment : Fragment() {
             item.like!!.likeCount++
             item.like!!.liked = true
             item.textIalbumsLike.text = (item.like!!.likeCount).toString()
-            viewModel.likeAlbum(item.album!!.albumsId)
+            viewModel.likeAlbum(item.album!!.albumId)
         } else {
             val animator = getValueAnimator(0.5f,0.0f, view)
             animator.start()
             item.like!!.likeCount--
             item.like!!.liked = false
             item.textIalbumsLike.text = (item.like!!.likeCount).toString()
-            viewModel.unlikeAlbum(item.album!!.albumsId)
+            viewModel.unlikeAlbum(item.album!!.albumId)
         }
     }
 

@@ -23,7 +23,7 @@ data class UserAlbums(
     @Entity(tableName = "user_albums")
     data class UserAlbum(
         @PrimaryKey(autoGenerate = true) val id: Long = 0,
-        val userAlbumsId: Long,
+        val userAlbumId: Long,
         val createdAt: LocalDateTime,
         val lastModifiedAt: LocalDateTime,
         val title: String,
@@ -34,7 +34,7 @@ data class UserAlbums(
     @Parcelize
     @Entity(tableName = "user_albums_remote_keys")
     data class UserAlbumRemoteKeys(
-        @PrimaryKey val userAlbumsId: Long,
+        @PrimaryKey val userAlbumId: Long,
         val prevKey: Int?,
         val nextKey: Int,
     ) : Parcelable

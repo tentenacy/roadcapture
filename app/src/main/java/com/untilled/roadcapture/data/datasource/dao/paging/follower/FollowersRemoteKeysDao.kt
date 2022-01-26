@@ -13,7 +13,7 @@ interface FollowersRemoteKeysDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertAll(remoteKey: List<Followers.FollowerRemoteKeys>)
 
-    @Query("SELECT * FROM followers_remote_keys WHERE followersId = :followersId")
+    @Query("SELECT * FROM followers_remote_keys WHERE followerId = :followersId")
     fun remoteKeysByFollowersId(followersId: Long): Followers.FollowerRemoteKeys
 
     @Query("DELETE FROM followers_remote_keys")

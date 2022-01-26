@@ -5,7 +5,6 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.databinding.ItemAlbumsStudioBinding
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
@@ -38,7 +37,7 @@ class MyStudioAlbumsAdapter(private val itemOnClickListener: (ItemClickArgs?) ->
     companion object {
         private val COMPARATOR = object : DiffUtil.ItemCallback<UserAlbums.UserAlbum>() {
             override fun areItemsTheSame(oldItem: UserAlbums.UserAlbum, newItem: UserAlbums.UserAlbum): Boolean {
-                return oldItem.userAlbumsId == newItem.userAlbumsId
+                return oldItem.userAlbumId == newItem.userAlbumId
             }
 
             override fun areContentsTheSame(oldItem: UserAlbums.UserAlbum, newItem: UserAlbums.UserAlbum): Boolean {

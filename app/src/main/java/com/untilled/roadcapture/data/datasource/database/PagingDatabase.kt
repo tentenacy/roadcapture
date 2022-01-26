@@ -13,10 +13,7 @@ import com.untilled.roadcapture.data.datasource.dao.paging.comment.AlbumComments
 import com.untilled.roadcapture.data.datasource.dao.paging.comment.AlbumCommentsRemoteKeysDao
 import com.untilled.roadcapture.data.datasource.dao.paging.comment.PictureCommentsDao
 import com.untilled.roadcapture.data.datasource.dao.paging.comment.PictureCommentsRemoteKeysDao
-import com.untilled.roadcapture.data.datasource.dao.paging.follower.FollowersDao
-import com.untilled.roadcapture.data.datasource.dao.paging.follower.FollowersRemoteKeysDao
-import com.untilled.roadcapture.data.datasource.dao.paging.follower.FollowingsDao
-import com.untilled.roadcapture.data.datasource.dao.paging.follower.FollowingsRemoteKeysDao
+import com.untilled.roadcapture.data.datasource.dao.paging.follower.*
 import com.untilled.roadcapture.data.entity.paging.*
 import com.untilled.roadcapture.utils.converter.RoomConverters
 
@@ -34,6 +31,8 @@ import com.untilled.roadcapture.utils.converter.RoomConverters
         Followers.FollowerRemoteKeys::class,
         Followings.Following::class,
         Followings.FollowingRemoteKeys::class,
+        FollowingsSortByAlbum.FollowingSortByAlbum::class,
+        FollowingsSortByAlbum.FollowingSortByAlbumRemoteKeys::class,
     ],
     version = 1,
     exportSchema = false
@@ -52,6 +51,8 @@ abstract class PagingDatabase : RoomDatabase() {
     abstract fun followersKeysDao(): FollowersRemoteKeysDao
     abstract fun followingsDao(): FollowingsDao
     abstract fun followingsKeysDao(): FollowingsRemoteKeysDao
+    abstract fun followingsSortByAlbumDao(): FollowingsSortByAlbumDao
+    abstract fun followingsSortByAlbumRemoteKeysDao(): FollowingsSortByAlbumRemoteKeysDao
 
     companion object {
         fun getInstance(context: Context): PagingDatabase =

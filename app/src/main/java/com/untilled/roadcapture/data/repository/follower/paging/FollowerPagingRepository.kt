@@ -26,4 +26,7 @@ interface FollowerPagingRepository {
         followingsCondition: FollowingsCondition?
     ): Flowable<PagingData<Followings.Following>>
 
+    fun getFollowingsSortByAlbum(
+    ): Flowable<PagingData<FollowingsSortByAlbum.FollowingSortByAlbum>>
+
 }

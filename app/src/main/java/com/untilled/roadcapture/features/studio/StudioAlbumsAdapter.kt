@@ -35,7 +35,7 @@ class StudioAlbumsAdapter(private val itemOnClickListener: (ItemClickArgs?) -> U
     companion object {
         private val COMPARATOR = object : DiffUtil.ItemCallback<UserAlbums.UserAlbum>() {
             override fun areItemsTheSame(oldItem: UserAlbums.UserAlbum, newItem: UserAlbums.UserAlbum): Boolean {
-                return oldItem.userAlbumsId == newItem.userAlbumsId
+                return oldItem.userAlbumId == newItem.userAlbumId
             }
 
             override fun areContentsTheSame(oldItem: UserAlbums.UserAlbum, newItem: UserAlbums.UserAlbum): Boolean {
