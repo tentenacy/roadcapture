@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.paging.PagingData
+import androidx.recyclerview.widget.LinearSmoothScroller
+import androidx.recyclerview.widget.RecyclerView
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.databinding.FragmentCommentBinding

@@ -114,7 +114,7 @@ class PictureViewerViewModel @Inject constructor(
                 commentRepository.postPictureComment(it, request)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
-                        getPictureComments()
+                        getComments()
                     }) { t ->
                         error.value = t.message
                     }.addTo(compositeDisposable)

@@ -19,14 +19,9 @@ import com.untilled.roadcapture.databinding.BottomsheetCommentBinding
 import com.untilled.roadcapture.databinding.ItemCommentBinding
 import com.untilled.roadcapture.features.comment.AlbumCommentsAdapter
 import com.untilled.roadcapture.features.common.CommentMorePopupMenu
-import com.untilled.roadcapture.features.common.ReportDialogFragment
 import com.untilled.roadcapture.utils.ui.CustomDivider
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
-import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
-import com.untilled.roadcapture.utils.mainActivity
-import com.untilled.roadcapture.utils.navigateToStudio
-import com.untilled.roadcapture.utils.pictureViewerFrom2Depth
-import com.untilled.roadcapture.utils.showReportDialog
+import com.untilled.roadcapture.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -52,18 +47,22 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     private val albumCommentsObserver: (PagingData<AlbumComments.AlbumComment>?) -> Unit =
         { pagingData ->
             pagingData?.let { albumCommentsAdapter.submitData(lifecycle, it) }
+            binding.recycleBottomsheetComment.scrollToPositionSmooth(0)
         }
 
     private val pictureCommentsObserver: (PagingData<PictureComments.PictureComment>?) -> Unit =
         { pagingData ->
             pagingData?.let { pictureCommentsAdapter.submitData(lifecycle, it) }
+            binding.recycleBottomsheetComment.scrollToPositionSmooth(0)
         }
 
     private val currentPositionObserver: (Int) -> Unit = { position ->
         if (position == 0) {
             binding.recycleBottomsheetComment.adapter = albumCommentsAdapter
+            initPagingLoadStateFlow(albumCommentsAdapter, binding.recycleBottomsheetComment)
         } else {
             binding.recycleBottomsheetComment.adapter = pictureCommentsAdapter
+            initPagingLoadStateFlow(pictureCommentsAdapter, binding.recycleBottomsheetComment)
         }
         viewModel.getComments()
     }

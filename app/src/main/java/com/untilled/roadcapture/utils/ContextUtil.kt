@@ -10,6 +10,8 @@ import com.untilled.roadcapture.features.root.capture.PictureEditorFragment
 import com.untilled.roadcapture.features.root.capture.PlaceSearchFragment
 import com.untilled.roadcapture.features.signup.SignupFragment
 
+fun MainActivity.currentFragment(): Fragment? = supportFragmentManager.findFragmentById(binding.root.id)?.childFragmentManager?.fragments?.get(0)
+
 fun Fragment.mainActivity() = (requireActivity() as MainActivity)
 
 fun Fragment.rootFrom1Depth(): RootFragment = (parentFragment as RootFragment)

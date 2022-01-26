@@ -11,7 +11,12 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.WindowCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
+import androidx.paging.LoadState
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.LinearSmoothScroller
+import androidx.recyclerview.widget.RecyclerView
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.features.root.albums.AlbumsFragment
@@ -21,6 +26,10 @@ import com.untilled.roadcapture.features.root.studio.MyStudioFragment
 import com.untilled.roadcapture.features.signup.SignupEmailFragment
 import com.untilled.roadcapture.features.signup.SignupPasswordFragment
 import com.untilled.roadcapture.features.signup.SignupUsernameFragment
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.filter
 
 // Milliseconds used for UI animations in Camera
 const val ANIMATION_FAST_MILLIS = 50L
@@ -54,4 +63,27 @@ fun View.setRippleEffect() {
     foreground = context.getDrawableFrom(android.R.attr.selectableItemBackground)
 }
 
-fun MainActivity.currentFragment(): Fragment? = supportFragmentManager.findFragmentById(binding.root.id)?.childFragmentManager?.fragments?.get(0)
+fun Context.getSmoothScroll(): LinearSmoothScroller {
+    return object : LinearSmoothScroller(this) {
+        override fun getVerticalSnapPreference(): Int {
+            return SNAP_TO_START
+        }
+    }
+}
+
+fun RecyclerView.scrollToPositionSmooth(int: Int) {
+    this.layoutManager?.startSmoothScroll(this.context.getSmoothScroll().apply {
+        targetPosition = int
+    })
+}
+
+fun RecyclerView.scrollToPositionFast(position: Int) {
+    this.layoutManager?.scrollToPosition(position)
+}
+
+fun Fragment.initPagingLoadStateFlow(adapter: PagingDataAdapter<*, *>, recyclerView: RecyclerView) = lifecycleScope.launchWhenCreated {
+    adapter.loadStateFlow
+        .distinctUntilChangedBy { it.refresh }
+        .filter { it.refresh is LoadState.NotLoading }
+        .collect { recyclerView.scrollToPositionSmooth(0) }
+}
