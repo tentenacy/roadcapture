@@ -19,6 +19,7 @@ import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
 import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToStudio
+import com.untilled.roadcapture.utils.showReportDialog
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -53,7 +54,7 @@ class CommentFragment : Fragment() {
                     setOnMenuItemClickListener { item ->
                         when (item.itemId) {
                             R.id.popup_menu_comment_more_report -> {
-                                showReportDialog()
+                                showReportDialog({})
                             }
                         }
                         true
@@ -116,9 +117,5 @@ class CommentFragment : Fragment() {
 
     private fun refresh() {
         viewModel.getAlbumComments(args.albumsId)
-    }
-
-    private fun showReportDialog() {
-        ReportDialogFragment({}).show(childFragmentManager, DialogTagConstant.REPORT_DIALOG)
     }
 }

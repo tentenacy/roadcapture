@@ -1,31 +1,32 @@
 package com.untilled.roadcapture.features.picture
 
-import android.app.Activity
-import android.app.Dialog
 import android.os.Bundle
 import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.paging.PagingData
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentCreateRequest
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.data.entity.paging.PictureComments
 import com.untilled.roadcapture.databinding.BottomsheetCommentBinding
+import com.untilled.roadcapture.databinding.ItemCommentBinding
 import com.untilled.roadcapture.features.comment.AlbumCommentsAdapter
+import com.untilled.roadcapture.features.common.CommentMorePopupMenu
 import com.untilled.roadcapture.features.common.ReportDialogFragment
 import com.untilled.roadcapture.utils.ui.CustomDivider
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
 import com.untilled.roadcapture.utils.mainActivity
+import com.untilled.roadcapture.utils.navigateToStudio
+import com.untilled.roadcapture.utils.pictureViewerFrom2Depth
+import com.untilled.roadcapture.utils.showReportDialog
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -67,26 +68,23 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
         viewModel.getComments()
     }
 
+    private val menuItemClickListener: (item: MenuItem) -> Boolean = { item ->
+        when (item.itemId) {
+            R.id.popup_menu_comment_more_report -> {
+                showReportDialog({})
+            }
+        }
+        true
+    }
+
     private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
-        when (args?.view?.id) {
+        val userId = (args?.item as ItemCommentBinding).comments?.user?.id
+        when (args.view?.id) {
             R.id.img_icomment_more -> {
-                val popupMenu = PopupMenu(requireContext(), args.view)
-                popupMenu.apply {
-                    menuInflater.inflate(R.menu.popupmenu_comment_more, popupMenu.menu)
-                    setOnMenuItemClickListener { item ->
-                        when (item.itemId) {
-                            R.id.popup_menu_comment_more_report -> {
-                                showReportDialog()
-                            }
-                        }
-                        true
-                    }
-                }.show()
+                CommentMorePopupMenu(requireContext(), args.view, menuItemClickListener).show()
             }
             R.id.img_icomment_profile -> {
-                //TODO: parent의 parent인 pictureViewerFragment에서 studioFragment로 이동
-                Navigation.findNavController(binding.root)
-                    .navigate(R.id.action_commentFragment_to_studioFragment)
+                userId?.let { pictureViewerFrom2Depth().navigateToStudio(it) }
             }
         }
     }
@@ -165,10 +163,6 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
 
     private fun initRecyclerView() {
         binding.recycleBottomsheetComment.addItemDecoration(customDivider)
-    }
-
-    private fun showReportDialog() {
-        ReportDialogFragment({}).show(childFragmentManager, DialogTagConstant.REPORT_DIALOG)
     }
 
 }

@@ -18,6 +18,8 @@ import com.untilled.roadcapture.features.login.LoginEmailFragmentDirections
 import com.untilled.roadcapture.features.login.LoginFragment
 import com.untilled.roadcapture.features.login.LoginFragmentDirections
 import com.untilled.roadcapture.features.picture.CommentBottomSheetDialog
+import com.untilled.roadcapture.features.picture.PictureViewerFragment
+import com.untilled.roadcapture.features.picture.PictureViewerFragmentDirections
 import com.untilled.roadcapture.features.root.RootFragment
 import com.untilled.roadcapture.features.root.RootFragmentDirections
 import com.untilled.roadcapture.features.root.capture.*
@@ -175,6 +177,10 @@ fun FollowingsFragment.navigateToStudio(id: Long) {
 
 fun CameraFragment.navigateToCropFragment(imageUri: String) {
     binding.root.navigate(CameraFragmentDirections.actionCameraFragmentToCropFragment(imageUri))
+}
+
+fun PictureViewerFragment.navigateToStudio(id: Long) {
+    binding.root.navigate(PictureViewerFragmentDirections.actionPictureViewerContainerFragmentToStudioFragment(id))
 }
 
 fun Fragment.navigateToLogin() {

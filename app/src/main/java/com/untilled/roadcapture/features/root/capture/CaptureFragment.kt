@@ -302,14 +302,6 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
             ).check()
     }
 
-    private fun showCancelAlbumCreationAskingDialog(listener: () -> Unit) {
-        AlbumCreationCancelDialogFragment(listener).show(childFragmentManager, DialogTagConstant.ALBUM_CREATION_CANCEL)
-    }
-
-    private fun showThumbnailSettingDialog() {
-        ThumbnailSettingDialogFragment().show(childFragmentManager, DialogTagConstant.THUMBNAIL_SETTING)
-    }
-
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }

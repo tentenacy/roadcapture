@@ -83,7 +83,7 @@ class FollowingAlbumsFragment : Fragment() {
                             R.id.popup_menu_albums_more_share -> {
                             }
                             R.id.popup_menu_albums_more_report -> {
-                                showReportDialog()
+                                showReportDialog({})
                             }
                             R.id.popup_menu_albums_more_hide -> {
                             }
@@ -124,7 +124,7 @@ class FollowingAlbumsFragment : Fragment() {
         viewModel.followingsSortByAlbum.observe(viewLifecycleOwner, followingAlbumsFilterObserver)
     }
 
-    fun initAdapter() {
+    private fun initAdapter() {
         binding.recyclerFollowingalbums.adapter = followingAlbumsAdapter
         binding.recyclerFollowingalbumsFilter.adapter = followingAlbumsFilterAdapter
     }
@@ -142,10 +142,6 @@ class FollowingAlbumsFragment : Fragment() {
         super.onDestroyView()
 
         _binding = null
-    }
-
-    private fun showReportDialog() {
-        ReportDialogFragment({}).show(childFragmentManager, DialogTagConstant.REPORT_DIALOG)
     }
 
     private fun setLikeStatus(view: LottieAnimationView, item: ItemAlbumsBinding) {

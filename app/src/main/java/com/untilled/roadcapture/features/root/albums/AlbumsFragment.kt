@@ -69,7 +69,7 @@ class AlbumsFragment : Fragment() {
                             R.id.popup_menu_albums_more_share -> {
                             }
                             R.id.popup_menu_albums_more_report -> {
-                                showReportDialog()
+                                showReportDialog({})
                             }
                             R.id.popup_menu_albums_more_hide -> {
                             }
@@ -126,10 +126,6 @@ class AlbumsFragment : Fragment() {
 
     fun refresh(dateTimeFrom: String?, dateTimeTo: String?) {
         viewModel.getAlbums(AlbumsCondition(dateTimeFrom, dateTimeTo))
-    }
-
-    private fun showReportDialog() {
-        ReportDialogFragment({}).show(childFragmentManager, DialogTagConstant.REPORT_DIALOG)
     }
 
     private fun setLikeStatus(view: LottieAnimationView, item: ItemAlbumsBinding) {

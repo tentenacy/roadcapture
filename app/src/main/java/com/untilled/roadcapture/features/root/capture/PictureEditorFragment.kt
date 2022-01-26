@@ -23,6 +23,7 @@ import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
 import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToCapture
 import com.untilled.roadcapture.utils.navigateToSearchPlace
+import com.untilled.roadcapture.utils.showPictureDeleteAskingDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -71,13 +72,15 @@ class PictureEditorFragment : Fragment() {
         }
     }
 
-    private val deleteOnClickListener: (View?) -> Unit = {
-        showPictureDeleteAskingDialog {
-            if (mode == EDIT) {
-                viewModel.deletePicture(makePicture())
-            }
-            navigateToCapture()
+    private val confirmOnClickListener: () -> Unit = {
+        if (mode == EDIT) {
+            viewModel.deletePicture(makePicture())
         }
+        navigateToCapture()
+    }
+
+    private val deleteOnClickListener: (View?) -> Unit = {
+        showPictureDeleteAskingDialog(confirmOnClickListener)
     }
 
     private fun addressToPlace(tmapAddress: TmapAddressInfoResponse): PlaceRequest {
@@ -190,10 +193,6 @@ class PictureEditorFragment : Fragment() {
             picture = args.picture
             binding.picture = picture
         }
-    }
-
-    private fun showPictureDeleteAskingDialog(listener: () -> Unit) {
-        PictureDeleteDialogFragment(listener).show(childFragmentManager, DialogTagConstant.PICTURE_DELETE_DIALOG)
     }
 
     companion object {

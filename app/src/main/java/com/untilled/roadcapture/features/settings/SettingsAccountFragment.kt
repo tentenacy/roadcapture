@@ -17,7 +17,6 @@ class SettingsAccountFragment : Fragment() {
 
     private val logoutConfirmListener: () -> Unit = {
         mainActivity().viewModel.logout()
-//        navigateToLogin()
     }
 
     override fun onCreateView(
@@ -57,11 +56,7 @@ class SettingsAccountFragment : Fragment() {
             navigateToServiceWithdrawal()
         }
         binding.textSettingaccountLabelLogout.setOnClickListener {
-            showLogoutConfirmationDialog()
+            showLogoutConfirmationDialog(logoutConfirmListener)
         }
-    }
-
-    private fun showLogoutConfirmationDialog() {
-        LogoutDialogFragment(logoutConfirmListener).show(childFragmentManager, DialogTagConstant.LOGOUT_DIALOG)
     }
 }
