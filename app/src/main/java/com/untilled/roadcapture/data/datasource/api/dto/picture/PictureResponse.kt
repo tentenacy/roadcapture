@@ -14,5 +14,5 @@ data class PictureResponse(
     val imageUrl: String,
     val description: String = "",
     val place: PlaceResponse,
-    val commentCount: Int,
+    var commentCount: Int,
 ) : Parcelable

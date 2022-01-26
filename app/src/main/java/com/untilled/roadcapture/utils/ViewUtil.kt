@@ -17,6 +17,8 @@ import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.features.root.albums.AlbumsFragment
@@ -35,7 +37,7 @@ import kotlinx.coroutines.flow.filter
 const val ANIMATION_FAST_MILLIS = 50L
 const val ANIMATION_SLOW_MILLIS = 100L
 
-fun ConstraintLayout.setStatusBarTransparent(activity: Activity) = activity.run {
+fun View.setStatusBarTransparent(activity: Activity) = activity.run {
     WindowCompat.setDecorFitsSystemWindows(window, false)
     setPaddingWhenStatusBarTransparent(this)
 }
@@ -44,8 +46,12 @@ fun Activity.setStatusBarOrigin() {
     WindowCompat.setDecorFitsSystemWindows(window, true)
 }
 
-fun ConstraintLayout.setPaddingWhenStatusBarTransparent(context: Context) = context.run {
+fun View.setPaddingWhenStatusBarTransparent(context: Context) = context.run {
     setPadding(0, this.statusBarHeight(), 0, this.navigationHeight())
+}
+
+fun View.setBottomSheetDialogPadding(context: Context) = context.run {
+    setPadding(0, 0, 0, getPxFromDp(8f))
 }
 
 fun Activity.hideKeyboard(editText: EditText) {
@@ -86,4 +92,15 @@ fun Fragment.initPagingLoadStateFlow(adapter: PagingDataAdapter<*, *>, recyclerV
         .distinctUntilChangedBy { it.refresh }
         .filter { it.refresh is LoadState.NotLoading }
         .collect { recyclerView.scrollToPositionSmooth(0) }
+}
+
+fun EditText.isPosOutOf(x: Float, y: Float) = x < left || x > right || y < top || y > bottom
+
+fun BottomSheetDialogFragment.expandFullHeight() {
+    val bottomSheet = dialog?.findViewById(com.google.android.material.R.id.design_bottom_sheet) as View
+    val behavior = BottomSheetBehavior.from<View>(bottomSheet)
+    val layoutParams = bottomSheet.layoutParams
+    layoutParams.height = mainActivity().getWindowHeight() * 95 / 100
+    bottomSheet.layoutParams = layoutParams
+    behavior.state = BottomSheetBehavior.STATE_EXPANDED
 }

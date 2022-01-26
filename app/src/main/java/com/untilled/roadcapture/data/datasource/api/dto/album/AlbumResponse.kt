@@ -16,7 +16,7 @@ data class AlbumResponse(
     val user: AlbumUserResponse,
     val viewCount: Int,
     val likeCount: Int,
-    val commentCount: Int,
+    var commentCount: Int,
     val liked: Boolean,
     val pictures: List<PictureResponse>
 ) : Parcelable

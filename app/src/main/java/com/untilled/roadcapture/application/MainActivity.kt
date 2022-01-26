@@ -1,8 +1,12 @@
 package com.untilled.roadcapture.application
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.MotionEvent
 import android.view.View
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import androidx.activity.result.ActivityResult
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -11,8 +15,8 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.activityresult.ActivityResultFactory
 import com.untilled.roadcapture.databinding.ActivityMainBinding
 import com.untilled.roadcapture.features.root.capture.CropFragment
-import com.untilled.roadcapture.network.subject.OAuthLoginManagerSubject
 import com.untilled.roadcapture.utils.currentFragment
+import com.untilled.roadcapture.utils.isPosOutOf
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropFragment
 import com.yalantis.ucrop.UCropFragmentCallback
@@ -44,12 +48,27 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
         observeData()
     }
 
-    private fun initData() {
-        viewModel
-    }
+    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+        val view = currentFocus
 
-    private fun observeData() {
-        viewModel.logout.observe(this, logoutObserver)
+        if (view != null
+            && (ev?.action == MotionEvent.ACTION_UP || ev?.action == MotionEvent.ACTION_MOVE)
+            && view is EditText
+            && !view.javaClass.name.startsWith("android.webkit.")
+        ) {
+            val scrcoords = intArrayOf(0, 0)
+            view.getLocationOnScreen(scrcoords)
+
+            val x = ev.rawX + view.left - scrcoords[0]
+            val y = ev.rawY + view.top - scrcoords[1]
+
+            if (view.isPosOutOf(x, y)) {
+                (getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager)
+                    .hideSoftInputFromWindow(window.decorView.applicationWindowToken, 0)
+            }
+        }
+
+        return super.dispatchTouchEvent(ev)
     }
 
     override fun loadingProgress(showLoader: Boolean) {
@@ -70,6 +89,14 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
             }
         }
         cropFragment.removeFragmentFromScreen()
+    }
+
+    private fun initData() {
+        viewModel
+    }
+
+    private fun observeData() {
+        viewModel.logout.observe(this, logoutObserver)
     }
 
 }

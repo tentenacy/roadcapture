@@ -2,6 +2,7 @@ package com.untilled.roadcapture.features.comment
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
@@ -15,6 +16,7 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.databinding.FragmentCommentBinding
 import com.untilled.roadcapture.databinding.ItemCommentBinding
+import com.untilled.roadcapture.features.common.CommentMorePopupMenu
 import com.untilled.roadcapture.features.common.ReportDialogFragment
 import com.untilled.roadcapture.utils.ui.CustomDivider
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
@@ -45,23 +47,22 @@ class CommentFragment : Fragment() {
         adapterAlbum.submitData(lifecycle, pagingData)
     }
 
+    private val menuItemClickListener: (item: MenuItem) -> Boolean = { item ->
+        when (item.itemId) {
+            R.id.popup_menu_comment_more_report -> {
+                showReportDialog({})
+            }
+        }
+        true
+    }
+
+
     private val itemClickListener: (ItemClickArgs?) -> Unit = { args ->
         val userId = (args?.item as ItemCommentBinding).comments!!.user.id
 
         when (args.view?.id) {
             R.id.img_icomment_more -> {
-                val popupMenu = PopupMenu(requireContext(), args.view)
-                popupMenu.apply {
-                    menuInflater.inflate(R.menu.popupmenu_comment_more, popupMenu.menu)
-                    setOnMenuItemClickListener { item ->
-                        when (item.itemId) {
-                            R.id.popup_menu_comment_more_report -> {
-                                showReportDialog({})
-                            }
-                        }
-                        true
-                    }
-                }.show()
+                CommentMorePopupMenu(requireContext(), args.view, menuItemClickListener).show()
             }
             R.id.img_icomment_profile -> {
                 navigateToStudio(userId)
@@ -72,7 +73,7 @@ class CommentFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        refresh()
+        viewModel.getAlbumComments(args.albumsId)
     }
 
     override fun onCreateView(
@@ -115,9 +116,5 @@ class CommentFragment : Fragment() {
     private fun initAdapter() {
         binding.recyclerComment.addItemDecoration(customDivider)
         binding.recyclerComment.adapter = adapterAlbum
-    }
-
-    private fun refresh() {
-        viewModel.getAlbumComments(args.albumsId)
     }
 }

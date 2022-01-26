@@ -1,6 +1,9 @@
 package com.untilled.roadcapture.utils
 
+import android.app.Activity
 import android.content.Context
+import android.util.DisplayMetrics
+import android.util.Log
 import android.util.TypedValue
 
 fun Context.statusBarHeight(): Int {
@@ -26,4 +29,17 @@ fun Context.getDpFromPx(px: Int) = resources.displayMetrics.density.let { densit
         2.0f -> px / (density * 2.0f)
         else -> px / density
     }
+}
+
+@Suppress("DEPRECATION")
+fun Activity.getWindowHeight(): Int {
+    val outMetrics = DisplayMetrics()
+    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+        val display = display
+        display?.getRealMetrics (outMetrics)
+    } else {
+        val display = windowManager?.defaultDisplay
+        display?.getMetrics(outMetrics)
+    }
+    return outMetrics.heightPixels
 }

@@ -1,15 +1,14 @@
 package com.untilled.roadcapture.features.picture
 
 import android.os.Bundle
-import android.util.DisplayMetrics
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
 import androidx.paging.PagingData
-import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentCreateRequest
@@ -23,6 +22,9 @@ import com.untilled.roadcapture.utils.ui.CustomDivider
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.*
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.filter
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -31,7 +33,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     private var _binding: BottomsheetCommentBinding? = null
     val binding get() = _binding!!
 
-    private val viewModel: PictureViewerViewModel by viewModels({ requireParentFragment().requireParentFragment() })
+    private val viewModel: PictureViewerViewModel by viewModels({ pictureViewerFrom2Depth() })
 
     @Inject
     lateinit var customDivider: CustomDivider
@@ -47,22 +49,34 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     private val albumCommentsObserver: (PagingData<AlbumComments.AlbumComment>?) -> Unit =
         { pagingData ->
             pagingData?.let { albumCommentsAdapter.submitData(lifecycle, it) }
-            binding.recycleBottomsheetComment.scrollToPositionSmooth(0)
         }
 
     private val pictureCommentsObserver: (PagingData<PictureComments.PictureComment>?) -> Unit =
         { pagingData ->
             pagingData?.let { pictureCommentsAdapter.submitData(lifecycle, it) }
-            binding.recycleBottomsheetComment.scrollToPositionSmooth(0)
         }
 
     private val currentPositionObserver: (Int) -> Unit = { position ->
         if (position == 0) {
             binding.recycleBottomsheetComment.adapter = albumCommentsAdapter
-            initPagingLoadStateFlow(albumCommentsAdapter, binding.recycleBottomsheetComment)
+            lifecycleScope.launchWhenCreated {
+                albumCommentsAdapter.loadStateFlow
+                    .distinctUntilChangedBy { it.refresh }
+                    .filter { it.refresh is LoadState.NotLoading }
+                    .collect {
+                        binding.recycleBottomsheetComment.scrollToPositionSmooth(0)
+                    }
+            }
         } else {
             binding.recycleBottomsheetComment.adapter = pictureCommentsAdapter
-            initPagingLoadStateFlow(pictureCommentsAdapter, binding.recycleBottomsheetComment)
+            lifecycleScope.launchWhenCreated {
+                pictureCommentsAdapter.loadStateFlow
+                    .distinctUntilChangedBy { it.refresh }
+                    .filter { it.refresh is LoadState.NotLoading }
+                    .collect {
+                        binding.recycleBottomsheetComment.scrollToPositionSmooth(0)
+                    }
+            }
         }
         viewModel.getComments()
     }
@@ -77,13 +91,13 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
-        val userId = (args?.item as ItemCommentBinding).comments?.user?.id
+        val userId = (args?.item as ItemCommentBinding).comments!!.user.id
         when (args.view?.id) {
             R.id.img_icomment_more -> {
                 CommentMorePopupMenu(requireContext(), args.view, menuItemClickListener).show()
             }
             R.id.img_icomment_profile -> {
-                userId?.let { pictureViewerFrom2Depth().navigateToStudio(it) }
+                pictureViewerFrom2Depth().navigateToStudio(userId)
             }
         }
     }
@@ -100,7 +114,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
         _binding = BottomsheetCommentBinding.inflate(inflater, container, false)
 
         mainActivity().setSupportActionBar(binding.toolbarBottomsheetComment)
-
+        binding.coordinatorBottomsheetCommentContainer.setBottomSheetDialogPadding(mainActivity())
         return binding.root
     }
 
@@ -108,8 +122,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         observeData()
-        initRecyclerView()
-        expandFullHeight()
+        initViews()
         setOnClickListeners()
     }
 
@@ -119,34 +132,6 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
         viewModel.clearComments()
 
         _binding = null
-    }
-
-    private fun expandFullHeight() {
-        val bottomSheet = dialog?.findViewById(com.google.android.material.R.id.design_bottom_sheet) as View
-        val behavior = BottomSheetBehavior.from<View>(bottomSheet)
-        val layoutParams = bottomSheet.layoutParams
-        layoutParams.height = getBottomSheetDialogDefaultHeight()
-        bottomSheet.layoutParams = layoutParams
-        behavior.state = BottomSheetBehavior.STATE_EXPANDED
-    }
-
-    private fun getBottomSheetDialogDefaultHeight(): Int {
-        return getWindowHeight() * 95 / 100
-    }
-
-    private fun getWindowHeight(): Int {
-        val outMetrics = DisplayMetrics()
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-            val display = activity?.display
-            display?.getRealMetrics (outMetrics)
-        } else {
-            @Suppress("DEPRECATION")
-            val display = activity?.windowManager?.defaultDisplay
-            @Suppress("DEPRECATION")
-            display?.getMetrics(outMetrics)
-        }
-        Log.d("Test",outMetrics.heightPixels.toString())
-        return outMetrics.heightPixels
     }
 
     private fun observeData() {
@@ -160,7 +145,8 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
         binding.imgBottomsheetCommentInput.setOnClickListener(postOnClickListener)
     }
 
-    private fun initRecyclerView() {
+    private fun initViews() {
+        expandFullHeight()
         binding.recycleBottomsheetComment.addItemDecoration(customDivider)
     }
 

@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
+import androidx.paging.rxjava3.mapAsync
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentCreateRequest
 import com.untilled.roadcapture.data.datasource.api.dto.picture.PictureResponse
