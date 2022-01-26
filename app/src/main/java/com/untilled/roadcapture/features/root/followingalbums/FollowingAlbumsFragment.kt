@@ -14,6 +14,7 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.album.FollowingAlbumsCondition
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.data.entity.paging.Followings
+import com.untilled.roadcapture.data.entity.paging.FollowingsSortByAlbum
 import com.untilled.roadcapture.databinding.FragmentFollowingalbumsBinding
 import com.untilled.roadcapture.databinding.ItemAlbumsBinding
 import com.untilled.roadcapture.databinding.ItemFollowingFilterBinding
@@ -33,19 +34,19 @@ class FollowingAlbumsFragment : Fragment() {
 
     private var followingId: Long? = null
 
-    private val albumAdapter: FollowingAlbumsAdapter by lazy {
+    private val followingAlbumsAdapter: FollowingAlbumsAdapter by lazy {
         FollowingAlbumsAdapter(albumItemOnClickListener)
     }
-    private val filterAdapter: FollowingAlbumsFilterAdapter by lazy{
+    private val followingAlbumsFilterAdapter: FollowingAlbumsFilterAdapter by lazy{
         FollowingAlbumsFilterAdapter(filterItemOnClickListener)
     }
 
-    private val followingAlbumObserver: (PagingData<Albums.Album>) -> Unit = { pagingData ->
-        albumAdapter.submitData(lifecycle, pagingData)
+    private val followingAlbumsObserver: (PagingData<Albums.Album>) -> Unit = { pagingData ->
+        followingAlbumsAdapter.submitData(lifecycle, pagingData)
     }
 
-    private val followingFilterObserver: (PagingData<Followings.Following>) -> Unit = { pagingData ->
-        filterAdapter.submitData(lifecycle, pagingData)
+    private val followingAlbumsFilterObserver: (PagingData<FollowingsSortByAlbum.FollowingSortByAlbum>) -> Unit = { pagingData ->
+        followingAlbumsFilterAdapter.submitData(lifecycle, pagingData)
     }
 
     private val notificationOnClickListener: (View?) -> Unit = {
@@ -54,7 +55,7 @@ class FollowingAlbumsFragment : Fragment() {
 
     private val filterItemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
         val position = (args?.item as ItemFollowingFilterBinding).position
-        followingId = (args.item).user?.followingId
+        followingId = (args.item).user?.followingSortByAlbumId
         getSelectedAlbums(position, followingId)
     }
 
@@ -119,18 +120,18 @@ class FollowingAlbumsFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.followingAlbums.observe(viewLifecycleOwner, followingAlbumObserver)
-        viewModel.followings.observe(viewLifecycleOwner,followingFilterObserver)
+        viewModel.followingAlbums.observe(viewLifecycleOwner, followingAlbumsObserver)
+        viewModel.followingsSortByAlbum.observe(viewLifecycleOwner, followingAlbumsFilterObserver)
     }
 
     fun initAdapter() {
-        binding.recyclerFollowingalbums.adapter = albumAdapter
-        binding.recyclerFollowingalbumsFilter.adapter = filterAdapter
+        binding.recyclerFollowingalbums.adapter = followingAlbumsAdapter
+        binding.recyclerFollowingalbumsFilter.adapter = followingAlbumsFilterAdapter
     }
 
     private fun refresh(followingId: Long?) {
         viewModel.getFollowingAlbums(FollowingAlbumsCondition(followingId))
-        viewModel.getFollowings()
+        viewModel.getFollowingsSortByAlbum()
     }
 
     private fun setOnClickListeners() {
@@ -174,13 +175,13 @@ class FollowingAlbumsFragment : Fragment() {
     }
 
     private fun getSelectedAlbums(position: Int?, followingId: Long?) {
-        if (filterAdapter.index == position) {
-            filterAdapter.index = null
+        if (followingAlbumsFilterAdapter.index == position) {
+            followingAlbumsFilterAdapter.index = null
             refresh(null)
         } else {
-            filterAdapter.index = position
+            followingAlbumsFilterAdapter.index = position
             refresh(followingId)
         }
-        filterAdapter.notifyDataSetChanged()
+        followingAlbumsFilterAdapter.notifyDataSetChanged()
     }
 }

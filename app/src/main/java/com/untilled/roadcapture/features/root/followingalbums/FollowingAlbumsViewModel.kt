@@ -5,11 +5,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
-import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.data.datasource.api.dto.album.FollowingAlbumsCondition
-import com.untilled.roadcapture.data.datasource.api.dto.follower.FollowingsCondition
 import com.untilled.roadcapture.data.entity.paging.Albums
-import com.untilled.roadcapture.data.entity.paging.Followings
+import com.untilled.roadcapture.data.entity.paging.FollowingsSortByAlbum
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepository
 import com.untilled.roadcapture.data.repository.follower.paging.FollowerPagingRepository
@@ -29,17 +27,17 @@ class FollowingAlbumsViewModel @Inject constructor(
     private val _followingAlbums = MutableLiveData<PagingData<Albums.Album>>()
     val followingAlbums: LiveData<PagingData<Albums.Album>> get() = _followingAlbums
 
-    private val _followings = MutableLiveData<PagingData<Followings.Following>>()
-    val followings: LiveData<PagingData<Followings.Following>> get() = _followings
+    private val _followingsSortByAlbum = MutableLiveData<PagingData<FollowingsSortByAlbum.FollowingSortByAlbum>>()
+    val followingsSortByAlbum: LiveData<PagingData<FollowingsSortByAlbum.FollowingSortByAlbum>> get() = _followingsSortByAlbum
 
-    fun getFollowings(followingsCondition: FollowingsCondition? = null){
-        followingPagingRepository.getFollowings(followingsCondition)
+    fun getFollowingsSortByAlbum(){
+        followingPagingRepository.getFollowingsSortByAlbum()
             .observeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
             .subscribe({ response->
-                _followings.value = response
+                _followingsSortByAlbum.value = response
             },{ t ->
-                Logger.d("test: $t")
+
             }).addTo(compositeDisposable)
     }
 

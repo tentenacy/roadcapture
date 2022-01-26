@@ -10,7 +10,7 @@
 
         <variable
             name="user"
-            type="com.untilled.roadcapture.data.entity.paging.Followings.Following" />
+            type="com.untilled.roadcapture.data.entity.paging.FollowingsSortByAlbum.FollowingSortByAlbum" />
 
         <variable
             name="position"

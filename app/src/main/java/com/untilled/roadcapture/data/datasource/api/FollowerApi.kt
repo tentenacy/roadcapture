@@ -58,7 +58,7 @@ interface FollowerApi {
     fun getFollowingsSortByAlbum(
         @Query("page") page: Int? = null,
         @Query("size") size: Int? = null,
-        @Query("sort") sort: String? = "createdAt,desdc"
+        @Query("sort") sort: String? = "createdAt,desc"
     ): Single<PageResponse<FollowingsSortByAlbumResponse>>
 
 }
