@@ -7,13 +7,13 @@ import com.untilled.roadcapture.data.datasource.api.dto.address.Address
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class PlaceRequest(
+data class PlaceCreateRequest(
     @SerializedName("createdAt")
-    val placeCreatedAt: String,
+    var placeCreatedAt: String,
     @SerializedName("lastModifiedAt")
-    val placeLastModifiedAt: String,
-    val latitude: Float,
-    val longitude: Float,
+    var placeLastModifiedAt: String,
+    val latitude: Double,
+    val longitude: Double,
     val name: String,
     @Embedded
     val address: Address

@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.data.datasource.api.dto.address.Address
-import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceRequest
+import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceCreateRequest
 import com.untilled.roadcapture.data.datasource.api.dto.place.SearchPlaceResponse
 import com.untilled.roadcapture.data.datasource.api.dto.poi.Poi
 import com.untilled.roadcapture.data.datasource.api.dto.poi.Pois
@@ -25,6 +25,8 @@ import com.untilled.roadcapture.utils.navigateToCapture
 import com.untilled.roadcapture.utils.navigateToPictureEditor
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -43,8 +45,8 @@ class PlaceSearchFragment : Fragment() {
     @Inject
     lateinit var customDivider: CustomDivider
 
-    private val itemOnClickListener: (PlaceRequest?) -> Unit = { placeRequest ->
-        picture.place = placeRequest
+    private val itemOnClickListener: (PlaceCreateRequest?) -> Unit = { placeCreateRequest ->
+        picture.place = placeCreateRequest
         navigateToCapture(picture)
     }
 
@@ -52,7 +54,7 @@ class PlaceSearchFragment : Fragment() {
         adapter.run {
             binding.progressbarPlaceSearchLoading.isVisible = false // 로딩 애니메이션 off
             if (searchPlaceResponse != null) {
-                placeList = poisToPlace(searchPlaceResponse.searchPoiInfo.pois)
+                placeCreateList = poisToPlace(searchPlaceResponse.searchPoiInfo.pois)
                 notifyDataSetChanged()
             } else {
                 displayNoResult()
@@ -68,6 +70,7 @@ class PlaceSearchFragment : Fragment() {
         _binding = FragmentPlaceSearchBinding.inflate(inflater, container, false)
 
         mainActivity().viewModel.setBindingRoot(binding.root)
+        getNavArgs()
 
         return binding.root
     }
@@ -77,7 +80,6 @@ class PlaceSearchFragment : Fragment() {
 
         initAdapter()
         observeData()
-        getNavArgs()
         setOnClickListeners()
     }
 
@@ -127,14 +129,15 @@ class PlaceSearchFragment : Fragment() {
         }
     }
 
-    private fun poisToPlace(pois: Pois): List<PlaceRequest> =
-        pois.poi.map {
-            PlaceRequest(
-                // todo 생성날짜 표시
-                placeCreatedAt = "",
-                placeLastModifiedAt = "",
-                latitude = it.noorLat,
-                longitude = it.noorLon,
+    private fun poisToPlace(pois: Pois): List<PlaceCreateRequest> {
+        val now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS")).toString()
+
+        return pois.poi.map {
+            PlaceCreateRequest(
+                placeCreatedAt = now,
+                placeLastModifiedAt = now,
+                latitude = it.noorLat.toDouble(),
+                longitude = it.noorLon.toDouble(),
                 name = it.name ?: "",
                 Address(
                     addressName = makeAddressNumber(it),
@@ -146,6 +149,7 @@ class PlaceSearchFragment : Fragment() {
                 )
             )
         }
+    }
 
     private fun displayNoResult() {
         binding.textPlaceSearchNoresult.isVisible = true

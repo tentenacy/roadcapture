@@ -1,8 +1,10 @@
 package com.untilled.roadcapture.data.datasource.api
 
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumCreateRequest
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
+import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentCreateRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.utils.constant.url.RoadCapturePathConstant
 import io.reactivex.rxjava3.core.Single
@@ -54,4 +56,9 @@ interface AlbumApi {
         @Query("sort") sort: String? = "createdAt,desc",
     ): Single<PageResponse<AlbumsResponse>>
 
+    @Multipart
+    @POST(RoadCapturePathConstant.POST_ALBUM)
+    fun postAlbum(
+        @Body request: AlbumCreateRequest
+    ) : Single<Unit>
 }

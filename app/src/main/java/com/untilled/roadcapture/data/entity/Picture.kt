@@ -5,7 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceRequest
+import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceCreateRequest
 import kotlinx.android.parcel.Parcelize
 
 @Entity
@@ -19,7 +19,7 @@ data class Picture(
     var imageUrl: String? = null,
     var description: String? = null,
     @Embedded
-    var place: PlaceRequest? = null
+    var place: PlaceCreateRequest? = null
 )  : Parcelable {
     @ColumnInfo(name = "picture_id")
     @PrimaryKey(autoGenerate = true) var id: Long = 0

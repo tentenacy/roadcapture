@@ -29,6 +29,7 @@ class AlbumCreationCancelDialogFragment(private val listener: () -> Unit) :
 
         binding.textDlgalbumcreationcancelConfirm.setOnClickListener {
             listener()
+            dismiss()
         }
         binding.textDlgalbumcreationcancelCancel.setOnClickListener(dismissOnClickListener)
     }

@@ -17,7 +17,7 @@ interface PictureDao {
     @Delete
     fun deletePicture(picture: Picture): Completable
 
-    @Query("SELECT * FROM picture")
+    @Query("SELECT * FROM picture ORDER BY `order`")
     fun getPictures(): Flowable<List<Picture>>
 
     @Query("DELETE FROM picture")

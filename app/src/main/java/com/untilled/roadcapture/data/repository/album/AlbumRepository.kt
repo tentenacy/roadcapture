@@ -1,6 +1,7 @@
 package com.untilled.roadcapture.data.repository.album
 
 import com.untilled.roadcapture.data.datasource.api.dto.address.PlaceCondition
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumCreateRequest
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
@@ -18,4 +19,5 @@ interface AlbumRepository {
     fun getAlbumDetail(id: Long): Single<AlbumResponse>
     fun likeAlbum(albumId: Long): Single<Unit>
     fun unlikeAlbum(albumId: Long): Single<Unit>
+    fun postAlbum(request: AlbumCreateRequest): Single<Unit>
 }

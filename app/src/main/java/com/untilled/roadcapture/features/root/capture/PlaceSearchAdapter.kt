@@ -3,20 +3,20 @@ package com.untilled.roadcapture.features.root.capture
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceRequest
+import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceCreateRequest
 import com.untilled.roadcapture.databinding.ItemPlaceSearchBinding
 
-class PlaceSearchAdapter(private val itemOnClickListener: (PlaceRequest?) -> Unit) :
+class PlaceSearchAdapter(private val itemOnClickListener: (PlaceCreateRequest?) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    lateinit var placeList: List<PlaceRequest>
+    var placeCreateList: List<PlaceCreateRequest> = emptyList()
 
     fun clear() {
-        placeList = emptyList()
+        placeCreateList = emptyList()
     }
 
     inner class PlaceSearchViewHolder(private val binding: ItemPlaceSearchBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(place: PlaceRequest) {
+        fun bind(place: PlaceCreateRequest) {
             binding.place = place
             binding.setOnClickItem {
                 itemOnClickListener(binding.place)
@@ -29,8 +29,8 @@ class PlaceSearchAdapter(private val itemOnClickListener: (PlaceRequest?) -> Uni
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as PlaceSearchViewHolder).bind(placeList[position])
+        (holder as PlaceSearchViewHolder).bind(placeCreateList[position])
     }
 
-    override fun getItemCount(): Int = placeList.size
+    override fun getItemCount(): Int = placeCreateList.size
 }

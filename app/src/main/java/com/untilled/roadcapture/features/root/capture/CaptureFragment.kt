@@ -2,6 +2,7 @@ package com.untilled.roadcapture.features.root.capture
 
 import android.Manifest
 import android.app.Activity.RESULT_OK
+import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -40,7 +41,6 @@ import com.naver.maps.map.overlay.PathOverlay
 import com.naver.maps.map.util.FusedLocationSource
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.utils.*
-import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
 
 
 @AndroidEntryPoint

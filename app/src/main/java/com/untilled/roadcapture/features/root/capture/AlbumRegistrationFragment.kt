@@ -6,23 +6,31 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumCreateRequest
+import com.untilled.roadcapture.data.datasource.api.dto.picture.PictureCreateRequest
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentAlbumRegistrationBinding
 import com.untilled.roadcapture.utils.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class AlbumRegistrationFragment : Fragment() {
     private var _binding: FragmentAlbumRegistrationBinding? = null
     private val binding get() = _binding!!
     private var picture: Picture? = null
+    private val viewModel: AlbumRegistrationViewModel by viewModels()
+
 
     private val checkOnClickListener: (View?) -> Unit = {
         if(binding.edtAlbumregTitle.text.isNullOrEmpty()) {
             Toast.makeText(requireContext(), "앨범 제목을 작성해주세요", Toast.LENGTH_SHORT).show()
         } else {
-            // todo: 앨범 등록 로직
+            viewModel.postAlbum(binding.edtAlbumregTitle.text.toString(),binding.edtAlbumregDesc.text?.toString())
+            //todo: navigation stack pop 해서 이전 화면으로 이동
         }
     }
 
@@ -34,6 +42,7 @@ class AlbumRegistrationFragment : Fragment() {
         _binding = FragmentAlbumRegistrationBinding.inflate(inflater, container, false)
 
         mainActivity().viewModel.setBindingRoot(binding.root)
+        viewModel.getPictures()
 
         return binding.root
     }

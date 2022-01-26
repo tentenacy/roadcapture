@@ -15,16 +15,17 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.data.datasource.api.dto.address.Address
 import com.untilled.roadcapture.data.datasource.api.dto.address.TmapAddressInfoResponse
-import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceRequest
+import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceCreateRequest
 import com.untilled.roadcapture.data.entity.LocationLatLng
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPictureEditorBinding
-import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
 import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToCapture
 import com.untilled.roadcapture.utils.navigateToSearchPlace
 import com.untilled.roadcapture.utils.showPictureDeleteAskingDialog
 import dagger.hilt.android.AndroidEntryPoint
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class PictureEditorFragment : Fragment() {
@@ -83,13 +84,14 @@ class PictureEditorFragment : Fragment() {
         showPictureDeleteAskingDialog(confirmOnClickListener)
     }
 
-    private fun addressToPlace(tmapAddress: TmapAddressInfoResponse): PlaceRequest {
+    private fun addressToPlace(tmapAddress: TmapAddressInfoResponse): PlaceCreateRequest {
         val addressList: List<String?> = tmapAddress.tmapAddressInfo.fullAddress!!.split(",")
-        return PlaceRequest(
-            placeCreatedAt = "",
-            placeLastModifiedAt = "",
-            latitude = locationLatLng.latitude,
-            longitude = locationLatLng.longitude,
+        val now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS")).toString()
+        return PlaceCreateRequest(
+            placeCreatedAt = now,
+            placeLastModifiedAt = now,
+            latitude = locationLatLng.latitude.toDouble(),
+            longitude = locationLatLng.longitude.toDouble(),
             name = addressList[0]!!,
             Address(
                 addressName = addressList[1] ?: addressList[0]!!,
