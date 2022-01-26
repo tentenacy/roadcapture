@@ -12,5 +12,6 @@ data class PictureResponse(
     val lastModifiedAt: LocalDateTime,
     val imageUrl: String,
     val description: String = "",
-    val place: PlaceResponse
+    val place: PlaceResponse,
+    val thumbnail: Boolean,
 ) : Parcelable

@@ -8,6 +8,7 @@ import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentCreateRequest
+import com.untilled.roadcapture.data.datasource.api.dto.picture.PictureResponse
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.data.entity.paging.PictureComments
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
@@ -47,6 +48,9 @@ class PictureViewerViewModel @Inject constructor(
 
     private val _liked = MutableLiveData<Boolean>()
     val liked: LiveData<Boolean> get() = _liked
+
+    private val _thumbnailPicture = MutableLiveData<PictureResponse>()
+    val thumbnailPicture: LiveData<PictureResponse> get() = _thumbnailPicture
 
     fun setCurrentPosition(position: Int) {
         _currentPosition.value = position
@@ -97,6 +101,7 @@ class PictureViewerViewModel @Inject constructor(
                     _likeCount.postValue(likeCount)
                     _commentCount.postValue(commentCount)
                     _liked.postValue(liked)
+                    _thumbnailPicture.postValue(pictures.first { it.thumbnail })
                 }
             }, { t ->
                 error.value = t.message

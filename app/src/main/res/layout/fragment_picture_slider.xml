@@ -21,20 +21,36 @@
 
         <ImageView
             android:id="@+id/image_picture_slider_bg"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop" />
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            bind:Image="@{vm.thumbnailPicture.imageUrl}" />
 
         <View
             android:id="@+id/view_picture_slider_overlay"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/overlay_picture_viewer" />
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/overlay_picture_viewer"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_picture_slider_container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_picture_slider"
@@ -70,10 +86,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:text="@{String.valueOf(vm.likeCount)}"
-                tools:text="39.1천"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/image_picture_slider_like"
-                app:layout_constraintStart_toStartOf="@id/image_picture_slider_like" />
+                app:layout_constraintStart_toStartOf="@id/image_picture_slider_like"
+                tools:text="39.1천" />
 
 
             <ImageView
@@ -93,10 +109,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
                 android:text="@{String.valueOf(vm.commentCount)}"
-                tools:text="392"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/image_picture_slider_comment"
-                app:layout_constraintStart_toStartOf="@id/image_picture_slider_comment" />
+                app:layout_constraintStart_toStartOf="@id/image_picture_slider_comment"
+                tools:text="392" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
