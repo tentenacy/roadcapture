@@ -1,6 +1,10 @@
 package com.untilled.roadcapture.features.picture
 
+import android.app.Activity
+import android.app.Dialog
 import android.os.Bundle
+import android.util.DisplayMetrics
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +13,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.Navigation
 import androidx.paging.PagingData
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentCreateRequest
@@ -56,8 +61,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     private val currentPositionObserver: (Int) -> Unit = { position ->
         if (position == 0) {
             binding.recycleBottomsheetComment.adapter = albumCommentsAdapter
-        }
-        else {
+        } else {
             binding.recycleBottomsheetComment.adapter = pictureCommentsAdapter
         }
         viewModel.getComments()
@@ -120,17 +124,38 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
         _binding = null
     }
 
+    private fun expandFullHeight() {
+        val bottomSheet = dialog?.findViewById(com.google.android.material.R.id.design_bottom_sheet) as View
+        val behavior = BottomSheetBehavior.from<View>(bottomSheet)
+        val layoutParams = bottomSheet.layoutParams
+        layoutParams.height = getBottomSheetDialogDefaultHeight()
+        bottomSheet.layoutParams = layoutParams
+        behavior.state = BottomSheetBehavior.STATE_EXPANDED
+    }
+
+    private fun getBottomSheetDialogDefaultHeight(): Int {
+        return getWindowHeight() * 95 / 100
+    }
+
+    private fun getWindowHeight(): Int {
+        val outMetrics = DisplayMetrics()
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
+            val display = activity?.display
+            display?.getRealMetrics (outMetrics)
+        } else {
+            @Suppress("DEPRECATION")
+            val display = activity?.windowManager?.defaultDisplay
+            @Suppress("DEPRECATION")
+            display?.getMetrics(outMetrics)
+        }
+        Log.d("Test",outMetrics.heightPixels.toString())
+        return outMetrics.heightPixels
+    }
+
     private fun observeData() {
         viewModel.albumComments.observe(viewLifecycleOwner, albumCommentsObserver)
         viewModel.pictureComments.observe(viewLifecycleOwner, pictureCommentsObserver)
         viewModel.currentPosition.observe(viewLifecycleOwner, currentPositionObserver)
-    }
-
-    private fun expandFullHeight() {
-        val bottomSheet =
-            dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
-        val behavior = BottomSheetBehavior.from<View>(bottomSheet!!)
-        behavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
     private fun setOnClickListeners() {
@@ -145,4 +170,5 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     private fun showReportDialog() {
         ReportDialogFragment({}).show(childFragmentManager, DialogTagConstant.REPORT_DIALOG)
     }
+
 }
