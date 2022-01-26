@@ -30,11 +30,11 @@ class FollowingAlbumsViewModel @Inject constructor(
     private val _followingsSortByAlbum = MutableLiveData<PagingData<FollowingsSortByAlbum.FollowingSortByAlbum>>()
     val followingsSortByAlbum: LiveData<PagingData<FollowingsSortByAlbum.FollowingSortByAlbum>> get() = _followingsSortByAlbum
 
-    fun getFollowingsSortByAlbum(){
+    fun getFollowingsSortByAlbum() {
         followingPagingRepository.getFollowingsSortByAlbum()
             .observeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
-            .subscribe({ response->
+            .subscribe({ response ->
                 _followingsSortByAlbum.value = response
             },{ t ->
 

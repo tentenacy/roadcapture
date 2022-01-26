@@ -56,6 +56,16 @@ class PictureViewerViewModel @Inject constructor(
         _currentPosition.value = position
     }
 
+    fun changeCommentCount() = album.value?.apply {
+        currentPosition.value?.let { position ->
+            if(position == 0) {
+                _commentCount.value = commentCount
+            } else {
+                _commentCount.value = pictures[position - 1].commentCount
+            }
+        }
+    }
+
     fun likeOrUnlike() {
         liked.value?.let { liked ->
             if (liked) {
@@ -67,28 +77,6 @@ class PictureViewerViewModel @Inject constructor(
             }
         }
         _liked.value = _liked.value?.not()
-    }
-
-    private fun like() = album.value?.apply {
-        albumRepository.likeAlbum(id)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-
-            }, { t ->
-                error.value = t.message
-            })
-    }
-
-    private fun unlike() = album.value?.apply {
-        albumRepository.unlikeAlbum(id)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-
-            }, { t ->
-                error.value = t.message
-            })
     }
 
     fun getAlbumDetail(id: Long) {
@@ -114,9 +102,51 @@ class PictureViewerViewModel @Inject constructor(
             if (position == 0) {
                 getAlbumComments()
             } else {
-                getPictureComments(pictures[position - 1].id)
+                getPictureComments()
             }
         }
+    }
+
+    fun postComment(request: CommentCreateRequest) = album.value?.apply {
+        currentPosition.value?.let { position ->
+            val pictureId = if(position == 0) thumbnailPicture.value?.id else pictures[position - 1].id
+            pictureId?.let {
+                commentRepository.postPictureComment(it, request)
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({
+                        getPictureComments()
+                    }) { t ->
+                        error.value = t.message
+                    }.addTo(compositeDisposable)
+            }
+        }
+    }
+
+    fun clearComments() {
+        _pictureComments.value = null
+        _albumComments.value = null
+    }
+
+    private fun like() = album.value?.apply {
+        albumRepository.likeAlbum(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+
+            }, { t ->
+                error.value = t.message
+            })
+    }
+
+    private fun unlike() = album.value?.apply {
+        albumRepository.unlikeAlbum(id)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+
+            }, { t ->
+                error.value = t.message
+            })
     }
 
     private fun getAlbumComments() = album.value?.apply {
@@ -130,41 +160,16 @@ class PictureViewerViewModel @Inject constructor(
             }.addTo(compositeDisposable)
     }
 
-    private fun getPictureComments(pictureId: Long) = album.value?.apply {
-        commentPagingRepository.getPictureComments(pictureId)
-            .subscribeOn(AndroidSchedulers.mainThread())
-            .cachedIn(viewModelScope)
-            .subscribe({
-                _pictureComments.postValue(it)
-            }) { t ->
-                error.value = t.message
-            }.addTo(compositeDisposable)
-    }
-
-    fun postComment(request: CommentCreateRequest) = album.value?.apply {
+    private fun getPictureComments() = album.value?.apply {
         currentPosition.value?.let { position ->
-            if (position == 0) {
-                /*commentRepository.postPictureComment(pictures[position - 1].id, request)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        getComments()
-                    }) { t ->
-                        error.value = t.message
-                    }.addTo(compositeDisposable)*/
-            } else {
-                commentRepository.postPictureComment(pictures[position - 1].id, request)
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({
-                        getPictureComments(pictures[position - 1].id)
-                    }) { t ->
-                        error.value = t.message
-                    }.addTo(compositeDisposable)
-            }
+            commentPagingRepository.getPictureComments(pictures[position - 1].id)
+                .observeOn(AndroidSchedulers.mainThread())
+                .cachedIn(viewModelScope)
+                .subscribe({
+                    _pictureComments.postValue(it)
+                }) { t ->
+                    error.value = t.message
+                }.addTo(compositeDisposable)
         }
-    }
-
-    fun clearComments() {
-        _pictureComments.value = null
-        _albumComments.value = null
     }
 }

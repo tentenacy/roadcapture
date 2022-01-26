@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.PagerSnapHelper
 import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.databinding.FragmentPictureSliderBinding
-import com.untilled.roadcapture.features.base.BaseFragment
 import com.untilled.roadcapture.features.picture.listener.PictureSnapPagerScrollListener
 import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
 import com.untilled.roadcapture.utils.setPaddingWhenStatusBarTransparent
@@ -57,6 +56,10 @@ class PictureSliderFragment: Fragment() {
         }
     }
 
+    private val currentPositionObserver: (Int) -> Unit = { position ->
+        viewModel.changeCommentCount()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -96,6 +99,7 @@ class PictureSliderFragment: Fragment() {
 
     private fun observeData() {
         viewModel.album.observe(viewLifecycleOwner, albumObserver)
+        viewModel.currentPosition.observe(viewLifecycleOwner, currentPositionObserver)
     }
 
     private fun getValueAnimator(start: Float, end: Float, view: LottieAnimationView): ValueAnimator {
@@ -109,14 +113,6 @@ class PictureSliderFragment: Fragment() {
     private fun setOnClickListeners() {
         binding.imagePictureSliderComment.setOnClickListener(commentOnClickListener)
         binding.imagePictureSliderLike.setOnClickListener(likeOnClickListener)
-    }
-
-    private fun setThumbnailToBackground(albumResponse: AlbumResponse) {
-        //TODO null 대신 isThumbnail 있는 picture로
-//        Glide.with(binding.imagePictureSliderBg.context)
-//            .load(null)
-//            .centerCrop()
-//            .into(binding.imagePictureSliderBg)
     }
 
     private fun setScrollListener() {

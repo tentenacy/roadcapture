@@ -10,8 +10,9 @@ data class PictureResponse(
     val id: Long,
     val createdAt: LocalDateTime,
     val lastModifiedAt: LocalDateTime,
+    val thumbnail: Boolean,
     val imageUrl: String,
     val description: String = "",
     val place: PlaceResponse,
-    val thumbnail: Boolean,
+    val commentCount: Int,
 ) : Parcelable
