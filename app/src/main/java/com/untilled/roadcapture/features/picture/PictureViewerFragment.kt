@@ -65,17 +65,21 @@ class PictureViewerFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setStatusBarTransparent()
+        binding.constraintPictureViewerContainer.setStatusBarTransparent(mainActivity())
         setIconWhite()
         setOnClickListeners()
     }
 
-    private fun updateView() {
-        viewModel.getAlbumDetail(args.id)
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        mainActivity().setStatusBarOrigin()
+
+        _binding = null
     }
 
-    private fun setStatusBarTransparent() {
-        binding.constraintPictureViewerContainer.setStatusBarTransparent(mainActivity())
+    private fun updateView() {
+        viewModel.getAlbumDetail(args.id)
     }
 
     private fun setOnClickListeners() {
@@ -126,13 +130,5 @@ class PictureViewerFragment : BaseFragment() {
             )
             hide(pictureMapFragment)
         }.commit()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-
-        mainActivity().setStatusBarOrigin()
-
-        _binding = null
     }
 }

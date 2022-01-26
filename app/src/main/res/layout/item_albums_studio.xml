@@ -40,7 +40,7 @@
             android:id="@+id/view_ialbums_studio_overlay"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/overlay_gradient_studio_thumbnail"
+            android:background="@drawable/overlay_gradient_studio_album_thumbnail"
             app:layout_constraintBottom_toBottomOf="@id/img_ialbums_studio_thumbnail"
             app:layout_constraintEnd_toEndOf="@id/img_ialbums_studio_thumbnail"
             app:layout_constraintStart_toStartOf="@id/img_ialbums_studio_thumbnail"

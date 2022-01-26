@@ -46,7 +46,7 @@
                     android:id="@+id/view_studio_overlay"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
-                    android:background="@drawable/overlay_gradient_thumbnail"
+                    android:background="@drawable/overlay_gradient_studio_background"
                     app:layout_constraintBottom_toBottomOf="@+id/img_studio_background"
                     app:layout_constraintEnd_toEndOf="@+id/img_studio_background"
                     app:layout_constraintStart_toStartOf="@+id/img_studio_background"

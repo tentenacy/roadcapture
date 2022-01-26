@@ -39,7 +39,7 @@
             android:id="@+id/view_ititlesearch_overlay"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="@drawable/overlay_gradient_studio_thumbnail"
+            android:background="@drawable/overlay_gradient_studio_album_thumbnail"
             app:layout_constraintStart_toStartOf="@id/img_ititlesearch_thumbnail"
             app:layout_constraintEnd_toEndOf="@id/img_ititlesearch_thumbnail"
             app:layout_constraintTop_toTopOf="@id/img_ititlesearch_thumbnail"
