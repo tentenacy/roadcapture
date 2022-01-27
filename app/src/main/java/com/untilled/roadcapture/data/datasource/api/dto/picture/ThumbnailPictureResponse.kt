@@ -16,6 +16,4 @@ data class ThumbnailPictureResponse (
     @ColumnInfo(name = "thumbnail_picture_last_modified_at")
     val lastModifiedAt: LocalDateTime,
     val imageUrl: String,
-    @Embedded
-    val place: PlaceResponse
 ): Parcelable

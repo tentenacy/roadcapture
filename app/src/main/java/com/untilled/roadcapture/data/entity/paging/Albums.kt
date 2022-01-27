@@ -4,6 +4,7 @@ import android.os.Parcelable
 import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.untilled.roadcapture.data.datasource.api.dto.picture.ThumbnailPictureResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.datasource.api.dto.user.UsersResponse
 import kotlinx.android.parcel.IgnoredOnParcel
@@ -29,7 +30,8 @@ data class Albums(
         val lastModifiedAt: LocalDateTime,
         val title: String,
         val description: String,
-        val thumbnailUrl: String,
+        @Embedded
+        val thumbnailPicture: ThumbnailPictureResponse,
         @Embedded
         val user: UsersResponse,
         val viewCount: Int,

@@ -48,8 +48,9 @@ class AlbumRegistrationViewModel
             pictures.add(
                 PictureCreateRequest(
                     thumbnail = _pictures[i].thumbnail,
-                    createdAt = now.plusSeconds(i.toLong()).format(formatter).toString(), // 순서 대로 넣기
-                    lastModifiedAt = now.plusSeconds(i.toLong()).format(formatter).toString(),
+                    order = i,
+//                    createdAt = now.plusSeconds(i.toLong()).format(formatter).toString(), // 순서 대로 넣기
+//                    lastModifiedAt = now.plusSeconds(i.toLong()).format(formatter).toString(),
                     description = _pictures[i].description,
                     place = _pictures[i].place!!,
                     imageUrl = _pictures[i].imageUrl

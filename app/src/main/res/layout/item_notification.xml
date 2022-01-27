@@ -66,7 +66,7 @@
             app:layout_constraintBottom_toBottomOf="@id/img_inotification_profile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/img_inotification_profile"
-            bind:notificationThumbnailImage="@{notification.thumbnailUrl}"
+            bind:notificationThumbnailImage="@{notification.thumbnailPicture.imageUrl}"
             tools:src="@drawable/img_sample_thumbnail" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

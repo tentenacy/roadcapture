@@ -134,8 +134,6 @@ class PlaceSearchFragment : Fragment() {
 
         return pois.poi.map {
             PlaceCreateRequest(
-                placeCreatedAt = now,
-                placeLastModifiedAt = now,
                 latitude = it.noorLat.toDouble(),
                 longitude = it.noorLon.toDouble(),
                 name = it.name ?: "",

@@ -32,7 +32,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            bind:titleSearchThumbnailImage="@{album.thumbnailUrl}"
+            bind:titleSearchThumbnailImage="@{album.thumbnailPicture.imageUrl}"
             tools:src="@drawable/img_sample_thumbnail" />
 
         <View

@@ -8,10 +8,6 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class PlaceCreateRequest(
-    @SerializedName("createdAt")
-    var placeCreatedAt: String,
-    @SerializedName("lastModifiedAt")
-    var placeLastModifiedAt: String,
     val latitude: Double,
     val longitude: Double,
     val name: String,

@@ -88,8 +88,6 @@ class PictureEditorFragment : Fragment() {
         val addressList: List<String?> = tmapAddress.tmapAddressInfo.fullAddress!!.split(",")
         val now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS")).toString()
         return PlaceCreateRequest(
-            placeCreatedAt = now,
-            placeLastModifiedAt = now,
             latitude = locationLatLng.latitude.toDouble(),
             longitude = locationLatLng.longitude.toDouble(),
             name = addressList[0]!!,

@@ -21,7 +21,7 @@ class AlbumsMapper {
                         it.lastModifiedAt,
                         it.title,
                         it.description,
-                        it.thumbnailUrl,
+                        it.thumbnailPicture,
                         it.user,
                         it.viewCount,
                         it.likeCount,
