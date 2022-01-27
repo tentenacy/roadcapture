@@ -50,10 +50,10 @@ class AlbumsFragment : Fragment() {
 
         val albumUserId = (args?.item as ItemAlbumsBinding).album?.user!!.id
         val albumId = args.item.album!!.albumId
-
+        val commentCount = args.item.album!!.commentCount
         when (args.view?.id) {
             R.id.img_ialbums_profile -> rootFrom3Depth().navigateToStudio(albumUserId)
-            R.id.img_ialbums_comment -> rootFrom3Depth().navigateToComment(albumId)
+            R.id.img_ialbums_comment -> rootFrom3Depth().navigateToComment(albumId,commentCount)
             R.id.img_ialbums_like -> {
                 setLikeStatus(args.view as LottieAnimationView, args.item)
             }

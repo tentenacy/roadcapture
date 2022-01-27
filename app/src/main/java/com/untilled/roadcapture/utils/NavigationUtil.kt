@@ -47,8 +47,8 @@ fun RootFragment.navigateToStudio(id: Long) {
     binding.root.navigate(RootFragmentDirections.actionRootFragmentToStudioFragment(id))
 }
 
-fun RootFragment.navigateToComment(id: Long) {
-    binding.root.navigate(RootFragmentDirections.actionRootFragmentToCommentFragment(id))
+fun RootFragment.navigateToComment(id: Long, commentCount: Int) {
+    binding.root.navigate(RootFragmentDirections.actionRootFragmentToCommentFragment(id,commentCount))
 }
 
 fun RootFragment.navigateToPictureViewer(id: Long) {

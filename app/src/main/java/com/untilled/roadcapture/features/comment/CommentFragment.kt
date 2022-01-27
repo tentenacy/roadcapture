@@ -5,23 +5,18 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.paging.PagingData
-import androidx.recyclerview.widget.LinearSmoothScroller
-import androidx.recyclerview.widget.RecyclerView
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.databinding.FragmentCommentBinding
 import com.untilled.roadcapture.databinding.ItemCommentBinding
 import com.untilled.roadcapture.features.common.CommentMorePopupMenu
 import com.untilled.roadcapture.features.common.PageLoadStateAdapter
-import com.untilled.roadcapture.features.common.ReportDialogFragment
 import com.untilled.roadcapture.utils.ui.CustomDivider
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
-import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
 import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToStudio
 import com.untilled.roadcapture.utils.showReportDialog
@@ -37,15 +32,24 @@ class CommentFragment : Fragment() {
     private val viewModel: CommentViewModel by viewModels()
     private val args: CommentFragmentArgs by navArgs()
 
-    private val adapterAlbum: AlbumCommentsAdapter by lazy {
+    private val albumAdapter: AlbumCommentsAdapter by lazy {
         AlbumCommentsAdapter(itemClickListener)
+    }
+
+    private val itemCountObserver: (Int) -> Unit = { itemCount ->
+        if(itemCount != 0){
+            binding.textCommentNocomment1.visibility = View.INVISIBLE
+            binding.textCommentNocomment2.visibility = View.INVISIBLE
+            binding.imgCommentNocomment.visibility = View.INVISIBLE
+            binding.recyclerComment.visibility = View.VISIBLE
+        }
     }
 
     @Inject
     lateinit var customDivider: CustomDivider
 
     private val commentObserver: (PagingData<AlbumComments.AlbumComment>) -> Unit = { pagingData ->
-        adapterAlbum.submitData(lifecycle, pagingData)
+        albumAdapter.submitData(lifecycle, pagingData)
     }
 
     private val menuItemClickListener: (item: MenuItem) -> Boolean = { item ->
@@ -92,13 +96,24 @@ class CommentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        initViews()
         observeData()
         initAdapter()
         setOnClickListeners()
     }
 
+    private fun initViews(){
+        if(args.commentsCount == 0){
+            binding.textCommentNocomment1.visibility = View.VISIBLE
+            binding.textCommentNocomment2.visibility = View.VISIBLE
+            binding.imgCommentNocomment.visibility = View.VISIBLE
+            binding.recyclerComment.visibility = View.INVISIBLE
+        }
+    }
+
     private fun observeData() {
         viewModel.albumComments.observe(viewLifecycleOwner, commentObserver)
+        viewModel.itemCount.observe(viewLifecycleOwner,itemCountObserver)
     }
 
     private fun setOnClickListeners() {
@@ -116,9 +131,11 @@ class CommentFragment : Fragment() {
 
     private fun initAdapter() {
         binding.recyclerComment.addItemDecoration(customDivider)
-        binding.recyclerComment.adapter = adapterAlbum.withLoadStateHeaderAndFooter(
-            header = PageLoadStateAdapter{adapterAlbum.retry()},
-            footer = PageLoadStateAdapter{adapterAlbum.retry()}
+        albumAdapter.addLoadStateListener { viewModel.itemCount.postValue(albumAdapter.itemCount) }
+        binding.recyclerComment.adapter = albumAdapter.withLoadStateHeaderAndFooter(
+            header = PageLoadStateAdapter{albumAdapter.retry()},
+            footer = PageLoadStateAdapter{albumAdapter.retry()}
         )
+
     }
 }

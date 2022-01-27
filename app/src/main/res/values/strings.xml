@@ -165,5 +165,7 @@
     <string name="search_input_hint">검색어를 입력하세요.</string>
     <string name="studio_edit">팔로우</string>
     <string name="iloading_retry">재시도</string>
+    <string name="comment_nocomment1">아직 댓글이 없습니다</string>
+    <string name="comment_nocomment2">가장 먼저 댓글을 남겨보세요 :)</string>
 
 </resources>
