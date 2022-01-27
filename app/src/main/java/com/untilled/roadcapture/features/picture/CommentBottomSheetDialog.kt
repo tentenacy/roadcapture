@@ -18,6 +18,7 @@ import com.untilled.roadcapture.databinding.BottomsheetCommentBinding
 import com.untilled.roadcapture.databinding.ItemCommentBinding
 import com.untilled.roadcapture.features.comment.AlbumCommentsAdapter
 import com.untilled.roadcapture.features.common.CommentMorePopupMenu
+import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.utils.ui.CustomDivider
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.*
@@ -58,7 +59,10 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
 
     private val currentPositionObserver: (Int) -> Unit = { position ->
         if (position == 0) {
-            binding.recycleBottomsheetComment.adapter = albumCommentsAdapter
+            binding.recycleBottomsheetComment.adapter = albumCommentsAdapter.withLoadStateHeaderAndFooter(
+                header = PageLoadStateAdapter{albumCommentsAdapter.retry()},
+                footer = PageLoadStateAdapter{albumCommentsAdapter.retry()}
+            )
             lifecycleScope.launchWhenCreated {
                 albumCommentsAdapter.loadStateFlow
                     .distinctUntilChangedBy { it.refresh }
@@ -68,7 +72,10 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
                     }
             }
         } else {
-            binding.recycleBottomsheetComment.adapter = pictureCommentsAdapter
+            binding.recycleBottomsheetComment.adapter = pictureCommentsAdapter.withLoadStateHeaderAndFooter(
+                header = PageLoadStateAdapter{pictureCommentsAdapter.retry()},
+                footer = PageLoadStateAdapter{pictureCommentsAdapter.retry()}
+            )
             lifecycleScope.launchWhenCreated {
                 pictureCommentsAdapter.loadStateFlow
                     .distinctUntilChangedBy { it.refresh }

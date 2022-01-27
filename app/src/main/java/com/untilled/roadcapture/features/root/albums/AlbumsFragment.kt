@@ -15,6 +15,7 @@ import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.databinding.FragmentAlbumsBinding
 import com.untilled.roadcapture.databinding.ItemAlbumsBinding
+import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.features.common.ReportDialogFragment
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.*
@@ -121,7 +122,10 @@ class AlbumsFragment : Fragment() {
     }
 
     fun initAdapter() {
-        binding.recycleAlbums.adapter = adapter
+        binding.recycleAlbums.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = PageLoadStateAdapter{adapter.retry()},
+            footer = PageLoadStateAdapter{adapter.retry()}
+        )
     }
 
     fun refresh(dateTimeFrom: String?, dateTimeTo: String?) {

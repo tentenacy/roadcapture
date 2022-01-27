@@ -11,6 +11,7 @@ import androidx.paging.PagingData
 import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.databinding.FragmentStudioBinding
+import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToFollower
@@ -83,8 +84,12 @@ class StudioFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        binding.recyclerStudioAlbum.adapter = studioAlbumsAdapter
+        binding.recyclerStudioAlbum.adapter = studioAlbumsAdapter.withLoadStateHeaderAndFooter(
+            header = PageLoadStateAdapter{studioAlbumsAdapter.retry()},
+            footer = PageLoadStateAdapter{studioAlbumsAdapter.retry()}
+        )
     }
+
     private fun refresh() {
         viewModel.getStudioAlbums(args.id,null)
     }

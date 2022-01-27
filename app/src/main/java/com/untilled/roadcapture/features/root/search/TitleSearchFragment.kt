@@ -11,6 +11,7 @@ import androidx.paging.PagingData
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.databinding.FragmentTitleSearchBinding
+import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.features.signup.SignupViewModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,7 +62,10 @@ class TitleSearchFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        binding.recyclerTitlesearch.adapter = adapter
+        binding.recyclerTitlesearch.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = PageLoadStateAdapter{adapter.retry()},
+            footer = PageLoadStateAdapter{adapter.retry()}
+        )
     }
 
 

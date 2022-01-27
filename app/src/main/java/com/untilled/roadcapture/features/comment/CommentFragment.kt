@@ -17,6 +17,7 @@ import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.databinding.FragmentCommentBinding
 import com.untilled.roadcapture.databinding.ItemCommentBinding
 import com.untilled.roadcapture.features.common.CommentMorePopupMenu
+import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.features.common.ReportDialogFragment
 import com.untilled.roadcapture.utils.ui.CustomDivider
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
@@ -115,6 +116,9 @@ class CommentFragment : Fragment() {
 
     private fun initAdapter() {
         binding.recyclerComment.addItemDecoration(customDivider)
-        binding.recyclerComment.adapter = adapterAlbum
+        binding.recyclerComment.adapter = adapterAlbum.withLoadStateHeaderAndFooter(
+            header = PageLoadStateAdapter{adapterAlbum.retry()},
+            footer = PageLoadStateAdapter{adapterAlbum.retry()}
+        )
     }
 }

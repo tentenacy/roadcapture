@@ -18,6 +18,7 @@ import com.untilled.roadcapture.data.entity.paging.FollowingsSortByAlbum
 import com.untilled.roadcapture.databinding.FragmentFollowingalbumsBinding
 import com.untilled.roadcapture.databinding.ItemAlbumsBinding
 import com.untilled.roadcapture.databinding.ItemFollowingFilterBinding
+import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.features.common.ReportDialogFragment
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.*
@@ -125,8 +126,14 @@ class FollowingAlbumsFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        binding.recyclerFollowingalbums.adapter = followingAlbumsAdapter
-        binding.recyclerFollowingalbumsFilter.adapter = followingAlbumsFilterAdapter
+        binding.recyclerFollowingalbums.adapter = followingAlbumsAdapter.withLoadStateHeaderAndFooter(
+            header = PageLoadStateAdapter{followingAlbumsAdapter.retry()},
+            footer = PageLoadStateAdapter{followingAlbumsAdapter.retry()}
+        )
+        binding.recyclerFollowingalbumsFilter.adapter = followingAlbumsFilterAdapter.withLoadStateHeaderAndFooter(
+            header = PageLoadStateAdapter{followingAlbumsFilterAdapter.retry()},
+            footer = PageLoadStateAdapter{followingAlbumsFilterAdapter.retry()}
+        )
     }
 
     private fun refresh(followingId: Long?) {

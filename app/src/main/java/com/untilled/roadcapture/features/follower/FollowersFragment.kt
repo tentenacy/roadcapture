@@ -15,6 +15,7 @@ import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.paging.Followers
 import com.untilled.roadcapture.databinding.FragmentFollowerBinding
 import com.untilled.roadcapture.databinding.ItemFollowBinding
+import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.utils.ui.CustomDivider
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.hideKeyboard
@@ -99,7 +100,10 @@ class FollowersFragment : Fragment(){
 
     private fun initAdapter(){
         binding.recyclerFollower.addItemDecoration(customDivider)
-        binding.recyclerFollower.adapter = adapter
+        binding.recyclerFollower.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = PageLoadStateAdapter{adapter.retry()},
+            footer = PageLoadStateAdapter{adapter.retry()}
+        )
     }
 
     private fun setOnClickListeners() {
