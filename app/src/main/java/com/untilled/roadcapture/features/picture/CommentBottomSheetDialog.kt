@@ -148,7 +148,6 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     }
 
     private fun setOnClickListeners() {
-        binding.imgBottomsheetCommentBack.setOnClickListener { mainActivity().onBackPressed() }
         binding.imgBottomsheetCommentInput.setOnClickListener(postOnClickListener)
     }
 

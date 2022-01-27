@@ -30,16 +30,3 @@ fun Context.getDpFromPx(px: Int) = resources.displayMetrics.density.let { densit
         else -> px / density
     }
 }
-
-@Suppress("DEPRECATION")
-fun Activity.getWindowHeight(): Int {
-    val outMetrics = DisplayMetrics()
-    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.R) {
-        val display = display
-        display?.getRealMetrics (outMetrics)
-    } else {
-        val display = windowManager?.defaultDisplay
-        display?.getMetrics(outMetrics)
-    }
-    return outMetrics.heightPixels
-}

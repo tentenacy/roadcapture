@@ -3,6 +3,7 @@ package com.untilled.roadcapture.utils
 import android.app.Activity
 import android.content.Context
 import android.view.View
+import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
@@ -100,7 +101,8 @@ fun BottomSheetDialogFragment.expandFullHeight() {
     val bottomSheet = dialog?.findViewById(com.google.android.material.R.id.design_bottom_sheet) as View
     val behavior = BottomSheetBehavior.from<View>(bottomSheet)
     val layoutParams = bottomSheet.layoutParams
-    layoutParams.height = mainActivity().getWindowHeight() * 95 / 100
+    layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
     bottomSheet.layoutParams = layoutParams
     behavior.state = BottomSheetBehavior.STATE_EXPANDED
+    behavior.skipCollapsed = true
 }

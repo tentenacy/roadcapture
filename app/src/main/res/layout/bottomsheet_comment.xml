@@ -11,9 +11,7 @@
         android:id="@+id/appbar_bottomsheet_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/ctoolbar_bottomsheet_comment"
@@ -28,16 +26,12 @@
                 app:contentInsetStart="0dp"
                 app:layout_collapseMode="parallax" />
 
-            <ImageView
-                android:id="@+id/img_bottomsheet_comment_back"
-                style="@style/BackArrow" />
-
             <TextView
                 android:id="@+id/text_bottomsheet_comment_title"
                 style="@style/ActionBarTitle"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
-                android:layout_marginStart="64dp"
+                android:layout_marginStart="16dp"
                 android:text="@string/bottomsheet_comment_title" />
 
 
@@ -48,7 +42,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycle_bottomsheet_comment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/item_comment" />
