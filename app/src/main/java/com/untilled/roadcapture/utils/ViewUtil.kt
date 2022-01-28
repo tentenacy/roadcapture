@@ -51,10 +51,6 @@ fun View.setPaddingWhenStatusBarTransparent(context: Context) = context.run {
     setPadding(0, this.statusBarHeight(), 0, this.navigationHeight())
 }
 
-fun View.setBottomSheetDialogPadding(context: Context) = context.run {
-    setPadding(0, 0, 0, getPxFromDp(8f))
-}
-
 fun Activity.hideKeyboard(editText: EditText) {
     val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     imm.hideSoftInputFromWindow(editText.windowToken, 0)

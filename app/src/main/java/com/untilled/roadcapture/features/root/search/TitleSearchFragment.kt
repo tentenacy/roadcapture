@@ -15,6 +15,13 @@ import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.features.signup.SignupViewModel
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.Observable
+import io.reactivex.ObservableEmitter
+import io.reactivex.Observer
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.flow.flow
+import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
 class TitleSearchFragment : Fragment() {

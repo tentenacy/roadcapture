@@ -121,7 +121,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
         _binding = BottomsheetCommentBinding.inflate(inflater, container, false)
 
         mainActivity().setSupportActionBar(binding.toolbarBottomsheetComment)
-        binding.coordinatorBottomsheetCommentContainer.setBottomSheetDialogPadding(mainActivity())
+
         return binding.root
     }
 
