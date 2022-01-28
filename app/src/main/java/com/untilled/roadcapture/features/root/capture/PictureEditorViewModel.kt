@@ -1,7 +1,7 @@
 package com.untilled.roadcapture.features.root.capture
 
 import androidx.lifecycle.MutableLiveData
-import com.untilled.roadcapture.data.datasource.api.dto.address.TmapAddressInfoResponse
+import com.untilled.roadcapture.data.datasource.api.ext.dto.address.TmapAddressInfoResponse
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.data.repository.picture.PictureRemoteRepository
 import com.untilled.roadcapture.data.repository.place.SearchPlaceRepository

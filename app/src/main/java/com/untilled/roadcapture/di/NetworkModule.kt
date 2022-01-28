@@ -1,10 +1,8 @@
 package com.untilled.roadcapture.di
 
-import android.os.Build
-import androidx.annotation.RequiresApi
 import com.google.gson.GsonBuilder
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
-import com.untilled.roadcapture.data.datasource.api.TmapService
+import com.untilled.roadcapture.data.datasource.api.ext.TmapService
 import com.untilled.roadcapture.network.interceptor.TokenInterceptor
 import dagger.Module
 import dagger.Provides
@@ -15,10 +13,8 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
-import java.time.LocalDate
 import java.time.LocalDateTime
 import javax.inject.Singleton
-import com.google.gson.Gson
 import com.untilled.roadcapture.data.datasource.dao.LocalTokenDao
 import com.untilled.roadcapture.utils.converter.GsonLocalDateTimeAdapter
 

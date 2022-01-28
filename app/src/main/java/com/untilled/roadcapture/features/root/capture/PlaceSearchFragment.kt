@@ -13,9 +13,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.data.datasource.api.dto.address.Address
 import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceCreateRequest
-import com.untilled.roadcapture.data.datasource.api.dto.place.SearchPlaceResponse
-import com.untilled.roadcapture.data.datasource.api.dto.poi.Poi
-import com.untilled.roadcapture.data.datasource.api.dto.poi.Pois
+import com.untilled.roadcapture.data.datasource.api.ext.dto.poi.SearchPlaceResponse
+import com.untilled.roadcapture.data.datasource.api.ext.dto.poi.Pois
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPlaceSearchBinding
 import com.untilled.roadcapture.utils.ui.CustomDivider
@@ -25,8 +24,6 @@ import com.untilled.roadcapture.utils.navigateToCapture
 import com.untilled.roadcapture.utils.navigateToPictureEditor
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -130,16 +127,14 @@ class PlaceSearchFragment : Fragment() {
     }
 
     private fun poisToPlace(pois: Pois): List<PlaceCreateRequest> {
-        val now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS")).toString()
-
         return pois.poi.map {
             PlaceCreateRequest(
                 latitude = it.noorLat.toDouble(),
                 longitude = it.noorLon.toDouble(),
                 name = it.name ?: "",
                 Address(
-                    addressName = makeAddressNumber(it),
-                    roadAddressName = makeRoadName(it),
+                    addressName = it.getAddressName(),
+                    roadAddressName = it.getRoadAddressName(),
                     region1DepthName = it.upperAddrName ?: "",
                     region2DepthName = it.middleAddrName ?: "",
                     region3DepthName = it.lowerAddrName ?: "",
@@ -159,36 +154,6 @@ class PlaceSearchFragment : Fragment() {
         binding.progressbarPlaceSearchLoading.isVisible = true  // 로딩 애니메이션 on
         binding.textPlaceSearchNoresult.isVisible = false
     }
-
-    private fun makeAddressNumber(poi: Poi): String =
-        if (poi.secondNo?.trim().isNullOrEmpty()) {
-            (poi.upperAddrName?.trim() ?: "") + " " +
-                    (poi.middleAddrName?.trim() ?: "") + " " +
-                    (poi.lowerAddrName?.trim() ?: "") + " " +
-                    (poi.detailAddrName?.trim() ?: "") + " " +
-                    poi.firstNo?.trim()
-        } else {
-            (poi.upperAddrName?.trim() ?: "") + " " +
-                    (poi.middleAddrName?.trim() ?: "") + " " +
-                    (poi.lowerAddrName?.trim() ?: "") + " " +
-                    (poi.detailAddrName?.trim() ?: "") + " " +
-                    (poi.firstNo?.trim() ?: "") + "-" +
-                    poi.secondNo?.trim()
-        }
-
-    private fun makeRoadName(poi: Poi): String =
-        if (poi.secondBuildNo?.trim().isNullOrEmpty()) {
-            (poi.upperAddrName?.trim() ?: "") + " " +
-                    (poi.middleAddrName?.trim() ?: "") + " " +
-                    (poi.roadName?.trim() ?: "") + " " +
-                    poi.firstBuildNo?.trim()
-        } else {
-            (poi.upperAddrName?.trim() ?: "") + " " +
-                    (poi.middleAddrName?.trim() ?: "") + " " +
-                    (poi.roadName?.trim() ?: "") + " " +
-                    (poi.firstBuildNo?.trim() ?: "") + "-" +
-                    poi.secondBuildNo?.trim()
-        }
 
     override fun onDestroy() {
         super.onDestroy()

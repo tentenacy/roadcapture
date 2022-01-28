@@ -1,4 +1,4 @@
-package com.untilled.roadcapture.data.datasource.api.dto.address
+package com.untilled.roadcapture.data.datasource.api.ext.dto.address
 
 import com.google.gson.annotations.SerializedName
 

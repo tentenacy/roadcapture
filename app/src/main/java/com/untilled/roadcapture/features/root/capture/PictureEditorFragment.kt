@@ -14,7 +14,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.data.datasource.api.dto.address.Address
-import com.untilled.roadcapture.data.datasource.api.dto.address.TmapAddressInfoResponse
+import com.untilled.roadcapture.data.datasource.api.ext.dto.address.TmapAddressInfoResponse
 import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceCreateRequest
 import com.untilled.roadcapture.data.entity.LocationLatLng
 import com.untilled.roadcapture.data.entity.Picture
@@ -55,7 +55,8 @@ class PictureEditorFragment : Fragment() {
     private val addressObserver: (TmapAddressInfoResponse) -> Unit = { addressInfoResponse ->
         if (picture?.place == null) {
             picture?.place = addressToPlace(addressInfoResponse)
-            binding.textPictureEditorPlace.text = picture?.place?.name
+            //binding.textPictureEditorPlace.text = picture?.place?.name
+            binding.textPictureEditorPlace.text = addressInfoResponse.tmapAddressInfo.getPlaceName()
         }
     }
 
