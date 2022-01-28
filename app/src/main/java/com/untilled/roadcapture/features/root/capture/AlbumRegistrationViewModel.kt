@@ -20,13 +20,13 @@ class AlbumRegistrationViewModel
     private val remoteRepository: PictureRemoteRepository,
     private val albumRepository: AlbumRepository
 ) : BaseViewModel() {
-    private lateinit var pictures: List<PictureCreateRequest>
+    private var pictureCreateRequestList = mutableListOf<PictureCreateRequest>()
 
     fun postAlbum(title: String, description: String?) {
             AlbumCreateRequest(
                 title = title,
                 description = description,
-                pictures = pictures
+                pictures = pictureCreateRequestList
             )
     }
 
@@ -34,29 +34,14 @@ class AlbumRegistrationViewModel
         remoteRepository.getPictures()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { _pictures ->
-                pictures = getPictureCreateRequestList(_pictures)
+            .subscribe { pictures ->
+                getPictureCreateRequestList(pictures)
             }.addTo(compositeDisposable)
     }
 
-    private fun getPictureCreateRequestList(_pictures: List<Picture>): List<PictureCreateRequest> {
-        val pictures = mutableListOf<PictureCreateRequest>()
-        val now = LocalDateTime.now()
-        val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS")
-
-        for (i in _pictures.indices) {
-            pictures.add(
-                PictureCreateRequest(
-                    thumbnail = _pictures[i].thumbnail,
-                    order = i,
-//                    createdAt = now.plusSeconds(i.toLong()).format(formatter).toString(), // 순서 대로 넣기
-//                    lastModifiedAt = now.plusSeconds(i.toLong()).format(formatter).toString(),
-                    description = _pictures[i].description,
-                    place = _pictures[i].place!!,
-                    imageUrl = _pictures[i].imageUrl
-                )
-            )
+    private fun getPictureCreateRequestList(pictures: List<Picture>){
+        for (picture in pictures) {
+            pictureCreateRequestList.add(picture.toPictureCreateRequest())
         }
-        return pictures.toList()
     }
 }

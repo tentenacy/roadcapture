@@ -211,7 +211,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                         return@OnClickListener true
                     }
                 }
-                Glide.with(requireContext()).asBitmap().load(picture.imageUrl!!.toUri())
+                Glide.with(requireContext()).asBitmap().load(picture.fileUri!!.toUri())
                     .apply(RequestOptions().centerCrop().circleCrop())
                     .into(object : SimpleTarget<Bitmap>() {
                         override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {

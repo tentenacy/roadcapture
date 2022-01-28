@@ -7,9 +7,13 @@
 
         <import type="android.view.View" />
 
+<!--        <variable-->
+<!--            name="place"-->
+<!--            type="com.untilled.roadcapture.data.datasource.api.dto.place.PlaceCreateRequest" />-->
+
         <variable
-            name="place"
-            type="com.untilled.roadcapture.data.datasource.api.dto.place.PlaceCreateRequest" />
+            name="poi"
+            type="com.untilled.roadcapture.data.datasource.api.ext.dto.poi.Poi" />
 
         <variable
             name="onClickItem"
@@ -29,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:text="@{place.name}"
+            android:text="@{poi.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -58,7 +62,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:gravity="center_vertical"
-            android:text="@{place.address.addressName}"
+            android:text="@{poi.getAddressName()}"
             android:textColor="@color/gray"
             app:layout_constraintBottom_toBottomOf="@+id/text_iplacesearch_label_addressnumber"
             app:layout_constraintEnd_toEndOf="parent"
@@ -89,7 +93,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginEnd="16dp"
             android:gravity="center_vertical"
-            android:text="@{place.address.roadAddressName}"
+            android:text="@{poi.getRoadAddressName()}"
             android:textColor="@color/gray"
             app:layout_constraintBottom_toBottomOf="@+id/text_iplacesearch_label_roadname"
             app:layout_constraintEnd_toEndOf="parent"

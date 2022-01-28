@@ -71,7 +71,7 @@
                 app:layout_constraintBottom_toBottomOf="@+id/text_albumreg_label_thumbnail"
                 app:layout_constraintEnd_toEndOf="@id/guideline_albumreg_end"
                 app:layout_constraintTop_toTopOf="@+id/text_albumreg_label_thumbnail"
-                android:text="@{picture.place.address.region1DepthName + ' ' + picture.place.address.region2DepthName + ' ' +picture.place.address.region3DepthName}"
+                android:text="@{picture.place.region1DepthName + ' ' + picture.place.region2DepthName + ' ' + picture.place.region3DepthName}"
                 tools:text="김포시 장기동" />
 
             <ImageView
@@ -96,7 +96,7 @@
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_albumreg_label_thumbnail"
-                bind:Image="@{picture.imageUrl}" />
+                bind:Image="@{picture.fileUri}" />
 
             <TextView
                 android:id="@+id/text_albumreg_label_title"

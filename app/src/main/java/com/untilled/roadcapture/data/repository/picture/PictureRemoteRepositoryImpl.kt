@@ -34,6 +34,6 @@ constructor(
     override fun initThumbnail() : Completable =
         pictureDao.initThumbnail()
 
-    override fun getNextOrder() : Single<Long> =
+    override fun getNextOrder() : Single<Int> =
         pictureDao.getNextOrder()
 }

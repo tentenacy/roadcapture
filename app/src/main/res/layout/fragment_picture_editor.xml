@@ -72,7 +72,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/toolbar_picture_editor"
-                bind:Image="@{picture.imageUrl}" />
+                bind:Image="@{picture.fileUri}" />
 
             <TextView
                 android:id="@+id/text_picture_editor_label_thumbnail"

@@ -1,7 +1,6 @@
 package com.untilled.roadcapture.features.root.capture
 
 import android.content.Context
-import android.content.pm.PackageManager
 import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
@@ -9,23 +8,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import com.untilled.roadcapture.data.datasource.api.dto.address.Address
 import com.untilled.roadcapture.data.datasource.api.ext.dto.address.TmapAddressInfoResponse
-import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceCreateRequest
-import com.untilled.roadcapture.data.entity.LocationLatLng
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPictureEditorBinding
-import com.untilled.roadcapture.utils.mainActivity
-import com.untilled.roadcapture.utils.navigateToCapture
-import com.untilled.roadcapture.utils.navigateToSearchPlace
-import com.untilled.roadcapture.utils.showPictureDeleteAskingDialog
+import com.untilled.roadcapture.utils.*
 import dagger.hilt.android.AndroidEntryPoint
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 
 @AndroidEntryPoint
 class PictureEditorFragment : Fragment() {
@@ -33,18 +23,15 @@ class PictureEditorFragment : Fragment() {
     val binding get() = _binding!!
     private var picture: Picture? = null
     private var mode = POST
-    private lateinit var locationLatLng: LocationLatLng
     private lateinit var locationManager: LocationManager
 
     private val viewModel: PictureEditorViewModel by viewModels()
 
     private val locationListener = LocationListener { location ->
-        location
-        locationLatLng = LocationLatLng(location.latitude.toFloat(), location.longitude.toFloat())
-        viewModel.getReverseGeoCode(location.latitude.toFloat(), location.longitude.toFloat())
+        viewModel.getReverseGeoCode(location.latitude, location.longitude)
     }
 
-    private val orderObserver: (Long) -> Unit = { order ->
+    private val orderObserver: (Int) -> Unit = { order ->
         picture?.order = order
     }
 
@@ -54,12 +41,10 @@ class PictureEditorFragment : Fragment() {
 
     private val addressObserver: (TmapAddressInfoResponse) -> Unit = { addressInfoResponse ->
         if (picture?.place == null) {
-            picture?.place = addressToPlace(addressInfoResponse)
-            //binding.textPictureEditorPlace.text = picture?.place?.name
-            binding.textPictureEditorPlace.text = addressInfoResponse.tmapAddressInfo.getPlaceName()
+            picture?.place = addressInfoResponse.tmapAddressInfo.toPlace()
+            binding.textPictureEditorPlace.text = picture?.place?.name ?: ""
         }
     }
-
 
     private val checkOnClickListener: (View?) -> Unit = {
         if (picture?.place == null) {
@@ -85,25 +70,6 @@ class PictureEditorFragment : Fragment() {
         showPictureDeleteAskingDialog(confirmOnClickListener)
     }
 
-    private fun addressToPlace(tmapAddress: TmapAddressInfoResponse): PlaceCreateRequest {
-        val addressList: List<String?> = tmapAddress.tmapAddressInfo.fullAddress!!.split(",")
-        val now = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS")).toString()
-        return PlaceCreateRequest(
-            latitude = locationLatLng.latitude.toDouble(),
-            longitude = locationLatLng.longitude.toDouble(),
-            name = addressList[0]!!,
-            Address(
-                addressName = addressList[1] ?: addressList[0]!!,
-                roadAddressName = addressList[2] ?: addressList[0]!!,
-                region1DepthName = tmapAddress.tmapAddressInfo.cityDo ?: "",
-                region2DepthName = tmapAddress.tmapAddressInfo.guGun ?: "",
-                region3DepthName = tmapAddress.tmapAddressInfo.adminDong ?: tmapAddress.tmapAddressInfo.legalDong
-                ?: tmapAddress.tmapAddressInfo.eupMyun ?: "",
-                zoneNo = ""
-            )
-        )
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -114,10 +80,24 @@ class PictureEditorFragment : Fragment() {
         mainActivity().viewModel.setBindingRoot(binding.root)
 
         getNavArgs()
+        setMode()
+        setOrder()
         initLocationManager()
         getLocation()
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        observeData()
+        setOnClickListeners()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     private fun initLocationManager() {
@@ -128,15 +108,9 @@ class PictureEditorFragment : Fragment() {
     }
 
     private fun getLocation() {
-        val isGpsEnabled = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-        if (isGpsEnabled) {
-            if (ContextCompat.checkSelfPermission(
-                    requireContext(),
-                    android.Manifest.permission.ACCESS_FINE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED && ContextCompat.checkSelfPermission(
-                    requireContext(),
-                    android.Manifest.permission.ACCESS_COARSE_LOCATION
-                ) == PackageManager.PERMISSION_GRANTED
+        if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            requireContext().checkSelfPermission(
+                listOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION)
             ) {
                 with(locationManager) {
                     requestLocationUpdates(
@@ -150,18 +124,6 @@ class PictureEditorFragment : Fragment() {
                 }
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        _binding = null
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        observeData()
-        setOnClickListeners()
     }
 
     private fun observeData() {
@@ -185,14 +147,18 @@ class PictureEditorFragment : Fragment() {
 
     private fun getNavArgs() {
         val args: PictureEditorFragmentArgs by navArgs()
-        if (args.picture != null) {
-            mode = if (args.picture!!.id == 0L) POST else EDIT
-            if (args.picture!!.order == 0L) {
-                viewModel.getNextOrder()
-            }
 
-            picture = args.picture
-            binding.picture = picture
+        picture = args.picture
+        binding.picture = picture
+    }
+
+    private fun setMode() {
+        mode = if(picture?.id == 0L) POST else EDIT
+    }
+
+    private fun setOrder() {
+        if (picture?.order == 0) {
+            viewModel.getNextOrder()
         }
     }
 

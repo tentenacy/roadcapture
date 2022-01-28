@@ -1,5 +1,7 @@
 package com.untilled.roadcapture.data.datasource.api.ext.dto.poi
 
+import com.untilled.roadcapture.data.entity.Place
+
 data class Poi(
     val name: String? = null,       //POI 의 name
     val frontLat: Float = 0.0f,     //시설물 입구 위도 좌표
@@ -16,7 +18,7 @@ data class Poi(
     val firstBuildNo: String? = null,   //건물번호 1
     val secondBuildNo: String? = null   //건물번호 2
 ) {
-    fun getAddressName() : String =
+    fun getAddressName(): String =
         if (secondNo?.trim().isNullOrEmpty()) {
             (upperAddrName?.trim() ?: "") + " " +
                     (middleAddrName?.trim() ?: "") + " " +
@@ -45,4 +47,16 @@ data class Poi(
                     (firstBuildNo?.trim() ?: "") + "-" +
                     secondBuildNo?.trim()
         }
+
+    fun toPlace(): Place =
+        Place(
+            latitude = noorLat.toDouble(),   // 위도
+            longitude = noorLon.toDouble(),  // 경도
+            name = name ?: "",       // 장소 이름
+            addressName = getAddressName(),        // 지번 주소
+            roadAddressName = getRoadAddressName(),   // 도로명 주소
+            region1DepthName = upperAddrName ?: "",   // 시구명
+            region2DepthName = middleAddrName ?: "",   // 시군구명
+            region3DepthName = lowerAddrName ?: "",   // 읍면동명
+        )
 }

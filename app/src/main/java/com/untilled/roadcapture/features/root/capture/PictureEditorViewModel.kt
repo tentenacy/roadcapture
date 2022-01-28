@@ -19,7 +19,7 @@ class PictureEditorViewModel
     private val remoteRepository: PictureRemoteRepository,
     private val searchPlaceRepository: SearchPlaceRepository
     ) : BaseViewModel() {
-    val order = MutableLiveData<Long>()
+    val order = MutableLiveData<Int>()
     val addressInfoResponse = MutableLiveData<TmapAddressInfoResponse>()
 
     fun insertPicture(picture: Picture) {
@@ -70,7 +70,7 @@ class PictureEditorViewModel
             }
     }
 
-    fun getReverseGeoCode(lat: Float, lon: Float) {
+    fun getReverseGeoCode(lat: Double, lon: Double) {
         searchPlaceRepository.getReverseGeoCode(lat.toString(), lon.toString())
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

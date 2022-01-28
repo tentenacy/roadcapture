@@ -27,5 +27,5 @@ interface PictureDao {
     fun initThumbnail() : Completable
 
     @Query("SELECT IFNULL(MAX(`order`), 0) FROM picture")
-    fun getNextOrder(): Single<Long>
+    fun getNextOrder(): Single<Int>
 }

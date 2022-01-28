@@ -18,5 +18,5 @@ interface PictureRemoteRepository {
 
     fun initThumbnail() : Completable
 
-    fun getNextOrder() : Single<Long>
+    fun getNextOrder() : Single<Int>
 }

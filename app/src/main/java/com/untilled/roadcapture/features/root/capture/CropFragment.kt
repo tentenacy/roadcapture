@@ -213,7 +213,7 @@ class CropFragment : Fragment() {
         val resultUri = UCrop.getOutput(result)
         if (resultUri != null) {
             // crop 성공하였으므로 crop한 이미지 uri 전달
-            navigateToPictureEditor(Picture(imageUrl = resultUri.toString()))
+            navigateToPictureEditor(Picture(fileUri = resultUri.toString()))
         } else {
             Toast.makeText(requireContext(), "실패", Toast.LENGTH_SHORT).show()
         }

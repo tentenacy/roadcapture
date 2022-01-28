@@ -4,22 +4,23 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.untilled.roadcapture.data.datasource.api.dto.place.PlaceCreateRequest
+import com.untilled.roadcapture.data.datasource.api.ext.dto.poi.Poi
 import com.untilled.roadcapture.databinding.ItemPlaceSearchBinding
 
-class PlaceSearchAdapter(private val itemOnClickListener: (PlaceCreateRequest?) -> Unit) :
+class PlaceSearchAdapter(private val itemOnClickListener: (Poi?) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    var placeCreateList: List<PlaceCreateRequest> = emptyList()
+    var poiList: List<Poi> = emptyList()
 
     fun clear() {
-        placeCreateList = emptyList()
+        poiList = emptyList()
     }
 
     inner class PlaceSearchViewHolder(private val binding: ItemPlaceSearchBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(place: PlaceCreateRequest) {
-            binding.place = place
+        fun bind(poi: Poi) {
+            binding.poi = poi
             binding.setOnClickItem {
-                itemOnClickListener(binding.place)
+                itemOnClickListener(binding.poi)
             }
         }
     }
@@ -29,8 +30,8 @@ class PlaceSearchAdapter(private val itemOnClickListener: (PlaceCreateRequest?) 
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        (holder as PlaceSearchViewHolder).bind(placeCreateList[position])
+        (holder as PlaceSearchViewHolder).bind(poiList[position])
     }
 
-    override fun getItemCount(): Int = placeCreateList.size
+    override fun getItemCount(): Int = poiList.size
 }
