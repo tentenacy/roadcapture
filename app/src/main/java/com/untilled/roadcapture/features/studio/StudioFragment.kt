@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.paging.PagingData
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.appbar.AppBarLayout
 import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.databinding.FragmentStudioBinding
@@ -31,6 +33,10 @@ class StudioFragment : Fragment() {
 
     }
 
+    private val appbarOffsetChangedListener = AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+        binding.swipeStudioContainer.isEnabled = verticalOffset == 0
+    }
+
     private val studioAlbumsAdapter: StudioAlbumsAdapter by lazy{
         StudioAlbumsAdapter(itemOnClickListener)
     }
@@ -41,6 +47,11 @@ class StudioFragment : Fragment() {
 
     private val albumsObserver: (PagingData<UserAlbums.UserAlbum>) -> Unit = { pagingData ->
         studioAlbumsAdapter.submitData(lifecycle, pagingData)
+    }
+
+    private val swipeRefreshListener = SwipeRefreshLayout.OnRefreshListener {
+        refresh()
+        binding.swipeStudioContainer.isRefreshing = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,8 +83,17 @@ class StudioFragment : Fragment() {
         initViews()
         initAdapter()
         setOnClickListeners()
+        setOnRefreshListener()
+        addOnOffsetChangedListener()
     }
 
+    private fun addOnOffsetChangedListener(){
+        binding.appbarStudio.addOnOffsetChangedListener(appbarOffsetChangedListener)
+    }
+
+    private fun setOnRefreshListener(){
+        binding.swipeStudioContainer.setOnRefreshListener(swipeRefreshListener)
+    }
     private fun observeData() {
         viewModel.userInfo.observe(viewLifecycleOwner,userObserver)
         viewModel.albums.observe(viewLifecycleOwner,albumsObserver)

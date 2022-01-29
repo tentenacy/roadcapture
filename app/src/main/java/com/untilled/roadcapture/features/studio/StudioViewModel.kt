@@ -2,7 +2,9 @@ package com.untilled.roadcapture.features.studio
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.rxjava3.cachedIn
 import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
@@ -47,6 +49,7 @@ class StudioViewModel @Inject constructor(
         albumPagingRepository.getStudioAlbums(userId,cond)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .cachedIn(viewModelScope)
             .subscribe({ response->
                 _albums.postValue(response)
             },{

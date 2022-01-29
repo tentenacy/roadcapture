@@ -6,9 +6,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.paging.PagingData
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
@@ -44,6 +46,11 @@ class AlbumsFragment : Fragment() {
 
     private val albumObserver: (PagingData<Albums.Album>) -> Unit = { pagingData ->
         adapter.submitData(lifecycle, pagingData)
+    }
+
+    private val swipeRefreshListener = SwipeRefreshLayout.OnRefreshListener {
+        refresh(null,null)
+        binding.swipeAlbumsInnercontainer.isRefreshing = false
     }
 
     private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
@@ -82,6 +89,7 @@ class AlbumsFragment : Fragment() {
         }
     }
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -104,6 +112,11 @@ class AlbumsFragment : Fragment() {
         observeData()
         initAdapter()
         setOnClickListeners()
+        setOnRefreshListener()
+    }
+
+    private fun setOnRefreshListener(){
+        binding.swipeAlbumsInnercontainer.setOnRefreshListener(swipeRefreshListener)
     }
 
     private fun observeData() {

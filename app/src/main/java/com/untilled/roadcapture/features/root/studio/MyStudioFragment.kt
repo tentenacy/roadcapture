@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.paging.PagingData
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.appbar.AppBarLayout
 import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.datasource.sharedpref.User
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
@@ -34,12 +36,21 @@ class MyStudioFragment : Fragment() {
 
     }
 
+    private val appbarOffsetChangedListener = AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+        binding.swipeMystudioContainer.isEnabled = verticalOffset == 0
+    }
+
     private val albumsObserver: (PagingData<UserAlbums.UserAlbum>) -> Unit = { pagingData ->
         myStudioAlbumsAdapter.submitData(lifecycle, pagingData)
     }
 
     private val userInfoObserver: (StudioUserResponse) -> Unit = { user ->
         binding.user = user
+    }
+
+    private val swipeRefreshListener = SwipeRefreshLayout.OnRefreshListener {
+        refresh()
+        binding.swipeMystudioContainer.isRefreshing = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,7 +70,6 @@ class MyStudioFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
-
         _binding = null
     }
 
@@ -69,8 +79,17 @@ class MyStudioFragment : Fragment() {
         initViews()
         initAdapter()
         setOnClickListeners()
+        setOnRefreshListener()
+        addOnOffsetChangedListener()
     }
 
+    private fun addOnOffsetChangedListener(){
+        binding.appbarMystudio.addOnOffsetChangedListener(appbarOffsetChangedListener)
+    }
+
+    private fun setOnRefreshListener(){
+        binding.swipeMystudioContainer.setOnRefreshListener(swipeRefreshListener)
+    }
     private fun observeData() {
         viewModel.myAlbums.observe(viewLifecycleOwner, albumsObserver)
         viewModel.userInfo.observe(viewLifecycleOwner,userInfoObserver)

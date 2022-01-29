@@ -15,6 +15,11 @@
             type="com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse" />
     </data>
 
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_studio_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinator_studio_container"
         android:layout_width="match_parent"
@@ -125,7 +130,6 @@
                     style="@style/Body"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
                     android:text="@string/studio_label_following"
                     android:textColor="@color/gray" />
 
@@ -226,5 +230,5 @@
 
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

@@ -9,6 +9,7 @@ import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.paging.PagingData
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.album.FollowingAlbumsCondition
@@ -58,6 +59,11 @@ class FollowingAlbumsFragment : Fragment() {
         val position = (args?.item as ItemFollowingFilterBinding).position
         followingId = (args.item).user?.followingSortByAlbumId
         getSelectedAlbums(position, followingId)
+    }
+
+    private val swipeRefreshListener = SwipeRefreshLayout.OnRefreshListener {
+        refresh(null)
+        binding.swipeFollowingalbumsInnercontainer.isRefreshing = false
     }
 
     private val albumItemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
@@ -118,6 +124,11 @@ class FollowingAlbumsFragment : Fragment() {
         observeData()
         initAdapter()
         setOnClickListeners()
+        setOnRefreshListener()
+    }
+
+    private fun setOnRefreshListener(){
+        binding.swipeFollowingalbumsInnercontainer.setOnRefreshListener(swipeRefreshListener)
     }
 
     private fun observeData() {

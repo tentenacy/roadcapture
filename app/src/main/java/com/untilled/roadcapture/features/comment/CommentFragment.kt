@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.paging.PagingData
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.databinding.FragmentCommentBinding
@@ -75,10 +76,15 @@ class CommentFragment : Fragment() {
         }
     }
 
+    private val swipeRefreshListener = SwipeRefreshLayout.OnRefreshListener {
+        refresh()
+        binding.swipeCommentInnercontainer.isRefreshing = false
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.getAlbumComments(args.albumsId)
+        refresh()
     }
 
     override fun onCreateView(
@@ -100,6 +106,15 @@ class CommentFragment : Fragment() {
         observeData()
         initAdapter()
         setOnClickListeners()
+        setOnRefreshListener()
+    }
+
+    private fun refresh(){
+        viewModel.getAlbumComments(args.albumsId)
+    }
+
+    private fun setOnRefreshListener(){
+        binding.swipeCommentInnercontainer.setOnRefreshListener(swipeRefreshListener)
     }
 
     private fun initViews(){
