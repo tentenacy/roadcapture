@@ -160,6 +160,18 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="16dp" />
 
+            <ProgressBar
+                android:id="@+id/progress_albumreg_loading"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:indeterminateDuration="1000"
+                android:visibility="invisible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>

@@ -7,15 +7,15 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class Place(
-    val latitude: Double,   // 위도
-    val longitude: Double,  // 경도
+    var latitude: Double,   // 위도
+    var longitude: Double,  // 경도
     val name: String,       // 장소 이름
     val addressName: String,        // 지번 주소
     val roadAddressName: String,   // 도로명 주소
     val region1DepthName: String,   // 시구명
     val region2DepthName: String,   // 시군구명
     val region3DepthName: String,   // 읍면동명
-    val zoneNo: String = ""              // 우편번호
+    val zoneNo: String = "1"              // 우편번호
 ) : Parcelable {
     fun toPlaceCreateRequest(): PlaceCreateRequest =
         PlaceCreateRequest(

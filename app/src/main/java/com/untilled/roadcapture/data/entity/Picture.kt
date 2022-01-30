@@ -25,7 +25,7 @@ data class Picture(
     fun toPictureCreateRequest() : PictureCreateRequest =
         PictureCreateRequest(
             thumbnail = thumbnail,
-            imageUrl = fileUri,
+            path = fileUri,
             description = description,
             place = place!!.toPlaceCreateRequest(),
             order = order

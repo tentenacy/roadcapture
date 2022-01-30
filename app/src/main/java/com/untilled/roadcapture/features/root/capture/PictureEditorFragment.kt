@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import com.untilled.roadcapture.data.datasource.api.ext.dto.address.TmapAddressInfoResponse
+import com.untilled.roadcapture.data.entity.LocationLatLng
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPictureEditorBinding
 import com.untilled.roadcapture.utils.*
@@ -24,11 +25,13 @@ class PictureEditorFragment : Fragment() {
     private var picture: Picture? = null
     private var mode = POST
     private lateinit var locationManager: LocationManager
+    private lateinit var locationLatLng: LocationLatLng
 
     private val viewModel: PictureEditorViewModel by viewModels()
 
     private val locationListener = LocationListener { location ->
         viewModel.getReverseGeoCode(location.latitude, location.longitude)
+        locationLatLng = LocationLatLng(location.latitude, location.longitude)
     }
 
     private val orderObserver: (Int) -> Unit = { order ->
@@ -42,6 +45,8 @@ class PictureEditorFragment : Fragment() {
     private val addressObserver: (TmapAddressInfoResponse) -> Unit = { addressInfoResponse ->
         if (picture?.place == null) {
             picture?.place = addressInfoResponse.tmapAddressInfo.toPlace()
+            picture?.place?.latitude = locationLatLng.latitude
+            picture?.place?.longitude = locationLatLng.longitude
             binding.textPictureEditorPlace.text = picture?.place?.name ?: ""
         }
     }

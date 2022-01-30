@@ -10,6 +10,8 @@ import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.utils.constant.url.RoadCapturePathConstant
 import io.reactivex.rxjava3.core.Single
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
@@ -19,5 +21,5 @@ interface AlbumRepository {
     fun getAlbumDetail(id: Long): Single<AlbumResponse>
     fun likeAlbum(albumId: Long): Single<Unit>
     fun unlikeAlbum(albumId: Long): Single<Unit>
-    fun postAlbum(request: AlbumCreateRequest): Single<Unit>
+    fun postAlbum(images: List<MultipartBody.Part>, data: String): Single<Unit>
 }

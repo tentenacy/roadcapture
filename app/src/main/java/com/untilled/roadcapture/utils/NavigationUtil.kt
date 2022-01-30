@@ -183,6 +183,10 @@ fun PictureViewerFragment.navigateToStudio(id: Long) {
     binding.root.navigate(PictureViewerFragmentDirections.actionPictureViewerContainerFragmentToStudioFragment(id))
 }
 
+fun AlbumRegistrationFragment.navigateToRoot() {
+    binding.root.navigate(AlbumRegistrationFragmentDirections.actionAlbumRegistrationFragmentToRootFragment())
+}
+
 fun Fragment.navigateToLogin() {
     findNavController().navigate(R.id.action_global_loginFragment)
 }

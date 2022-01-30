@@ -2,8 +2,9 @@ package com.untilled.roadcapture.data.datasource.api.dto.address
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
-
+import kotlinx.serialization.Serializable
 @Parcelize
+@Serializable
 data class Address(
     val addressName: String,        // 지번 주소
     val roadAddressName: String? = null,   // 도로명 주소

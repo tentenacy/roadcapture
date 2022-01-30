@@ -8,6 +8,8 @@ import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentCreateReq
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.utils.constant.url.RoadCapturePathConstant
 import io.reactivex.rxjava3.core.Single
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.http.*
 
 interface AlbumApi {
@@ -59,6 +61,7 @@ interface AlbumApi {
     @Multipart
     @POST(RoadCapturePathConstant.POST_ALBUM)
     fun postAlbum(
-        @Body request: AlbumCreateRequest
+        @Part images: List<MultipartBody.Part>,
+        @Part("data") data: String
     ) : Single<Unit>
 }

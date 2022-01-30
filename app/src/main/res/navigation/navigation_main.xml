@@ -275,6 +275,11 @@
             app:argType="com.untilled.roadcapture.data.entity.Picture"
             app:nullable="true"
             android:defaultValue="@null" />
+        <action
+            android:id="@+id/action_albumRegistrationFragment_to_rootFragment"
+            app:popUpTo="@id/rootFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/rootFragment" />
     </fragment>
     <fragment
         android:id="@+id/pictureViewerContainerFragment"

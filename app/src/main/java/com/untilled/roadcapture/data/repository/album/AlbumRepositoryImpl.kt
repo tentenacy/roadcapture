@@ -16,6 +16,8 @@ import com.untilled.roadcapture.utils.retryThreeTimes
 import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -33,8 +35,6 @@ class AlbumRepositoryImpl
     override fun getAlbumDetail(id: Long): Single<AlbumResponse> =
         roadCaptureApi.getAlbumDetail(id).retryThreeTimes()
 
-    override fun postAlbum(request: AlbumCreateRequest): Single<Unit> =
-        roadCaptureApi.postAlbum(request)
-            .subscribeOn(Schedulers.io())
-
+    override fun postAlbum(images: List<MultipartBody.Part>, data: String): Single<Unit> =
+        roadCaptureApi.postAlbum(images, data)
 }

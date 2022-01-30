@@ -17,6 +17,7 @@ import java.time.LocalDateTime
 import javax.inject.Singleton
 import com.untilled.roadcapture.data.datasource.dao.LocalTokenDao
 import com.untilled.roadcapture.utils.converter.GsonLocalDateTimeAdapter
+import retrofit2.converter.scalars.ScalarsConverterFactory
 
 
 @InstallIn(SingletonComponent::class)
@@ -56,6 +57,7 @@ class NetworkModule {
         val gson = GsonBuilder().registerTypeAdapter(LocalDateTime::class.java, GsonLocalDateTimeAdapter()).create()
 
         return Retrofit.Builder()
+            .addConverterFactory(ScalarsConverterFactory.create())
             .addConverterFactory(GsonConverterFactory.create(gson))
             .addCallAdapterFactory(RxJava3CallAdapterFactory.create())
             .client(client)
