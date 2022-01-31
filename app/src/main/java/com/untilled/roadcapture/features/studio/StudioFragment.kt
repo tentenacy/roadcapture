@@ -37,16 +37,16 @@ class StudioFragment : Fragment() {
         binding.swipeStudioContainer.isEnabled = verticalOffset == 0
     }
 
-    private val studioAlbumsAdapter: StudioAlbumsAdapter by lazy{
-        StudioAlbumsAdapter(itemOnClickListener)
+    private val studioAdapter: StudioAdapter by lazy{
+        StudioAdapter(itemOnClickListener)
     }
 
-    private val userObserver = { user: StudioUserResponse ->
+    private val userInfoObserver: (StudioUserResponse) -> Unit = { user ->
         binding.user = user
     }
 
     private val albumsObserver: (PagingData<UserAlbums.UserAlbum>) -> Unit = { pagingData ->
-        studioAlbumsAdapter.submitData(lifecycle, pagingData)
+        studioAdapter.submitData(lifecycle, pagingData)
     }
 
     private val swipeRefreshListener = SwipeRefreshLayout.OnRefreshListener {
@@ -95,7 +95,7 @@ class StudioFragment : Fragment() {
         binding.swipeStudioContainer.setOnRefreshListener(swipeRefreshListener)
     }
     private fun observeData() {
-        viewModel.userInfo.observe(viewLifecycleOwner,userObserver)
+        viewModel.userInfo.observe(viewLifecycleOwner,userInfoObserver)
         viewModel.albums.observe(viewLifecycleOwner,albumsObserver)
     }
 
@@ -104,9 +104,9 @@ class StudioFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        binding.recyclerStudioAlbum.adapter = studioAlbumsAdapter.withLoadStateHeaderAndFooter(
-            header = PageLoadStateAdapter{studioAlbumsAdapter.retry()},
-            footer = PageLoadStateAdapter{studioAlbumsAdapter.retry()}
+        binding.recyclerStudioAlbum.adapter = studioAdapter.withLoadStateHeaderAndFooter(
+            header = PageLoadStateAdapter{studioAdapter.retry()},
+            footer = PageLoadStateAdapter{studioAdapter.retry()}
         )
     }
 

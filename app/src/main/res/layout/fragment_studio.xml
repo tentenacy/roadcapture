@@ -20,215 +20,170 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinator_studio_container"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appbar_studio"
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
+            android:id="@+id/coordinator_studio_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="false">
+            android:layout_height="match_parent">
 
-            <com.untilled.roadcapture.utils.ui.CollapsibleToolbar
-                android:id="@+id/toolbar_studio"
+            <com.google.android.material.appbar.AppBarLayout
+                android:id="@+id/appbar_studio"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:minHeight="48dp"
-                app:layoutDescription="@xml/fragment_studio_scene"
-                app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed">
+                android:fitsSystemWindows="false">
 
-                <ImageView
-                    android:id="@+id/img_studio_background"
+                <com.untilled.roadcapture.utils.ui.CollapsibleToolbar
+                    android:id="@+id/toolbar_studio"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:scaleType="centerCrop"
-                    bind:studioBackgroundImage="@{user.backgroundImageUrl}"
-                    tools:src="@drawable/img_sample_profilebg" />
-
-                <View
-                    android:id="@+id/view_studio_overlay"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:background="@drawable/overlay_gradient_studio_background"
-                    app:layout_constraintBottom_toBottomOf="@+id/img_studio_background"
-                    app:layout_constraintEnd_toEndOf="@+id/img_studio_background"
-                    app:layout_constraintStart_toStartOf="@+id/img_studio_background"
-                    app:layout_constraintTop_toTopOf="@+id/img_studio_background" />
-
-                <ImageView
-                    android:id="@+id/img_studio_back_before"
-                    style="@style/BackArrow"
-                    app:tint="@color/white" />
-
-                <ImageView
-                    android:id="@+id/img_studio_back_after"
-                    style="@style/BackArrow" />
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/img_studio_profile"
-                    android:layout_width="96dp"
-                    android:layout_height="96dp"
-                    app:civ_border_color="@color/white"
-                    app:civ_border_width="2dp"
-                    bind:studioProfileImage="@{user.profileImageUrl}"
-                    tools:src="@drawable/img_sample_profile" />
-
-                <TextView
-                    android:id="@+id/text_studio_name"
-                    style="@style/HeadBold"
-                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:text="@{user.username}"
-                    tools:text="kvvangddang" />
+                    android:minHeight="48dp"
+                    app:layoutDescription="@xml/fragment_studio_scene"
+                    app:layout_scrollFlags="scroll|enterAlwaysCollapsed|exitUntilCollapsed">
 
-                <TextView
-                    android:id="@+id/text_studio_title"
-                    style="@style/ActionBarTitle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="200dp"
-                    android:text="@{user.username}"
-                    android:visibility="invisible"
-                    tools:text="kvvangddang" />
+                    <ImageView
+                        android:id="@+id/img_studio_background"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:scaleType="centerCrop"
+                        bind:studioBackgroundImage="@{user.backgroundImageUrl}"
+                        tools:src="@drawable/img_sample_profilebg" />
 
-                <TextView
-                    android:id="@+id/text_studio_desc"
-                    style="@style/Body"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:paddingHorizontal="48dp"
-                    android:text="@{user.introduction}"
-                    tools:text="안녕하세요 최광현입니다." />
+                    <View
+                        android:id="@+id/view_studio_overlay"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:background="@drawable/overlay_gradient_studio_background"
+                        app:layout_constraintBottom_toBottomOf="@+id/img_studio_background"
+                        app:layout_constraintEnd_toEndOf="@+id/img_studio_background"
+                        app:layout_constraintStart_toStartOf="@+id/img_studio_background"
+                        app:layout_constraintTop_toTopOf="@+id/img_studio_background" />
+
+                    <ImageView
+                        android:id="@+id/img_studio_back_before"
+                        style="@style/BackArrow"
+                        app:tint="@color/white" />
+
+                    <ImageView
+                        android:id="@+id/img_studio_back_after"
+                        style="@style/BackArrow" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/img_studio_profile"
+                        android:layout_width="96dp"
+                        android:layout_height="96dp"
+                        app:civ_border_color="@color/white"
+                        app:civ_border_width="2dp"
+                        bind:studioProfileImage="@{user.profileImageUrl}"
+                        tools:src="@drawable/img_sample_profile" />
+
+                    <TextView
+                        android:id="@+id/text_studio_name"
+                        style="@style/HeadBold"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:text="@{user.username}"
+                        tools:text="kvvangddang" />
+
+                    <TextView
+                        android:id="@+id/text_studio_title"
+                        style="@style/ActionBarTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="200dp"
+                        android:text="@{user.username}"
+                        android:visibility="invisible"
+                        tools:text="kvvangddang" />
+
+                    <TextView
+                        android:id="@+id/text_studio_desc"
+                        style="@style/Body"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:paddingHorizontal="48dp"
+                        android:text="@{user.introduction}"
+                        tools:text="안녕하세요 최광현입니다." />
 
 
-                <TextView
-                    android:id="@+id/text_studio_label_follower"
-                    style="@style/Body"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:text="@string/studio_label_follower"
-                    android:textColor="@color/gray" />
+                    <TextView
+                        android:id="@+id/text_studio_label_follower"
+                        style="@style/Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="32dp"
+                        android:text="@string/studio_label_follower"
+                        android:textColor="@color/gray" />
 
-                <TextView
-                    android:id="@+id/text_studio_follower"
-                    style="@style/SubHeadBold"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:layout_marginTop="16dp"
-                    android:gravity="top|center"
-                    android:text="@{Integer.toString(user.followerCount)}" />
+                    <TextView
+                        android:id="@+id/text_studio_follower"
+                        style="@style/SubHeadBold"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:layout_marginTop="16dp"
+                        android:gravity="top|center"
+                        android:text="@{Integer.toString(user.followerCount)}" />
 
-                <TextView
-                    android:id="@+id/text_studio_label_following"
-                    style="@style/Body"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/studio_label_following"
-                    android:textColor="@color/gray" />
+                    <TextView
+                        android:id="@+id/text_studio_label_following"
+                        style="@style/Body"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/studio_label_following"
+                        android:textColor="@color/gray" />
 
-                <TextView
-                    android:id="@+id/text_studio_following"
-                    style="@style/SubHeadBold"
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:gravity="top|center"
-                    android:text="@{Integer.toString(user.followingCount)}"
-                    tools:layout_editor_absoluteX="305dp"
-                    tools:layout_editor_absoluteY="325dp" />
+                    <TextView
+                        android:id="@+id/text_studio_following"
+                        style="@style/SubHeadBold"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
+                        android:gravity="top|center"
+                        android:text="@{Integer.toString(user.followingCount)}"
+                        tools:layout_editor_absoluteX="305dp"
+                        tools:layout_editor_absoluteY="325dp" />
 
-                <Button
-                    android:id="@+id/btn_studio_follow"
-                    style="@style/BodyWhite"
-                    android:layout_width="192dp"
-                    android:layout_height="48dp"
-                    android:layout_marginTop="32dp"
-                    bind:FollowedStatus="@{user.followed}"
-                    app:backgroundTint="@color/secondaryColor"
-                    tools:text="팔로우"/>
+                    <Button
+                        android:id="@+id/btn_studio_follow"
+                        style="@style/BodyWhite"
+                        android:layout_width="192dp"
+                        android:layout_height="48dp"
+                        android:layout_marginTop="32dp"
+                        app:backgroundTint="@color/secondaryColor"
+                        bind:FollowedStatus="@{user.followed}"
+                        tools:text="팔로우" />
 
-                <ImageView
-                    android:id="@+id/img_studio_more_before"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:padding="12dp"
-                    android:src="@drawable/ic_more"
-                    app:tint="@color/white" />
+                    <ImageView
+                        android:id="@+id/img_studio_more_before"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:padding="12dp"
+                        android:src="@drawable/ic_more"
+                        app:tint="@color/white" />
 
-                <ImageView
-                    android:id="@+id/img_studio_more_after"
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:padding="12dp"
-                    android:src="@drawable/ic_more" />
+                    <ImageView
+                        android:id="@+id/img_studio_more_after"
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:padding="12dp"
+                        android:src="@drawable/ic_more" />
 
-            </com.untilled.roadcapture.utils.ui.CollapsibleToolbar>
+                </com.untilled.roadcapture.utils.ui.CollapsibleToolbar>
 
-        </com.google.android.material.appbar.AppBarLayout>
+            </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/scroll_studio_container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_studio_album"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:orientation="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_studio_label_album"
+                tools:listitem="@layout/item_albums_studio" />
 
-                <TextView
-                    android:id="@+id/text_studio_label_place"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="24dp"
-                    android:text="@string/studio_label_place"
-                    android:textAppearance="@style/SubHeadBold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_studio_place"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="16dp"
-                    android:nestedScrollingEnabled="false"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_studio_label_place"
-                    tools:listitem="@layout/item_place_filter" />
-
-                <TextView
-                    android:id="@+id/text_studio_label_album"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="@string/studio_label_album"
-                    android:textAppearance="@style/SubHeadBold"
-                    app:layout_constraintStart_toStartOf="@+id/text_studio_label_place"
-                    app:layout_constraintTop_toBottomOf="@+id/recycler_studio_place" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_studio_album"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_studio_label_album"
-                    tools:listitem="@layout/item_albums_studio" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </androidx.core.widget.NestedScrollView>
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

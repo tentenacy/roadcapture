@@ -29,8 +29,8 @@ class MyStudioFragment : Fragment() {
 
     private val viewModel: MyStudioViewModel by viewModels()
 
-    private val myStudioAlbumsAdapter: MyStudioAlbumsAdapter by lazy{
-        MyStudioAlbumsAdapter(itemOnClickListener)
+    private val myStudioAdapter: MyStudioAdapter by lazy{
+        MyStudioAdapter(itemOnClickListener)
     }
     private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
 
@@ -41,7 +41,7 @@ class MyStudioFragment : Fragment() {
     }
 
     private val albumsObserver: (PagingData<UserAlbums.UserAlbum>) -> Unit = { pagingData ->
-        myStudioAlbumsAdapter.submitData(lifecycle, pagingData)
+        myStudioAdapter.submitData(lifecycle, pagingData)
     }
 
     private val userInfoObserver: (StudioUserResponse) -> Unit = { user ->
@@ -100,9 +100,9 @@ class MyStudioFragment : Fragment() {
     }
 
     private fun initAdapter() {
-        binding.recyclerMystudioAlbum.adapter = myStudioAlbumsAdapter.withLoadStateHeaderAndFooter(
-            header = PageLoadStateAdapter{myStudioAlbumsAdapter.retry()},
-            footer = PageLoadStateAdapter{myStudioAlbumsAdapter.retry()}
+        binding.recyclerMystudioAlbum.adapter = myStudioAdapter.withLoadStateHeaderAndFooter(
+            header = PageLoadStateAdapter{myStudioAdapter.retry()},
+            footer = PageLoadStateAdapter{myStudioAdapter.retry()}
         )
     }
 

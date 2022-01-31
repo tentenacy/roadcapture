@@ -5,12 +5,14 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.untilled.roadcapture.data.datasource.api.dto.picture.PictureResponse
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.databinding.ItemAlbumsStudioBinding
+import com.untilled.roadcapture.databinding.ItemLabelAlbumsStudioBinding
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 
 
-class MyStudioAlbumsAdapter(private val itemOnClickListener: (ItemClickArgs?) -> Unit): PagingDataAdapter<UserAlbums.UserAlbum, MyStudioAlbumsAdapter.MyStudioAlbumsViewHolder>(
+class MyStudioAdapter(private val itemOnClickListener: (ItemClickArgs?) -> Unit): PagingDataAdapter<UserAlbums.UserAlbum, RecyclerView.ViewHolder>(
     COMPARATOR
 ) {
 
@@ -23,14 +25,29 @@ class MyStudioAlbumsAdapter(private val itemOnClickListener: (ItemClickArgs?) ->
         }
     }
 
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyStudioAlbumsViewHolder {
-        return MyStudioAlbumsViewHolder(ItemAlbumsStudioBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+    inner class MyStudioLabelViewHolder(private val binding: ItemLabelAlbumsStudioBinding): RecyclerView.ViewHolder(binding.root){
+        fun bind(){
+            //binding.albumCount = albumCount
+        }
     }
 
-    override fun onBindViewHolder(holder: MyStudioAlbumsViewHolder, position: Int) {
-        getItem(position)?.let{
-            holder.bind(it)
+    override fun getItemViewType(position: Int): Int {
+        return position
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return when(viewType){
+            0 -> MyStudioLabelViewHolder(ItemLabelAlbumsStudioBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+            else -> MyStudioAlbumsViewHolder(ItemAlbumsStudioBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        }
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        when(holder.itemViewType){
+            0 -> (holder as MyStudioLabelViewHolder).bind()
+            else -> getItem(position - 1)?.let{
+                (holder as MyStudioAlbumsViewHolder).bind(it)
+            }
         }
     }
 
@@ -45,4 +62,5 @@ class MyStudioAlbumsAdapter(private val itemOnClickListener: (ItemClickArgs?) ->
             }
         }
     }
+
 }

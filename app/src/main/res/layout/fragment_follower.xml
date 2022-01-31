@@ -8,11 +8,10 @@
     android:fitsSystemWindows="true"
     tools:context=".features.root.albums.AlbumsFragment">
 
-
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appbar_follower"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
         android:fitsSystemWindows="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +20,7 @@
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:id="@+id/ctoolbar_follower"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             app:layout_scrollFlags="scroll|enterAlways">
 
             <com.google.android.material.appbar.MaterialToolbar
@@ -46,72 +45,55 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/scroll_follower_container"
+    <View
+        android:id="@+id/view_follower_search_bg"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="40dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="64dp"
+        android:background="@drawable/edit_search"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/appbar_follower">
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <ImageView
+        android:id="@+id/image_follower_search"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:layout_marginStart="16dp"
+        android:src="@drawable/ic_search"
+        app:layout_constraintBottom_toBottomOf="@id/view_follower_search_bg"
+        app:layout_constraintStart_toStartOf="@id/view_follower_search_bg"
+        app:layout_constraintTop_toTopOf="@id/view_follower_search_bg"
+        app:tint="#999999" />
 
-            <View
-                android:id="@+id/view_follower_search_bg"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_margin="16dp"
-                android:background="@drawable/edit_search"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/edt_follower_input"
+        style="@style/Body"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:background="@android:color/transparent"
+        android:hint="@string/follow_input_hint"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:maxLines="1"
+        app:layout_constraintBottom_toBottomOf="@id/view_follower_search_bg"
+        app:layout_constraintEnd_toEndOf="@id/view_follower_search_bg"
+        app:layout_constraintStart_toEndOf="@id/image_follower_search"
+        app:layout_constraintTop_toTopOf="@id/view_follower_search_bg" />
 
-            <ImageView
-                android:id="@+id/image_follower_search"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_marginStart="16dp"
-                android:src="@drawable/ic_search"
-                app:layout_constraintBottom_toBottomOf="@id/view_follower_search_bg"
-                app:layout_constraintStart_toStartOf="@id/view_follower_search_bg"
-                app:layout_constraintTop_toTopOf="@id/view_follower_search_bg"
-                app:tint="#999999" />
-
-            <EditText
-                android:id="@+id/edt_follower_input"
-                style="@style/Body"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:background="@android:color/transparent"
-                android:hint="@string/follow_input_hint"
-                android:imeOptions="actionSearch"
-                android:inputType="text"
-                android:maxLines="1"
-                app:layout_constraintBottom_toBottomOf="@id/view_follower_search_bg"
-                app:layout_constraintEnd_toEndOf="@id/view_follower_search_bg"
-                app:layout_constraintStart_toEndOf="@id/image_follower_search"
-                app:layout_constraintTop_toTopOf="@id/view_follower_search_bg"
-                tools:minHeight="0dp"
-                tools:paddingVertical="12dp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/recycler_follower"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="vertical"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/view_follower_search_bg"
-                tools:listitem="@layout/item_follow" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-    </androidx.core.widget.NestedScrollView>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_follower"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/view_follower_search_bg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/item_follow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

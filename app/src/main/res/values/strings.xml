@@ -167,5 +167,6 @@
     <string name="iloading_retry">재시도</string>
     <string name="comment_nocomment1">아직 댓글이 없습니다</string>
     <string name="comment_nocomment2">가장 먼저 댓글을 남겨보세요 :)</string>
+    <string name="ilabel_albums_studio">앨범</string>
 
 </resources>
