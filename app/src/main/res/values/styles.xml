@@ -267,19 +267,6 @@
 
     <style name="Theme.RoadCapture.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
 
-    <!--    <style name="CustomBottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog">-->
-    <!--        <item name="bottomSheetStyle">@style/CustomBottomSheet</item>-->
-    <!--    </style>-->
-
-    <!--    <style name="CustomBottomSheet" parent="Widget.MaterialComponents.BottomSheet.Modal">-->
-    <!--        <item name="shapeAppearanceOverlay">@style/CustomShapeAppearanceBottomSheetDialog</item>-->
-    <!--    </style>-->
-
-    <!--    <style name="CustomShapeAppearanceBottomSheetDialog" parent="">-->
-    <!--        <item name="cornerFamily">rounded</item>-->
-    <!--        <item name="cornerSizeTopRight">@dimen/bottom_sheet_corner_radius</item>-->
-    <!--        <item name="cornerSizeTopLeft">@dimen/bottom_sheet_corner_radius</item>-->
-    <!--    </style>-->
     <style name="BottomSheetDialog" parent="@style/ThemeOverlay.MaterialComponents.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/BottomSheet</item>
         <item name="android:windowIsFloating">false</item>
@@ -315,5 +302,19 @@
         <!-- Dialog 가 센터에 나옴 -->
         <item name="android:windowIsFloating">true</item>
     </style>
+
+
+    <style name="Widget.App.Snackbar" parent="Widget.MaterialComponents.Snackbar">
+        <item name="actionTextColorAlpha">1</item>
+    </style>
+
+    <style name="Widget.App.SnackbarButton" parent="Widget.MaterialComponents.Button.TextButton.Snackbar">
+        <item name="android:textColor">@color/secondaryColor</item>
+    </style>
+
+<!--    <style name="ThemeOverlay.App.Snackbar" parent="">-->
+<!--        <item name="colorPrimary">@color/shrine_pink_100</item>-->
+<!--        <item name="colorOnSurface">@color/shrine_pink_900</item>-->
+<!--    </style>-->
 
 </resources>

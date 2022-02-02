@@ -15,6 +15,7 @@ import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentAlbumRegistrationBinding
 import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToRoot
+import com.untilled.roadcapture.utils.showSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -41,10 +42,10 @@ class AlbumRegistrationFragment : Fragment() {
     private val isCompleteObserver: (Boolean) -> Unit = { isComplete ->
         binding.progressAlbumregLoading.isVisible = false
         if(isComplete) {
-            showSnackBar("앨범이 등록되었습니다.")
+            showSnackbar(requireView(),"앨범이 등록되었습니다.")
             navigateToRoot()
         } else {
-            showSnackBar("앨범 등록에 실패했습니다.")
+            showSnackbar(requireView(),"앨범 등록에 실패했습니다.")
         }
     }
 
@@ -94,13 +95,5 @@ class AlbumRegistrationFragment : Fragment() {
     private fun setOnClickListeners() {
         binding.imageAlbumregBack.setOnClickListener { mainActivity().onBackPressed() }
         binding.imageAlbumregCheck.setOnClickListener(checkOnClickListener)
-    }
-
-    private fun showSnackBar(title: String) {
-        Snackbar.make(binding.root, title, Snackbar.LENGTH_SHORT).apply {
-            setAction("확인") {
-                dismiss()
-            }
-        }.show()
     }
 }

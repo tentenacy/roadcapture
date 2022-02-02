@@ -1,6 +1,7 @@
 package com.untilled.roadcapture.features.root.studio
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,16 +10,14 @@ import androidx.fragment.app.viewModels
 import androidx.paging.PagingData
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.appbar.AppBarLayout
+import com.google.android.material.snackbar.Snackbar
 import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.datasource.sharedpref.User
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.databinding.FragmentMystudioBinding
 import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
-import com.untilled.roadcapture.utils.rootFrom3Depth
-import com.untilled.roadcapture.utils.navigateToFollower
-import com.untilled.roadcapture.utils.navigateToFollowing
-import com.untilled.roadcapture.utils.navigateToSettings
+import com.untilled.roadcapture.utils.*
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -119,7 +118,8 @@ class MyStudioFragment : Fragment() {
         }
         binding.btnMystudioEdit.setOnClickListener {
 //            Navigation.findNavController(rootFragmentFrom3Depth().binding.root)
-//                .navigate(RootFragmentDirections.actionRootFragmentToMyStudioModification(binding.user))
+//                .navigate(RootFragmentDirections.actionRootFragmentToMyStudioModification(binding.user)
+            showSnackbar(requireView(),"스낵바 테스트")
         }
         binding.imageMystudioSettingBefore.setOnClickListener {
             rootFrom3Depth().navigateToSettings()

@@ -98,6 +98,43 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tab_search" />
 
+        <ImageView
+            android:id="@+id/img_search_nosearch"
+            android:layout_width="168dp"
+            android:layout_height="168dp"
+            android:src="@drawable/ic_nosearch"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.4"
+            app:tint="@color/gray"/>
+
+        <TextView
+            android:id="@+id/text_search_nosearch1"
+            style="@style/HeadError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="4dp"
+            android:layout_marginTop="24dp"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/img_search_nosearch"
+            android:text="@string/search_nosearch1"/>
+
+        <TextView
+            android:id="@+id/text_search_nosearch2"
+            style="@style/SubHeadError"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="invisible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_search_nosearch1"
+            android:text="@string/search_nosearch2"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

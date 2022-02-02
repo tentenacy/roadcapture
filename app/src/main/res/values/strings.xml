@@ -168,5 +168,9 @@
     <string name="comment_nocomment1">아직 댓글이 없습니다</string>
     <string name="comment_nocomment2">가장 먼저 댓글을 남겨보세요 :)</string>
     <string name="ilabel_albums_studio">앨범</string>
+    <string name="followingalbums_nofollowing1">아직 아무도 팔로우를 하지 않았어요</string>
+    <string name="followingalbums_nofollowing2">팔로잉 후 소식을 받아보세요 :)</string>
+    <string name="search_nosearch1">검색 결과가 없습니다.</string>
+    <string name="search_nosearch2">다시 한번 검색해주세요 :)</string>
 
 </resources>

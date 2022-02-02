@@ -16,6 +16,8 @@
         <item name="android:enforceStatusBarContrast" tools:targetApi="q">false</item>
         <!-- Customize your theme here. -->
         <item name="bottomSheetDialogTheme">@style/BottomSheetDialog</item>
+        <item name="snackbarStyle">@style/Widget.App.Snackbar</item>
+        <item name="snackbarButtonStyle">@style/Widget.App.SnackbarButton</item>
 
     </style>
 </resources>

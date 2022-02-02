@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.features.root.albums.AlbumsFragment
@@ -109,4 +110,10 @@ fun BottomSheetDialogFragment.expandFullHeight() {
     bottomSheet.layoutParams = layoutParams
     behavior.state = BottomSheetBehavior.STATE_EXPANDED
     behavior.skipCollapsed = true
+}
+
+fun showSnackbar(view: View, message: String){
+    Snackbar.make(view,message, Snackbar.LENGTH_INDEFINITE)
+        .setAction("확인"){}
+        .show()
 }

@@ -75,6 +75,44 @@
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_constraintTop_toBottomOf="@id/recycler_followingalbums_filter"
                     tools:listitem="@layout/item_albums" />
+
+                <ImageView
+                    android:id="@+id/img_followingalbums_nofollowing"
+                    android:layout_width="168dp"
+                    android:layout_height="168dp"
+                    android:src="@drawable/ic_nofollowing"
+                    android:visibility="invisible"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.1"
+                    app:tint="@color/gray" />
+
+                <TextView
+                    android:id="@+id/text_followingalbums_nofollowing1"
+                    style="@style/HeadError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingVertical="4dp"
+                    android:layout_marginTop="24dp"
+                    android:text="@string/followingalbums_nofollowing1"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_followingalbums_nofollowing" />
+
+                <TextView
+                    android:id="@+id/text_followingalbums_nofollowing2"
+                    style="@style/SubHeadError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/followingalbums_nofollowing2"
+                    android:visibility="invisible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/text_followingalbums_nofollowing1" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

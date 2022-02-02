@@ -43,8 +43,21 @@ class TitleSearchFragment : Fragment() {
         adapter.submitData(lifecycle, pagingData)
     }
 
-    private val searchObserver: (String?) -> Unit = {
-        refresh(it)
+    private val searchObserver: (String?) -> Unit = { text ->
+        refresh(text)
+    }
+
+    private val itemCountObserver: (Int) -> Unit = { itemCount ->
+        val parent = (parentFragment as SearchFragment).binding
+        if(itemCount == 0){
+            parent.imgSearchNosearch.visibility = View.VISIBLE
+            parent.textSearchNosearch1.visibility = View.VISIBLE
+            parent.textSearchNosearch2.visibility = View.VISIBLE
+        } else{
+            parent.imgSearchNosearch.visibility = View.INVISIBLE
+            parent.textSearchNosearch1.visibility = View.INVISIBLE
+            parent.textSearchNosearch2.visibility = View.INVISIBLE
+        }
     }
 
     override fun onCreateView(
@@ -66,9 +79,11 @@ class TitleSearchFragment : Fragment() {
     private fun observeData() {
         viewModel.album.observe(viewLifecycleOwner, albumObserver)
         viewModel.search.observe(viewLifecycleOwner,searchObserver)
+        viewModel.itemCount.observe(viewLifecycleOwner,itemCountObserver)
     }
 
     private fun initAdapter() {
+        adapter.addLoadStateListener { viewModel.itemCount.postValue(adapter.itemCount) }
         binding.recyclerTitlesearch.adapter = adapter.withLoadStateHeaderAndFooter(
             header = PageLoadStateAdapter{adapter.retry()},
             footer = PageLoadStateAdapter{adapter.retry()}

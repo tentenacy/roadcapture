@@ -22,6 +22,7 @@ class SearchViewModel
 ): BaseViewModel() {
 
     val search = MutableLiveData("")
+    var itemCount = MutableLiveData<Int>()
 
     private var _albums = MutableLiveData<PagingData<Albums.Album>>()
     val album: LiveData<PagingData<Albums.Album>> get() = _albums

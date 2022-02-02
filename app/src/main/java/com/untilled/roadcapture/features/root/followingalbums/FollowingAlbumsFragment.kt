@@ -66,6 +66,18 @@ class FollowingAlbumsFragment : Fragment() {
         binding.swipeFollowingalbumsInnercontainer.isRefreshing = false
     }
 
+    private val itemCountObserver: (Int) -> Unit = { itemCount ->
+        if(itemCount == 0){
+            binding.imgFollowingalbumsNofollowing.visibility = View.VISIBLE
+            binding.textFollowingalbumsNofollowing1.visibility = View.VISIBLE
+            binding.textFollowingalbumsNofollowing2.visibility = View.VISIBLE
+        } else{
+            binding.imgFollowingalbumsNofollowing.visibility = View.INVISIBLE
+            binding.textFollowingalbumsNofollowing1.visibility = View.INVISIBLE
+            binding.textFollowingalbumsNofollowing2.visibility = View.INVISIBLE
+        }
+    }
+
     private val albumItemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
 
         val albumUserId = (args?.item as ItemAlbumsBinding).album?.user!!.id
@@ -134,6 +146,7 @@ class FollowingAlbumsFragment : Fragment() {
     private fun observeData() {
         viewModel.followingAlbums.observe(viewLifecycleOwner, followingAlbumsObserver)
         viewModel.followingsSortByAlbum.observe(viewLifecycleOwner, followingAlbumsFilterObserver)
+        viewModel.itemCount.observe(viewLifecycleOwner,itemCountObserver)
     }
 
     private fun initAdapter() {
@@ -141,6 +154,7 @@ class FollowingAlbumsFragment : Fragment() {
             header = PageLoadStateAdapter{followingAlbumsAdapter.retry()},
             footer = PageLoadStateAdapter{followingAlbumsAdapter.retry()}
         )
+        followingAlbumsFilterAdapter.addLoadStateListener { viewModel.itemCount.postValue(followingAlbumsFilterAdapter.itemCount) }
         binding.recyclerFollowingalbumsFilter.adapter = followingAlbumsFilterAdapter.withLoadStateHeaderAndFooter(
             header = PageLoadStateAdapter{followingAlbumsFilterAdapter.retry()},
             footer = PageLoadStateAdapter{followingAlbumsFilterAdapter.retry()}
