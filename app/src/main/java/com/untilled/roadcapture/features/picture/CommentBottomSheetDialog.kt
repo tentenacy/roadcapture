@@ -12,12 +12,14 @@ import androidx.paging.PagingData
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentCreateRequest
+import com.untilled.roadcapture.data.datasource.sharedpref.User
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.data.entity.paging.PictureComments
 import com.untilled.roadcapture.databinding.BottomsheetCommentBinding
 import com.untilled.roadcapture.databinding.ItemCommentBinding
 import com.untilled.roadcapture.features.comment.AlbumCommentsAdapter
 import com.untilled.roadcapture.features.common.CommentMorePopupMenu
+import com.untilled.roadcapture.features.common.MyCommentMorePopupMenu
 import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.utils.ui.CustomDivider
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
@@ -93,6 +95,12 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
             R.id.popup_menu_comment_more_report -> {
                 showReportDialog({})
             }
+            R.id.popup_menu_mycomment_more_edit -> {
+
+            }
+            R.id.popup_menu_mycomment_more_del -> {
+
+            }
         }
         true
     }
@@ -101,7 +109,8 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
         val userId = (args?.item as ItemCommentBinding).comments!!.user.id
         when (args.view?.id) {
             R.id.img_icomment_more -> {
-                CommentMorePopupMenu(requireContext(), args.view, menuItemClickListener).show()
+                if(userId == User.id) MyCommentMorePopupMenu(requireContext(), args.view, menuItemClickListener).show()
+                else CommentMorePopupMenu(requireContext(), args.view, menuItemClickListener).show()
             }
             R.id.img_icomment_profile -> {
                 pictureViewerFrom2Depth().navigateToStudio(userId)

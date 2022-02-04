@@ -172,5 +172,7 @@
     <string name="followingalbums_nofollowing2">팔로잉 후 소식을 받아보세요 :)</string>
     <string name="search_nosearch1">검색 결과가 없습니다.</string>
     <string name="search_nosearch2">다시 한번 검색해주세요 :)</string>
+    <string name="popup_menu_mycomment_more_edit">수정</string>
+    <string name="popup_menu_mycomment_more_del">삭제</string>
 
 </resources>
