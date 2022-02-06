@@ -12,7 +12,7 @@ interface PictureRemoteRepository {
 
     fun deletePicture(picture: Picture) : Completable
 
-    fun getPictures() : Flowable<List<Picture>>
+    fun getPictures() : Single<List<Picture>>
 
     fun deleteAll() : Completable
 

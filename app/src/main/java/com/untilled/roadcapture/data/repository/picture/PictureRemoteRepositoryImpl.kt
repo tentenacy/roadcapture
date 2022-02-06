@@ -26,7 +26,7 @@ constructor(
         pictureDao.deletePicture(picture)
 
 
-    override fun getPictures(): Flowable<List<Picture>> = pictureDao.getPictures()
+    override fun getPictures(): Single<List<Picture>> = pictureDao.getPictures()
 
     override fun deleteAll(): Completable =
         pictureDao.deleteAll()
