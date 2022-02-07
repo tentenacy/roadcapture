@@ -5,6 +5,8 @@ import android.os.Build
 import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
+import java.time.ZoneId
+import java.time.ZonedDateTime
 import java.time.temporal.ChronoUnit
 import java.util.*
 
@@ -18,7 +20,7 @@ fun dateToString(cal : Calendar): String {
 @SuppressLint("SimpleDateFormat")
 fun dateToSnsFormat(date: LocalDateTime): String{
 
-    val curDate = LocalDateTime.now()
+    val curDate = ZonedDateTime.now(ZoneId.of("Asia/Seoul")).toLocalDateTime()
     var diffDate = date.until(curDate, ChronoUnit.SECONDS)
 
     var msg: String?
@@ -104,4 +106,3 @@ class TimeUtil{
         const val YEAR = 5
     }
 }
-
