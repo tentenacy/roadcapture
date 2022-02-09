@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/popupmenu_mystudio_more_share"
+        android:title="@string/popupmenu_mystudio_more_share"/>
+    <item
+        android:id="@+id/popupmenu_mystudio_more_edit"
+        android:title="@string/popupmenu_mystudio_more_edit"/>
+    <item
+        android:id="@+id/popupmenu_mystudio_more_del"
+        android:title="@string/popupmenu_mystudio_more_del"/>
+</menu>

@@ -5,12 +5,14 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.paging.PagingData
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.snackbar.Snackbar
+import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.datasource.sharedpref.User
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
@@ -32,7 +34,27 @@ class MyStudioFragment : Fragment() {
         MyStudioAdapter(itemOnClickListener)
     }
     private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
+        when(args?.view?.id){
+            R.id.img_ialbums_studio_more -> {
+                val popupMenu = PopupMenu(requireContext(), args.view)
+                popupMenu.apply {
+                    menuInflater.inflate(R.menu.popupmenu_mystudio_more, popupMenu.menu)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.popupmenu_mystudio_more_share -> {
+                            }
+                            R.id.popupmenu_mystudio_more_edit -> {
 
+                            }
+                            R.id.popupmenu_mystudio_more_del -> {
+
+                            }
+                        }
+                        true
+                    }
+                }.show()
+            }
+        }
     }
 
     private val appbarOffsetChangedListener = AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->

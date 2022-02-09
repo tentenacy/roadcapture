@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.paging.PagingData
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.appbar.AppBarLayout
+import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.databinding.FragmentStudioBinding
@@ -18,6 +20,7 @@ import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToFollower
 import com.untilled.roadcapture.utils.navigateToFollowing
+import com.untilled.roadcapture.utils.showReportDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -30,7 +33,24 @@ class StudioFragment : Fragment() {
     private val viewModel: StudioViewModel by viewModels()
 
     private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
-
+        when(args?.view?.id){
+            R.id.img_ialbums_studio_more -> {
+                val popupMenu = PopupMenu(requireContext(), args.view)
+                popupMenu.apply {
+                    menuInflater.inflate(R.menu.popupmenu_studio_more, popupMenu.menu)
+                    setOnMenuItemClickListener { item ->
+                        when (item.itemId) {
+                            R.id.popupmenu_studio_more_share -> {
+                            }
+                            R.id.popupmenu_studio_more_report -> {
+                                showReportDialog {  }
+                            }
+                        }
+                        true
+                    }
+                }.show()
+            }
+        }
     }
 
     private val appbarOffsetChangedListener = AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
