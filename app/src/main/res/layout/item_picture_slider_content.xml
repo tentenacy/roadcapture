@@ -24,9 +24,13 @@
 
         <View
             android:id="@+id/view_ipicture_slider_content_overlay"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/overlay_picture_viewer"/>
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/overlay_picture_viewer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
         <ImageView
             android:id="@+id/img_ipicture_slider_content_bg"

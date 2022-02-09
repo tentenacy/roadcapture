@@ -44,19 +44,29 @@ class TitleSearchFragment : Fragment() {
     }
 
     private val searchObserver: (String?) -> Unit = { text ->
-        refresh(text)
+        val parent = (parentFragment as SearchFragment).binding
+        if(viewModel.search.value == ""){
+            parent.imgSearchNosearch.visibility = View.INVISIBLE
+            parent.textSearchNosearch1.visibility = View.INVISIBLE
+            parent.textSearchNosearch2.visibility = View.INVISIBLE
+            binding.recyclerTitlesearch.visibility = View.INVISIBLE
+        }else{
+            refresh(text)
+        }
     }
 
     private val itemCountObserver: (Int) -> Unit = { itemCount ->
         val parent = (parentFragment as SearchFragment).binding
-        if(itemCount == 0){
+        if(itemCount == 0 && viewModel.search.value != ""){
             parent.imgSearchNosearch.visibility = View.VISIBLE
             parent.textSearchNosearch1.visibility = View.VISIBLE
             parent.textSearchNosearch2.visibility = View.VISIBLE
+            binding.recyclerTitlesearch.visibility = View.INVISIBLE
         } else{
             parent.imgSearchNosearch.visibility = View.INVISIBLE
             parent.textSearchNosearch1.visibility = View.INVISIBLE
             parent.textSearchNosearch2.visibility = View.INVISIBLE
+            binding.recyclerTitlesearch.visibility = View.VISIBLE
         }
     }
 
