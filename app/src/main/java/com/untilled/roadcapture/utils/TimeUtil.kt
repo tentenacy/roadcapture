@@ -2,6 +2,7 @@ package com.untilled.roadcapture.utils
 
 import android.annotation.SuppressLint
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
 import java.time.LocalDateTime
@@ -41,11 +42,13 @@ fun dateToSnsFormat(date: LocalDateTime): String{
     return msg
 }
 
-fun getFilterDate(filter: Int): String{
-    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS")
-    val calendar = Calendar.getInstance()
+fun getRadioFilterDate(filter: Int): String{
+    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSSSS", Locale.KOREA)
+    format.timeZone = TimeZone.getTimeZone("Asia/Seoul")
+    val calendar = getTodayCalendar()
     when(filter){
         TimeUtil.TODAY ->{
+            calendar.add(Calendar.DAY_OF_MONTH, -1)
         }
 
         TimeUtil.WEEK -> {
@@ -65,7 +68,7 @@ fun getFilterDate(filter: Int): String{
     return date.toString()
 }
 
-fun getFilterDate(str: String): String{
+fun getFilterDateFrom(str: String): String{
     val year = str.substring(0,4).toInt()
     val month = str.substring(6,8).toInt() - 1
     val day = str.substring(10,12).toInt()
@@ -75,6 +78,20 @@ fun getFilterDate(str: String): String{
     val date = format.format(time)
     return date.toString()
 }
+
+fun getFilterDateTo(str: String): String{
+    val year = str.substring(0,4).toInt()
+    val month = str.substring(6,8).toInt() - 1
+    val day = str.substring(10,12).toInt()
+    val calendar = getCalendar(year,month,day)
+    val format = SimpleDateFormat("yyyy-MM-dd'T'23:59:59.999999999")
+    val time = calendar.time
+    val date = format.format(time)
+    return date.toString()
+}
+
+fun getTodayCalendar(): Calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"),Locale.KOREA)
+
 
 fun getCalendar(year: Int, month: Int, dayOfMonth: Int): Calendar {
     val cal = Calendar.getInstance()

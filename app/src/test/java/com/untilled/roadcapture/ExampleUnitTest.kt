@@ -1,13 +1,10 @@
 package com.untilled.roadcapture
 
 import com.untilled.roadcapture.utils.dateToSnsFormat
-import com.untilled.roadcapture.utils.getFilterDate
 import org.junit.Test
 
 import org.junit.Assert.*
-import java.text.SimpleDateFormat
 import java.time.LocalDateTime
-import java.util.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).

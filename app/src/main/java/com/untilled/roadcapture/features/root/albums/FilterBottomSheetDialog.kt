@@ -48,17 +48,35 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
         behavior.state = BottomSheetBehavior.STATE_EXPANDED
     }
 
-    private fun initViews() {
+    private fun reset() {
         binding.run {
-            val now = Calendar.getInstance()
-            btnDlgfilterStartdate.text = dateToString(now)
-            btnDlgfilterEnddate.text = dateToString(now)
+            btnDlgfilterStartdate.text = dateToString(getTodayCalendar())
+            btnDlgfilterEnddate.text = dateToString(getTodayCalendar())
             radiogroupDlgfilterDuration.clearCheck()
             radiogroupDlgfilterSorting.clearCheck()
             radiobtnDlgfilterWhole.isChecked = true
             radiobtnDlgfilterSortLatest.isChecked = true
+            viewModel.radioId = R.id.radiobtn_dlgfilter_whole
         }
+    }
 
+    private fun initViews(){
+        binding.run {
+            btnDlgfilterStartdate.text = viewModel.dateTimeFrom
+            btnDlgfilterEnddate.text = viewModel.dateTimeTo
+            initRadioState()
+        }
+    }
+
+    private fun initRadioState(){
+        when(viewModel.radioId){
+            R.id.radiobtn_dlgfilter_whole -> binding.radiobtnDlgfilterWhole.isChecked = true
+            R.id.radiobtn_dlgfilter_today -> binding.radiobtnDlgfilterToday.isChecked = true
+            R.id.radiobtn_dlgfilter_week -> binding.radiobtnDlgfilterWeek.isChecked = true
+            R.id.radiobtn_dlgfilter_month -> binding.radiobtnDlgfilterMonth.isChecked = true
+            R.id.radiobtn_dlgfilter_year -> binding.radiobtnDlgfilterYear.isChecked = true
+            null -> binding.radiogroupDlgfilterDuration.clearCheck()
+        }
     }
 
     private fun setOnClickListeners() {
@@ -69,7 +87,7 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
             dismiss()
         }
         binding.textDlgfilterReset.setOnClickListener {
-            initViews()
+            reset()
         }
         binding.btnDlgfilterStartdate.setOnClickListener {
             onCreateDatePicker(it as Button)
@@ -83,24 +101,30 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
         when (binding.radiogroupDlgfilterDuration.checkedRadioButtonId) {
             binding.radiobtnDlgfilterWhole.id -> {
                 albumsFragment.refresh(null, null)
+                viewModel.radioId = R.id.radiobtn_dlgfilter_whole
             }
 
             binding.radiobtnDlgfilterToday.id -> {
-                albumsFragment.refresh(getFilterDate(TimeUtil.TODAY), getFilterDate(TimeUtil.TODAY))
+                albumsFragment.refresh(getRadioFilterDate(TimeUtil.TODAY), null)
+                viewModel.radioId = R.id.radiobtn_dlgfilter_today
             }
             binding.radiobtnDlgfilterWeek.id -> {
-                albumsFragment.refresh(getFilterDate(TimeUtil.WEEK), getFilterDate(TimeUtil.TODAY))
+                albumsFragment.refresh(getRadioFilterDate(TimeUtil.WEEK), null)
+                viewModel.radioId = R.id.radiobtn_dlgfilter_week
             }
 
             binding.radiobtnDlgfilterMonth.id -> {
-                albumsFragment.refresh(getFilterDate(TimeUtil.MONTH), getFilterDate(TimeUtil.TODAY))
+                albumsFragment.refresh(getRadioFilterDate(TimeUtil.MONTH), null)
+                viewModel.radioId = R.id.radiobtn_dlgfilter_month
             }
 
             binding.radiobtnDlgfilterYear.id -> {
-                albumsFragment.refresh(getFilterDate(TimeUtil.YEAR), getFilterDate(TimeUtil.TODAY))
+                albumsFragment.refresh(getRadioFilterDate(TimeUtil.YEAR), null)
+                viewModel.radioId = R.id.radiobtn_dlgfilter_year
             }
             else -> {
-                albumsFragment.refresh(getFilterDate(binding.btnDlgfilterStartdate.text.toString()), getFilterDate(binding.btnDlgfilterEnddate.text.toString()))
+                albumsFragment.refresh(getFilterDateFrom(binding.btnDlgfilterStartdate.text.toString()), getFilterDateTo(binding.btnDlgfilterEnddate.text.toString()))
+                viewModel.radioId = null
             }
         }
         dismiss()
@@ -124,6 +148,7 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
                         val startDate = getCalendar(year, month, dayOfMonth)
                         val endDate = getCalendar(binding.btnDlgfilterEnddate.text.toString())
                         view.text = dateToString(startDate)
+                        viewModel.dateTimeFrom = dateToString(startDate)
                         if (compareDate(startDate, endDate)) {
                             binding.btnDlgfilterEnddate.text = dateToString(startDate)
                         }
@@ -132,6 +157,7 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
                         val startDate = getCalendar(binding.btnDlgfilterStartdate.text.toString())
                         val endDate = getCalendar(year, month, dayOfMonth)
                         view.text = dateToString(endDate)
+                        viewModel.dateTimeTo = dateToString(endDate)
                         if (compareDate(startDate, endDate)) {
                             binding.btnDlgfilterStartdate.text = dateToString(endDate)
                         }

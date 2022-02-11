@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
+import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
@@ -15,11 +16,14 @@ import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingReposito
 import com.untilled.roadcapture.data.repository.follower.FollowRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
+import com.untilled.roadcapture.utils.dateToString
+import com.untilled.roadcapture.utils.getTodayCalendar
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.schedulers.Schedulers
 import kotlinx.coroutines.flow.Flow
+import java.util.*
 import javax.inject.Inject
 
 
@@ -32,9 +36,9 @@ class AlbumsViewModel
     private val albumRepository: AlbumRepository
 ) : BaseViewModel() {
 
-    private var currentDateTimeFrom: String? = null
-    private var currentDateTimeTo: String? = null
-    private var currentAlbumsResult: Flow<PagingData<AlbumsResponse>>? = null
+    var dateTimeFrom: String? = dateToString(getTodayCalendar())
+    var dateTimeTo: String? = dateToString(getTodayCalendar())
+    var radioId: Int? = R.id.radiobtn_dlgfilter_whole
 
     private var _albums = MutableLiveData<PagingData<Albums.Album>>()
     val album: LiveData<PagingData<Albums.Album>> get() = _albums

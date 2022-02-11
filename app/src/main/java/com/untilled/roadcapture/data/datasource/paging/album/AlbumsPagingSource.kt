@@ -1,5 +1,6 @@
 package com.untilled.roadcapture.data.datasource.paging.album
 
+import android.util.Log
 import androidx.paging.PagingState
 import androidx.paging.rxjava3.RxPagingSource
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
@@ -31,7 +32,6 @@ class AlbumsPagingSource @Inject constructor(
 
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Albums.Album>> {
         val position = params.key ?: 0
-
         return roadCaptureApi.getAlbums(
             page = position,
             size = params.loadSize,
