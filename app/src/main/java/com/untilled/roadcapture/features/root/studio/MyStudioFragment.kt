@@ -3,6 +3,7 @@ package com.untilled.roadcapture.features.root.studio
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
@@ -17,6 +18,7 @@ import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.datasource.sharedpref.User
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.databinding.FragmentMystudioBinding
+import com.untilled.roadcapture.databinding.ItemAlbumsStudioBinding
 import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.*
@@ -35,26 +37,23 @@ class MyStudioFragment : Fragment() {
     }
     private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
         when(args?.view?.id){
-            R.id.img_ialbums_studio_more -> {
-                val popupMenu = PopupMenu(requireContext(), args.view)
-                popupMenu.apply {
-                    menuInflater.inflate(R.menu.popupmenu_mystudio_more, popupMenu.menu)
-                    setOnMenuItemClickListener { item ->
-                        when (item.itemId) {
-                            R.id.popupmenu_mystudio_more_share -> {
-                            }
-                            R.id.popupmenu_mystudio_more_edit -> {
+            R.id.img_ialbums_studio_more -> MyStudioMorePopupMenu(requireContext(),args.view, menuItemClickListener((args?.item as ItemAlbumsStudioBinding).album?.userAlbumId!!)).show()
+        }
+    }
 
-                            }
-                            R.id.popupmenu_mystudio_more_del -> {
+    private fun menuItemClickListener(albumId: Long): (item: MenuItem) -> Boolean = { item ->
+        when (item.itemId) {
+            R.id.popupmenu_mystudio_more_share -> {
 
-                            }
-                        }
-                        true
-                    }
-                }.show()
+            }
+            R.id.popupmenu_mystudio_more_edit -> {
+
+            }
+            R.id.popupmenu_mystudio_more_del -> {
+                viewModel.deleteAlbum(albumId)
             }
         }
+        true
     }
 
     private val appbarOffsetChangedListener = AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->

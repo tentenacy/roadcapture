@@ -78,6 +78,17 @@ class AlbumsViewModel
             })
     }
 
+    fun deleteAlbum(albumId: Long){
+        albumRepository.deleteAlbum(albumId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+
+            },{
+
+            })
+    }
+
 //    fun getUserFollowing(followingsCondition: FollowingsCondition, pageRequest: PageRequest){
 //        userRepository.getUserFollowing(followingsCondition, pageRequest)
 //            .subscribeOn(Schedulers.io())

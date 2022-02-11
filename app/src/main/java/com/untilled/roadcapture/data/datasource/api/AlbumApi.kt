@@ -64,4 +64,9 @@ interface AlbumApi {
         @Part images: List<MultipartBody.Part>,
         @Part("data") data: String
     ) : Single<Unit>
+
+    @DELETE(RoadCapturePathConstant.DELETE_ALBUM)
+    fun deleteAlbum(
+        @Path("albumId") albumId: Long
+    ): Single<Unit>
 }

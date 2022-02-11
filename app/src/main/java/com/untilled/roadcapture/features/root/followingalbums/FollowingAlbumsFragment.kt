@@ -3,6 +3,7 @@ package com.untilled.roadcapture.features.root.followingalbums
 import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
@@ -19,6 +20,7 @@ import com.untilled.roadcapture.data.entity.paging.FollowingsSortByAlbum
 import com.untilled.roadcapture.databinding.FragmentFollowingalbumsBinding
 import com.untilled.roadcapture.databinding.ItemAlbumsBinding
 import com.untilled.roadcapture.databinding.ItemFollowingFilterBinding
+import com.untilled.roadcapture.features.common.AlbumMorePopupMenu
 import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.features.common.ReportDialogFragment
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
@@ -93,25 +95,23 @@ class FollowingAlbumsFragment : Fragment() {
             R.id.img_ialbums_thumbnail,
             R.id.text_ialbums_title,
             R.id.text_ialbums_desc -> rootFrom3Depth().navigateToPictureViewer(albumId)
-            R.id.img_ialbums_more -> {
-                val popupMenu = PopupMenu(requireContext(), args.view)
-                popupMenu.apply {
-                    menuInflater.inflate(R.menu.popupmenu_albums_more, popupMenu.menu)
-                    setOnMenuItemClickListener { item ->
-                        when (item.itemId) {
-                            R.id.popup_menu_albums_more_share -> {
-                            }
-                            R.id.popup_menu_albums_more_report -> {
-                                showReportDialog({})
-                            }
-                            R.id.popup_menu_albums_more_hide -> {
-                            }
-                        }
-                        true
-                    }
-                }.show()
+            R.id.img_ialbums_more -> AlbumMorePopupMenu(requireContext(), args.view, menuItemClickListener).show()
+        }
+    }
+
+    private val menuItemClickListener: (item: MenuItem) -> Boolean = { item ->
+        when (item.itemId) {
+            R.id.popupmenu_albums_more_report -> {
+                showReportDialog({})
+            }
+            R.id.popupmenu_albums_more_hide -> {
+
+            }
+            R.id.popupmenu_albums_more_share -> {
+
             }
         }
+        true
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -3,10 +3,9 @@ package com.untilled.roadcapture.features.root.albums
 import android.animation.ValueAnimator
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.paging.PagingData
@@ -14,11 +13,12 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
+import com.untilled.roadcapture.data.datasource.sharedpref.User
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.databinding.FragmentAlbumsBinding
 import com.untilled.roadcapture.databinding.ItemAlbumsBinding
+import com.untilled.roadcapture.features.common.AlbumMorePopupMenu
 import com.untilled.roadcapture.features.common.PageLoadStateAdapter
-import com.untilled.roadcapture.features.common.ReportDialogFragment
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.*
 import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
@@ -53,6 +53,36 @@ class AlbumsFragment : Fragment() {
         binding.swipeAlbumsInnercontainer.isRefreshing = false
     }
 
+    private val albumMenuItemClickListener: (item: MenuItem) -> Boolean = { item ->
+        when (item.itemId) {
+            R.id.popupmenu_albums_more_report -> {
+                showReportDialog({})
+            }
+            R.id.popupmenu_albums_more_hide -> {
+
+            }
+            R.id.popupmenu_albums_more_share -> {
+
+            }
+        }
+        true
+    }
+
+    private fun myAlbumMenuItemClickListener(albumId: Long): (item: MenuItem) -> Boolean = { item ->
+        when (item.itemId) {
+            R.id.popupmenu_myalbums_more_share -> {
+
+            }
+            R.id.popupmenu_myalbums_more_edit -> {
+
+            }
+            R.id.popupmenu_myalbums_more_del -> {
+                viewModel.deleteAlbum(albumId)
+            }
+        }
+        true
+    }
+
     private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
 
         val albumUserId = (args?.item as ItemAlbumsBinding).album?.user!!.id
@@ -69,22 +99,8 @@ class AlbumsFragment : Fragment() {
             R.id.text_ialbums_title,
             R.id.text_ialbums_desc -> rootFrom3Depth().navigateToPictureViewer(albumId)
             R.id.img_ialbums_more -> {
-                val popupMenu = PopupMenu(requireContext(), args.view)
-                popupMenu.apply {
-                    menuInflater.inflate(R.menu.popupmenu_albums_more, popupMenu.menu)
-                    setOnMenuItemClickListener { item ->
-                        when (item.itemId) {
-                            R.id.popup_menu_albums_more_share -> {
-                            }
-                            R.id.popup_menu_albums_more_report -> {
-                                showReportDialog({})
-                            }
-                            R.id.popup_menu_albums_more_hide -> {
-                            }
-                        }
-                        true
-                    }
-                }.show()
+                if(albumUserId == User.id) MyAlbumMorePopupMenu(requireContext(), args.view, myAlbumMenuItemClickListener(albumId)).show()
+                else AlbumMorePopupMenu(requireContext(), args.view, albumMenuItemClickListener).show()
             }
         }
     }

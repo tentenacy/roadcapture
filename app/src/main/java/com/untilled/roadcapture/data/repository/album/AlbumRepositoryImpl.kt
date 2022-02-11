@@ -32,9 +32,9 @@ class AlbumRepositoryImpl
 
     override fun unlikeAlbum(albumId: Long): Single<Unit> = roadCaptureApi.unlikeAlbum(albumId)
 
-    override fun getAlbumDetail(id: Long): Single<AlbumResponse> =
-        roadCaptureApi.getAlbumDetail(id).retryThreeTimes()
+    override fun getAlbumDetail(id: Long): Single<AlbumResponse> = roadCaptureApi.getAlbumDetail(id).retryThreeTimes()
 
-    override fun postAlbum(images: List<MultipartBody.Part>, data: String): Single<Unit> =
-        roadCaptureApi.postAlbum(images, data)
+    override fun postAlbum(images: List<MultipartBody.Part>, data: String): Single<Unit> = roadCaptureApi.postAlbum(images, data)
+
+    override fun deleteAlbum(albumId: Long): Single<Unit> = roadCaptureApi.deleteAlbum(albumId)
 }

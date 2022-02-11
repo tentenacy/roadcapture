@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/popup_menu_albums_more_share"
-        android:title="@string/popup_menu_albums_more_share"/>
+        android:id="@+id/popupmenu_albums_more_share"
+        android:title="@string/popupmenu_albums_more_share"/>
     <item
-        android:id="@+id/popup_menu_albums_more_report"
-        android:title="@string/popup_menu_albums_more_report"/>
+        android:id="@+id/popupmenu_albums_more_report"
+        android:title="@string/popupmenu_albums_more_report"/>
     <item
-        android:id="@+id/popup_menu_albums_more_hide"
-        android:title="@string/popup_menu_albums_more_hide"/>
+        android:id="@+id/popupmenu_albums_more_hide"
+        android:title="@string/popupmenu_albums_more_hide"/>
 </menu>
