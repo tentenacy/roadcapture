@@ -34,12 +34,13 @@ class MyStudioFragment : Fragment() {
 
     private val viewModel: MyStudioViewModel by viewModels()
 
-    private val myStudioAdapter: MyStudioAdapter by lazy{
+    private val myStudioAdapter: MyStudioAdapter by lazy {
         MyStudioAdapter(itemOnClickListener)
     }
+
     private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
         when(args?.view?.id){
-            R.id.img_ialbums_studio_more -> MyStudioMorePopupMenu(requireContext(),args.view, menuItemClickListener((args?.item as ItemAlbumsStudioBinding).album?.userAlbumId!!)).show()
+            R.id.img_ialbums_studio_more -> MyStudioMorePopupMenu(requireContext(), args.view, menuItemClickListener((args?.item as ItemAlbumsStudioBinding).album?.userAlbumId!!)).show()
         }
     }
 
@@ -78,6 +79,8 @@ class MyStudioFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        viewModel.getMyInfo()
         refresh()
     }
 
@@ -93,13 +96,14 @@ class MyStudioFragment : Fragment() {
 
     override fun onDestroyView() {
         super.onDestroyView()
+
         _binding = null
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         observeData()
-        initViews()
         initAdapter()
         setOnClickListeners()
         setOnRefreshListener()
@@ -115,11 +119,7 @@ class MyStudioFragment : Fragment() {
     }
     private fun observeData() {
         viewModel.myAlbums.observe(viewLifecycleOwner, albumsObserver)
-        viewModel.userInfo.observe(viewLifecycleOwner,userInfoObserver)
-    }
-
-    private fun initViews(){
-        viewModel.getMyInfo()
+        viewModel.userInfo.observe(viewLifecycleOwner, userInfoObserver)
     }
 
     private fun initAdapter() {

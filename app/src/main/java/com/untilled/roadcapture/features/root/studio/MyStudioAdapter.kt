@@ -8,6 +8,8 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.google.android.material.shape.CornerFamily
+import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.picture.PictureResponse
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.databinding.ItemAlbumsStudioBinding
@@ -41,7 +43,7 @@ sealed class UserAlbumsViewHolder(
         }
 
         fun bind(album: UserAlbums.UserAlbum) {
-            binding.album = album
+             binding.album = album
         }
     }
 }
@@ -68,7 +70,6 @@ class MyStudioAdapter(private val itemOnClickListener: (ItemClickArgs?) -> Unit)
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if(holder.itemViewType == VIEW_TYPE_LABEL) return
         getItem(position)?.let {
             when(holder) {
                 is UserAlbumsViewHolder.UserAlbumViewHolder -> {

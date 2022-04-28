@@ -33,6 +33,7 @@ class RootFragment : Fragment() {
             followingAlbumsFragment,
             myStudioFragment,
         )
+
     private var selectedIndex = 0
 
     private val tabs: Array<ImageView>

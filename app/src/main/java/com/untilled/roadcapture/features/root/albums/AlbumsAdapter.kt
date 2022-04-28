@@ -10,22 +10,25 @@ import com.untilled.roadcapture.databinding.ItemAlbumsBinding
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.features.root.albums.dto.LikeStatus
 
-class AlbumsAdapter(private val itemOnClickListener: (ItemClickArgs?) -> Unit): PagingDataAdapter<Albums.Album, AlbumsAdapter.AlbumViewHolder>(
-    COMPARATOR
-) {
-    inner class AlbumViewHolder(private val binding: ItemAlbumsBinding): RecyclerView.ViewHolder(binding.root) {
+class AlbumViewHolder(private val binding: ItemAlbumsBinding, private val itemOnClickListener: (ItemClickArgs?) -> Unit): RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(album: Albums.Album) {
-            binding.album = album
-            binding.like = LikeStatus(album.liked,album.likeCount)
-            binding.setOnClickItem{ view ->
-                itemOnClickListener(ItemClickArgs(binding,view))
-            }
+    init {
+        binding.setOnClickItem{ view ->
+            itemOnClickListener(ItemClickArgs(binding,view))
         }
     }
 
+    fun bind(album: Albums.Album) {
+        binding.album = album
+        binding.like = LikeStatus(album.liked,album.likeCount)
+    }
+}
+
+class AlbumsAdapter(private val itemOnClickListener: (ItemClickArgs?) -> Unit): PagingDataAdapter<Albums.Album, AlbumViewHolder>(
+    COMPARATOR
+) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AlbumViewHolder {
-        return AlbumViewHolder(ItemAlbumsBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+        return AlbumViewHolder(ItemAlbumsBinding.inflate(LayoutInflater.from(parent.context), parent, false), itemOnClickListener)
     }
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
@@ -45,6 +48,4 @@ class AlbumsAdapter(private val itemOnClickListener: (ItemClickArgs?) -> Unit): 
             }
         }
     }
-
-
 }

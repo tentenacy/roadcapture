@@ -21,23 +21,22 @@ class StudioAdapter(private val itemOnClickListener: (ItemClickArgs?) -> Unit): 
 
     override fun getItemViewType(position: Int): Int {
         getItem(position)?.let {
-            return if(it.type == UserAlbumType.HEADER) MyStudioAdapter.VIEW_TYPE_LABEL else MyStudioAdapter.VIEW_TYPE_ALBUM
+            return if(it.type == UserAlbumType.HEADER) VIEW_TYPE_LABEL else VIEW_TYPE_ALBUM
         } ?: kotlin.run {
-            return MyStudioAdapter.VIEW_TYPE_ALBUM
+            return VIEW_TYPE_ALBUM
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         return when(viewType) {
-            MyStudioAdapter.VIEW_TYPE_LABEL -> UserAlbumsViewHolder.LabelViewHolder(ItemLabelAlbumsStudioBinding.inflate(LayoutInflater.from(parent.context),parent,false))
-            MyStudioAdapter.VIEW_TYPE_ALBUM -> UserAlbumsViewHolder.UserAlbumViewHolder(ItemAlbumsStudioBinding.inflate(LayoutInflater.from(parent.context),parent,false), itemOnClickListener)
+            VIEW_TYPE_LABEL -> UserAlbumsViewHolder.LabelViewHolder(ItemLabelAlbumsStudioBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+            VIEW_TYPE_ALBUM -> UserAlbumsViewHolder.UserAlbumViewHolder(ItemAlbumsStudioBinding.inflate(LayoutInflater.from(parent.context),parent,false), itemOnClickListener)
             else -> throw RuntimeException("세상에 이런 일이!")
         }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        if(holder.itemViewType == MyStudioAdapter.VIEW_TYPE_LABEL) return
         getItem(position)?.let {
             when(holder) {
                 is UserAlbumsViewHolder.UserAlbumViewHolder -> {

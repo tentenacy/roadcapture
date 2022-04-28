@@ -23,20 +23,22 @@ object AlbumsBindingAdapters {
     @JvmStatic
     @BindingAdapter("albumThumbnailImage")
     fun setAlbumThumbnailImage(view: ShapeableImageView, url: String?) {
-        view.context.apply {
-            val radius = resources.getDimension(R.dimen.album_corner_radius)
-            val shapeAppearanceModel = view.shapeAppearanceModel.toBuilder()
-                .setTopRightCorner(CornerFamily.ROUNDED, radius)
-                .setBottomRightCorner(CornerFamily.ROUNDED, radius)
-                .build()
+        url?.let {
+            view.context.apply {
+                val radius = resources.getDimension(R.dimen.album_corner_radius)
+                val shapeAppearanceModel = view.shapeAppearanceModel.toBuilder()
+                    .setTopRightCorner(CornerFamily.ROUNDED, radius)
+                    .setBottomRightCorner(CornerFamily.ROUNDED, radius)
+                    .build()
 
-            view.shapeAppearanceModel = shapeAppearanceModel
+                view.shapeAppearanceModel = shapeAppearanceModel
 
-            Glide.with(this)
-                .asBitmap()
-                .load(url)
-                .centerCrop()
-                .into(view)
+                Glide.with(this)
+                    .asBitmap()
+                    .load(it)
+                    .centerCrop()
+                    .into(view)
+            }
         }
     }
 

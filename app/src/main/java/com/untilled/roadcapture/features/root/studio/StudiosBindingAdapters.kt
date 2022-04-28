@@ -13,19 +13,21 @@ object StudiosBindingAdapters {
 
     @JvmStatic
     @BindingAdapter("studioThumbnailImage")
-    fun setStudioThumbnailImage(view: ShapeableImageView, url: String) {
-        view.context.apply {
-            val radius = resources.getDimension(R.dimen.studio_album_corner_radius)
-            val shapeAppearanceModel = view.shapeAppearanceModel.toBuilder()
-                .setAllCorners(CornerFamily.ROUNDED,radius)
-                .build()
-            view.shapeAppearanceModel = shapeAppearanceModel
+    fun setStudioThumbnailImage(view: ShapeableImageView, url: String?) {
+        url?.let {
+            view.context.apply {
+                val radius = resources.getDimension(R.dimen.studio_album_corner_radius)
+                val shapeAppearanceModel = view.shapeAppearanceModel.toBuilder()
+                    .setAllCorners(CornerFamily.ROUNDED,radius)
+                    .build()
+                view.shapeAppearanceModel = shapeAppearanceModel
 
-            Glide.with(this)
-                .asBitmap()
-                .load(url)
-                .centerCrop()
-                .into(view)
+                Glide.with(this)
+                    .asBitmap()
+                    .load(it)
+                    .centerCrop()
+                    .into(view)
+            }
         }
     }
 
