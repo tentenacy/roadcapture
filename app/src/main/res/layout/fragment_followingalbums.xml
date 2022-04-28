@@ -58,22 +58,12 @@
                 android:layout_height="match_parent">
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_followingalbums_filter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:listitem="@layout/item_following_filter" />
-
-                <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycler_followingalbums"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintTop_toBottomOf="@id/recycler_followingalbums_filter"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:listitem="@layout/item_albums" />
 
                 <ImageView

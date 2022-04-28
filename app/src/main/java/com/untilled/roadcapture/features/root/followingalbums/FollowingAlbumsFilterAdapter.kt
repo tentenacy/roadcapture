@@ -13,42 +13,33 @@ import com.untilled.roadcapture.databinding.ItemFollowBinding
 import com.untilled.roadcapture.databinding.ItemFollowingFilterBinding
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 
-class FollowingAlbumsFilterAdapter(private val itemOnClickListener: (ItemClickArgs?) -> Unit): PagingDataAdapter<FollowingsSortByAlbum.FollowingSortByAlbum, FollowingAlbumsFilterAdapter.FollowingAlbumsFilterViewHolder>(
-    COMPARATOR
-) {
-    var index: Int? = null
-    inner class FollowingAlbumsFilterViewHolder(val binding: ItemFollowingFilterBinding): RecyclerView.ViewHolder(binding.root){
-        fun bind(user: FollowingsSortByAlbum.FollowingSortByAlbum, position: Int){
-            binding.position = position
-            binding.user = user
-            binding.setOnClickItem { view ->
-                itemOnClickListener(ItemClickArgs(binding,view))
-            }
+class FollowingAlbumsFilterViewHolder(val binding: ItemFollowingFilterBinding, private val itemOnClickListener: (ItemClickArgs?) -> Unit): RecyclerView.ViewHolder(binding.root){
+
+    init {
+        binding.setOnClickItem { view ->
+            itemOnClickListener(ItemClickArgs(binding,view))
+            binding.viewIfollowingFilterOverlay.setBackgroundResource(R.drawable.overlay_gradient_following_filter_selected)
         }
     }
 
+    fun bind(user: FollowingsSortByAlbum.FollowingSortByAlbum){
+        //TODO: 필터 선택 시 효과 적용 (뷰모델 고려)
+        binding.user = user
+        binding.viewIfollowingFilterOverlay.setBackgroundResource(R.drawable.overlay_gradient_following_filter)
+    }
+}
+
+class FollowingAlbumsFilterAdapter(private val itemOnClickListener: (ItemClickArgs?) -> Unit): PagingDataAdapter<FollowingsSortByAlbum.FollowingSortByAlbum, FollowingAlbumsFilterViewHolder>(
+    COMPARATOR
+) {
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowingAlbumsFilterViewHolder {
-        return FollowingAlbumsFilterViewHolder(ItemFollowingFilterBinding.inflate(LayoutInflater.from(parent.context),parent,false))
+        return FollowingAlbumsFilterViewHolder(ItemFollowingFilterBinding.inflate(LayoutInflater.from(parent.context),parent,false), itemOnClickListener)
     }
 
     override fun onBindViewHolder(holder: FollowingAlbumsFilterViewHolder, position: Int) {
         getItem(position)?.let{
-            setSelectedStatus(holder, position)
-            holder.bind(it, position)
-        }
-    }
-
-    private fun setSelectedStatus(
-        holder: FollowingAlbumsFilterViewHolder,
-        position: Int
-    ) {
-        if (index == null) {
-            holder.binding.viewIfollowingFilterOverlay.setBackgroundResource(R.drawable.overlay_gradient_following_filter)
-        } else {
-            if (index == position) holder.binding.viewIfollowingFilterOverlay.setBackgroundResource(
-                R.drawable.overlay_gradient_following_filter
-            )
-            else holder.binding.viewIfollowingFilterOverlay.setBackgroundResource(R.drawable.overlay_gradient_following_filter_selected)
+            holder.bind(it)
         }
     }
 

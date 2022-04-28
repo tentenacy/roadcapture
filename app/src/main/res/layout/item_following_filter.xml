@@ -13,10 +13,6 @@
             type="com.untilled.roadcapture.data.entity.paging.FollowingsSortByAlbum.FollowingSortByAlbum" />
 
         <variable
-            name="position"
-            type="Integer" />
-
-        <variable
             name="onClickItem"
             type="android.view.View.OnClickListener" />
     </data>
