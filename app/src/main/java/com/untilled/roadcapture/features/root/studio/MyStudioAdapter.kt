@@ -61,8 +61,8 @@ class MyStudioAdapter(private val itemOnClickListener: (ItemClickArgs?) -> Unit)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 
         return when(viewType) {
-            VIEW_TYPE_LABEL -> UserAlbumsViewHolder.LabelViewHolder(ItemLabelAlbumsStudioBinding.inflate(LayoutInflater.from(parent.context),parent,false))
-            VIEW_TYPE_ALBUM -> UserAlbumsViewHolder.UserAlbumViewHolder(ItemAlbumsStudioBinding.inflate(LayoutInflater.from(parent.context),parent,false), itemOnClickListener)
+            VIEW_TYPE_LABEL -> UserAlbumsViewHolder.LabelViewHolder(ItemLabelAlbumsStudioBinding.inflate(LayoutInflater.from(parent.context), parent, false))
+            VIEW_TYPE_ALBUM -> UserAlbumsViewHolder.UserAlbumViewHolder(ItemAlbumsStudioBinding.inflate(LayoutInflater.from(parent.context), parent, false), itemOnClickListener)
             else -> throw RuntimeException("세상에 이런 일이!")
         }
     }

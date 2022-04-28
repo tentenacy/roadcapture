@@ -1,5 +1,6 @@
 package com.untilled.roadcapture.di
 
+import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.paging.album.AlbumsPagingSource
 import com.untilled.roadcapture.data.datasource.paging.album.FollowingAlbumsPagingSource
 import com.untilled.roadcapture.data.datasource.paging.album.UserAlbumsPagingSource
@@ -8,6 +9,7 @@ import com.untilled.roadcapture.data.datasource.paging.comment.PictureCommentsPa
 import com.untilled.roadcapture.data.datasource.paging.follower.FollowersPagingSource
 import com.untilled.roadcapture.data.datasource.paging.follower.FollowingsPagingSource
 import com.untilled.roadcapture.data.datasource.paging.follower.FollowingsSortByAlbumPagingSource
+import com.untilled.roadcapture.data.entity.mapper.AlbumsMapper
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import com.untilled.roadcapture.data.repository.album.AlbumRepositoryImpl
 import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepository
@@ -47,9 +49,10 @@ abstract class RepositoryModule {
         fun provideAlbumsPagingRepository(
             albumsPagingSource: AlbumsPagingSource,
             followingAlbumsPagingSource: FollowingAlbumsPagingSource,
-            userAlbumsPagingSource: UserAlbumsPagingSource
+            mapper: AlbumsMapper,
+            roadCaptureApi: RoadCaptureApi,
         ): AlbumPagingRepository {
-            return AlbumPagingRepositoryImpl(albumsPagingSource, followingAlbumsPagingSource, userAlbumsPagingSource)
+            return AlbumPagingRepositoryImpl(albumsPagingSource, followingAlbumsPagingSource, mapper, roadCaptureApi)
         }
 
         @Singleton

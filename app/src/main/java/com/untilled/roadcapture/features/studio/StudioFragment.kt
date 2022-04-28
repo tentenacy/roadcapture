@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
 import androidx.paging.PagingData
+import androidx.paging.insertHeaderItem
+import androidx.paging.map
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.untilled.roadcapture.R
@@ -17,6 +19,7 @@ import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.databinding.FragmentStudioBinding
 import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
+import com.untilled.roadcapture.features.root.studio.UserAlbumItem
 import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToFollower
 import com.untilled.roadcapture.utils.navigateToFollowing
@@ -66,7 +69,8 @@ class StudioFragment : Fragment() {
     }
 
     private val albumsObserver: (PagingData<UserAlbums.UserAlbum>) -> Unit = { pagingData ->
-        studioAdapter.submitData(lifecycle, pagingData)
+        studioAdapter.submitData(lifecycle, pagingData.map { UserAlbumItem.Data(it) as UserAlbumItem }
+            .insertHeaderItem(item = UserAlbumItem.Header))
     }
 
     private val swipeRefreshListener = SwipeRefreshLayout.OnRefreshListener {
