@@ -10,6 +10,8 @@ import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.paging.PagingData
+import androidx.paging.insertHeaderItem
+import androidx.paging.map
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.snackbar.Snackbar
@@ -61,7 +63,8 @@ class MyStudioFragment : Fragment() {
     }
 
     private val albumsObserver: (PagingData<UserAlbums.UserAlbum>) -> Unit = { pagingData ->
-        myStudioAdapter.submitData(lifecycle, pagingData)
+        myStudioAdapter.submitData(lifecycle, pagingData.map { UserAlbumItem.Data(it) as UserAlbumItem }
+            .insertHeaderItem(item = UserAlbumItem.Header))
     }
 
     private val userInfoObserver: (StudioUserResponse) -> Unit = { user ->

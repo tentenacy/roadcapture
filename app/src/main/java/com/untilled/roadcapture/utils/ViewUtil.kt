@@ -2,6 +2,7 @@ package com.untilled.roadcapture.utils
 
 import android.app.Activity
 import android.content.Context
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
@@ -11,6 +12,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.core.view.WindowCompat
+import androidx.databinding.DataBindingUtil
+import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
@@ -116,4 +119,13 @@ fun showSnackbar(view: View, message: String){
     Snackbar.make(view,message, Snackbar.LENGTH_INDEFINITE)
         .setAction("확인"){}
         .show()
+}
+
+fun <T: ViewDataBinding> viewBind(parent: ViewGroup, layoutRes: Int): T {
+    return DataBindingUtil.inflate(
+        LayoutInflater.from(parent.context),
+        layoutRes,
+        parent,
+        false
+    )
 }

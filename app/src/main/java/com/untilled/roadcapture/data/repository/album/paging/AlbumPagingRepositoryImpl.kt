@@ -43,11 +43,14 @@ class AlbumPagingRepositoryImpl(
         userAlbumsPagingSource.userAlbumsCondition = cond
         return Pager(
             config = PagingConfig(
-                pageSize = 20,
+                pageSize = 5,
+//                pageSize = 20,
                 enablePlaceholders = true,
                 maxSize = 30,
-                prefetchDistance = 5,
-                initialLoadSize = 20
+                prefetchDistance = 1,
+//                prefetchDistance = 5,
+                initialLoadSize = 5
+//                initialLoadSize = 20
             ),
             pagingSourceFactory = { userAlbumsPagingSource }
         ).flowable
