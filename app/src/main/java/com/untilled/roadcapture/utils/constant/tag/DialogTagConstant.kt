@@ -11,4 +11,5 @@ object DialogTagConstant {
     const val ALBUM_CREATION_CANCEL = "albumCreationCancelDialog"
     const val THUMBNAIL_SETTING = "thumbnailSettingDialog"
     const val LOGOUT_DIALOG = "logoutDialog"
+    const val PLACE_SEARCH_BOTTOM_SHEET = "placeSearchBottomSheetDialog"
 }

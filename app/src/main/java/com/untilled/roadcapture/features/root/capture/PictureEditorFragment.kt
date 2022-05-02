@@ -16,7 +16,9 @@ import com.untilled.roadcapture.data.entity.LocationLatLng
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPictureEditorBinding
 import com.untilled.roadcapture.utils.*
+import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
 import dagger.hilt.android.AndroidEntryPoint
+import retrofit2.http.POST
 
 @AndroidEntryPoint
 class PictureEditorFragment : Fragment() {
@@ -39,7 +41,16 @@ class PictureEditorFragment : Fragment() {
     }
 
     private val placeOnClickListener: (View?) -> Unit = {
-        navigateToSearchPlace(makePicture())
+        showPlaceSearchBottomSheetDialog()
+    }
+
+    private fun showPlaceSearchBottomSheetDialog() {
+        PlaceSearchBottomSheetDialog().apply {
+            searchOnClickListener = { navigateToSearchPlace(makePicture()) }
+        }.show(
+            childFragmentManager,
+            DialogTagConstant.PLACE_SEARCH_BOTTOM_SHEET
+        )
     }
 
     private val addressObserver: (TmapAddressInfoResponse) -> Unit = { addressInfoResponse ->
@@ -115,7 +126,10 @@ class PictureEditorFragment : Fragment() {
     private fun getLocation() {
         if (locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             requireContext().checkSelfPermission(
-                listOf(android.Manifest.permission.ACCESS_FINE_LOCATION, android.Manifest.permission.ACCESS_FINE_LOCATION)
+                listOf(
+                    android.Manifest.permission.ACCESS_FINE_LOCATION,
+                    android.Manifest.permission.ACCESS_FINE_LOCATION
+                )
             ) {
                 with(locationManager) {
                     requestLocationUpdates(
@@ -158,7 +172,7 @@ class PictureEditorFragment : Fragment() {
     }
 
     private fun setMode() {
-        mode = if(picture?.id == 0L) POST else EDIT
+        mode = if (picture?.id == 0L) POST else EDIT
     }
 
     private fun setOrder() {
