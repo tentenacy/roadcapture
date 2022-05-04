@@ -12,6 +12,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,19 +22,14 @@ class LoginEmailViewModel @Inject constructor(
     private val localUserRepository: LocalUserRepository,
 ): BaseViewModel() {
 
-    private var _isLoggedIn = MutableLiveData<Boolean>()
-    val isLoggedIn: LiveData<Boolean> get() = _isLoggedIn
+    companion object {
+        const val EVENT_NAVIGATE_TO_ROOT = 1000
+    }
 
     fun login(loginRequest: LoginRequest) {
+        loadingEvent(true)
         userRepository.login(loginRequest)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe {
-                loading.addSource(_isLoggedIn.apply { value = false }) {
-                    loading.value = !it
-                }
-            }
-            .subscribe({ response ->
+            .flatMap { response ->
                 localTokenRepository.saveToken(
                     TokenArgs(
                         grantType = response.grantType,
@@ -42,28 +38,20 @@ class LoginEmailViewModel @Inject constructor(
                         accessTokenExpireDate = response.accessTokenExpireDate.toLong(),
                     )
                 )
-                saveUserId()
-            }) { t ->
-                loading.removeSource(_isLoggedIn)
-                loading.value = false
-                error.value = t.message
+                userRepository.getUserDetail()
             }
-            .addTo(compositeDisposable)
-    }
-
-    private fun saveUserId() {
-        userRepository.getUserDetail()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
+                loadingEvent(false)
                 localUserRepository.saveUser(response.id)
-                loading.removeSource(_isLoggedIn.apply { value = true })
+                viewEvent(Pair(EVENT_NAVIGATE_TO_ROOT, Unit))
             }) { t ->
+                loadingEvent(false)
                 logout()
-                loading.removeSource(_isLoggedIn)
-                loading.value = false
                 error.value = t.message
-            }.addTo(compositeDisposable)
+            }
+            .addTo(compositeDisposable)
     }
 
     private fun logout() {

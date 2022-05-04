@@ -97,7 +97,7 @@ class LoginFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        _binding = FragmentLoginBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
         mainActivity().viewModel.setBindingRoot(binding.root)
         observeData()
@@ -137,8 +137,24 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun observeData() {
-        viewModel.loading.observe(viewLifecycleOwner, isLoadingObserver)
-        viewModel.isLoggedIn.observe(viewLifecycleOwner) { navigateToRoot() }
+        viewModel.viewEvent.observe(viewLifecycleOwner) {
+            it?.getContentIfNotHandled()?.let {
+                when(it.first) {
+                    LoginViewModel.EVENT_NAVIGATE_TO_ROOT -> {
+                        navigateToRoot()
+                    }
+                }
+            }
+        }
+        viewModel.loadingEvent.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { event ->
+                if(event) {
+                    mainActivity().showLoading("${this::class.java.simpleName}LoadingDialog")
+                } else {
+                    mainActivity().dismissLoading()
+                }
+            }
+        }
         viewModel.error.observe(viewLifecycleOwner, errorObserver)
     }
 

@@ -33,12 +33,6 @@ class SignupUsernameFragment : BaseFragment() {
             binding.motionSignupUsernameContainer.transitionToStart()
     }
 
-    private val isLoggedInObserver: (Boolean) -> Unit = { isLoggedIn ->
-        if (isLoggedIn) {
-            signupFrom2Depth().navigateToRoot()
-        }
-    }
-
     override fun onAttach(context: Context) {
         super.onAttach(context)
         callback = object : OnBackPressedCallback(true) {
@@ -95,8 +89,24 @@ class SignupUsernameFragment : BaseFragment() {
 
     private fun observeData() {
         viewModel.username.observe(viewLifecycleOwner, usernameObserver)
-        viewModel.isLoggedIn.observe(viewLifecycleOwner, isLoggedInObserver)
         viewModel.error.observe(viewLifecycleOwner, errorObserver)
-        viewModel.loading.observe(viewLifecycleOwner, isLoadingObserver)
+        viewModel.loadingEvent.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { event ->
+                if(event) {
+                    mainActivity().showLoading("${this::class.java.simpleName}LoadingDialog")
+                } else {
+                    mainActivity().dismissLoading()
+                }
+            }
+        }
+        viewModel.viewEvent.observe(viewLifecycleOwner) {
+            it?.getContentIfNotHandled()?.let {
+                when(it.first) {
+                    SignupViewModel.EVENT_NAVIGATE_TO_ROOT -> {
+                        signupFrom2Depth().navigateToRoot()
+                    }
+                }
+            }
+        }
     }
 }

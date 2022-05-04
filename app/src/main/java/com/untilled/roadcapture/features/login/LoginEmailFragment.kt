@@ -40,12 +40,6 @@ class LoginEmailFragment : BaseFragment(), Validator.ValidationListener {
 
     private val viewModel: LoginEmailViewModel by viewModels()
 
-    private val isLoggedInObserver: (Boolean) -> Unit = { isLoggedIn ->
-        if (isLoggedIn) {
-            navigateToRoot()
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -102,8 +96,24 @@ class LoginEmailFragment : BaseFragment(), Validator.ValidationListener {
     }
 
     private fun observeData() {
-        viewModel.isLoggedIn.observe(viewLifecycleOwner, isLoggedInObserver)
-        viewModel.loading.observe(viewLifecycleOwner, isLoadingObserver)
+        viewModel.viewEvent.observe(viewLifecycleOwner) {
+            it?.getContentIfNotHandled()?.let {
+                when(it.first) {
+                    LoginEmailViewModel.EVENT_NAVIGATE_TO_ROOT -> {
+                        navigateToRoot()
+                    }
+                }
+            }
+        }
+        viewModel.loadingEvent.observe(viewLifecycleOwner) {
+            it.getContentIfNotHandled()?.let { event ->
+                if(event) {
+                    mainActivity().showLoading("${this::class.java.simpleName}LoadingDialog")
+                } else {
+                    mainActivity().dismissLoading()
+                }
+            }
+        }
         viewModel.error.observe(viewLifecycleOwner, errorObserver)
     }
 

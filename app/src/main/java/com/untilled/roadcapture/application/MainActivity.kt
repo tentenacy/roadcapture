@@ -14,6 +14,7 @@ import androidx.navigation.Navigation
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.activityresult.ActivityResultFactory
 import com.untilled.roadcapture.databinding.ActivityMainBinding
+import com.untilled.roadcapture.features.common.LoadingDialog
 import com.untilled.roadcapture.features.root.capture.CropFragment
 import com.untilled.roadcapture.utils.currentFragment
 import com.untilled.roadcapture.utils.isPosOutOf
@@ -25,12 +26,28 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), UCropFragmentCallback {
+
     lateinit var binding: ActivityMainBinding
 
     val viewModel: MainViewModel by viewModels()
 
     @Inject
+    lateinit var loadingDialog: LoadingDialog
+
+    @Inject
     lateinit var activityResultFactory: ActivityResultFactory<Intent, ActivityResult>
+
+    fun showLoading(tag: String) {
+        if(!loadingDialog.isAdded) {
+            loadingDialog.show(supportFragmentManager, tag)
+        }
+    }
+
+    fun dismissLoading() {
+        if(loadingDialog.isAdded) {
+            loadingDialog.dismissAllowingStateLoss()
+        }
+    }
 
     private val logoutObserver: (View) -> Unit = { bindingRoot ->
         Navigation.findNavController(bindingRoot).apply {
@@ -98,5 +115,4 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
     private fun observeData() {
         viewModel.logout.observe(this, logoutObserver)
     }
-
 }

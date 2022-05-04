@@ -25,13 +25,14 @@ class LoginViewModel @Inject constructor(
     private val oauthLoginManagerMap: Map<String, @JvmSuppressWildcards OAuthLoginManagerSubject>,
 ) : BaseViewModel() {
 
-    private var _isLoggedIn = MutableLiveData<SocialType?>()
-    val isLoggedIn: LiveData<SocialType?> get() = _isLoggedIn
+    companion object {
+        const val EVENT_NAVIGATE_TO_ROOT = 1000
+    }
 
     fun autoLogin() {
         localTokenRepository.getOAuthToken().whenHasOAuthTokenOrNot (this::socialLogin) {
             localTokenRepository.getToken().whenHasAccessToken {
-                _isLoggedIn.value = null
+                viewEvent(Pair(EVENT_NAVIGATE_TO_ROOT, Unit))
             }
         }
     }
@@ -41,18 +42,9 @@ class LoginViewModel @Inject constructor(
     }
 
     fun socialLogin(socialType: SocialType) {
+        loadingEvent(true)
         userRepository.socialSignup(socialType)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doOnSubscribe {
-                loading.apply {
-                    addSource(_isLoggedIn) {
-                        loading.value = it?.name?.isBlank()
-                    }
-                    value = true
-                }
-            }
-            .subscribe({ response ->
+            .flatMap { response ->
                 localTokenRepository.saveToken(
                     TokenArgs(
                         grantType = response.grantType,
@@ -61,26 +53,17 @@ class LoginViewModel @Inject constructor(
                         accessTokenExpireDate = response.accessTokenExpireDate.toLong(),
                     )
                 )
-                saveUserId()
-            }) { t ->
-                loading.removeSource(_isLoggedIn)
-                loading.value = false
-                localTokenRepository.clearToken()
-                error.value = t.message
-            }.addTo(compositeDisposable)
-    }
-
-    private fun saveUserId() {
-        userRepository.getUserDetail()
+                userRepository.getUserDetail()
+            }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
+                loadingEvent(false)
+                viewEvent(Pair(EVENT_NAVIGATE_TO_ROOT, Unit))
                 localUserRepository.saveUser(response.id)
-                loading.removeSource(_isLoggedIn.apply { value = localTokenRepository.getOAuthToken().socialType.getSocialType() })
-            }) { t->
+            }) { t ->
+                loadingEvent(false)
                 logout()
-                loading.removeSource(_isLoggedIn)
-                loading.value = false
                 error.value = t.message
             }.addTo(compositeDisposable)
     }
