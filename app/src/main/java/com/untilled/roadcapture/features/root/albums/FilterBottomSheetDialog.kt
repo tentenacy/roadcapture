@@ -131,8 +131,8 @@ class FilterBottomSheetDialog : BottomSheetDialogFragment() {
     private fun resetFilter() {
 
         binding.apply {
-            binding.radiogroupDlgfilterDuration.clearCheck()
-            binding.radiogroupDlgfilterSorting.clearCheck()
+            binding.radiobtnDlgfilterWhole.isChecked = true
+            binding.radiobtnDlgfilterSortLatest.isChecked = true
         }
     }
 

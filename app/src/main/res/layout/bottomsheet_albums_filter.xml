@@ -8,14 +8,14 @@
         android:id="@+id/constraint_dlgfilter_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/dlg_bottomsheet"
-        android:paddingHorizontal="16dp">
+        android:background="@drawable/dlg_bottomsheet">
 
         <ImageView
             android:id="@+id/image_dlgfilter_close"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:src="@drawable/ic_close"
+            android:layout_marginStart="16dp"
             app:layout_constraintBottom_toBottomOf="@id/text_dlgfilter_title"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@id/text_dlgfilter_title"
@@ -36,15 +36,15 @@
         <TextView
             android:id="@+id/text_dlgfilter_reset"
             android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:clickable="true"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
             android:gravity="center"
             android:text="@string/dlgfilter_reset"
+            android:layout_marginEnd="8dp"
             android:textAppearance="@style/Body"
             app:layout_constraintBottom_toBottomOf="@id/view_dlgfilter_divider1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            bind:rippleEffect="@{null}" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <View
             android:id="@+id/view_dlgfilter_divider1"
@@ -52,6 +52,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
             android:background="@color/divider"
+            android:layout_marginHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_dlgfilter_title" />
@@ -62,6 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"
             android:text="@string/dlgfilter_label_duration"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_dlgfilter_divider1" />
@@ -73,6 +75,7 @@
             android:layout_marginTop="16dp"
             android:orientation="horizontal"
             android:scrollbars="none"
+            android:layout_marginHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_dlgfilter_label_duration">
@@ -154,6 +157,7 @@
             android:includeFontPadding="false"
             android:stateListAnimator="@null"
             android:textSize="14sp"
+            android:layout_marginStart="16dp"
             app:layout_constraintEnd_toEndOf="@id/guideline_dlgfilter_h50p"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_dlgfilter_label_startdate"
@@ -181,6 +185,7 @@
             android:includeFontPadding="false"
             android:stateListAnimator="@null"
             android:textSize="14sp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/guideline_dlgfilter_h50p"
             app:layout_constraintTop_toTopOf="@id/btn_dlgfilter_startdate"
@@ -192,6 +197,7 @@
             android:layout_height="1dp"
             android:layout_marginTop="15dp"
             android:background="@color/divider"
+            android:layout_marginHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_dlgfilter_startdate" />
@@ -202,6 +208,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:text="@string/dlgfilter_label_sort"
+            android:layout_marginStart="16dp"
             android:textAppearance="@style/SubHeadBold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/view_dlgfilter_divider2" />
@@ -213,6 +220,7 @@
             android:layout_marginTop="16dp"
             android:gravity="center|start"
             android:orientation="horizontal"
+            android:layout_marginHorizontal="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_dlgfilter_label_sort">
@@ -242,6 +250,7 @@
             android:layout_height="56dp"
             android:layout_marginVertical="16dp"
             android:text="@string/dlgfilter_apply"
+            android:layout_marginHorizontal="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
