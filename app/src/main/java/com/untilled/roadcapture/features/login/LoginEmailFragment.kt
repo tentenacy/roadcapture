@@ -8,13 +8,9 @@ import android.view.WindowManager
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import com.mobsandgeeks.saripaar.ValidationError
 import com.mobsandgeeks.saripaar.Validator
 import com.mobsandgeeks.saripaar.annotation.*
-import com.untilled.roadcapture.R
-import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.datasource.api.dto.user.LoginRequest
 import com.untilled.roadcapture.databinding.FragmentLoginEmailBinding
 import com.untilled.roadcapture.features.base.BaseFragment
@@ -107,7 +103,7 @@ class LoginEmailFragment : BaseFragment(), Validator.ValidationListener {
 
     private fun observeData() {
         viewModel.isLoggedIn.observe(viewLifecycleOwner, isLoggedInObserver)
-        viewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
+        viewModel.loading.observe(viewLifecycleOwner, isLoadingObserver)
         viewModel.error.observe(viewLifecycleOwner, errorObserver)
     }
 

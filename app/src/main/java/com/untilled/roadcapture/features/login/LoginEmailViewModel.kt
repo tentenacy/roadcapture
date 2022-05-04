@@ -29,8 +29,8 @@ class LoginEmailViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
-                isLoading.addSource(_isLoggedIn.apply { value = false }) {
-                    isLoading.value = !it
+                loading.addSource(_isLoggedIn.apply { value = false }) {
+                    loading.value = !it
                 }
             }
             .subscribe({ response ->
@@ -44,8 +44,8 @@ class LoginEmailViewModel @Inject constructor(
                 )
                 saveUserId()
             }) { t ->
-                isLoading.removeSource(_isLoggedIn)
-                isLoading.value = false
+                loading.removeSource(_isLoggedIn)
+                loading.value = false
                 error.value = t.message
             }
             .addTo(compositeDisposable)
@@ -57,11 +57,11 @@ class LoginEmailViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
                 localUserRepository.saveUser(response.id)
-                isLoading.removeSource(_isLoggedIn.apply { value = true })
+                loading.removeSource(_isLoggedIn.apply { value = true })
             }) { t ->
                 logout()
-                isLoading.removeSource(_isLoggedIn)
-                isLoading.value = false
+                loading.removeSource(_isLoggedIn)
+                loading.value = false
                 error.value = t.message
             }.addTo(compositeDisposable)
     }

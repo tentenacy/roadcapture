@@ -1,6 +1,7 @@
 package com.untilled.roadcapture.utils
 
 import com.untilled.roadcapture.utils.type.SocialType
+import java.text.DecimalFormat
 
 fun String.getSocialType(): SocialType? = when(this) {
     "naver" -> {
@@ -17,3 +18,5 @@ fun String.getSocialType(): SocialType? = when(this) {
     }
     else -> null
 }
+
+fun Int.toZeroZeroFormat(): String = DecimalFormat("00").format(this)

@@ -1,9 +1,7 @@
 package com.untilled.roadcapture.features.signup
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.untilled.roadcapture.data.datasource.api.dto.user.SignupRequest
 import com.untilled.roadcapture.data.repository.token.LocalTokenRepository
 import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
@@ -40,8 +38,8 @@ class SignupViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
-                isLoading.addSource(_isLoggedIn.apply { value = false }) {
-                    isLoading.value = !it
+                loading.addSource(_isLoggedIn.apply { value = false }) {
+                    loading.value = !it
                 }
             }.subscribe({ response ->
                 localTokenRepository.saveToken(
@@ -54,8 +52,8 @@ class SignupViewModel @Inject constructor(
                 )
                 saveUserId()
             }) { t ->
-                isLoading.removeSource(_isLoggedIn)
-                isLoading.value = false
+                loading.removeSource(_isLoggedIn)
+                loading.value = false
                 error.value = t.message
             }
             .addTo(compositeDisposable)
@@ -67,11 +65,11 @@ class SignupViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
                 localUserRepository.saveUser(response.id)
-                isLoading.removeSource(_isLoggedIn.apply { value = true })
+                loading.removeSource(_isLoggedIn.apply { value = true })
             }) { t ->
                 logout()
-                isLoading.removeSource(_isLoggedIn)
-                isLoading.value = false
+                loading.removeSource(_isLoggedIn)
+                loading.value = false
                 error.value = t.message
             }.addTo(compositeDisposable)
     }

@@ -15,13 +15,11 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 import javax.inject.Singleton
 
-@Singleton
-class AlbumsPagingSource @Inject constructor(
+class AlbumsPagingSource (
     private val mapper: AlbumsMapper,
     private val roadCaptureApi: RoadCaptureApi,
+    private val albumsCondition: AlbumsCondition,
 ): RxPagingSource<Int, Albums.Album>() {
-
-    lateinit var albumsCondition: AlbumsCondition
 
     override fun getRefreshKey(state: PagingState<Int, Albums.Album>): Int? {
         return state.anchorPosition?.let { anchorPosition ->

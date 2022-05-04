@@ -12,7 +12,6 @@ import com.untilled.roadcapture.features.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,7 +27,7 @@ class SearchViewModel
     val album: LiveData<PagingData<Albums.Album>> get() = _albums
 
     fun getAlbums(cond: AlbumsCondition){
-        albumPagingRepository.getAlbums(cond)
+        albumPagingRepository.albums(cond)
             .subscribeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
             .subscribe({ pagingData ->

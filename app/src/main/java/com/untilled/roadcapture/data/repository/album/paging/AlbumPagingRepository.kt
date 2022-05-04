@@ -11,7 +11,7 @@ import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
 
 interface AlbumPagingRepository {
-    fun getAlbums(
+    fun albums(
         cond: AlbumsCondition,
     ): Flowable<PagingData<Albums.Album>>
 

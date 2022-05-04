@@ -6,4 +6,5 @@ data class AlbumsCondition(
     val dateTimeFrom: String? = null,
     val dateTimeTo: String? = null,
     val title: String? = null,
+    val sort: String? = null,
 )

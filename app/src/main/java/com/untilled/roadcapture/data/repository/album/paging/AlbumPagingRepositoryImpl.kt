@@ -19,16 +19,14 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 class AlbumPagingRepositoryImpl(
-    private val albumsPagingSource: AlbumsPagingSource,
     private val followingAlbumsPagingSource: FollowingAlbumsPagingSource,
     private val mapper: AlbumsMapper,
     private val roadCaptureApi: RoadCaptureApi,
 ): AlbumPagingRepository {
 
-    override fun getAlbums(
+    override fun albums(
         cond: AlbumsCondition
     ): Flowable<PagingData<Albums.Album>> {
-        albumsPagingSource.albumsCondition = cond
         return Pager(
             config = PagingConfig(
                 pageSize = 20,
@@ -37,7 +35,7 @@ class AlbumPagingRepositoryImpl(
                 prefetchDistance = 5,
                 initialLoadSize = 20
             ),
-            pagingSourceFactory = { albumsPagingSource }
+            pagingSourceFactory = { AlbumsPagingSource(mapper, roadCaptureApi, albumsCondition = cond) }
         ).flowable
     }
 

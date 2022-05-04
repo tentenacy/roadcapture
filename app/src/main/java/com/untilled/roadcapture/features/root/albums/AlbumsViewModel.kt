@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
+import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsResponse
@@ -13,32 +14,42 @@ import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepository
-import com.untilled.roadcapture.data.repository.follower.FollowRepository
-import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
-import com.untilled.roadcapture.utils.dateToString
-import com.untilled.roadcapture.utils.getTodayCalendar
+import com.untilled.roadcapture.utils.dateFrom
+import com.untilled.roadcapture.utils.start
+import com.untilled.roadcapture.utils.toDateTimeFormat
+import com.untilled.roadcapture.utils.tomorrow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
 import io.reactivex.rxjava3.schedulers.Schedulers
-import kotlinx.coroutines.flow.Flow
-import java.util.*
 import javax.inject.Inject
 
 
 @HiltViewModel
-class AlbumsViewModel
-@Inject constructor(
-    private val userRepository: UserRepository,
-    private val followRepository: FollowRepository,
+class AlbumsViewModel @Inject constructor(
     private val albumPagingRepository: AlbumPagingRepository,
     private val albumRepository: AlbumRepository
 ) : BaseViewModel() {
 
-    var dateTimeFrom: String? = dateToString(getTodayCalendar())
-    var dateTimeTo: String? = dateToString(getTodayCalendar())
-    var radioId: Int? = R.id.radiobtn_dlgfilter_whole
+    companion object {
+        const val EVENT_SEARCH = 1000
+    }
+
+    private val _durationCheckedRadioId = MutableLiveData<Int?>(R.id.radiobtn_dlgfilter_whole)
+    val durationCheckedRadioId: LiveData<Int?> = _durationCheckedRadioId
+
+    private val _sortCheckedRadioId = MutableLiveData<Int?>(R.id.radiobtn_dlgfilter_sort_latest)
+    val sortCheckedRadioId: LiveData<Int?> = _sortCheckedRadioId
+
+    private val _dateFromText = MutableLiveData<String?>(null)
+    val dateFromText: LiveData<String?> = _dateFromText
+
+    private val _dateToText = MutableLiveData<String?>(null)
+    val dateToText: LiveData<String?> = _dateToText
+
+    private val _sortText = MutableLiveData<String?>(null)
+    val sortText: LiveData<String?> = _sortText
 
     private var _albums = MutableLiveData<PagingData<Albums.Album>>()
     val album: LiveData<PagingData<Albums.Album>> get() = _albums
@@ -49,14 +60,40 @@ class AlbumsViewModel
     private val _followingAlbums = MutableLiveData<PageResponse<AlbumsResponse>>()
     val followingAlbums: LiveData<PageResponse<AlbumsResponse>> get() = _followingAlbums
 
-    fun getAlbums(cond: AlbumsCondition) {
-        albumPagingRepository.getAlbums(cond)
+    fun setDurationCheckedRadioId(id: Int?) {
+        _durationCheckedRadioId.value = id
+    }
+
+    fun setSortCheckedRadioId(id: Int?) {
+        _sortCheckedRadioId.value = id
+    }
+
+    fun setDateFromText(dateFromText: String?) {
+        _dateFromText.value = dateFromText
+    }
+
+    fun setDateToText(dateToText: String?) {
+        _dateToText.value = dateToText
+    }
+
+    fun setSortText(sortText: String?) {
+        _sortText.value = sortText
+    }
+
+    fun albums() {
+        albumPagingRepository.albums(
+            AlbumsCondition(
+                dateTimeFrom = dateFromText.value?.let { dateFrom(it).start().toDateTimeFormat() },
+                dateTimeTo = dateToText.value?.let { dateFrom(it).tomorrow().start().toDateTimeFormat() },
+                sort = sortText.value,
+            )
+        )
             .subscribeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
             .subscribe({ pagingData ->
-                _albums.value = pagingData
+                _albums.postValue(pagingData)
             }) { t ->
-
+                Logger.e("${t}")
             }.addTo(compositeDisposable)
     }
 
@@ -68,7 +105,7 @@ class AlbumsViewModel
 
             }, {
 
-            })
+            }).addTo(compositeDisposable)
     }
 
     fun unlikeAlbum(albumsId: Long) {
@@ -79,7 +116,7 @@ class AlbumsViewModel
 
             }, {
 
-            })
+            }).addTo(compositeDisposable)
     }
 
     fun deleteAlbum(albumId: Long){
@@ -90,29 +127,7 @@ class AlbumsViewModel
 
             },{
 
-            })
+            }).addTo(compositeDisposable)
     }
-
-//    fun getUserFollowing(followingsCondition: FollowingsCondition, pageRequest: PageRequest){
-//        userRepository.getUserFollowing(followingsCondition, pageRequest)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe({ user ->
-//                _user.postValue(user)
-//            },{ error ->
-//                Logger.d("test: $error")
-//            })
-//    }
-//
-//    fun getFollowingAlbums(id: Long?, pageRequest: PageRequest){
-//        followRepository.getFollowingAlbums(id,pageRequest)
-//            .subscribeOn(Schedulers.io())
-//            .observeOn(AndroidSchedulers.mainThread())
-//            .subscribe({ response ->
-//                _followingAlbums.postValue(response)
-//            }, { t ->
-//
-//            }).addTo(compositeDisposable)
-//    }
 
 }

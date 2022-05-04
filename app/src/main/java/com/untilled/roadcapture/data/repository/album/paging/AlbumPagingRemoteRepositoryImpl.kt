@@ -26,7 +26,7 @@ class AlbumPagingRemoteRepositoryImpl(
     private val userAlbumsRemoteMediator: UserAlbumsRemoteMediator,
 ): AlbumPagingRepository {
 
-    override fun getAlbums(
+    override fun albums(
         cond: AlbumsCondition
     ): Flowable<PagingData<Albums.Album>> {
         albumsRemoteMediator.albumsCondition = cond

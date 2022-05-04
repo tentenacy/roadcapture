@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.viewModels
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentSignupUsernameBinding
 import com.untilled.roadcapture.features.base.BaseFragment
 import com.untilled.roadcapture.utils.mainActivity
@@ -99,6 +97,6 @@ class SignupUsernameFragment : BaseFragment() {
         viewModel.username.observe(viewLifecycleOwner, usernameObserver)
         viewModel.isLoggedIn.observe(viewLifecycleOwner, isLoggedInObserver)
         viewModel.error.observe(viewLifecycleOwner, errorObserver)
-        viewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
+        viewModel.loading.observe(viewLifecycleOwner, isLoadingObserver)
     }
 }

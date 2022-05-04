@@ -18,7 +18,6 @@ import com.untilled.roadcapture.features.login.handler.KakaoOAuthLoginHandler
 import com.untilled.roadcapture.features.login.handler.NaverOAuthLoginHandler
 import com.untilled.roadcapture.utils.*
 import com.untilled.roadcapture.utils.constant.scope.SocialScopeConstant
-import com.untilled.roadcapture.utils.type.SocialType
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -138,7 +137,7 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun observeData() {
-        viewModel.isLoading.observe(viewLifecycleOwner, isLoadingObserver)
+        viewModel.loading.observe(viewLifecycleOwner, isLoadingObserver)
         viewModel.isLoggedIn.observe(viewLifecycleOwner) { navigateToRoot() }
         viewModel.error.observe(viewLifecycleOwner, errorObserver)
     }

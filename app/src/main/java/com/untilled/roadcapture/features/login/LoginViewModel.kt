@@ -2,7 +2,6 @@ package com.untilled.roadcapture.features.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.untilled.roadcapture.data.datasource.api.dto.user.LoginRequest
 import com.untilled.roadcapture.data.repository.token.LocalTokenRepository
 import com.untilled.roadcapture.data.repository.token.dto.OAuthTokenArgs
 import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
@@ -46,9 +45,9 @@ class LoginViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe {
-                isLoading.apply {
+                loading.apply {
                     addSource(_isLoggedIn) {
-                        isLoading.value = it?.name?.isBlank()
+                        loading.value = it?.name?.isBlank()
                     }
                     value = true
                 }
@@ -64,8 +63,8 @@ class LoginViewModel @Inject constructor(
                 )
                 saveUserId()
             }) { t ->
-                isLoading.removeSource(_isLoggedIn)
-                isLoading.value = false
+                loading.removeSource(_isLoggedIn)
+                loading.value = false
                 localTokenRepository.clearToken()
                 error.value = t.message
             }.addTo(compositeDisposable)
@@ -77,11 +76,11 @@ class LoginViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
                 localUserRepository.saveUser(response.id)
-                isLoading.removeSource(_isLoggedIn.apply { value = localTokenRepository.getOAuthToken().socialType.getSocialType() })
+                loading.removeSource(_isLoggedIn.apply { value = localTokenRepository.getOAuthToken().socialType.getSocialType() })
             }) { t->
                 logout()
-                isLoading.removeSource(_isLoggedIn)
-                isLoading.value = false
+                loading.removeSource(_isLoggedIn)
+                loading.value = false
                 error.value = t.message
             }.addTo(compositeDisposable)
     }
