@@ -22,66 +22,10 @@
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bnv_root"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/design_bottom_navigation_height"
         app:labelVisibilityMode="unlabeled"
         app:itemIconTint="@color/selector_menu"
         app:itemTextColor="@color/selector_menu"
         app:menu="@menu/bnv_menu" />
-
-<!--
-    <LinearLayout
-        android:id="@+id/linear_root_container_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:orientation="horizontal">
-
-        <ImageView
-            android:id="@+id/img_root_albums_tab"
-            style="@style/RippleEffect"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="12dp"
-            android:src="@drawable/ic_home" />
-
-        <ImageView
-            android:id="@+id/img_root_search_tab"
-            style="@style/RippleEffect"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="12dp"
-            android:src="@drawable/ic_search" />
-
-        <ImageView
-            android:id="@+id/img_root_capture_tab"
-            style="@style/RippleEffect"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:padding="12dp"
-            android:src="@drawable/ic_plus" />
-
-        <ImageView
-            android:id="@+id/img_root_followingalbums_tab"
-            style="@style/RippleEffect"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="12dp"
-            android:src="@drawable/ic_album" />
-
-        <ImageView
-            android:id="@+id/img_root_my_studio_tab"
-            style="@style/RippleEffect"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:padding="12dp"
-            android:src="@drawable/ic_user" />
-
-    </LinearLayout>
--->
 
 </LinearLayout>

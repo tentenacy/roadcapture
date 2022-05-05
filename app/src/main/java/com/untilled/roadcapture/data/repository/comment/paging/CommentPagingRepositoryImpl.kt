@@ -21,7 +21,6 @@ class CommentPagingRepositoryImpl(
             config = PagingConfig(
                 pageSize = 20,
                 enablePlaceholders = true,
-                maxSize = 30,
                 prefetchDistance = 5,
                 initialLoadSize = 20
             ),
@@ -35,7 +34,6 @@ class CommentPagingRepositoryImpl(
             config = PagingConfig(
                 pageSize = 20,
                 enablePlaceholders = true,
-                maxSize = 30,
                 prefetchDistance = 5,
                 initialLoadSize = 20
             ),

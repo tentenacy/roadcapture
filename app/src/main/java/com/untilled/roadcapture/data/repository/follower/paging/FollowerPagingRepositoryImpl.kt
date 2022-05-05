@@ -28,7 +28,6 @@ class FollowerPagingRepositoryImpl(
             config = PagingConfig(
                 pageSize = 20,
                 enablePlaceholders = true,
-                maxSize = 30,
                 prefetchDistance = 5,
                 initialLoadSize = 40
             ),
@@ -47,7 +46,6 @@ class FollowerPagingRepositoryImpl(
             config = PagingConfig(
                 pageSize = 20,
                 enablePlaceholders = false,
-                maxSize = 30,
                 prefetchDistance = 5,
                 initialLoadSize = 40
             ),
@@ -62,7 +60,6 @@ class FollowerPagingRepositoryImpl(
             config = PagingConfig(
                 pageSize = 20,
                 enablePlaceholders = true,
-                maxSize = 30,
                 prefetchDistance = 5,
                 initialLoadSize = 40
             ),
@@ -77,7 +74,6 @@ class FollowerPagingRepositoryImpl(
             config = PagingConfig(
                 pageSize = 20,
                 enablePlaceholders = false,
-                maxSize = 30,
                 prefetchDistance = 5,
                 initialLoadSize = 40
             ),
@@ -90,7 +86,6 @@ class FollowerPagingRepositoryImpl(
             config = PagingConfig(
                 pageSize = 20,
                 enablePlaceholders = false,
-                maxSize = 30,
                 prefetchDistance = 5,
                 initialLoadSize = 40
             ),

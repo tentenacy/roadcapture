@@ -60,9 +60,9 @@
     <string name="filter_set_duration">기간 설정</string>
     <string name="dlgfilter_whole">전체 기간</string>
     <string name="dlgfilter_today">오늘</string>
-    <string name="dlgfilter_week">이번 주</string>
-    <string name="dlgfilter_month">이번 달</string>
-    <string name="dlgfilter_year">올해</string>
+    <string name="dlgfilter_week">한 주</string>
+    <string name="dlgfilter_month">한 달</string>
+    <string name="dlgfilter_year">한 해</string>
     <string name="dlgfilter_label_startdate">시작일</string>
     <string name="dlgfilter_label_enddate">종료일</string>
     <string name="dlgfilter_label_sort">정렬</string>

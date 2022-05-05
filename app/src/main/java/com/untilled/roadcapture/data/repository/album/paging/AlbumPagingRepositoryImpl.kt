@@ -31,8 +31,7 @@ class AlbumPagingRepositoryImpl(
             config = PagingConfig(
                 pageSize = 20,
                 enablePlaceholders = true,
-                maxSize = 30,
-                prefetchDistance = 5,
+                prefetchDistance = 1,
                 initialLoadSize = 20
             ),
             pagingSourceFactory = { AlbumsPagingSource(mapper, roadCaptureApi, albumsCondition = cond) }
@@ -45,7 +44,6 @@ class AlbumPagingRepositoryImpl(
                 pageSize = 5,
 //                pageSize = 20,
                 enablePlaceholders = true,
-                maxSize = 30,
                 prefetchDistance = 1,
 //                prefetchDistance = 5,
                 initialLoadSize = 5
@@ -61,7 +59,6 @@ class AlbumPagingRepositoryImpl(
                 pageSize = 5,
 //                pageSize = 20,
                 enablePlaceholders = true,
-                maxSize = 30,
                 prefetchDistance = 1,
 //                prefetchDistance = 5,
                 initialLoadSize = 5
@@ -77,7 +74,6 @@ class AlbumPagingRepositoryImpl(
             config = PagingConfig(
                 pageSize = 20,
                 enablePlaceholders = true,
-                maxSize = 30,
                 prefetchDistance = 5,
                 initialLoadSize = 20
             ),

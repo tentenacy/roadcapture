@@ -34,7 +34,6 @@ class AlbumPagingRemoteRepositoryImpl(
             config = PagingConfig(
                 pageSize = 20,
                 enablePlaceholders = true,
-                maxSize = 30,
                 prefetchDistance = 5,
                 initialLoadSize = 20
             ),
@@ -50,7 +49,6 @@ class AlbumPagingRemoteRepositoryImpl(
             config = PagingConfig(
                 pageSize = 20,
                 enablePlaceholders = true,
-                maxSize = 30,
                 prefetchDistance = 5,
                 initialLoadSize = 20
             ),
@@ -66,7 +64,6 @@ class AlbumPagingRemoteRepositoryImpl(
             config = PagingConfig(
                 pageSize = 20,
                 enablePlaceholders = true,
-                maxSize = 30,
                 prefetchDistance = 5,
                 initialLoadSize = 40
             ),
