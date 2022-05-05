@@ -1,6 +1,7 @@
 package com.untilled.roadcapture.features.studio
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -13,6 +14,7 @@ import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingReposito
 import com.untilled.roadcapture.data.repository.follower.FollowRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
+import com.untilled.roadcapture.utils.combineLatestData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
@@ -27,11 +29,25 @@ class StudioViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private val _userInfo = MutableLiveData<StudioUserResponse>()
-    val userInfo: LiveData<StudioUserResponse> get() = _userInfo
 
     private var _albums = MutableLiveData<PagingData<UserAlbums.UserAlbum>>()
-    val albums: LiveData<PagingData<UserAlbums.UserAlbum>> get() = _albums
 
+    val load = MediatorLiveData<Pair<StudioUserResponse, PagingData<UserAlbums.UserAlbum>>?>()
+
+    init {
+        load.addSource(_userInfo) {
+            load.value = combineLatestData(_userInfo, _albums)
+        }
+        load.addSource(_albums) {
+            load.value = combineLatestData(_userInfo, _albums)
+        }
+        load.value = null
+    }
+
+    fun loadAll(userId: Long?, cond: UserAlbumsCondition? = null) {
+        getStudioAlbums(userId, cond)
+        userId?.let { getUserInfo(it) }
+    }
 
     fun getUserInfo(id: Long){
         userRepository.getUserInfo(id)
@@ -46,7 +62,7 @@ class StudioViewModel @Inject constructor(
 
 
     fun getStudioAlbums(userId: Long?, cond: UserAlbumsCondition?){
-        albumPagingRepository.getStudioAlbums(userId,cond)
+        albumPagingRepository.getStudioAlbums(userId, cond)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)

@@ -71,5 +71,6 @@
                 tools:listitem="@layout/item_albums" />
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

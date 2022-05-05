@@ -47,11 +47,10 @@ abstract class RepositoryModule {
         @Singleton
         @Provides
         fun provideAlbumsPagingRepository(
-            followingAlbumsPagingSource: FollowingAlbumsPagingSource,
             mapper: AlbumsMapper,
             roadCaptureApi: RoadCaptureApi,
         ): AlbumPagingRepository {
-            return AlbumPagingRepositoryImpl(followingAlbumsPagingSource, mapper, roadCaptureApi)
+            return AlbumPagingRepositoryImpl(mapper, roadCaptureApi)
         }
 
         @Singleton

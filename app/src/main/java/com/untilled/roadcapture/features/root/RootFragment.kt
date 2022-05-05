@@ -16,6 +16,7 @@ import com.untilled.roadcapture.core.navigation.StackHostFragment
 import com.untilled.roadcapture.databinding.FragmentRootBinding
 import com.untilled.roadcapture.features.root.capture.AlbumCreationAskingBottomSheetDialog
 import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
+import com.untilled.roadcapture.utils.constant.tag.FragmentTagConstant
 import com.untilled.roadcapture.utils.mainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -42,7 +43,7 @@ class RootFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         initFragments()
-        fragments[R.id.menu_albums]?.let { selectFragment(it) }
+        selectFragment(fragments[R.id.menu_albums]!!)
     }
 
     private fun initFragments() {
@@ -52,28 +53,11 @@ class RootFragment : Fragment() {
             StackHostFragment.newInstance(R.navigation.navigation_root_following_albums)
         myStudioFragment = StackHostFragment.newInstance(R.navigation.navigation_root_my_studio)
 
-        childFragmentManager.beginTransaction().apply {
-            add(
-                R.id.frame_root_container_contents,
-                searchRootFragment,
-                this@RootFragment::searchRootFragment.name
-            )
-            add(
-                R.id.frame_root_container_contents,
-                followingAlbumsFragment,
-                this@RootFragment::followingAlbumsFragment.name
-            )
-            add(
-                R.id.frame_root_container_contents,
-                albumsFragment,
-                this@RootFragment::albumsFragment.name
-            )
-            add(
-                R.id.frame_root_container_contents,
-                myStudioFragment,
-                this@RootFragment::myStudioFragment.name
-            )
-        }.commit()
+        addFragment(albumsFragment, FragmentTagConstant.ROOT[R.id.menu_albums]!!)
+    }
+
+    private fun addFragment(fragment: Fragment, tag: String) {
+        childFragmentManager.beginTransaction().add(R.id.frame_root_container_contents, fragment, tag).commit()
     }
 
     override fun onCreateView(
@@ -109,8 +93,11 @@ class RootFragment : Fragment() {
                 )
                 return@setOnNavigationItemSelectedListener false
             } else {
-                fragments[it.itemId]?.let { fragment ->
+                childFragmentManager.findFragmentByTag(fragments[it.itemId]!!.tag)?.let { fragment ->
                     selectFragment(fragment)
+                } ?: kotlin.run {
+                    addFragment(fragments[it.itemId]!!, FragmentTagConstant.ROOT[it.itemId]!!)
+                    selectFragment(fragments[it.itemId]!!)
                 }
             }
 

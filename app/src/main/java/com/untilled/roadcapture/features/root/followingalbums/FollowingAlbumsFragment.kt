@@ -6,8 +6,11 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.paging.insertHeaderItem
 import androidx.paging.map
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -20,8 +23,14 @@ import com.untilled.roadcapture.databinding.ItemFollowingFilterBinding
 import com.untilled.roadcapture.features.common.AlbumMorePopupMenu
 import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
+import com.untilled.roadcapture.features.root.followingalbums.dto.FollowingAlbumsAdapterArgs
+import com.untilled.roadcapture.features.root.followingalbums.dto.FollowingFiltersViewHolderArgs
 import com.untilled.roadcapture.utils.*
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FollowingAlbumsFragment : Fragment() {
@@ -32,7 +41,16 @@ class FollowingAlbumsFragment : Fragment() {
     private val viewModel: FollowingAlbumsViewModel by viewModels()
 
     private val adapter: FollowingAlbumsAdapter by lazy {
-        FollowingAlbumsAdapter(lifecycle, albumItemOnClickListener, filterItemOnClickListener)
+        FollowingAlbumsAdapter(
+            FollowingAlbumsAdapterArgs(
+                followingFiltersViewHolderArgs = FollowingFiltersViewHolderArgs(
+                    lifecycle,
+                    headerLoadStateListener,
+                    filterItemOnClickListener,
+                ),
+                itemOnClickListener = albumItemOnClickListener,
+            )
+        )
     }
 
     private val notificationOnClickListener: (View?) -> Unit = {
@@ -44,8 +62,20 @@ class FollowingAlbumsFragment : Fragment() {
     }
 
     private val swipeRefreshListener = SwipeRefreshLayout.OnRefreshListener {
-        refresh(null)
-        binding.swipeFollowingalbumsInnercontainer.isRefreshing = false
+        refresh()
+    }
+
+    private val headerLoadStateListener: (CombinedLoadStates) -> Unit = { loadState ->
+        if (loadState.source.refresh is LoadState.Loading) {
+            binding.swipeFollowingalbumsInnercontainer.isRefreshing = true
+        }
+        if (loadState.source.refresh is LoadState.NotLoading) {
+            CoroutineScope(Dispatchers.Main).launch {
+                delay(1000)
+                binding.swipeFollowingalbumsInnercontainer.isRefreshing = false
+                binding.constraintFollowingalbumsContainer.isVisible = true
+            }
+        }
     }
 
     private val albumItemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
@@ -63,7 +93,11 @@ class FollowingAlbumsFragment : Fragment() {
             R.id.img_ialbums_thumbnail,
             R.id.text_ialbums_title,
             R.id.text_ialbums_desc -> rootFrom3Depth().navigateToPictureViewer(albumId)
-            R.id.img_ialbums_more -> AlbumMorePopupMenu(requireContext(), args.view, menuItemClickListener).show()
+            R.id.img_ialbums_more -> AlbumMorePopupMenu(
+                requireContext(),
+                args.view,
+                menuItemClickListener
+            ).show()
         }
     }
 
@@ -84,7 +118,7 @@ class FollowingAlbumsFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        refresh(null)
+        refresh()
     }
 
     override fun onCreateView(
@@ -104,31 +138,39 @@ class FollowingAlbumsFragment : Fragment() {
         observeData()
         initAdapter()
         setOnClickListeners()
-        setOnRefreshListener()
+        setOtherListeners()
     }
 
-    private fun setOnRefreshListener(){
+    private fun setOtherListeners() {
         binding.swipeFollowingalbumsInnercontainer.setOnRefreshListener(swipeRefreshListener)
     }
 
     private fun observeData() {
         viewModel.load.observe(viewLifecycleOwner) {
             it?.let {
-                adapter.submitData(lifecycle, it.first.map { FollowingAlbumPagingItem.Data(it) as FollowingAlbumPagingItem }
-                    .insertHeaderItem(item = it.second.let { FollowingAlbumPagingItem.Header(it) }))
+                adapter.submitData(
+                    lifecycle,
+                    it.first.map { FollowingAlbumPagingItem.Data(it) as FollowingAlbumPagingItem }
+                        .insertHeaderItem(item = it.second.let { FollowingAlbumPagingItem.Header(it) })
+                )
+            } ?: kotlin.run {
+                binding.constraintFollowingalbumsContainer.isVisible = false
             }
         }
     }
 
     private fun initAdapter() {
         binding.recyclerFollowingalbums.adapter = adapter.withLoadStateHeaderAndFooter(
-            header = PageLoadStateAdapter{adapter.retry()},
-            footer = PageLoadStateAdapter{adapter.retry()}
+            header = PageLoadStateAdapter { adapter.retry() },
+            footer = PageLoadStateAdapter { adapter.retry() }
         )
-        adapter.addLoadStateListener {  }
+        adapter.addLoadStateListener { loadState ->
+            binding.swipeFollowingalbumsInnercontainer.isRefreshing =
+                loadState.source.refresh is LoadState.Loading
+        }
     }
 
-    private fun refresh(followingId: Long?) {
+    private fun refresh(followingId: Long? = null) {
         viewModel.loadAll(FollowingAlbumsCondition(followingId))
     }
 
@@ -144,14 +186,14 @@ class FollowingAlbumsFragment : Fragment() {
 
     private fun setLikeStatus(view: LottieAnimationView, item: ItemAlbumsBinding) {
         if (!(item.like?.liked)!!) {
-            val animator = getValueAnimator(0f,0.5f, view)
+            val animator = getValueAnimator(0f, 0.5f, view)
             animator.start()
             item.like!!.likeCount++
             item.like!!.liked = true
             item.textIalbumsLike.text = (item.like!!.likeCount).toString()
             viewModel.likeAlbum(item.album!!.albumId)
         } else {
-            val animator = getValueAnimator(0.5f,0.0f, view)
+            val animator = getValueAnimator(0.5f, 0.0f, view)
             animator.start()
             item.like!!.likeCount--
             item.like!!.liked = false
@@ -160,7 +202,11 @@ class FollowingAlbumsFragment : Fragment() {
         }
     }
 
-    private fun getValueAnimator(start: Float, end: Float, view: LottieAnimationView): ValueAnimator {
+    private fun getValueAnimator(
+        start: Float,
+        end: Float,
+        view: LottieAnimationView
+    ): ValueAnimator {
         val animator = ValueAnimator.ofFloat(start, end).setDuration(500)
         animator.addUpdateListener {
             view.progress = it.animatedValue as Float

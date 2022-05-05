@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.paging.LoadState
 import androidx.paging.PagingData
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.jakewharton.rxbinding3.widget.textChanges
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.entity.paging.Albums
@@ -39,6 +40,10 @@ class TitleSearchFragment : BaseFragment() {
         adapter.submitData(lifecycle, pagingData)
     }
 
+    private val swipeRefreshListener = SwipeRefreshLayout.OnRefreshListener {
+        viewModel.getAlbums(AlbumsCondition(title = searchFrom1Depth().binding.edtSearchInput.text.toString()))
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -57,8 +62,14 @@ class TitleSearchFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         observeData()
         initAdapter()
+        setOtherListeners()
+    }
+
+    private fun setOtherListeners() {
+        binding.swipeTitlesearchContainer.setOnRefreshListener(swipeRefreshListener)
     }
 
     private fun observeData() {
@@ -81,6 +92,9 @@ class TitleSearchFragment : BaseFragment() {
 
     private fun initAdapter() {
         adapter.addLoadStateListener { loadState ->
+
+            binding.swipeTitlesearchContainer.isRefreshing = loadState.source.refresh is LoadState.Loading
+
             if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1) {
                 searchFrom1Depth().binding.imgSearchNosearch.visibility = View.VISIBLE
                 searchFrom1Depth().binding.textSearchNosearch1.visibility = View.VISIBLE

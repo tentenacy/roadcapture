@@ -10,8 +10,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.paging.LoadState
 import androidx.paging.PagingData
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.entity.paging.Followings
 import com.untilled.roadcapture.databinding.FragmentFollowingBinding
 import com.untilled.roadcapture.databinding.ItemFollowBinding
@@ -29,6 +32,7 @@ class FollowingsFragment : Fragment(){
 
     private var _binding: FragmentFollowingBinding? = null
     val binding get() = _binding!!
+
     private val viewModel: FollowingsViewModel by viewModels()
     private val args: FollowingsFragmentArgs by navArgs()
     private val adapter: FollowingsAdapter by lazy {
@@ -43,6 +47,10 @@ class FollowingsFragment : Fragment(){
             R.id.btn_ifollow -> viewModel.follow((args.item as ItemFollowBinding).user!!.followingId)
             R.id.img_ifollow_profile -> navigateToStudio((args.item as ItemFollowBinding).user!!.followingId)
         }
+    }
+
+    private val swipeRefreshListener = SwipeRefreshLayout.OnRefreshListener {
+        viewModel.getUserFollowing(args.id)
     }
 
     private val userObserver: (PagingData<Followings.Following>) -> Unit = { pagingData ->
@@ -60,8 +68,10 @@ class FollowingsFragment : Fragment(){
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
-        refresh()
+
+        viewModel.getUserFollowing(args.id)
     }
 
     override fun onCreateView(
@@ -86,16 +96,16 @@ class FollowingsFragment : Fragment(){
         observeData()
         initAdapter()
         setOnClickListeners()
+        setOtherListeners()
+    }
+
+    private fun setOtherListeners() {
+        binding.swipeFollowingInnercontainer.setOnRefreshListener(swipeRefreshListener)
     }
 
     private fun observeData(){
-        viewModel.user.observe(viewLifecycleOwner,userObserver)
+        viewModel.user.observe(viewLifecycleOwner, userObserver)
     }
-
-    private fun refresh(){
-        viewModel.getUserFollowing(args.id)
-    }
-
 
     private fun initAdapter(){
         binding.recyclerFollowing.addItemDecoration(customDivider)
@@ -103,6 +113,9 @@ class FollowingsFragment : Fragment(){
             header = PageLoadStateAdapter{adapter.retry()},
             footer = PageLoadStateAdapter{adapter.retry()}
         )
+        adapter.addLoadStateListener { loadState ->
+            binding.swipeFollowingInnercontainer.isRefreshing = loadState.source.refresh is LoadState.Loading
+        }
     }
 
     private fun setOnClickListeners(){

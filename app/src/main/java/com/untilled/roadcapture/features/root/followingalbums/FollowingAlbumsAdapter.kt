@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.Lifecycle
+import androidx.paging.CombinedLoadStates
 import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
@@ -14,6 +15,8 @@ import com.untilled.roadcapture.databinding.*
 import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.features.root.albums.dto.LikeStatus
+import com.untilled.roadcapture.features.root.followingalbums.dto.FollowingAlbumsAdapterArgs
+import com.untilled.roadcapture.features.root.followingalbums.dto.FollowingFiltersViewHolderArgs
 
 sealed class FollowingAlbumPagingItem(val type: FollowingAlbumPagingType) {
     data class Data(val value: Albums.Album) : FollowingAlbumPagingItem(FollowingAlbumPagingType.DATA)
@@ -30,22 +33,22 @@ sealed class FollowingAlbumsViewHolder(
 
     data class FollowingFiltersViewHolder(
         val binding: ItemContainerFollowingFilterBinding,
-        val lifecycle: Lifecycle,
-        val filterItemOnClickListener: (ItemClickArgs?) -> Unit
+        val followingFiltersViewHolderArgs: FollowingFiltersViewHolderArgs,
     ) : FollowingAlbumsViewHolder(binding) {
 
         val adapter =
-            FollowingAlbumsFilterAdapter(filterItemOnClickListener)
+            FollowingAlbumsFilterAdapter(followingFiltersViewHolderArgs.filterItemOnClickListener)
 
         init {
             binding.recyclerFollowingalbumsFilter.adapter = adapter.withLoadStateHeaderAndFooter(
                 header = PageLoadStateAdapter{adapter.retry()},
                 footer = PageLoadStateAdapter{adapter.retry()}
             )
+            adapter.addLoadStateListener(followingFiltersViewHolderArgs.headerLoadStateListener)
         }
 
         fun bind(filters: PagingData<FollowingsSortByAlbum.FollowingSortByAlbum>) {
-            adapter.submitData(lifecycle, filters)
+            adapter.submitData(followingFiltersViewHolderArgs.lifecycle, filters)
         }
     }
 
@@ -68,9 +71,7 @@ sealed class FollowingAlbumsViewHolder(
 }
 
 class FollowingAlbumsAdapter(
-    val lifecycle: Lifecycle,
-    val itemOnClickListener: (ItemClickArgs?) -> Unit,
-    private val filterItemOnClickListener: (ItemClickArgs?) -> Unit,
+    private val followingAlbumsAdapterArgs: FollowingAlbumsAdapterArgs,
 ) : PagingDataAdapter<FollowingAlbumPagingItem, RecyclerView.ViewHolder>(
     COMPARATOR
 ) {
@@ -78,11 +79,12 @@ class FollowingAlbumsAdapter(
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FollowingAlbumsViewHolder {
         return when (viewType) {
             VIEW_TYPE_FOLLOWING_FILTER -> FollowingAlbumsViewHolder.FollowingFiltersViewHolder(
-                ItemContainerFollowingFilterBinding.inflate(LayoutInflater.from(parent.context), parent, false), lifecycle, filterItemOnClickListener
+                ItemContainerFollowingFilterBinding.inflate(LayoutInflater.from(parent.context), parent, false),
+                followingAlbumsAdapterArgs.followingFiltersViewHolderArgs,
             )
             VIEW_TYPE_FOLLOWING_ALBUM -> FollowingAlbumsViewHolder.FollowingAlbumViewHolder(
                 ItemAlbumsBinding.inflate(LayoutInflater.from(parent.context), parent, false),
-                itemOnClickListener
+                followingAlbumsAdapterArgs.itemOnClickListener,
             )
             else -> throw RuntimeException("세상에 이런 일이!")
         }

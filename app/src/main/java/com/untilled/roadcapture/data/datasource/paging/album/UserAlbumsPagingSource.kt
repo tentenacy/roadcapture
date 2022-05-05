@@ -11,6 +11,7 @@ import com.untilled.roadcapture.utils.constant.policy.RetryPolicyConstant
 import com.untilled.roadcapture.utils.retryThreeTimes
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -39,6 +40,7 @@ class UserAlbumsPagingSource(
                 region2DepthName = userAlbumsCondition?.region2DepthName,
                 region3DepthName = userAlbumsCondition?.region3DepthName,
             )
+                .delay(1, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .map { mapper.transform(it) }
                 .map { toLoadResult(it, position) }
@@ -53,6 +55,7 @@ class UserAlbumsPagingSource(
                 region2DepthName = userAlbumsCondition?.region2DepthName,
                 region3DepthName = userAlbumsCondition?.region3DepthName,
             )
+                .delay(1, TimeUnit.SECONDS)
                 .subscribeOn(Schedulers.io())
                 .map { mapper.transform(it) }
                 .map { toLoadResult(it, position) }

@@ -1,21 +1,18 @@
 package com.untilled.roadcapture.features.root.studio
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.paging.PagingData
-import androidx.paging.insertHeaderItem
-import androidx.paging.map
+import androidx.paging.*
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.snackbar.Snackbar
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
 import com.untilled.roadcapture.data.datasource.sharedpref.User
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
@@ -25,7 +22,12 @@ import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.*
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
+//TODO: 로딩 중 onDestroyView 호출 후 onCreateView 진입 시 NPE 버그 수정
 @AndroidEntryPoint
 class MyStudioFragment : Fragment() {
 
@@ -34,13 +36,25 @@ class MyStudioFragment : Fragment() {
 
     private val viewModel: MyStudioViewModel by viewModels()
 
-    private val myStudioAdapter: MyStudioAdapter by lazy {
+    private val adapter: MyStudioAdapter by lazy {
         MyStudioAdapter(itemOnClickListener)
     }
 
+    private val loadStateListener: (CombinedLoadStates) -> Unit = { loadState ->
+        binding.swipeMystudioContainer.isRefreshing =
+            loadState.source.refresh is LoadState.Loading
+        if (loadState.source.refresh is LoadState.NotLoading) {
+            binding.coordinatorMystudioContainer.isVisible = true
+        }
+    }
+
     private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
-        when(args?.view?.id){
-            R.id.img_ialbums_studio_more -> MyStudioMorePopupMenu(requireContext(), args.view, menuItemClickListener((args?.item as ItemAlbumsStudioBinding).album?.userAlbumId!!)).show()
+        when (args?.view?.id) {
+            R.id.img_ialbums_studio_more -> MyStudioMorePopupMenu(
+                requireContext(),
+                args.view,
+                menuItemClickListener((args?.item as ItemAlbumsStudioBinding).album?.userAlbumId!!)
+            ).show()
         }
     }
 
@@ -59,29 +73,19 @@ class MyStudioFragment : Fragment() {
         true
     }
 
-    private val appbarOffsetChangedListener = AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-        binding.swipeMystudioContainer.isEnabled = verticalOffset == 0
-    }
-
-    private val albumsObserver: (PagingData<UserAlbums.UserAlbum>) -> Unit = { pagingData ->
-        myStudioAdapter.submitData(lifecycle, pagingData.map { UserAlbumItem.Data(it) as UserAlbumItem }
-            .insertHeaderItem(item = UserAlbumItem.Header))
-    }
-
-    private val userInfoObserver: (StudioUserResponse) -> Unit = { user ->
-        binding.user = user
-    }
+    private val appbarOffsetChangedListener =
+        AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            binding.swipeMystudioContainer.isEnabled = verticalOffset == 0
+        }
 
     private val swipeRefreshListener = SwipeRefreshLayout.OnRefreshListener {
-        refresh()
-        binding.swipeMystudioContainer.isRefreshing = false
+        viewModel.loadAll(null)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        viewModel.getMyInfo()
-        refresh()
+        viewModel.loadAll(null)
     }
 
     override fun onCreateView(
@@ -106,31 +110,32 @@ class MyStudioFragment : Fragment() {
         observeData()
         initAdapter()
         setOnClickListeners()
-        setOnRefreshListener()
-        addOnOffsetChangedListener()
+        setOtherListeners()
     }
 
-    private fun addOnOffsetChangedListener(){
+    private fun setOtherListeners() {
+        binding.swipeMystudioContainer.setOnRefreshListener(swipeRefreshListener)
         binding.appbarMystudio.addOnOffsetChangedListener(appbarOffsetChangedListener)
     }
 
-    private fun setOnRefreshListener(){
-        binding.swipeMystudioContainer.setOnRefreshListener(swipeRefreshListener)
-    }
     private fun observeData() {
-        viewModel.myAlbums.observe(viewLifecycleOwner, albumsObserver)
-        viewModel.userInfo.observe(viewLifecycleOwner, userInfoObserver)
+        viewModel.load.observe(viewLifecycleOwner) {
+            it?.let {
+                binding.user = it.first
+                adapter.submitData(lifecycle, it.second.map { UserAlbumItem.Data(it) as UserAlbumItem }
+                    .insertHeaderItem(item = UserAlbumItem.Header))
+            } ?: kotlin.run {
+                binding.coordinatorMystudioContainer.isVisible = false
+            }
+        }
     }
 
     private fun initAdapter() {
-        binding.recyclerMystudioAlbum.adapter = myStudioAdapter.withLoadStateHeaderAndFooter(
-            header = PageLoadStateAdapter{myStudioAdapter.retry()},
-            footer = PageLoadStateAdapter{myStudioAdapter.retry()}
+        binding.recyclerMystudioAlbum.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = PageLoadStateAdapter { adapter.retry() },
+            footer = PageLoadStateAdapter { adapter.retry() }
         )
-    }
-
-    private fun refresh() {
-        viewModel.getMyStudioAlbums(null)
+        adapter.addLoadStateListener(loadStateListener)
     }
 
     private fun setOnClickListeners() {
@@ -143,7 +148,7 @@ class MyStudioFragment : Fragment() {
         binding.btnMystudioEdit.setOnClickListener {
 //            Navigation.findNavController(rootFragmentFrom3Depth().binding.root)
 //                .navigate(RootFragmentDirections.actionRootFragmentToMyStudioModification(binding.user)
-            showSnackbar(requireView(),"스낵바 테스트")
+            showSnackbar(requireView(), "스낵바 테스트")
         }
         binding.imageMystudioSettingBefore.setOnClickListener {
             rootFrom3Depth().navigateToSettings()

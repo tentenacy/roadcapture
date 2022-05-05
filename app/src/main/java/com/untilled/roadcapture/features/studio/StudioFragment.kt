@@ -5,12 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
-import androidx.paging.PagingData
-import androidx.paging.insertHeaderItem
-import androidx.paging.map
+import androidx.paging.*
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.appbar.AppBarLayout
 import com.untilled.roadcapture.R
@@ -36,7 +35,7 @@ class StudioFragment : Fragment() {
     private val viewModel: StudioViewModel by viewModels()
 
     private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
-        when(args?.view?.id){
+        when (args?.view?.id) {
             R.id.img_ialbums_studio_more -> {
                 val popupMenu = PopupMenu(requireContext(), args.view)
                 popupMenu.apply {
@@ -46,7 +45,7 @@ class StudioFragment : Fragment() {
                             R.id.popupmenu_studio_more_share -> {
                             }
                             R.id.popupmenu_studio_more_report -> {
-                                showReportDialog {  }
+                                showReportDialog { }
                             }
                         }
                         true
@@ -56,31 +55,33 @@ class StudioFragment : Fragment() {
         }
     }
 
-    private val appbarOffsetChangedListener = AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-        binding.swipeStudioContainer.isEnabled = verticalOffset == 0
+    private val loadStateListener: (CombinedLoadStates) -> Unit = { loadState ->
+        binding.swipeStudioContainer.isRefreshing =
+            loadState.source.refresh is LoadState.Loading
+        if (loadState.source.refresh is LoadState.NotLoading) {
+            binding.coordinatorStudioContainer.isVisible = true
+        }
     }
 
-    private val studioAdapter: StudioAdapter by lazy{
+    private val appbarOffsetChangedListener =
+        AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+            binding.swipeStudioContainer.isEnabled = verticalOffset == 0
+        }
+
+    private val adapter: StudioAdapter by lazy {
         StudioAdapter(itemOnClickListener)
     }
 
-    private val userInfoObserver: (StudioUserResponse) -> Unit = { user ->
-        binding.user = user
-    }
-
-    private val albumsObserver: (PagingData<UserAlbums.UserAlbum>) -> Unit = { pagingData ->
-        studioAdapter.submitData(lifecycle, pagingData.map { UserAlbumItem.Data(it) as UserAlbumItem }
-            .insertHeaderItem(item = UserAlbumItem.Header))
-    }
-
     private val swipeRefreshListener = SwipeRefreshLayout.OnRefreshListener {
-        refresh()
+        viewModel.getStudioAlbums(args.id, null)
         binding.swipeStudioContainer.isRefreshing = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
-        refresh()
+
+        viewModel.loadAll(args.id, null)
     }
 
     override fun onCreateView(
@@ -104,50 +105,47 @@ class StudioFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeData()
-        initViews()
         initAdapter()
         setOnClickListeners()
-        setOnRefreshListener()
-        addOnOffsetChangedListener()
+        setOtherListeners()
     }
 
-    private fun addOnOffsetChangedListener(){
+    private fun setOtherListeners() {
+        binding.swipeStudioContainer.setOnRefreshListener(swipeRefreshListener)
         binding.appbarStudio.addOnOffsetChangedListener(appbarOffsetChangedListener)
     }
 
-    private fun setOnRefreshListener(){
-        binding.swipeStudioContainer.setOnRefreshListener(swipeRefreshListener)
-    }
     private fun observeData() {
-        viewModel.userInfo.observe(viewLifecycleOwner,userInfoObserver)
-        viewModel.albums.observe(viewLifecycleOwner,albumsObserver)
-    }
-
-    private fun initViews(){
-        viewModel.getUserInfo(args.id)
+        viewModel.load.observe(viewLifecycleOwner) {
+            it?.let {
+                binding.user = it.first
+                adapter.submitData(
+                    lifecycle,
+                    it.second.map { UserAlbumItem.Data(it) as UserAlbumItem }
+                        .insertHeaderItem(item = UserAlbumItem.Header))
+            } ?: kotlin.run {
+                binding.coordinatorStudioContainer.isVisible = false
+            }
+        }
     }
 
     private fun initAdapter() {
-        binding.recyclerStudioAlbum.adapter = studioAdapter.withLoadStateHeaderAndFooter(
-            header = PageLoadStateAdapter{studioAdapter.retry()},
-            footer = PageLoadStateAdapter{studioAdapter.retry()}
+        binding.recyclerStudioAlbum.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = PageLoadStateAdapter { adapter.retry() },
+            footer = PageLoadStateAdapter { adapter.retry() }
         )
+        adapter.addLoadStateListener(loadStateListener)
     }
-
-    private fun refresh() {
-        viewModel.getStudioAlbums(args.id,null)
-    }
-
 
     private val btnStudioFollowObserver: (View?) -> Unit = {
-        if(binding.user?.followed!!){
+        if (binding.user?.followed!!) {
             viewModel.unfollow(args.id)
             binding.btnStudioFollow.text = "팔로우"
             binding.user?.followed = false
             binding.textStudioFollower.text = (binding.user?.followerCount!! - 1).toString()
             val temp = binding.user?.followerCount!!
             binding.user?.followerCount = temp - 1
-        } else{
+        } else {
             viewModel.follow(args.id)
             binding.btnStudioFollow.text = "언팔로우"
             binding.user?.followed = true

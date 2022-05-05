@@ -10,7 +10,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.paging.LoadState
 import androidx.paging.PagingData
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.paging.Followers
 import com.untilled.roadcapture.databinding.FragmentFollowerBinding
@@ -38,6 +40,10 @@ class FollowersFragment : Fragment(){
     @Inject
     lateinit var customDivider: CustomDivider
 
+    private val swipeRefreshListener = SwipeRefreshLayout.OnRefreshListener {
+        viewModel.getUserFollower(args.id)
+    }
+
     private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
         when(args?.view?.id){
             R.id.btn_ifollow -> viewModel.follow((args.item as ItemFollowBinding).user!!.followingId)
@@ -61,8 +67,10 @@ class FollowersFragment : Fragment(){
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
-        refresh()
+
+        viewModel.getUserFollower(args.id)
     }
 
     override fun onCreateView(
@@ -88,14 +96,15 @@ class FollowersFragment : Fragment(){
         observeData()
         initAdapter()
         setOnClickListeners()
+        setOtherListeners()
+    }
+
+    private fun setOtherListeners() {
+        binding.swipeFollowerInnercontainer.setOnRefreshListener(swipeRefreshListener)
     }
 
     private fun observeData() {
         viewModel.user.observe(viewLifecycleOwner, userObserver)
-    }
-
-    private fun refresh() {
-        viewModel.getUserFollower(args.id)
     }
 
     private fun initAdapter(){
@@ -104,6 +113,9 @@ class FollowersFragment : Fragment(){
             header = PageLoadStateAdapter{adapter.retry()},
             footer = PageLoadStateAdapter{adapter.retry()}
         )
+        adapter.addLoadStateListener { loadState ->
+            binding.swipeFollowerInnercontainer.isRefreshing = loadState.source.refresh is LoadState.Loading
+        }
     }
 
     private fun setOnClickListeners() {

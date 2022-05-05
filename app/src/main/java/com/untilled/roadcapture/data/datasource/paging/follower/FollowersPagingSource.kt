@@ -10,6 +10,7 @@ import com.untilled.roadcapture.utils.applyRetryPolicy
 import com.untilled.roadcapture.utils.constant.policy.RetryPolicyConstant
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -38,6 +39,7 @@ class FollowersPagingSource @Inject constructor(
             id = userId,
             username = followersCondition?.username,
         )
+            .delay(1, TimeUnit.SECONDS)
             .subscribeOn(Schedulers.io())
             .map { mapper.transformToFollowers(it) }
             .map { toLoadResult(it, position) }

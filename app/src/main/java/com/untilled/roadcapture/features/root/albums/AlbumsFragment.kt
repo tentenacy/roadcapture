@@ -6,8 +6,10 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.airbnb.lottie.LottieAnimationView
@@ -49,7 +51,6 @@ class AlbumsFragment : Fragment() {
 
     private val swipeRefreshListener = SwipeRefreshLayout.OnRefreshListener {
         viewModel.albums()
-        binding.swipeAlbumsInnercontainer.isRefreshing = false
     }
 
     private val albumMenuItemClickListener: (item: MenuItem) -> Boolean = { item ->
@@ -172,6 +173,9 @@ class AlbumsFragment : Fragment() {
             header = PageLoadStateAdapter { adapter.retry() },
             footer = PageLoadStateAdapter { adapter.retry() }
         )
+        adapter.addLoadStateListener { loadState ->
+            binding.swipeAlbumsInnercontainer.isRefreshing = loadState.source.refresh is LoadState.Loading
+        }
     }
 
     private fun setLikeStatus(view: LottieAnimationView, item: ItemAlbumsBinding) {

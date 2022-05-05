@@ -28,10 +28,8 @@ class FollowingAlbumsViewModel @Inject constructor(
 ): BaseViewModel() {
 
     private val _followingAlbums = MutableLiveData<PagingData<Albums.Album>>()
-    val followingAlbums: LiveData<PagingData<Albums.Album>> get() = _followingAlbums
 
     private val _followingsSortByAlbum = MutableLiveData<PagingData<FollowingsSortByAlbum.FollowingSortByAlbum>>()
-    val followingsSortByAlbum: LiveData<PagingData<FollowingsSortByAlbum.FollowingSortByAlbum>> get() = _followingsSortByAlbum
 
     val load = MediatorLiveData<Pair<PagingData<Albums.Album>, PagingData<FollowingsSortByAlbum.FollowingSortByAlbum>>?>()
 
@@ -42,6 +40,7 @@ class FollowingAlbumsViewModel @Inject constructor(
         load.addSource(_followingsSortByAlbum) {
             load.value = combineLatestData(_followingAlbums, _followingsSortByAlbum)
         }
+        load.value = null
     }
 
     fun loadAll(cond: FollowingAlbumsCondition? = null) {
@@ -52,7 +51,6 @@ class FollowingAlbumsViewModel @Inject constructor(
     private fun followingsSortByAlbum() {
         followingPagingRepository.getFollowingsSortByAlbum()
             .cachedIn(viewModelScope)
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ pagingData ->
                 _followingsSortByAlbum.postValue(pagingData)
             }) { t ->
@@ -63,7 +61,6 @@ class FollowingAlbumsViewModel @Inject constructor(
     private fun followingAlbums(cond: FollowingAlbumsCondition? = null) {
         albumPagingRepository.getFollowingAlbums(cond)
             .cachedIn(viewModelScope)
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ pagingData ->
                 _followingAlbums.postValue(pagingData)
             }) { t ->

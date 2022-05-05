@@ -11,16 +11,16 @@ import com.untilled.roadcapture.utils.constant.policy.RetryPolicyConstant
 import com.untilled.roadcapture.utils.retryThreeTimes
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 
 @Singleton
 class FollowingAlbumsPagingSource @Inject constructor(
     private val mapper: AlbumsMapper,
-    private val roadCaptureApi: RoadCaptureApi
+    private val roadCaptureApi: RoadCaptureApi,
+    private val followingAlbumsCondition: FollowingAlbumsCondition?
 ): RxPagingSource<Int, Albums.Album>() {
-
-    var followingAlbumsCondition: FollowingAlbumsCondition? = null
 
     override fun getRefreshKey(state: PagingState<Int, Albums.Album>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -37,6 +37,7 @@ class FollowingAlbumsPagingSource @Inject constructor(
             page = position,
             size = params.loadSize,
         )
+            .delay(1, TimeUnit.SECONDS)
             .subscribeOn(Schedulers.io())
             .map { mapper.transform(it) }
             .map { toLoadResult(it,position) }
