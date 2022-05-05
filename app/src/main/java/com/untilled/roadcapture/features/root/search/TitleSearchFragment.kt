@@ -1,37 +1,33 @@
 package com.untilled.roadcapture.features.root.search
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import androidx.paging.PagingData
+import com.jakewharton.rxbinding3.widget.textChanges
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.databinding.FragmentTitleSearchBinding
+import com.untilled.roadcapture.features.base.BaseFragment
 import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
-import com.untilled.roadcapture.features.signup.SignupViewModel
+import com.untilled.roadcapture.utils.searchFrom1Depth
 import dagger.hilt.android.AndroidEntryPoint
-import io.reactivex.Observable
-import io.reactivex.ObservableEmitter
-import io.reactivex.Observer
-import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.coroutines.flow.flow
 import java.util.concurrent.TimeUnit
 
 @AndroidEntryPoint
-class TitleSearchFragment : Fragment() {
+class TitleSearchFragment : BaseFragment() {
 
     private var _binding: FragmentTitleSearchBinding? = null
     private val binding get() = _binding!!
 
     private val viewModel: SearchViewModel by viewModels({ requireParentFragment() })
 
-    private val adapter: TitleSearchAdapter by lazy{
+    private val adapter: TitleSearchAdapter by lazy {
         TitleSearchAdapter(itemOnClickListener)
     }
 
@@ -41,33 +37,6 @@ class TitleSearchFragment : Fragment() {
 
     private val albumObserver: (PagingData<Albums.Album>) -> Unit = { pagingData ->
         adapter.submitData(lifecycle, pagingData)
-    }
-
-    private val searchObserver: (String?) -> Unit = { text ->
-        val parent = (parentFragment as SearchFragment).binding
-        if(viewModel.search.value == ""){
-            parent.imgSearchNosearch.visibility = View.INVISIBLE
-            parent.textSearchNosearch1.visibility = View.INVISIBLE
-            parent.textSearchNosearch2.visibility = View.INVISIBLE
-            binding.recyclerTitlesearch.visibility = View.INVISIBLE
-        }else{
-            refresh(text)
-        }
-    }
-
-    private val itemCountObserver: (Int) -> Unit = { itemCount ->
-        val parent = (parentFragment as SearchFragment).binding
-        if(itemCount == 0 && viewModel.search.value != ""){
-            parent.imgSearchNosearch.visibility = View.VISIBLE
-            parent.textSearchNosearch1.visibility = View.VISIBLE
-            parent.textSearchNosearch2.visibility = View.VISIBLE
-            binding.recyclerTitlesearch.visibility = View.INVISIBLE
-        } else{
-            parent.imgSearchNosearch.visibility = View.INVISIBLE
-            parent.textSearchNosearch1.visibility = View.INVISIBLE
-            parent.textSearchNosearch2.visibility = View.INVISIBLE
-            binding.recyclerTitlesearch.visibility = View.VISIBLE
-        }
     }
 
     override fun onCreateView(
@@ -84,29 +53,36 @@ class TitleSearchFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         observeData()
         initAdapter()
-        setOnClickListeners()
+        compositeDisposable.add(searchFrom1Depth().binding.edtSearchInput.textChanges()
+            .debounce(500, TimeUnit.MILLISECONDS)
+            .subscribeOn(Schedulers.io())
+            .subscribe {
+                viewModel.getAlbums(AlbumsCondition(title = it.toString()))
+            })
     }
+
     private fun observeData() {
         viewModel.album.observe(viewLifecycleOwner, albumObserver)
-        viewModel.search.observe(viewLifecycleOwner,searchObserver)
-        viewModel.itemCount.observe(viewLifecycleOwner,itemCountObserver)
     }
 
     private fun initAdapter() {
-        adapter.addLoadStateListener { viewModel.itemCount.postValue(adapter.itemCount) }
+        adapter.addLoadStateListener { loadState ->
+            if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1) {
+                searchFrom1Depth().binding.imgSearchNosearch.visibility = View.VISIBLE
+                searchFrom1Depth().binding.textSearchNosearch1.visibility = View.VISIBLE
+                searchFrom1Depth().binding.textSearchNosearch2.visibility = View.VISIBLE
+            } else {
+                searchFrom1Depth().binding.imgSearchNosearch.visibility = View.INVISIBLE
+                searchFrom1Depth().binding.textSearchNosearch1.visibility =
+                    View.INVISIBLE
+                searchFrom1Depth().binding.textSearchNosearch2.visibility =
+                    View.INVISIBLE
+            }
+        }
         binding.recyclerTitlesearch.adapter = adapter.withLoadStateHeaderAndFooter(
-            header = PageLoadStateAdapter{adapter.retry()},
-            footer = PageLoadStateAdapter{adapter.retry()}
+            header = PageLoadStateAdapter { adapter.retry() },
+            footer = PageLoadStateAdapter { adapter.retry() }
         )
-    }
-
-
-    private fun setOnClickListeners() {
-
-    }
-
-    fun refresh(title: String?) {
-        viewModel.getAlbums(AlbumsCondition(title = title))
     }
 
     override fun onDestroyView() {

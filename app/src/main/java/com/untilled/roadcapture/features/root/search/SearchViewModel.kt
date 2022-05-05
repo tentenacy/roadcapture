@@ -11,27 +11,27 @@ import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingReposito
 import com.untilled.roadcapture.features.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Flowable
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.kotlin.addTo
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @HiltViewModel
-class SearchViewModel
-@Inject constructor(
+class SearchViewModel @Inject constructor(
     private val albumPagingRepository: AlbumPagingRepository
 ): BaseViewModel() {
-
-    val search = MutableLiveData("")
-    var itemCount = MutableLiveData<Int>()
 
     private var _albums = MutableLiveData<PagingData<Albums.Album>>()
     val album: LiveData<PagingData<Albums.Album>> get() = _albums
 
-    fun getAlbums(cond: AlbumsCondition){
+    fun getAlbums(cond: AlbumsCondition) {
+
         albumPagingRepository.albums(cond)
             .subscribeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
             .subscribe({ pagingData ->
-                _albums.value = pagingData
+                _albums.postValue(pagingData)
             },{
 
             }).addTo(compositeDisposable)

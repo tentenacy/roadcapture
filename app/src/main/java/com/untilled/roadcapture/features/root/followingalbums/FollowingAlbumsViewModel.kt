@@ -30,8 +30,6 @@ class FollowingAlbumsViewModel @Inject constructor(
     private val _followingsSortByAlbum = MutableLiveData<PagingData<FollowingsSortByAlbum.FollowingSortByAlbum>>()
     val followingsSortByAlbum: LiveData<PagingData<FollowingsSortByAlbum.FollowingSortByAlbum>> get() = _followingsSortByAlbum
 
-    var itemCount = MutableLiveData<Int>()
-
     fun getFollowingsSortByAlbum() {
         followingPagingRepository.getFollowingsSortByAlbum()
             .observeOn(AndroidSchedulers.mainThread())

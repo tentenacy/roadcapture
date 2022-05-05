@@ -3,7 +3,6 @@ package com.untilled.roadcapture.features.root.search
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
-import android.util.Log
 import android.widget.EditText
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -58,35 +57,39 @@ object SearchBindingAdapters {
     }
 
     /********/
-
+/*
+    //BindingAdapter (Setter 역할)
     @JvmStatic
-    @BindingAdapter("searchResult")
-    fun setSearchResult(view: EditText, text: String?){
-
+    @BindingAdapter("android:text")
+    fun getSearchText(view: EditText, text: String?){
+        if (view.text.toString() != text) view.setText(text)
     }
 
+    //InverseBindingListener (InverseBindingAdapter 실행 역할)
     @JvmStatic
-    @BindingAdapter("searchResultAttrChanged")
-    fun setSearchResultInverseBindingListener(view: EditText, listener: InverseBindingListener){
-        view.addTextChangedListener(object: TextWatcher{
+    @BindingAdapter("textAttrChanged")
+    fun setSearchTextWatcher(view: EditText, listener: InverseBindingListener?){
+
+        view.addTextChangedListener(object: TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                listener.onChange()
+                listener?.onChange()
             }
 
             override fun afterTextChanged(s: Editable?) {
             }
-
         })
     }
 
+    //InverseBindingAdapter (Getter 역할)
     @JvmStatic
-    @InverseBindingAdapter(attribute = "searchResult", event = "searchResultAttrChanged")
-    fun getSearchResult(view: EditText): String{
+    @InverseBindingAdapter(attribute = "android:text", event = "textAttrChanged")
+    fun getSearchText(view: EditText): String? {
         return view.text.toString()
     }
+*/
 
 }

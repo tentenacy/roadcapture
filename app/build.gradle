@@ -290,6 +290,10 @@ dependencies {
      */
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:${kotlinx_serialization_version}"
 
+    /**
+     * util - rxbinding-appcompat
+     */
+    implementation "com.jakewharton.rxbinding3:rxbinding:3.0.0-alpha2"
 
     ////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////

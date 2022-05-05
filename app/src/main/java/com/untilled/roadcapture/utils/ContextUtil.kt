@@ -8,6 +8,8 @@ import com.untilled.roadcapture.features.root.capture.CaptureFragment
 import com.untilled.roadcapture.features.root.capture.CropFragment
 import com.untilled.roadcapture.features.root.capture.PictureEditorFragment
 import com.untilled.roadcapture.features.root.capture.PlaceSearchFragment
+import com.untilled.roadcapture.features.root.search.SearchFragment
+import com.untilled.roadcapture.features.root.search.TitleSearchFragment
 import com.untilled.roadcapture.features.signup.SignupFragment
 
 fun MainActivity.currentFragment(): Fragment? = supportFragmentManager.findFragmentById(binding.root.id)?.childFragmentManager?.fragments?.get(0)
@@ -21,3 +23,5 @@ fun Fragment.rootFrom3Depth(): RootFragment = (parentFragment?.parentFragment?.p
 fun Fragment.signupFrom2Depth(): SignupFragment = (parentFragment?.parentFragment as SignupFragment)
 
 fun Fragment.pictureViewerFrom2Depth(): PictureViewerFragment = (parentFragment?.parentFragment as PictureViewerFragment)
+
+fun TitleSearchFragment.searchFrom1Depth(): SearchFragment = (parentFragment as SearchFragment)
