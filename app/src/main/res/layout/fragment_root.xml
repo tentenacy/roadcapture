@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/linear_root_container"
     android:layout_width="match_parent"
@@ -18,6 +19,16 @@
         android:layout_height="1dp"
         android:background="@color/divider" />
 
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bnv_root"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:labelVisibilityMode="unlabeled"
+        app:itemIconTint="@color/selector_menu"
+        app:itemTextColor="@color/selector_menu"
+        app:menu="@menu/bnv_menu" />
+
+<!--
     <LinearLayout
         android:id="@+id/linear_root_container_tabs"
         android:layout_width="match_parent"
@@ -71,10 +82,6 @@
             android:src="@drawable/ic_user" />
 
     </LinearLayout>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/divider" />
+-->
 
 </LinearLayout>

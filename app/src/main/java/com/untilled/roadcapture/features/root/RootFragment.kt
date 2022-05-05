@@ -1,23 +1,27 @@
 package com.untilled.roadcapture.features.root
 
+import android.graphics.PorterDuff
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.viewModels
+import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.navigation.StackHostFragment
 import com.untilled.roadcapture.databinding.FragmentRootBinding
 import com.untilled.roadcapture.features.root.capture.AlbumCreationAskingBottomSheetDialog
 import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
 import com.untilled.roadcapture.utils.mainActivity
-import com.untilled.roadcapture.utils.setTint
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class RootFragment : Fragment() {
+
     private var _binding: FragmentRootBinding? = null
     val binding get() = _binding!!
 
@@ -26,78 +30,50 @@ class RootFragment : Fragment() {
     private lateinit var followingAlbumsFragment: StackHostFragment
     private lateinit var myStudioFragment: StackHostFragment
 
-    private val fragments: Array<Fragment>
-        get() = arrayOf(
-            albumsFragment,
-            searchRootFragment,
-            followingAlbumsFragment,
-            myStudioFragment,
+    private val fragments: Map<Int, Fragment>
+        get() = mapOf(
+            R.id.menu_albums to albumsFragment,
+            R.id.menu_search to searchRootFragment,
+            R.id.menu_followingalbums to followingAlbumsFragment,
+            R.id.menu_mystudio to myStudioFragment,
         )
-
-    private var selectedIndex = 0
-
-    private val tabs: Array<ImageView>
-        get() = binding.run {
-            arrayOf(
-                imgRootAlbumsTab,
-                imgRootSearchTab,
-                imgRootFollowingalbumsTab,
-                imgRootMyStudioTab,
-            )
-        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (savedInstanceState == null) {
-            initChildFragments()
-            childFragmentManager.beginTransaction().addFragments().showDefaultFragment().commit()
-        } else {
-            selectedIndex = savedInstanceState.getInt("selectedIndex", 0)
-            loadChildFragments()
-        }
+        initFragments()
+        fragments[R.id.menu_albums]?.let { selectFragment(it) }
     }
 
-    private fun loadChildFragments() {
-        albumsFragment =
-            childFragmentManager.findFragmentByTag(this@RootFragment::albumsFragment.name) as StackHostFragment
-        searchRootFragment =
-            childFragmentManager.findFragmentByTag(this@RootFragment::searchRootFragment.name) as StackHostFragment
-        followingAlbumsFragment =
-            childFragmentManager.findFragmentByTag(this@RootFragment::followingAlbumsFragment.name) as StackHostFragment
-        myStudioFragment =
-            childFragmentManager.findFragmentByTag(this@RootFragment::myStudioFragment.name) as StackHostFragment
-    }
-
-    private fun FragmentTransaction.addFragments() = apply {
-        add(
-            R.id.frame_root_container_contents,
-            searchRootFragment,
-            this@RootFragment::searchRootFragment.name
-        )
-        add(
-            R.id.frame_root_container_contents,
-            followingAlbumsFragment,
-            this@RootFragment::followingAlbumsFragment.name
-        )
-        add(
-            R.id.frame_root_container_contents,
-            albumsFragment,
-            this@RootFragment::albumsFragment.name
-        )
-        add(
-            R.id.frame_root_container_contents,
-            myStudioFragment,
-            this@RootFragment::myStudioFragment.name
-        )
-    }
-
-    private fun initChildFragments() {
+    private fun initFragments() {
         albumsFragment = StackHostFragment.newInstance(R.navigation.navigation_root_albums)
         searchRootFragment = StackHostFragment.newInstance(R.navigation.navigation_root_search)
         followingAlbumsFragment =
             StackHostFragment.newInstance(R.navigation.navigation_root_following_albums)
         myStudioFragment = StackHostFragment.newInstance(R.navigation.navigation_root_my_studio)
+
+        childFragmentManager.beginTransaction().apply {
+            add(
+                R.id.frame_root_container_contents,
+                searchRootFragment,
+                this@RootFragment::searchRootFragment.name
+            )
+            add(
+                R.id.frame_root_container_contents,
+                followingAlbumsFragment,
+                this@RootFragment::followingAlbumsFragment.name
+            )
+            add(
+                R.id.frame_root_container_contents,
+                albumsFragment,
+                this@RootFragment::albumsFragment.name
+            )
+            add(
+                R.id.frame_root_container_contents,
+                myStudioFragment,
+                this@RootFragment::myStudioFragment.name
+            )
+        }.commit()
     }
 
     override fun onCreateView(
@@ -115,14 +91,7 @@ class RootFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tabs.forEachIndexed { index, imageView ->
-            imageView.setOnClickListener {
-                selectFragment(index)
-            }
-        }
-
-        setOnClickListeners()
-        setupTabSelectedState(selectedIndex)
+        setOtherListeners()
     }
 
     override fun onDestroyView() {
@@ -131,53 +100,34 @@ class RootFragment : Fragment() {
         _binding = null
     }
 
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        outState.putInt("selectedIndex", selectedIndex)
-    }
-
-    private fun FragmentTransaction.showDefaultFragment() = selectFragment(selectedIndex)
-
-    private fun FragmentTransaction.selectFragment(selectedIndex: Int): FragmentTransaction {
-        fragments.forEachIndexed { index, fragment ->
-            if (index == selectedIndex) {
-                show(fragment)
+    private fun setOtherListeners() {
+        binding.bnvRoot.setOnNavigationItemSelectedListener {
+            if(it.itemId == R.id.menu_capture) {
+                AlbumCreationAskingBottomSheetDialog().show(
+                    childFragmentManager,
+                    DialogTagConstant.ALBUM_CREATION_ASKING_BOTTOM_SHEET
+                )
+                return@setOnNavigationItemSelectedListener false
             } else {
-                hide(fragment)
-            }
-        }
-
-        return this
-    }
-
-    private fun setupTabSelectedState(selectedIndex: Int) {
-        tabs.forEachIndexed { index, imageView ->
-            imageView.setTint(
-                when (index) {
-                    selectedIndex -> requireContext().getColor(R.color.tab_selected)
-                    else -> requireContext().getColor(R.color.tab_unselected)
+                fragments[it.itemId]?.let { fragment ->
+                    selectFragment(fragment)
                 }
-            )
+            }
+
+            return@setOnNavigationItemSelectedListener true
         }
     }
 
-    private fun selectFragment(indexToSelect: Int) {
-        this.selectedIndex = indexToSelect
-
-        setupTabSelectedState(indexToSelect)
-
-        childFragmentManager.beginTransaction()
-            .selectFragment(indexToSelect)
-            .commit()
+    private fun selectFragment(fragment: Fragment) {
+        childFragmentManager.beginTransaction().apply {
+            fragments.forEach {
+                if(it.value == fragment) {
+                    show(fragment)
+                } else {
+                    hide(it.value)
+                }
+            }
+        }.commit()
     }
 
-
-    private fun setOnClickListeners() {
-        binding.imgRootCaptureTab.setOnClickListener {
-            AlbumCreationAskingBottomSheetDialog().show(
-                childFragmentManager,
-                DialogTagConstant.ALBUM_CREATION_ASKING_BOTTOM_SHEET
-            )
-        }
-    }
 }

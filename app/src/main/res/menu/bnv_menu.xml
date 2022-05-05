@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_albums"
+        android:icon="@drawable/ic_home"
+        android:title="홈" />
+
+    <item
+        android:id="@+id/menu_search"
+        android:icon="@drawable/ic_search"
+        android:title="검색" />
+
+    <item
+        android:id="@+id/menu_capture"
+        android:icon="@drawable/ic_plus"
+        android:iconTint="@null"
+        android:title="앨범만들기" />
+
+    <item
+        android:id="@+id/menu_followingalbums"
+        android:icon="@drawable/ic_album"
+        android:title="팔로잉앨범" />
+
+    <item
+        android:id="@+id/menu_mystudio"
+        android:icon="@drawable/ic_user"
+        android:title="마이스튜디오" />
+
+
+</menu>
