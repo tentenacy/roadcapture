@@ -17,7 +17,7 @@ class FollowingAlbumsFilterViewHolder(val binding: ItemFollowingFilterBinding, p
 
     init {
         binding.setOnClickItem { view ->
-            itemOnClickListener(ItemClickArgs(binding,view))
+            itemOnClickListener(ItemClickArgs(binding, view))
             binding.viewIfollowingFilterOverlay.setBackgroundResource(R.drawable.overlay_gradient_following_filter_selected)
         }
     }

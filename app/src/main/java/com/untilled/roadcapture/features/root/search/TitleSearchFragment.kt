@@ -39,6 +39,12 @@ class TitleSearchFragment : BaseFragment() {
         adapter.submitData(lifecycle, pagingData)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        viewModel.initSearch()
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -53,16 +59,24 @@ class TitleSearchFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         observeData()
         initAdapter()
-        compositeDisposable.add(searchFrom1Depth().binding.edtSearchInput.textChanges()
-            .debounce(500, TimeUnit.MILLISECONDS)
-            .subscribeOn(Schedulers.io())
-            .subscribe {
-                viewModel.getAlbums(AlbumsCondition(title = it.toString()))
-            })
     }
 
     private fun observeData() {
         viewModel.album.observe(viewLifecycleOwner, albumObserver)
+        viewModel.viewEvent.observe(viewLifecycleOwner) {
+            it?.getContentIfNotHandled()?.let {
+                when (it.first) {
+                    SearchViewModel.EVENT_INIT_SEARCH -> {
+                        compositeDisposable.add(searchFrom1Depth().binding.edtSearchInput.textChanges()
+                            .debounce(500, TimeUnit.MILLISECONDS)
+                            .subscribeOn(Schedulers.io())
+                            .subscribe {
+                                viewModel.getAlbums(AlbumsCondition(title = it.toString()))
+                            })
+                    }
+                }
+            }
+        }
     }
 
     private fun initAdapter() {

@@ -22,6 +22,10 @@ class SearchViewModel @Inject constructor(
     private val albumPagingRepository: AlbumPagingRepository
 ): BaseViewModel() {
 
+    companion object {
+        const val EVENT_INIT_SEARCH = 1000
+    }
+
     private var _albums = MutableLiveData<PagingData<Albums.Album>>()
     val album: LiveData<PagingData<Albums.Album>> get() = _albums
 
@@ -35,5 +39,9 @@ class SearchViewModel @Inject constructor(
             },{
 
             }).addTo(compositeDisposable)
+    }
+
+    fun initSearch() {
+        viewEvent(Pair(EVENT_INIT_SEARCH, Unit))
     }
 }

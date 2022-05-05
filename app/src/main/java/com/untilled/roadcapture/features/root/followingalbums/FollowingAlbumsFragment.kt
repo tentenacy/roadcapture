@@ -6,28 +6,21 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.paging.PagingData
 import androidx.paging.insertHeaderItem
 import androidx.paging.map
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.airbnb.lottie.LottieAnimationView
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.album.FollowingAlbumsCondition
-import com.untilled.roadcapture.data.entity.paging.Albums
-import com.untilled.roadcapture.data.entity.paging.Followings
-import com.untilled.roadcapture.data.entity.paging.FollowingsSortByAlbum
 import com.untilled.roadcapture.databinding.FragmentFollowingalbumsBinding
 import com.untilled.roadcapture.databinding.ItemAlbumsBinding
 import com.untilled.roadcapture.databinding.ItemFollowingFilterBinding
 import com.untilled.roadcapture.features.common.AlbumMorePopupMenu
 import com.untilled.roadcapture.features.common.PageLoadStateAdapter
-import com.untilled.roadcapture.features.common.ReportDialogFragment
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.*
-import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -38,18 +31,8 @@ class FollowingAlbumsFragment : Fragment() {
 
     private val viewModel: FollowingAlbumsViewModel by viewModels()
 
-    private val followingAlbumsAdapter: FollowingAlbumsAdapter by lazy {
+    private val adapter: FollowingAlbumsAdapter by lazy {
         FollowingAlbumsAdapter(lifecycle, albumItemOnClickListener, filterItemOnClickListener)
-    }
-
-    private val followingAlbumsObserver: (PagingData<Albums.Album>) -> Unit = { pagingData ->
-        followingAlbumsAdapter.submitData(lifecycle, pagingData.map { FollowingAlbumItem.Data(it) as FollowingAlbumItem }
-            .insertHeaderItem(item = viewModel.followingsSortByAlbum.value?.let { FollowingAlbumItem.Header(it) } ?: FollowingAlbumItem.Header(PagingData.empty())))
-    }
-
-    private val followingAlbumsFilterObserver: (PagingData<FollowingsSortByAlbum.FollowingSortByAlbum>) -> Unit = { pagingData ->
-        followingAlbumsAdapter.submitData(lifecycle, (viewModel.followingAlbums.value ?: PagingData.empty()).map { FollowingAlbumItem.Data(it) as FollowingAlbumItem }
-            .insertHeaderItem(item = FollowingAlbumItem.Header(pagingData)))
     }
 
     private val notificationOnClickListener: (View?) -> Unit = {
@@ -129,21 +112,24 @@ class FollowingAlbumsFragment : Fragment() {
     }
 
     private fun observeData() {
-        viewModel.followingAlbums.observe(viewLifecycleOwner, followingAlbumsObserver)
-        viewModel.followingsSortByAlbum.observe(viewLifecycleOwner, followingAlbumsFilterObserver)
+        viewModel.load.observe(viewLifecycleOwner) {
+            it?.let {
+                adapter.submitData(lifecycle, it.first.map { FollowingAlbumPagingItem.Data(it) as FollowingAlbumPagingItem }
+                    .insertHeaderItem(item = it.second.let { FollowingAlbumPagingItem.Header(it) }))
+            }
+        }
     }
 
     private fun initAdapter() {
-        binding.recyclerFollowingalbums.adapter = followingAlbumsAdapter.withLoadStateHeaderAndFooter(
-            header = PageLoadStateAdapter{followingAlbumsAdapter.retry()},
-            footer = PageLoadStateAdapter{followingAlbumsAdapter.retry()}
+        binding.recyclerFollowingalbums.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = PageLoadStateAdapter{adapter.retry()},
+            footer = PageLoadStateAdapter{adapter.retry()}
         )
-//        followingAlbumsFilterAdapter.addLoadStateListener { viewModel.itemCount.postValue(followingAlbumsFilterAdapter.itemCount) }
+        adapter.addLoadStateListener {  }
     }
 
     private fun refresh(followingId: Long?) {
-        viewModel.getFollowingAlbums(FollowingAlbumsCondition(followingId))
-        viewModel.getFollowingsSortByAlbum()
+        viewModel.loadAll(FollowingAlbumsCondition(followingId))
     }
 
     private fun setOnClickListeners() {

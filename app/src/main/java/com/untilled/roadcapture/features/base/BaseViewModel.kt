@@ -11,7 +11,6 @@ open class BaseViewModel : ViewModel() {
 
     protected val compositeDisposable = CompositeDisposable()
 
-    val loading = MediatorLiveData<Boolean>()
     val error = MediatorLiveData<String>()
 
     private val _viewEvent = MutableLiveData<Event<Pair<Int, Any>>>()
@@ -22,11 +21,11 @@ open class BaseViewModel : ViewModel() {
     val loadingEvent: LiveData<Event<Boolean>>
         get() = _loadingEvent
 
-    fun viewEvent(content: Pair<Int, Any>) {
+    protected fun viewEvent(content: Pair<Int, Any>) {
         _viewEvent.postValue(Event(content))
     }
 
-    fun loadingEvent(content: Boolean) {
+    protected fun loadingEvent(content: Boolean) {
         _loadingEvent.postValue(Event(content))
     }
 

@@ -1,6 +1,7 @@
 package com.untilled.roadcapture.features.root.followingalbums
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -12,6 +13,7 @@ import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepository
 import com.untilled.roadcapture.data.repository.follower.paging.FollowerPagingRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
+import com.untilled.roadcapture.utils.combineLatestData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
@@ -24,29 +26,46 @@ class FollowingAlbumsViewModel @Inject constructor(
     private val albumRepository: AlbumRepository,
     private val followingPagingRepository: FollowerPagingRepository
 ): BaseViewModel() {
+
     private val _followingAlbums = MutableLiveData<PagingData<Albums.Album>>()
     val followingAlbums: LiveData<PagingData<Albums.Album>> get() = _followingAlbums
 
     private val _followingsSortByAlbum = MutableLiveData<PagingData<FollowingsSortByAlbum.FollowingSortByAlbum>>()
     val followingsSortByAlbum: LiveData<PagingData<FollowingsSortByAlbum.FollowingSortByAlbum>> get() = _followingsSortByAlbum
 
-    fun getFollowingsSortByAlbum() {
-        followingPagingRepository.getFollowingsSortByAlbum()
-            .observeOn(AndroidSchedulers.mainThread())
-            .cachedIn(viewModelScope)
-            .subscribe({ response ->
-                _followingsSortByAlbum.value = response
-            },{ t ->
+    val load = MediatorLiveData<Pair<PagingData<Albums.Album>, PagingData<FollowingsSortByAlbum.FollowingSortByAlbum>>?>()
 
-            }).addTo(compositeDisposable)
+    init {
+        load.addSource(_followingAlbums) {
+            load.value = combineLatestData(_followingAlbums, _followingsSortByAlbum)
+        }
+        load.addSource(_followingsSortByAlbum) {
+            load.value = combineLatestData(_followingAlbums, _followingsSortByAlbum)
+        }
     }
 
-    fun getFollowingAlbums(cond: FollowingAlbumsCondition? = null) {
-        albumPagingRepository.getFollowingAlbums(cond)
-            .observeOn(AndroidSchedulers.mainThread())
+    fun loadAll(cond: FollowingAlbumsCondition? = null) {
+        followingsSortByAlbum()
+        followingAlbums(cond)
+    }
+
+    private fun followingsSortByAlbum() {
+        followingPagingRepository.getFollowingsSortByAlbum()
             .cachedIn(viewModelScope)
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ pagingData ->
-                _followingAlbums.value = pagingData
+                _followingsSortByAlbum.postValue(pagingData)
+            }) { t ->
+
+            }.addTo(compositeDisposable)
+    }
+
+    private fun followingAlbums(cond: FollowingAlbumsCondition? = null) {
+        albumPagingRepository.getFollowingAlbums(cond)
+            .cachedIn(viewModelScope)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ pagingData ->
+                _followingAlbums.postValue(pagingData)
             }) { t ->
 
             }.addTo(compositeDisposable)
@@ -72,5 +91,9 @@ class FollowingAlbumsViewModel @Inject constructor(
             }, {
 
             })
+    }
+
+    override fun onCleared() {
+        super.onCleared()
     }
 }

@@ -14,19 +14,15 @@ import com.untilled.roadcapture.databinding.*
 import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.features.root.albums.dto.LikeStatus
-import com.untilled.roadcapture.features.root.studio.MyStudioAdapter
-import com.untilled.roadcapture.features.root.studio.UserAlbumItem
-import com.untilled.roadcapture.features.root.studio.UserAlbumType
-import com.untilled.roadcapture.features.root.studio.UserAlbumsViewHolder
 
-sealed class FollowingAlbumItem(val type: FollowingAlbumType) {
-    data class Data(val value: Albums.Album) : FollowingAlbumItem(FollowingAlbumType.DATA)
+sealed class FollowingAlbumPagingItem(val type: FollowingAlbumPagingType) {
+    data class Data(val value: Albums.Album) : FollowingAlbumPagingItem(FollowingAlbumPagingType.DATA)
     data class Header(val value: PagingData<FollowingsSortByAlbum.FollowingSortByAlbum>) :
-        FollowingAlbumItem(FollowingAlbumType.HEADER)
-    object Separator : FollowingAlbumItem(FollowingAlbumType.SEPARATOR)
+        FollowingAlbumPagingItem(FollowingAlbumPagingType.HEADER)
+    object Separator : FollowingAlbumPagingItem(FollowingAlbumPagingType.SEPARATOR)
 }
 
-enum class FollowingAlbumType { HEADER, DATA, SEPARATOR }
+enum class FollowingAlbumPagingType { HEADER, DATA, SEPARATOR }
 
 sealed class FollowingAlbumsViewHolder(
     binding: ViewDataBinding,
@@ -75,7 +71,7 @@ class FollowingAlbumsAdapter(
     val lifecycle: Lifecycle,
     val itemOnClickListener: (ItemClickArgs?) -> Unit,
     private val filterItemOnClickListener: (ItemClickArgs?) -> Unit,
-) : PagingDataAdapter<FollowingAlbumItem, RecyclerView.ViewHolder>(
+) : PagingDataAdapter<FollowingAlbumPagingItem, RecyclerView.ViewHolder>(
     COMPARATOR
 ) {
 
@@ -96,10 +92,10 @@ class FollowingAlbumsAdapter(
         getItem(position)?.let {
             when(holder) {
                 is FollowingAlbumsViewHolder.FollowingFiltersViewHolder -> {
-                    holder.bind((it as FollowingAlbumItem.Header).value)
+                    holder.bind((it as FollowingAlbumPagingItem.Header).value)
                 }
                 is FollowingAlbumsViewHolder.FollowingAlbumViewHolder -> {
-                    holder.bind((it as FollowingAlbumItem.Data).value)
+                    holder.bind((it as FollowingAlbumPagingItem.Data).value)
                 }
             }
         }
@@ -107,7 +103,7 @@ class FollowingAlbumsAdapter(
 
     override fun getItemViewType(position: Int): Int {
         getItem(position)?.let {
-            return if(it.type == FollowingAlbumType.HEADER) VIEW_TYPE_FOLLOWING_FILTER else VIEW_TYPE_FOLLOWING_ALBUM
+            return if(it.type == FollowingAlbumPagingType.HEADER) VIEW_TYPE_FOLLOWING_FILTER else VIEW_TYPE_FOLLOWING_ALBUM
         } ?: kotlin.run {
             return VIEW_TYPE_FOLLOWING_ALBUM
         }
@@ -118,26 +114,26 @@ class FollowingAlbumsAdapter(
         const val VIEW_TYPE_FOLLOWING_FILTER = 0
         const val VIEW_TYPE_FOLLOWING_ALBUM = 1
 
-        private val COMPARATOR = object : DiffUtil.ItemCallback<FollowingAlbumItem>() {
+        private val COMPARATOR = object : DiffUtil.ItemCallback<FollowingAlbumPagingItem>() {
             override fun areItemsTheSame(
-                oldItem: FollowingAlbumItem,
-                newItem: FollowingAlbumItem
+                oldItem: FollowingAlbumPagingItem,
+                newItem: FollowingAlbumPagingItem
             ): Boolean {
-                return if(oldItem.type == FollowingAlbumType.DATA && newItem.type == FollowingAlbumType.DATA) {
-                    (oldItem as FollowingAlbumItem.Data).value.albumId == (newItem as FollowingAlbumItem.Data).value.albumId
+                return if(oldItem.type == FollowingAlbumPagingType.DATA && newItem.type == FollowingAlbumPagingType.DATA) {
+                    (oldItem as FollowingAlbumPagingItem.Data).value.albumId == (newItem as FollowingAlbumPagingItem.Data).value.albumId
                 } else {
-                    false
+                    true
                 }
             }
 
             override fun areContentsTheSame(
-                oldItem: FollowingAlbumItem,
-                newItem: FollowingAlbumItem
+                oldItem: FollowingAlbumPagingItem,
+                newItem: FollowingAlbumPagingItem
             ): Boolean {
-                return if(oldItem.type == FollowingAlbumType.DATA && newItem.type == FollowingAlbumType.DATA) {
-                    (oldItem as FollowingAlbumItem.Data).value == (newItem as FollowingAlbumItem.Data).value
+                return if(oldItem.type == FollowingAlbumPagingType.DATA && newItem.type == FollowingAlbumPagingType.DATA) {
+                    (oldItem as FollowingAlbumPagingItem.Data).value == (newItem as FollowingAlbumPagingItem.Data).value
                 } else {
-                    false
+                    true
                 }
             }
         }
