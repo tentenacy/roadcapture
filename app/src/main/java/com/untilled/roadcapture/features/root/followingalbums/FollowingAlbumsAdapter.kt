@@ -36,19 +36,11 @@ sealed class FollowingAlbumsViewHolder(
         val followingFiltersViewHolderArgs: FollowingFiltersViewHolderArgs,
     ) : FollowingAlbumsViewHolder(binding) {
 
-        val adapter =
-            FollowingAlbumsFilterAdapter(followingFiltersViewHolderArgs.filterItemOnClickListener)
-
         init {
-            binding.recyclerFollowingalbumsFilter.adapter = adapter.withLoadStateHeaderAndFooter(
-                header = PageLoadStateAdapter{adapter.retry()},
-                footer = PageLoadStateAdapter{adapter.retry()}
+            binding.recyclerFollowingalbumsFilter.adapter = followingFiltersViewHolderArgs.adapter.withLoadStateHeaderAndFooter(
+                header = PageLoadStateAdapter{followingFiltersViewHolderArgs.adapter.retry()},
+                footer = PageLoadStateAdapter{followingFiltersViewHolderArgs.adapter.retry()}
             )
-            adapter.addLoadStateListener(followingFiltersViewHolderArgs.headerLoadStateListener)
-        }
-
-        fun bind(filters: PagingData<FollowingsSortByAlbum.FollowingSortByAlbum>) {
-            adapter.submitData(followingFiltersViewHolderArgs.lifecycle, filters)
         }
     }
 
@@ -94,7 +86,7 @@ class FollowingAlbumsAdapter(
         getItem(position)?.let {
             when(holder) {
                 is FollowingAlbumsViewHolder.FollowingFiltersViewHolder -> {
-                    holder.bind((it as FollowingAlbumPagingItem.Header).value)
+//                    holder.bind((it as FollowingAlbumPagingItem.Header).value)
                 }
                 is FollowingAlbumsViewHolder.FollowingAlbumViewHolder -> {
                     holder.bind((it as FollowingAlbumPagingItem.Data).value)

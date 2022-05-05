@@ -40,17 +40,24 @@ class FollowingAlbumsFragment : Fragment() {
 
     private val viewModel: FollowingAlbumsViewModel by viewModels()
 
+    private val filterAdapter: FollowingAlbumsFilterAdapter by lazy {
+        FollowingAlbumsFilterAdapter(filterItemOnClickListener).apply {
+            addLoadStateListener(headerLoadStateListener)
+        }
+    }
+
     private val adapter: FollowingAlbumsAdapter by lazy {
         FollowingAlbumsAdapter(
             FollowingAlbumsAdapterArgs(
-                followingFiltersViewHolderArgs = FollowingFiltersViewHolderArgs(
-                    lifecycle,
-                    headerLoadStateListener,
-                    filterItemOnClickListener,
-                ),
+                followingFiltersViewHolderArgs = FollowingFiltersViewHolderArgs(filterAdapter),
                 itemOnClickListener = albumItemOnClickListener,
             )
-        )
+        ).apply {
+            addLoadStateListener { loadState ->
+                binding.swipeFollowingalbumsInnercontainer.isRefreshing =
+                    loadState.source.refresh is LoadState.Loading
+            }
+        }
     }
 
     private val notificationOnClickListener: (View?) -> Unit = {
@@ -151,7 +158,10 @@ class FollowingAlbumsFragment : Fragment() {
                 adapter.submitData(
                     lifecycle,
                     it.first.map { FollowingAlbumPagingItem.Data(it) as FollowingAlbumPagingItem }
-                        .insertHeaderItem(item = it.second.let { FollowingAlbumPagingItem.Header(it) })
+                        .insertHeaderItem(item = it.second.let {
+                            filterAdapter.submitData(lifecycle, it)
+                            FollowingAlbumPagingItem.Header(it)
+                        })
                 )
             } ?: kotlin.run {
                 binding.constraintFollowingalbumsContainer.isVisible = false
@@ -164,10 +174,6 @@ class FollowingAlbumsFragment : Fragment() {
             header = PageLoadStateAdapter { adapter.retry() },
             footer = PageLoadStateAdapter { adapter.retry() }
         )
-        adapter.addLoadStateListener { loadState ->
-            binding.swipeFollowingalbumsInnercontainer.isRefreshing =
-                loadState.source.refresh is LoadState.Loading
-        }
     }
 
     private fun refresh(followingId: Long? = null) {
