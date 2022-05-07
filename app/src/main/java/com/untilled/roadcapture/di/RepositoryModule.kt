@@ -10,6 +10,7 @@ import com.untilled.roadcapture.data.datasource.paging.follower.FollowersPagingS
 import com.untilled.roadcapture.data.datasource.paging.follower.FollowingsPagingSource
 import com.untilled.roadcapture.data.datasource.paging.follower.FollowingsSortByAlbumPagingSource
 import com.untilled.roadcapture.data.entity.mapper.AlbumsMapper
+import com.untilled.roadcapture.data.entity.mapper.CommentsMapper
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import com.untilled.roadcapture.data.repository.album.AlbumRepositoryImpl
 import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepository
@@ -56,13 +57,10 @@ abstract class RepositoryModule {
         @Singleton
         @Provides
         fun provideAlbumCommentsPagingRepository(
-            albumCommentsPagingSource: AlbumCommentsPagingSource,
-            pictureCommentsPagingSource: PictureCommentsPagingSource
+            mapper: CommentsMapper,
+            roadCaptureApi: RoadCaptureApi,
         ): CommentPagingRepository {
-            return CommentPagingRepositoryImpl(
-                albumCommentsPagingSource,
-                pictureCommentsPagingSource
-            )
+            return CommentPagingRepositoryImpl(mapper, roadCaptureApi)
         }
 
         @Singleton

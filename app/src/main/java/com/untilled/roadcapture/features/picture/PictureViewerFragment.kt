@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.content.res.AppCompatResources
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.databinding.FragmentPictureViewerBinding
 import com.untilled.roadcapture.features.base.BaseFragment
@@ -47,6 +47,7 @@ class PictureViewerFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
 
         setChildFragmentTransaction()
+        viewModel.albumDetail(args.id)
     }
 
     override fun onCreateView(
@@ -57,7 +58,6 @@ class PictureViewerFragment : BaseFragment() {
         _binding = FragmentPictureViewerBinding.inflate(inflater, container, false)
 
         mainActivity().viewModel.setBindingRoot(binding.root)
-        updateView()
 
         return binding.root
     }
@@ -76,10 +76,6 @@ class PictureViewerFragment : BaseFragment() {
         mainActivity().setStatusBarOrigin()
 
         _binding = null
-    }
-
-    private fun updateView() {
-        viewModel.getAlbumDetail(args.id)
     }
 
     private fun setOnClickListeners() {

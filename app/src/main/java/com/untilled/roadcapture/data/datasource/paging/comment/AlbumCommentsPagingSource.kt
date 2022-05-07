@@ -9,6 +9,7 @@ import com.untilled.roadcapture.utils.applyRetryPolicy
 import com.untilled.roadcapture.utils.constant.policy.RetryPolicyConstant
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.properties.Delegates
@@ -17,9 +18,8 @@ import kotlin.properties.Delegates
 class AlbumCommentsPagingSource @Inject constructor(
     private val mapper: CommentsMapper,
     private val roadCaptureApi: RoadCaptureApi,
+    private val albumId: Long,
 ) : RxPagingSource<Int, AlbumComments.AlbumComment>() {
-
-    var albumId by Delegates.notNull<Long>()
 
     override fun getRefreshKey(state: PagingState<Int, AlbumComments.AlbumComment>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -36,6 +36,7 @@ class AlbumCommentsPagingSource @Inject constructor(
             size = params.loadSize,
             albumId = albumId,
         )
+            .delay(1, TimeUnit.SECONDS)
             .subscribeOn(Schedulers.io())
             .map { mapper.transformToAlbumComments(it) }
             .map { toLoadResult(it, position) }

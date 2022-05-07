@@ -1,12 +1,10 @@
 package com.untilled.roadcapture.features.picture
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
-import androidx.paging.rxjava3.mapAsync
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentCreateRequest
 import com.untilled.roadcapture.data.datasource.api.dto.picture.PictureResponse
@@ -80,7 +78,7 @@ class PictureViewerViewModel @Inject constructor(
         _liked.value = _liked.value?.not()
     }
 
-    fun getAlbumDetail(id: Long) {
+    fun albumDetail(id: Long) {
         albumRepository.getAlbumDetail(id)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -97,13 +95,13 @@ class PictureViewerViewModel @Inject constructor(
             }).addTo(compositeDisposable)
     }
 
-    fun getComments() = album.value?.apply {
+    fun comments() = album.value?.apply {
         currentPosition.value?.let { position ->
             clearComments()
             if (position == 0) {
-                getAlbumComments()
+                albumComments()
             } else {
-                getPictureComments()
+                pictureComments()
             }
         }
     }
@@ -115,7 +113,7 @@ class PictureViewerViewModel @Inject constructor(
                 commentRepository.postPictureComment(it, request)
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({
-                        getComments()
+                        comments()
                     }) { t ->
                         error.value = t.message
                     }.addTo(compositeDisposable)
@@ -150,7 +148,7 @@ class PictureViewerViewModel @Inject constructor(
             })
     }
 
-    private fun getAlbumComments() = album.value?.apply {
+    private fun albumComments() = album.value?.apply {
         commentPagingRepository.getAlbumComments(id)
             .observeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
@@ -161,7 +159,7 @@ class PictureViewerViewModel @Inject constructor(
             }.addTo(compositeDisposable)
     }
 
-    private fun getPictureComments() = album.value?.apply {
+    private fun pictureComments() = album.value?.apply {
         currentPosition.value?.let { position ->
             commentPagingRepository.getPictureComments(pictures[position - 1].id)
                 .observeOn(AndroidSchedulers.mainThread())
