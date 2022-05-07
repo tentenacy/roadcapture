@@ -173,5 +173,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/text_mystudio_label_album"
                 tools:listitem="@layout/item_albums_studio" />
         </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

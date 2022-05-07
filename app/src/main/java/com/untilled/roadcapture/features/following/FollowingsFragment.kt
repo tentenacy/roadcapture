@@ -14,7 +14,6 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.untilled.roadcapture.R
-import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.entity.paging.Followings
 import com.untilled.roadcapture.databinding.FragmentFollowingBinding
 import com.untilled.roadcapture.databinding.ItemFollowBinding
@@ -53,8 +52,8 @@ class FollowingsFragment : Fragment(){
         viewModel.getUserFollowing(args.id)
     }
 
-    private val userObserver: (PagingData<Followings.Following>) -> Unit = { pagingData ->
-        adapter.submitData(lifecycle, pagingData)
+    private val followingsObserver: (PagingData<Followings.Following>) -> Unit = { pagingData ->
+        adapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
     }
 
     private val editorActionListener: (TextView?, Int?, KeyEvent) -> Boolean = { v: TextView?, actionId: Int?, event: KeyEvent ->
@@ -104,7 +103,7 @@ class FollowingsFragment : Fragment(){
     }
 
     private fun observeData(){
-        viewModel.user.observe(viewLifecycleOwner, userObserver)
+        viewModel.user.observe(viewLifecycleOwner, followingsObserver)
     }
 
     private fun initAdapter(){

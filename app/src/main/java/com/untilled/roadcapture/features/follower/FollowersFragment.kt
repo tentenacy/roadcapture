@@ -52,8 +52,8 @@ class FollowersFragment : Fragment(){
         }
     }
 
-    private val userObserver: (PagingData<Followers.Follower>) -> Unit = { pagingData ->
-        adapter.submitData(lifecycle,pagingData)
+    private val followersObserver: (PagingData<Followers.Follower>) -> Unit = { pagingData ->
+        adapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
     }
 
     private val editorActionListener: (TextView?, Int?, KeyEvent) -> Boolean = { v: TextView?, actionId: Int?, event: KeyEvent ->
@@ -104,7 +104,7 @@ class FollowersFragment : Fragment(){
     }
 
     private fun observeData() {
-        viewModel.user.observe(viewLifecycleOwner, userObserver)
+        viewModel.user.observe(viewLifecycleOwner, followersObserver)
     }
 
     private fun initAdapter(){

@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.airbnb.lottie.LottieAnimationView
+import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.sharedpref.User
 import com.untilled.roadcapture.data.entity.paging.Albums
@@ -29,7 +30,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class AlbumsFragment : Fragment() {
 
     private var _binding: FragmentAlbumsBinding? = null
-    private val binding get() = _binding!!
+    val binding get() = _binding!!
 
     private val viewModel: AlbumsViewModel by viewModels()
 
@@ -83,6 +84,12 @@ class AlbumsFragment : Fragment() {
         true
     }
 
+    private var loadStateListener: (CombinedLoadStates) -> Unit = { loadState ->
+        Logger.d("isRefreshing = ${loadState.source.refresh is LoadState.Loading}")
+        binding.swipeAlbumsInnercontainer.isRefreshing =
+            loadState.source.refresh is LoadState.Loading
+    }
+
     private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
 
         val albumUserId = (args?.item as ItemAlbumsBinding).album?.user!!.id
@@ -113,7 +120,6 @@ class AlbumsFragment : Fragment() {
         }
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -137,10 +143,10 @@ class AlbumsFragment : Fragment() {
         observeData()
         initAdapter()
         setOnClickListeners()
-        setOnRefreshListener()
+        setOtherListeners()
     }
 
-    private fun setOnRefreshListener() {
+    private fun setOtherListeners() {
         binding.swipeAlbumsInnercontainer.setOnRefreshListener(swipeRefreshListener)
     }
 
@@ -173,9 +179,7 @@ class AlbumsFragment : Fragment() {
             header = PageLoadStateAdapter { adapter.retry() },
             footer = PageLoadStateAdapter { adapter.retry() }
         )
-        adapter.addLoadStateListener { loadState ->
-            binding.swipeAlbumsInnercontainer.isRefreshing = loadState.source.refresh is LoadState.Loading
-        }
+        adapter.addLoadStateListener(loadStateListener)
     }
 
     private fun setLikeStatus(view: LottieAnimationView, item: ItemAlbumsBinding) {

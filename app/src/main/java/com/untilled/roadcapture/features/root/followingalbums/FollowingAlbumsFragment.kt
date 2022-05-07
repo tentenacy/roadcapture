@@ -77,11 +77,8 @@ class FollowingAlbumsFragment : Fragment() {
             binding.swipeFollowingalbumsInnercontainer.isRefreshing = true
         }
         if (loadState.source.refresh is LoadState.NotLoading) {
-            CoroutineScope(Dispatchers.Main).launch {
-                delay(1000)
-                binding.swipeFollowingalbumsInnercontainer.isRefreshing = false
-                binding.constraintFollowingalbumsContainer.isVisible = true
-            }
+            binding.swipeFollowingalbumsInnercontainer.isRefreshing = false
+            binding.constraintFollowingalbumsContainer.isVisible = true
         }
     }
 
@@ -156,10 +153,10 @@ class FollowingAlbumsFragment : Fragment() {
         viewModel.load.observe(viewLifecycleOwner) {
             it?.let {
                 adapter.submitData(
-                    lifecycle,
+                    viewLifecycleOwner.lifecycle,
                     it.first.map { FollowingAlbumPagingItem.Data(it) as FollowingAlbumPagingItem }
                         .insertHeaderItem(item = it.second.let {
-                            filterAdapter.submitData(lifecycle, it)
+                            filterAdapter.submitData(viewLifecycleOwner.lifecycle, it)
                             FollowingAlbumPagingItem.Header(it)
                         })
                 )

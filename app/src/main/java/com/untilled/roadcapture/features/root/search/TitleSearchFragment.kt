@@ -37,7 +37,7 @@ class TitleSearchFragment : BaseFragment() {
     }
 
     private val albumObserver: (PagingData<Albums.Album>) -> Unit = { pagingData ->
-        adapter.submitData(lifecycle, pagingData)
+        adapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
     }
 
     private val swipeRefreshListener = SwipeRefreshLayout.OnRefreshListener {

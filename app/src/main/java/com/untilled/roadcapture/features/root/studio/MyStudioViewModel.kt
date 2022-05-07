@@ -53,6 +53,7 @@ class MyStudioViewModel @Inject constructor(
 
     private fun getMyStudioAlbums(cond: UserAlbumsCondition?) {
         albumPagingRepository.getMyStudioAlbums(cond)
+            .subscribeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
             .subscribe({
                 _myAlbums.postValue(it)

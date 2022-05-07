@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import androidx.paging.*
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.appbar.AppBarLayout
+import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.StudioUserResponse
@@ -32,7 +33,7 @@ import kotlinx.coroutines.launch
 class MyStudioFragment : Fragment() {
 
     private var _binding: FragmentMystudioBinding? = null
-    val binding get() = _binding!!
+    private val binding get() = _binding!!
 
     private val viewModel: MyStudioViewModel by viewModels()
 
@@ -41,6 +42,7 @@ class MyStudioFragment : Fragment() {
     }
 
     private val loadStateListener: (CombinedLoadStates) -> Unit = { loadState ->
+        Logger.d("isRefreshing = ${loadState.source.refresh is LoadState.Loading}")
         binding.swipeMystudioContainer.isRefreshing =
             loadState.source.refresh is LoadState.Loading
         if (loadState.source.refresh is LoadState.NotLoading) {
@@ -122,7 +124,7 @@ class MyStudioFragment : Fragment() {
         viewModel.load.observe(viewLifecycleOwner) {
             it?.let {
                 binding.user = it.first
-                adapter.submitData(lifecycle, it.second.map { UserAlbumItem.Data(it) as UserAlbumItem }
+                adapter.submitData(viewLifecycleOwner.lifecycle, it.second.map { UserAlbumItem.Data(it) as UserAlbumItem }
                     .insertHeaderItem(item = UserAlbumItem.Header))
             } ?: kotlin.run {
                 binding.coordinatorMystudioContainer.isVisible = false

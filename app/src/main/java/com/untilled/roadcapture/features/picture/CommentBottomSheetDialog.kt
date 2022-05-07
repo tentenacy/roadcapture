@@ -51,12 +51,12 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
 
     private val albumCommentsObserver: (PagingData<AlbumComments.AlbumComment>?) -> Unit =
         { pagingData ->
-            pagingData?.let { albumCommentsAdapter.submitData(lifecycle, it) }
+            pagingData?.let { albumCommentsAdapter.submitData(viewLifecycleOwner.lifecycle, it) }
         }
 
     private val pictureCommentsObserver: (PagingData<PictureComments.PictureComment>?) -> Unit =
         { pagingData ->
-            pagingData?.let { pictureCommentsAdapter.submitData(lifecycle, it) }
+            pagingData?.let { pictureCommentsAdapter.submitData(viewLifecycleOwner.lifecycle, it) }
         }
 
     private val currentPositionObserver: (Int) -> Unit = { position ->

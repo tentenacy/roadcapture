@@ -52,7 +52,7 @@ class CommentFragment : Fragment() {
     lateinit var customDivider: CustomDivider
 
     private val commentObserver: (PagingData<AlbumComments.AlbumComment>) -> Unit = { pagingData ->
-        albumAdapter.submitData(lifecycle, pagingData)
+        albumAdapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
     }
 
     private val menuItemClickListener: (item: MenuItem) -> Boolean = { item ->
