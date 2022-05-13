@@ -57,7 +57,7 @@ class AlbumsFragment : Fragment() {
     private val albumMenuItemClickListener: (item: MenuItem) -> Boolean = { item ->
         when (item.itemId) {
             R.id.popupmenu_albums_more_report -> {
-                showReportDialog {}
+                showReportDialog({})
             }
             R.id.popupmenu_albums_more_hide -> {
 

@@ -45,7 +45,7 @@ class StudioFragment : Fragment() {
                             R.id.popupmenu_studio_more_share -> {
                             }
                             R.id.popupmenu_studio_more_report -> {
-                                showReportDialog { }
+                                showReportDialog({})
                             }
                         }
                         true
