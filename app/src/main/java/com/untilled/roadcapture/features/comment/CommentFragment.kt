@@ -13,18 +13,20 @@ import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentCreateRequest
 import com.untilled.roadcapture.data.datasource.sharedpref.User
 import com.untilled.roadcapture.data.entity.paging.AlbumComments
 import com.untilled.roadcapture.databinding.FragmentCommentBinding
 import com.untilled.roadcapture.databinding.ItemCommentBinding
 import com.untilled.roadcapture.features.common.CommentMorePopupMenu
 import com.untilled.roadcapture.features.common.MyCommentMorePopupMenu
+import com.untilled.roadcapture.features.common.OnMenuItemClickListenerWithId
 import com.untilled.roadcapture.features.common.PageLoadStateAdapter
-import com.untilled.roadcapture.utils.ui.CustomDivider
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
 import com.untilled.roadcapture.utils.mainActivity
 import com.untilled.roadcapture.utils.navigateToStudio
 import com.untilled.roadcapture.utils.showReportDialog
+import com.untilled.roadcapture.utils.ui.CustomDivider
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -67,33 +69,38 @@ class CommentFragment : Fragment() {
         adapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
     }
 
-    private val menuItemClickListener: (item: MenuItem) -> Boolean = { item ->
-        when (item.itemId) {
-            R.id.popup_menu_comment_more_report -> {
-                showReportDialog {}
-            }
-            R.id.popup_menu_mycomment_more_edit -> {
+    private val menuItemClickListener: (commentId: Long, item: MenuItem?) -> Boolean =
+        { commentId, item ->
+            when (item?.itemId) {
+                R.id.popup_menu_comment_more_report -> {
+                    showReportDialog {}
+                }
+                R.id.popup_menu_mycomment_more_edit -> {
 
+                }
+                R.id.popup_menu_mycomment_more_del -> {
+                    viewModel.delete(commentId)
+                }
             }
-            R.id.popup_menu_mycomment_more_del -> {
-
-            }
+            true
         }
-        true
-    }
-
 
     private val itemClickListener: (ItemClickArgs?) -> Unit = { args ->
         val userId = (args?.item as ItemCommentBinding).comments!!.user.id
+        val commentId = args.item.comments!!.id
 
         when (args.view?.id) {
             R.id.img_icomment_more -> {
                 if (userId == User.id) MyCommentMorePopupMenu(
                     requireContext(),
                     args.view,
-                    menuItemClickListener
+                    OnMenuItemClickListenerWithId(commentId, menuItemClickListener)
                 ).show()
-                else CommentMorePopupMenu(requireContext(), args.view, menuItemClickListener).show()
+                else CommentMorePopupMenu(
+                    requireContext(),
+                    args.view,
+                    OnMenuItemClickListenerWithId(commentId, menuItemClickListener)
+                ).show()
             }
             R.id.img_icomment_profile -> {
                 navigateToStudio(userId)
@@ -127,7 +134,6 @@ class CommentFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        initViews()
         observeData()
         initAdapter()
         setOnClickListeners()
@@ -139,26 +145,26 @@ class CommentFragment : Fragment() {
     }
 
     private fun refresh() {
-        viewModel.albumComments(args.albumsId)
-    }
-
-    private fun initViews() {
-        if (args.commentsCount == 0) {
-            binding.textCommentNocomment1.visibility = View.VISIBLE
-            binding.textCommentNocomment2.visibility = View.VISIBLE
-            binding.imgCommentNocomment.visibility = View.VISIBLE
-            binding.recyclerComment.visibility = View.INVISIBLE
-        }
+        viewModel.albumComments(args.albumId)
     }
 
     private fun observeData() {
         viewModel.albumComments.observe(viewLifecycleOwner, commentObserver)
+        viewModel.viewEvent.observe(viewLifecycleOwner) {
+            it?.getContentIfNotHandled()?.let {
+                when(it.first) {
+                    CommentViewModel.EVENT_REFRESH -> {
+                        refresh()
+                    }
+                }
+            }
+        }
     }
 
     private fun setOnClickListeners() {
         binding.imgCommentBack.setOnClickListener { mainActivity().onBackPressed() }
         binding.imgCommentInput.setOnClickListener {
-
+            viewModel.post(args.thumbnailPictureId, CommentCreateRequest(binding.edtCommentInput.text.toString()))
         }
     }
 

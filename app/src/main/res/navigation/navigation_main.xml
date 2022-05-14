@@ -142,11 +142,11 @@
             android:id="@+id/action_commentFragment_to_studioFragment"
             app:destination="@id/studioFragment" />
         <argument
-            android:name="albumsId"
+            android:name="albumId"
             app:argType="long" />
         <argument
-            android:name="commentsCount"
-            app:argType="integer" />
+            android:name="thumbnailPictureId"
+            app:argType="long" />
     </fragment>
     <fragment
         android:id="@+id/notificationFragment"

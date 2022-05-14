@@ -34,16 +34,13 @@ class LoginViewModel @Inject constructor(
     fun autoLogin() {
         localTokenRepository.getOAuthToken().whenHasOAuthTokenOrNot (this::socialLogin) {
             localTokenRepository.getToken().whenHasAccessToken {
-                loadingEvent(true)
                 userRepository.getUserDetail()
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe({ response ->
-                        loadingEvent(false)
                         localUserRepository.saveUser(response)
                         viewEvent(Pair(EVENT_NAVIGATE_TO_ROOT, Unit))
                     }) { t ->
-                        loadingEvent(false)
                         Logger.e("${t}")
                     }
             }

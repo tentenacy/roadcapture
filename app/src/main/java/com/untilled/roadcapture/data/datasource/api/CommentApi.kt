@@ -4,6 +4,7 @@ import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentCreateReq
 import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
 import com.untilled.roadcapture.utils.constant.url.RoadCapturePathConstant
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import retrofit2.Response
 import retrofit2.http.*
@@ -30,4 +31,9 @@ interface CommentApi {
         @Path("pictureId") pictureId: Long,
         @Body request: CommentCreateRequest
     ): Single<Unit>
+
+    @DELETE(RoadCapturePathConstant.DELETE_COMMENT)
+    fun deleteComment(
+        @Path("commentId") commentId: Long,
+    ): Completable
 }
