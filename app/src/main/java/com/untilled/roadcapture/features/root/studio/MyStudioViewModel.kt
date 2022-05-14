@@ -14,6 +14,7 @@ import com.untilled.roadcapture.data.entity.paging.FollowingsSortByAlbum
 import com.untilled.roadcapture.data.entity.paging.UserAlbums
 import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import com.untilled.roadcapture.data.repository.album.paging.AlbumPagingRepository
+import com.untilled.roadcapture.data.repository.user.LocalUserRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
 import com.untilled.roadcapture.utils.combineLatestData
@@ -27,7 +28,8 @@ import javax.inject.Inject
 class MyStudioViewModel @Inject constructor(
     private val albumPagingRepository: AlbumPagingRepository,
     private val userRepository: UserRepository,
-    private val albumRepository: AlbumRepository
+    private val albumRepository: AlbumRepository,
+    private val localUserRepository: LocalUserRepository,
 ): BaseViewModel() {
 
     private var _myAlbums = MutableLiveData<PagingData<UserAlbums.UserAlbum>>()
@@ -67,6 +69,7 @@ class MyStudioViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
+                localUserRepository.saveUser(response)
                 _userInfo.postValue(response)
             }) {
 

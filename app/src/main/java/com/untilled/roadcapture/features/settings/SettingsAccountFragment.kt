@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.untilled.roadcapture.data.datasource.sharedpref.User
 import com.untilled.roadcapture.databinding.FragmentSettingsAccountBinding
 import com.untilled.roadcapture.utils.*
 import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
@@ -29,11 +30,12 @@ class SettingsAccountFragment : Fragment() {
         mainActivity().viewModel.setBindingRoot(binding.root)
 
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.user = User
         setOnClickListeners()
     }
 

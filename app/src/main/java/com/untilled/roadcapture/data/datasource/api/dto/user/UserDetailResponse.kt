@@ -12,7 +12,7 @@ data class UserDetailResponse(
     val email: String,
     val username: String,
     val profileImageUrl: String,
-    val introduction: String = "",
-    val provider: String = "",
+    val introduction: String? = null,
+    val provider: String? = null,
     val address: Address?
 ): Parcelable

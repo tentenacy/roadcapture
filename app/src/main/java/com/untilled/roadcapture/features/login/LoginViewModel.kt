@@ -2,6 +2,8 @@ package com.untilled.roadcapture.features.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.orhanobut.logger.Logger
+import com.untilled.roadcapture.data.datasource.sharedpref.User
 import com.untilled.roadcapture.data.repository.token.LocalTokenRepository
 import com.untilled.roadcapture.data.repository.token.dto.OAuthTokenArgs
 import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
@@ -32,7 +34,18 @@ class LoginViewModel @Inject constructor(
     fun autoLogin() {
         localTokenRepository.getOAuthToken().whenHasOAuthTokenOrNot (this::socialLogin) {
             localTokenRepository.getToken().whenHasAccessToken {
-                viewEvent(Pair(EVENT_NAVIGATE_TO_ROOT, Unit))
+                loadingEvent(true)
+                userRepository.getUserDetail()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ response ->
+                        loadingEvent(false)
+                        localUserRepository.saveUser(response)
+                        viewEvent(Pair(EVENT_NAVIGATE_TO_ROOT, Unit))
+                    }) { t ->
+                        loadingEvent(false)
+                        Logger.e("${t}")
+                    }
             }
         }
     }
@@ -60,11 +73,11 @@ class LoginViewModel @Inject constructor(
             .subscribe({ response ->
                 loadingEvent(false)
                 viewEvent(Pair(EVENT_NAVIGATE_TO_ROOT, Unit))
-                localUserRepository.saveUser(response.id)
+                localUserRepository.saveUser(response)
             }) { t ->
                 loadingEvent(false)
                 logout()
-                error.value = t.message
+                Logger.e("${t}")
             }.addTo(compositeDisposable)
     }
 

@@ -52,7 +52,7 @@ class SignupViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
                 loadingEvent(false)
-                localUserRepository.saveUser(response.id)
+                localUserRepository.saveUser(response)
                 viewEvent(Pair(EVENT_NAVIGATE_TO_ROOT, Unit))
             }) { t ->
                 loadingEvent(false)
