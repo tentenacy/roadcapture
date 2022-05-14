@@ -117,4 +117,8 @@ class RootFragment : Fragment() {
         }.commit()
     }
 
+    fun selectMyStudio() {
+        binding.bnvRoot.selectedItemId = R.id.menu_mystudio
+    }
+
 }

@@ -25,6 +25,7 @@ import com.untilled.roadcapture.utils.navigateToFollowing
 import com.untilled.roadcapture.utils.showReportDialog
 import dagger.hilt.android.AndroidEntryPoint
 
+//TODO: 스튜디오 유저가 현재 로그인된 유저인지 확인하여 화면을 다르게 보여준다.
 @AndroidEntryPoint
 class StudioFragment : Fragment() {
 
