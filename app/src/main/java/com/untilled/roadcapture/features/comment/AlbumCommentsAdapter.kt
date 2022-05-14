@@ -16,8 +16,8 @@ class AlbumCommentsAdapter(private val itemClickListener: (ItemClickArgs?) -> Un
 
         fun bind(comments: AlbumComments.AlbumComment, itemClickListener: (ItemClickArgs?) -> Unit) {
             binding.comments = comments.toCommentsResponse()
-            binding.setOnClickItem{ view ->
-                itemClickListener(ItemClickArgs(binding,view))
+            binding.setOnClickItem { view ->
+                itemClickListener(ItemClickArgs(binding, view))
             }
         }
     }

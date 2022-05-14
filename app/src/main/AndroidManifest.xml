@@ -29,7 +29,7 @@
         <activity
             android:name=".application.MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/SplashTheme"
+            android:theme="@style/Theme.RoadCapture.Splash"
             android:windowSoftInputMode="adjustResize">
 
             <!-- Main app intent filter -->

@@ -9,9 +9,20 @@ data class TokenArgs(
     var refreshToken: String,
     var accessTokenExpireDate: Long,
 ) {
-    fun whenHasAccessToken(callback: () -> Unit) {
+    fun whenHasAccessToken(callback: () -> Unit): Boolean =
         if(accessToken.isNotBlank()) {
             callback()
+            true
+        } else {
+            false
+        }
+
+    fun whenHasOAuthTokenOrNot(
+        hasAccessTokenCallback: () -> Unit,
+        hasNotAccessTokenCallback: () -> Unit
+    ) {
+        if (!whenHasAccessToken(hasAccessTokenCallback)) {
+            hasNotAccessTokenCallback()
         }
     }
 }

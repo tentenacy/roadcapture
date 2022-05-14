@@ -1,6 +1,7 @@
 package com.untilled.roadcapture.application
 
 import android.app.Application
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import com.chibatching.kotpref.Kotpref
@@ -24,6 +25,9 @@ class GlobalApplication: Application(), Configuration.Provider {
 
     override fun onCreate() {
         super.onCreate()
+
+        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+
         Logger.addLogAdapter(AndroidLogAdapter())
         Kotpref.init(this)
         KakaoSdk.init(this, BuildConfig.SOCIAL_KAKAO_CLIENT_ID)

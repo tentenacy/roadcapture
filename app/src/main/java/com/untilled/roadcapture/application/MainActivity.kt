@@ -10,7 +10,10 @@ import android.widget.EditText
 import androidx.activity.result.ActivityResult
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
+import androidx.navigation.NavGraph
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.activityresult.ActivityResultFactory
 import com.untilled.roadcapture.databinding.ActivityMainBinding
@@ -30,6 +33,9 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
     lateinit var binding: ActivityMainBinding
 
     val viewModel: MainViewModel by viewModels()
+
+    lateinit var navGraph: NavGraph
+    lateinit var navController: NavController
 
     @Inject
     lateinit var loadingDialog: LoadingDialog
@@ -58,10 +64,11 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         setTheme(R.style.Theme_RoadCapture)
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
 
-        initData()
+        viewModel.autoLogin()
+
+        binding = ActivityMainBinding.inflate(layoutInflater)
+
         observeData()
     }
 
@@ -108,11 +115,30 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
         cropFragment.removeFragmentFromScreen()
     }
 
-    private fun initData() {
-        viewModel
-    }
-
     private fun observeData() {
         viewModel.logout.observe(this, logoutObserver)
+        viewModel.viewEvent.observe(this) {
+            it?.getContentIfNotHandled()?.let {
+                when (it.first) {
+                    MainViewModel.EVENT_LEAVE -> {
+                        val navHostFragment =
+                            supportFragmentManager.findFragmentById(R.id.fragmentcontainer_activity) as NavHostFragment
+                        navController = navHostFragment.navController
+
+                        navGraph =
+                            navController.navInflater.inflate(R.navigation.navigation_main)
+                        navGraph.startDestination = R.id.rootFragment
+                        navController.graph = navGraph
+
+                        Thread.sleep(100)
+
+                        setContentView(binding.root)
+                    }
+                    MainViewModel.EVENT_REMAIN -> {
+                        setContentView(binding.root)
+                    }
+                }
+            }
+        }
     }
 }

@@ -3,10 +3,13 @@ package com.untilled.roadcapture.application
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.data.repository.token.LocalTokenRepository
+import com.untilled.roadcapture.data.repository.token.dto.TokenArgs
 import com.untilled.roadcapture.data.repository.user.LocalUserRepository
 import com.untilled.roadcapture.data.repository.user.UserRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
+import com.untilled.roadcapture.features.login.LoginViewModel
 import com.untilled.roadcapture.network.interceptor.TokenInterceptor
 import com.untilled.roadcapture.network.observer.TokenExpirationObserver
 import com.untilled.roadcapture.network.subject.OAuthLoginManagerSubject
@@ -31,8 +34,61 @@ class MainViewModel @Inject constructor(
 
     private var _bindingRoot = MutableLiveData<View>()
 
+    companion object {
+        const val EVENT_LEAVE = 1000
+        const val EVENT_REMAIN = 1001
+    }
+
     init {
         tokenExpirationObservable.registerObserver(this)
+    }
+
+    fun autoLogin() {
+        localTokenRepository.getOAuthToken().whenHasOAuthTokenOrNot(this::socialLogin) {
+            localTokenRepository.getToken().whenHasOAuthTokenOrNot({
+                userRepository.getUserDetail()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ response ->
+                        localUserRepository.saveUser(response)
+                        viewEvent(Pair(EVENT_LEAVE, Unit))
+                    }) { t ->
+                        Logger.e("${t}")
+                        logout()
+                        viewEvent(Pair(EVENT_REMAIN, Unit))
+                    }
+            }) {
+                viewEvent(Pair(EVENT_REMAIN, Unit))
+            }
+        }
+    }
+
+    private fun socialLogin(socialType: SocialType) {
+        loadingEvent(true)
+        userRepository.socialSignup(socialType)
+            .flatMap { response ->
+                localTokenRepository.saveToken(
+                    TokenArgs(
+                        grantType = response.grantType,
+                        accessToken = response.accessToken,
+                        refreshToken = response.refreshToken,
+                        accessTokenExpireDate = response.accessTokenExpireDate.toLong(),
+                    )
+                )
+                userRepository.getUserDetail()
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ response ->
+                loadingEvent(false)
+                localUserRepository.saveUser(response)
+                viewEvent(Pair(EVENT_LEAVE, Unit))
+            }) { t ->
+                loadingEvent(false)
+                Logger.e("${t}")
+                logout()
+                viewEvent(Pair(EVENT_REMAIN, Unit))
+            }.addTo(compositeDisposable)
     }
 
     override fun onCleared() {
