@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.navArgs
+import androidx.paging.CombinedLoadStates
+import androidx.paging.LoadState
 import androidx.paging.PagingData
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.untilled.roadcapture.R
@@ -35,12 +37,22 @@ class CommentFragment : Fragment() {
     private val viewModel: CommentViewModel by viewModels()
     private val args: CommentFragmentArgs by navArgs()
 
-    private val albumAdapter: AlbumCommentsAdapter by lazy {
-        AlbumCommentsAdapter(itemClickListener)
+    private val adapter: AlbumCommentsAdapter by lazy {
+        AlbumCommentsAdapter(itemClickListener).apply {
+            addLoadStateListener(loadStateListener)
+        }
     }
 
-    private val itemCountObserver: (Int) -> Unit = { itemCount ->
-        if(itemCount != 0){
+    private val loadStateListener: (CombinedLoadStates) -> Unit = { loadState ->
+        binding.swipeCommentInnercontainer.isRefreshing =
+            loadState.source.refresh is LoadState.Loading
+
+        if (loadState.source.refresh is LoadState.NotLoading && loadState.append.endOfPaginationReached && adapter.itemCount < 1) {
+            binding.textCommentNocomment1.visibility = View.VISIBLE
+            binding.textCommentNocomment2.visibility = View.VISIBLE
+            binding.imgCommentNocomment.visibility = View.VISIBLE
+            binding.recyclerComment.visibility = View.INVISIBLE
+        } else {
             binding.textCommentNocomment1.visibility = View.INVISIBLE
             binding.textCommentNocomment2.visibility = View.INVISIBLE
             binding.imgCommentNocomment.visibility = View.INVISIBLE
@@ -52,13 +64,13 @@ class CommentFragment : Fragment() {
     lateinit var customDivider: CustomDivider
 
     private val commentObserver: (PagingData<AlbumComments.AlbumComment>) -> Unit = { pagingData ->
-        albumAdapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
+        adapter.submitData(viewLifecycleOwner.lifecycle, pagingData)
     }
 
     private val menuItemClickListener: (item: MenuItem) -> Boolean = { item ->
         when (item.itemId) {
             R.id.popup_menu_comment_more_report -> {
-                showReportDialog({})
+                showReportDialog {}
             }
             R.id.popup_menu_mycomment_more_edit -> {
 
@@ -76,7 +88,11 @@ class CommentFragment : Fragment() {
 
         when (args.view?.id) {
             R.id.img_icomment_more -> {
-                if(userId == User.id) MyCommentMorePopupMenu(requireContext(), args.view, menuItemClickListener).show()
+                if (userId == User.id) MyCommentMorePopupMenu(
+                    requireContext(),
+                    args.view,
+                    menuItemClickListener
+                ).show()
                 else CommentMorePopupMenu(requireContext(), args.view, menuItemClickListener).show()
             }
             R.id.img_icomment_profile -> {
@@ -87,7 +103,6 @@ class CommentFragment : Fragment() {
 
     private val swipeRefreshListener = SwipeRefreshLayout.OnRefreshListener {
         refresh()
-        binding.swipeCommentInnercontainer.isRefreshing = false
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -108,6 +123,7 @@ class CommentFragment : Fragment() {
 
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
@@ -115,19 +131,19 @@ class CommentFragment : Fragment() {
         observeData()
         initAdapter()
         setOnClickListeners()
-        setOnRefreshListener()
+        setOtherListeners()
     }
 
-    private fun refresh(){
-        viewModel.getAlbumComments(args.albumsId)
-    }
-
-    private fun setOnRefreshListener(){
+    private fun setOtherListeners() {
         binding.swipeCommentInnercontainer.setOnRefreshListener(swipeRefreshListener)
     }
 
-    private fun initViews(){
-        if(args.commentsCount == 0){
+    private fun refresh() {
+        viewModel.albumComments(args.albumsId)
+    }
+
+    private fun initViews() {
+        if (args.commentsCount == 0) {
             binding.textCommentNocomment1.visibility = View.VISIBLE
             binding.textCommentNocomment2.visibility = View.VISIBLE
             binding.imgCommentNocomment.visibility = View.VISIBLE
@@ -137,7 +153,6 @@ class CommentFragment : Fragment() {
 
     private fun observeData() {
         viewModel.albumComments.observe(viewLifecycleOwner, commentObserver)
-        viewModel.itemCount.observe(viewLifecycleOwner,itemCountObserver)
     }
 
     private fun setOnClickListeners() {
@@ -155,11 +170,9 @@ class CommentFragment : Fragment() {
 
     private fun initAdapter() {
         binding.recyclerComment.addItemDecoration(customDivider)
-        albumAdapter.addLoadStateListener { viewModel.itemCount.postValue(albumAdapter.itemCount) }
-        binding.recyclerComment.adapter = albumAdapter.withLoadStateHeaderAndFooter(
-            header = PageLoadStateAdapter{albumAdapter.retry()},
-            footer = PageLoadStateAdapter{albumAdapter.retry()}
+        binding.recyclerComment.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = PageLoadStateAdapter { adapter.retry() },
+            footer = PageLoadStateAdapter { adapter.retry() }
         )
-
     }
 }

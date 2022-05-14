@@ -23,14 +23,12 @@ class CommentViewModel @Inject constructor(
     private var _albumComments = MutableLiveData<PagingData<AlbumComments.AlbumComment>>()
     val albumComments: LiveData<PagingData<AlbumComments.AlbumComment>> get() = _albumComments
 
-    var itemCount = MutableLiveData<Int>()
-
-    fun getAlbumComments(albumId: Long) {
+    fun albumComments(albumId: Long) {
         commentPagingRepository.getAlbumComments(albumId)
             .subscribeOn(AndroidSchedulers.mainThread())
             .cachedIn(viewModelScope)
             .subscribe({
-                _albumComments.value = it
+                _albumComments.postValue(it)
             }) { t ->
 
             }.addTo(compositeDisposable)

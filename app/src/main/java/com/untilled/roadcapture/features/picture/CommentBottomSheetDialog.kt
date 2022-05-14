@@ -72,7 +72,7 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
     private val loadStateListener: (CombinedLoadStates) -> Unit = { loadState ->
         binding.swipeBottomsheetCommentInnerContainer.isRefreshing =
             loadState.source.refresh is LoadState.Loading
-        }
+    }
 
     private val albumCommentsObserver: (PagingData<AlbumComments.AlbumComment>?) -> Unit =
         { pagingData ->
