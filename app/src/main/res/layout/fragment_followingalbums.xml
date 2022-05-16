@@ -71,7 +71,7 @@
                     android:id="@+id/img_followingalbums_nofollowing"
                     android:layout_width="168dp"
                     android:layout_height="168dp"
-                    android:src="@drawable/ic_nofollowing"
+                    android:src="@drawable/ic_nofollow"
                     android:visibility="invisible"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

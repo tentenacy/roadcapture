@@ -186,5 +186,11 @@
     <string name="dlgplacesearch_title">장소 검색</string>
     <string name="dlgplacesearch_search">키워드로 검색</string>
     <string name="dlgplacesearch_map">지도에서 설정</string>
+    <string name="mystudio_noalbum1">아직 앨범이 없습니다</string>
+    <string name="mystudio_noalbum2">앨범을 만들어 기록을 남겨보세요 :)</string>
+    <string name="studio_noalbum">앨범이 없습니다 :)</string>
+    <string name="follower_nofollower">아직 아무도 팔로우 하지 않았어요 :)</string>
+    <string name="following_nofollowing">아직 아무도 팔로우 하지 않았어요 :)</string>
+    <string name="following_nofollowing2">팔로잉 후 소식을 받아보세요 :)</string>
 
 </resources>
