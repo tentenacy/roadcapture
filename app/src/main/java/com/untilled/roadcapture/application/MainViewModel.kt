@@ -101,6 +101,17 @@ class MainViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ response ->
+                with(response) {
+                    localTokenRepository.saveToken(
+                        TokenArgs(
+                            grantType = grantType,
+                            accessToken = accessToken,
+                            refreshToken = refreshToken,
+                            accessTokenExpireDate = accessTokenExpireDate.toLong(),
+                        )
+                    )
+                    tokenExpirationObservable.resetTokenErrorOccurred()
+                }
             }) { t ->
                 error.value = t.message
             }.addTo(compositeDisposable)

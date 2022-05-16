@@ -42,19 +42,6 @@ class TokenInterceptor(
                     }
                 }
             }
-        } else {
-            response.peekBody(2048).toTokenResponseOrNull()?.apply {
-                localTokenDao.saveToken(
-                    TokenArgs(
-                        grantType = grantType,
-                        accessToken = accessToken,
-                        refreshToken = refreshToken,
-                        accessTokenExpireDate = accessTokenExpireDate.toLong(),
-                    )
-                )
-                accessTokenErrorOccurred = false
-                refreshTokenErrorOccurred = false
-            }
         }
 
         return response
@@ -66,5 +53,10 @@ class TokenInterceptor(
 
     private fun notifyRefreshTokenExpired() {
         observers.forEach(TokenExpirationObserver::onRefreshTokenExpired)
+    }
+
+    fun resetTokenErrorOccurred() {
+        accessTokenErrorOccurred = false
+        refreshTokenErrorOccurred = false
     }
 }
