@@ -6,12 +6,14 @@ import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.*
 import android.view.Gravity.END
 import android.view.Gravity.TOP
+import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.Fragment
 import com.naver.maps.map.overlay.Marker
@@ -22,7 +24,9 @@ import androidx.core.net.toUri
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.SimpleTarget
+import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
 import com.google.android.material.snackbar.Snackbar
 import com.karumi.dexter.Dexter
@@ -41,6 +45,7 @@ import com.naver.maps.map.overlay.PathOverlay
 import com.naver.maps.map.util.FusedLocationSource
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.utils.*
+import com.untilled.roadcapture.utils.permission.*
 
 
 @AndroidEntryPoint
@@ -54,26 +59,76 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
 
     private var naverMap: NaverMap? = null
     private var uiSettings: UiSettings? = null
-    private lateinit var locationSource: FusedLocationSource
     private var markerList: MutableList<Marker> = mutableListOf()
     private var path = PathOverlay()
+    private lateinit var locationSource: FusedLocationSource
 
     // 갤러리 사진 가져오는 intent 콜백 등록
-    private val getContent = registerForActivityResult(
-        ActivityResultContracts.StartActivityForResult()
-    ) {
-        if (it.resultCode == RESULT_OK) {
-            imageUri = it.data?.data
-            navigateToCrop(imageUri.toString())
+    private val getImageActivityResultContract =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == RESULT_OK) {
+                imageUri = it.data?.data
+                navigateToCrop(imageUri.toString())
+            }
+        }
+
+    private val onBackPressed: (View?) -> Unit = {
+        mainActivity().onBackPressed()
+    }
+
+    private val galleryOnClickListener: (View?) -> Unit = {
+        pickFromGallery()
+    }
+
+    private val cameraOnClickListener: (View?) -> Unit = {
+        if (checkPermission(CAMERA)) {
+            navigateToCamera()
+        } else {
+            requestCameraRequest()
         }
     }
 
-    private fun pickFromGallery() {
-        val intent = Intent(Intent.ACTION_PICK)
-            .setType(MediaStore.Images.Media.CONTENT_TYPE)
-            .setType("image/*")
+    private val registrationOnClickListener: (View?) -> Unit = {
+        viewModel.pictureList.value?.let {
+            it.forEach { picture ->
+                if (picture.thumbnail) {
+                    navigateToAlbumRegistration(picture)
+                    return@let
+                }
+            }
+            showThumbnailSettingDialog()
+        }
+    }
 
-        getContent.launch(intent)
+    private val cancelOnClickListener: (View?) -> Unit = {
+        if (markerList.isNotEmpty()) {
+            showCancelAlbumCreationAskingDialog {
+                markerList.forEach {   // 지도에서 마커 제거
+                    it.map = null
+                }
+                markerList.clear()  // 마커 리스트 클리어
+                path.map = null     // 지도에서 경로 제거
+                deleteCache(requireContext())   // 캐시 디렉토리에 있는 사진들 제거
+                viewModel.deleteAll()   // Room에 저장된 picture 모두 제거
+            }
+        }
+    }
+
+    private val locationBasicPermissionListener = basicPermissionListener {
+        Toast.makeText(requireContext(), "위치 권한을 허용하였습니다.", Toast.LENGTH_SHORT).show()
+    }
+
+    private val locationSnackBarPermissionListener by lazy {
+        snackBarPermissionListener(view, "지도에 현재 위치를 표시하기 위해서는 위치권한이 필요합니다. 설정으로 이동합니다.")
+    }
+
+    private val cameraBasicPermissionListener = basicPermissionListener {
+        Toast.makeText(requireContext(), "카메라 권한을 허용하였습니다.", Toast.LENGTH_SHORT).show()
+        navigateToCamera()
+    }
+
+    private val cameraSnackBarPermissionListener by lazy {
+        snackBarPermissionListener(view, "사진을 찍기위해서는 카메라 권한이 필요합니다. 설정으로 이동합니다.")
     }
 
     override fun onCreateView(
@@ -82,13 +137,11 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCaptureBinding.inflate(inflater, container, false)
-
         mainActivity().viewModel.setBindingRoot(binding.root)
 
-        locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
-        viewModel.pictureList.observe(viewLifecycleOwner) { }
+        initLocationSource()
+        initLocationSource()
         initNaverMap()
-
         return binding.root
     }
 
@@ -96,156 +149,168 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
 
         binding.constraintCaptureInnercontainer.setStatusBarTransparent(mainActivity())
-
+        requestLocationPermission()
+        observeData()
         setOnClickListeners()
+    }
+
+    private fun observeData() {
+        viewModel.pictureList.observe(viewLifecycleOwner) {
+
+        }
+    }
+
+    private fun setOnClickListeners() {
+        binding.imageCaptureBack.setOnClickListener(onBackPressed)
+        binding.imageCaptureGallery.setOnClickListener(galleryOnClickListener)
+        binding.imageCaptureCamera.setOnClickListener(cameraOnClickListener)
+        binding.imageCaptureRegistration.setOnClickListener(registrationOnClickListener)
+        binding.imageCaptureCancel.setOnClickListener(cancelOnClickListener)
+    }
+
+    override fun onMapReady(_naverMap: NaverMap) {
+        naverMap = _naverMap
+
+        setNaverMapUI()
+        drawMarker()
+        drawPolyline()
+    }
+
+    private fun initLocationSource() {
+        locationSource = FusedLocationSource(this, LOCATION_PERMISSION_REQUEST_CODE)
+    }
+
+    private fun initNaverMap() {
+        val naverMap =
+            childFragmentManager.findFragmentById(R.id.fragmentcontainer_capture) as? MapFragment
+                ?: MapFragment.newInstance().also {
+                    childFragmentManager.beginTransaction()
+                        .add(R.id.fragmentcontainer_capture, it)
+                        .commit()
+                }
+        naverMap.getMapAsync(this)
+    }
+
+    private fun setNaverMapUI() {
+        naverMap?.apply {
+            this.locationSource = this@CaptureFragment.locationSource
+            isLiteModeEnabled = true
+
+            this@CaptureFragment.uiSettings = this.uiSettings.apply {
+                isCompassEnabled = false // 나침반 비활성화
+                isZoomControlEnabled = false // 확대 축소 버튼 비활성화
+                isScaleBarEnabled = false // 스케일 바 비활성화
+                isLocationButtonEnabled = false // 기본 내 위치 버튼 비활성화
+                logoGravity = TOP
+                logoGravity = END
+                binding.btnCaptureLocation.map = naverMap // 내 위치 버튼 설정
+                setLogoMargin(
+                    0,
+                    requireContext().getPxFromDp(16f) + requireContext().statusBarHeight(),
+                    requireContext().getPxFromDp(16f),
+                    0
+                )
+            }
+        }
+    }
+
+    private fun drawPolyline() {
+        markerList.map {
+            it.position
+        }.also {
+            if (it.size >= 2) {
+                path.apply {
+                    color = Color.parseColor("#3d86c7")
+                    outlineColor = Color.parseColor("#3d86c7")
+                    outlineWidth = requireContext().getPxFromDp(3f)
+                    coords = it
+                    map = naverMap
+                }
+            }
+        }
+    }
+
+    private fun drawMarker() {
+        viewModel.pictureList.value?.let {
+            it.forEach { picture ->
+                markerList.add(
+                    Marker().apply {
+                        isHideCollidedMarkers = true    // 마커 겹치면 사라지기
+                        zIndex = if (picture.thumbnail) 100 else 0  // 썸네일 마커가 가장 위에 표시
+                        position = LatLng(
+                            picture.place?.latitude ?: 37.5670135,
+                            picture.place?.longitude ?: 126.9783740,
+                        )
+                        onClickListener = Overlay.OnClickListener {     // 마커
+                            navigateToPictureEditor(picture)
+                            return@OnClickListener true
+                        }
+                        setCircularImageMarker(this, picture.fileUri!!)
+                        map = naverMap
+                    }
+                )
+            }
+            if(it.isNotEmpty()) {
+                naverMap?.moveCamera(CameraUpdate.scrollTo(markerList.last().position))
+            }
+        }
+    }
+
+    private fun setCircularImageMarker(marker: Marker, imgUri: String) {
+        Glide.with(requireContext())
+            .asBitmap()
+            .load(imgUri.toUri())
+            .apply(RequestOptions().centerCrop().circleCrop())
+            .into(object : CustomTarget<Bitmap>() {
+                override fun onResourceReady(
+                    resource: Bitmap,
+                    transition: Transition<in Bitmap>?
+                ) {
+                    marker.apply {
+                        icon = OverlayImage.fromBitmap(
+                            Bitmap.createScaledBitmap(
+                                resource,
+                                requireContext().getPxFromDp(64f),
+                                requireContext().getPxFromDp(64f),
+                                true
+                            )
+                        )
+                    }
+                }
+                override fun onLoadCleared(placeholder: Drawable?) {}
+            })
+    }
+
+    private fun pickFromGallery() {
+        getImageActivityResultContract.launch(
+            Intent(Intent.ACTION_PICK).apply {
+                type = MediaStore.Images.Media.CONTENT_TYPE
+                type = "image/*"
+            }
+        )
+    }
+
+    private fun requestLocationPermission() {
+        requestSinglePermission(
+            FINE_LOCATION,
+            locationBasicPermissionListener,
+            locationSnackBarPermissionListener
+        )
+    }
+
+    private fun requestCameraRequest() {
+        requestSinglePermission(
+            CAMERA,
+            cameraBasicPermissionListener,
+            cameraSnackBarPermissionListener
+        )
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
 
         mainActivity().setStatusBarOrigin()
-
         _binding = null
-    }
-
-    private fun setOnClickListeners() {
-        binding.imageCaptureBack.setOnClickListener {
-            mainActivity().onBackPressed()
-        }
-        binding.imageCaptureCamera.setOnClickListener {
-            requestSinglePermission(
-                Manifest.permission.CAMERA,
-                "사진을 찍기위해서는 카메라 권한이 필요합니다. 설정으로 이동합니다.",
-            ) {
-                navigateToCamera()
-            }
-        }
-        binding.imageCaptureGallery.setOnClickListener {
-            pickFromGallery()
-        }
-        binding.imageCaptureRegistration.setOnClickListener {
-            if (!viewModel.pictureList.value.isNullOrEmpty()) {
-                var picture : Picture? = null
-                for(p in viewModel.pictureList.value!!) {
-                    if(p.thumbnail) {
-                        picture = p
-                    }
-                }
-                if(picture == null) {
-                    showThumbnailSettingDialog()
-                } else {
-                    navigateToAlbumRegistration(picture)
-                }
-            }
-        }
-        binding.imageCaptureCancel.setOnClickListener {
-            if (markerList.isNotEmpty()) {
-                showCancelAlbumCreationAskingDialog {
-                    for (i in markerList) {
-                        i.map = null    // 지도에서 마커 제거
-                    }
-                    markerList.clear()  // 마커 리스트 클리어
-                    path.map = null     // 지도에서 경로 제거
-                    deleteCache(requireContext())   // 캐시 디렉토리에 있는 사진들 제거
-                    viewModel.deleteAll()   // Room에 저장된 picture 모두 제거
-                }
-            }
-        }
-    }
-
-    private fun initNaverMap() {
-        val mapFragment = childFragmentManager.findFragmentById(R.id.fragmentcontainer_capture) as? MapFragment
-            ?: MapFragment.newInstance().also {
-                childFragmentManager.beginTransaction().add(R.id.fragmentcontainer_capture, it).commit()
-            }
-        mapFragment.getMapAsync(this)
-    }
-
-    private fun initNaverMapUiSetting() {
-        uiSettings = naverMap!!.uiSettings
-        uiSettings?.isCompassEnabled = false // 나침반 비활성화
-        uiSettings?.isZoomControlEnabled = false // 확대 축소 버튼 비활성화
-        uiSettings?.isScaleBarEnabled = false // 스케일 바 비활성화
-        uiSettings?.isLocationButtonEnabled = false // 기본 내 위치 버튼 비활성화
-        binding.btnCaptureLocation.map = naverMap // 내 위치 버튼 설정
-
-        uiSettings?.logoGravity = TOP
-        uiSettings?.logoGravity = END
-        uiSettings?.setLogoMargin(
-            0,
-            requireContext().getPxFromDp(16f) + requireContext().statusBarHeight(),
-            requireContext().getPxFromDp(16f),
-            0
-        )
-    }
-
-    private fun drawPolyline() {
-        val _coords = mutableListOf<LatLng>()
-        for(i in markerList) {
-            _coords.add(i.position)
-        }
-
-        if(_coords.size >= 2) {
-            path.apply {
-                color = Color.parseColor("#3d86c7")
-                outlineColor = Color.parseColor("#3d86c7")
-                outlineWidth = requireContext().getPxFromDp(3f)
-                coords = _coords
-            }.map = naverMap
-        }
-    }
-
-    private fun drawMarker() {
-        if (!viewModel.pictureList.value.isNullOrEmpty()) {
-            for (picture in viewModel.pictureList.value!!) {
-                val marker = Marker()
-                marker.apply {
-                    position = LatLng(
-                        picture.place?.latitude?.toDouble() ?: 37.5670135,
-                        picture.place?.longitude?.toDouble() ?: 126.9783740,
-                    )
-                    isHideCollidedMarkers = true    // 마커 겹치면 사라지기
-                    zIndex = if (picture.thumbnail) 100 else 0  // 썸네일 마커가 가장 위에 표시
-                    onClickListener = Overlay.OnClickListener {     // 마커
-                        navigateToPictureEditor(picture)
-                        return@OnClickListener true
-                    }
-                }
-                Glide.with(requireContext()).asBitmap().load(picture.fileUri!!.toUri())
-                    .apply(RequestOptions().centerCrop().circleCrop())
-                    .into(object : SimpleTarget<Bitmap>() {
-                        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                            val bitmap = Bitmap.createScaledBitmap(
-                                resource,
-                                requireContext().getPxFromDp(64f),
-                                requireContext().getPxFromDp(64f),
-                                true
-                            )
-                            marker.apply {
-                                icon = OverlayImage.fromBitmap(bitmap)
-                            }.map = naverMap
-                        }
-                    })
-                markerList.add(marker)
-            }
-            naverMap?.moveCamera(CameraUpdate.scrollTo(markerList.last().position))
-        }
-    }
-
-    override fun onMapReady(_naverMap: NaverMap) {
-        _naverMap.isLiteModeEnabled = true
-        naverMap = _naverMap
-        naverMap!!.locationSource = locationSource
-
-        initNaverMapUiSetting()
-
-        requestSinglePermission(
-            Manifest.permission.ACCESS_FINE_LOCATION,
-            "지도에 현재 위치를 표시하기 위해서는 위치권한이 필요합니다. 설정으로 이동합니다."
-        ) { }
-
-        drawMarker()
-        drawPolyline()
     }
 
     override fun onRequestPermissionsResult(
@@ -266,43 +331,9 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
     }
 
-    private fun requestSinglePermission(
-        permission: String,
-        deniedMessage: String,
-        logic: () -> Unit
-    ) {
-        val basicPermissionListener: PermissionListener = object : PermissionListener {
-            override fun onPermissionGranted(p0: PermissionGrantedResponse?) {
-                logic()
-            } // 권한 허용 됬을때
-
-            override fun onPermissionDenied(p0: PermissionDeniedResponse?) {}    // 권한 거부 됬을대
-            override fun onPermissionRationaleShouldBeShown(
-                p0: PermissionRequest?,
-                p1: PermissionToken?
-            ) {
-            }
-        }
-        val snackbarPermissionListener: PermissionListener =
-            SnackbarOnDeniedPermissionListener.Builder
-                .with(view, deniedMessage)
-                .withOpenSettingsButton("설정")
-                .withCallback(object : Snackbar.Callback() {
-                    override fun onShown(snackbar: Snackbar) {}
-                    override fun onDismissed(snackbar: Snackbar, event: Int) {}
-                }).build()
-
-        Dexter.withContext(requireContext())
-            .withPermission(permission)
-            .withListener(
-                CompositePermissionListener(
-                    basicPermissionListener,
-                    snackbarPermissionListener
-                )
-            ).check()
-    }
-
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
     }
 }
+
+

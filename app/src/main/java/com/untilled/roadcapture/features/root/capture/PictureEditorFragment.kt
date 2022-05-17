@@ -15,10 +15,13 @@ import com.untilled.roadcapture.data.datasource.api.ext.dto.address.TmapAddressI
 import com.untilled.roadcapture.data.entity.LocationLatLng
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.databinding.FragmentPictureEditorBinding
-import com.untilled.roadcapture.utils.*
 import com.untilled.roadcapture.utils.constant.tag.DialogTagConstant
+import com.untilled.roadcapture.utils.mainActivity
+import com.untilled.roadcapture.utils.navigateToCapture
+import com.untilled.roadcapture.utils.navigateToSearchPlace
+import com.untilled.roadcapture.utils.permission.checkSelfPermission
+import com.untilled.roadcapture.utils.showPictureDeleteAskingDialog
 import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.http.POST
 
 @AndroidEntryPoint
 class PictureEditorFragment : Fragment() {
