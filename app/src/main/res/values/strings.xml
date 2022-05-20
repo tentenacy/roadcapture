@@ -192,5 +192,6 @@
     <string name="follower_nofollower">아직 아무도 팔로우 하지 않았어요 :)</string>
     <string name="following_nofollowing">아직 아무도 팔로우 하지 않았어요 :)</string>
     <string name="following_nofollowing2">팔로잉 후 소식을 받아보세요 :)</string>
+    <string name="followingalbums_noalbum">아직 아무도 앨범을 만들지 않았어요 :)</string>
 
 </resources>

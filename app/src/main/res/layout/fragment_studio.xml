@@ -70,10 +70,10 @@
                         android:id="@+id/img_studio_profile"
                         android:layout_width="96dp"
                         android:layout_height="96dp"
-                        app:civ_border_color="@color/white"
-                        app:civ_border_width="2dp"
                         bind:studioProfileImage="@{user.profileImageUrl}"
-                        tools:src="@drawable/img_sample_profile" />
+                        tools:layout_editor_absoluteX="158dp"
+                        tools:layout_editor_absoluteY="261dp"
+                        tools:src="@drawable/ic_default_user" />
 
                     <TextView
                         android:id="@+id/text_studio_name"
@@ -185,9 +185,9 @@
                     android:orientation="vertical"
                     app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:listitem="@layout/item_albums_studio" />
 
                 <ImageView

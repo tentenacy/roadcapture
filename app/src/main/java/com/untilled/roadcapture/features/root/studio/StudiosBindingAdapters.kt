@@ -1,5 +1,6 @@
 package com.untilled.roadcapture.features.root.studio
 
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -34,6 +35,8 @@ object StudiosBindingAdapters {
     @JvmStatic
     @BindingAdapter("studioProfileImage")
     fun setStudioProfileImage(view: CircleImageView, url: String?){
+        if(url == null) Log.d("Test","null")
+        else Log.d("Test",url)
         view.context.apply {
             Glide.with(this)
                 .asBitmap()
