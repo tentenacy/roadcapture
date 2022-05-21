@@ -40,6 +40,7 @@ import android.widget.FrameLayout
 import android.content.DialogInterface
 import android.content.DialogInterface.OnShowListener
 import com.orhanobut.logger.Logger
+import com.untilled.roadcapture.features.common.OnMenuItemClickListenerWithId
 
 
 @AndroidEntryPoint
@@ -118,31 +119,34 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
         }
     }
 
-    private val menuItemClickListener: (item: MenuItem) -> Boolean = { item ->
-        when (item.itemId) {
-            R.id.popup_menu_comment_more_report -> {
-                showReportDialog({})
-            }
-            R.id.popup_menu_mycomment_more_edit -> {
+    private val menuItemClickListener: (commentId: Long, item: MenuItem?) -> Boolean =
+        { commentId, item ->
+            when (item?.itemId) {
+                R.id.popup_menu_comment_more_report -> {
+                    showReportDialog {}
+                }
+                R.id.popup_menu_mycomment_more_edit -> {
 
+                }
+                R.id.popup_menu_mycomment_more_del -> {
+                    viewModel.deleteComment(commentId)
+                }
             }
-            R.id.popup_menu_mycomment_more_del -> {
-
-            }
+            true
         }
-        true
-    }
 
     private val itemOnClickListener: (ItemClickArgs?) -> Unit = { args ->
         val userId = (args?.item as ItemCommentBinding).comments!!.user.id
+        val commentId = args.item.comments!!.id
+
         when (args.view?.id) {
             R.id.img_icomment_more -> {
                 if (userId == User.id) MyCommentMorePopupMenu(
                     requireContext(),
                     args.view,
-                    menuItemClickListener
+                    OnMenuItemClickListenerWithId(commentId, menuItemClickListener)
                 ).show()
-                else CommentMorePopupMenu(requireContext(), args.view, menuItemClickListener).show()
+                else CommentMorePopupMenu(requireContext(), args.view, OnMenuItemClickListenerWithId(commentId, menuItemClickListener)).show()
             }
             R.id.img_icomment_profile -> {
                 pictureViewerFrom2Depth().navigateToStudio(userId)
@@ -194,6 +198,15 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
 
     private fun observeData() {
         viewModel.currentPosition.observe(viewLifecycleOwner, currentPositionObserver)
+        viewModel.viewEvent.observe(viewLifecycleOwner) {
+            it?.getContentIfNotHandled()?.let {
+                when(it.first) {
+                    PictureViewerViewModel.EVENT_REFRESH_COMMENT -> {
+                        viewModel.comments()
+                    }
+                }
+            }
+        }
     }
 
     private fun setOnClickListeners() {

@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
+import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumResponse
 import com.untilled.roadcapture.data.datasource.api.dto.comment.CommentCreateRequest
 import com.untilled.roadcapture.data.datasource.api.dto.picture.PictureResponse
@@ -14,6 +15,7 @@ import com.untilled.roadcapture.data.repository.album.AlbumRepository
 import com.untilled.roadcapture.data.repository.comment.CommentRepository
 import com.untilled.roadcapture.data.repository.comment.paging.CommentPagingRepository
 import com.untilled.roadcapture.features.base.BaseViewModel
+import com.untilled.roadcapture.features.comment.CommentViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.kotlin.addTo
@@ -26,6 +28,10 @@ class PictureViewerViewModel @Inject constructor(
     private val commentPagingRepository: CommentPagingRepository,
     private val commentRepository: CommentRepository,
     ) : BaseViewModel() {
+
+    companion object {
+        const val EVENT_REFRESH_COMMENT = 1000
+    }
 
     private val _album = MutableLiveData<AlbumResponse>()
     val album: LiveData<AlbumResponse> get() = _album
@@ -119,6 +125,17 @@ class PictureViewerViewModel @Inject constructor(
                     }.addTo(compositeDisposable)
             }
         }
+    }
+
+    fun deleteComment(commentId: Long) {
+        commentRepository.deleteComment(commentId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+                viewEvent(Pair(EVENT_REFRESH_COMMENT, Unit))
+            }) { t ->
+                Logger.e("${t}")
+            }.addTo(compositeDisposable)
     }
 
     fun clearComments() {
