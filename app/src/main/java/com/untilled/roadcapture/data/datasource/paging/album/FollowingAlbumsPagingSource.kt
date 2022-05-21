@@ -8,7 +8,6 @@ import com.untilled.roadcapture.data.entity.mapper.AlbumsMapper
 import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.utils.applyRetryPolicy
 import com.untilled.roadcapture.utils.constant.policy.RetryPolicyConstant
-import com.untilled.roadcapture.utils.retryThreeTimes
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
@@ -20,7 +19,7 @@ class FollowingAlbumsPagingSource @Inject constructor(
     private val mapper: AlbumsMapper,
     private val roadCaptureApi: RoadCaptureApi,
     private val followingAlbumsCondition: FollowingAlbumsCondition?
-): RxPagingSource<Int, Albums.Album>() {
+) : RxPagingSource<Int, Albums.Album>() {
 
     override fun getRefreshKey(state: PagingState<Int, Albums.Album>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -40,7 +39,7 @@ class FollowingAlbumsPagingSource @Inject constructor(
             .delay(1, TimeUnit.SECONDS)
             .subscribeOn(Schedulers.io())
             .map { mapper.transform(it) }
-            .map { toLoadResult(it,position) }
+            .map { toLoadResult(it, position) }
             .compose(
                 applyRetryPolicy(
                     RetryPolicyConstant.TIMEOUT,
@@ -53,8 +52,8 @@ class FollowingAlbumsPagingSource @Inject constructor(
     private fun toLoadResult(data: Albums, position: Int): LoadResult<Int, Albums.Album> {
         return LoadResult.Page(
             data = data.albums,
-            prevKey = if(position == 0) null else position - 1,
-            nextKey = if(data.endOfPage) null else position + 1,
+            prevKey = if (position == 0) null else position - 1,
+            nextKey = if (data.endOfPage) null else position + 1,
         )
     }
 }

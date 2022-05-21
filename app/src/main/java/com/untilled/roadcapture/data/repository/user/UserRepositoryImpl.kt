@@ -1,13 +1,11 @@
 package com.untilled.roadcapture.data.repository.user
 
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
+import com.untilled.roadcapture.data.datasource.api.dto.address.PlaceCondition
+import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
 import com.untilled.roadcapture.data.datasource.api.dto.common.ErrorCode
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageRequest
 import com.untilled.roadcapture.data.datasource.api.dto.common.PageResponse
-import com.untilled.roadcapture.data.datasource.api.dto.address.PlaceCondition
-import com.untilled.roadcapture.data.datasource.api.dto.album.UserAlbumsResponse
-import com.untilled.roadcapture.data.datasource.api.dto.follower.FollowersResponse
-import com.untilled.roadcapture.data.datasource.api.dto.follower.FollowingsCondition
 import com.untilled.roadcapture.data.datasource.api.dto.user.*
 import com.untilled.roadcapture.data.datasource.dao.LocalOAuthTokenDao
 import com.untilled.roadcapture.data.datasource.dao.LocalTokenDao
@@ -33,12 +31,13 @@ class UserRepositoryImpl @Inject constructor(
                     return@flatMap Single.error(IllegalStateException(it.toErrorResponseOrNull()?.message))
                 }
 
-                return@flatMap login(LoginRequest(
-                    email = signupRequest.email,
-                    password = signupRequest.password,
-                ))
+                return@flatMap login(
+                    LoginRequest(
+                        email = signupRequest.email,
+                        password = signupRequest.password,
+                    )
+                )
             }
-            .retryThreeTimes()
     }
 
     override fun socialSignup(socialType: SocialType): Single<TokenResponse> {
@@ -53,7 +52,6 @@ class UserRepositoryImpl @Inject constructor(
 
                 return@flatMap socialLogin(socialType, oauthToken.accessToken)
             }
-            .retryThreeTimes()
     }
 
     override fun reissue(): Single<TokenResponse> {
@@ -71,7 +69,8 @@ class UserRepositoryImpl @Inject constructor(
             }
     }
 
-    override fun getMyInfo(): Single<StudioUserResponse> = roadCaptureApi.getMyStudioUser().retryThreeTimes()
+    override fun getMyInfo(): Single<StudioUserResponse> =
+        roadCaptureApi.getMyStudioUser()
 
 
     override fun login(loginRequest: LoginRequest): Single<TokenResponse> =
@@ -87,7 +86,6 @@ class UserRepositoryImpl @Inject constructor(
 
                 return@flatMap Single.error(IllegalStateException("Network error"))
             }
-            .retryThreeTimes()
 
     private fun socialLogin(socialType: SocialType, accessToken: String): Single<TokenResponse> =
         roadCaptureApi.socialLogin(
@@ -109,17 +107,25 @@ class UserRepositoryImpl @Inject constructor(
 
             return@flatMap Single.error(IllegalStateException("Network error"))
         }
-            .retryThreeTimes()
 
     override fun getUserDetail(): Single<UserDetailResponse> =
         roadCaptureApi.getUserDetail()
-            .retryThreeTimes()
 
     override fun getUserInfo(userId: Long): Single<StudioUserResponse> =
         roadCaptureApi.getStudioUser(userId)
-            .retryThreeTimes()
 
-    override fun getUserAlbums(userId: Long?,pageRequest: PageRequest, placeCondition: PlaceCondition): Single<PageResponse<UserAlbumsResponse>> =
-        roadCaptureApi.getStudioAlbums(userId, pageRequest.page,pageRequest.size,placeCondition.address1,placeCondition.address2,placeCondition.address3).retryThreeTimes()
+    override fun getUserAlbums(
+        userId: Long?,
+        pageRequest: PageRequest,
+        placeCondition: PlaceCondition
+    ): Single<PageResponse<UserAlbumsResponse>> =
+        roadCaptureApi.getStudioAlbums(
+            userId,
+            pageRequest.page,
+            pageRequest.size,
+            placeCondition.address1,
+            placeCondition.address2,
+            placeCondition.address3
+        )
 
 }

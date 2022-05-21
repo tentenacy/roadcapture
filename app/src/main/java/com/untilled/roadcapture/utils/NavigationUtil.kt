@@ -4,8 +4,11 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavDirections
 import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.untilled.roadcapture.R
+import com.untilled.roadcapture.application.MainActivity
 import com.untilled.roadcapture.data.entity.Picture
 import com.untilled.roadcapture.features.comment.CommentFragment
 import com.untilled.roadcapture.features.comment.CommentFragmentDirections
@@ -187,6 +190,16 @@ fun AlbumRegistrationFragment.navigateToRoot() {
     binding.root.navigate(AlbumRegistrationFragmentDirections.actionAlbumRegistrationFragmentToRootFragment())
 }
 
-fun Fragment.navigateToLogin() {
-    findNavController().navigate(R.id.action_global_loginFragment)
+fun MainActivity.currentDestinationId(): Int? = currentFragment()?.let { NavHostFragment.findNavController(it).currentDestination?.id }
+
+fun MainActivity.navigateToLogin() {
+    if(currentDestinationId() != R.id.loginFragment) {
+        val navController = findNavController(R.id.fragmentcontainer_activity)
+        val navHostFragment: NavHostFragment = supportFragmentManager.findFragmentById(R.id.fragmentcontainer_activity) as NavHostFragment
+        val inflater = navHostFragment.navController.navInflater
+        val graph = inflater.inflate(R.navigation.navigation_main)
+        graph.startDestination = R.id.loginFragment
+
+        navController.graph = graph
+    }
 }

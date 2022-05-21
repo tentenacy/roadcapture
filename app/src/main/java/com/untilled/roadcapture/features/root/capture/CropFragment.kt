@@ -55,7 +55,7 @@ class CropFragment : Fragment() {
     ): View? {
         _binding = FragmentCropBinding.inflate(inflater, container, false)
 
-        mainActivity().viewModel.setBindingRoot(binding.root)
+
 
         setHasOptionsMenu(true) // fragment 에서 optionMenu 생성 허용
 

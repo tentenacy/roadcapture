@@ -21,7 +21,7 @@ class TermsOfServiceFragment : Fragment() {
     ): View? {
         _binding = FragmentTermsofserviceBinding.inflate(layoutInflater,container,false)
 
-        mainActivity().viewModel.setBindingRoot(binding.root)
+
 
         return binding.root
     }

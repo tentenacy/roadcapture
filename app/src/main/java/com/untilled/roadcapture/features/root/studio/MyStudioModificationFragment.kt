@@ -66,7 +66,7 @@ class MyStudioModificationFragment : Fragment() {
     ): View? {
         _binding = FragmentMystudioModificationBinding.inflate(inflater,container,false)
 
-        mainActivity().viewModel.setBindingRoot(binding.root)
+
         initAdapter()
 
         return binding.root

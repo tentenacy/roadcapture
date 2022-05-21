@@ -25,7 +25,7 @@ class WithdrawalFragment : Fragment(){
     ): View? {
         _binding = FragmentWithdrawalBinding.inflate(inflater,container,false)
 
-        mainActivity().viewModel.setBindingRoot(binding.root)
+
 
         return binding.root
     }

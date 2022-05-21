@@ -10,6 +10,7 @@ import com.untilled.roadcapture.network.observer.TokenExpirationObserver
 import com.untilled.roadcapture.utils.toErrorResponseOrNull
 import com.untilled.roadcapture.utils.toTokenResponseOrNull
 import okhttp3.Interceptor
+import okhttp3.Protocol
 import okhttp3.Response
 
 class TokenInterceptor(
@@ -17,13 +18,14 @@ class TokenInterceptor(
 ) : Interceptor, Subject<TokenExpirationObserver>() {
 
     private var accessTokenErrorOccurred = false
-    private var refreshTokenErrorOccurred = false
 
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request().newBuilder()
             .addHeader("X-AUTH-TOKEN", localTokenDao.getToken().accessToken)
             .build()
-        val response = chain.proceed(request)
+        var response = chain.proceed(request)
+
+        var tryCount: Byte = 0
 
         if (!response.isSuccessful) {
             response.peekBody(2048).toErrorResponseOrNull()?.apply {
@@ -33,12 +35,13 @@ class TokenInterceptor(
                             notifyTokenExpired()
                             accessTokenErrorOccurred = true
                         }
+                        while(tryCount++ < 3 && !response.isSuccessful && response.peekBody(2048).toErrorResponseOrNull()?.code == ErrorCode.ACCESS_TOKEN_ERROR.code) {
+                            Thread.sleep((1000 * tryCount).toLong())
+                            response = chain.proceed(request)
+                        }
                     }
                     ErrorCode.REFRESH_TOKEN_ERROR.code -> {
-                        if(!refreshTokenErrorOccurred) {
-                            notifyRefreshTokenExpired()
-                            refreshTokenErrorOccurred = true
-                        }
+                        notifyRefreshTokenExpired()
                     }
                 }
             }
@@ -57,6 +60,5 @@ class TokenInterceptor(
 
     fun resetTokenErrorOccurred() {
         accessTokenErrorOccurred = false
-        refreshTokenErrorOccurred = false
     }
 }

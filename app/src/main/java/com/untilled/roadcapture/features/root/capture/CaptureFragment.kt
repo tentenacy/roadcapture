@@ -137,7 +137,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentCaptureBinding.inflate(inflater, container, false)
-        mainActivity().viewModel.setBindingRoot(binding.root)
+
 
         initLocationSource()
         initLocationSource()

@@ -56,7 +56,7 @@ class AlbumRegistrationFragment : Fragment() {
     ): View? {
         _binding = FragmentAlbumRegistrationBinding.inflate(inflater, container, false)
 
-        mainActivity().viewModel.setBindingRoot(binding.root)
+
 
         return binding.root
     }

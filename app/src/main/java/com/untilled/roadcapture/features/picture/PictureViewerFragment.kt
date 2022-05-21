@@ -57,7 +57,7 @@ class PictureViewerFragment : BaseFragment() {
     ): View? {
         _binding = FragmentPictureViewerBinding.inflate(inflater, container, false)
 
-        mainActivity().viewModel.setBindingRoot(binding.root)
+
 
         return binding.root
     }

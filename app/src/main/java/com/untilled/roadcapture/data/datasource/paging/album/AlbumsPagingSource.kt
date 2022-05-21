@@ -1,26 +1,22 @@
 package com.untilled.roadcapture.data.datasource.paging.album
 
-import android.util.Log
 import androidx.paging.PagingState
 import androidx.paging.rxjava3.RxPagingSource
 import com.untilled.roadcapture.data.datasource.api.RoadCaptureApi
 import com.untilled.roadcapture.data.datasource.api.dto.album.AlbumsCondition
-import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.data.entity.mapper.AlbumsMapper
+import com.untilled.roadcapture.data.entity.paging.Albums
 import com.untilled.roadcapture.utils.applyRetryPolicy
 import com.untilled.roadcapture.utils.constant.policy.RetryPolicyConstant
-import com.untilled.roadcapture.utils.retryThreeTimes
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
-import javax.inject.Singleton
 
-class AlbumsPagingSource (
+class AlbumsPagingSource(
     private val mapper: AlbumsMapper,
     private val roadCaptureApi: RoadCaptureApi,
     private val albumsCondition: AlbumsCondition,
-): RxPagingSource<Int, Albums.Album>() {
+) : RxPagingSource<Int, Albums.Album>() {
 
     override fun getRefreshKey(state: PagingState<Int, Albums.Album>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -54,8 +50,8 @@ class AlbumsPagingSource (
     private fun toLoadResult(data: Albums, position: Int): LoadResult<Int, Albums.Album> {
         return LoadResult.Page(
             data = data.albums,
-            prevKey = if(position == 0) null else position - 1,
-            nextKey = if(data.endOfPage) null else position + 1,
+            prevKey = if (position == 0) null else position - 1,
+            nextKey = if (data.endOfPage) null else position + 1,
         )
     }
 }

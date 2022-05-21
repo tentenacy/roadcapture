@@ -63,7 +63,7 @@ class PlaceSearchFragment : Fragment() {
     ): View? {
         _binding = FragmentPlaceSearchBinding.inflate(inflater, container, false)
 
-        mainActivity().viewModel.setBindingRoot(binding.root)
+
         getNavArgs()
 
         return binding.root

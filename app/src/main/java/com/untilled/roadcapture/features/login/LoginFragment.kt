@@ -94,7 +94,7 @@ class LoginFragment : BaseFragment() {
         // Inflate the layout for this fragment
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
 
-        mainActivity().viewModel.setBindingRoot(binding.root)
+
         observeData()
 
         return binding.root

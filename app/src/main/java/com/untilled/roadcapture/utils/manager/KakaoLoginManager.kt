@@ -1,7 +1,5 @@
 package com.untilled.roadcapture.utils.manager
 
-import com.kakao.sdk.auth.AuthApiClient
-import com.kakao.sdk.common.model.KakaoSdkError
 import com.kakao.sdk.user.UserApiClient
 import com.orhanobut.logger.Logger
 import com.untilled.roadcapture.network.subject.OAuthLoginManagerSubject

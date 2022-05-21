@@ -27,7 +27,7 @@ class SettingsAccountFragment : Fragment() {
     ): View? {
         _binding = FragmentSettingsAccountBinding.inflate(inflater, container, false)
 
-        mainActivity().viewModel.setBindingRoot(binding.root)
+
 
         return binding.root
     }

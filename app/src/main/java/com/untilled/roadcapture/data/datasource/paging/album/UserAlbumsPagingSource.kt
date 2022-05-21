@@ -12,15 +12,13 @@ import com.untilled.roadcapture.utils.retryThreeTimes
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
-import javax.inject.Inject
-import javax.inject.Singleton
 
 class UserAlbumsPagingSource(
     private val mapper: AlbumsMapper,
     private val roadCaptureApi: RoadCaptureApi,
     private val userAlbumsCondition: UserAlbumsCondition?,
     private val userId: Long? = null,
-): RxPagingSource<Int, UserAlbums.UserAlbum>() {
+) : RxPagingSource<Int, UserAlbums.UserAlbum>() {
 
     override fun getRefreshKey(state: PagingState<Int, UserAlbums.UserAlbum>): Int? {
         return state.anchorPosition?.let { anchorPosition ->
@@ -32,7 +30,7 @@ class UserAlbumsPagingSource(
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, UserAlbums.UserAlbum>> {
         val position = params.key ?: 0
 
-        if(userId == null) {
+        if (userId == null) {
             return roadCaptureApi.getMyStudioAlbums(
                 page = position,
                 size = params.loadSize,
@@ -44,9 +42,14 @@ class UserAlbumsPagingSource(
                 .subscribeOn(Schedulers.io())
                 .map { mapper.transform(it) }
                 .map { toLoadResult(it, position) }
-                .onErrorReturn { LoadResult.Error(it) }
-                .retryThreeTimes()
-        } else{
+                .compose(
+                    applyRetryPolicy(
+                        RetryPolicyConstant.TIMEOUT,
+                        RetryPolicyConstant.NETWORK,
+                        RetryPolicyConstant.SERVICE_UNAVAILABLE,
+                        RetryPolicyConstant.ACCESS_TOKEN_EXPIRED
+                    ) { LoadResult.Error(it) })
+        } else {
             return roadCaptureApi.getStudioAlbums(
                 userId = userId,
                 page = position,
@@ -69,11 +72,14 @@ class UserAlbumsPagingSource(
         }
     }
 
-    private fun toLoadResult(data: UserAlbums, position: Int): LoadResult<Int, UserAlbums.UserAlbum> {
+    private fun toLoadResult(
+        data: UserAlbums,
+        position: Int
+    ): LoadResult<Int, UserAlbums.UserAlbum> {
         return LoadResult.Page(
             data = data.userAlbums,
-            prevKey = if(position == 0) null else position - 1,
-            nextKey = if(data.endOfPage) null else position + 1,
+            prevKey = if (position == 0) null else position - 1,
+            nextKey = if (data.endOfPage) null else position + 1,
         )
     }
 }

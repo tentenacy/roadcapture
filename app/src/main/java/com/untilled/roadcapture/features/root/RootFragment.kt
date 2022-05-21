@@ -67,7 +67,7 @@ class RootFragment : Fragment() {
     ): View? {
         _binding = FragmentRootBinding.inflate(layoutInflater, container, false)
 
-        mainActivity().viewModel.setBindingRoot(binding.root)
+
 
         return binding.root
     }

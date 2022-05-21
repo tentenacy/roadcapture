@@ -4,7 +4,6 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import androidx.activity.result.ActivityResult
@@ -12,7 +11,6 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
 import com.untilled.roadcapture.R
 import com.untilled.roadcapture.core.activityresult.ActivityResultFactory
@@ -21,6 +19,7 @@ import com.untilled.roadcapture.features.common.LoadingDialog
 import com.untilled.roadcapture.features.root.capture.CropFragment
 import com.untilled.roadcapture.utils.currentFragment
 import com.untilled.roadcapture.utils.isPosOutOf
+import com.untilled.roadcapture.utils.navigateToLogin
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropFragment
 import com.yalantis.ucrop.UCropFragmentCallback
@@ -44,20 +43,14 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
     lateinit var activityResultFactory: ActivityResultFactory<Intent, ActivityResult>
 
     fun showLoading(tag: String) {
-        if(!loadingDialog.isAdded) {
+        if (!loadingDialog.isAdded) {
             loadingDialog.show(supportFragmentManager, tag)
         }
     }
 
     fun dismissLoading() {
-        if(loadingDialog.isAdded) {
+        if (loadingDialog.isAdded) {
             loadingDialog.dismissAllowingStateLoss()
-        }
-    }
-
-    private val logoutObserver: (View) -> Unit = { bindingRoot ->
-        Navigation.findNavController(bindingRoot).apply {
-            navigate(R.id.action_global_loginFragment)
         }
     }
 
@@ -116,7 +109,6 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
     }
 
     private fun observeData() {
-        viewModel.logout.observe(this, logoutObserver)
         viewModel.viewEvent.observe(this) {
             it?.getContentIfNotHandled()?.let {
                 when (it.first) {
@@ -136,6 +128,9 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
                     }
                     MainViewModel.EVENT_REMAIN -> {
                         setContentView(binding.root)
+                    }
+                    MainViewModel.EVENT_NAVIGATE_TO_LOGIN -> {
+                        navigateToLogin()
                     }
                 }
             }

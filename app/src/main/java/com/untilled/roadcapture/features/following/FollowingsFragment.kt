@@ -79,7 +79,7 @@ class FollowingsFragment : Fragment(){
     ): View? {
         _binding = FragmentFollowingBinding.inflate(layoutInflater,container,false)
 
-        mainActivity().viewModel.setBindingRoot(binding.root)
+
 
         return binding.root
     }

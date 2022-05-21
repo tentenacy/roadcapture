@@ -7,13 +7,11 @@ import com.untilled.roadcapture.data.entity.mapper.CommentsMapper
 import com.untilled.roadcapture.data.entity.paging.PictureComments
 import com.untilled.roadcapture.utils.applyRetryPolicy
 import com.untilled.roadcapture.utils.constant.policy.RetryPolicyConstant
-import com.untilled.roadcapture.utils.retryThreeTimes
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import javax.inject.Singleton
-import kotlin.properties.Delegates
 
 @Singleton
 class PictureCommentsPagingSource @Inject constructor(
@@ -57,7 +55,7 @@ class PictureCommentsPagingSource @Inject constructor(
         return LoadResult.Page(
             data = data.pictureComments,
             prevKey = if (position == 0) null else position - 1,
-            nextKey = if(data.endOfPage) null else position + 1,
+            nextKey = if (data.endOfPage) null else position + 1,
         )
     }
 }

@@ -29,14 +29,10 @@ class MainViewModel @Inject constructor(
     private val oauthLoginManagerMap: Map<String, @JvmSuppressWildcards OAuthLoginManagerSubject>,
 ) : BaseViewModel(), TokenExpirationObserver {
 
-    private var _logout = MutableLiveData<View>()
-    val logout: LiveData<View> get() = _logout
-
-    private var _bindingRoot = MutableLiveData<View>()
-
     companion object {
         const val EVENT_LEAVE = 1000
         const val EVENT_REMAIN = 1001
+        const val EVENT_NAVIGATE_TO_LOGIN = 1002
     }
 
     init {
@@ -121,18 +117,14 @@ class MainViewModel @Inject constructor(
         logout()
     }
 
-    fun setBindingRoot(bindingRoot: View) {
-        _bindingRoot.value = bindingRoot
-    }
-
     fun logout() {
-        _logout.postValue(_bindingRoot.value)
-
         localTokenRepository.getOAuthToken().whenHasOAuthToken {
             oauthLoginManagerMap[it.name]?.logout()
         }
         localUserRepository.clearUser()
         localTokenRepository.clearToken()
+
+        viewEvent(Pair(EVENT_NAVIGATE_TO_LOGIN, Unit))
     }
 
     private fun unregisterObservers() {
