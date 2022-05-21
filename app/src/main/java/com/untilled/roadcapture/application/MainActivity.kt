@@ -58,9 +58,16 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
         setTheme(R.style.Theme_RoadCapture)
         super.onCreate(savedInstanceState)
 
-        viewModel.autoLogin()
-
         binding = ActivityMainBinding.inflate(layoutInflater)
+
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragmentcontainer_activity) as NavHostFragment
+        navController = navHostFragment.navController
+
+        navGraph =
+            navController.navInflater.inflate(R.navigation.navigation_main)
+
+        viewModel.autoLogin()
 
         observeData()
     }
@@ -113,12 +120,6 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
             it?.getContentIfNotHandled()?.let {
                 when (it.first) {
                     MainViewModel.EVENT_LEAVE -> {
-                        val navHostFragment =
-                            supportFragmentManager.findFragmentById(R.id.fragmentcontainer_activity) as NavHostFragment
-                        navController = navHostFragment.navController
-
-                        navGraph =
-                            navController.navInflater.inflate(R.navigation.navigation_main)
                         navGraph.startDestination = R.id.rootFragment
                         navController.graph = navGraph
 
