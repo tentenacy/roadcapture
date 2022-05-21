@@ -40,6 +40,10 @@ data class AlbumComments(
             content = content,
             user = user,
         )
+
+        override fun equals(other: Any?): Boolean {
+            return super.equals(other) && createdAt.isEqual(lastModifiedAt)
+        }
     }
 
     @Parcelize

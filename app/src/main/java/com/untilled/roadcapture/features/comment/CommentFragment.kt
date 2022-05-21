@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
@@ -23,11 +24,12 @@ import com.untilled.roadcapture.features.common.MyCommentMorePopupMenu
 import com.untilled.roadcapture.features.common.OnMenuItemClickListenerWithId
 import com.untilled.roadcapture.features.common.PageLoadStateAdapter
 import com.untilled.roadcapture.features.common.dto.ItemClickArgs
-import com.untilled.roadcapture.utils.mainActivity
-import com.untilled.roadcapture.utils.navigateToStudio
-import com.untilled.roadcapture.utils.showReportDialog
+import com.untilled.roadcapture.utils.*
 import com.untilled.roadcapture.utils.ui.CustomDivider
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.filter
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -164,6 +166,10 @@ class CommentFragment : Fragment() {
         binding.imgCommentBack.setOnClickListener { mainActivity().onBackPressed() }
         binding.imgCommentInput.setOnClickListener {
             viewModel.post(args.thumbnailPictureId, CommentCreateRequest(binding.edtCommentInput.text.toString()))
+            binding.edtCommentInput.apply {
+                setText("")
+                mainActivity().hideKeyboard(this)
+            }
         }
     }
 
@@ -179,5 +185,13 @@ class CommentFragment : Fragment() {
             header = PageLoadStateAdapter { adapter.retry() },
             footer = PageLoadStateAdapter { adapter.retry() }
         )
+        lifecycleScope.launchWhenCreated {
+            adapter.loadStateFlow
+                .distinctUntilChangedBy { it.refresh }
+                .filter { it.refresh is LoadState.NotLoading }
+                .collect {
+                    binding.recyclerComment.scrollToPositionSmooth(0)
+                }
+        }
     }
 }

@@ -156,6 +156,10 @@ class CommentBottomSheetDialog : BottomSheetDialogFragment() {
 
     private val postOnClickListener: (View?) -> Unit = {
         viewModel.postComment(CommentCreateRequest(binding.edtBottomsheetCommentInput.text.toString()))
+        binding.edtBottomsheetCommentInput.apply {
+            setText("")
+            mainActivity().hideKeyboard(this)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

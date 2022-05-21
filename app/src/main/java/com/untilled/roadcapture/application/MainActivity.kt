@@ -1,11 +1,7 @@
 package com.untilled.roadcapture.application
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.view.MotionEvent
-import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
 import androidx.activity.result.ActivityResult
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -18,7 +14,6 @@ import com.untilled.roadcapture.databinding.ActivityMainBinding
 import com.untilled.roadcapture.features.common.LoadingDialog
 import com.untilled.roadcapture.features.root.capture.CropFragment
 import com.untilled.roadcapture.utils.currentFragment
-import com.untilled.roadcapture.utils.isPosOutOf
 import com.untilled.roadcapture.utils.navigateToLogin
 import com.yalantis.ucrop.UCrop
 import com.yalantis.ucrop.UCropFragment
@@ -72,7 +67,7 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
         observeData()
     }
 
-    override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
+    /*override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {
         val view = currentFocus
 
         if (view != null
@@ -93,7 +88,7 @@ class MainActivity : AppCompatActivity(), UCropFragmentCallback {
         }
 
         return super.dispatchTouchEvent(ev)
-    }
+    }*/
 
     override fun loadingProgress(showLoader: Boolean) {
         val cropFragment: CropFragment = currentFragment() as CropFragment
