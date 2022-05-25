@@ -28,8 +28,8 @@
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginStart="16dp"
-            android:src="@drawable/img_sample_thumbnail"
             android:onClick="@{onClickItem}"
+            android:src="@drawable/img_sample_thumbnail"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/text_icomment_username"
             bind:circleProfileImage="@{comments.user.profileImageUrl}" />
@@ -37,26 +37,26 @@
         <TextView
             android:id="@+id/text_icomment_username"
             style="@style/Body"
-            android:textStyle="bold"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
             android:text="@{comments.user.username}"
+            android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@id/img_icomment_profile"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="hsw0715" />
 
         <ImageView
             android:id="@+id/img_icomment_more"
-            android:padding="8dp"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintTop_toTopOf="@id/text_icomment_date"
+            android:onClick="@{onClickItem}"
+            android:padding="16dp"
+            android:src="@drawable/ic_more"
             app:layout_constraintBottom_toBottomOf="@id/text_icomment_date"
             app:layout_constraintEnd_toEndOf="parent"
-            android:onClick="@{onClickItem}"
-            android:src="@drawable/ic_more"/>
+            app:layout_constraintTop_toTopOf="@id/text_icomment_date" />
 
         <kr.co.prnd.readmore.ReadMoreTextView
             android:id="@+id/text_icomment_content"
@@ -64,9 +64,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="2dp"
-            app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginEnd="16dp"
             android:text="@{comments.content}"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@id/text_icomment_username"
             app:layout_constraintTop_toBottomOf="@id/text_icomment_username"
             tools:text="개발 진행중" />
@@ -74,12 +74,12 @@
         <TextView
             android:id="@+id/text_icomment_date"
             style="@style/Date"
-            android:textColor="@color/gray"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@+id/text_icomment_content"
-            app:layout_constraintStart_toStartOf="@+id/text_icomment_content"
             android:layout_marginTop="8dp"
+            android:textColor="@color/gray"
+            app:layout_constraintStart_toStartOf="@+id/text_icomment_content"
+            app:layout_constraintTop_toBottomOf="@+id/text_icomment_content"
             bind:DateToSnsFormat="@{comments.createdAt}"
             tools:text="3분전" />
 

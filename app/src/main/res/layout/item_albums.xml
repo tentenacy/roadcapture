@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="android.view.View" />
 
         <variable
@@ -66,10 +67,11 @@
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/img_ialbums_like"
-            android:layout_width="38dp"
-            android:layout_height="38dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:layout_marginBottom="2dp"
             android:onClick="@{onClickItem}"
+            android:padding="4dp"
             app:layout_constraintBottom_toTopOf="@id/text_ialbums_like"
             app:layout_constraintEnd_toEndOf="@id/text_ialbums_comment"
             app:layout_constraintStart_toStartOf="@id/text_ialbums_comment"
@@ -94,9 +96,9 @@
 
         <ImageView
             android:id="@+id/img_ialbums_comment"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginBottom="8dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:padding="12dp"
             android:onClick="@{onClickItem}"
             android:src="@drawable/ic_comment"
             app:layout_constraintBottom_toTopOf="@id/text_ialbums_comment"
@@ -119,9 +121,10 @@
 
         <ImageView
             android:id="@+id/img_ialbums_more"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:onClick="@{onClickItem}"
+            android:padding="12dp"
             android:src="@drawable/ic_more"
             app:layout_constraintEnd_toEndOf="@id/text_ialbums_comment"
             app:layout_constraintStart_toStartOf="@id/text_ialbums_comment"
@@ -147,10 +150,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
-            bind:DateToSnsFormat="@{album.createdAt}"
             app:layout_constraintBottom_toBottomOf="@id/text_ialbums_username"
             app:layout_constraintStart_toEndOf="@id/text_ialbums_username"
             app:layout_constraintTop_toTopOf="@id/text_ialbums_username"
+            bind:DateToSnsFormat="@{album.createdAt}"
             tools:text="3분전" />
 
 
@@ -163,8 +166,8 @@
             android:layout_marginTop="16dp"
             android:ellipsize="end"
             android:maxLines="2"
-            android:text="@{album.title}"
             android:onClick="@{onClickItem}"
+            android:text="@{album.title}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/img_ialbums_thumbnail"
@@ -177,9 +180,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="48dp"
+            android:onClick="@{onClickItem}"
             android:text="@{album.description}"
             android:visibility='@{album.description.equals("") ? View.GONE : View.VISIBLE}'
-            android:onClick="@{onClickItem}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/text_ialbums_title"
             app:layout_constraintStart_toStartOf="@+id/text_ialbums_title"

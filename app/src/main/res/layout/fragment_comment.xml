@@ -145,10 +145,10 @@
 
         <ImageView
             android:id="@+id/img_comment_input"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="56dp"
+            android:layout_height="48dp"
             android:layout_gravity="center|end"
-            android:layout_marginEnd="16dp"
+            android:paddingHorizontal="16dp"
             android:src="@drawable/ic_send"
             app:tint="@color/secondaryColor" />
 
