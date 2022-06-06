@@ -39,7 +39,10 @@ class AlbumRegistrationViewModel
                         FileUtils.getPath(application.applicationContext, picture.fileUri?.toUri())
                     picture.toPictureCreateRequest()
                 }
-                albumRepository.postAlbum(makeImagesParts(request.pictures!!), Json.encodeToString(request))
+                albumRepository.postAlbum(
+                    makeImagesParts(request.pictures!!),
+                    Json.encodeToString(request)
+                )
             }
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

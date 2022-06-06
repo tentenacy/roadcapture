@@ -17,28 +17,25 @@ import com.karumi.dexter.listener.single.CompositePermissionListener
 import com.karumi.dexter.listener.single.PermissionListener
 import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener
 
-fun Context.checkSelfPermission(permission: List<String>, logic: () -> Unit) {
-    var isGranted = true;
-    for (i in permission.indices) {
-        if (ContextCompat.checkSelfPermission(
-                this,
-                android.Manifest.permission.ACCESS_FINE_LOCATION
-            ) != PackageManager.PERMISSION_GRANTED
-        ) {
-            isGranted = false
-            break;
-        }
-    }
-    if (isGranted) {
-        logic()
-    }
-}
-
 fun Fragment.checkPermission(permission: String) =
     ContextCompat.checkSelfPermission(
         requireContext(),
         permission
     ) == PackageManager.PERMISSION_GRANTED
+
+fun Fragment.checkPermissions(permission: List<String>) : Boolean {
+    var isGranted = true
+    permission.forEach {
+        if(ContextCompat.checkSelfPermission(
+                requireContext(),
+                it
+        ) == PackageManager.PERMISSION_DENIED) {
+            isGranted = false
+            return@forEach
+        }
+    }
+    return isGranted
+}
 
 fun Fragment.requestSinglePermission(permission: String, basicPermissionListener: PermissionListener, snackBarPermissionListener: PermissionListener) {
     if(!checkPermission(permission)) {

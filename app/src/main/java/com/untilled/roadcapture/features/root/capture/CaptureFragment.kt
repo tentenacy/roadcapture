@@ -1,8 +1,6 @@
 package com.untilled.roadcapture.features.root.capture
 
-import android.Manifest
 import android.app.Activity.RESULT_OK
-import android.app.Dialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -10,50 +8,41 @@ import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
-import android.view.*
 import android.view.Gravity.END
 import android.view.Gravity.TOP
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.fragment.app.Fragment
-import com.naver.maps.map.overlay.Marker
-import com.untilled.roadcapture.R
-import com.untilled.roadcapture.databinding.FragmentCaptureBinding
-import dagger.hilt.android.AndroidEntryPoint
 import androidx.core.net.toUri
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
-import com.bumptech.glide.request.target.SimpleTarget
-import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
-import com.google.android.material.snackbar.Snackbar
-import com.karumi.dexter.Dexter
-import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionDeniedResponse
-import com.karumi.dexter.listener.PermissionGrantedResponse
-import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.single.CompositePermissionListener
-import com.karumi.dexter.listener.single.PermissionListener
-import com.karumi.dexter.listener.single.SnackbarOnDeniedPermissionListener
 import com.naver.maps.geometry.LatLng
 import com.naver.maps.map.*
+import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.overlay.Overlay
 import com.naver.maps.map.overlay.OverlayImage
 import com.naver.maps.map.overlay.PathOverlay
 import com.naver.maps.map.util.FusedLocationSource
+import com.untilled.roadcapture.R
 import com.untilled.roadcapture.data.entity.Picture
+import com.untilled.roadcapture.databinding.FragmentCaptureBinding
+import com.untilled.roadcapture.features.common.NavHostViewModel
 import com.untilled.roadcapture.utils.*
 import com.untilled.roadcapture.utils.permission.*
-
+import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CaptureFragment : Fragment(), OnMapReadyCallback {
     private var _binding: FragmentCaptureBinding? = null
     val binding get() = _binding!!
 
-    private val viewModel: CaptureViewModel by viewModels()
+    private val navHostViewModel: NavHostViewModel by viewModels({ requireParentFragment() })
 
     private var imageUri: Uri? = null
 
@@ -89,12 +78,10 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     }
 
     private val registrationOnClickListener: (View?) -> Unit = {
-        viewModel.pictureList.value?.let {
-            it.forEach { picture ->
-                if (picture.thumbnail) {
-                    navigateToAlbumRegistration(picture)
-                    return@let
-                }
+        navHostViewModel.pictureList.forEach { picture ->
+            if (picture.thumbnail) {
+                navigateToAlbumRegistration()
+                return@forEach
             }
             showThumbnailSettingDialog()
         }
@@ -108,8 +95,9 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                 }
                 markerList.clear()  // 마커 리스트 클리어
                 path.map = null     // 지도에서 경로 제거
+                navHostViewModel.pictureList.clear()
                 deleteCache(requireContext())   // 캐시 디렉토리에 있는 사진들 제거
-                viewModel.deleteAll()   // Room에 저장된 picture 모두 제거
+                //viewModel.deleteAll()   // Room에 저장된 picture 모두 제거
             }
         }
     }
@@ -138,8 +126,6 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
     ): View? {
         _binding = FragmentCaptureBinding.inflate(inflater, container, false)
 
-
-        initLocationSource()
         initLocationSource()
         initNaverMap()
         return binding.root
@@ -149,15 +135,9 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState)
 
         binding.constraintCaptureInnercontainer.setStatusBarTransparent(mainActivity())
+
         requestLocationPermission()
-        observeData()
         setOnClickListeners()
-    }
-
-    private fun observeData() {
-        viewModel.pictureList.observe(viewLifecycleOwner) {
-
-        }
     }
 
     private fun setOnClickListeners() {
@@ -172,7 +152,7 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         naverMap = _naverMap
 
         setNaverMapUI()
-        drawMarker()
+        drawMarkers()
         drawPolyline()
     }
 
@@ -230,29 +210,29 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
         }
     }
 
-    private fun drawMarker() {
-        viewModel.pictureList.value?.let {
-            it.forEach { picture ->
-                markerList.add(
-                    Marker().apply {
-                        isHideCollidedMarkers = true    // 마커 겹치면 사라지기
-                        zIndex = if (picture.thumbnail) 100 else 0  // 썸네일 마커가 가장 위에 표시
-                        position = LatLng(
-                            picture.place?.latitude ?: 37.5670135,
-                            picture.place?.longitude ?: 126.9783740,
-                        )
-                        onClickListener = Overlay.OnClickListener {     // 마커
-                            navigateToPictureEditor(picture)
-                            return@OnClickListener true
-                        }
-                        setCircularImageMarker(this, picture.fileUri!!)
-                        map = naverMap
-                    }
-                )
+    private fun initMarker(picture: Picture): Marker =
+        Marker().apply {
+            isHideCollidedMarkers = true    // 마커 겹치면 사라지기
+            zIndex = if (picture.thumbnail) 100 else 0  // 썸네일 마커가 가장 위에 표시
+            position = LatLng(
+                picture.place?.latitude ?: 37.5670135,
+                picture.place?.longitude ?: 126.9783740,
+            )
+            onClickListener = Overlay.OnClickListener {     // 마커
+                navigateToPictureEditor(picture)
+                return@OnClickListener true
             }
-            if(it.isNotEmpty()) {
-                naverMap?.moveCamera(CameraUpdate.scrollTo(markerList.last().position))
-            }
+            setCircularImageMarker(this, picture.fileUri!!)
+        }
+
+    private fun drawMarkers() {
+        navHostViewModel.pictureList.forEach { picture ->
+            markerList.add(
+                initMarker(picture)
+            )
+        }
+        if (navHostViewModel.pictureList.isNotEmpty()) {
+            naverMap?.moveCamera(CameraUpdate.scrollTo(markerList.last().position))
         }
     }
 
@@ -275,8 +255,10 @@ class CaptureFragment : Fragment(), OnMapReadyCallback {
                                 true
                             )
                         )
+                        map = naverMap
                     }
                 }
+
                 override fun onLoadCleared(placeholder: Drawable?) {}
             })
     }

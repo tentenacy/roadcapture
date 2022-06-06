@@ -14,3 +14,7 @@ fun <T, F>combineLatestData(
 
     return Pair(first.value!!, second.value!!)
 }
+
+const val SUCCESS = 100
+const val DEFAULT = 101
+const val FAILURE = 102

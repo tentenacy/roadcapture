@@ -55,8 +55,6 @@ class CropFragment : Fragment() {
     ): View? {
         _binding = FragmentCropBinding.inflate(inflater, container, false)
 
-
-
         setHasOptionsMenu(true) // fragment 에서 optionMenu 생성 허용
 
         val args: CropFragmentArgs by navArgs()

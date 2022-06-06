@@ -78,8 +78,8 @@ fun CaptureFragment.navigateToCamera() {
     binding.root.navigate(CaptureFragmentDirections.actionCaptureFragmentToCameraFragment())
 }
 
-fun CaptureFragment.navigateToAlbumRegistration(picture: Picture?) {
-    binding.root.navigate(CaptureFragmentDirections.actionCaptureFragmentToAlbumRegestrationFragment(picture))
+fun CaptureFragment.navigateToAlbumRegistration() {
+    binding.root.navigate(CaptureFragmentDirections.actionCaptureFragmentToAlbumRegestrationFragment())
 }
 
 fun CaptureFragment.navigateToPictureEditor(picture: Picture?) {
